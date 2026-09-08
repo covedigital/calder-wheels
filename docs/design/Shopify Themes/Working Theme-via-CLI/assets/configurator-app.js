@@ -304,7 +304,15 @@
         var self = this;
         this.addBtn.addEventListener('click', function () {
           self.addToCart(data.variant_id);
-        }, { once: true });
+        });
+      }
+
+      if (this.quoteBtn) {
+        this.quoteBtn.onclick = null;
+        var self2 = this;
+        this.quoteBtn.addEventListener('click', function () {
+          self2.requestQuote();
+        });
       }
     } else if (data && data.available_to_build === 0) {
       this.availabilityEl.className = 'wheel-configurator__availability wheel-configurator__availability--unavailable';
@@ -338,6 +346,69 @@
     if (this.actionsEl) this.actionsEl.style.display = 'flex';
   };
 
+  WheelConfigurator.prototype.requestQuote = function () {
+    var self = this;
+    if (!this.selected.center || !this.selected.barrel || !this.selected.hardware) return;
+
+    var modal = document.querySelector('.quote-modal');
+    if (modal) {
+      var form = modal.querySelector('form');
+      if (form) {
+        form.querySelector('[name="variant_id"]').value = this.currentVariantId || '';
+        form.querySelector('[name="product_id"]').value = this.productId;
+        var notesField = form.querySelector('[name="notes"]');
+        if (notesField) {
+          notesField.value = 'Config: Center=' + (self.selected.center.label || self.selected.center.id) +
+            ', Barrel=' + (self.selected.barrel.label || self.selected.barrel.id) +
+            ', Hardware=' + (self.selected.hardware.label || self.selected.hardware.id) +
+            (notesField.value ? '\n' + notesField.value : '');
+        }
+      }
+      if (typeof jq_lumia !== 'undefined') {
+        jq_lumia(modal).removeClass('hidden');
+        jq_lumia.fancybox.open({ src: '#' + modal.id });
+      }
+      return;
+    }
+
+    var data = {
+      product_id: this.productId.toString(),
+      variant_id: this.currentVariantId ? this.currentVariantId.toString() : '',
+      product_title: document.querySelector('[data-product-title]') ? document.querySelector('[data-product-title]').dataset.productTitle : '',
+      name: '',
+      email: '',
+      phone: '',
+      vehicle: '',
+      quantity: '4',
+      notes: 'Configurator Quote Request — Center: ' + (self.selected.center.label || self.selected.center.id) +
+        ', Barrel: ' + (self.selected.barrel.label || self.selected.barrel.id) +
+        ', Hardware: ' + (self.selected.hardware.label || self.selected.hardware.id),
+      dealer_inquiry: ''
+    };
+
+    var apiBase = window.CALDER_API_BASE || '';
+    var quoteUrl = apiBase ? apiBase + '/api/configurator/quote' : '/apps/wheel-configurator/api/quote';
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', quoteUrl, true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.onload = function () {
+      if (xhr.status === 200 || xhr.status === 201) {
+        alert('Quote request submitted! We will contact you within 1-2 business days.');
+      } else {
+        try {
+          var err = JSON.parse(xhr.responseText);
+          alert(err.description || 'Failed to submit quote request. Please try again.');
+        } catch (e) {
+          alert('Failed to submit quote request. Please try again.');
+        }
+      }
+    };
+    xhr.onerror = function () {
+      alert('Network error. Please check your connection and try again.');
+    };
+    xhr.send(JSON.stringify(data));
+  };
+
   WheelConfigurator.prototype.addToCart = function (variantId) {
     var self = this;
     if (!variantId) return;
@@ -360,7 +431,7 @@
       });
     } else {
       var xhr = new XMLHttpRequest();
-      xhr.open('POST', window.routes.cart_add_url, true);
+      xhr.open('POST', '/cart/add.js', true);
       xhr.setRequestHeader('Content-Type', 'application/json');
       xhr.onload = function () {
         if (xhr.status === 200) {
@@ -374,6 +445,9 @@
             alert('Failed to add to cart. Please try again.');
           }
         }
+      };
+      xhr.onerror = function () {
+        alert('Network error. Please try again.');
       };
       xhr.send(JSON.stringify({ id: parseInt(variantId, 10), quantity: 1, properties: properties }));
     }

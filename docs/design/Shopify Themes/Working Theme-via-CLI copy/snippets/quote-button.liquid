@@ -115,7 +115,9 @@
       formData.forEach(function (value, key) { data[key] = value; });
 
       var xhr = new XMLHttpRequest();
-      xhr.open('POST', '/apps/wheel-configurator/api/quote', true);
+      var apiBase = window.CALDER_API_BASE || '';
+      var quoteUrl = apiBase ? apiBase + '/api/configurator/quote' : '/apps/wheel-configurator/api/quote';
+      xhr.open('POST', quoteUrl, true);
       xhr.setRequestHeader('Content-Type', 'application/json');
       xhr.onload = function () {
         if (spinner) spinner.classList.add('hidden');

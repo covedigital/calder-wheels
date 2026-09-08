@@ -115,12 +115,28 @@ class AvailabilityRequest(BaseModel):
 class PriceRequest(BaseModel):
     design_code: str
     series: str
-    center_finish: str
+    center_finish: Optional[str] = None
     barrel_finish: Optional[str] = None
     hardware_finish: Optional[str] = None
     diameter: float
     width: float
     bolt_pattern: str
+
+
+class QuoteRequest(BaseModel):
+    product_id: str = ""
+    variant_id: str = ""
+    product_title: str = ""
+    name: str = ""
+    email: str = ""
+    phone: str = ""
+    vehicle: str = ""
+    quantity: str = "1"
+    notes: str = ""
+    dealer_inquiry: str = ""
+    center_finish: Optional[str] = None
+    barrel_finish: Optional[str] = None
+    hardware_finish: Optional[str] = None
 
 
 # ─── Endpoints ─────────────────────────────────────────────────────────────
@@ -296,6 +312,50 @@ def get_price(req: PriceRequest):
 def health():
     """Health check endpoint."""
     return {"status": "ok", "service": "calder-wheels-configurator"}
+
+
+@app.post("/api/configurator/quote")
+def submit_quote(req: QuoteRequest):
+    """
+    Submit a quote request. Stores to local DB and returns success.
+    Messages can be forwarded to email/n8n via integration layer.
+    """
+    import json
+    from datetime import datetime
+
+    quote_dir = Path(__file__).parent / "quotes"
+    quote_dir.mkdir(exist_ok=True)
+    timestamp = datetime.utcnow().strftime("%Y%m%d-%H%M%S")
+    safe_name = "".join(c for c in req.name if c.isalnum() or c in " _-").strip() or "anonymous"
+    filename = f"quote_{timestamp}_{safe_name}.json"
+
+    record = {
+        "submitted_at": datetime.utcnow().isoformat(),
+        "product_id": req.product_id,
+        "variant_id": req.variant_id,
+        "product_title": req.product_title,
+        "name": req.name,
+        "email": req.email,
+        "phone": req.phone,
+        "vehicle": req.vehicle,
+        "quantity": req.quantity,
+        "notes": req.notes,
+        "dealer_inquiry": req.dealer_inquiry == "yes",
+        "config": {
+            "center_finish": req.center_finish,
+            "barrel_finish": req.barrel_finish,
+            "hardware_finish": req.hardware_finish,
+        },
+    }
+
+    with open(quote_dir / filename, "w") as f:
+        json.dump(record, f, indent=2)
+
+    return {
+        "status": "ok",
+        "message": "Quote request received. We will contact you within 1-2 business days.",
+        "quote_id": filename.replace(".json", ""),
+    }
 
 
 # ─── Main ──────────────────────────────────────────────────────────────────
