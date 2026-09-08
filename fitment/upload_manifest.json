@@ -1,0 +1,259 @@
+{
+  "version": "1.0",
+  "total_layers": 35,
+  "designs": [
+    "201",
+    "202",
+    "203",
+    "205",
+    "207"
+  ],
+  "layers_per_design": 7,
+  "files": [
+    {
+      "local_path": "composites/design-201/barrel-bk.png",
+      "shopify_path": "assets/composites/design-201/barrel-bk.png",
+      "size_kb": 639.9,
+      "design": "201",
+      "layer": "barrel-bk.png"
+    },
+    {
+      "local_path": "composites/design-201/barrel-polish.png",
+      "shopify_path": "assets/composites/design-201/barrel-polish.png",
+      "size_kb": 806.3,
+      "design": "201",
+      "layer": "barrel-polish.png"
+    },
+    {
+      "local_path": "composites/design-201/bolt-bk.png",
+      "shopify_path": "assets/composites/design-201/bolt-bk.png",
+      "size_kb": 89.6,
+      "design": "201",
+      "layer": "bolt-bk.png"
+    },
+    {
+      "local_path": "composites/design-201/bolt-chrome.png",
+      "shopify_path": "assets/composites/design-201/bolt-chrome.png",
+      "size_kb": 115.1,
+      "design": "201",
+      "layer": "bolt-chrome.png"
+    },
+    {
+      "local_path": "composites/design-201/center-bk.png",
+      "shopify_path": "assets/composites/design-201/center-bk.png",
+      "size_kb": 618.3,
+      "design": "201",
+      "layer": "center-bk.png"
+    },
+    {
+      "local_path": "composites/design-201/center-bkuti.png",
+      "shopify_path": "assets/composites/design-201/center-bkuti.png",
+      "size_kb": 739.0,
+      "design": "201",
+      "layer": "center-bkuti.png"
+    },
+    {
+      "local_path": "composites/design-201/center-su.png",
+      "shopify_path": "assets/composites/design-201/center-su.png",
+      "size_kb": 1154.4,
+      "design": "201",
+      "layer": "center-su.png"
+    },
+    {
+      "local_path": "composites/design-202/barrel-bk.png",
+      "shopify_path": "assets/composites/design-202/barrel-bk.png",
+      "size_kb": 639.9,
+      "design": "202",
+      "layer": "barrel-bk.png"
+    },
+    {
+      "local_path": "composites/design-202/barrel-polish.png",
+      "shopify_path": "assets/composites/design-202/barrel-polish.png",
+      "size_kb": 806.3,
+      "design": "202",
+      "layer": "barrel-polish.png"
+    },
+    {
+      "local_path": "composites/design-202/bolt-bk.png",
+      "shopify_path": "assets/composites/design-202/bolt-bk.png",
+      "size_kb": 89.6,
+      "design": "202",
+      "layer": "bolt-bk.png"
+    },
+    {
+      "local_path": "composites/design-202/bolt-chrome.png",
+      "shopify_path": "assets/composites/design-202/bolt-chrome.png",
+      "size_kb": 115.1,
+      "design": "202",
+      "layer": "bolt-chrome.png"
+    },
+    {
+      "local_path": "composites/design-202/center-bk.png",
+      "shopify_path": "assets/composites/design-202/center-bk.png",
+      "size_kb": 658.6,
+      "design": "202",
+      "layer": "center-bk.png"
+    },
+    {
+      "local_path": "composites/design-202/center-bkuti.png",
+      "shopify_path": "assets/composites/design-202/center-bkuti.png",
+      "size_kb": 859.2,
+      "design": "202",
+      "layer": "center-bkuti.png"
+    },
+    {
+      "local_path": "composites/design-202/center-su.png",
+      "shopify_path": "assets/composites/design-202/center-su.png",
+      "size_kb": 1285.6,
+      "design": "202",
+      "layer": "center-su.png"
+    },
+    {
+      "local_path": "composites/design-203/barrel-bk.png",
+      "shopify_path": "assets/composites/design-203/barrel-bk.png",
+      "size_kb": 639.9,
+      "design": "203",
+      "layer": "barrel-bk.png"
+    },
+    {
+      "local_path": "composites/design-203/barrel-polish.png",
+      "shopify_path": "assets/composites/design-203/barrel-polish.png",
+      "size_kb": 806.3,
+      "design": "203",
+      "layer": "barrel-polish.png"
+    },
+    {
+      "local_path": "composites/design-203/bolt-bk.png",
+      "shopify_path": "assets/composites/design-203/bolt-bk.png",
+      "size_kb": 89.6,
+      "design": "203",
+      "layer": "bolt-bk.png"
+    },
+    {
+      "local_path": "composites/design-203/bolt-chrome.png",
+      "shopify_path": "assets/composites/design-203/bolt-chrome.png",
+      "size_kb": 115.1,
+      "design": "203",
+      "layer": "bolt-chrome.png"
+    },
+    {
+      "local_path": "composites/design-203/center-bk.png",
+      "shopify_path": "assets/composites/design-203/center-bk.png",
+      "size_kb": 641.5,
+      "design": "203",
+      "layer": "center-bk.png"
+    },
+    {
+      "local_path": "composites/design-203/center-bkuti.png",
+      "shopify_path": "assets/composites/design-203/center-bkuti.png",
+      "size_kb": 696.4,
+      "design": "203",
+      "layer": "center-bkuti.png"
+    },
+    {
+      "local_path": "composites/design-203/center-su.png",
+      "shopify_path": "assets/composites/design-203/center-su.png",
+      "size_kb": 1159.4,
+      "design": "203",
+      "layer": "center-su.png"
+    },
+    {
+      "local_path": "composites/design-205/barrel-bk.png",
+      "shopify_path": "assets/composites/design-205/barrel-bk.png",
+      "size_kb": 639.9,
+      "design": "205",
+      "layer": "barrel-bk.png"
+    },
+    {
+      "local_path": "composites/design-205/barrel-polish.png",
+      "shopify_path": "assets/composites/design-205/barrel-polish.png",
+      "size_kb": 806.3,
+      "design": "205",
+      "layer": "barrel-polish.png"
+    },
+    {
+      "local_path": "composites/design-205/bolt-bk.png",
+      "shopify_path": "assets/composites/design-205/bolt-bk.png",
+      "size_kb": 89.6,
+      "design": "205",
+      "layer": "bolt-bk.png"
+    },
+    {
+      "local_path": "composites/design-205/bolt-chrome.png",
+      "shopify_path": "assets/composites/design-205/bolt-chrome.png",
+      "size_kb": 115.1,
+      "design": "205",
+      "layer": "bolt-chrome.png"
+    },
+    {
+      "local_path": "composites/design-205/center-bk.png",
+      "shopify_path": "assets/composites/design-205/center-bk.png",
+      "size_kb": 576.8,
+      "design": "205",
+      "layer": "center-bk.png"
+    },
+    {
+      "local_path": "composites/design-205/center-bkuti.png",
+      "shopify_path": "assets/composites/design-205/center-bkuti.png",
+      "size_kb": 654.8,
+      "design": "205",
+      "layer": "center-bkuti.png"
+    },
+    {
+      "local_path": "composites/design-205/center-su.png",
+      "shopify_path": "assets/composites/design-205/center-su.png",
+      "size_kb": 1111.0,
+      "design": "205",
+      "layer": "center-su.png"
+    },
+    {
+      "local_path": "composites/design-207/barrel-bk.png",
+      "shopify_path": "assets/composites/design-207/barrel-bk.png",
+      "size_kb": 639.9,
+      "design": "207",
+      "layer": "barrel-bk.png"
+    },
+    {
+      "local_path": "composites/design-207/barrel-polish.png",
+      "shopify_path": "assets/composites/design-207/barrel-polish.png",
+      "size_kb": 806.3,
+      "design": "207",
+      "layer": "barrel-polish.png"
+    },
+    {
+      "local_path": "composites/design-207/bolt-bk.png",
+      "shopify_path": "assets/composites/design-207/bolt-bk.png",
+      "size_kb": 89.6,
+      "design": "207",
+      "layer": "bolt-bk.png"
+    },
+    {
+      "local_path": "composites/design-207/bolt-chrome.png",
+      "shopify_path": "assets/composites/design-207/bolt-chrome.png",
+      "size_kb": 115.1,
+      "design": "207",
+      "layer": "bolt-chrome.png"
+    },
+    {
+      "local_path": "composites/design-207/center-bk.png",
+      "shopify_path": "assets/composites/design-207/center-bk.png",
+      "size_kb": 634.0,
+      "design": "207",
+      "layer": "center-bk.png"
+    },
+    {
+      "local_path": "composites/design-207/center-bkuti.png",
+      "shopify_path": "assets/composites/design-207/center-bkuti.png",
+      "size_kb": 771.8,
+      "design": "207",
+      "layer": "center-bkuti.png"
+    },
+    {
+      "local_path": "composites/design-207/center-su.png",
+      "shopify_path": "assets/composites/design-207/center-su.png",
+      "size_kb": 1148.1,
+      "design": "207",
+      "layer": "center-su.png"
+    }
+  ]
+}

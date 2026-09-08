@@ -1,0 +1,169 @@
+{{ 'fitment-finder.css' | asset_url | stylesheet_tag }}
+{% render 'fitment-data' %}
+
+{%- liquid
+  assign store_width = settings.container_max_width
+  if section.settings.section_width == 'custom'
+    assign store_width = section.settings.container_max_width
+  endif
+  assign bg_image = section.settings.background_image
+  assign heading = section.settings.heading | default: 'Find Your Fit'
+  assign subheading = section.settings.subheading
+  assign button_text = section.settings.button_text | default: 'View Compatible Wheels'
+  assign placeholder_year = section.settings.placeholder_year | default: 'Select Year'
+  assign placeholder_make = section.settings.placeholder_make | default: 'Select Make'
+  assign placeholder_model = section.settings.placeholder_model | default: 'Select Model'
+  assign placeholder_generation = section.settings.placeholder_generation | default: 'Select Generation'
+-%}
+
+<div
+  class="fitment-finder"
+  id="fitment-finder-{{ section.id }}"
+  style="--container-max-width: {{ store_width }}px; {% if bg_image != blank %}--fitment-bg: url({{ bg_image | img_url: '1920x' }});{% endif %}"
+>
+  <div class="fitment-finder__inner container">
+    <div class="fitment-finder__content">
+      {% if heading != blank %}
+        <h2 class="fitment-finder__heading">{{ heading }}</h2>
+      {% endif %}
+      {% if subheading != blank %}
+        <p class="fitment-finder__subheading">{{ subheading }}</p>
+      {% endif %}
+    </div>
+
+    <div class="fitment-finder__selects">
+      <div class="fitment-finder__select-row">
+        <div class="fitment-finder__select-col">
+          <select id="fitment-year-{{ section.id }}" class="form-control fitment-finder__select" data-fitment="year">
+            <option value="">{{ placeholder_year }}</option>
+          </select>
+        </div>
+        <div class="fitment-finder__select-col">
+          <select id="fitment-make-{{ section.id }}" class="form-control fitment-finder__select" data-fitment="make" disabled>
+            <option value="">{{ placeholder_make }}</option>
+          </select>
+        </div>
+        <div class="fitment-finder__select-col">
+          <select id="fitment-model-{{ section.id }}" class="form-control fitment-finder__select" data-fitment="model" disabled>
+            <option value="">{{ placeholder_model }}</option>
+          </select>
+        </div>
+        <div class="fitment-finder__select-col">
+          <select id="fitment-generation-{{ section.id }}" class="form-control fitment-finder__select" data-fitment="generation" disabled>
+            <option value="">{{ placeholder_generation }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="fitment-finder__action">
+        <button
+          id="fitment-submit-{{ section.id }}"
+          class="btn btn--primary fitment-finder__submit"
+          disabled
+          data-section-id="{{ section.id }}"
+        >
+          {{ button_text }}
+        </button>
+      </div>
+    </div>
+
+    <div id="fitment-results-{{ section.id }}" class="fitment-finder__results" style="display: none;"></div>
+  </div>
+</div>
+
+<script src="{{ 'fitment-finder.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "Fitment Finder",
+  "tag": "section",
+  "class": "section section--fitment-finder",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "section_width",
+      "label": "Section width",
+      "options": [
+        { "value": "global", "label": "Global" },
+        { "value": "custom", "label": "Custom" }
+      ],
+      "default": "global"
+    },
+    {
+      "type": "range",
+      "id": "container_max_width",
+      "min": 400,
+      "max": 1920,
+      "step": 10,
+      "unit": "px",
+      "label": "Container max width",
+      "default": 1178
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Find Your Perfect Fit"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Select your vehicle to see compatible wheels"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background image"
+    },
+    {
+      "type": "header",
+      "content": "Placeholder Text"
+    },
+    {
+      "type": "text",
+      "id": "placeholder_year",
+      "label": "Year placeholder",
+      "default": "Select Year"
+    },
+    {
+      "type": "text",
+      "id": "placeholder_make",
+      "label": "Make placeholder",
+      "default": "Select Make"
+    },
+    {
+      "type": "text",
+      "id": "placeholder_model",
+      "label": "Model placeholder",
+      "default": "Select Model"
+    },
+    {
+      "type": "text",
+      "id": "placeholder_generation",
+      "label": "Generation placeholder",
+      "default": "Select Generation"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "View Compatible Wheels"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Fitment Finder",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}

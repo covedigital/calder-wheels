@@ -1,0 +1,32 @@
+{% comment %}
+  Fitment results partial — used as an async section endpoint and inline display.
+  Include with: {% render 'fitment-results', products: products, vehicle_name: vehicle_name %}
+{% endcomment %}
+
+{% if products and products.size > 0 %}
+  <div class="fitment-results">
+    <p class="fitment-results__count">{{ products.size }} wheel{{ products.size | pluralize }} compatible{% if vehicle_name != blank %} with {{ vehicle_name }}{% endif %}</p>
+    <div class="fitment-results__grid">
+      {% for product in products %}
+        <a href="{{ product.url }}" class="fitment-results__item">
+          {% if product.featured_image %}
+            <img
+              src="{{ product.featured_image | img_url: '400x' }}"
+              alt="{{ product.featured_image.alt | escape }}"
+              class="fitment-results__image"
+              loading="lazy"
+              width="200"
+              height="200"
+            >
+          {% endif %}
+          <span class="fitment-results__title">{{ product.title }}</span>
+          {% if product.price > 0 %}
+            <span class="fitment-results__price">{{ product.price | money }}</span>
+          {% endif %}
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+{% else %}
+  <p class="fitment-results__empty">No compatible wheels found for this vehicle.</p>
+{% endif %}

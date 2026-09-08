@@ -1,0 +1,88 @@
+{% comment %}
+  Calder Wheels — Wheel Catalog for Fitment Matching
+  Source of truth for which wheel designs fit which vehicles.
+  Rendered on-demand by async-fitment-results.liquid.
+
+  For launch, this mirrors the curated fitment manifest
+  (fitment/fitment_manifest.py) and the sizing per Shopify product.
+  Fields per handle:
+    - bolt_patterns:  bolt patterns the wheel is produced in
+    - min/max diameter & width: available sizes on the product
+    - offset: typical offsets produced
+{% endcomment %}
+
+{%- liquid
+  assign wheel_catalog = '[]'
+-%}
+
+{%- capture wheel_catalog_json -%}
+[
+  {
+    "handle": "apex-201",
+    "title": "Apex 201",
+    "bolt_patterns": ["5x114.3","5x112","5x120","5x127","5x139.7"],
+    "min_diameter": 18,
+    "max_diameter": 22,
+    "min_width": 8,
+    "max_width": 10.5,
+    "min_offset": 10,
+    "max_offset": 45,
+    "hub_bore": 72.6,
+    "load_rating": 725
+  },
+  {
+    "handle": "vortex-207",
+    "title": "Vortex 207",
+    "bolt_patterns": ["5x114.3","5x112","5x120"],
+    "min_diameter": 18,
+    "max_diameter": 22,
+    "min_width": 8,
+    "max_width": 10.5,
+    "min_offset": 15,
+    "max_offset": 40,
+    "hub_bore": 72.6,
+    "load_rating": 725
+  },
+  {
+    "handle": "striker-203",
+    "title": "Striker 203",
+    "bolt_patterns": ["5x114.3","5x100","5x112","5x120","5x120.7","5x127","5x139.7"],
+    "min_diameter": 18,
+    "max_diameter": 22,
+    "min_width": 8,
+    "max_width": 10.5,
+    "min_offset": 0,
+    "max_offset": 45,
+    "hub_bore": 72.6,
+    "load_rating": 725
+  },
+  {
+    "handle": "turbine-205",
+    "title": "Turbine 205",
+    "bolt_patterns": ["5x114.3","5x112","5x120"],
+    "min_diameter": 20,
+    "max_diameter": 24,
+    "min_width": 9,
+    "max_width": 11.5,
+    "min_offset": 20,
+    "max_offset": 50,
+    "hub_bore": 72.6,
+    "load_rating": 900
+  },
+  {
+    "handle": "vertex-202",
+    "title": "Vertex 202",
+    "bolt_patterns": ["5x114.3","5x112","5x120"],
+    "min_diameter": 18,
+    "max_diameter": 22,
+    "min_width": 8,
+    "max_width": 10.5,
+    "min_offset": 15,
+    "max_offset": 45,
+    "hub_bore": 72.6,
+    "load_rating": 725
+  }
+]
+{%- endcapture -%}
+
+{{ wheel_catalog_json }}

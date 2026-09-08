@@ -1,0 +1,30 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-account",
+      "settings": {
+      }
+    },
+    "dealer-dashboard": {
+      "type": "dealer-dashboard",
+      "settings": {
+      }
+    },
+    "dealer-quick-order": {
+      "type": "dealer-quick-order",
+      "settings": {
+      }
+    },
+    "customer-quotes": {
+      "type": "quote-list",
+      "settings": {
+      }
+    }
+  },
+  "order": [
+    "main",
+    "dealer-dashboard",
+    "dealer-quick-order",
+    "customer-quotes"
+  ]
+}

@@ -1,0 +1,916 @@
+/* ══════════════════════════════════════════════════════════════════
+   Calder Wheels — Dealer Portal Stylesheet
+   Based on dealer-portal-mockups-exact.html
+   Designed for the Lumia Shopify theme v7.0.1
+   ══════════════════════════════════════════════════════════════════ */
+
+/* ── 1. Dealer Portal Root Variables ── */
+.dp-root {
+  --dp-accent: var(--custom-color, #d9b35e);
+  --dp-accent-text: #181208;
+  --dp-line: var(--decor-border-color, rgba(255,255,255,.08));
+  --dp-line2: var(--decor-border-dark-color, rgba(255,255,255,.13));
+  --dp-panel: var(--body-bg-secondary, #0d1013);
+  --dp-good: #58c26a;
+  --dp-warn: #cfa24c;
+  --dp-bad: #d26262;
+  --dp-info: #7ab2e4;
+  --dp-r1: var(--radius-md, 16px);
+  --dp-r2: var(--radius-sm, 8px);
+  --dp-sidebar-w: 254px;
+  --dp-font: var(--body-font-family);
+}
+
+/* ── 2. Dealer Portal Wrapper ── */
+.dealer-portal {
+  display: grid;
+  grid-template-columns: var(--dp-sidebar-w) 1fr;
+  min-height: calc(100vh - 200px);
+  margin: 0;
+}
+.dealer-portal__sidebar {
+  border-right: 1px solid var(--dp-line);
+  background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
+  padding: 24px 16px 18px;
+  display: flex;
+  flex-direction: column;
+}
+.dealer-portal__main {
+  padding: 26px 24px 20px;
+  display: grid;
+  gap: 20px;
+  align-content: start;
+  overflow-x: hidden;
+}
+
+/* ── 3. Sidebar Brand ── */
+.dp-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 26px;
+  color: var(--heading-color);
+  text-decoration: none;
+}
+.dp-brand__mark {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  border: 1px solid rgba(215,179,95,.34);
+  background: linear-gradient(180deg, rgba(215,179,95,.2), rgba(215,179,95,.06));
+  display: grid;
+  place-items: center;
+  color: var(--dp-accent);
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+.dp-brand__name {
+  display: grid;
+  gap: 2px;
+}
+.dp-brand__name strong {
+  font-size: 14px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--heading-color);
+}
+.dp-brand__name span {
+  font-size: 11px;
+  letter-spacing: .22em;
+  color: var(--text-color);
+}
+
+/* ── 4. Sidebar Navigation ── */
+.dp-nav-title {
+  font-size: 12px;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: var(--text-color-light, #98a1aa);
+  margin: 6px 6px 14px;
+}
+.dp-nav {
+  display: grid;
+  gap: 4px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.dp-nav__link,
+.dp-nav a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 40px;
+  padding: 0 12px;
+  border-radius: 12px;
+  color: var(--text-color);
+  text-decoration: none;
+  border: 1px solid transparent;
+  font-size: 14px;
+  transition: background .15s, border-color .15s, color .15s;
+}
+.dp-nav__link:hover,
+.dp-nav a:hover {
+  background: rgba(255,255,255,.04);
+  color: var(--heading-color);
+}
+.dp-nav__link--active,
+.dp-nav a.active {
+  background: linear-gradient(180deg, rgba(215,179,95,.11), rgba(215,179,95,.08));
+  border-color: rgba(215,179,95,.26);
+  color: var(--dp-accent);
+}
+.dp-nav__icon {
+  width: 20px;
+  height: 20px;
+  display: grid;
+  place-items: center;
+  opacity: .92;
+  flex-shrink: 0;
+}
+
+/* ── 5. Sidebar Help Box ── */
+.dp-help {
+  margin-top: auto;
+  padding: 14px 14px 12px;
+  border: 1px solid var(--dp-line);
+  border-radius: 14px;
+  background: rgba(255,255,255,.02);
+  color: var(--text-color);
+  font-size: 13px;
+}
+.dp-help strong {
+  color: var(--heading-color);
+  font-weight: 600;
+}
+.dp-help .dp-help__small {
+  display: block;
+  margin-top: 4px;
+  color: var(--text-color-light, #8a949d);
+}
+.dp-logout {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 18px;
+  color: var(--text-color);
+  font-size: 15px;
+  text-decoration: none;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+.dp-logout:hover {
+  color: var(--heading-color);
+}
+.dp-logout__icon {
+  width: 20px;
+  height: 20px;
+  display: grid;
+  place-items: center;
+}
+
+/* ── 6. Top Bar ── */
+.dp-top-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+.dp-hero-title h2,
+.dp-hero-title h1 {
+  margin: 0;
+  color: var(--heading-color);
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 1.04;
+  letter-spacing: -.02em;
+}
+.dp-hero-title p {
+  margin: 12px 0 0;
+  color: var(--text-color);
+  font-size: 14px;
+}
+
+/* ── 7. Pills / Chips ── */
+.dp-pills {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.dp-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 34px;
+  padding: 0 15px;
+  border-radius: 10px;
+  border: 1px solid var(--dp-line2);
+  background: rgba(255,255,255,.02);
+  color: var(--heading-color);
+  font-size: 13px;
+  white-space: nowrap;
+  text-decoration: none;
+  cursor: pointer;
+}
+.dp-pill--accent {
+  border-color: rgba(215,179,95,.42);
+  color: var(--dp-accent);
+  background: rgba(215,179,95,.08);
+}
+.dp-pill--good {
+  border-color: rgba(88,194,106,.3);
+  background: rgba(88,194,106,.08);
+  color: var(--dp-good);
+}
+.dp-pill--warn {
+  border-color: rgba(207,162,76,.32);
+  background: rgba(207,162,76,.1);
+  color: var(--dp-warn);
+}
+.dp-pill--bad {
+  border-color: rgba(210,98,98,.3);
+  background: rgba(210,98,98,.08);
+  color: var(--dp-bad);
+}
+.dp-pill--info {
+  color: var(--dp-info);
+}
+
+/* ── 8. Summary Bar ── */
+.dp-summary {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  border: 1px solid var(--dp-line);
+  border-radius: 12px;
+  overflow: hidden;
+  background: rgba(255,255,255,.03);
+  min-width: 560px;
+}
+.dp-summary__item {
+  padding: 18px 24px;
+  background: linear-gradient(180deg, rgba(255,255,255,.025), rgba(255,255,255,.01));
+}
+.dp-summary__item + .dp-summary__item {
+  border-left: 1px solid var(--dp-line);
+}
+.dp-summary__label {
+  font-size: 14px;
+  color: var(--text-color);
+}
+.dp-summary__value {
+  margin-top: 8px;
+  font-size: 18px;
+  color: var(--heading-color);
+}
+.dp-summary__value--accent {
+  color: var(--dp-accent);
+}
+
+/* ── 9. Cards ── */
+.dp-card {
+  border: 1px solid var(--dp-line);
+  border-radius: var(--dp-r1, 18px);
+  background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.015));
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.02);
+}
+.dp-card--pad {
+  padding: 18px;
+}
+.dp-card__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+.dp-card__head h3,
+.dp-card__title {
+  margin: 0;
+  color: var(--heading-color);
+  font-size: 17px;
+  font-weight: 600;
+}
+.dp-card__link {
+  color: var(--dp-accent);
+  font-size: 14px;
+  text-decoration: none;
+}
+.dp-card__link:hover {
+  text-decoration: underline;
+}
+
+/* ── 10. Stats Grid ── */
+.dp-grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+.dp-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+.dp-grid-2 {
+  display: grid;
+  grid-template-columns: 1.28fr .72fr;
+  gap: 16px;
+}
+.dp-grid-2b {
+  display: grid;
+  grid-template-columns: 1.05fr .95fr;
+  gap: 16px;
+}
+
+.dp-stat {
+  height: 112px;
+  padding: 18px;
+  display: grid;
+  grid-template-columns: 54px 1fr;
+  gap: 14px;
+  align-items: center;
+}
+.dp-stat__icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.08);
+  display: grid;
+  place-items: center;
+  color: #d3d7db;
+  flex-shrink: 0;
+}
+.dp-stat__icon--gold {
+  color: var(--dp-accent);
+}
+.dp-stat__label {
+  font-size: 13px;
+  color: var(--text-color);
+  margin-bottom: 4px;
+}
+.dp-stat__value {
+  font-size: 22px;
+  color: var(--heading-color);
+  font-weight: 600;
+  letter-spacing: -.02em;
+}
+.dp-stat__sub {
+  font-size: 13px;
+  color: var(--text-color-light, var(--text-color-secondary));
+  margin-top: 8px;
+}
+
+/* ── 11. Data Tables ── */
+.dp-table-wrap {
+  padding: 16px 18px 10px;
+}
+.dp-table-wrap .dp-card__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+.dp-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.dp-table th,
+.dp-table td {
+  padding: 14px 12px;
+  border-bottom: 1px solid var(--dp-line);
+  text-align: left;
+  font-size: 13px;
+}
+.dp-table th {
+  color: var(--text-color-light, #b8c0c7);
+  font-weight: 500;
+}
+.dp-table td {
+  color: var(--text-color);
+}
+.dp-table tr:hover td {
+  background: rgba(255,255,255,.01);
+}
+.dp-table__muted {
+  color: var(--text-color-light, #8a949d);
+  font-size: 12px;
+}
+
+/* ── 12. Row Layout (for summary lists) ── */
+.dp-rows {
+  display: grid;
+}
+.dp-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
+  align-items: center;
+  padding: 13px 0;
+  border-bottom: 1px solid var(--dp-line);
+}
+.dp-row:last-child {
+  border-bottom: 0;
+}
+.dp-row__left {
+  color: var(--text-color);
+  font-size: 14px;
+}
+.dp-row__right {
+  color: var(--heading-color);
+  font-weight: 500;
+  font-size: 14px;
+}
+
+/* ── 13. Account Summary Card ── */
+.dp-account-card {
+  position: relative;
+  overflow: hidden;
+}
+.dp-account-card::after {
+  content: '';
+  position: absolute;
+  right: 18px;
+  bottom: 8px;
+  font-size: 108px;
+  font-weight: 700;
+  letter-spacing: .05em;
+  color: rgba(215,179,95,.06);
+  line-height: 1;
+  pointer-events: none;
+}
+
+/* ── 14. Status Dot ── */
+.dp-status-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--dp-good);
+  margin-left: 8px;
+  vertical-align: middle;
+}
+
+/* ── 15. Quick Order ── */
+.dp-qo-grid {
+  display: grid;
+  grid-template-columns: 1.2fr .72fr;
+  gap: 20px;
+}
+.dp-field {
+  display: grid;
+  gap: 8px;
+}
+.dp-field label {
+  color: var(--text-color-light, #8a949d);
+  font-size: 13px;
+}
+.dp-field .dp-input,
+.dp-field .dp-select,
+.dp-field .dp-textarea,
+.dp-input,
+.dp-select,
+.dp-textarea {
+  width: 100%;
+  height: 40px;
+  border-radius: 10px;
+  border: 1px solid var(--dp-line);
+  background: rgba(255,255,255,.03);
+  color: var(--heading-color);
+  padding: 0 14px;
+  font: inherit;
+  font-size: 14px;
+}
+.dp-textarea {
+  height: 128px;
+  padding: 12px 14px;
+  resize: vertical;
+}
+.dp-select {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
+.dp-field__hint {
+  font-size: 12px;
+  color: var(--text-color-light, #8a949d);
+}
+.dp-qty {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  height: 34px;
+  padding: 0 8px;
+  border-radius: 9px;
+  border: 1px solid var(--dp-line);
+  background: rgba(255,255,255,.02);
+}
+.dp-qty button {
+  width: 24px;
+  height: 24px;
+  border: 0;
+  border-radius: 6px;
+  background: rgba(255,255,255,.05);
+  color: var(--heading-color);
+  cursor: pointer;
+  font-size: 14px;
+}
+.dp-qty span {
+  color: var(--heading-color);
+  min-width: 20px;
+  text-align: center;
+}
+
+/* ── 16. Buttons ── */
+.dp-btn {
+  min-height: 46px;
+  border-radius: 12px;
+  border: 1px solid var(--dp-line2);
+  background: rgba(255,255,255,.03);
+  color: var(--heading-color);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 15px;
+  gap: 10px;
+  padding: 0 24px;
+  cursor: pointer;
+  transition: all .15s;
+  white-space: nowrap;
+}
+.dp-btn:hover {
+  background: rgba(255,255,255,.06);
+  color: var(--heading-color);
+}
+.dp-btn--primary {
+  background: linear-gradient(180deg, #e0bc67, #c89e49);
+  border-color: transparent;
+  color: #181208;
+}
+.dp-btn--primary:hover {
+  background: linear-gradient(180deg, #d4b15b, #bb8f3d);
+  color: #181208;
+}
+.dp-btn--ghost {
+  background: transparent;
+}
+.dp-btn--sm {
+  min-height: 36px;
+  font-size: 13px;
+  padding: 0 16px;
+}
+.dp-btn--full {
+  width: 100%;
+}
+.dp-cta-stack {
+  display: grid;
+  gap: 12px;
+}
+
+/* ── 17. Order Summary Card ── */
+.dp-order-summary {
+  padding: 16px 18px;
+}
+.dp-order-summary__line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 7px 0;
+  color: var(--text-color);
+  font-size: 14px;
+}
+.dp-order-summary__line--total {
+  font-size: 18px;
+  color: var(--dp-accent);
+  margin-top: 6px;
+  font-weight: 600;
+}
+.dp-order-summary__block {
+  margin-top: 14px;
+  padding: 12px;
+  border: 1px solid var(--dp-line);
+  border-radius: 12px;
+  background: rgba(255,255,255,.02);
+}
+.dp-order-summary__block-title {
+  font-size: 12px;
+  color: var(--text-color-light, #8a949d);
+}
+.dp-order-summary__block-value {
+  font-size: 20px;
+  color: var(--heading-color);
+  font-weight: 700;
+  margin-top: 6px;
+}
+.dp-order-summary__block-value--good {
+  color: var(--dp-good);
+}
+
+/* ── 18. Progress Bar ── */
+.dp-progress {
+  height: 10px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.08);
+  overflow: hidden;
+  margin-top: 12px;
+}
+.dp-progress > span {
+  display: block;
+  height: 100%;
+  width: 54%;
+  background: linear-gradient(90deg, var(--dp-accent), #c89e49);
+  border-radius: 999px;
+}
+
+/* ── 19. Quote Filters ── */
+.dp-filters {
+  display: grid;
+  grid-template-columns: 1.5fr .8fr .8fr .42fr;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.dp-search-like,
+.dp-select-like {
+  height: 42px;
+  border-radius: 10px;
+  border: 1px solid var(--dp-line);
+  background: rgba(255,255,255,.03);
+  color: var(--heading-color);
+  display: flex;
+  align-items: center;
+  padding: 0 14px;
+  font-size: 14px;
+  cursor: pointer;
+}
+.dp-search-like {
+  cursor: text;
+}
+.dp-search-like::placeholder {
+  color: var(--text-color-light, #7f8890);
+}
+.dp-select-like {
+  justify-content: space-between;
+}
+
+/* ── 20. Compact Table ── */
+.dp-table-compact th,
+.dp-table-compact td {
+  padding: 13px 10px;
+}
+
+/* ── 21. Quote / Payment Panels ── */
+.dp-panel {
+  padding: 18px;
+}
+.dp-panel__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.dp-panel__big {
+  font-size: 28px;
+  color: var(--heading-color);
+  font-weight: 700;
+  letter-spacing: -.02em;
+}
+.dp-panel__icon {
+  font-size: 46px;
+  color: var(--dp-accent);
+}
+
+/* ── 22. Pagination ── */
+.dp-pagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 12px;
+  color: var(--text-color-light, #8a949d);
+  font-size: 14px;
+}
+
+/* ── 23. Footer ── */
+.dp-footer {
+  margin-top: auto;
+  padding-top: 14px;
+  border-top: 1px solid var(--dp-line);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--text-color-light, #8a949d);
+  font-size: 13px;
+}
+.dp-footer__links {
+  display: flex;
+  gap: 24px;
+}
+.dp-footer__links a {
+  color: var(--text-color-light, #8a949d);
+  text-decoration: none;
+}
+.dp-footer__links a:hover {
+  color: var(--heading-color);
+}
+
+/* ── 24. Landing Page Elements ── */
+.dp-landing-hero {
+  display: grid;
+  grid-template-columns: 1.02fr .98fr;
+  gap: 24px;
+  padding: 0;
+}
+.dp-section-label {
+  color: var(--dp-accent);
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  font-size: 13px;
+  margin-bottom: 18px;
+}
+.dp-landing-title {
+  font-size: 56px;
+  line-height: .95;
+  letter-spacing: -.03em;
+  color: var(--heading-color);
+  max-width: 10ch;
+  margin: 0;
+  font-weight: 700;
+}
+.dp-landing-copy {
+  max-width: 54ch;
+  font-size: 18px;
+  color: var(--text-color);
+  margin: 20px 0 24px;
+  line-height: 1.55;
+}
+.dp-benefits {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+.dp-benefit {
+  min-height: 224px;
+  border: 1px solid var(--dp-line);
+  border-radius: 14px;
+  background: rgba(255,255,255,.02);
+  padding: 18px 18px 16px;
+  display: grid;
+  align-content: start;
+  gap: 16px;
+}
+.dp-benefit__icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 2px solid var(--dp-accent);
+  color: var(--dp-accent);
+  display: grid;
+  place-items: center;
+  font-size: 22px;
+}
+.dp-benefit h3 {
+  margin: 0;
+  color: var(--heading-color);
+  font-size: 20px;
+  font-weight: 500;
+}
+.dp-benefit p {
+  margin: 0;
+  color: var(--text-color);
+  font-size: 15px;
+  line-height: 1.45;
+}
+.dp-benefit a {
+  margin-top: auto;
+  color: var(--dp-accent);
+  text-decoration: none;
+  font-size: 14px;
+  letter-spacing: .08em;
+}
+.dp-benefit a:hover {
+  text-decoration: underline;
+}
+
+/* ── 25. Application Status Panel ── */
+.dp-status-panel {
+  border: 1px solid rgba(215,179,95,.28);
+  border-radius: 16px;
+  background: linear-gradient(180deg, rgba(215,179,95,.07), rgba(255,255,255,.02));
+  padding: 22px 24px;
+  display: grid;
+  gap: 20px;
+}
+.dp-status-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+}
+.dp-status-head h3 {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 500;
+  color: var(--heading-color);
+  line-height: 1.08;
+}
+.dp-timeline {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 8px;
+  margin-top: 4px;
+}
+.dp-step {
+  text-align: center;
+  color: var(--text-color);
+}
+.dp-step__bubble {
+  width: 52px;
+  height: 52px;
+  margin: 0 auto 10px;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,.32);
+  display: grid;
+  place-items: center;
+  font-size: 20px;
+  color: var(--heading-color);
+}
+.dp-step--done .dp-step__bubble {
+  border-color: var(--dp-accent);
+  color: var(--dp-accent);
+}
+.dp-step--active .dp-step__bubble {
+  border-color: var(--dp-accent);
+  color: var(--dp-accent);
+  background: rgba(215,179,95,.08);
+}
+.dp-step__sub {
+  display: block;
+  margin-top: 6px;
+  color: var(--text-color-light, #8a949d);
+  font-size: 13px;
+}
+
+/* ── 26. Tab Navigation ── */
+.dp-tabs {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid var(--dp-line);
+  margin-bottom: 20px;
+}
+.dp-tab {
+  padding: 12px 20px;
+  color: var(--text-color);
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  transition: all .15s;
+}
+.dp-tab:hover {
+  color: var(--heading-color);
+}
+.dp-tab--active {
+  color: var(--dp-accent);
+  border-bottom-color: var(--dp-accent);
+}
+
+/* ── 27. Responsive ── */
+@media (max-width: 1199px) {
+  .dp-grid-4 { grid-template-columns: repeat(2, 1fr); }
+  .dp-grid-2 { grid-template-columns: 1fr; }
+  .dp-qo-grid { grid-template-columns: 1fr; }
+  .dp-summary { min-width: 0; grid-template-columns: 1fr 1fr 1fr; }
+  .dp-filters { grid-template-columns: 1fr .8fr; }
+  .dp-benefits { grid-template-columns: 1fr; }
+  .dp-landing-hero { grid-template-columns: 1fr; }
+}
+@media (max-width: 991px) {
+  .dealer-portal {
+    grid-template-columns: 1fr;
+  }
+  .dealer-portal__sidebar {
+    display: none;
+  }
+  .dp-grid-4 { grid-template-columns: 1fr 1fr; }
+  .dp-grid-3 { grid-template-columns: 1fr; }
+  .dp-top-row { flex-direction: column; }
+  .dp-summary { grid-template-columns: 1fr; }
+  .dp-landing-title { font-size: 38px; }
+}
+@media (max-width: 767px) {
+  .dp-grid-4 { grid-template-columns: 1fr; }
+  .dp-grid-2b { grid-template-columns: 1fr; }
+  .dealer-portal__main { padding: 16px; }
+  .dp-hero-title h2 { font-size: 24px; }
+  .dp-table th:nth-child(4),
+  .dp-table td:nth-child(4),
+  .dp-table th:nth-child(5),
+  .dp-table td:nth-child(5) { display: none; }
+}

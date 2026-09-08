@@ -1,0 +1,33 @@
+{% comment %}
+  Calder Wheels — Fitment Data Provider
+  Provides vehicle fitment data to the storefront.
+
+  Two data modes:
+    1. LIVE API (primary): The middleware Fitment API server auto-syncs with
+       NHTSA and serves live data. Set CALDER_FITMENT_API_URL in theme settings
+       or set window.CALDER_FITMENT_API before this renders.
+    2. EMBEDDED (fallback): Static JSON generated from the NHTSA seeder.
+       Regenerate by running:
+         cd fitment && python nhtsa_seeder.py --db fitment.db --years 2010-2026
+         python export_fitment_data.py --db fitment.db --liquid ../shopify/snippets/fitment-data.liquid
+
+  The fitment-finder.js tries the API first, then falls back to embedded data.
+{% endcomment %}
+
+{%- liquid
+  assign fitment_api_url = settings.fitment_api_url | default: 'http://localhost:8081'
+  assign configurator_api_url = settings.configurator_api_url | default: 'http://localhost:8080'
+-%}
+
+<script>
+  window.CALDER_FITMENT_API = '{{ fitment_api_url }}';
+  window.CALDER_API_BASE = '{{ configurator_api_url }}';
+</script>
+
+<script id="fitment-data-json" type="application/json">
+{"vehicles": []}
+</script>
+
+<script>
+  window.__fitmentData = {"vehicles": []};
+</script>

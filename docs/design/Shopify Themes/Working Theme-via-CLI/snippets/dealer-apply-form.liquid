@@ -1,0 +1,337 @@
+{% comment %}
+  Calder Wheels — Dealer Application Form
+  Multi-step: Business Info → Contact → Shipping → Review & Submit
+  Usage: {% render 'dealer-apply-form' %}
+{% endcomment %}
+
+{%- liquid
+  assign form_id = 'dealer-apply-form'
+  assign section_id = section.id | default: 'dealer-apply'
+-%}
+
+<div class="dealer-apply" id="dealer-apply-{{ section_id }}">
+  <div class="container" style="max-width:800px;margin:0 auto;padding:40px 0">
+    <div class="text-center mb-5">
+      <h2 class="h2" style="color:var(--heading-color)">Dealer Application</h2>
+      <p style="color:var(--text-color);opacity:0.7">Complete all steps to apply for a Calder Wheels dealer account.</p>
+    </div>
+
+    <div class="dealer-apply__steps" style="display:flex;justify-content:center;gap:8px;margin-bottom:40px">
+      <span class="dealer-apply__step dealer-apply__step--active" data-step="1">Business Info</span>
+      <span class="dealer-apply__step-sep">→</span>
+      <span class="dealer-apply__step" data-step="2">Contact</span>
+      <span class="dealer-apply__step-sep">→</span>
+      <span class="dealer-apply__step" data-step="3">Shipping</span>
+      <span class="dealer-apply__step-sep">→</span>
+      <span class="dealer-apply__step" data-step="4">Review</span>
+    </div>
+
+    <form id="{{ form_id }}-{{ section_id }}" class="dealer-apply__form" method="post" action="/apps/calder/dealer-apply">
+      {% comment %}Step 1: Business Information{% endcomment %}
+      <div class="dealer-apply__panel" data-panel="1">
+        <div class="dp-card dp-card--pad" style="padding:32px">
+          <h3 style="margin:0 0 24px;color:var(--heading-color)">Business Information</h3>
+          <div style="display:grid;gap:16px">
+            <div class="dp-field">
+              <label for="apply-company-{{ section_id }}">Legal Business Name *</label>
+              <input type="text" class="dp-input" id="apply-company-{{ section_id }}" name="company" required placeholder="Your registered business name">
+            </div>
+            <div class="dp-field">
+              <label for="apply-dba-{{ section_id }}">DBA (Doing Business As)</label>
+              <input type="text" class="dp-input" id="apply-dba-{{ section_id }}" name="dba" placeholder="If different from legal name">
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+              <div class="dp-field">
+                <label for="apply-taxid-{{ section_id }}">Tax ID / EIN *</label>
+                <input type="text" class="dp-input" id="apply-taxid-{{ section_id }}" name="tax_id" required placeholder="XX-XXXXXXX">
+              </div>
+              <div class="dp-field">
+                <label for="apply-years-{{ section_id }}">Years in Business *</label>
+                <select class="dp-input" id="apply-years-{{ section_id }}" name="years_in_business" required>
+                  <option value="">Select...</option>
+                  <option value="0-1">Less than 1 year</option>
+                  <option value="1-3">1-3 years</option>
+                  <option value="3-5">3-5 years</option>
+                  <option value="5-10">5-10 years</option>
+                  <option value="10+">10+ years</option>
+                </select>
+              </div>
+            </div>
+            <div class="dp-field">
+              <label for="apply-type-{{ section_id }}">Business Type *</label>
+              <select class="dp-input" id="apply-type-{{ section_id }}" name="business_type" required>
+                <option value="">Select...</option>
+                <option value="tire_shop">Tire & Wheel Shop</option>
+                <option value="auto_dealer">Auto Dealership</option>
+                <option value="collision">Collision / Body Shop</option>
+                <option value="performance">Performance Tuner</option>
+                <option value="etailer">Online Retailer</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            <div class="dp-field">
+              <label for="apply-estimated-volume-{{ section_id }}">Estimated Monthly Volume (sets) *</label>
+              <select class="dp-input" id="apply-estimated-volume-{{ section_id }}" name="estimated_volume" required>
+                <option value="">Select...</option>
+                <option value="1-5">1-5 sets</option>
+                <option value="5-10">5-10 sets</option>
+                <option value="10-25">10-25 sets</option>
+                <option value="25-50">25-50 sets</option>
+                <option value="50+">50+ sets</option>
+              </select>
+            </div>
+            <div class="dp-field">
+              <label for="apply-references-{{ section_id }}">Trade References</label>
+              <textarea class="dp-textarea" id="apply-references-{{ section_id }}" name="references" rows="3" placeholder="List any distributor references or current wheel suppliers (optional)"></textarea>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;justify-content:flex-end;margin-top:20px">
+          <button type="button" class="dp-btn dp-btn--primary" data-next-step="2">Next: Contact Info</button>
+        </div>
+      </div>
+
+      {% comment %}Step 2: Contact Information{% endcomment %}
+      <div class="dealer-apply__panel" data-panel="2" style="display:none">
+        <div class="dp-card dp-card--pad" style="padding:32px">
+          <h3 style="margin:0 0 24px;color:var(--heading-color)">Contact Information</h3>
+          <div style="display:grid;gap:16px">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+              <div class="dp-field">
+                <label for="apply-first-{{ section_id }}">First Name *</label>
+                <input type="text" class="dp-input" id="apply-first-{{ section_id }}" name="first_name" required placeholder="First name">
+              </div>
+              <div class="dp-field">
+                <label for="apply-last-{{ section_id }}">Last Name *</label>
+                <input type="text" class="dp-input" id="apply-last-{{ section_id }}" name="last_name" required placeholder="Last name">
+              </div>
+            </div>
+            <div class="dp-field">
+              <label for="apply-email-{{ section_id }}">Email Address *</label>
+              <input type="email" class="dp-input" id="apply-email-{{ section_id }}" name="email" required placeholder="you@company.com">
+            </div>
+            <div class="dp-field">
+              <label for="apply-phone-{{ section_id }}">Phone Number *</label>
+              <input type="tel" class="dp-input" id="apply-phone-{{ section_id }}" name="phone" required placeholder="(555) 555-5555">
+            </div>
+            <div class="dp-field">
+              <label for="apply-position-{{ section_id }}">Position / Title</label>
+              <input type="text" class="dp-input" id="apply-position-{{ section_id }}" name="position" placeholder="e.g. General Manager">
+            </div>
+            <div class="dp-field">
+              <label for="apply-preferred-contact-{{ section_id }}">Preferred Contact Method</label>
+              <select class="dp-input" id="apply-preferred-contact-{{ section_id }}" name="preferred_contact">
+                <option value="email">Email</option>
+                <option value="phone">Phone</option>
+                <option value="either">Either</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;justify-content:space-between;margin-top:20px">
+          <button type="button" class="dp-btn dp-btn--ghost" data-prev-step="1">Back</button>
+          <button type="button" class="dp-btn dp-btn--primary" data-next-step="3">Next: Shipping Address</button>
+        </div>
+      </div>
+
+      {% comment %}Step 3: Shipping Address{% endcomment %}
+      <div class="dealer-apply__panel" data-panel="3" style="display:none">
+        <div class="dp-card dp-card--pad" style="padding:32px">
+          <h3 style="margin:0 0 24px;color:var(--heading-color)">Shipping Address</h3>
+          <div style="display:grid;gap:16px">
+            <div class="dp-field">
+              <label for="apply-address-{{ section_id }}">Street Address *</label>
+              <input type="text" class="dp-input" id="apply-address-{{ section_id }}" name="address" required placeholder="123 Main Street">
+            </div>
+            <div class="dp-field">
+              <label for="apply-address2-{{ section_id }}">Suite / Unit</label>
+              <input type="text" class="dp-input" id="apply-address2-{{ section_id }}" name="address2" placeholder="Suite 100">
+            </div>
+            <div style="display:grid;grid-template-columns:2fr 1fr 1fr;gap:16px">
+              <div class="dp-field">
+                <label for="apply-city-{{ section_id }}">City *</label>
+                <input type="text" class="dp-input" id="apply-city-{{ section_id }}" name="city" required placeholder="City">
+              </div>
+              <div class="dp-field">
+                <label for="apply-state-{{ section_id }}">State *</label>
+                <select class="dp-input" id="apply-state-{{ section_id }}" name="state" required>
+                  <option value="">Select...</option>
+                  <option value="AL">AL</option><option value="AK">AK</option><option value="AZ">AZ</option>
+                  <option value="AR">AR</option><option value="CA">CA</option><option value="CO">CO</option>
+                  <option value="CT">CT</option><option value="DE">DE</option><option value="FL">FL</option>
+                  <option value="GA">GA</option><option value="HI">HI</option><option value="ID">ID</option>
+                  <option value="IL">IL</option><option value="IN">IN</option><option value="IA">IA</option>
+                  <option value="KS">KS</option><option value="KY">KY</option><option value="LA">LA</option>
+                  <option value="ME">ME</option><option value="MD">MD</option><option value="MA">MA</option>
+                  <option value="MI">MI</option><option value="MN">MN</option><option value="MS">MS</option>
+                  <option value="MO">MO</option><option value="MT">MT</option><option value="NE">NE</option>
+                  <option value="NV">NV</option><option value="NH">NH</option><option value="NJ">NJ</option>
+                  <option value="NM">NM</option><option value="NY">NY</option><option value="NC">NC</option>
+                  <option value="ND">ND</option><option value="OH">OH</option><option value="OK">OK</option>
+                  <option value="OR">OR</option><option value="PA">PA</option><option value="RI">RI</option>
+                  <option value="SC">SC</option><option value="SD">SD</option><option value="TN">TN</option>
+                  <option value="TX">TX</option><option value="UT">UT</option><option value="VT">VT</option>
+                  <option value="VA">VA</option><option value="WA">WA</option><option value="WV">WV</option>
+                  <option value="WI">WI</option><option value="WY">WY</option>
+                </select>
+              </div>
+              <div class="dp-field">
+                <label for="apply-zip-{{ section_id }}">Zip Code *</label>
+                <input type="text" class="dp-input" id="apply-zip-{{ section_id }}" name="zip" required placeholder="12345">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;justify-content:space-between;margin-top:20px">
+          <button type="button" class="dp-btn dp-btn--ghost" data-prev-step="2">Back</button>
+          <button type="button" class="dp-btn dp-btn--primary" data-next-step="4">Next: Review</button>
+        </div>
+      </div>
+
+      {% comment %}Step 4: Review & Submit{% endcomment %}
+      <div class="dealer-apply__panel" data-panel="4" style="display:none">
+        <div class="dp-card dp-card--pad" style="padding:32px">
+          <h3 style="margin:0 0 24px;color:var(--heading-color)">Review & Submit</h3>
+          <p style="color:var(--text-color);opacity:0.7;margin-bottom:20px">Please review your application before submitting. Our team will review within 2 business days.</p>
+          <div id="apply-review-{{ section_id }}" style="display:grid;gap:12px;margin-bottom:24px"></div>
+          <div class="dp-field">
+            <label class="quote-form__checkbox" style="display:flex;align-items:center;gap:8px;cursor:pointer">
+              <input type="checkbox" name="agree_terms" required style="width:18px;height:18px">
+              I confirm that all information provided is accurate and I agree to the Calder Wheels Dealer Terms & Conditions.
+            </label>
+          </div>
+        </div>
+        <div style="display:flex;justify-content:space-between;margin-top:20px">
+          <button type="button" class="dp-btn dp-btn--ghost" data-prev-step="3">Back</button>
+          <button type="submit" class="dp-btn dp-btn--primary" id="apply-submit-{{ section_id }}">Submit Application</button>
+        </div>
+      </div>
+    </form>
+
+    <div id="apply-success-{{ section_id }}" style="display:none;text-align:center;padding:60px 20px">
+      <div style="font-size:48px;margin-bottom:16px">&#10003;</div>
+      <h2 style="color:var(--heading-color);margin-bottom:8px">Application Submitted</h2>
+      <p style="color:var(--text-color);opacity:0.7;max-width:500px;margin:0 auto">Thank you for applying to the Calder Wheels dealer program. Our team will review your application and contact you within 2 business days.</p>
+      <a href="/" class="dp-btn dp-btn--primary" style="margin-top:24px;display:inline-block">Return to Homepage</a>
+    </div>
+  </div>
+</div>
+
+<style>
+  .dealer-apply__steps { font-size:0.9rem; }
+  .dealer-apply__step {
+    padding:6px 16px;border-radius:20px;background:var(--dp-line);
+    color:var(--text-color-light);font-weight:500;
+  }
+  .dealer-apply__step--active { background:var(--dp-accent);color:var(--dp-accent-text); }
+  .dealer-apply__step-sep { color:var(--text-color-light);opacity:0.4;align-self:center; }
+  .dp-field { display:grid;gap:4px; }
+  .dp-field label { font-size:0.85rem;font-weight:500;color:var(--heading-color); }
+  .dp-input, .dp-textarea {
+    width:100%;padding:10px 14px;
+    background:var(--body-bg);border:1px solid var(--decor-border-color);
+    border-radius:6px;color:var(--text-color);font-size:0.95rem;
+  }
+  .dp-textarea { resize:vertical;min-height:60px; }
+  .dp-btn {
+    padding:12px 28px;border-radius:8px;font-weight:600;font-size:0.95rem;
+    cursor:pointer;border:none;transition:all 0.2s;
+  }
+  .dp-btn--primary { background:var(--dp-accent);color:var(--dp-accent-text); }
+  .dp-btn--primary:hover { opacity:0.9; }
+  .dp-btn--ghost { background:transparent;color:var(--text-color);border:1px solid var(--dp-line); }
+  .dp-btn--ghost:hover { background:var(--dp-line); }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var form = document.getElementById('{{ form_id }}-{{ section_id }}');
+    if (!form) return;
+
+    var currentStep = 1;
+    var totalSteps = 4;
+
+    function showStep(n) {
+      document.querySelectorAll('.dealer-apply__panel').forEach(function(p) { p.style.display = 'none'; });
+      var panel = form.querySelector('[data-panel="' + n + '"]');
+      if (panel) panel.style.display = 'block';
+      document.querySelectorAll('.dealer-apply__step').forEach(function(s) {
+        s.classList.toggle('dealer-apply__step--active', parseInt(s.dataset.step) === n);
+      });
+      currentStep = n;
+      window.scrollTo({top: form.offsetTop - 40, behavior: 'smooth'});
+      if (n === 4) buildReview();
+    }
+
+    form.querySelectorAll('[data-next-step]').forEach(function(btn) {
+      btn.addEventListener('click', function() { showStep(parseInt(this.dataset.nextStep)); });
+    });
+    form.querySelectorAll('[data-prev-step]').forEach(function(btn) {
+      btn.addEventListener('click', function() { showStep(parseInt(this.dataset.prevStep)); });
+    });
+
+    function buildReview() {
+      var review = document.getElementById('apply-review-{{ section_id }}');
+      if (!review) return;
+      var fields = {};
+      form.querySelectorAll('input, select, textarea').forEach(function(el) {
+        if (el.name && !el.name.includes('agree')) {
+          fields[el.name] = el.value || '—';
+        }
+      });
+      var labels = {
+        company: 'Business Name', tax_id: 'Tax ID', years_in_business: 'Years in Business',
+        business_type: 'Business Type', estimated_volume: 'Est. Monthly Volume',
+        first_name: 'First Name', last_name: 'Last Name', email: 'Email',
+        phone: 'Phone', position: 'Position', address: 'Address', city: 'City',
+        state: 'State', zip: 'Zip Code'
+      };
+      var html = '';
+      var order = ['company','tax_id','years_in_business','business_type','estimated_volume',
+                   'first_name','last_name','email','phone','position',
+                   'address','city','state','zip'];
+      order.forEach(function(k) {
+        if (fields[k]) {
+          html += '<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--dp-line)">' +
+            '<span style="color:var(--text-color-light)">' + (labels[k] || k) + '</span>' +
+            '<span style="color:var(--heading-color);font-weight:500">' + fields[k] + '</span></div>';
+        }
+      });
+      review.innerHTML = html || '<p>No data entered.</p>';
+    }
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      var submitBtn = document.getElementById('apply-submit-{{ section_id }}');
+      var successEl = document.getElementById('apply-success-{{ section_id }}');
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Submitting...';
+
+      var data = {};
+      form.querySelectorAll('input, select, textarea').forEach(function(el) {
+        if (el.name) data[el.name] = el.value;
+      });
+
+      var xhr = new XMLHttpRequest();
+      xhr.open('POST', '/apps/calder/dealer-apply', true);
+      xhr.setRequestHeader('Content-Type', 'application/json');
+      xhr.onload = function() {
+        if (xhr.status === 200 || xhr.status === 201) {
+          form.style.display = 'none';
+          document.querySelector('.dealer-apply__steps').style.display = 'none';
+          successEl.style.display = 'block';
+        } else {
+          alert('There was an error submitting your application. Please try again or contact us.');
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Submit Application';
+        }
+      };
+      xhr.onerror = function() {
+        alert('Network error. Please check your connection.');
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Submit Application';
+      };
+      xhr.send(JSON.stringify(data));
+    });
+  });
+</script>

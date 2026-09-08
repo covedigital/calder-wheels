@@ -1,0 +1,17 @@
+{%- capture catalog_json -%}
+[
+  { "handle": "apex-201", "title": "Apex 201", "bolt_patterns": ["5x114.3"] },
+  { "handle": "vortex-207", "title": "Vortex 207", "bolt_patterns": ["5x114.3"] }
+]
+{%- endcapture -%}
+{%- assign catalog_arr = catalog_json | parse_json -%}
+{%- assign count = catalog_arr | size -%}
+{%- assign first_handle = catalog_arr[0].handle -%}
+<script type="application/json" id="fitment-results-json">
+{
+  "debug": true,
+  "catalog_count": {{ count }},
+  "first_handle": {{ first_handle | json }},
+  "products": []
+}
+</script>

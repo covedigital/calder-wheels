@@ -1,0 +1,194 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "vehicle-gallery": {
+      "type": "index-gallery",
+      "blocks": {
+        "vehicle-gallery-heading": {
+          "type": "image",
+          "settings": {
+            "image": "",
+            "color_placeholder": "#0d1117",
+            "title": "Vehicle Gallery",
+            "description": "Browse by vehicle — see how Calder Wheels look on your car",
+            "link": ""
+          }
+        },
+        "vehicle-gallery-1": {
+          "type": "image",
+          "settings": {
+            "image": "",
+            "color_placeholder": "#1a1a2e",
+            "title": "2024 BMW M3",
+            "description": "Apex 3-Piece — Gloss Black / Polished",
+            "link": ""
+          }
+        },
+        "vehicle-gallery-2": {
+          "type": "image",
+          "settings": {
+            "image": "",
+            "color_placeholder": "#16213e",
+            "title": "2023 Porsche 911",
+            "description": "Vertex 3-Piece — Satin Silver / Polished",
+            "link": ""
+          }
+        },
+        "vehicle-gallery-3": {
+          "type": "image",
+          "settings": {
+            "image": "",
+            "color_placeholder": "#0f3460",
+            "title": "2024 Toyota Supra",
+            "description": "Striker 3-Piece — Black Titanium / Polished",
+            "link": ""
+          }
+        },
+        "vehicle-gallery-4": {
+          "type": "image",
+          "settings": {
+            "image": "",
+            "color_placeholder": "#533483",
+            "title": "2022 Mercedes C63",
+            "description": "Vortex 3-Piece — Gloss Black / Chrome Bolts",
+            "link": ""
+          }
+        },
+        "vehicle-gallery-5": {
+          "type": "image",
+          "settings": {
+            "image": "",
+            "color_placeholder": "#e94560",
+            "title": "2024 Ford Mustang",
+            "description": "Turbine 3-Piece — Satin Silver / Black Bolts",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "vehicle-gallery-heading",
+        "vehicle-gallery-1",
+        "vehicle-gallery-2",
+        "vehicle-gallery-3",
+        "vehicle-gallery-4",
+        "vehicle-gallery-5"
+      ],
+      "settings": {
+        "spacing_sections": 30,
+        "use_global_desktop_space": false,
+        "spacing_sections_mobile": 20,
+        "use_global_mobile_space": false,
+        "spacing_padding_sections": 80,
+        "use_global_desktop_space_padding": true,
+        "spacing_padding_sections_mobile": 60,
+        "use_global_mobile_space_padding": true,
+        "background": false,
+        "columns": "3",
+        "heading_alignment": "center",
+        "heading": "Vehicle Gallery",
+        "subtitle": "See how our wheels look on real vehicles"
+      }
+    },
+    "wheel-gallery": {
+      "type": "index-gallery",
+      "blocks": {
+        "wheel-gallery-heading": {
+          "type": "image",
+          "settings": {
+            "image": "",
+            "color_placeholder": "#0d1117",
+            "title": "Design Gallery",
+            "description": "Browse by design — explore every finish combination",
+            "link": ""
+          }
+        },
+        "wheel-gallery-201": {
+          "type": "image",
+          "settings": {
+            "image": "",
+            "color_placeholder": "#1a1a2e",
+            "title": "201 — Apex",
+            "description": "7-spoke 3-piece forged — multiple finishes",
+            "link": ""
+          }
+        },
+        "wheel-gallery-202": {
+          "type": "image",
+          "settings": {
+            "image": "",
+            "color_placeholder": "#16213e",
+            "title": "202 — Vertex",
+            "description": "Split-spoke 3-piece forged",
+            "link": ""
+          }
+        },
+        "wheel-gallery-203": {
+          "type": "image",
+          "settings": {
+            "image": "",
+            "color_placeholder": "#0f3460",
+            "title": "203 — Striker",
+            "description": "Sport mesh 3-piece forged",
+            "link": ""
+          }
+        },
+        "wheel-gallery-205": {
+          "type": "image",
+          "settings": {
+            "image": "",
+            "color_placeholder": "#533483",
+            "title": "205 — Turbine",
+            "description": "Turbine-blade 3-piece forged",
+            "link": ""
+          }
+        },
+        "wheel-gallery-207": {
+          "type": "image",
+          "settings": {
+            "image": "",
+            "color_placeholder": "#e94560",
+            "title": "207 — Vortex",
+            "description": "Deep dish step-lip 3-piece forged",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "wheel-gallery-heading",
+        "wheel-gallery-201",
+        "wheel-gallery-202",
+        "wheel-gallery-203",
+        "wheel-gallery-205",
+        "wheel-gallery-207"
+      ],
+      "settings": {
+        "spacing_sections": 50,
+        "use_global_desktop_space": false,
+        "spacing_sections_mobile": 30,
+        "use_global_mobile_space": false,
+        "spacing_padding_sections": 80,
+        "use_global_desktop_space_padding": true,
+        "spacing_padding_sections_mobile": 60,
+        "use_global_mobile_space_padding": true,
+        "background": true,
+        "background_preset": "none",
+        "columns": "3",
+        "heading_alignment": "center",
+        "heading": "Design Gallery",
+        "subtitle": "Explore every Calder Wheels design"
+      }
+    }
+  },
+  "order": [
+    "vehicle-gallery",
+    "wheel-gallery"
+  ]
+}

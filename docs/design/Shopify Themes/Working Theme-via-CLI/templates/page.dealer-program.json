@@ -1,0 +1,230 @@
+{
+  "sections": {
+    "dealer-hero": {
+      "type": "index-banner-grid",
+      "blocks": {
+        "dealer-hero-banner": {
+          "type": "banner",
+          "settings": {
+            "image": "",
+            "video_loop": false,
+            "color_placeholder": "#070909",
+            "title": "Calder Wheels<br>Dealer Program",
+            "subtitle": "",
+            "invert_color": true,
+            "custom_caption_colorization": false,
+            "color_title": "rgba(0,0,0,0)",
+            "color_subtitle": "rgba(0,0,0,0)",
+            "color_description": "rgba(0,0,0,0)",
+            "color_caption_bg": "",
+            "url": "",
+            "fast_shop": false,
+            "description": "Join the select network of elite dealers carrying the finest 3-piece forged wheels. Tiered pricing, NET-30 terms, dedicated support, and exclusive inventory access.",
+            "button": true,
+            "button_text": "Apply Now",
+            "button_url": "/pages/dealer-apply",
+            "button_target_blank": false,
+            "button_color": "btn--white",
+            "aligment": "center",
+            "aligment_v": "middle",
+            "aligment_text": "center",
+            "width": 60,
+            "left_padding": 5,
+            "top_padding": 5,
+            "mobile_sync": false,
+            "aligment_mobile": "center",
+            "aligment_v_mobile": "bottom",
+            "aligment_text_mobile": "center",
+            "width_mobile": 90,
+            "left_padding_mobile": 5,
+            "top_padding_mobile": 5
+          }
+        }
+      },
+      "block_order": ["dealer-hero-banner"],
+      "settings": {
+        "fluid": true,
+        "boxed": true,
+        "layout": "grid",
+        "style": "style-1",
+        "per_row": "1",
+        "images_auto_height": true,
+        "images_auto_height_padding": 54,
+        "font_ratio": 72,
+        "per_row_mobile": "1",
+        "images_auto_height_mobile": true,
+        "images_auto_height_padding_mobile": 60,
+        "font_ratio_mobile": 80,
+        "heading_alignment": "center",
+        "heading": "",
+        "subtitle": "",
+        "lazyload": false,
+        "placeholder": true,
+        "spacing_sections": 0,
+        "use_global_desktop_space": false,
+        "spacing_sections_mobile": 0,
+        "use_global_mobile_space": false,
+        "spacing_padding_sections": 0,
+        "use_global_desktop_space_padding": false,
+        "spacing_padding_sections_mobile": 0,
+        "use_global_mobile_space_padding": false,
+        "background": true,
+        "background_preset": "dark",
+        "background_image_placeholder_type": "color_global_secondary_bg"
+      }
+    },
+    "dealer-benefits": {
+      "type": "index-icons",
+      "blocks": {
+        "benefit-tiered": {
+          "type": "icon",
+          "settings": {
+            "icon": "icon-star",
+            "only_image": false,
+            "title": "Tiered Pricing",
+            "subtitle": "Volume-based pricing from Tier 1 to Tier 3 with increasing discounts"
+          }
+        },
+        "benefit-terms": {
+          "type": "icon",
+          "settings": {
+            "icon": "icon-card",
+            "only_image": false,
+            "title": "NET-30 Terms",
+            "subtitle": "Approved dealers enjoy NET-30 payment terms on all orders"
+          }
+        },
+        "benefit-inventory": {
+          "type": "icon",
+          "settings": {
+            "icon": "icon-truck",
+            "only_image": false,
+            "title": "Priority Fulfillment",
+            "subtitle": "Dealer orders receive priority production scheduling"
+          }
+        },
+        "benefit-support": {
+          "type": "icon",
+          "settings": {
+            "icon": "icon-chat",
+            "only_image": false,
+            "title": "Dedicated Support",
+            "subtitle": "Dealer hotline with dedicated account representative"
+          }
+        },
+        "benefit-marketing": {
+          "type": "icon",
+          "settings": {
+            "icon": "icon-image",
+            "only_image": false,
+            "title": "Marketing Assets",
+            "subtitle": "Access to professional photography, renders, and co-branded materials"
+          }
+        },
+        "benefit-exclusive": {
+          "type": "icon",
+          "settings": {
+            "icon": "icon-diamond",
+            "only_image": false,
+            "title": "Exclusive Access",
+            "subtitle": "Early access to new designs and limited-edition finishes"
+          }
+        }
+      },
+      "block_order": [
+        "benefit-tiered", "benefit-terms", "benefit-inventory",
+        "benefit-support", "benefit-marketing", "benefit-exclusive"
+      ],
+      "settings": {
+        "layout": "layout_2",
+        "icons_font_size": "default",
+        "icons_background": false,
+        "icons_text_background": false,
+        "icons_bordered": false,
+        "under_slider": true,
+        "per_view": "3",
+        "per_view_mobile": "1",
+        "heading_alignment": "center",
+        "heading": "Why Become a Calder Dealer?",
+        "subtitle": "",
+        "spacing_sections": 50,
+        "use_global_desktop_space": false,
+        "spacing_sections_mobile": 30,
+        "use_global_mobile_space": false,
+        "spacing_padding_sections": 80,
+        "use_global_desktop_space_padding": true,
+        "spacing_padding_sections_mobile": 60,
+        "use_global_mobile_space_padding": true,
+        "background": true,
+        "background_preset": "none",
+        "background_image_placeholder_type": "color_global_secondary_bg"
+      }
+    },
+    "dealer-cta": {
+      "type": "index-banner-grid",
+      "blocks": {
+        "dealer-cta-banner": {
+          "type": "banner",
+          "settings": {
+            "image": "",
+            "video_loop": false,
+            "color_placeholder": "#0d1117",
+            "title": "Ready to Partner?",
+            "subtitle": "",
+            "invert_color": true,
+            "description": "Complete our dealer application and our team will review within 2 business days.",
+            "button": true,
+            "button_text": "Apply for Dealer Account",
+            "button_url": "/pages/dealer-apply",
+            "button_target_blank": false,
+            "button_color": "btn--white",
+            "aligment": "center",
+            "aligment_v": "middle",
+            "aligment_text": "center",
+            "width": 60,
+            "left_padding": 5,
+            "top_padding": 5,
+            "mobile_sync": false,
+            "aligment_mobile": "center",
+            "aligment_v_mobile": "bottom",
+            "aligment_text_mobile": "center",
+            "width_mobile": 90,
+            "left_padding_mobile": 5,
+            "top_padding_mobile": 5
+          }
+        }
+      },
+      "block_order": ["dealer-cta-banner"],
+      "settings": {
+        "fluid": true,
+        "boxed": true,
+        "layout": "grid",
+        "style": "style-1",
+        "per_row": "1",
+        "images_auto_height": true,
+        "images_auto_height_padding": 40,
+        "font_ratio": 60,
+        "per_row_mobile": "1",
+        "images_auto_height_mobile": true,
+        "images_auto_height_padding_mobile": 50,
+        "font_ratio_mobile": 70,
+        "heading_alignment": "center",
+        "spacing_sections": 30,
+        "use_global_desktop_space": false,
+        "spacing_sections_mobile": 20,
+        "use_global_mobile_space": false,
+        "spacing_padding_sections": 60,
+        "use_global_desktop_space_padding": true,
+        "spacing_padding_sections_mobile": 40,
+        "use_global_mobile_space_padding": true,
+        "background": true,
+        "background_preset": "dark"
+      }
+    }
+  },
+  "order": [
+    "dealer-hero",
+    "dealer-benefits",
+    "dealer-cta"
+  ]
+}

@@ -1,0 +1,237 @@
+{% comment %}
+  Quote button variant — replaces "Add to Cart" for made-to-order/configurable products.
+  Triggers a modal form for quote submission.
+  Usage: {% render 'quote-button', product: product, current_variant: current_variant, layout: layout %}
+{% endcomment %}
+
+{%- liquid
+  assign quote_text = 'Request Quote'
+  assign quote_icon = false
+  assign button_class = 'button--primary'
+  assign current_variant_id = current_variant.id | default: product.selected_or_first_available_variant.id
+  assign available = current_variant.available | default: false
+-%}
+
+<button
+  type="button"
+  class="btn w-100 position-relative {{ button_class }} quote-button js-quote-button"
+  data-product-id="{{ product.id }}"
+  data-variant-id="{{ current_variant_id }}"
+  data-product-title="{{ product.title | escape }}"
+  data-product-url="{{ product.url }}"
+  data-fancybox
+  data-src="#quote-modal-{{ section.id }}"
+  {% unless available %}disabled{% endunless %}
+>
+  <span>
+    {% if available %}
+      {{ quote_text }}
+    {% else %}
+      {{ 'products.product.sold_out' | t }}
+    {% endif %}
+  </span>
+</button>
+
+<div id="quote-modal-{{ section.id }}" class="quote-modal" style="display:none;max-width:600px;padding:30px;">
+  <div class="quote-modal__content">
+    <h3 class="quote-modal__title">Request a Quote</h3>
+    <p class="quote-modal__product"><strong>{{ product.title }}</strong>{% if current_variant.title != 'Default Title' %} — {{ current_variant.title }}{% endif %}</p>
+
+    <form id="quote-form-{{ section.id }}" class="quote-form js-quote-form">
+      <input type="hidden" name="product_id" value="{{ product.id }}">
+      <input type="hidden" name="variant_id" value="{{ current_variant_id }}">
+      <input type="hidden" name="product_title" value="{{ product.title | escape }}">
+
+      <div class="form-group">
+        <label for="quote-name-{{ section.id }}">Full Name *</label>
+        <input type="text" id="quote-name-{{ section.id }}" name="name" class="form-control" required placeholder="Your full name" {% if customer %}value="{{ customer.name }}"{% endif %}>
+      </div>
+
+      <div class="form-group">
+        <label for="quote-email-{{ section.id }}">Email *</label>
+        <input type="email" id="quote-email-{{ section.id }}" name="email" class="form-control" required placeholder="your@email.com" {% if customer %}value="{{ customer.email }}"{% endif %}>
+      </div>
+
+      <div class="form-group">
+        <label for="quote-phone-{{ section.id }}">Phone</label>
+        <input type="tel" id="quote-phone-{{ section.id }}" name="phone" class="form-control" placeholder="(555) 123-4567" {% if customer.default_address.phone %}value="{{ customer.default_address.phone }}"{% endif %}>
+      </div>
+
+      <div class="form-group">
+        <label for="quote-vehicle-{{ section.id }}">Vehicle (Year, Make, Model)</label>
+        <input type="text" id="quote-vehicle-{{ section.id }}" name="vehicle" class="form-control" placeholder="e.g. 2024 BMW M3 Competition">
+      </div>
+
+      <div class="form-group">
+        <label for="quote-quantity-{{ section.id }}">Quantity *</label>
+        <input type="number" id="quote-quantity-{{ section.id }}" name="quantity" class="form-control" min="1" value="1" required>
+      </div>
+
+      <div class="form-group">
+        <label for="quote-notes-{{ section.id }}">Additional Notes</label>
+        <textarea id="quote-notes-{{ section.id }}" name="notes" class="form-control" rows="3" placeholder="Finish preferences, special requests, timeline..."></textarea>
+      </div>
+
+      <div class="form-group">
+        <label class="quote-form__checkbox">
+          <input type="checkbox" name="dealer_inquiry" value="yes">
+          I am a dealer inquiring about wholesale pricing
+        </label>
+      </div>
+
+      <div class="quote-form__actions">
+        <button type="submit" class="btn btn--primary w-100">
+          <span>Submit Quote Request</span>
+          <div class="loading-overlay__spinner hidden">
+            <div data-load="loading"></div>
+          </div>
+        </button>
+      </div>
+
+      <div class="quote-form__status" style="display:none;"></div>
+    </form>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var form = document.getElementById('quote-form-{{ section.id }}');
+    if (!form) return;
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      var submitBtn = form.querySelector('button[type="submit"]');
+      var statusEl = form.querySelector('.quote-form__status');
+      var spinner = submitBtn.querySelector('.loading-overlay__spinner');
+      var btnText = submitBtn.querySelector('span:not(.loading-overlay__spinner)');
+
+      submitBtn.disabled = true;
+      if (spinner) spinner.classList.remove('hidden');
+      if (btnText) btnText.style.display = 'none';
+
+      var formData = new FormData(form);
+      var data = {};
+      formData.forEach(function (value, key) { data[key] = value; });
+
+      var xhr = new XMLHttpRequest();
+      xhr.open('POST', '/apps/wheel-configurator/api/quote', true);
+      xhr.setRequestHeader('Content-Type', 'application/json');
+      xhr.onload = function () {
+        if (spinner) spinner.classList.add('hidden');
+        if (btnText) btnText.style.display = '';
+
+        if (xhr.status === 200 || xhr.status === 201) {
+          if (statusEl) {
+            statusEl.style.display = 'block';
+            statusEl.className = 'quote-form__status quote-form__status--success';
+            statusEl.innerHTML = 'Your quote request has been submitted! We will contact you within 1-2 business days.';
+          }
+          form.querySelectorAll('input, textarea, button').forEach(function (el) { el.disabled = true; });
+
+          setTimeout(function () {
+            if (typeof jq_lumia !== 'undefined') {
+              jq_lumia.fancybox.close();
+            }
+          }, 3000);
+        } else {
+          if (statusEl) {
+            statusEl.style.display = 'block';
+            statusEl.className = 'quote-form__status quote-form__status--error';
+            statusEl.innerHTML = 'There was an error submitting your request. Please try again or contact us directly.';
+          }
+          submitBtn.disabled = false;
+        }
+      };
+      xhr.onerror = function () {
+        if (spinner) spinner.classList.add('hidden');
+        if (btnText) btnText.style.display = '';
+        submitBtn.disabled = false;
+        if (statusEl) {
+          statusEl.style.display = 'block';
+          statusEl.className = 'quote-form__status quote-form__status--error';
+          statusEl.innerHTML = 'Network error. Please check your connection and try again.';
+        }
+      };
+      xhr.send(JSON.stringify(data));
+    });
+  });
+</script>
+
+<style>
+  .quote-modal__title {
+    color: var(--heading-color);
+    font-size: 1.4rem;
+    margin: 0 0 8px;
+  }
+
+  .quote-modal__product {
+    color: var(--text-color);
+    font-size: 0.95rem;
+    margin-bottom: 24px;
+    opacity: 0.7;
+  }
+
+  .quote-form .form-group {
+    margin-bottom: 16px;
+  }
+
+  .quote-form label {
+    display: block;
+    color: var(--heading-color);
+    font-size: 0.85rem;
+    font-weight: 500;
+    margin-bottom: 6px;
+  }
+
+  .quote-form .form-control {
+    width: 100%;
+    padding: 10px 14px;
+    background: var(--body-bg);
+    border: 1px solid var(--decor-border-color);
+    border-radius: 6px;
+    color: var(--text-color);
+    font-size: 0.95rem;
+  }
+
+  .quote-form textarea.form-control {
+    resize: vertical;
+    min-height: 80px;
+  }
+
+  .quote-form__checkbox {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+    cursor: pointer;
+  }
+
+  .quote-form__checkbox input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+  }
+
+  .quote-form__actions {
+    margin-top: 24px;
+  }
+
+  .quote-form__status {
+    margin-top: 16px;
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+  }
+
+  .quote-form__status--success {
+    background: rgba(34,197,94,0.1);
+    color: #22c55e;
+    border: 1px solid rgba(34,197,94,0.2);
+  }
+
+  .quote-form__status--error {
+    background: rgba(239,68,68,0.1);
+    color: #ef4444;
+    border: 1px solid rgba(239,68,68,0.2);
+  }
+</style>

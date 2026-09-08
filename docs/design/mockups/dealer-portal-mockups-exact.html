@@ -1,0 +1,1077 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Calder Wheels Dealer Portal Mockups</title>
+  <style>
+    :root{
+      --bg:#07090b;
+      --panel:#0d1013;
+      --panel2:#10161b;
+      --panel3:#141a20;
+      --line:rgba(255,255,255,.08);
+      --line2:rgba(255,255,255,.13);
+      --text:#cad0d6;
+      --muted:#8a949d;
+      --heading:#f3f3f1;
+      --accent:#d9b35e;
+      --accent2:#c79f4b;
+      --good:#58c26a;
+      --warn:#cfa24c;
+      --bad:#d26262;
+      --shadow:0 24px 70px rgba(0,0,0,.48);
+      --r1:18px;
+      --r2:14px;
+      --chrome:56px;
+      --navw:254px;
+      --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, system-ui, sans-serif;
+      --serif: Georgia, "Times New Roman", serif;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;background:radial-gradient(circle at top,#151a20 0,#07090b 55%);color:var(--text);font-family:var(--font);line-height:1.45}
+    body{padding:24px 16px 48px}
+    .page{display:grid;gap:26px;justify-items:center}
+    .intro{
+      width:min(1450px,100%);
+      padding:22px 24px;
+      border:1px solid var(--line);
+      border-radius:24px;
+      background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.015));
+      box-shadow:var(--shadow);
+    }
+    .intro h1{margin:0 0 8px;color:var(--heading);font:700 26px/1.06 var(--font);letter-spacing:-.02em}
+    .intro p{margin:0;max-width:105ch;color:var(--text)}
+    .meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+    .chip{
+      display:inline-flex;align-items:center;gap:6px;min-height:32px;padding:0 12px;border-radius:999px;
+      border:1px solid var(--line);background:rgba(255,255,255,.02);font-size:13px;color:var(--text)
+    }
+    .chip strong{color:var(--heading);font-weight:600}
+    .frame{
+      width:fit-content;
+      border:1px solid rgba(255,255,255,.12);
+      border-radius:20px;
+      overflow:hidden;
+      box-shadow:var(--shadow);
+      background:#0a0d10;
+    }
+    .chrome{
+      height:var(--chrome);
+      display:flex;align-items:center;gap:16px;
+      padding:0 14px;
+      background:
+        linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.02)),
+        #111417;
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+    .lights{display:flex;gap:8px;align-items:center;min-width:62px}
+    .dot{width:14px;height:14px;border-radius:50%}
+    .red{background:#ff5f57}.yellow{background:#febc2e}.green{background:#28c840}
+    .tab{
+      width:26px;height:18px;border-radius:4px;border:1px solid rgba(255,255,255,.24);position:relative;opacity:.75
+    }
+    .tab::after{content:"";position:absolute;right:5px;top:6px;width:10px;height:2px;background:rgba(255,255,255,.65)}
+    .chev{color:rgba(255,255,255,.45);font-size:24px;line-height:1;transform:translateY(-1px)}
+    .bar{
+      flex:1;height:34px;border-radius:10px;border:1px solid rgba(255,255,255,.09);
+      background:rgba(255,255,255,.04);display:flex;align-items:center;justify-content:center;
+      color:#aeb5bb;font-size:13px;letter-spacing:.01em;
+    }
+    .icons{display:flex;gap:12px;align-items:center;color:rgba(255,255,255,.9)}
+    .icons .ico{width:20px;height:20px;display:inline-grid;place-items:center;opacity:.95}
+    .icons .badge{position:relative}
+    .badge-num{
+      position:absolute;right:-7px;top:-6px;min-width:18px;height:18px;padding:0 5px;border-radius:999px;
+      display:grid;place-items:center;background:var(--accent);color:#17120a;font-size:11px;font-weight:700
+    }
+    .content{
+      position:relative;
+      background:linear-gradient(180deg,rgba(255,255,255,.01),rgba(255,255,255,0));
+    }
+    .dashboard{width:1568px;height:1003px}
+    .quick-order{width:1595px;height:986px}
+    .quotes{width:1578px;height:996px}
+    .landing{width:1536px;height:1024px}
+
+    .dashboard .content,
+    .quick-order .content,
+    .quotes .content{
+      height:calc(100% - var(--chrome));
+      display:grid;
+      grid-template-columns:var(--navw) 1fr;
+      background:
+        radial-gradient(circle at 20% 0%,rgba(215,179,95,.045),transparent 30%),
+        linear-gradient(180deg,rgba(255,255,255,.01),rgba(255,255,255,0));
+    }
+
+    .sidebar{
+      border-right:1px solid var(--line);
+      background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.01));
+      padding:24px 16px 18px;
+      display:flex;flex-direction:column
+    }
+    .brand{display:flex;align-items:center;gap:12px;margin-bottom:26px;color:var(--heading)}
+    .mark{
+      width:34px;height:34px;border-radius:10px;border:1px solid rgba(215,179,95,.34);
+      background:linear-gradient(180deg,rgba(215,179,95,.2),rgba(215,179,95,.06));
+      display:grid;place-items:center;color:var(--accent);font-weight:700;font-size:20px;line-height:1
+    }
+    .brand .name{display:grid;gap:2px}
+    .brand .name strong{font-size:14px;letter-spacing:.16em;text-transform:uppercase;font-weight:700}
+    .brand .name span{font-size:11px;letter-spacing:.22em;color:var(--text)}
+    .navTitle{font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:#98a1aa;margin:6px 6px 14px}
+    .nav{display:grid;gap:6px}
+    .nav a{
+      display:flex;align-items:center;gap:10px;height:42px;padding:0 12px;border-radius:12px;
+      color:var(--text);text-decoration:none;border:1px solid transparent;font-size:14px
+    }
+    .nav a.active{
+      background:linear-gradient(180deg,rgba(215,179,95,.11),rgba(215,179,95,.08));
+      border-color:rgba(215,179,95,.26);color:#f0d08d
+    }
+    .nav a .sym{width:20px;height:20px;display:grid;place-items:center;opacity:.92}
+    .help{
+      margin-top:auto;padding:14px 14px 12px;border:1px solid var(--line);border-radius:14px;
+      background:rgba(255,255,255,.02);color:var(--text);font-size:13px
+    }
+    .help .small{display:block;margin-top:4px;color:var(--muted)}
+    .logout{display:flex;align-items:center;gap:10px;margin-top:18px;color:var(--text);font-size:15px}
+    .logout .sym{width:20px;height:20px}
+
+    .main{padding:26px 24px 20px;display:grid;gap:20px}
+    .topRow{display:flex;align-items:flex-start;justify-content:space-between;gap:18px}
+    .heroTitle h2,.quotes .heroTitle h2,.quick-order .heroTitle h2{
+      margin:0;color:var(--heading);font:700 30px/1.04 var(--font);letter-spacing:-.02em
+    }
+    .heroTitle p{margin:12px 0 0;color:var(--text);font-size:14px}
+    .pillRow{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+    .pill{
+      display:inline-flex;align-items:center;justify-content:center;min-height:34px;padding:0 15px;border-radius:10px;
+      border:1px solid var(--line2);background:rgba(255,255,255,.02);color:var(--heading);font-size:13px
+    }
+    .pill.accent{border-color:rgba(215,179,95,.42);color:#f3d18b;background:rgba(215,179,95,.08)}
+    .pill.good{border-color:rgba(88,194,106,.3);background:rgba(88,194,106,.08);color:var(--good)}
+    .pill.warn{border-color:rgba(207,162,76,.32);background:rgba(207,162,76,.1);color:#ebb55e}
+    .pill.bad{border-color:rgba(210,98,98,.3);background:rgba(210,98,98,.08);color:#e07d7d}
+    .summaryBar{
+      display:grid;grid-template-columns:repeat(3,1fr);gap:1px;border:1px solid var(--line);border-radius:12px;
+      overflow:hidden;background:rgba(255,255,255,.03);min-width:560px
+    }
+    .summaryItem{padding:18px 24px;background:linear-gradient(180deg,rgba(255,255,255,.025),rgba(255,255,255,.01))}
+    .summaryItem .label{font-size:14px;color:var(--text)}
+    .summaryItem .value{margin-top:8px;font-size:18px;color:var(--heading)}
+    .summaryItem .value.accent{color:#f3c15a}
+    .summaryItem + .summaryItem{border-left:1px solid var(--line)}
+
+    .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+    .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+    .grid2{display:grid;grid-template-columns:1.4fr .9fr;gap:16px}
+    .grid2b{display:grid;grid-template-columns:1.05fr .95fr;gap:16px}
+    .card{
+      border:1px solid var(--line);
+      border-radius:var(--r1);
+      background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.015));
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.02);
+    }
+    .card.pad{padding:18px}
+    .card h3{margin:0 0 14px;color:var(--heading);font-size:17px;font-weight:600}
+    .stat{
+      height:112px;padding:18px;display:grid;grid-template-columns:54px 1fr;gap:14px;align-items:center
+    }
+    .stat .icon{
+      width:48px;height:48px;border-radius:50%;background:rgba(255,255,255,.08);
+      display:grid;place-items:center;color:#d3d7db
+    }
+    .stat .icon.gold{color:var(--accent)}
+    .stat .label{font-size:13px;color:var(--text);margin-bottom:4px}
+    .stat .value{font-size:22px;color:var(--heading);font-weight:600;letter-spacing:-.02em}
+    .stat .sub{font-size:13px;color:var(--muted);margin-top:8px}
+
+    .actions{
+      height:112px;padding:18px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px
+    }
+    .action{
+      border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,.02);
+      display:grid;place-items:center;text-align:center;color:var(--text);font-size:12px;gap:8px;padding:14px
+    }
+    .action .i{width:38px;height:38px;color:var(--accent);display:grid;place-items:center}
+    .action span{font-size:15px;color:var(--heading)}
+
+    table{width:100%;border-collapse:collapse}
+    th,td{padding:14px 12px;border-bottom:1px solid var(--line);text-align:left;font-size:13px}
+    th{color:#b8c0c7;font-weight:500}
+    td{color:var(--text)}
+    .tableCard{padding:16px 18px 10px}
+    .tableCard .head{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+    .link{color:#d8af54;font-size:14px;text-decoration:none}
+    .rows .row{
+      display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;padding:13px 0;border-bottom:1px solid var(--line)
+    }
+    .rows .row:last-child{border-bottom:0}
+    .rows .left{color:var(--text)}
+    .rows .right{color:var(--heading)}
+    .small{font-size:12px;color:var(--muted)}
+    .statusDot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--good);margin-left:8px;vertical-align:middle}
+    .footer{
+      margin-top:auto;padding-top:14px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:13px
+    }
+    .footer .links{display:flex;gap:24px}
+    .footer a{color:var(--muted);text-decoration:none}
+
+    /* dashboard specifics */
+    .dbTop{display:grid;grid-template-columns:1fr auto;gap:18px;align-items:start}
+    .dbHero{display:flex;align-items:center;justify-content:space-between;gap:20px}
+    .dbHero .left{max-width:520px}
+    .dbHero .right{min-width:560px}
+    .dbGrid{display:grid;grid-template-columns:1.1fr .92fr;gap:16px}
+    .quoteCard .row{display:grid;grid-template-columns:1fr auto;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}
+    .quoteCard .row:last-child{border-bottom:0}
+    .accountCard{position:relative;overflow:hidden}
+    .accountCard::after{
+      content:"RS";position:absolute;right:18px;bottom:8px;font-size:108px;font-weight:700;
+      letter-spacing:.05em;color:rgba(215,179,95,.08);font-family:var(--serif)
+    }
+
+    /* quick order specifics */
+    .qoGrid{display:grid;grid-template-columns:1.2fr .72fr;gap:20px}
+    .field{
+      display:grid;gap:8px
+    }
+    .field label{color:var(--muted);font-size:13px}
+    .input,.select,.textarea{
+      width:100%;height:40px;border-radius:10px;border:1px solid var(--line);background:rgba(255,255,255,.03);
+      color:var(--heading);padding:0 14px;font:inherit
+    }
+    .textarea{height:128px;padding:12px 14px;resize:none}
+    .formCard{padding:18px}
+    .quickTable th,.quickTable td{padding:13px 12px}
+    .qty{
+      display:inline-flex;align-items:center;gap:12px;height:34px;padding:0 8px;border-radius:9px;border:1px solid var(--line);background:rgba(255,255,255,.02)
+    }
+    .qty button{width:24px;height:24px;border:0;border-radius:6px;background:rgba(255,255,255,.05);color:var(--heading)}
+    .ctaStack{display:grid;gap:12px}
+    .btn{
+      min-height:46px;border-radius:12px;border:1px solid var(--line2);background:rgba(255,255,255,.03);color:var(--heading);
+      display:inline-flex;align-items:center;justify-content:center;text-decoration:none;font-weight:600;font-size:15px;gap:10px
+    }
+    .btn.primary{background:linear-gradient(180deg,#e0bc67,#c89e49);border-color:transparent;color:#181208}
+    .btn.ghost{background:transparent}
+    .qtyRow{display:grid;grid-template-columns:1fr 1fr 1fr 1fr 1fr 1fr;gap:0}
+    .summaryCard{padding:16px 18px}
+    .summaryCard .line{display:flex;justify-content:space-between;align-items:center;padding:7px 0;color:var(--text)}
+    .summaryCard .total{font-size:18px;color:#f0c24e;margin-top:6px}
+    .summaryCard .block{margin-top:14px;padding:12px;border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,.02)}
+
+    /* quotes specifics */
+    .qGrid{display:grid;grid-template-columns:1.2fr .72fr;gap:20px}
+    .filters{display:grid;grid-template-columns:1.5fr .8fr .8fr .42fr;gap:10px;margin-bottom:12px}
+    .selectLike,.searchLike{
+      height:42px;border-radius:10px;border:1px solid var(--line);background:rgba(255,255,255,.03);
+      color:var(--heading);display:flex;align-items:center;padding:0 14px;font-size:14px
+    }
+    .tableCompact th,.tableCompact td{padding:13px 10px}
+    .summaryPanel{padding:18px}
+    .summaryPanel .big{font-size:28px;color:var(--heading);font-weight:700;letter-spacing:-.02em}
+    .progress{
+      height:10px;border-radius:999px;background:rgba(255,255,255,.08);overflow:hidden;margin-top:12px
+    }
+    .progress > span{display:block;height:100%;width:54%;background:linear-gradient(90deg,#e0bc67,#c89e49)}
+    .invoiceTop{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+
+    /* landing specifics */
+    .landing .content{
+      height:calc(100% - var(--chrome));
+      padding:0;
+      display:block;
+      background:
+        radial-gradient(circle at 70% 15%, rgba(215,179,95,.18), transparent 32%),
+        linear-gradient(180deg, rgba(255,255,255,.01), rgba(255,255,255,0));
+    }
+    .landingShell{height:100%;display:grid;grid-template-rows:auto 1fr auto}
+    .landingNav{
+      height:74px;display:grid;grid-template-columns:auto 1fr auto;align-items:center;padding:0 24px;border-bottom:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01))
+    }
+    .navLinks{display:flex;justify-content:center;gap:42px;align-items:center;color:#c7ccd2;font-size:16px;letter-spacing:.12em;text-transform:uppercase}
+    .navLinks a{color:inherit;text-decoration:none}
+    .navLinks a.active{color:#d9b25f;border-bottom:1px solid #d9b25f;padding-bottom:8px}
+    .topBtns{display:flex;gap:12px;align-items:center}
+    .topBtn{height:40px;min-width:112px;padding:0 18px;border-radius:10px;border:1px solid rgba(255,255,255,.22);display:grid;place-items:center;color:#f0f0ee;text-decoration:none;font-size:14px}
+    .topBtn.gold{background:#d8ae50;color:#111;border-color:transparent}
+    .heroWrap{display:grid;grid-template-columns:1.02fr .98fr;gap:24px;padding:22px 28px 0 28px}
+    .sectionLabel{color:#d0a749;letter-spacing:.2em;text-transform:uppercase;font-size:13px;margin-bottom:18px}
+    .landingTitle{font-family:var(--serif);font-size:66px;line-height:.95;letter-spacing:-.03em;color:var(--heading);max-width:10ch;margin:0}
+    .landingCopy{max-width:54ch;font-size:18px;color:#c7ccd2;margin:20px 0 24px}
+    .heroBtns{display:flex;gap:16px;align-items:center}
+    .heroBtn{height:50px;min-width:190px;padding:0 24px;border-radius:8px;display:grid;place-items:center;text-decoration:none;letter-spacing:.08em;text-transform:uppercase;font-size:16px}
+    .heroBtn.gold{background:#d8ae50;color:#111}
+    .heroBtn.ghost{border:1px solid rgba(255,255,255,.18);color:#f0f0ee}
+    .benefits{
+      display:grid;grid-template-columns:repeat(3,1fr);gap:18px;padding:20px 24px 0 24px
+    }
+    .benefit{
+      min-height:242px;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.02);padding:18px 18px 16px;display:grid;align-content:start;gap:16px
+    }
+    .benefit .ico{
+      width:50px;height:50px;border-radius:50%;border:2px solid #d0a747;color:#d0a747;display:grid;place-items:center;font-size:22px
+    }
+    .benefit h3{margin:0;color:var(--heading);font-size:20px;font-weight:500;font-family:var(--serif)}
+    .benefit p{margin:0;color:#b8bec4;font-size:15px;line-height:1.45}
+    .benefit a{margin-top:auto;color:#d0a747;text-decoration:none;font-size:14px;letter-spacing:.08em}
+    .applyRow{display:grid;grid-template-columns:1.2fr .8fr;gap:20px;padding:24px 24px 0}
+    .needCard,.trustRow{display:flex;gap:28px;align-items:flex-start;color:#d0d4d8}
+    .needCard .item{display:grid;gap:4px}
+    .needCard .item strong{color:var(--heading);font-weight:500}
+    .statusPanel{
+      border:1px solid rgba(215,179,95,.28);border-radius:16px;background:linear-gradient(180deg,rgba(215,179,95,.07),rgba(255,255,255,.02));
+      padding:22px 24px;display:grid;gap:20px
+    }
+    .statusHead{display:flex;justify-content:space-between;align-items:flex-start;gap:20px}
+    .statusHead h3{margin:0;font:500 26px/1.08 var(--serif);color:var(--heading)}
+    .statusTimeline{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:4px}
+    .step{text-align:center;color:var(--text)}
+    .bubble{
+      width:52px;height:52px;margin:0 auto 10px;border-radius:50%;border:2px solid rgba(255,255,255,.32);display:grid;place-items:center;font-size:20px;color:#fff
+    }
+    .step.done .bubble{border-color:#d0a747;color:#d0a747}
+    .step.active .bubble{border-color:#d0a747;color:#d0a747;background:rgba(215,179,95,.08)}
+    .step .sub{display:block;margin-top:6px;color:var(--muted)}
+    .reviewRow{display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:stretch}
+    .reviewBox{border-top:1px solid rgba(255,255,255,.07);padding-top:16px;display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:start}
+    .reviewBox .label{color:var(--muted);font-size:13px}
+    .reviewBox .value{color:var(--heading);font-size:20px}
+    .footerBand{
+      margin-top:18px;border-top:1px solid var(--line);padding:18px 24px 20px;display:grid;grid-template-columns:repeat(4,1fr);gap:16px
+    }
+    .footerItem{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:center;padding:0 14px}
+    .footerItem:not(:first-child){border-left:1px solid rgba(255,255,255,.08)}
+    .footerItem .i{color:#d0a747;font-size:28px}
+    .footerItem strong{color:var(--heading);display:block;font-weight:500}
+    .footerItem span{color:var(--muted);font-size:14px}
+
+    .wheelWrap{position:relative;height:330px}
+    .wheelArt{
+      position:absolute;right:0;top:-26px;width:540px;height:540px;overflow:visible
+    }
+    .lockSym{position:absolute;right:14px;top:148px;color:#d0a747;font-size:18px}
+    .verticalLabel{
+      position:absolute;right:18px;top:176px;writing-mode:vertical-rl;transform:rotate(180deg);
+      color:#d0a747;letter-spacing:.24em;text-transform:uppercase;font-size:10px
+    }
+    .heroFrame{padding:26px 24px 0 24px}
+
+    svg{display:block}
+    .logoText{font-size:14px;letter-spacing:.22em}
+
+    @media (max-width: 1700px){
+      .dashboard,.quick-order,.quotes,.landing{transform:scale(.84);transform-origin:top left}
+      .page{width:fit-content}
+      body{overflow-x:auto}
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="intro">
+      <h1>Calder Wheels Dealer Portal Mockups, rebuilt in HTML/CSS</h1>
+      <p>
+        These screens are now code-native recreations of the generated PNGs. The layout, chrome, spacing, and styling
+        are expressed directly in HTML/CSS so a local agent can inspect the source and implement the Shopify theme
+        without needing image viewing support.
+      </p>
+      <div class="meta">
+        <span class="chip"><strong>Source</strong> HTML/CSS only</span>
+        <span class="chip"><strong>Goal</strong> match the PNG mockups as closely as possible</span>
+        <span class="chip"><strong>Fallback</strong> PNGs remain in the same folder for reference</span>
+      </div>
+    </section>
+
+    <!-- Dashboard -->
+    <section class="frame dashboard">
+      <div class="chrome">
+        <div class="lights">
+          <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+          <span class="tab"></span>
+          <span class="chev">‹</span><span class="chev">›</span>
+        </div>
+        <div class="bar">dealer.calderwheels.com/account</div>
+        <div class="icons">
+          <span class="ico">⤴</span><span class="ico">＋</span><span class="ico badge">▭<span class="badge-num">3</span></span>
+        </div>
+      </div>
+      <div class="content">
+        <aside class="sidebar">
+          <div class="brand">
+            <div class="mark">RS</div>
+            <div class="name">
+              <strong>RAY SHADRAVAN</strong>
+              <span>NEW WHEEL CO.</span>
+            </div>
+          </div>
+          <div class="navTitle">Dealer Portal</div>
+          <nav class="nav">
+            <a class="active" href="#"><span class="sym">⌂</span>Dashboard</a>
+            <a href="#"><span class="sym">▦</span>Catalog</a>
+            <a href="#"><span class="sym">↓</span>Quick Order</a>
+            <a href="#"><span class="sym">▭</span>Orders</a>
+            <a href="#"><span class="sym">⚲</span>Quotes</a>
+            <a href="#"><span class="sym">□</span>Invoices</a>
+            <a href="#"><span class="sym">↺</span>Returns</a>
+            <a href="#"><span class="sym">⌧</span>Marketing Assets</a>
+            <a href="#"><span class="sym">◔</span>Account</a>
+            <a href="#"><span class="sym">◫</span>Users</a>
+            <a href="#"><span class="sym">☰</span>Notifications</a>
+          </nav>
+          <div class="help">
+            <div class="sym">☎</div>
+            <strong>Need Help?</strong><br>
+            888.587.4511
+            <span class="small">Mon–Fri 8am – 5pm PST</span>
+          </div>
+          <div class="logout"><span class="sym">⇦</span>Log Out</div>
+        </aside>
+        <section class="main">
+          <div class="dbTop">
+            <div class="dbHero">
+              <div class="left">
+                <div class="heroTitle">
+                  <h2>Dealer Dashboard</h2>
+                  <p>Welcome back, Downtown Motorworks<br>Here's your account overview and activity.</p>
+                </div>
+              </div>
+              <div class="right">
+                <div class="pillRow" style="justify-content:flex-end;margin-bottom:10px">
+                  <span class="pill accent">Tier 2</span>
+                  <span class="pill">NET-30</span>
+                </div>
+                <div class="summaryBar">
+                  <div class="summaryItem">
+                    <div class="label">Credit Limit</div>
+                    <div class="value">$75,000.00</div>
+                  </div>
+                  <div class="summaryItem">
+                    <div class="label">Available Credit</div>
+                    <div class="value accent">$34,250.00</div>
+                  </div>
+                  <div class="summaryItem">
+                    <div class="label">Account Status</div>
+                    <div class="value">In Good Standing <span class="statusDot"></span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid4">
+            <div class="card stat">
+              <div class="icon">⬚</div>
+              <div>
+                <div class="label">Open Orders</div>
+                <div class="value">5</div>
+                <div class="sub">$18,746.00</div>
+              </div>
+            </div>
+            <div class="card stat">
+              <div class="icon">▣</div>
+              <div>
+                <div class="label">Pending Quotes</div>
+                <div class="value">3</div>
+                <div class="sub">$9,350.00</div>
+              </div>
+            </div>
+            <div class="card stat">
+              <div class="icon">▤</div>
+              <div>
+                <div class="label">YTD Spend</div>
+                <div class="value">$128,540.00</div>
+                <div class="sub">2025 Total</div>
+              </div>
+            </div>
+            <div class="card stat">
+              <div class="icon gold">◈</div>
+              <div>
+                <div class="label">Last Order</div>
+                <div class="value">May 12, 2025</div>
+                <div class="sub">PO# DMX-5125</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid4">
+            <div class="card actions" style="grid-column:4 / 5"></div>
+          </div>
+
+          <div style="display:grid;grid-template-columns:1.28fr .72fr;gap:16px">
+            <div class="card tableCard">
+              <div class="head"><h3 style="margin:0">Recent Orders</h3><a class="link" href="#">View All Orders</a></div>
+              <table>
+                <thead>
+                  <tr><th>PO#</th><th>Order Date</th><th>Status</th><th>Items</th><th>Total</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>DMX-5125</td><td>May 12, 2025</td><td><span class="pill good">Shipped</span></td><td>8</td><td>$6,842.00</td></tr>
+                  <tr><td>DMX-5108</td><td>May 5, 2025</td><td><span class="pill" style="color:#7ab2e4">Processing</span></td><td>6</td><td>$4,356.00</td></tr>
+                  <tr><td>DMX-5091</td><td>Apr 28, 2025</td><td><span class="pill warn">Backordered</span></td><td>4</td><td>$2,948.00</td></tr>
+                  <tr><td>DMX-5077</td><td>Apr 21, 2025</td><td><span class="pill">Delivered</span></td><td>10</td><td>$8,125.00</td></tr>
+                  <tr><td>DMX-5062</td><td>Apr 14, 2025</td><td><span class="pill">Cancelled</span></td><td>0</td><td>$0.00</td></tr>
+                </tbody>
+              </table>
+              <div style="display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:14px;padding:12px 4px 2px">
+                <span>Showing 1 to 5 of 25 orders</span>
+                <a class="link" href="#">View All Orders</a>
+              </div>
+            </div>
+
+            <div style="display:grid;gap:16px">
+              <div class="card pad quoteCard">
+                <div class="head"><h3 style="margin:0">Pending Quotes</h3><a class="link" href="#">View All</a></div>
+                <div class="rows">
+                  <div class="row"><div class="left">Q-0521 · May 14, 2025</div><div class="right">9 Items · $5,210.00 <span class="pill" style="margin-left:12px;padding:0 12px">New</span></div></div>
+                  <div class="row"><div class="left">Q-0520 · May 13, 2025</div><div class="right">4 Items · $2,180.00 <span class="pill" style="margin-left:12px;padding:0 12px">Sent</span></div></div>
+                  <div class="row"><div class="left">Q-0517 · May 9, 2025</div><div class="right">6 Items · $1,960.00 <span class="pill warn" style="margin-left:12px;padding:0 12px">Review</span></div></div>
+                </div>
+              </div>
+
+              <div class="card pad accountCard">
+                <div class="head"><h3 style="margin:0">Account Summary</h3><a class="link" href="#">View Account</a></div>
+                <div class="grid2b" style="gap:0">
+                  <div class="rows" style="padding-right:16px;border-right:1px solid var(--line)">
+                    <div class="row"><div class="left">Dealer Name</div><div class="right">Downtown Motorworks</div></div>
+                    <div class="row"><div class="left">Account Number</div><div class="right">DWN-00215</div></div>
+                    <div class="row"><div class="left">Payment Terms</div><div class="right">NET-30</div></div>
+                    <div class="row"><div class="left">Tier Level</div><div class="right">Tier 2</div></div>
+                  </div>
+                  <div class="rows" style="padding-left:16px">
+                    <div class="row"><div class="left">Credit Limit</div><div class="right">$75,000.00</div></div>
+                    <div class="row"><div class="left">Available Credit</div><div class="right">$34,250.00</div></div>
+                    <div class="row"><div class="left">Past Due</div><div class="right">$0.00</div></div>
+                    <div class="row"><div class="left">Account Status</div><div class="right">In Good Standing <span class="statusDot"></span></div></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="footer">
+            <div>© 2025 Calder Wheels. All rights reserved.</div>
+            <div class="links"><a href="#">Dealer Portal</a><a href="#">Terms & Conditions</a><a href="#">Privacy Policy</a></div>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <!-- Quick Order -->
+    <section class="frame quick-order">
+      <div class="chrome">
+        <div class="lights">
+          <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+          <span class="tab"></span><span class="chev">‹</span><span class="chev">›</span>
+        </div>
+        <div class="bar">dealer.calderwheels.com/account?view=quick-order</div>
+        <div class="icons">
+          <span class="ico">⤴</span><span class="ico">＋</span><span class="ico badge">▭<span class="badge-num">3</span></span>
+        </div>
+      </div>
+      <div class="content">
+        <aside class="sidebar">
+          <div class="brand">
+            <div class="mark">RS</div>
+            <div class="name">
+              <strong>RAY SHADRAVAN</strong>
+              <span>NEW WHEEL CO.</span>
+            </div>
+          </div>
+          <div class="navTitle">Dealer Portal</div>
+          <nav class="nav">
+            <a href="#"><span class="sym">⌂</span>Dashboard</a>
+            <a href="#"><span class="sym">▦</span>Catalog</a>
+            <a class="active" href="#"><span class="sym">↓</span>Quick Order</a>
+            <a href="#"><span class="sym">▭</span>Orders</a>
+            <a href="#"><span class="sym">⚲</span>Quotes</a>
+            <a href="#"><span class="sym">□</span>Invoices</a>
+            <a href="#"><span class="sym">↺</span>Returns</a>
+            <a href="#"><span class="sym">⌧</span>Marketing Assets</a>
+            <a href="#"><span class="sym">◔</span>Account</a>
+            <a href="#"><span class="sym">◫</span>Users</a>
+            <a href="#"><span class="sym">☰</span>Notifications</a>
+          </nav>
+          <div class="help">
+            <div class="sym">☎</div>
+            <strong>Need Help?</strong><br>
+            888.587.4511
+            <span class="small">Mon–Fri 8am – 5pm PST</span>
+          </div>
+          <div class="logout"><span class="sym">⇦</span>Log Out</div>
+        </aside>
+
+        <section class="main">
+          <div class="topRow">
+            <div class="heroTitle">
+              <h2>Quick Order</h2>
+              <p>Enter items quickly by SKU to add to your order.</p>
+            </div>
+            <div class="pillRow">
+              <span class="pill accent">Tier 2</span>
+              <span class="pill">NET-30</span>
+            </div>
+          </div>
+
+          <div class="qoGrid">
+            <div>
+              <div class="card formCard">
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:end">
+                  <div class="field">
+                    <label>PO #</label>
+                    <input class="input" value="DMX-052025-17">
+                    <div class="small">Your PO will appear on the invoice.</div>
+                  </div>
+                  <div class="field">
+                    <label>Shipping Address</label>
+                    <div class="select" style="display:flex;justify-content:space-between;align-items:center">Downtown Motorworks - Main Warehouse <span>⌄</span></div>
+                    <div class="link" style="font-size:14px;margin-top:2px">Manage Addresses</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card tableCard">
+                <div class="head"><h3 style="margin:0">Line Items</h3></div>
+                <table class="quickTable">
+                  <thead>
+                    <tr><th>SKU / Search</th><th>Size</th><th>Finish</th><th>Qty</th><th>Unit Price</th><th>Total</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>RS-10-2012-GB<div class="small">RS10 Flow Form Wheel</div></td>
+                      <td><div class="select">20x12</div></td>
+                      <td><div class="select">Gloss Black</div></td>
+                      <td><div class="qty"><button>−</button><span>2</span><button>+</button></div></td>
+                      <td>$325.00<br><span class="small">EA</span></td>
+                      <td>$650.00</td>
+                    </tr>
+                    <tr>
+                      <td><div class="selectLike" style="color:#7f8890">Search SKU or product name</div></td>
+                      <td><div class="selectLike" style="color:#7f8890">Select size</div></td>
+                      <td><div class="selectLike" style="color:#7f8890">Select finish</div></td>
+                      <td><div class="qty"><button>−</button><span>1</span><button>+</button></div></td>
+                      <td>—<br><span class="small">EA</span></td>
+                      <td>—</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-top:14px">
+                  <a class="pill accent" href="#" style="height:40px">＋ Add Line</a>
+                  <a class="pill" href="#" style="height:40px">Import CSV</a>
+                </div>
+              </div>
+
+              <div class="card formCard">
+                <h3 style="margin:0 0 12px">Notes</h3>
+                <textarea class="textarea" placeholder="Add any notes or special instructions for your order..."></textarea>
+                <div style="display:flex;justify-content:flex-end;color:var(--muted);font-size:13px;margin-top:6px">0 / 500</div>
+              </div>
+            </div>
+
+            <div>
+              <div class="card summaryCard">
+                <h3>Order Summary</h3>
+                <div class="line"><span>Items (1)</span><span>$650.00</span></div>
+                <div class="line"><span>Subtotal</span><span>$650.00</span></div>
+                <div class="line"><span>Freight</span><span>—</span></div>
+                <div class="line"><span>Taxes</span><span>—</span></div>
+                <div class="line total"><span>Estimated Total</span><span>$650.00</span></div>
+                <div class="block">
+                  <div class="small">Payment Terms</div>
+                  <div style="font-size:20px;color:var(--heading);font-weight:700;margin-top:6px">NET-30</div>
+                  <div class="small">Invoices are due 30 days from invoice date.</div>
+                </div>
+                <div class="block">
+                  <div class="small">Credit Available</div>
+                  <div style="font-size:18px;color:var(--good);font-weight:600">$34,250.00</div>
+                  <div class="small">of $75,000.00 limit</div>
+                  <div class="progress"><span></span></div>
+                </div>
+                <div class="block">
+                  <div class="small">Account Status</div>
+                  <div>In Good Standing <span class="statusDot"></span></div>
+                </div>
+              </div>
+              <div class="ctaStack" style="margin-top:14px">
+                <a class="btn primary" href="#">Submit Order →</a>
+                <a class="btn ghost" href="#">Save as Draft <span>💾</span></a>
+              </div>
+              <div class="small" style="text-align:center;margin-top:10px">Orders are reviewed before confirmation.<br>You will receive an email confirmation.</div>
+            </div>
+          </div>
+
+          <div class="footer">
+            <div>© 2025 Calder Wheels. All rights reserved.</div>
+            <div class="links"><a href="#">Dealer Portal</a><a href="#">Terms & Conditions</a><a href="#">Privacy Policy</a></div>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <!-- Quotes -->
+    <section class="frame quotes">
+      <div class="chrome">
+        <div class="lights">
+          <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+          <span class="tab"></span><span class="chev">‹</span><span class="chev">›</span>
+        </div>
+        <div class="bar">dealer.calderwheels.com/account/quotes</div>
+        <div class="icons">
+          <span class="ico">⤴</span><span class="ico">＋</span><span class="ico badge">▭<span class="badge-num">3</span></span>
+        </div>
+      </div>
+      <div class="content">
+        <aside class="sidebar">
+          <div class="brand">
+            <div class="mark">RS</div>
+            <div class="name">
+              <strong>RAY SHADRAVAN</strong>
+              <span>NEW WHEEL CO.</span>
+            </div>
+          </div>
+          <div class="navTitle">Dealer Portal</div>
+          <nav class="nav">
+            <a href="#"><span class="sym">⌂</span>Dashboard</a>
+            <a href="#"><span class="sym">▦</span>Catalog</a>
+            <a href="#"><span class="sym">↓</span>Quick Order</a>
+            <a href="#"><span class="sym">▭</span>Orders</a>
+            <a class="active" href="#"><span class="sym">⚲</span>Quotes</a>
+            <a href="#"><span class="sym">□</span>Invoices</a>
+            <a href="#"><span class="sym">↺</span>Returns</a>
+            <a href="#"><span class="sym">⌧</span>Marketing Assets</a>
+            <a href="#"><span class="sym">◔</span>Account</a>
+            <a href="#"><span class="sym">◫</span>Users</a>
+            <a href="#"><span class="sym">☰</span>Notifications</a>
+          </nav>
+          <div class="help">
+            <div class="sym">☎</div>
+            <strong>Need Help?</strong><br>
+            888.587.4511
+            <span class="small">Mon–Fri 8am – 5pm PST</span>
+          </div>
+          <div class="logout"><span class="sym">⇦</span>Log Out</div>
+        </aside>
+
+        <section class="main">
+          <div class="topRow">
+            <div class="heroTitle">
+              <h2>My Quotes</h2>
+              <p>Create, review, and manage your quotes.</p>
+            </div>
+            <div style="display:grid;gap:10px;justify-items:end">
+              <div class="pillRow">
+                <span class="pill accent">Tier 2 Dealer</span>
+                <span class="pill">NET-30</span>
+              </div>
+              <div class="summaryBar" style="min-width:680px">
+                <div class="summaryItem"><div class="label">Credit Limit</div><div class="value">$75,000.00</div></div>
+                <div class="summaryItem"><div class="label">Available Credit</div><div class="value accent">$34,250.00</div></div>
+                <div class="summaryItem"><div class="label">Outstanding Balance</div><div class="value" style="color:#db6e5b">$18,746.00</div></div>
+                <div class="summaryItem"><div class="label">Account Status</div><div class="value">In Good Standing <span class="statusDot"></span></div></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="qGrid">
+            <div class="card tableCard">
+              <div class="filters">
+                <div class="searchLike">Search by quote #, reference, or item... <span style="margin-left:auto;color:var(--muted)">⌕</span></div>
+                <div class="selectLike" style="justify-content:space-between">All Statuses <span>⌄</span></div>
+                <div class="selectLike" style="justify-content:space-between">Last 90 Days <span>⌄</span></div>
+                <div class="selectLike" style="justify-content:center">⚲</div>
+              </div>
+              <table class="tableCompact">
+                <thead>
+                  <tr><th>Quote #</th><th>Date</th><th>Valid Until</th><th>Reference / Project</th><th>Items</th><th>Total</th><th>Status</th><th>Actions</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>Q-0521</td><td>May 14, 2025</td><td>May 28, 2025</td><td>BMW M5 Build</td><td>9</td><td>$5,210.00</td><td><span class="pill warn">Pending</span></td><td><span class="pill">View</span></td></tr>
+                  <tr><td>Q-0520</td><td>May 13, 2025</td><td>May 27, 2025</td><td>Porsche 992</td><td>4</td><td>$2,180.00</td><td><span class="pill good">Approved</span></td><td><span class="pill">View</span> <span class="pill">Convert</span></td></tr>
+                  <tr><td>Q-0517</td><td>May 9, 2025</td><td>May 23, 2025</td><td>Audi RS6</td><td>6</td><td>$1,960.00</td><td><span class="pill warn">Pending</span></td><td><span class="pill">View</span> <span class="pill">Approve</span></td></tr>
+                  <tr><td>Q-0510</td><td>May 5, 2025</td><td>May 19, 2025</td><td>Mercedes C63</td><td>8</td><td>$4,875.00</td><td><span class="pill" style="color:#7ab2e4">Converted</span></td><td><span class="pill">View</span> <span class="pill">Order #</span></td></tr>
+                  <tr><td>Q-0503</td><td>Apr 29, 2025</td><td>May 13, 2025</td><td>Lamborghini Huracan</td><td>12</td><td>$8,920.00</td><td><span class="pill good">Approved</span></td><td><span class="pill">View</span> <span class="pill">Convert</span></td></tr>
+                  <tr><td>Q-0498</td><td>Apr 24, 2025</td><td>May 8, 2025</td><td>Range Rover Sport</td><td>5</td><td>$3,250.00</td><td><span class="pill">Expired</span></td><td><span class="pill">View</span></td></tr>
+                  <tr><td>Q-0491</td><td>Apr 18, 2025</td><td>May 2, 2025</td><td>Toyota Supra</td><td>6</td><td>$2,145.00</td><td><span class="pill">Expired</span></td><td><span class="pill">View</span></td></tr>
+                  <tr><td>Q-0487</td><td>Apr 15, 2025</td><td>Apr 29, 2025</td><td>Nissan GT-R</td><td>7</td><td>$3,775.00</td><td><span class="pill" style="color:#7ab2e4">Converted</span></td><td><span class="pill">View</span> <span class="pill">Order #</span></td></tr>
+                </tbody>
+              </table>
+              <div style="display:flex;justify-content:space-between;align-items:center;padding-top:12px;color:var(--muted);font-size:14px">
+                <span>Showing 1 to 8 of 23 quotes</span>
+                <div class="pillRow">
+                  <span class="pill">‹</span><span class="pill accent">1</span><span class="pill">2</span><span class="pill">3</span><span class="pill">›</span>
+                </div>
+              </div>
+            </div>
+
+            <div style="display:grid;gap:16px">
+              <div class="card summaryPanel">
+                <div class="invoiceTop">
+                  <h3 style="margin:0">Payment Terms</h3>
+                  <a class="pill accent" href="#">Terms & Conditions</a>
+                </div>
+                <div style="display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:center;padding:6px 0 14px;border-bottom:1px solid var(--line)">
+                  <div style="font-size:46px;color:var(--accent)">☷</div>
+                  <div>
+                    <div class="big">NET-30</div>
+                    <div class="small" style="font-size:15px">Payment Due Within 30 Days</div>
+                  </div>
+                </div>
+                <div class="rows" style="margin-top:10px">
+                  <div class="row"><div class="left">Credit Limit</div><div class="right">$75,000.00</div></div>
+                  <div class="row"><div class="left">Outstanding Balance</div><div class="right" style="color:#db6e5b">$18,746.00</div></div>
+                  <div class="row"><div class="left">Available Credit</div><div class="right" style="color:var(--good)">$34,250.00</div></div>
+                  <div class="row"><div class="left">Credit Usage</div><div class="right">54%</div></div>
+                </div>
+                <div class="progress"><span></span></div>
+              </div>
+
+              <div class="card tableCard" style="padding-bottom:14px">
+                <div class="invoiceTop"><h3 style="margin:0">Outstanding Invoices</h3><span class="pill bad">2 Overdue</span></div>
+                <div style="display:flex;justify-content:space-between;color:var(--muted);font-size:14px;margin-bottom:8px">
+                  <span></span><span>Total Due: <span style="color:#db6e5b">$18,746.00</span></span>
+                </div>
+                <table class="tableCompact">
+                  <thead><tr><th>Invoice #</th><th>Date</th><th>Due Date</th><th>Amount</th><th>Status</th><th>Actions</th></tr></thead>
+                  <tbody>
+                    <tr><td>INV-1423</td><td>May 2, 2025</td><td>Jun 1, 2025</td><td>$8,920.00</td><td><span class="pill bad">Overdue</span></td><td><span class="pill">View Invoice</span> <span class="pill accent">Pay Now</span></td></tr>
+                    <tr><td>INV-1401</td><td>Apr 2, 2025</td><td>May 2, 2025</td><td>$9,826.00</td><td><span class="pill bad">Overdue</span></td><td><span class="pill">View Invoice</span> <span class="pill accent">Pay Now</span></td></tr>
+                    <tr><td>INV-1380</td><td>Mar 3, 2025</td><td>Apr 2, 2025</td><td>$0.00</td><td><span class="pill good">Paid</span></td><td><span class="pill">View Invoice</span></td></tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="card tableCard" style="padding-bottom:14px">
+                <div class="invoiceTop"><h3 style="margin:0">Payment History (Last 4 Payments)</h3><a class="link" href="#">View All Invoices</a></div>
+                <table class="tableCompact">
+                  <thead><tr><th>Date Paid</th><th>Invoice #</th><th>Payment Method</th><th>Amount</th><th>Status</th></tr></thead>
+                  <tbody>
+                    <tr><td>Apr 28, 2025</td><td>INV-1361</td><td>ACH Transfer</td><td>$7,450.00</td><td><span class="pill good">Successful</span></td></tr>
+                    <tr><td>Mar 31, 2025</td><td>INV-1340</td><td>ACH Transfer</td><td>$6,875.00</td><td><span class="pill good">Successful</span></td></tr>
+                    <tr><td>Feb 28, 2025</td><td>INV-1318</td><td>ACH Transfer</td><td>$5,960.00</td><td><span class="pill good">Successful</span></td></tr>
+                    <tr><td>Jan 31, 2025</td><td>INV-1295</td><td>ACH Transfer</td><td>$8,120.00</td><td><span class="pill good">Successful</span></td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <div class="footer">
+            <div>© 2025 Calder Wheels. All rights reserved.</div>
+            <div class="links"><a href="#">Dealer Portal</a><a href="#">Terms & Conditions</a><a href="#">Privacy Policy</a></div>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <!-- Landing -->
+    <section class="frame landing">
+      <div class="chrome">
+        <div class="lights">
+          <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+          <span class="tab"></span><span class="chev">‹</span><span class="chev">›</span>
+        </div>
+        <div class="bar">dealer.calderwheels.com/dealer-program</div>
+        <div class="icons">
+          <span class="ico">⤴</span><span class="ico">＋</span><span class="ico badge">▭<span class="badge-num">3</span></span>
+        </div>
+      </div>
+      <div class="content">
+        <div class="landingShell">
+          <div class="landingNav">
+            <div class="brand" style="margin:0">
+              <div class="mark">RS</div>
+              <div class="name">
+                <strong>RAY SHADRAVAN</strong>
+                <span>NEW WHEEL CO.</span>
+              </div>
+            </div>
+            <nav class="navLinks">
+              <a href="#">Products</a>
+              <a href="#">Collections</a>
+              <a href="#">About Us</a>
+              <a href="#">Resources</a>
+              <a class="active" href="#">Dealer Program</a>
+            </nav>
+            <div class="topBtns">
+              <a href="#" class="topBtn">Log In</a>
+              <a href="#" class="topBtn gold">Apply Now</a>
+            </div>
+          </div>
+
+          <div class="heroFrame">
+            <div class="heroWrap">
+              <div>
+                <div class="sectionLabel">Exclusive Wholesale Program</div>
+                <h2 class="landingTitle">Become a Dealer</h2>
+                <div class="landingCopy">
+                  Join Calder Wheels and get wholesale access to premium wheels, tiered pricing,
+                  and dealer-only resources built for performance and profit.
+                </div>
+                <div class="heroBtns">
+                  <a href="#" class="heroBtn gold">Apply Now</a>
+                  <a href="#" class="heroBtn ghost">Log In to Account</a>
+                </div>
+                <div class="benefits" style="padding-left:0">
+                  <div class="benefit" style="min-height:226px">
+                    <div class="ico">⬡</div>
+                    <h3>Wholesale Access</h3>
+                    <p>Exclusive pricing and inventory for approved dealers only.</p>
+                    <a href="#">Learn More →</a>
+                  </div>
+                  <div class="benefit" style="min-height:226px">
+                    <div class="ico">⌂</div>
+                    <h3>Tiered Pricing</h3>
+                    <p>Volume-based discounts that grow with your business.</p>
+                    <a href="#">Learn More →</a>
+                  </div>
+                  <div class="benefit" style="min-height:226px">
+                    <div class="ico">▭</div>
+                    <h3>Dealer-Only Catalog</h3>
+                    <p>Access exclusive wheels, new releases, and private offers.</p>
+                    <a href="#">Learn More →</a>
+                  </div>
+                </div>
+                <div class="applyRow" style="padding-left:0">
+                  <div>
+                    <div style="font-size:24px;color:var(--heading);margin-bottom:18px">What You’ll Need to Apply</div>
+                    <div class="needCard">
+                      <div class="item">
+                        <strong>Business Information</strong>
+                        <span class="small">Company & contact details</span>
+                      </div>
+                      <div class="item">
+                        <strong>Tax ID / Resale Certificate</strong>
+                        <span class="small">Valid for resale eligibility</span>
+                      </div>
+                      <div style="display:flex;align-items:center;margin-left:auto">
+                        <a href="#" class="heroBtn ghost" style="min-width:280px;height:48px;font-size:14px;letter-spacing:.08em">View Application Preview</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="wheelWrap">
+                <div class="wheelArt">
+                  <svg viewBox="0 0 700 700" width="540" height="540" aria-label="Wheel artwork">
+                    <defs>
+                      <radialGradient id="wg" cx="50%" cy="50%" r="50%">
+                        <stop offset="0%" stop-color="#1a1410"/>
+                        <stop offset="65%" stop-color="#0e0b09"/>
+                        <stop offset="100%" stop-color="#07090b"/>
+                      </radialGradient>
+                      <linearGradient id="gold" x1="0" x2="1">
+                        <stop offset="0%" stop-color="#b98c44"/>
+                        <stop offset="50%" stop-color="#e0bf7a"/>
+                        <stop offset="100%" stop-color="#9f7331"/>
+                      </linearGradient>
+                    </defs>
+                    <circle cx="350" cy="350" r="300" fill="url(#wg)" opacity=".9"/>
+                    <circle cx="350" cy="350" r="250" fill="none" stroke="rgba(255,255,255,.05)" stroke-width="22"/>
+                    <circle cx="350" cy="350" r="208" fill="none" stroke="url(#gold)" stroke-width="18"/>
+                    <circle cx="350" cy="350" r="150" fill="none" stroke="rgba(255,255,255,.06)" stroke-width="8"/>
+                    <g stroke="url(#gold)" stroke-width="18" stroke-linecap="round">
+                      <line x1="350" y1="350" x2="350" y2="140"/>
+                      <line x1="350" y1="350" x2="444" y2="160"/>
+                      <line x1="350" y1="350" x2="556" y2="230"/>
+                      <line x1="350" y1="350" x2="595" y2="350"/>
+                      <line x1="350" y1="350" x2="556" y2="470"/>
+                      <line x1="350" y1="350" x2="444" y2="540"/>
+                      <line x1="350" y1="350" x2="350" y2="560"/>
+                      <line x1="350" y1="350" x2="256" y2="540"/>
+                      <line x1="350" y1="350" x2="144" y2="470"/>
+                      <line x1="350" y1="350" x2="105" y2="350"/>
+                      <line x1="350" y1="350" x2="144" y2="230"/>
+                      <line x1="350" y1="350" x2="256" y2="160"/>
+                    </g>
+                    <g fill="#111" stroke="url(#gold)" stroke-width="8">
+                      <circle cx="350" cy="350" r="58"/>
+                      <circle cx="350" cy="350" r="26" fill="url(#gold)" stroke="none"/>
+                    </g>
+                    <text x="350" y="360" text-anchor="middle" fill="#d9b35e" font-size="24" font-weight="700" font-family="Georgia">RS</text>
+                  </svg>
+                </div>
+                <div class="lockSym">🔒</div>
+                <div class="verticalLabel">Dealer Access</div>
+              </div>
+            </div>
+          </div>
+
+          <div style="padding:0 24px 0">
+            <div class="statusPanel">
+              <div class="statusHead">
+                <div>
+                  <h3>Application Under Review</h3>
+                  <div style="margin-top:10px;max-width:46ch;color:var(--text)">
+                    Thanks for applying to the Calder Wheels dealer program. We're reviewing your information
+                    and will be in touch soon.
+                  </div>
+                </div>
+                <span class="pill accent">Pending Approval</span>
+              </div>
+              <div class="statusTimeline">
+                <div class="step done">
+                  <div class="bubble">✓</div>
+                  <div>Submitted</div>
+                  <span class="sub">May 14, 2025</span>
+                </div>
+                <div class="step active">
+                  <div class="bubble">◐</div>
+                  <div>In Review</div>
+                  <span class="sub">1-2 Business Days</span>
+                </div>
+                <div class="step">
+                  <div class="bubble">○</div>
+                  <div>Approved</div>
+                  <span class="sub">Next Step</span>
+                </div>
+              </div>
+              <div class="reviewRow">
+                <div class="reviewBox">
+                  <div style="font-size:26px;color:#d0a747">📅</div>
+                  <div>
+                    <div class="label">Review ETA</div>
+                    <div class="value">1-2 Business Days</div>
+                  </div>
+                </div>
+                <div class="reviewBox">
+                  <div style="font-size:26px;color:#d0a747">✉</div>
+                  <div>
+                    <div class="label">Status Note</div>
+                    <div class="value" style="font-size:15px;font-weight:400;line-height:1.5;color:var(--text)">
+                      You'll receive an email once your application has been approved. Thank you for your patience!
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="footerBand">
+            <div class="footerItem">
+              <div class="i">🛡</div>
+              <div><strong>Trusted by Professionals</strong><span>Dealers nationwide trust Calder Wheels.</span></div>
+            </div>
+            <div class="footerItem">
+              <div class="i">🏅</div>
+              <div><strong>Premium Quality</strong><span>Performance wheels built to last.</span></div>
+            </div>
+            <div class="footerItem">
+              <div class="i">🚚</div>
+              <div><strong>Fast & Reliable Shipping</strong><span>Getting your inventory, on time.</span></div>
+            </div>
+            <div class="footerItem">
+              <div class="i">🎧</div>
+              <div><strong>Dedicated Dealer Support</strong><span>Real people. Real answers.</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

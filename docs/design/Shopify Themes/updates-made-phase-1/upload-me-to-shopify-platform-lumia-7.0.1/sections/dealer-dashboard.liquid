@@ -1,0 +1,317 @@
+{% comment %}
+  Calder Wheels — Dealer Dashboard
+  Matches dealer-portal-mockups-exact.html Dashboard screen.
+  Sidebar-based layout with stats, recent orders, quotes, and account summary.
+{% endcomment %}
+
+{%- liquid
+  render 'dealer-context'
+  unless is_dealer
+    echo '<!-- not a dealer — dashboard hidden -->'
+  endunless
+-%}
+
+{% if is_dealer %}
+{%- liquid
+  render 'dealer-credit'
+
+  assign section_id = section.id
+-%}
+
+<div class="dp-root dealer-portal" id="dealer-portal-{{ section_id }}">
+  {% render 'dealer-sidebar' %}
+
+  <section class="dealer-portal__main">
+    <div class="dp-top-row">
+      <div class="dp-hero-title">
+        <h2>Dealer Dashboard</h2>
+        <p>Welcome back, {{ customer.first_name | default: customer.name }}<br>Here's your account overview and activity.</p>
+      </div>
+      <div>
+        <div class="dp-pills" style="justify-content:flex-end;margin-bottom:10px">
+          <span class="dp-pill dp-pill--accent">Tier {{ dealer_tier | default: 1 }}</span>
+          {%- if dealer_net_terms -%}
+            <span class="dp-pill">NET-30</span>
+          {%- endif -%}
+        </div>
+        <div class="dp-summary">
+          <div class="dp-summary__item">
+            <div class="dp-summary__label">Credit Limit</div>
+            <div class="dp-summary__value">{{ credit_limit | money }}</div>
+          </div>
+          <div class="dp-summary__item">
+            <div class="dp-summary__label">Available Credit</div>
+            <div class="dp-summary__value dp-summary__value--accent">{{ available_credit | money }}</div>
+          </div>
+          <div class="dp-summary__item">
+            <div class="dp-summary__label">Account Status</div>
+            <div class="dp-summary__value">
+              {{ account_status | capitalize | replace: 'Active', 'In Good Standing' }}
+              <span class="dp-status-dot"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="dp-grid-4">
+      <div class="dp-card dp-stat">
+        <div class="dp-stat__icon" aria-hidden="true">&#9700;</div>
+        <div>
+          <div class="dp-stat__label">Open Orders</div>
+          <div class="dp-stat__value">{{ customer.orders | where: 'financial_status', 'pending' | size | plus: customer.orders | where: 'financial_status', 'authorized' | size }}</div>
+          <div class="dp-stat__sub">
+            {%- assign open_total = 0 -%}
+            {%- for order in customer.orders -%}
+              {%- if order.financial_status == 'pending' or order.financial_status == 'authorized' -%}
+                {%- assign open_total = open_total | plus: order.total_price -%}
+              {%- endif -%}
+            {%- endfor -%}
+            {{ open_total | money }}
+          </div>
+        </div>
+      </div>
+
+      <div class="dp-card dp-stat">
+        <div class="dp-stat__icon" aria-hidden="true">&#9635;</div>
+        <div>
+          <div class="dp-stat__label">Pending Quotes</div>
+          <div class="dp-stat__value">
+            {%- assign pending_quotes = 0 -%}
+            {%- assign pending_total = 0 -%}
+            {%- if customer.metafields.custom.quotes.value -%}
+              {%- for quote in customer.metafields.custom.quotes.value -%}
+                {%- if quote.status == 'pending' -%}
+                  {%- assign pending_quotes = pending_quotes | plus: 1 -%}
+                  {%- assign pending_total = pending_total | plus: quote.total -%}
+                {%- endif -%}
+              {%- endfor -%}
+            {%- endif -%}
+            {{ pending_quotes }}
+          </div>
+          <div class="dp-stat__sub">
+            {%- if pending_total > 0 -%}{{ pending_total | money }}{%- else -%}$0.00{%- endif -%}
+          </div>
+        </div>
+      </div>
+
+      <div class="dp-card dp-stat">
+        <div class="dp-stat__icon" aria-hidden="true">&#9636;</div>
+        <div>
+          <div class="dp-stat__label">YTD Spend</div>
+          <div class="dp-stat__value">
+            {%- assign ytd_total = 0 -%}
+            {%- assign current_year = 'now' | date: '%Y' -%}
+            {%- for order in customer.orders -%}
+              {%- if order.financial_status == 'paid' -%}
+                {%- assign order_year = order.created_at | date: '%Y' -%}
+                {%- if order_year == current_year -%}
+                  {%- assign ytd_total = ytd_total | plus: order.total_price -%}
+                {%- endif -%}
+              {%- endif -%}
+            {%- endfor -%}
+            {{ ytd_total | money }}
+          </div>
+          <div class="dp-stat__sub">{{ current_year }} Total</div>
+        </div>
+      </div>
+
+      <div class="dp-card dp-stat">
+        <div class="dp-stat__icon dp-stat__icon--gold" aria-hidden="true">&#9672;</div>
+        <div>
+          <div class="dp-stat__label">Last Order</div>
+          {%- assign last_order = customer.orders | first -%}
+          <div class="dp-stat__value">
+            {%- if last_order -%}
+              {{ last_order.created_at | date: '%b %d, %Y' }}
+            {%- else -%}
+              —
+            {%- endif -%}
+          </div>
+          <div class="dp-stat__sub">
+            {%- if last_order.metafields.custom.po_number -%}
+              PO# {{ last_order.metafields.custom.po_number }}
+            {%- elsif last_order -%}
+              {{ last_order.name }}
+            {%- else -%}
+              No orders yet
+            {%- endif -%}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="dp-grid-2">
+      <div class="dp-card dp-table-wrap">
+        <div class="dp-card__head">
+          <h3>Recent Orders</h3>
+          <a href="{{ routes.account_url }}#orders" class="dp-card__link">View All Orders</a>
+        </div>
+        {%- if customer.orders.size > 0 -%}
+          <table class="dp-table">
+            <thead>
+              <tr>
+                <th>PO#</th>
+                <th>Order Date</th>
+                <th>Status</th>
+                <th>Items</th>
+                <th>Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              {%- for order in customer.orders limit: 5 -%}
+                <tr>
+                  <td>
+                    {%- if order.metafields.custom.po_number -%}
+                      {{ order.metafields.custom.po_number }}
+                    {%- else -%}
+                      {{ order.name }}
+                    {%- endif -%}
+                  </td>
+                  <td>{{ order.created_at | date: '%b %d, %Y' }}</td>
+                  <td>
+                    {%- case order.fulfillment_status -%}
+                      {%- when 'fulfilled' -%}
+                        <span class="dp-pill dp-pill--good">Shipped</span>
+                      {%- when 'partial' -%}
+                        <span class="dp-pill dp-pill--info">Processing</span>
+                      {%- when 'unfulfilled' -%}
+                        <span class="dp-pill dp-pill--info">Processing</span>
+                      {%- when 'restocked' -%}
+                        <span class="dp-pill dp-pill--bad">Cancelled</span>
+                      {%- else -%}
+                        <span class="dp-pill">Delivered</span>
+                    {%- endcase -%}
+                  </td>
+                  <td>{{ order.line_items | size }}</td>
+                  <td>{{ order.total_price | money }}</td>
+                </tr>
+              {%- endfor -%}
+            </tbody>
+          </table>
+          <div class="dp-pagination">
+            <span>
+              {%- assign shown = customer.orders.size | at_most: 5 -%}
+              Showing 1 to {{ shown }} of {{ customer.orders.size }} orders
+            </span>
+            <a href="{{ routes.account_url }}#orders" class="dp-card__link">View All Orders</a>
+          </div>
+        {%- else -%}
+          <div style="padding:24px;text-align:center;color:var(--text-color-light)">
+            <p>No orders yet. Start by browsing the catalog.</p>
+            <a href="/collections/all" class="dp-btn dp-btn--primary" style="margin-top:12px">Browse Catalog</a>
+          </div>
+        {%- endif -%}
+      </div>
+
+      <div style="display:grid;gap:16px">
+        <div class="dp-card dp-card--pad">
+          <div class="dp-card__head">
+            <h3>Pending Quotes</h3>
+            <a href="{{ routes.account_url }}#quotes" class="dp-card__link">View All</a>
+          </div>
+          <div class="dp-rows">
+            {%- if customer.metafields.custom.quotes.value -%}
+              {%- assign quote_found = false -%}
+              {%- for quote in customer.metafields.custom.quotes.value limit: 3 -%}
+                {%- if quote.status == 'pending' or quote.status == 'review' -%}
+                  {%- assign quote_found = true -%}
+                  <div class="dp-row">
+                    <div class="dp-row__left">{{ quote.id | truncate: 8, '' }}{% if quote.created_at %} &middot; {{ quote.created_at | date: '%b %d, %Y' }}{% endif %}</div>
+                    <div class="dp-row__right">
+                      {%- if quote.line_items_size -%}{{ quote.line_items_size }} Items{%- endif -%}
+                      {%- if quote.total -%} &middot; {{ quote.total | money }}{%- endif -%}
+                      <span class="dp-pill" style="margin-left:12px;padding:0 12px">{% if quote.status == 'review' %}Review{% else %}Sent{% endif %}</span>
+                    </div>
+                  </div>
+                {%- endif -%}
+              {%- endfor -%}
+              {%- unless quote_found -%}
+                <div class="dp-row" style="justify-items:center;text-align:center">
+                  <div style="grid-column:1/-1;color:var(--text-color-light)">No pending quotes. <a href="#" class="dp-card__link">Request a Quote</a></div>
+                </div>
+              {%- endunless -%}
+            {%- else -%}
+              <div class="dp-row" style="justify-items:center;text-align:center">
+                <div style="grid-column:1/-1;color:var(--text-color-light)">No quotes yet. When you configure a wheel and request a quote, it will appear here.</div>
+              </div>
+            {%- endif -%}
+          </div>
+        </div>
+
+        <div class="dp-card dp-card--pad dp-account-card">
+          <div class="dp-card__head">
+            <h3>Account Summary</h3>
+            <a href="{{ routes.account_addresses_url }}" class="dp-card__link">View Account</a>
+          </div>
+          <div class="dp-grid-2b" style="gap:0">
+            <div class="dp-rows" style="padding-right:16px;border-right:1px solid var(--dp-line)">
+              <div class="dp-row">
+                <div class="dp-row__left">Dealer Name</div>
+                <div class="dp-row__right">{{ customer.name | default: customer.first_name | append: ' ' | append: customer.last_name }}</div>
+              </div>
+              <div class="dp-row">
+                <div class="dp-row__left">Account Number</div>
+                <div class="dp-row__right">{{ customer.id | prepend: 'DWN-' }}</div>
+              </div>
+              <div class="dp-row">
+                <div class="dp-row__left">Payment Terms</div>
+                <div class="dp-row__right">{% if dealer_net_terms %}NET-30{% else %}Standard{% endif %}</div>
+              </div>
+              <div class="dp-row">
+                <div class="dp-row__left">Tier Level</div>
+                <div class="dp-row__right">Tier {{ dealer_tier | default: 1 }}</div>
+              </div>
+            </div>
+            <div class="dp-rows" style="padding-left:16px">
+              <div class="dp-row">
+                <div class="dp-row__left">Credit Limit</div>
+                <div class="dp-row__right">{{ credit_limit | money }}</div>
+              </div>
+              <div class="dp-row">
+                <div class="dp-row__left">Available Credit</div>
+                <div class="dp-row__right">{{ available_credit | money }}</div>
+              </div>
+              <div class="dp-row">
+                <div class="dp-row__left">Past Due</div>
+                <div class="dp-row__right">{{ past_due | money }}</div>
+              </div>
+              <div class="dp-row">
+                <div class="dp-row__left">Account Status</div>
+                <div class="dp-row__right">
+                  {{ account_status | capitalize | replace: 'Active', 'In Good Standing' }}
+                  <span class="dp-status-dot"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div style="margin-top:12px;text-align:center">
+            <a href="/pages/dealer-order-guide?view=dealer-guide" target="_blank" class="dp-pill dp-pill--accent" style="text-decoration:none;display:inline-flex;align-items:center;gap:6px">
+              &#9776; Download Order Guide (PDF)
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="dp-footer">
+      <div>&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. All rights reserved.</div>
+      <div class="dp-footer__links">
+        <a href="{{ routes.account_url }}">Dealer Portal</a>
+        <a href="/policies/terms-of-service">Terms & Conditions</a>
+        <a href="/policies/privacy-policy">Privacy Policy</a>
+      </div>
+    </div>
+  </section>
+</div>
+
+{% endif %}
+
+{% schema %}
+{
+  "name": "Dealer Dashboard",
+  "tag": "section",
+  "class": "section section--dealer-dashboard",
+  "settings": []
+}
+{% endschema %}

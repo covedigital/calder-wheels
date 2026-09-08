@@ -1,0 +1,39 @@
+{% comment %}
+  Calder Wheels — Dealer-Only Product Gating
+  Hides dealer-only products from retail customers by redirecting
+  PDP access to the dealer program page.
+
+  Usage: {% render 'dealer-gating' %}
+  Requires: dealer-context rendered before this snippet.
+{% endcomment %}
+
+{%- liquid
+  render 'dealer-context'
+  assign should_redirect = false
+  assign redirect_url = '/pages/dealer-program'
+
+  if is_dealer == false and product
+    if product.metafields.custom.dealer_only.value == true
+      assign should_redirect = true
+    else
+      for tag in product.tags
+        if tag == 'dealer-only'
+          assign should_redirect = true
+          break
+        endif
+      endfor
+    endif
+  endif
+
+  if should_redirect and customer
+    assign redirect_url = routes.account_url
+  endif
+-%}
+
+{% if should_redirect %}
+<script>
+  window.location.href = '{{ redirect_url }}';
+</script>
+<meta http-equiv="refresh" content="0;url={{ redirect_url }}">
+<p>This product is for dealers only. <a href="{{ redirect_url }}">Please log in to your dealer account</a>.</p>
+{% endif %}

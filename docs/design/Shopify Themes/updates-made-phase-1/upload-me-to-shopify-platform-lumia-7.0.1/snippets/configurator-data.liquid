@@ -1,0 +1,66 @@
+{% comment %}
+  Calder Wheels — Configurator Data Provider
+  Renders complete BOM + component data as inline JSON for the configurator JS.
+  This replaces the /apps/wheel-configurator/api/components HTTP call.
+  Usage: {% render 'configurator-data', product: product %}
+  Include in product template before the configurator section.
+{% endcomment %}
+
+{%- liquid
+  assign bom_json = product.metafields.custom.bom.value
+  assign components = bom_json.components | default: bom_json
+
+  assign centers = '' | split: ','
+  assign barrels = '' | split: ','
+  assign hardware_items = '' | split: ','
+
+  if components
+    for component in components
+      assign component_type = component.type | downcase
+      assign component_entry = component | json
+      if component_type == 'center'
+        assign centers = centers | concat: component_entry
+      elsif component_type == 'barrel' or component_type == 'lip'
+        assign barrels = barrels | concat: component_entry
+      elsif component_type == 'hardware'
+        assign hardware_items = hardware_items | concat: component_entry
+      endif
+    endfor
+  endif
+
+  if centers == blank
+    assign centers = product.metafields.custom.centers.value
+    if centers
+      assign centers = centers | json
+      assign centers = centers | split: '},'
+    endif
+  endif
+  if barrels == blank
+    assign barrels = product.metafields.custom.barrels.value
+    if barrels
+      assign barrels = barrels | json
+      assign barrels = barrels | split: '},'
+    endif
+  endif
+  if hardware_items == blank
+    assign hardware_items = product.metafields.custom.hardware_options.value
+    if hardware_items
+      assign hardware_items = hardware_items | json
+      assign hardware_items = hardware_items | split: '},'
+    endif
+  endif
+-%}
+
+<script type="application/json" id="configurator-data-{{ section.id }}">
+{
+  "product_id": {{ product.id | json }},
+  "components": {
+    "center": {{ centers | json }},
+    "barrel": {{ barrels | json }},
+    "hardware": {{ hardware_items | json }}
+  },
+  "variant_map": {{ product.metafields.custom.variant_map.value | default: product.metafields.custom.config_map.value | json }},
+  "base_price": {{ product.price | json }},
+  "lead_time_days": {{ product.metafields.custom.lead_time_days.value | default: 10 | json }}
+}
+</script>

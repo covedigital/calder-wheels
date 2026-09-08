@@ -1,0 +1,222 @@
+{% comment %}
+  Calder Wheels — Dealer Invoice / NET-30 Workflow
+  Invoice-on-account system for dealers without Shopify Plus.
+  Tracks invoices, payment terms, and payment status.
+
+  Usage as invoice list: {% render 'dealer-invoice' %}
+  Usage as single invoice: {% render 'dealer-invoice', invoice_id: invoice_id %}
+  Requires: dealer-context + dealer-credit rendered before this snippet.
+{% endcomment %}
+
+{%- liquid
+  render 'dealer-context'
+  unless is_dealer
+    break
+  endunless
+
+  render 'dealer-credit'
+
+  assign invoices_json = customer.metafields.custom.invoices.value
+
+  if invoice_id
+    assign show_single_invoice = true
+  else
+    assign show_single_invoice = false
+  endif
+-%}
+
+{% if invoices_json %}
+  <script type="application/json" id="dealer-invoices-data-{{ section.id }}">
+    {{ invoices_json | json }}
+  </script>
+{% endif %}
+
+{% if show_single_invoice %}
+  {% for invoice in invoices_json %}
+    {% if invoice.id == invoice_id %}
+      <div class="dp-card dp-card--pad">
+        <div class="dp-card__head">
+          <h3>{{ invoice.number | default: invoice.id }}</h3>
+          <span class="dp-pill {% if invoice.status == 'paid' %}dp-pill--good{% elsif invoice.status == 'overdue' %}dp-pill--bad{% elsif invoice.status == 'open' %}dp-pill--info{% else %}dp-pill--warn{% endif %}">
+            {{ invoice.status | capitalize }}
+          </span>
+        </div>
+
+        <div class="dp-rows" style="margin-top:16px">
+          <div class="dp-row">
+            <div class="dp-row__left">Invoice Date</div>
+            <div class="dp-row__right">{{ invoice.created_at | date: '%B %d, %Y' }}</div>
+          </div>
+          <div class="dp-row">
+            <div class="dp-row__left">Due Date</div>
+            <div class="dp-row__right">{{ invoice.due_date | date: '%B %d, %Y' }}</div>
+          </div>
+          <div class="dp-row">
+            <div class="dp-row__left">PO Number</div>
+            <div class="dp-row__right">{{ invoice.po_number | default: '—' }}</div>
+          </div>
+          <div class="dp-row">
+            <div class="dp-row__left">Payment Terms</div>
+            <div class="dp-row__right">{{ invoice.terms | default: 'NET-30' }}</div>
+          </div>
+          <div class="dp-row">
+            <div class="dp-row__left">Order Reference</div>
+            <div class="dp-row__right">{{ invoice.order_name | default: '—' }}</div>
+          </div>
+        </div>
+
+        <table class="dp-table" style="margin-top:20px">
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th>SKU</th>
+              <th>Qty</th>
+              <th>Unit Price</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for item in invoice.line_items %}
+              <tr>
+                <td>{{ item.title }}</td>
+                <td>{{ item.sku | default: '—' }}</td>
+                <td>{{ item.quantity }}</td>
+                <td>{{ item.price | money }}</td>
+                <td>{{ item.quantity | times: item.price | money }}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="4" style="text-align:right"><strong>Subtotal</strong></td>
+              <td><strong>{{ invoice.subtotal | money }}</strong></td>
+            </tr>
+            {% if invoice.tax and invoice.tax > 0 %}
+              <tr>
+                <td colspan="4" style="text-align:right">Tax</td>
+                <td>{{ invoice.tax | money }}</td>
+              </tr>
+            {% endif %}
+            {% if invoice.shipping and invoice.shipping > 0 %}
+              <tr>
+                <td colspan="4" style="text-align:right">Shipping</td>
+                <td>{{ invoice.shipping | money }}</td>
+              </tr>
+            {% endif %}
+            <tr>
+              <td colspan="4" style="text-align:right"><strong>Total</strong></td>
+              <td><strong>{{ invoice.total | money }}</strong></td>
+            </tr>
+            {% if invoice.paid_amount and invoice.paid_amount > 0 %}
+              <tr>
+                <td colspan="4" style="text-align:right">Paid</td>
+                <td style="color:var(--dp-good)">{{ invoice.paid_amount | money }}</td>
+              </tr>
+              <tr>
+                <td colspan="4" style="text-align:right"><strong>Balance Due</strong></td>
+                <td><strong style="{% if invoice.balance > 0 %}color:#db6e5b{% endif %}">{{ invoice.balance | money }}</strong></td>
+              </tr>
+            {% endif %}
+          </tfoot>
+        </table>
+
+        {% if invoice.status == 'open' or invoice.status == 'overdue' %}
+          <div style="margin-top:16px;text-align:right">
+            <span class="dp-pill dp-pill--accent" style="cursor:pointer;padding:8px 24px" onclick="alert('Invoice payment will be integrated with QuickBooks in WS2.')">Pay Invoice</span>
+          </div>
+        {% endif %}
+
+        {% if invoice.payments %}
+          <div style="margin-top:24px">
+            <h4>Payment History</h4>
+            <table class="dp-table dp-table-compact">
+              <thead>
+                <tr><th>Date</th><th>Method</th><th>Reference</th><th>Amount</th><th>Status</th></tr>
+              </thead>
+              <tbody>
+                {% for payment in invoice.payments %}
+                  <tr>
+                    <td>{{ payment.date | date: '%b %d, %Y' }}</td>
+                    <td>{{ payment.method | default: '—' }}</td>
+                    <td>{{ payment.reference | default: '—' }}</td>
+                    <td>{{ payment.amount | money }}</td>
+                    <td><span class="dp-pill dp-pill--good">{{ payment.status | default: 'Confirmed' }}</span></td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        {% endif %}
+      </div>
+      {% break %}
+    {% endif %}
+  {% endfor %}
+{% endif %}
+
+{% unless show_single_invoice %}
+  {% if invoices_json %}
+    <div class="dp-card dp-table-wrap">
+      <div class="dp-card__head">
+        <h3>Invoices</h3>
+        <span class="dp-card__link">
+          {% assign open_count = 0 %}
+          {% assign overdue_count = 0 %}
+          {% for inv in invoices_json %}
+            {% if inv.status == 'open' %}{% assign open_count = open_count | plus: 1 %}{% endif %}
+            {% if inv.status == 'overdue' %}{% assign overdue_count = overdue_count | plus: 1 %}{% endif %}
+          {% endfor %}
+          {% if overdue_count > 0 %}<span class="dp-pill dp-pill--bad" style="margin-right:8px">{{ overdue_count }} Overdue</span>{% endif %}
+          {% if open_count > 0 %}<span class="dp-pill dp-pill--info">{{ open_count }} Open</span>{% endif %}
+        </span>
+      </div>
+      <table class="dp-table dp-table-compact">
+        <thead>
+          <tr>
+            <th>Invoice #</th>
+            <th>Date</th>
+            <th>Due Date</th>
+            <th>PO #</th>
+            <th>Amount</th>
+            <th>Balance</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for invoice in invoices_json %}
+            <tr>
+              <td>{{ invoice.number | default: invoice.id | truncate: 12, '' }}</td>
+              <td>{{ invoice.created_at | date: '%b %d, %Y' }}</td>
+              <td>{{ invoice.due_date | date: '%b %d, %Y' }}</td>
+              <td>{{ invoice.po_number | default: '—' }}</td>
+              <td>{{ invoice.total | money }}</td>
+              <td>
+                {% if invoice.balance > 0 %}
+                  <span style="color:#db6e5b">{{ invoice.balance | money }}</span>
+                {% else %}
+                  <span style="color:var(--dp-good)">$0.00</span>
+                {% endif %}
+              </td>
+              <td>
+                <span class="dp-pill {% if invoice.status == 'paid' %}dp-pill--good{% elsif invoice.status == 'overdue' %}dp-pill--bad{% elsif invoice.status == 'open' %}dp-pill--info{% else %}dp-pill--warn{% endif %}">
+                  {{ invoice.status | capitalize }}
+                </span>
+              </td>
+              <td>
+                <span class="dp-pill" style="cursor:pointer" onclick="window.location.hash='invoice-{{ invoice.id }}'">View</span>
+                {% if invoice.status == 'open' or invoice.status == 'overdue' %}
+                  <span class="dp-pill dp-pill--accent" style="cursor:pointer">Pay</span>
+                {% endif %}
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <div class="dp-card dp-card--pad" style="text-align:center;padding:40px">
+      <p style="color:var(--text-color-light)">No invoices yet.</p>
+      <p style="font-size:14px;color:var(--text-color-light)">Invoices are generated when you place NET-30 orders.</p>
+    </div>
+  {% endif %}
+{% endunless %}

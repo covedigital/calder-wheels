@@ -1,0 +1,26 @@
+{
+  "sections": {
+    "dealer-dashboard": {
+      "type": "dealer-dashboard",
+      "settings": {}
+    },
+    "dealer-quick-order": {
+      "type": "dealer-quick-order",
+      "settings": {}
+    },
+    "dealer-invoices": {
+      "type": "dealer-invoices",
+      "settings": {}
+    },
+    "quote-list": {
+      "type": "quote-list",
+      "settings": {}
+    }
+  },
+  "order": [
+    "dealer-dashboard",
+    "dealer-quick-order",
+    "dealer-invoices",
+    "quote-list"
+  ]
+}

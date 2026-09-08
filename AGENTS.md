@@ -1,6 +1,6 @@
-# Agent Instructions — Ray Shadravan — New Wheel Co
+# Agent Instructions — Calder Wheels
 
-> **Project**: New wheel company — Shopify e-commerce + component inventory platform
+> **Project**: Calder Wheels — Shopify e-commerce + component inventory platform
 > **Loaded by**: All agents working on this project
 > **Read alongside**: `docs/0 - DO NOT DELETE/llm-continuity.md` for current state
 
@@ -19,14 +19,20 @@ Your primary directive: deliver a **custom e-commerce system**, not just a websi
 This is a new company (build-to-order manufacturing) distinct from the client's existing E5 Wheels business. It does **not** stock finished wheels — it stocks components and assembles to order.
 
 ### Core Requirements
-- Shopify store + custom premium design
+- Shopify store + custom premium design (dark/luxury, photography-led — reference `bespokerev.com`)
 - **Dealer/B2B portal** — approved dealer accounts, tiered pricing, dealer-only products, wholesale checkout, payment terms, minimum order quantities
 - **Vehicle fitment finder** — Year → Make → Model → Generation/Trim → compatible wheels; never show incompatible products
-- **Wheel configurator** — center finish × barrel/lip finish × rivet/hardware finish, with live visual preview
-- **Component inventory + Bill of Materials** — build-to-order logic
+- **Wheel configurator** — center finish × barrel/lip finish × rivet/hardware finish, with live visual preview. Backed by component availability: a config is orderable only if its BOM is in stock.
+- **Component inventory + Bill of Materials** — build-to-order logic; every finished SKU decomposes into Center × 1 + Barrel/Lip × 1 + Hardware × N
 - **QuickBooks** — accounting, COGS, vendor transactions
 - **ShipStation** — labels, tracking, carrier selection
-- Financing, accelerated checkout, customer accounts, gallery, mobile UX
+- Financing, accelerated checkout, customer accounts, dual gallery (vehicle-first + wheel-first), mobile UX
+
+### Design Inspiration
+| Source | What We Borrow |
+|--------|---------------|
+| `bespokerev.com` | Dark/luxury aesthetic, nicknamed designs, feature spotlights, build-to-order messaging, customer-build gallery, newsletter drop cadence |
+| `vossenwheels.com` | Series taxonomy (forged/hybrid/3-piece), finish matrix photography, dual gallery system, faceted URL-param filtering, manufacturing authority content, dealer locator
 
 ### Inventory Model (critical)
 - Finished SKU (e.g. `WHEEL-20-GLOSSBLACK-POLISHED-CHROME`) = Center × 1 + Barrel × 1 + Hardware × N
@@ -96,11 +102,12 @@ This is a new company (build-to-order manufacturing) distinct from the client's 
 | Document | When to Read |
 |----------|-------------|
 | `docs/0 - DO NOT DELETE/llm-continuity.md` | Every session start and end |
-| `docs/discovery/` | Requirements, architecture, inventory decisions |
+| `docs/discovery/requirements.md` | Before scoping any feature |
+| `docs/discovery/inspiration-analysis.md` | Before visual or catalog work |
 | `brand/brand.md` | Before any client-facing copy or visual work |
-| `0 - SOPs/SOP-Index.md` | Task-to-SOP navigation |
-| `0 - SOPs/META/Activity-Modes.md` | Declare operating mode at session start |
-| `0 - SOPs/META/PRIME-Prompting.md` | Apply before ambiguous or high-risk tasks |
+| `sops/SOP-Index.md` | Task-to-SOP navigation |
+| `sops/META/Activity-Modes.md` | Declare operating mode at session start |
+| `sops/META/PRIME-Prompting.md` | Apply before ambiguous or high-risk tasks |
 
 ---
 
@@ -117,4 +124,4 @@ This is a new company (build-to-order manufacturing) distinct from the client's 
 
 ---
 
-*Created: 2026-08-15 — Project B from Ray Shadravan meeting (2026-08-14). Separate from the E5 Wheels Automation project.*
+*Created: 2026-08-15 — Project B from Ray Shadravan meeting (2026-08-14). Separate from the E5 Wheels Automation project. Renamed to Calder Wheels on 2026-08-20.*

@@ -29,7 +29,35 @@ __pycache__/
 # Logs
 *.log
 
+# Python
+*.pyc
+__pycache__/
+.pytest_cache/
+*.egg-info/
+
+# Databases
+*.db
+*.sqlite
+*.sqlite3
+
+# Composite assets (generated PNGs)
+shopify/assets/composites/
+shopify/assets/composites-flat/
+
 # Backups
 *.sql
 *.backup
 *.bak
+
+# Zipped archives
+*.zip
+
+# Large binary/images
+*.png
+*.jpg
+*.jpeg
+*.avif
+*.pdf
+
+# Fitment seed stats
+fitment/.seed_stats

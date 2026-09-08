@@ -1,0 +1,36 @@
+{
+  "project": "Calder Wheels",
+  "visual_html": "docs/design/mockups/dealer-portal-mockups-exact.html",
+  "source_html": "docs/design/mockups/dealer-portal-mockups.html",
+  "screens": [
+    {
+      "id": "dashboard",
+      "title": "Dealer Dashboard",
+      "html_id": "dashboard",
+      "png": "docs/design/mockups/dealer-portal-dashboard-mockup.png"
+    },
+    {
+      "id": "quick-order",
+      "title": "Quick Order",
+      "html_id": "quick-order",
+      "png": "docs/design/mockups/dealer-portal-quick-order-mockup.png"
+    },
+    {
+      "id": "quotes-payment-terms",
+      "title": "Quotes / Payment Terms",
+      "html_id": "quotes",
+      "png": "docs/design/mockups/dealer-portal-quotes-payment-terms-mockup.png"
+    },
+    {
+      "id": "pending-landing",
+      "title": "Dealer Landing / Pending Approval",
+      "html_id": "landing",
+      "png": "docs/design/mockups/dealer-portal-pending-landing-mockup.png"
+    }
+  ],
+  "handoff_notes": [
+    "Use the HTML file as the readable mockup source.",
+    "Use the markdown spec to map screens to Shopify sections.",
+    "Use the PNGs for visual comparison only."
+  ]
+}

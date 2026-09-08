@@ -1,0 +1,45 @@
+{% comment %}
+  Dealer price display — show tiered pricing for dealer accounts.
+  Include after rendering {% render 'dealer-context' %}.
+  Usage: {% render 'dealer-price', product: product, current_variant: current_variant, block: block %}
+{% endcomment %}
+
+{%- liquid
+  unless is_dealer and dealer_tier > 0
+    echo '<!-- not a dealer — skip dealer pricing -->'
+    break
+  endunless
+
+  assign dealer_price_metafield = 'dealer_tier_' | append: dealer_tier | append: '_price'
+  assign dealer_price = product.metafields.custom[dealer_price_metafield]
+  assign dealer_moq = product.metafields.custom.dealer_moq | default: 1
+  assign retail_price = current_variant.price | default: product.price
+  assign show_dealer_savings = block.settings.show_dealer_savings | default: true
+-%}
+
+{% if dealer_price and dealer_price > 0 %}
+  <div class="dealer-price">
+    <div class="dealer-price__row">
+      <span class="dealer-price__label">Your Price (Tier {{ dealer_tier }})</span>
+      <span class="dealer-price__value">{{ dealer_price | money }}</span>
+    </div>
+    {% if show_dealer_savings and dealer_price < retail_price %}
+      <div class="dealer-price__row dealer-price__row--retail">
+        <span class="dealer-price__label">MSRP</span>
+        <span class="dealer-price__value dealer-price__value--strikethrough">{{ retail_price | money }}</span>
+      </div>
+      {% assign savings = retail_price | minus: dealer_price | times: 100 | divided_by: retail_price %}
+      <div class="dealer-price__savings">You save {{ savings }}% ({{ retail_price | minus: dealer_price | money }})</div>
+    {% endif %}
+    {% if dealer_moq > 1 %}
+      <div class="dealer-price__moq">Min. order: {{ dealer_moq }} units</div>
+    {% endif %}
+  </div>
+{% else %}
+  <div class="dealer-price">
+    <div class="dealer-price__row">
+      <span class="dealer-price__label">Your Price (Tier {{ dealer_tier }})</span>
+      <span class="dealer-price__value">{{ retail_price | money }}</span>
+    </div>
+  </div>
+{% endif %}

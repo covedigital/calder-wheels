@@ -1,0 +1,123 @@
+{% comment %}
+  Calder Wheels — Configurator API Page Template
+  Serves as a JSON endpoint for component data and availability checks.
+  Used as an App Proxy fallback when inline data is unavailable.
+  Access: /pages/configurator-api?view=json&product_id=X&action=components|availability
+{% endcomment %}
+
+{%- liquid
+  layout 'theme'
+
+  assign action = request.params.action | default: 'components'
+  assign product_id = request.params.product_id
+
+  if product_id == blank
+    assign product_id = request.params.product_id
+  endif
+-%}
+
+{%- if action == 'components' -%}
+  {%- liquid
+    assign product = all_products[product_id]
+    if product == blank
+      echo '{"error": "Product not found"}'
+      break
+    endif
+
+    assign bom_json = product.metafields.custom.bom.value
+    assign components_data = bom_json.components | default: bom_json
+
+    assign centers = '' | split: ','
+    assign barrels = '' | split: ','
+    assign hardware_items = '' | split: ','
+
+    if components_data
+      for component in components_data
+        assign component_type = component.type | downcase
+        assign component_entry = component
+        if component_type == 'center'
+          assign centers = centers | push: component_entry
+        elsif component_type == 'barrel' or component_type == 'lip'
+          assign barrels = barrels | push: component_entry
+        elsif component_type == 'hardware'
+          assign hardware_items = hardware_items | push: component_entry
+        endif
+      endfor
+    endif
+  -%}
+  {
+    "product_id": {{ product.id | json }},
+    "components": {
+      "center": {{ centers | json }},
+      "barrel": {{ barrels | json }},
+      "hardware": {{ hardware_items | json }}
+    },
+    "variant_map": {{ product.metafields.custom.variant_map.value | json }},
+    "base_price": {{ product.price | json }},
+    "lead_time_days": {{ product.metafields.custom.lead_time_days.value | default: 10 | json }}
+  }
+
+{%- elsif action == 'availability' -%}
+  {%- liquid
+    assign product = all_products[product_id]
+    if product == blank
+      echo '{"error": "Product not found"}'
+      break
+    endif
+
+    assign center_id = request.params.center
+    assign barrel_id = request.params.barrel
+    assign hardware_id = request.params.hardware
+
+    assign matched_variant = blank
+    assign variant_map = product.metafields.custom.variant_map.value
+
+    if variant_map
+      assign config_key = center_id | append: '|' | append: barrel_id | append: '|' | append: hardware_id
+      assign mapped_id = variant_map[config_key]
+      if mapped_id
+        for variant in product.variants
+          if variant.id == mapped_id
+            assign matched_variant = variant
+            break
+          endif
+        endfor
+      endif
+    endif
+
+    if matched_variant == blank
+      for variant in product.variants
+        assign opts = variant.option1 | append: '|' | append: variant.option2 | append: '|' | append: variant.option3
+        assign opts_lower = opts | downcase
+
+        assign center_lower = center_id | downcase
+        assign barrel_lower = barrel_id | downcase
+        assign hardware_lower = hardware_id | downcase
+
+        if opts_lower contains center_lower and opts_lower contains barrel_lower and opts_lower contains hardware_lower
+          assign matched_variant = variant
+          break
+        endif
+      endfor
+    endif
+
+    if matched_variant
+      assign available = matched_variant.inventory_quantity | default: 0
+      if matched_variant.available == false
+        assign available = 0
+      endif
+    else
+      assign available = 0
+    endif
+  -%}
+  {
+    "product_id": {{ product.id | json }},
+    "available_to_build": {{ available }},
+    "variant_id": {{ matched_variant.id | json }},
+    "price": {{ matched_variant.price | json }},
+    "compare_at_price": {{ matched_variant.compare_at_price | json }},
+    "lead_time": "{{ product.metafields.custom.lead_time_days.value | default: 10 }} business days",
+    "available": {{ matched_variant.available | json }}
+  }
+
+{%- endif -%}

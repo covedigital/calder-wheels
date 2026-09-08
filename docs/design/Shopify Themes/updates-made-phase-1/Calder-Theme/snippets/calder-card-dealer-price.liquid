@@ -1,0 +1,29 @@
+{% comment %}
+  Calder Wheels — Dealer Price Display on Collection Cards
+  Shows tiered dealer pricing below the retail price on product cards.
+  Usage: {% render 'calder-card-dealer-price', product: product %}
+  Requires: dealer-context rendered before this snippet.
+{% endcomment %}
+
+{%- liquid
+  render 'dealer-context'
+  assign show_price = false
+  if is_dealer and dealer_tier > 0
+    assign dealer_price_metafield = 'dealer_tier_' | append: dealer_tier | append: '_price'
+    assign dealer_price = product.metafields.custom[dealer_price_metafield]
+    assign cart_moq = product.metafields.custom.dealer_moq | default: 1
+    if dealer_price and dealer_price > 0
+      assign show_price = true
+    endif
+  endif
+-%}
+
+{% if show_price %}
+  <div class="dealer-card-price">
+    <span class="dealer-card-price__label">Dealer (T{{ dealer_tier }}):</span>
+    {{ dealer_price | money }}
+    {%- if cart_moq > 1 -%}
+      <span style="opacity:0.5;font-size:0.68rem;margin-left:4px">MOQ {{ cart_moq }}</span>
+    {%- endif -%}
+  </div>
+{% endif %}

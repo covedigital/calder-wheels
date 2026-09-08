@@ -1,0 +1,210 @@
+{% comment %}
+  Calder Wheels — Production Status
+  Tracks order production pipeline status via order metafields.
+  Displays abstracted status for dealers (internal detail is hidden).
+  Usage: {% render 'production-status', order: order %}
+{% endcomment %}
+
+{%- liquid
+  assign production_status = order.metafields.custom.production_status.value | default: 'order_received'
+  assign production_stage = order.metafields.custom.production_stage.value | default: 'order_received'
+  assign production_updated_at = order.metafields.custom.production_updated_at.value
+  assign estimated_ship_date = order.metafields.custom.estimated_ship_date.value
+  assign tracking_number = order.metafields.custom.tracking_number.value
+  assign tracking_url = order.metafields.custom.tracking_url.value
+  assign carrier = order.metafields.custom.carrier.value
+
+  assign dealer_statuses = '' | split: ','
+  assign dealer_statuses = dealer_statuses | concat: 'Order Received'
+  assign dealer_statuses = dealer_statuses | concat: 'In Production'
+  assign dealer_statuses = dealer_statuses | concat: 'Finishing'
+  assign dealer_statuses = dealer_statuses | concat: 'Quality Check'
+  assign dealer_statuses = dealer_statuses | concat: 'Preparing to Ship'
+  assign dealer_statuses = dealer_statuses | concat: 'Shipped'
+  assign dealer_statuses = dealer_statuses | concat: 'Delivered'
+
+  assign production_stages = '' | split: ','
+  assign production_stages = production_stages | concat: 'order_received'
+  assign production_stages = production_stages | concat: 'in_production'
+  assign production_stages = production_stages | concat: 'finishing'
+  assign production_stages = production_stages | concat: 'quality_check'
+  assign production_stages = production_stages | concat: 'preparing_to_ship'
+  assign production_stages = production_stages | concat: 'shipped'
+  assign production_stages = production_stages | concat: 'delivered'
+
+  assign stage_index = 0
+  for stage in production_stages
+    if stage == production_stage
+      break
+    endif
+    assign stage_index = stage_index | plus: 1
+  endfor
+
+  assign current_index = stage_index | plus: 0
+  assign total_stages = production_stages.size | minus: 1
+  assign progress_pct = current_index | times: 100 | divided_by: total_stages
+  if progress_pct > 100
+    assign progress_pct = 100
+  endif
+
+  assign shipped = false
+  if production_stage == 'shipped' or production_stage == 'delivered'
+    assign shipped = true
+  endif
+-%}
+
+<div class="production-status">
+  <div class="production-status__header">
+    <div class="production-status__title">Production Status</div>
+    <div class="production-status__stage">
+      {%- if shipped -%}
+        <span class="dp-pill dp-pill--good">Shipped</span>
+      {%- elsif production_stage == 'order_received' -%}
+        <span class="dp-pill dp-pill--info">Order Received</span>
+      {%- elsif production_stage == 'in_production' or production_stage == 'finishing' -%}
+        <span class="dp-pill dp-pill--warn">In Production</span>
+      {%- elsif production_stage == 'quality_check' or production_stage == 'preparing_to_ship' -%}
+        <span class="dp-pill dp-pill--info">Preparing to Ship</span>
+      {%- else -%}
+        <span class="dp-pill">{{ production_status | capitalize }}</span>
+      {%- endif -%}
+    </div>
+  </div>
+
+  <div class="dp-progress" style="margin:12px 0">
+    <span style="width:{{ progress_pct }}%"></span>
+  </div>
+
+  <div class="production-status__timeline">
+    {% for display_status in dealer_statuses %}
+      {% assign loop_index = forloop.index0 %}
+      <div class="production-status__step {% if loop_index <= current_index %}production-status__step--active{% endif %} {% if loop_index == current_index %}production-status__step--current{% endif %}">
+        <div class="production-status__dot"></div>
+        <div class="production-status__label">{{ display_status }}</div>
+      </div>
+    {% endfor %}
+  </div>
+
+  {% if estimated_ship_date %}
+    <div class="production-status__info">
+      <span>Estimated Ship Date:</span>
+      <strong>{{ estimated_ship_date | date: '%B %d, %Y' }}</strong>
+    </div>
+  {% endif %}
+
+  {% if production_updated_at %}
+    <div class="production-status__info">
+      <span>Last Updated:</span>
+      <strong>{{ production_updated_at | date: '%B %d, %Y at %I:%M %p' }}</strong>
+    </div>
+  {% endif %}
+
+  {% if shipped and tracking_number %}
+    <div class="production-status__tracking">
+      <div class="production-status__tracking-label">Tracking</div>
+      <div class="production-status__tracking-value">
+        {% if carrier %}{{ carrier }} — {% endif %}{{ tracking_number }}
+      </div>
+      {% if tracking_url %}
+        <a href="{{ tracking_url }}" target="_blank" rel="noopener" class="dp-pill dp-pill--accent" style="margin-top:8px;display:inline-block">Track Package</a>
+      {% endif %}
+    </div>
+  {% endif %}
+</div>
+
+<style>
+  .production-status {
+    padding: 4px 0;
+  }
+  .production-status__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+  .production-status__title {
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--heading-color);
+  }
+  .production-status__timeline {
+    display: flex;
+    justify-content: space-between;
+    margin: 16px 0;
+    position: relative;
+  }
+  .production-status__timeline::before {
+    content: '';
+    position: absolute;
+    top: 8px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--dp-line);
+    z-index: 0;
+  }
+  .production-status__step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    position: relative;
+    z-index: 1;
+    flex: 1;
+  }
+  .production-status__dot {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--dp-line);
+    border: 2px solid var(--dp-line);
+    transition: all 0.3s;
+  }
+  .production-status__step--active .production-status__dot {
+    background: var(--dp-accent);
+    border-color: var(--dp-accent);
+  }
+  .production-status__step--current .production-status__dot {
+    box-shadow: 0 0 0 4px rgba(var(--dp-accent-rgb, 200, 160, 100), 0.25);
+  }
+  .production-status__label {
+    font-size: 0.65rem;
+    color: var(--text-color-light);
+    text-align: center;
+    max-width: 70px;
+    line-height: 1.2;
+    white-space: normal;
+    word-wrap: break-word;
+  }
+  .production-status__step--active .production-status__label {
+    color: var(--heading-color);
+    font-weight: 500;
+  }
+  .production-status__info {
+    display: flex;
+    justify-content: space-between;
+    padding: 4px 0;
+    font-size: 0.85rem;
+    color: var(--text-color-light);
+  }
+  .production-status__info strong {
+    color: var(--heading-color);
+  }
+  .production-status__tracking {
+    margin-top: 12px;
+    padding: 12px;
+    background: var(--dp-card-bg);
+    border-radius: 8px;
+    border: 1px solid var(--dp-line);
+  }
+  .production-status__tracking-label {
+    font-size: 0.8rem;
+    color: var(--text-color-light);
+    margin-bottom: 4px;
+  }
+  .production-status__tracking-value {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--heading-color);
+  }
+</style>

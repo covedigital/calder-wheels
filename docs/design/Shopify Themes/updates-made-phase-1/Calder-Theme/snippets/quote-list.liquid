@@ -1,0 +1,139 @@
+{% comment %}
+  Quote list — displays customer's active quotes on account page.
+  Uses Shopify's customer metafields or middleware API for quote data.
+  Include with: {% render 'quote-list' %}
+{% endcomment %}
+
+{%- liquid
+  assign quote_count = 0
+
+  if customer.metafields.custom.quotes.value
+    assign quotes = customer.metafields.custom.quotes.value
+    assign quote_count = quotes.size
+  endif
+-%}
+
+<div class="quote-list" id="quote-list">
+  {% if quote_count > 0 and quotes %}
+    <div class="quote-list__table-wrap">
+      <table class="quote-list__table">
+        <thead>
+          <tr>
+            <th>Quote #</th>
+            <th>Product</th>
+            <th>Date</th>
+            <th>Status</th>
+            <th>Total</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for quote in quotes %}
+            <tr class="quote-list__row quote-list__row--{{ quote.status | handle }}">
+              <td>{{ quote.id | truncate: 8, '' }}</td>
+              <td>{{ quote.product_title | default: 'Custom Wheel' }}</td>
+              <td>{{ quote.created_at | date: '%b %d, %Y' }}</td>
+              <td>
+                <span class="quote-list__status quote-list__status--{{ quote.status | handle }}">
+                  {% case quote.status %}
+                    {% when 'pending' %}Pending Review
+                    {% when 'approved' %}Approved
+                    {% when 'converted' %}Order Placed
+                    {% when 'expired' %}Expired
+                    {% else %}{{ quote.status }}
+                  {% endcase %}
+                </span>
+              </td>
+              <td>{{ quote.total | default: 'TBD' }}</td>
+              <td>
+                {% if quote.status == 'approved' and quote.checkout_url %}
+                  <a href="{{ quote.checkout_url }}" class="btn btn--sm btn--primary">Complete Order</a>
+                {% elsif quote.status == 'converted' and quote.order_url %}
+                  <a href="{{ quote.order_url }}" class="btn btn--sm btn--grey">View Order</a>
+                {% endif %}
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <div class="quote-list__empty">
+      <p>You have no active quotes.</p>
+      <p>When you request a quote for a custom wheel configuration, it will appear here.</p>
+      <a href="{{ routes.all_products_collection_url }}" class="btn btn--primary">Browse Wheels</a>
+    </div>
+  {% endif %}
+</div>
+
+<style>
+  .quote-list__table-wrap {
+    overflow-x: auto;
+  }
+
+  .quote-list__table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .quote-list__table th {
+    text-align: left;
+    padding: 12px 16px;
+    border-bottom: 2px solid var(--decor-border-color);
+    color: var(--heading-color);
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .quote-list__table td {
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--decor-border-color, rgba(255,255,255,0.05));
+    color: var(--text-color);
+    font-size: 0.9rem;
+  }
+
+  .quote-list__row:hover td {
+    background: var(--body-bg-secondary, rgba(255,255,255,0.02));
+  }
+
+  .quote-list__status {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+
+  .quote-list__status--pending {
+    background: rgba(234,179,8,0.1);
+    color: #eab308;
+  }
+
+  .quote-list__status--approved {
+    background: rgba(59,130,246,0.1);
+    color: #3b82f6;
+  }
+
+  .quote-list__status--converted {
+    background: rgba(34,197,94,0.1);
+    color: #22c55e;
+  }
+
+  .quote-list__status--expired {
+    background: rgba(239,68,68,0.1);
+    color: #ef4444;
+  }
+
+  .quote-list__empty {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--text-color);
+  }
+
+  .quote-list__empty p {
+    margin-bottom: 12px;
+    opacity: 0.7;
+  }
+</style>

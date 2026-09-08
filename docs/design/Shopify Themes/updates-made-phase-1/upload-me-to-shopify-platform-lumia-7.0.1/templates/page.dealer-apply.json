@@ -1,0 +1,22 @@
+{
+  "sections": {
+    "dealer-apply": {
+      "type": "main-page",
+      "blocks": {},
+      "block_order": [],
+      "settings": {
+        "spacing_sections": 30,
+        "use_global_desktop_space": false,
+        "spacing_sections_mobile": 20,
+        "use_global_mobile_space": false,
+        "spacing_padding_sections": 60,
+        "use_global_desktop_space_padding": true,
+        "spacing_padding_sections_mobile": 40,
+        "use_global_mobile_space_padding": true,
+        "background": true,
+        "background_preset": "dark"
+      }
+    }
+  },
+  "order": ["dealer-apply"]
+}

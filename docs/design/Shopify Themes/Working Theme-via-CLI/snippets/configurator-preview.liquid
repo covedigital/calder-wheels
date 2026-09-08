@@ -1,0 +1,27 @@
+{% comment %}
+  Server-fallback static preview for wheel configurator.
+  Renders when JS is disabled or the React app has not yet hydrated.
+{% endcomment %}
+
+<div class="wheel-configurator__fallback">
+  {% if product.featured_image %}
+    <img
+      src="{{ product.featured_image | img_url: '600x' }}"
+      alt="{{ product.featured_image.alt | escape }}"
+      loading="eager"
+      width="600"
+      height="600"
+    >
+  {% endif %}
+
+  {% if product.variants.size > 1 %}
+    <select class="form-control" onchange="if(this.value) window.location.href=this.value">
+      <option value="">Select a configuration...</option>
+      {% for variant in product.variants %}
+        {% if variant.available %}
+          <option value="{{ variant.url }}">{{ variant.title }} — {{ variant.price | money }}</option>
+        {% endif %}
+      {% endfor %}
+    </select>
+  {% endif %}
+</div>

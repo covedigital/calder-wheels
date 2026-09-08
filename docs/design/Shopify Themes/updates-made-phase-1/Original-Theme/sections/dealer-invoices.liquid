@@ -1,0 +1,219 @@
+{% comment %}
+  Calder Wheels — Dealer Invoices Section
+  Invoice management with NET-30 terms, payment history, and account summary.
+  Usage: Added as a section on the dealer portal page.
+{% endcomment %}
+
+{%- liquid
+  render 'dealer-context'
+  unless is_dealer
+    echo '<!-- not a dealer — invoices hidden -->'
+    break
+  endunless
+
+  render 'dealer-credit'
+  assign section_id = section.id
+-%}
+
+<div class="dp-root dealer-portal" id="dealer-invoices-{{ section_id }}">
+  {% render 'dealer-sidebar' %}
+
+  <section class="dealer-portal__main">
+    <div class="dp-top-row">
+      <div class="dp-hero-title">
+        <h2>Invoices &amp; Payments</h2>
+        <p>Manage your invoices, view payment terms, and track account standing.</p>
+      </div>
+      <div style="display:grid;gap:10px;justify-items:end">
+        <div class="dp-pills">
+          <span class="dp-pill dp-pill--accent">Tier {{ dealer_tier | default: 1 }}</span>
+          {%- if dealer_net_terms -%}<span class="dp-pill">NET-30</span>{%- endif -%}
+        </div>
+        <div class="dp-summary" style="min-width:680px">
+          <div class="dp-summary__item">
+            <div class="dp-summary__label">Credit Limit</div>
+            <div class="dp-summary__value">{{ credit_limit | money }}</div>
+          </div>
+          <div class="dp-summary__item">
+            <div class="dp-summary__label">Available Credit</div>
+            <div class="dp-summary__value dp-summary__value--accent">{{ available_credit | money }}</div>
+          </div>
+          <div class="dp-summary__item">
+            <div class="dp-summary__label">Outstanding Balance</div>
+            <div class="dp-summary__value" style="{% if outstanding_balance > 0 %}color:#db6e5b{% endif %}">{{ outstanding_balance | money }}</div>
+          </div>
+          <div class="dp-summary__item">
+            <div class="dp-summary__label">Account Status</div>
+            <div class="dp-summary__value">
+              {{ account_status | capitalize | replace: 'Active', 'In Good Standing' }}
+              <span class="dp-status-dot"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="dp-grid-2">
+      <div>
+        {% render 'dealer-invoice' %}
+      </div>
+
+      <div style="display:grid;gap:16px">
+        <div class="dp-card dp-panel">
+          <div class="dp-panel__top">
+            <h3 class="dp-card__title">Payment Terms</h3>
+            <a href="#" class="dp-pill dp-pill--accent">Terms &amp; Conditions</a>
+          </div>
+          <div style="display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:center;padding:6px 0 14px;border-bottom:1px solid var(--dp-line)">
+            <div class="dp-panel__icon" aria-hidden="true">&#9775;</div>
+            <div>
+              <div class="dp-panel__big">
+                {%- if dealer_net_terms -%}NET-30{%- else -%}Standard{%- endif -%}
+              </div>
+              <div class="dp-table__muted" style="font-size:15px">
+                {%- if dealer_net_terms -%}
+                  Payment Due Within 30 Days of Invoice
+                {%- else -%}
+                  Payment Required at Order Confirmation
+                {%- endif -%}
+              </div>
+            </div>
+          </div>
+
+          <div class="dp-rows" style="margin-top:10px">
+            <div class="dp-row">
+              <div class="dp-row__left">Credit Limit</div>
+              <div class="dp-row__right">{{ credit_limit | money }}</div>
+            </div>
+            <div class="dp-row">
+              <div class="dp-row__left">Outstanding Balance</div>
+              <div class="dp-row__right" style="{% if outstanding_balance > 0 %}color:#db6e5b{% endif %}">{{ outstanding_balance | money }}</div>
+            </div>
+            <div class="dp-row">
+              <div class="dp-row__left">Past Due</div>
+              <div class="dp-row__right" style="{% if past_due > 0 %}color:#db6e5b{% endif %}">{{ past_due | money }}</div>
+            </div>
+            <div class="dp-row">
+              <div class="dp-row__left">Available Credit</div>
+              <div class="dp-row__right" style="color:var(--dp-good)">{{ available_credit | money }}</div>
+            </div>
+            <div class="dp-row">
+              <div class="dp-row__left">Credit Usage</div>
+              <div class="dp-row__right">{{ credit_usage_pct }}%</div>
+            </div>
+          </div>
+          <div class="dp-progress">
+            <span style="width:{{ credit_usage_pct }}%"></span>
+          </div>
+        </div>
+
+        <div class="dp-card dp-card--pad">
+          <h3 class="dp-card__title">Payment Methods</h3>
+          <div class="dp-rows" style="margin-top:10px">
+            <div class="dp-row">
+              <div class="dp-row__left">ACH Transfer</div>
+              <div class="dp-row__right">Enabled</div>
+            </div>
+            <div class="dp-row">
+              <div class="dp-row__left">Wire Transfer</div>
+              <div class="dp-row__right">Available on Request</div>
+            </div>
+            <div class="dp-row">
+              <div class="dp-row__left">Check</div>
+              <div class="dp-row__right">Accepted</div>
+            </div>
+          </div>
+          <div class="dp-table__muted" style="margin-top:10px">
+            Payment methods are managed by Calder Wheels. Contact your account representative to add or update payment methods.
+          </div>
+        </div>
+
+        <div class="dp-card dp-card--pad">
+          <h3 class="dp-card__title">Quick Summary</h3>
+          <div class="dp-grid-4" style="margin-top:10px">
+            <div class="dp-stat">
+              <div class="dp-stat__label">Total Invoiced</div>
+              <div class="dp-stat__value">
+                {%- assign total_invoiced = 0 -%}
+                {%- if customer.metafields.custom.invoices.value -%}
+                  {%- for inv in customer.metafields.custom.invoices.value -%}
+                    {%- assign total_invoiced = total_invoiced | plus: inv.total -%}
+                  {%- endfor -%}
+                {%- endif -%}
+                {{ total_invoiced | money }}
+              </div>
+            </div>
+            <div class="dp-stat">
+              <div class="dp-stat__label">Paid</div>
+              <div class="dp-stat__value">
+                {%- assign total_paid = 0 -%}
+                {%- if customer.metafields.custom.invoices.value -%}
+                  {%- for inv in customer.metafields.custom.invoices.value -%}
+                    {%- assign total_paid = total_paid | plus: inv.paid_amount -%}
+                  {%- endfor -%}
+                {%- endif -%}
+                {{ total_paid | money }}
+              </div>
+            </div>
+            <div class="dp-stat">
+              <div class="dp-stat__label">Open Invoices</div>
+              <div class="dp-stat__value">
+                {%- assign open_count = 0 -%}
+                {%- if customer.metafields.custom.invoices.value -%}
+                  {%- for inv in customer.metafields.custom.invoices.value -%}
+                    {%- if inv.status == 'open' or inv.status == 'overdue' -%}
+                      {%- assign open_count = open_count | plus: 1 -%}
+                    {%- endif -%}
+                  {%- endfor -%}
+                {%- endif -%}
+                {{ open_count }}
+              </div>
+            </div>
+            <div class="dp-stat">
+              <div class="dp-stat__label">Avg Days to Pay</div>
+              <div class="dp-stat__value">
+                {%- assign avg_days = 0 -%}
+                {%- assign payment_count = 0 -%}
+                {%- if customer.metafields.custom.invoices.value -%}
+                  {%- for inv in customer.metafields.custom.invoices.value -%}
+                    {%- if inv.payments -%}
+                      {%- for pay in inv.payments -%}
+                        {%- assign inv_date = inv.created_at | date: '%s' | plus: 0 -%}
+                        {%- assign pay_date = pay.date | date: '%s' | plus: 0 -%}
+                        {%- assign days = pay_date | minus: inv_date | divided_by: 86400 -%}
+                        {%- assign avg_days = avg_days | plus: days -%}
+                        {%- assign payment_count = payment_count | plus: 1 -%}
+                      {%- endfor -%}
+                    {%- endif -%}
+                  {%- endfor -%}
+                  {%- if payment_count > 0 -%}
+                    {%- assign avg_days = avg_days | divided_by: payment_count -%}
+                  {%- endif -%}
+                {%- endif -%}
+                {{ avg_days }} days
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="dp-footer">
+      <div>&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. All rights reserved.</div>
+      <div class="dp-footer__links">
+        <a href="{{ routes.account_url }}">Dealer Portal</a>
+        <a href="/policies/terms-of-service">Terms &amp; Conditions</a>
+        <a href="/policies/privacy-policy">Privacy Policy</a>
+      </div>
+    </div>
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "Dealer Invoices",
+  "tag": "section",
+  "class": "section section--dealer-invoices",
+  "settings": []
+}
+{% endschema %}

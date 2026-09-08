@@ -1,0 +1,94 @@
+{% comment %}
+  Dealer Portal — shared sidebar navigation
+  Renders the persistent left sidebar with brand, nav, help box, and logout.
+  Usage: {% render 'dealer-sidebar' %}
+  Requires: dealer-context snippet rendered before this
+{% endcomment %}
+
+<aside class="dealer-portal__sidebar">
+  <a href="{{ routes.account_url }}" class="dp-brand">
+    <div class="dp-brand__mark">{{ shop.name | slice: 0, 2 | upcase }}</div>
+    <div class="dp-brand__name">
+      <strong>{{ shop.name }}</strong>
+      <span>DEALER PORTAL</span>
+    </div>
+  </a>
+
+  <div class="dp-nav-title">Dealer Portal</div>
+  <nav class="dp-nav" role="navigation" aria-label="Dealer Portal Navigation">
+    {%- liquid
+      assign current_view = request.path | replace: routes.account_url, '' | default: 'dashboard'
+      if current_view == routes.account_url or current_view == blank or current_view == '/'
+        assign current_view = 'dashboard'
+      endif
+    -%}
+    <a href="{{ routes.account_url }}#dashboard"
+       class="dp-nav__link {% if current_view == 'dashboard' %}active{% endif %}"
+       data-dp-tab="dashboard">
+      <span class="dp-nav__icon" aria-hidden="true">&#8998;</span>Dashboard
+    </a>
+    <a href="/collections/all"
+       class="dp-nav__link"
+       data-dp-tab="catalog">
+      <span class="dp-nav__icon" aria-hidden="true">&#9638;</span>Catalog
+    </a>
+    <a href="{{ routes.account_url }}#quick-order"
+       class="dp-nav__link"
+       data-dp-tab="quick-order">
+      <span class="dp-nav__icon" aria-hidden="true">&#8595;</span>Quick Order
+    </a>
+    <a href="{{ routes.account_url }}#orders"
+       class="dp-nav__link"
+       data-dp-tab="orders">
+      <span class="dp-nav__icon" aria-hidden="true">&#9638;</span>Orders
+    </a>
+    <a href="{{ routes.account_url }}#quotes"
+       class="dp-nav__link"
+       data-dp-tab="quotes">
+      <span class="dp-nav__icon" aria-hidden="true">&#9810;</span>Quotes
+    </a>
+    <a href="{{ routes.account_url }}#invoices"
+       class="dp-nav__link"
+       data-dp-tab="invoices">
+      <span class="dp-nav__icon" aria-hidden="true">&#9634;</span>Invoices
+    </a>
+    <a href="{{ routes.account_url }}#returns"
+       class="dp-nav__link"
+       data-dp-tab="returns">
+      <span class="dp-nav__icon" aria-hidden="true">&#8627;</span>Returns
+    </a>
+    <a href="#"
+       class="dp-nav__link"
+       data-dp-tab="marketing">
+      <span class="dp-nav__icon" aria-hidden="true">&#8999;</span>Marketing Assets
+    </a>
+    <a href="/pages/dealer-order-guide?view=dealer-guide" target="_blank" class="dp-nav__link">
+      <span class="dp-nav__icon" aria-hidden="true">&#9776;</span>Order Guide PDF
+    </a>
+    <a href="{{ routes.account_addresses_url }}"
+       class="dp-nav__link"
+       data-dp-tab="account">
+      <span class="dp-nav__icon" aria-hidden="true">&#9678;</span>Account
+    </a>
+    <a href="#"
+       class="dp-nav__link"
+       data-dp-tab="users">
+      <span class="dp-nav__icon" aria-hidden="true">&#9699;</span>Users
+    </a>
+    <a href="#"
+       class="dp-nav__link"
+       data-dp-tab="notifications">
+      <span class="dp-nav__icon" aria-hidden="true">&#9776;</span>Notifications
+    </a>
+  </nav>
+
+  <div class="dp-help">
+    <strong>Need Help?</strong><br>
+    888.587.4511
+    <span class="dp-help__small">Mon–Fri 8am – 5pm PST</span>
+  </div>
+
+  <a href="{{ routes.account_logout_url }}" class="dp-logout" data-action="logout">
+    <span class="dp-logout__icon" aria-hidden="true">&#8644;</span>Log Out
+  </a>
+</aside>

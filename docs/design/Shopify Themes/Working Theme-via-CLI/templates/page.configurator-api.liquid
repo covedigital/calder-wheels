@@ -1,0 +1,124 @@
+{% comment %}
+  Calder Wheels — Configurator API Page Template
+  Serves as a JSON endpoint for component data, availability, and finish info.
+  Used as a Shopify App Proxy fallback when the middleware API is unavailable.
+  Access: /pages/configurator-api?view=json&action=components|availability|finishes
+{% endcomment %}
+
+{%- layout none -%}
+{%- assign action = request.params.action | default: 'finishes' -%}
+
+{%- if action == 'components' -%}
+  {%- liquid
+    assign product_id = request.params.product_id
+    assign product = all_products[product_id]
+
+    if product == blank
+      echo '{"error": "Product not found"}'
+    else
+      assign centers = '' | split: ','
+      assign barrels = '' | split: ','
+      assign hardware_items = '' | split: ','
+
+      assign bom_json = product.metafields.custom.bom.value
+      assign components_data = bom_json.components | default: bom_json
+
+      if components_data
+        for component in components_data
+          assign component_type = component.type | downcase
+          if component_type == 'center'
+            assign centers = centers | push: component
+          elsif component_type == 'barrel' or component_type == 'lip'
+            assign barrels = barrels | push: component
+          elsif component_type == 'hardware'
+            assign hardware_items = hardware_items | push: component
+          endif
+        endfor
+      endif
+    endif
+    -%}
+    {
+      "product_id": {{ product.id | json }},
+      "components": {
+        "center": {{ centers | json }},
+        "barrel": {{ barrels | json }},
+        "hardware": {{ hardware_items | json }}
+      },
+      "variant_map": {{ product.metafields.custom.variant_map.value | json }},
+      "base_price": {{ product.price | json }},
+      "lead_time_days": {{ product.metafields.custom.lead_time_days.value | default: 10 | json }}
+    }
+  {%- elsif action == 'availability' -%}
+  {%- liquid
+    assign product_id = request.params.product_id
+    assign center_id = request.params.center
+    assign barrel_id = request.params.barrel
+    assign hardware_id = request.params.hardware
+    assign product = all_products[product_id]
+
+    assign matched_variant = blank
+    assign available = 0
+    assign lead_time = product.metafields.custom.lead_time_days.value | default: 10
+
+    if product != blank
+      assign variant_map = product.metafields.custom.variant_map.value
+
+      if variant_map
+        assign config_key = center_id | append: '|' | append: barrel_id | append: '|' | append: hardware_id
+        assign mapped_id = variant_map[config_key]
+        if mapped_id
+          for variant in product.variants
+            if variant.id == mapped_id
+              assign matched_variant = variant
+            endif
+          endfor
+        endif
+      endif
+
+      if matched_variant == blank
+        for variant in product.variants
+          assign opts = variant.option1 | append: '|' | append: variant.option2 | append: '|' | append: variant.option3
+          assign opts_lower = opts | downcase
+          if opts_lower contains center_id and opts_lower contains barrel_id and opts_lower contains hardware_id
+            assign matched_variant = variant
+          endif
+        endfor
+      endif
+
+      if matched_variant
+        if matched_variant.available
+          assign available = matched_variant.inventory_quantity | default: 0
+        else
+          assign available = 0
+        endif
+      endif
+    endif
+  -%}
+  {
+    "available_to_build": {{ available }},
+    "variant_id": {{ matched_variant.id | json }},
+    "price": {{ matched_variant.price | json }},
+    "compare_at_price": {{ matched_variant.compare_at_price | json }},
+    "lead_time": "{{ lead_time }} business days",
+    "available": {{ matched_variant.available | json }}
+  }
+
+{%- elsif action == 'finishes' -%}
+  {% comment %}Static finish catalog matching the Python model{% endcomment %}
+  {
+    "center": [
+      {"id": "BK", "name": "Gloss Black", "client_code": "bk", "category": "standard"},
+      {"id": "BKUTI", "name": "Black Titanium", "client_code": "bkuti", "category": "premium"},
+      {"id": "SU", "name": "Satin Silver", "client_code": "su", "category": "standard"}
+    ],
+    "barrel": [
+      {"id": "BK", "name": "Black", "client_code": "bk", "category": "standard"},
+      {"id": "POLISH", "name": "Polished", "client_code": "polish", "category": "premium"}
+    ],
+    "hardware": [
+      {"id": "BK", "name": "Black Bolts", "client_code": "bk", "category": "standard"},
+      {"id": "CHROME", "name": "Chrome Bolts", "client_code": "chrome", "category": "chrome"}
+    ]
+  }
+
+{%- endif -%}

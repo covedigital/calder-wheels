@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calder Wheels — Commerce & Integration Platform Agreement</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700&display=swap');
+
+  @page {
+    size: Letter;
+    margin: 0;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: #10162B;
+    line-height: 1.6;
+    font-size: 10.5pt;
+    background: #fff;
+  }
+
+  .page {
+    width: 8.5in;
+    height: 11in;
+    padding: 0.65in 0.7in;
+    position: relative;
+    page-break-after: always;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+  }
+
+  .header {
+    border-bottom: 3px solid #072A67;
+    padding-bottom: 20px;
+    margin-bottom: 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  .header-left h1 {
+    font-size: 22pt;
+    font-weight: 800;
+    color: #072A67;
+    letter-spacing: -0.5px;
+  }
+
+  .header-left .subtitle {
+    font-size: 11pt;
+    color: #2F80FF;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-top: 3px;
+  }
+
+  .header-right {
+    text-align: right;
+    font-size: 9pt;
+    color: #667085;
+    line-height: 1.5;
+  }
+
+  .header-right strong { color: #10162B; }
+
+  .eyebrow {
+    font-size: 8pt;
+    font-weight: 700;
+    color: #2F80FF;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 6px;
+  }
+
+  h2 {
+    font-size: 14pt;
+    font-weight: 700;
+    color: #072A67;
+    margin-top: 24px;
+    margin-bottom: 10px;
+    padding-bottom: 4px;
+    border-bottom: 1.5px solid #E5E9F0;
+  }
+
+  h3 {
+    font-size: 11.5pt;
+    font-weight: 700;
+    color: #072A67;
+    margin-top: 16px;
+    margin-bottom: 8px;
+  }
+
+  h4 {
+    font-size: 10.5pt;
+    font-weight: 600;
+    color: #2F80FF;
+    margin-top: 12px;
+    margin-bottom: 6px;
+  }
+
+  p { margin-bottom: 8px; }
+
+  .workstream-card {
+    background: #F4F7FB;
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin: 10px 0 14px;
+    border-left: 4px solid #2F80FF;
+  }
+
+  .workstream-card h4 {
+    margin-top: 0;
+    color: #072A67;
+    font-size: 11pt;
+  }
+
+  .workstream-card .ws-price {
+    float: right;
+    font-weight: 700;
+    color: #2F80FF;
+    font-size: 11pt;
+  }
+
+  .workstream-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 6px 0 0;
+  }
+
+  .workstream-card ul li {
+    padding: 2px 0 2px 14px;
+    position: relative;
+    font-size: 9.5pt;
+    color: #344054;
+  }
+
+  .workstream-card ul li::before {
+    content: "—";
+    position: absolute;
+    left: 0;
+    color: #2F80FF;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 10px 0 14px;
+    font-size: 9.5pt;
+  }
+
+  table th {
+    background: #072A67;
+    color: #fff;
+    font-weight: 600;
+    text-align: left;
+    padding: 8px 12px;
+    font-size: 9pt;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  table td {
+    padding: 7px 12px;
+    border-bottom: 1px solid #E5E9F0;
+  }
+
+  table tr:nth-child(even) td { background: #F8FAFC; }
+
+  .milestone-table td:last-child,
+  .milestone-table th:last-child { text-align: right; }
+  .milestone-table td:nth-child(2) { font-weight: 600; }
+
+  .paid-badge {
+    display: inline-block;
+    background: #E6F7E6;
+    color: #1A7D1A;
+    font-size: 8pt;
+    font-weight: 700;
+    padding: 1px 8px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+
+  .arch-table td:first-child { font-weight: 600; color: #072A67; }
+
+  .system-list {
+    list-style: none;
+    padding: 0;
+    margin: 8px 0;
+  }
+
+  .system-list li {
+    padding: 3px 0 3px 20px;
+    position: relative;
+    font-size: 10pt;
+  }
+
+  .system-list li::before {
+    content: "●";
+    position: absolute;
+    left: 2px;
+    color: #2F80FF;
+    font-size: 7pt;
+  }
+
+  .scope-item {
+    background: #FFF8F0;
+    border-radius: 8px;
+    padding: 10px 14px;
+    margin: 6px 0;
+    border-left: 3px solid #F2994A;
+    font-size: 9.5pt;
+  }
+
+  .scope-item strong { color: #B85C00; }
+
+  .signature-section {
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 2px solid #072A67;
+  }
+
+  .signature-grid {
+    display: flex;
+    gap: 40px;
+    margin-top: 10px;
+  }
+
+  .signature-col { flex: 1; }
+
+  .signature-col h4 {
+    font-size: 10pt;
+    color: #072A67;
+    border-bottom: 1px solid #D0D5DD;
+    padding-bottom: 3px;
+    margin-bottom: 8px;
+  }
+
+  .sig-line {
+    margin: 10px 0 8px;
+    border-bottom: 1.5px solid #10162B;
+    height: 22px;
+  }
+
+  .sig-field {
+    font-size: 9pt;
+    color: #667085;
+    margin-bottom: 3px;
+  }
+
+  .sig-field span { color: #10162B; font-weight: 500; }
+
+  .bullet-list {
+    list-style: none;
+    padding: 0;
+    margin: 6px 0 10px;
+  }
+
+  .bullet-list li {
+    padding: 3px 0 3px 18px;
+    position: relative;
+    font-size: 9.5pt;
+    color: #344054;
+  }
+
+  .bullet-list li::before {
+    content: "•";
+    position: absolute;
+    left: 4px;
+    color: #2F80FF;
+    font-weight: 700;
+  }
+
+  hr { border: none; border-top: 1px solid #E5E9F0; margin: 18px 0; }
+
+  .footer {
+    position: absolute;
+    bottom: 0.3in;
+    left: 0.7in;
+    right: 0.7in;
+    border-top: 1px solid #E5E9F0;
+    padding-top: 8px;
+    font-size: 7.5pt;
+    color: #98A2B3;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .highlight-box {
+    background: #EEF5FF;
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin: 12px 0;
+    border: 1px solid #D0E2FF;
+  }
+
+  .highlight-box p { font-size: 9.5pt; margin: 0; color: #344054; }
+
+  @media print {
+    .page { width: 100%; }
+    .footer { position: absolute; bottom: 0.3in; left: 0.7in; right: 0.7in; }
+  }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1: Parties + WS1 -->
+<div class="page">
+  <div class="header">
+    <div class="header-left">
+      <h1>Calder Wheels</h1>
+      <div class="subtitle">Commerce &amp; Integration Platform Agreement</div>
+    </div>
+    <div class="header-right">
+      <strong>Prepared for:</strong> Ray Shadravan / Calder Wheels<br>
+      <strong>Prepared by:</strong> Cove Digital LLC<br>
+      <strong>Date:</strong> August 28, 2026
+    </div>
+  </div>
+
+  <p style="font-size:9.5pt; color:#667085; margin-bottom:20px;">
+    <strong style="color:#10162B;">Version:</strong> Final — for electronic signature via BoldSign
+  </p>
+
+  <h2>1. Parties</h2>
+  <p>This Agreement is entered into by and between:</p>
+  <div class="highlight-box">
+    <p><strong>Cove Digital LLC</strong> ("Provider") — a limited liability company providing digital commerce development and integration services.</p>
+    <p style="margin-top:6px;"><strong>Ray Shadravan</strong> on behalf of <strong>Calder Wheels</strong> ("Client") — a build-to-order wheel manufacturing company.</p>
+  </div>
+
+  <h2>2. Scope of Work</h2>
+  <p>The Provider will deliver a custom e-commerce and integration platform for Calder Wheels. The scope comprises two workstreams.</p>
+
+  <div class="workstream-card">
+    <h4>Workstream 1 — Commerce &amp; Dealer Platform <span class="ws-price">$11,750</span></h4>
+    <ul>
+      <li><strong>Shopify Storefront</strong> — Premium, photography-led, dark/luxury Calder-branded store. Homepage, wheel catalog, product pages, galleries, responsive mobile layout, customer accounts, checkout, SEO/AEO and analytics foundation.</li>
+      <li><strong>Wheel Configurator</strong> — 2D layered-image configurator: center finish × barrel/lip finish × hardware finish. Live visual preview, real-time price updating. Up to 5 initial wheel designs and 60 configuration combinations. Availability gate tied to Bill-of-Materials component stock. Vehicle-on-car visualizer excluded (Phase 2).</li>
+      <li><strong>Retail Ordering</strong> — Standard DTC flow: configure → price → cart → payment → order.</li>
+      <li><strong>Vehicle Fitment Finder</strong> — Year → Make → Model → Generation/Trim → compatible wheels. Never surface incompatible products. Manual curated database (ACES/PIES not included).</li>
+      <li><strong>Dealer / Wholesale Portal</strong> — Dealer login and approved accounts, tiered pricing, dealer-only products, MOQ enforcement, payment terms (Net-30, prepaid/card), order history and tracking, abstracted production status. Dashboard, Quick Order, Quote Management, Dealer Catalog, Application Form screens.</li>
+    </ul>
+  </div>
+
+  <p style="font-size:9pt; color:#667085; margin:-8px 0 0;"><strong>Phase 2 Exclusions:</strong> Vehicle-on-car visualizer, dealer commission/spiff engine, advanced loyalty/rewards, full CRM, AI sales assistant, large-scale rendering production.</p>
+
+  <div class="footer">
+    <span>CONFIDENTIAL — Calder Wheels Agreement</span>
+    <span>Page 1</span>
+  </div>
+</div>
+
+<!-- PAGE 2: WS2 + Architecture -->
+<div class="page">
+  <div class="workstream-card" style="margin-top:0;">
+    <h4>Workstream 2 — Systems Integration &amp; Automation <span class="ws-price">$4,250</span></h4>
+    <ul>
+      <li><strong>QuickBooks Integration Service</strong> — Web Connector setup, qbXML communication, authentication, queue management. Customer sync (Shopify → QuickBooks with duplicate protection).</li>
+      <li><strong>Accounting Transaction Creation</strong> — Order → QuickBooks invoice with customer, line items, SKU/item references, quantities, pricing, shipping, tax, and Shopify order reference.</li>
+      <li><strong>BOM/Component Mapping</strong> — Customer configuration decomposed into component recipe; BOM drives component deduction in QuickBooks.</li>
+      <li><strong>ShipStation Integration</strong> — Eligible order → ShipStation → label, tracking number, carrier, service pushed back to Shopify.</li>
+      <li><strong>Integration Reliability</strong> — Idempotency, duplicate prevention, retry logic, integration logs, error reporting, failed-job queue, exception handling.</li>
+    </ul>
+  </div>
+
+  <p style="font-size:9pt; color:#667085; margin:4px 0 20px;"><strong>Environment:</strong> Integration with Intuit QuickBooks Desktop Enterprise Solutions 24.0 (Windows) via QuickBooks Web Connector and qbXML SDK.</p>
+
+  <h2>3. Architecture &amp; System Boundaries</h2>
+  <p>The integration layer (n8n + custom ledger service) acts as the single orchestrator. A custom component ledger is the single source of truth for component quantities. Shopify and QuickBooks reflect this ledger.</p>
+
+  <table class="arch-table">
+    <tr><th>System</th><th>Role</th><th>Owns</th></tr>
+    <tr><td>Shopify</td><td>Commerce system of record</td><td>Storefront, products, configurator, checkout, payments, customer/dealer portals</td></tr>
+    <tr><td>QuickBooks Enterprise 24</td><td>Financial/inventory system of record</td><td>Accounting customers, invoices, items, financial inventory, COGS, payments</td></tr>
+    <tr><td>ShipStation</td><td>Shipping system of record</td><td>Shipments, carriers, services, labels, tracking</td></tr>
+    <tr><td>n8n / Cove layer</td><td>Orchestration</td><td>Data movement, BOM logic, available-to-build engine, workflow triggers, status translation, retry, exception routing</td></tr>
+  </table>
+
+  <p>No system independently decides what another system owns. The architecture supports adding a Production &amp; Fulfillment System (Workstream 3) later with zero redesign.</p>
+
+  <div class="footer">
+    <span>CONFIDENTIAL — Calder Wheels Agreement</span>
+    <span>Page 2</span>
+  </div>
+</div>
+
+<!-- PAGE 3: Timeline + Payment + Post-Launch -->
+<div class="page">
+  <h2 style="margin-top:0;">4. Timeline</h2>
+  <p><strong>Estimated: 10–12 weeks from kickoff and receipt of required product data and assets.</strong></p>
+
+  <table>
+    <tr><th style="width:100px;">Weeks</th><th>Primary Work</th></tr>
+    <tr><td>1–2</td><td>Final architecture, Shopify UX design, integration design</td></tr>
+    <tr><td>3–4</td><td>Shopify storefront + dealer portal foundation</td></tr>
+    <tr><td>4–6</td><td>Configurator + BOM implementation</td></tr>
+    <tr><td>6–8</td><td>QuickBooks Enterprise 24 integration</td></tr>
+    <tr><td>7–8</td><td>ShipStation + n8n workflows</td></tr>
+    <tr><td>8–10</td><td>Integration testing + exception handling</td></tr>
+    <tr><td>10–12</td><td>Beta testing, training, adjustments, launch</td></tr>
+  </table>
+
+  <p style="font-size:9.5pt; color:#667085;">Several streams can run concurrently. Configurator and QuickBooks integration, for example, do not depend on each other.</p>
+
+  <h2>5. Payment Terms</h2>
+  <h4>Fixed Price: $14,500</h4>
+
+  <table class="milestone-table">
+    <tr><th>Milestone</th><th>Amount</th><th>Status / Trigger</th></tr>
+    <tr><td>Kickoff</td><td>$4,350 (30%)</td><td><span class="paid-badge">Paid</span> — Agreement signed</td></tr>
+    <tr><td>Design &amp; System Approval</td><td>$4,350 (30%)</td><td>Architecture, UX mockups, system design approved</td></tr>
+    <tr><td>Functional Beta</td><td>$3,625 (25%)</td><td>Site, configurator, integrations live in staging</td></tr>
+    <tr><td>Production Launch</td><td>$2,175 (15%)</td><td>Final delivery, deployment, training complete</td></tr>
+  </table>
+
+  <p style="font-size:9pt;">The kickoff payment is non-refundable once discovery and design work begins. An alternative installment plan is available upon request: 25% deposit + $2,416.67 every two weeks for six payments. Invoices via Found, due within 15 days. Late payments may result in work suspension until cleared.</p>
+
+  <h2>6. Post-Launch</h2>
+  <p><strong>30 days of post-launch stabilization</strong> included at no charge — the Provider will fix any functionality within the approved scope that is not working correctly. This is not 30 days of free new features.</p>
+
+  <table>
+    <tr><th>Plan</th><th>Monthly</th><th>Hours</th><th>Best For</th></tr>
+    <tr><td>Care</td><td>$350</td><td>3</td><td>Basic website</td></tr>
+    <tr><td><strong>Commerce (Recommended)</strong></td><td><strong>$650</strong></td><td><strong>7</strong></td><td><strong>Shopify and catalog</strong></td></tr>
+    <tr><td>Additional time</td><td>$85/hr</td><td>—</td><td>Beyond monthly allowance</td></tr>
+  </table>
+
+  <p style="font-size:9.5pt;"><strong>New Wheel Models:</strong> Adding new wheel models — approximately $250–$650 depending on complexity, or deductible from maintenance hours.</p>
+
+  <div class="footer">
+    <span>CONFIDENTIAL — Calder Wheels Agreement</span>
+    <span>Page 3</span>
+  </div>
+</div>
+
+<!-- PAGE 4: Client Responsibilities + Scope Protections + IP + Confidentiality -->
+<div class="page">
+  <h2 style="margin-top:0;">7. Client Responsibilities</h2>
+  <p>The Client agrees to provide or arrange the following:</p>
+
+  <ol style="margin:8px 0 14px 20px; font-size:9.5pt; color:#344054; line-height:1.7;">
+    <li><strong>Product Renderings:</strong> Standardized product renderings for up to 5 initial wheel designs. The Provider will prepare and configure these for the configurator. Extensive photorealistic rendering libraries are separately scoped.</li>
+    <li><strong>QuickBooks Environment:</strong> Administrative access to a properly licensed and operational QuickBooks Desktop Enterprise Solutions 24.0 Windows environment and company file.</li>
+    <li><strong>Third-Party Subscriptions:</strong> Shopify plan (Plus or Advanced recommended), QuickBooks Desktop Enterprise 24.0 license, ShipStation account, n8n plan, and any apps/themes/services required for the platform.</li>
+    <li><strong>Product Data:</strong> Wheel designs, finishes, SKUs, pricing (retail and dealer tier), fitment specifications, and component inventory data.</li>
+    <li><strong>Brand Assets:</strong> Logo, brand colors, fonts, and existing brand guidelines.</li>
+    <li><strong>Access:</strong> Appropriate access to Shopify admin, QuickBooks environment, domain/DNS management, and relevant systems.</li>
+    <li><strong>Timely Review:</strong> Timely feedback and approvals on deliverables to keep the project on schedule.</li>
+  </ol>
+
+  <h2>8. Scope Protections</h2>
+
+  <div class="scope-item">
+    <strong>1. QuickBooks Environment Assumption.</strong> The quoted integration assumes Calder provides administrative access to a properly licensed and operational QuickBooks Desktop Enterprise Solutions 24.0 environment. Windows server/hosting migration, QuickBooks repair, company-file remediation, connector replacement, network remediation, and data cleanup are outside scope.
+  </div>
+
+  <div class="scope-item">
+    <strong>2. Rendering Allowance.</strong> Calder supplies standardized product renderings (up to 5 designs, 60 combinations). Extensive photorealistic rendering libraries are separately scoped.
+  </div>
+
+  <div class="scope-item">
+    <strong>3. Third-Party Platform Changes.</strong> If Shopify, QuickBooks, ShipStation, or n8n significantly change their APIs, pricing, or capabilities during the project, scope and timeline may need adjustment. The Provider will notify the Client promptly.
+  </div>
+
+  <div class="scope-item">
+    <strong>4. Fitment Data.</strong> The fitment finder uses a manual curated database. ACES/PIES data licensing and integration is not included.
+  </div>
+
+  <h2>9. Intellectual Property</h2>
+  <p>Upon full payment, the Client owns all custom code, configurations, designs, and deliverables created specifically for this project. The Provider retains the right to reuse general-purpose code, libraries, and patterns in other projects, and to display completed work in portfolios and case studies (excluding confidential financial data).</p>
+
+  <h2>10. Confidentiality</h2>
+  <p>Both parties agree to keep confidential all proprietary business information, financial data, system credentials, and trade secrets shared during the engagement. This obligation survives termination of the Agreement.</p>
+
+  <div class="footer">
+    <span>CONFIDENTIAL — Calder Wheels Agreement</span>
+    <span>Page 4</span>
+  </div>
+</div>
+
+<!-- PAGE 5: Liability + Termination + Relationship + Acceptance + Signatures -->
+<div class="page">
+  <h2 style="margin-top:0;">11. Limitation of Liability</h2>
+  <p>The Provider's total liability under this Agreement is limited to the total fees paid by the Client. The Provider is not liable for damages arising from third-party platform failures, losses from incorrect product data supplied by the Client, or consequential, indirect, or incidental damages. The Provider is not liable for data loss where the Client has not maintained adequate backups.</p>
+
+  <h2>12. Termination</h2>
+  <p>Either party may terminate this Agreement with 14 days written notice. In the event of termination, the Client pays for all work completed up to the termination date based on the milestone payment schedule. The Provider delivers all work product completed to date upon payment. The kickoff payment is non-refundable.</p>
+
+  <h2>13. Relationship Disclosure</h2>
+  <p>This project (Calder Wheels) is a separate engagement from the E5 Wheels Automation project. The two are independent engagements with independent scopes, timelines, and deliverables.</p>
+
+  <div class="signature-section">
+    <h2 style="border:none; margin-top:0;">14. Acceptance</h2>
+    <p style="margin-bottom:16px;">By signing below, both parties acknowledge they have read, understood, and agree to the terms of this Agreement.</p>
+
+    <div class="signature-grid">
+      <div class="signature-col">
+        <h4>Client — Calder Wheels</h4>
+
+        <div class="sig-field">Signature</div>
+        <div class="sig-line"></div>
+
+        <div class="sig-field">Name <span>Ray Shadravan</span></div>
+        <div class="sig-line" style="height:0; border-bottom-width:1px; margin:4px 0 12px;"></div>
+
+        <div class="sig-field">Title <span>Owner</span></div>
+        <div class="sig-line" style="height:0; border-bottom-width:1px; margin:4px 0 12px;"></div>
+
+        <div class="sig-field">Date</div>
+        <div class="sig-line" style="height:0; border-bottom-width:1px; margin:4px 0 12px;"></div>
+      </div>
+
+      <div class="signature-col">
+        <h4>Service Provider — Cove Digital LLC</h4>
+
+        <div class="sig-field">Signature</div>
+        <div class="sig-line"></div>
+
+        <div class="sig-field">Name</div>
+        <div class="sig-line" style="height:0; border-bottom-width:1px; margin:4px 0 12px;"></div>
+
+        <div class="sig-field">Title</div>
+        <div class="sig-line" style="height:0; border-bottom-width:1px; margin:4px 0 12px;"></div>
+
+        <div class="sig-field">Date</div>
+        <div class="sig-line" style="height:0; border-bottom-width:1px; margin:4px 0 12px;"></div>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top:30px; padding-top:16px; border-top:1px solid #E5E9F0; text-align:center; font-size:8pt; color:#98A2B3;">
+    Cove Digital LLC &bull; info@covedigitalworks.com<br>
+    Calder Wheels — Commerce &amp; Integration Platform Agreement &bull; August 28, 2026
+  </div>
+
+  <div class="footer">
+    <span>CONFIDENTIAL — Calder Wheels Agreement</span>
+    <span>Page 5</span>
+  </div>
+</div>
+
+</body>
+</html>

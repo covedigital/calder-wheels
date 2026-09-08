@@ -1,0 +1,817 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Calder Wheels Dealer Portal Mockups</title>
+  <style>
+    :root {
+      --bg: #07090a;
+      --panel: #0d1012;
+      --panel-2: #11161a;
+      --line: rgba(255,255,255,.08);
+      --line-2: rgba(255,255,255,.12);
+      --text: #c9cdd2;
+      --muted: #87919a;
+      --heading: #f4f4f2;
+      --accent: #d7b35f;
+      --accent-soft: rgba(215,179,95,.14);
+      --good: #59c36a;
+      --warn: #d8a84f;
+      --bad: #d26464;
+      --radius: 18px;
+      --radius-sm: 12px;
+      --shadow: 0 20px 60px rgba(0,0,0,.35);
+      --font: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --font-display: "Georgia", "Times New Roman", serif;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; background: radial-gradient(circle at top, #14181d 0, var(--bg) 55%); color: var(--text); font-family: var(--font); }
+    body { line-height: 1.45; }
+    a { color: inherit; text-decoration: none; }
+    .page {
+      width: min(1440px, calc(100vw - 32px));
+      margin: 24px auto 48px;
+    }
+    .intro {
+      display: grid;
+      gap: 16px;
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
+      box-shadow: var(--shadow);
+      margin-bottom: 24px;
+    }
+    .intro h1 {
+      margin: 0;
+      font: 700 32px/1.05 var(--font-display);
+      color: var(--heading);
+      letter-spacing: -.02em;
+    }
+    .intro p { margin: 0; max-width: 88ch; color: var(--text); }
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 34px;
+      padding: 0 12px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.02);
+      font-size: 13px;
+      color: var(--text);
+    }
+    .chip strong { color: var(--heading); font-weight: 600; }
+    .screen {
+      margin-top: 24px;
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      overflow: hidden;
+      background: var(--bg);
+      box-shadow: var(--shadow);
+    }
+    .window {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--line);
+      background: rgba(255,255,255,.03);
+    }
+    .dot { width: 12px; height: 12px; border-radius: 50%; }
+    .dot.red { background: #ff5f57; }
+    .dot.yellow { background: #febc2e; }
+    .dot.green { background: #28c840; }
+    .window .bar {
+      margin-left: 18px;
+      flex: 1;
+      height: 34px;
+      border-radius: 10px;
+      background: rgba(255,255,255,.05);
+      border: 1px solid var(--line);
+      display: grid;
+      place-items: center;
+      color: #aeb4ba;
+      font-size: 13px;
+    }
+    .canvas {
+      display: grid;
+      gap: 18px;
+      padding: 18px;
+      background:
+        radial-gradient(circle at top left, rgba(215,179,95,.08), transparent 40%),
+        linear-gradient(180deg, rgba(255,255,255,.01), rgba(255,255,255,0));
+    }
+    .portal-shell {
+      display: grid;
+      grid-template-columns: 250px 1fr;
+      min-height: 760px;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      overflow: hidden;
+      background: rgba(255,255,255,.015);
+    }
+    .sidebar {
+      padding: 18px 14px;
+      border-right: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+      color: var(--heading);
+    }
+    .mark {
+      width: 36px; height: 36px; border-radius: 12px;
+      display: grid; place-items: center;
+      background: linear-gradient(180deg, rgba(215,179,95,.22), rgba(215,179,95,.08));
+      color: var(--accent);
+      border: 1px solid rgba(215,179,95,.28);
+      font-weight: 700;
+    }
+    .brand strong { display: block; font-size: 14px; letter-spacing: .12em; text-transform: uppercase; }
+    .brand span { display: block; font-size: 11px; letter-spacing: .2em; color: var(--muted); }
+    .nav { display: grid; gap: 6px; }
+    .nav a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-height: 44px;
+      padding: 0 14px;
+      border-radius: 12px;
+      color: var(--text);
+      border: 1px solid transparent;
+      font-size: 14px;
+    }
+    .nav a.active {
+      background: var(--accent-soft);
+      border-color: rgba(215,179,95,.28);
+      color: var(--heading);
+    }
+    .help {
+      margin-top: 24px;
+      padding: 14px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.02);
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .main {
+      padding: 24px;
+      display: grid;
+      gap: 18px;
+    }
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .title h2 {
+      margin: 0 0 8px;
+      color: var(--heading);
+      font: 700 28px/1.05 var(--font-display);
+      letter-spacing: -.02em;
+    }
+    .title p { margin: 0; color: var(--muted); }
+    .badges { display: flex; gap: 10px; flex-wrap: wrap; }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 0 14px;
+      border-radius: 999px;
+      border: 1px solid var(--line-2);
+      color: var(--heading);
+      background: rgba(255,255,255,.02);
+      font-size: 13px;
+    }
+    .badge.accent { border-color: rgba(215,179,95,.45); color: var(--accent); background: rgba(215,179,95,.08); }
+    .grid-4, .grid-3, .grid-2 { display: grid; gap: 14px; }
+    .grid-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.015));
+      padding: 18px;
+      min-height: 110px;
+    }
+    .card h3, .card h4 {
+      margin: 0 0 10px;
+      color: var(--heading);
+      font-size: 17px;
+      font-weight: 600;
+    }
+    .stat {
+      display: grid;
+      gap: 8px;
+    }
+    .stat .value { font-size: 28px; color: var(--heading); font-weight: 700; letter-spacing: -.02em; }
+    .stat .label { font-size: 13px; color: var(--muted); }
+    .actions {
+      display: grid;
+      gap: 10px;
+    }
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 0 16px;
+      border-radius: 12px;
+      border: 1px solid var(--line-2);
+      background: rgba(255,255,255,.03);
+      color: var(--heading);
+      font-weight: 600;
+      font-size: 14px;
+    }
+    .button.primary {
+      background: linear-gradient(180deg, rgba(215,179,95,.98), rgba(195,156,69,.96));
+      color: #15120a;
+      border-color: transparent;
+    }
+    .button.ghost { background: transparent; }
+    .button.link {
+      justify-content: flex-start;
+      padding-left: 0;
+      border: 0;
+      color: var(--accent);
+      background: transparent;
+      min-height: auto;
+    }
+    .table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+    .table th, .table td {
+      text-align: left;
+      padding: 14px 12px;
+      border-bottom: 1px solid var(--line);
+      vertical-align: middle;
+    }
+    .table th { color: var(--muted); font-weight: 500; text-transform: none; }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 0 10px;
+      border-radius: 999px;
+      border: 1px solid var(--line-2);
+      background: rgba(255,255,255,.02);
+      color: var(--text);
+    }
+    .pill.good { color: var(--good); border-color: rgba(89,195,106,.3); background: rgba(89,195,106,.1); }
+    .pill.warn { color: var(--warn); border-color: rgba(216,168,79,.3); background: rgba(216,168,79,.1); }
+    .pill.bad { color: var(--bad); border-color: rgba(210,100,100,.3); background: rgba(210,100,100,.1); }
+    .mini-list { display: grid; gap: 10px; }
+    .rowline {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--line);
+      font-size: 14px;
+    }
+    .rowline:last-child { border-bottom: 0; }
+    .rowline .right { color: var(--heading); font-weight: 600; }
+    .split {
+      display: grid;
+      gap: 18px;
+      grid-template-columns: 1.45fr .95fr;
+    }
+    .quote-grid {
+      display: grid;
+      grid-template-columns: 1.55fr 1fr;
+      gap: 18px;
+    }
+    .landing {
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 18px;
+      align-items: stretch;
+    }
+    .hero {
+      min-height: 320px;
+      padding: 24px;
+      display: grid;
+      align-content: space-between;
+      border-radius: 22px;
+      border: 1px solid var(--line);
+      background:
+        radial-gradient(circle at top right, rgba(215,179,95,.16), transparent 38%),
+        linear-gradient(135deg, rgba(255,255,255,.04), rgba(255,255,255,.01));
+    }
+    .hero h3 {
+      margin: 0 0 12px;
+      font: 700 58px/0.98 var(--font-display);
+      color: var(--heading);
+      letter-spacing: -.03em;
+      max-width: 11ch;
+    }
+    .hero p { margin: 0; max-width: 58ch; color: var(--text); }
+    .hero .cta-row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 18px; }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 20px;
+    }
+    .icon-card {
+      padding: 16px;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.02);
+    }
+    .icon-card strong { display: block; color: var(--heading); margin-bottom: 6px; }
+    .status-panel {
+      display: grid;
+      gap: 18px;
+      padding: 24px;
+      border: 1px solid rgba(215,179,95,.28);
+      border-radius: 22px;
+      background: linear-gradient(180deg, rgba(215,179,95,.08), rgba(255,255,255,.02));
+    }
+    .timeline {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      align-items: start;
+    }
+    .step {
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .step .bubble {
+      width: 44px;
+      height: 44px;
+      margin: 0 auto 10px;
+      border-radius: 50%;
+      border: 2px solid var(--line-2);
+      display: grid;
+      place-items: center;
+      color: var(--heading);
+    }
+    .step.active .bubble { border-color: var(--accent); color: var(--accent); background: rgba(215,179,95,.08); }
+    .step.done .bubble { border-color: var(--good); color: var(--good); background: rgba(89,195,106,.08); }
+    .small { font-size: 12px; color: var(--muted); }
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .field {
+      display: grid;
+      gap: 8px;
+    }
+    .field label { font-size: 13px; color: var(--muted); }
+    .input, .select, .textarea {
+      width: 100%;
+      min-height: 44px;
+      padding: 0 14px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      color: var(--heading);
+      font: inherit;
+    }
+    .textarea { min-height: 110px; padding-top: 12px; }
+    .mockup-label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 12px;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+    .screen + .screen { margin-top: 28px; }
+    .section-note {
+      padding: 0 18px 18px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    @media (max-width: 1180px) {
+      .portal-shell { grid-template-columns: 1fr; }
+      .sidebar { border-right: 0; border-bottom: 1px solid var(--line); }
+      .grid-4, .grid-3, .grid-2, .split, .quote-grid, .landing, .hero-grid { grid-template-columns: 1fr; }
+      .title h2 { font-size: 24px; }
+      .hero h3 { font-size: 42px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="intro">
+      <h1>Calder Wheels Dealer Portal Mockups</h1>
+      <p>
+        Machine-readable source package for the dealer portal screens. This file is intentionally structured as
+        semantic HTML so a local agent can parse layout, component hierarchy, labels, and content without needing
+        image viewing support.
+      </p>
+      <div class="meta">
+        <span class="chip"><strong>Use</strong> Shopify theme implementation reference</span>
+        <span class="chip"><strong>System</strong> Lumia-inspired dark/luxury dealer portal</span>
+        <span class="chip"><strong>Screens</strong> Dashboard, Quick Order, Quotes / Payment Terms, Dealer Landing / Pending</span>
+      </div>
+    </section>
+
+    <section class="screen" id="dashboard">
+      <div class="window">
+        <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+        <div class="bar">dealer.calderwheels.com/account</div>
+      </div>
+      <div class="canvas">
+        <div class="portal-shell">
+          <aside class="sidebar">
+            <div class="brand">
+              <div class="mark">CW</div>
+              <div>
+                <strong>Calder Wheels</strong>
+                <span>Dealer Portal</span>
+              </div>
+            </div>
+            <nav class="nav" aria-label="Dealer sections">
+              <a class="active" href="#dashboard">Dashboard</a>
+              <a href="#quick-order">Quick Order</a>
+              <a href="#quotes">Quotes</a>
+              <a href="#landing">Dealer Program</a>
+              <a href="#landing">Application Status</a>
+            </nav>
+            <div class="help">
+              Need help? <br>dealer-support@calderwheels.com
+            </div>
+          </aside>
+          <section class="main">
+            <div class="topbar">
+              <div class="title">
+                <h2>Dealer Dashboard</h2>
+                <p>Wholesale account overview, activity, and quick actions.</p>
+              </div>
+              <div class="badges">
+                <span class="badge accent">Tier 2</span>
+                <span class="badge">NET-30</span>
+                <span class="badge">Account Status: In Good Standing</span>
+              </div>
+            </div>
+
+            <div class="grid-3">
+              <div class="card stat">
+                <div class="label">Open Orders</div>
+                <div class="value">5</div>
+                <div class="small">$18,746.00</div>
+              </div>
+              <div class="card stat">
+                <div class="label">Pending Quotes</div>
+                <div class="value">3</div>
+                <div class="small">$9,350.00</div>
+              </div>
+              <div class="card stat">
+                <div class="label">YTD Spend</div>
+                <div class="value">$128,540</div>
+                <div class="small">2025 total</div>
+              </div>
+            </div>
+
+            <div class="split">
+              <div class="card">
+                <h3>Recent Orders</h3>
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>PO#</th><th>Order Date</th><th>Status</th><th>Items</th><th>Total</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>DMX-5125</td><td>May 12, 2025</td><td><span class="pill good">Shipped</span></td><td>8</td><td>$6,842</td></tr>
+                    <tr><td>DMX-5108</td><td>May 5, 2025</td><td><span class="pill">Processing</span></td><td>6</td><td>$4,356</td></tr>
+                    <tr><td>DMX-5091</td><td>Apr 28, 2025</td><td><span class="pill warn">Backordered</span></td><td>4</td><td>$2,948</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="card">
+                <h3>Quick Actions</h3>
+                <div class="actions">
+                  <a class="button primary" href="#quick-order">Browse Catalog</a>
+                  <a class="button ghost" href="#quick-order">Quick Order</a>
+                  <a class="button ghost" href="#quotes">Request Quote</a>
+                  <a class="button link" href="#landing">Download Guide</a>
+                </div>
+              </div>
+            </div>
+
+            <div class="grid-2">
+              <div class="card">
+                <h3>Pending Quotes</h3>
+                <div class="mini-list">
+                  <div class="rowline"><span>Q-0521 · May 14, 2025</span><span class="right">New</span></div>
+                  <div class="rowline"><span>Q-0520 · May 13, 2025</span><span class="right">Sent</span></div>
+                  <div class="rowline"><span>Q-0517 · May 9, 2025</span><span class="right">Review</span></div>
+                </div>
+              </div>
+              <div class="card">
+                <h3>Account Summary</h3>
+                <div class="mini-list">
+                  <div class="rowline"><span>Dealer Name</span><span class="right">Downtown Motorworks</span></div>
+                  <div class="rowline"><span>Credit Limit</span><span class="right">$75,000.00</span></div>
+                  <div class="rowline"><span>Available Credit</span><span class="right">$34,250.00</span></div>
+                  <div class="rowline"><span>Payment Terms</span><span class="right">NET-30</span></div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+      <div class="section-note">Screen 1: dealer dashboard / account hub</div>
+    </section>
+
+    <section class="screen" id="quick-order">
+      <div class="window">
+        <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+        <div class="bar">dealer.calderwheels.com/account?view=quick-order</div>
+      </div>
+      <div class="canvas">
+        <div class="portal-shell">
+          <aside class="sidebar">
+            <div class="brand">
+              <div class="mark">CW</div>
+              <div><strong>Calder Wheels</strong><span>Dealer Portal</span></div>
+            </div>
+            <nav class="nav" aria-label="Dealer sections">
+              <a href="#dashboard">Dashboard</a>
+              <a class="active" href="#quick-order">Quick Order</a>
+              <a href="#quotes">Quotes</a>
+              <a href="#landing">Dealer Program</a>
+            </nav>
+          </aside>
+          <section class="main">
+            <div class="topbar">
+              <div class="title">
+                <h2>Quick Order</h2>
+                <p>SKU-based entry with wholesale pricing and PO reference.</p>
+              </div>
+              <div class="badges">
+                <span class="badge accent">Tier 2</span>
+                <span class="badge">NET-30</span>
+              </div>
+            </div>
+
+            <div class="grid-2">
+              <div class="card">
+                <div class="form-grid">
+                  <div class="field">
+                    <label>PO #</label>
+                    <input class="input" value="DMX-052025-17" aria-label="PO number">
+                  </div>
+                  <div class="field">
+                    <label>Shipping Address</label>
+                    <input class="input" value="Downtown Motorworks - Main Warehouse" aria-label="Shipping address">
+                  </div>
+                </div>
+              </div>
+              <div class="card">
+                <h3>Order Summary</h3>
+                <div class="mini-list">
+                  <div class="rowline"><span>Items</span><span class="right">$650.00</span></div>
+                  <div class="rowline"><span>Subtotal</span><span class="right">$650.00</span></div>
+                  <div class="rowline"><span>Estimated Total</span><span class="right">$650.00</span></div>
+                </div>
+                <div class="card" style="margin-top:14px;padding:14px;">
+                  <div class="small">Payment Terms</div>
+                  <div style="font-size:20px;color:var(--heading);font-weight:700;margin:6px 0;">NET-30</div>
+                  <div class="small">Invoices are due 30 days from invoice date.</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <h3>Line Items</h3>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>SKU / Search</th><th>Size</th><th>Finish</th><th>Qty</th><th>Unit Price</th><th>Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>RS-10-2012-GB<br><span class="small">RS10 Flow Form Wheel</span></td>
+                    <td>20x12</td><td>Gloss Black</td><td>2</td><td>$325.00</td><td>$650.00</td>
+                  </tr>
+                  <tr>
+                    <td><span class="small">Search SKU or product name</span></td>
+                    <td>Select size</td><td>Select finish</td><td>1</td><td>—</td><td>—</td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="mockup-label">
+                <span>Add Line / Import CSV</span>
+                <span>Notes field and submit controls below in implementation</span>
+              </div>
+            </div>
+
+            <div class="grid-2">
+              <a class="button primary" href="#quick-order">Submit Order</a>
+              <a class="button ghost" href="#quick-order">Save as Draft</a>
+            </div>
+          </section>
+        </div>
+      </div>
+      <div class="section-note">Screen 2: wholesale quick order / PO entry</div>
+    </section>
+
+    <section class="screen" id="quotes">
+      <div class="window">
+        <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+        <div class="bar">dealer.calderwheels.com/account/quotes</div>
+      </div>
+      <div class="canvas">
+        <div class="portal-shell">
+          <aside class="sidebar">
+            <div class="brand">
+              <div class="mark">CW</div>
+              <div><strong>Calder Wheels</strong><span>Dealer Portal</span></div>
+            </div>
+            <nav class="nav" aria-label="Dealer sections">
+              <a href="#dashboard">Dashboard</a>
+              <a href="#quick-order">Quick Order</a>
+              <a class="active" href="#quotes">Quotes</a>
+              <a href="#landing">Payment Terms</a>
+            </nav>
+          </aside>
+          <section class="main">
+            <div class="topbar">
+              <div class="title">
+                <h2>My Quotes</h2>
+                <p>Review, approve, convert, or expire wholesale quote requests.</p>
+              </div>
+              <div class="badges">
+                <span class="badge accent">Tier 2 Dealer</span>
+                <span class="badge">NET-30</span>
+                <span class="badge">Outstanding Balance: $18,746.00</span>
+              </div>
+            </div>
+
+            <div class="quote-grid">
+              <div class="card">
+                <div class="form-grid" style="grid-template-columns: 1.1fr .7fr .7fr .35fr;">
+                  <div class="field"><label>Search</label><input class="input" value="Search by quote #, reference, or item..."></div>
+                  <div class="field"><label>Status</label><input class="input" value="All Statuses"></div>
+                  <div class="field"><label>Date Range</label><input class="input" value="Last 90 Days"></div>
+                  <div class="field"><label>&nbsp;</label><input class="input" value="Filters"></div>
+                </div>
+                <table class="table" style="margin-top:12px;">
+                  <thead>
+                    <tr>
+                      <th>Quote #</th><th>Date</th><th>Valid Until</th><th>Reference / Project</th><th>Items</th><th>Total</th><th>Status</th><th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>Q-0521</td><td>May 14, 2025</td><td>May 28, 2025</td><td>BMW M5 Build</td><td>9</td><td>$5,210.00</td><td><span class="pill warn">Pending</span></td><td>View</td></tr>
+                    <tr><td>Q-0520</td><td>May 13, 2025</td><td>May 27, 2025</td><td>Porsche 992</td><td>4</td><td>$2,180.00</td><td><span class="pill good">Approved</span></td><td>View / Convert</td></tr>
+                    <tr><td>Q-0517</td><td>May 9, 2025</td><td>May 23, 2025</td><td>Audi RS6</td><td>6</td><td>$1,960.00</td><td><span class="pill warn">Pending</span></td><td>View / Approve</td></tr>
+                    <tr><td>Q-0510</td><td>May 5, 2025</td><td>May 19, 2025</td><td>Mercedes C63</td><td>8</td><td>$4,875.00</td><td><span class="pill">Converted</span></td><td>Order #</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="card">
+                <h3>Payment Terms</h3>
+                <div class="badge accent" style="margin-bottom:12px;">NET-30</div>
+                <div class="mini-list">
+                  <div class="rowline"><span>Credit Limit</span><span class="right">$75,000.00</span></div>
+                  <div class="rowline"><span>Outstanding Balance</span><span class="right">$18,746.00</span></div>
+                  <div class="rowline"><span>Available Credit</span><span class="right" style="color:var(--good)">$34,250.00</span></div>
+                  <div class="rowline"><span>Credit Usage</span><span class="right">54%</span></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="grid-2">
+              <div class="card">
+                <h3>Outstanding Invoices</h3>
+                <table class="table">
+                  <thead>
+                    <tr><th>Invoice #</th><th>Date</th><th>Due Date</th><th>Amount</th><th>Status</th><th>Actions</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>INV-1423</td><td>May 2, 2025</td><td>Jun 1, 2025</td><td>$8,920.00</td><td><span class="pill bad">Overdue</span></td><td>View / Pay Now</td></tr>
+                    <tr><td>INV-1401</td><td>Apr 2, 2025</td><td>May 2, 2025</td><td>$9,826.00</td><td><span class="pill bad">Overdue</span></td><td>View / Pay Now</td></tr>
+                    <tr><td>INV-1380</td><td>Mar 3, 2025</td><td>Apr 2, 2025</td><td>$0.00</td><td><span class="pill good">Paid</span></td><td>View Invoice</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="card">
+                <h3>Payment History</h3>
+                <table class="table">
+                  <thead>
+                    <tr><th>Date Paid</th><th>Invoice #</th><th>Method</th><th>Amount</th><th>Status</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>Apr 28, 2025</td><td>INV-1361</td><td>ACH Transfer</td><td>$7,450.00</td><td><span class="pill good">Successful</span></td></tr>
+                    <tr><td>Mar 31, 2025</td><td>INV-1340</td><td>ACH Transfer</td><td>$6,875.00</td><td><span class="pill good">Successful</span></td></tr>
+                    <tr><td>Feb 28, 2025</td><td>INV-1318</td><td>ACH Transfer</td><td>$5,960.00</td><td><span class="pill good">Successful</span></td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+      <div class="section-note">Screen 3: quotes management plus payment terms / invoices</div>
+    </section>
+
+    <section class="screen" id="landing">
+      <div class="window">
+        <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+        <div class="bar">dealer.calderwheels.com/dealer-program</div>
+      </div>
+      <div class="canvas">
+        <div class="landing">
+          <div class="hero">
+            <div>
+              <div class="badge accent" style="display:inline-flex;margin-bottom:14px;">Exclusive Wholesale Program</div>
+              <h3>Become a Dealer</h3>
+              <p>
+                Join Calder Wheels and get wholesale access to premium wheels, tiered pricing,
+                dealer-only resources, and NET-30 payment terms for approved accounts.
+              </p>
+              <div class="cta-row">
+                <a class="button primary" href="#landing">Apply Now</a>
+                <a class="button ghost" href="#landing">Log In to Account</a>
+              </div>
+            </div>
+            <div class="hero-grid">
+              <div class="icon-card">
+                <strong>Wholesale Access</strong>
+                <div class="small">Exclusive pricing and inventory for approved dealers.</div>
+              </div>
+              <div class="icon-card">
+                <strong>Tiered Pricing</strong>
+                <div class="small">Volume-based discounts that grow with your business.</div>
+              </div>
+              <div class="icon-card">
+                <strong>Dealer-Only Catalog</strong>
+                <div class="small">Access exclusive wheels, new releases, and private offers.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="status-panel">
+            <div>
+              <div class="badge" style="margin-bottom:10px;">Application Under Review</div>
+              <h3 style="margin:0 0 8px;font:700 26px/1.05 var(--font-display);color:var(--heading);">Pending Approval</h3>
+              <p style="margin:0;color:var(--text);">
+                Thanks for applying to the Calder Wheels dealer program. Your information is being reviewed
+                and you’ll receive an email once approved.
+              </p>
+            </div>
+            <div class="timeline" aria-label="Application review timeline">
+              <div class="step done">
+                <div class="bubble">✓</div>
+                <div>Submitted</div>
+                <div class="small">May 14, 2025</div>
+              </div>
+              <div class="step active">
+                <div class="bubble">◐</div>
+                <div>In Review</div>
+                <div class="small">1-2 business days</div>
+              </div>
+              <div class="step">
+                <div class="bubble">3</div>
+                <div>Approved</div>
+                <div class="small">Next step</div>
+              </div>
+            </div>
+            <div class="grid-2">
+              <div class="card" style="padding:14px;">
+                <div class="small">Review ETA</div>
+                <div style="color:var(--heading);font-size:20px;font-weight:700;margin-top:6px;">1-2 Business Days</div>
+              </div>
+              <div class="card" style="padding:14px;">
+                <div class="small">Status Note</div>
+                <div style="margin-top:6px;">You will receive an email once your application has been approved.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="section-note">Screen 4: dealer landing page and pending approval state</div>
+    </section>
+  </main>
+</body>
+</html>

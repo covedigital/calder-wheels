@@ -1,0 +1,49 @@
+{% comment %}
+  Calder Wheels — Dealer Pending Status Interstitial
+  Shown on /account for dealers whose application is pending review.
+  Usage: {% render 'dealer-pending' %}
+  Requires: dealer-context rendered before this snippet.
+{% endcomment %}
+
+{%- liquid
+  render 'dealer-context'
+-%}
+
+{%- if dealer_pending -%}
+<div class="dealer-pending" style="max-width:600px;margin:40px auto;padding:40px 20px;text-align:center">
+  <div style="font-size:48px;margin-bottom:16px;opacity:0.5">&#9679;</div>
+  <h2 style="color:var(--heading-color);margin-bottom:8px">Application Pending Review</h2>
+  <p style="color:var(--text-color);opacity:0.7;margin-bottom:24px;line-height:1.6">
+    Thank you for applying to the Calder Wheels dealer program.<br>
+    Your application is currently under review by our team.
+  </p>
+
+  <div class="dp-card dp-card--pad" style="text-align:left;padding:24px;margin-bottom:24px">
+    <h3 style="font-size:0.95rem;color:var(--heading-color);margin:0 0 16px">What to expect:</h3>
+    <div style="display:grid;gap:12px">
+      <div style="display:flex;gap:12px;align-items:start">
+        <span style="color:var(--dp-accent);font-weight:700">1.</span>
+        <span style="color:var(--text-color);font-size:0.9rem">Our team reviews your application within 2 business days</span>
+      </div>
+      <div style="display:flex;gap:12px;align-items:start">
+        <span style="color:var(--dp-accent);font-weight:700">2.</span>
+        <span style="color:var(--text-color);font-size:0.9rem">You receive an email notification with your approval status</span>
+      </div>
+      <div style="display:flex;gap:12px;align-items:start">
+        <span style="color:var(--dp-accent);font-weight:700">3.</span>
+        <span style="color:var(--text-color);font-size:0.9rem">Once approved, you'll get access to dealer pricing, NET-30 terms, and the full dealer portal</span>
+      </div>
+    </div>
+  </div>
+
+  <div style="display:flex;justify-content:center;gap:12px;flex-wrap:wrap">
+    <a href="/pages/dealer-program" class="dp-btn dp-btn--ghost" style="padding:12px 24px;border-radius:8px;border:1px solid var(--dp-line);color:var(--text-color);text-decoration:none">Back to Program</a>
+    <a href="/" class="dp-btn dp-btn--primary" style="padding:12px 24px;border-radius:8px;background:var(--dp-accent);color:var(--dp-accent-text);text-decoration:none">Browse Catalog</a>
+  </div>
+</div>
+{%- endif -%}
+
+<style>
+  .dp-btn--primary:hover { opacity:0.9; }
+  .dp-btn--ghost:hover { background:var(--dp-line); }
+</style>

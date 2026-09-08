@@ -1,0 +1,59 @@
+{% comment %}
+  Calder Wheels — Admin Approval Workflow
+  Deployed via Shopify Admin. No Liquid file needed — operates via
+  customer tags and metafields set through the admin panel.
+
+  ## Dealer Application to Approval Flow:
+
+  1. Customer submits application via /pages/dealer-apply form
+  2. The form POSTs to /apps/calder/dealer-apply (middleware webhook)
+  3. Middleware tags the customer with 'dealer-applied'
+  4. Admin reviews in Shopify Admin → Customers → filter by tag 'dealer-applied'
+
+  ## Manual Approval Steps (Admin):
+
+  Apply these tags to approve a dealer:
+
+    dealer-approved     (required — gates all dealer functionality)
+    dealer-tier-1      (required — 1=standard, 2=premium, 3=platinum)
+    dealer-net-30       (optional — enables NET-30 payment terms)
+    dealer-tax-exempt   (optional — tax exemption)
+
+  ## Metafields to set on the customer:
+
+    credit_limit       (number)   — e.g. 50000
+    credit_used        (number)   — e.g. 0
+    outstanding_balance (number)  — e.g. 0
+    past_due           (number)   — e.g. 0
+    account_status     (string)   — 'active', 'frozen', 'suspended'
+    default_moq        (integer)  — default minimum order quantity
+    quotes             (json)     — array of quote objects
+    invoices           (json)     — array of invoice objects
+
+  ## Tag-based permission matrix:
+
+    Tag                          Effect
+    ─────────────────────────────────────────────────────────
+    dealer-approved              enables all dealer sections
+    dealer-tier-1                dealer-price shows Tier 1 pricing
+    dealer-tier-2                dealer-price shows Tier 2 pricing
+    dealer-tier-3                dealer-price shows Tier 3 pricing
+    dealer-net-30                enables NET-30 payment terms
+    dealer-tax-exempt            hides tax at checkout
+    dealer-applied               shows pending interstitial
+    dealer-only (on product)     hides from non-dealer customers
+
+  ## Metafield namespace: custom (default)
+
+    custom.is_configurable        (true/false)
+    custom.design_code            (string)  — e.g. "201"
+    custom.design_nickname        (string)  — e.g. "Apex"
+    custom.series                 (string)  — 'forged', 'flow_formed', 'three_piece'
+    custom.dealer_only            (true/false)
+    custom.dealer_moq             (integer)
+    custom.dealer_tier_1_price    (money)
+    custom.dealer_tier_2_price    (money)
+    custom.dealer_tier_3_price    (money)
+    custom.bom                    (json)    — component BOM definition
+    custom.variant_map            (json)    — config key → variant ID mapping
+{% endcomment %}

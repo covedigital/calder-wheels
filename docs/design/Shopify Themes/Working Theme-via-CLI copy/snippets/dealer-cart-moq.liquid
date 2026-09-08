@@ -1,0 +1,79 @@
+{% comment %}
+  Calder Wheels — Dealer Cart MOQ Validation
+  Renders after cart items in header-cart and main-cart-items.
+  Checks each line item against its MOQ metafield and blocks checkout
+  until all MOQ violations are resolved.
+  Usage: {% render 'dealer-cart-moq', cart: cart %}
+{% endcomment %}
+
+{%- liquid
+  render 'dealer-context'
+  unless is_dealer
+    break
+  endunless
+
+  render 'dealer-credit'
+
+  assign moq_violations = 0
+  assign unfulfilled_items = '' | split: ','
+-%}
+
+{% for item in cart.items %}
+  {% assign item_moq = item.product.metafields.custom.dealer_moq | default: 1 | plus: 0 %}
+  {% if item.quantity < item_moq %}
+    {% assign moq_violations = moq_violations | plus: 1 %}
+    {% assign violation_info = item.product.title | append: '||' | append: item_moq | append: '||' | append: item.quantity | append: '||' | append: item.variant_id | append: '||' | append: forloop.index %}
+    {% assign unfulfilled_items = unfulfilled_items | push: violation_info %}
+  {% endif %}
+{% endfor %}
+
+{% if moq_violations > 0 %}
+  <div class="dealer-moq-warnings" id="dealer-moq-warnings">
+    {% for violation in unfulfilled_items %}
+      {% assign parts = violation | split: '||' %}
+      <div class="dealer-moq-warning" data-line-item="{{ parts[4] }}">
+        <span class="dealer-moq-warning__icon">&#9888;</span>
+        <span class="dealer-moq-warning__text">
+          <strong>{{ parts[0] }}</strong>: Minimum order quantity is {{ parts[1] }}. You have {{ parts[2] }}.
+          <button type="button" class="dealer-moq-warning__fix-btn js-update-moq" data-variant-id="{{ parts[3] }}" data-quantity="{{ parts[1] }}" data-line="{{ parts[4] }}">
+            Update to {{ parts[1] }}
+          </button>
+        </span>
+      </div>
+    {% endfor %}
+    <div class="dealer-moq-warning__notice">
+      Some items do not meet minimum order quantities. Checkout is blocked until resolved.
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var checkoutBtn = document.querySelector('[name="checkout"], .checkout-btn, #checkout, button[type="submit"][name="checkout"]');
+      if (checkoutBtn) {
+        checkoutBtn.disabled = true;
+        checkoutBtn.style.opacity = '0.5';
+        checkoutBtn.style.cursor = 'not-allowed';
+        checkoutBtn.title = 'Resolve minimum order quantity violations before checkout';
+      }
+
+      var fixBtns = document.querySelectorAll('.js-update-moq');
+      for (var i = 0; i < fixBtns.length; i++) {
+        fixBtns[i].addEventListener('click', function () {
+          var variantId = this.dataset.variantId;
+          var qty = parseInt(this.dataset.quantity, 10);
+          var line = parseInt(this.dataset.line, 10);
+
+          var xhr = new XMLHttpRequest();
+          xhr.open('POST', window.routes.cart_change_url, true);
+          xhr.setRequestHeader('Content-Type', 'application/json');
+          xhr.onload = function () {
+            if (xhr.status === 200) {
+              window.location.reload();
+            }
+          };
+          xhr.send(JSON.stringify({ id: variantId, quantity: qty, line: line }));
+        });
+      }
+    });
+  </script>
+{% endif %}

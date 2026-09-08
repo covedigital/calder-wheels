@@ -1,0 +1,467 @@
+[
+  {
+    "handle": "apex-201",
+    "title": "Apex 201 \u2014 3-Piece Forged",
+    "metafields": {
+      "is_configurable": true,
+      "design_code": "201",
+      "design_nickname": "Apex",
+      "series": "three_piece",
+      "dealer_moq": 1,
+      "dealer_tier_1_price": 1015.0,
+      "dealer_tier_2_price": 955.0,
+      "dealer_tier_3_price": 895.0,
+      "dealer_only": false,
+      "lead_time_days": 10,
+      "bom": {
+        "components": [
+          {
+            "id": "BK",
+            "name": "Gloss Black",
+            "client_code": "bk",
+            "type": "center",
+            "category": "standard",
+            "unit_cost": 150.0,
+            "retail_price": 400.0,
+            "image": "design-201-center-bk.png"
+          },
+          {
+            "id": "BKUTI",
+            "name": "Black Titanium",
+            "client_code": "bkuti",
+            "type": "center",
+            "category": "premium",
+            "unit_cost": 180.0,
+            "retail_price": 480.0,
+            "image": "design-201-center-bkuti.png"
+          },
+          {
+            "id": "SU",
+            "name": "Satin Silver",
+            "client_code": "su",
+            "type": "center",
+            "category": "standard",
+            "unit_cost": 160.0,
+            "retail_price": 420.0,
+            "image": "design-201-center-su.png"
+          },
+          {
+            "id": "BK",
+            "name": "Black",
+            "client_code": "bk",
+            "type": "barrel",
+            "category": "standard",
+            "unit_cost": 120.0,
+            "retail_price": 300.0,
+            "image": "design-201-barrel-bk.png"
+          },
+          {
+            "id": "POLISH",
+            "name": "Polished",
+            "client_code": "polish",
+            "type": "barrel",
+            "category": "premium",
+            "unit_cost": 140.0,
+            "retail_price": 350.0,
+            "image": "design-201-barrel-polish.png"
+          },
+          {
+            "id": "BK",
+            "name": "Black Bolts",
+            "client_code": "bk",
+            "type": "hardware",
+            "category": "standard",
+            "unit_cost": 12.0,
+            "retail_price": 30.0,
+            "image": "design-201-bolt-bk.png"
+          },
+          {
+            "id": "CHROME",
+            "name": "Chrome Bolts",
+            "client_code": "chrome",
+            "type": "hardware",
+            "category": "chrome",
+            "unit_cost": 15.0,
+            "retail_price": 35.0,
+            "image": "design-201-bolt-chrome.png"
+          }
+        ]
+      },
+      "variant_map": {
+        "_note": "Populated after Shopify product creation with variant IDs"
+      }
+    }
+  },
+  {
+    "handle": "vertex-202",
+    "title": "Vertex 202 \u2014 3-Piece Forged",
+    "metafields": {
+      "is_configurable": true,
+      "design_code": "202",
+      "design_nickname": "Vertex",
+      "series": "three_piece",
+      "dealer_moq": 1,
+      "dealer_tier_1_price": 1015.0,
+      "dealer_tier_2_price": 955.0,
+      "dealer_tier_3_price": 895.0,
+      "dealer_only": false,
+      "lead_time_days": 10,
+      "bom": {
+        "components": [
+          {
+            "id": "BK",
+            "name": "Gloss Black",
+            "client_code": "bk",
+            "type": "center",
+            "category": "standard",
+            "unit_cost": 150.0,
+            "retail_price": 400.0,
+            "image": "design-202-center-bk.png"
+          },
+          {
+            "id": "BKUTI",
+            "name": "Black Titanium",
+            "client_code": "bkuti",
+            "type": "center",
+            "category": "premium",
+            "unit_cost": 180.0,
+            "retail_price": 480.0,
+            "image": "design-202-center-bkuti.png"
+          },
+          {
+            "id": "SU",
+            "name": "Satin Silver",
+            "client_code": "su",
+            "type": "center",
+            "category": "standard",
+            "unit_cost": 160.0,
+            "retail_price": 420.0,
+            "image": "design-202-center-su.png"
+          },
+          {
+            "id": "BK",
+            "name": "Black",
+            "client_code": "bk",
+            "type": "barrel",
+            "category": "standard",
+            "unit_cost": 120.0,
+            "retail_price": 300.0,
+            "image": "design-202-barrel-bk.png"
+          },
+          {
+            "id": "POLISH",
+            "name": "Polished",
+            "client_code": "polish",
+            "type": "barrel",
+            "category": "premium",
+            "unit_cost": 140.0,
+            "retail_price": 350.0,
+            "image": "design-202-barrel-polish.png"
+          },
+          {
+            "id": "BK",
+            "name": "Black Bolts",
+            "client_code": "bk",
+            "type": "hardware",
+            "category": "standard",
+            "unit_cost": 12.0,
+            "retail_price": 30.0,
+            "image": "design-202-bolt-bk.png"
+          },
+          {
+            "id": "CHROME",
+            "name": "Chrome Bolts",
+            "client_code": "chrome",
+            "type": "hardware",
+            "category": "chrome",
+            "unit_cost": 15.0,
+            "retail_price": 35.0,
+            "image": "design-202-bolt-chrome.png"
+          }
+        ]
+      },
+      "variant_map": {
+        "_note": "Populated after Shopify product creation with variant IDs"
+      }
+    }
+  },
+  {
+    "handle": "striker-203",
+    "title": "Striker 203 \u2014 3-Piece Forged",
+    "metafields": {
+      "is_configurable": true,
+      "design_code": "203",
+      "design_nickname": "Striker",
+      "series": "three_piece",
+      "dealer_moq": 1,
+      "dealer_tier_1_price": 1015.0,
+      "dealer_tier_2_price": 955.0,
+      "dealer_tier_3_price": 895.0,
+      "dealer_only": false,
+      "lead_time_days": 10,
+      "bom": {
+        "components": [
+          {
+            "id": "BK",
+            "name": "Gloss Black",
+            "client_code": "bk",
+            "type": "center",
+            "category": "standard",
+            "unit_cost": 150.0,
+            "retail_price": 400.0,
+            "image": "design-203-center-bk.png"
+          },
+          {
+            "id": "BKUTI",
+            "name": "Black Titanium",
+            "client_code": "bkuti",
+            "type": "center",
+            "category": "premium",
+            "unit_cost": 180.0,
+            "retail_price": 480.0,
+            "image": "design-203-center-bkuti.png"
+          },
+          {
+            "id": "SU",
+            "name": "Satin Silver",
+            "client_code": "su",
+            "type": "center",
+            "category": "standard",
+            "unit_cost": 160.0,
+            "retail_price": 420.0,
+            "image": "design-203-center-su.png"
+          },
+          {
+            "id": "BK",
+            "name": "Black",
+            "client_code": "bk",
+            "type": "barrel",
+            "category": "standard",
+            "unit_cost": 120.0,
+            "retail_price": 300.0,
+            "image": "design-203-barrel-bk.png"
+          },
+          {
+            "id": "POLISH",
+            "name": "Polished",
+            "client_code": "polish",
+            "type": "barrel",
+            "category": "premium",
+            "unit_cost": 140.0,
+            "retail_price": 350.0,
+            "image": "design-203-barrel-polish.png"
+          },
+          {
+            "id": "BK",
+            "name": "Black Bolts",
+            "client_code": "bk",
+            "type": "hardware",
+            "category": "standard",
+            "unit_cost": 12.0,
+            "retail_price": 30.0,
+            "image": "design-203-bolt-bk.png"
+          },
+          {
+            "id": "CHROME",
+            "name": "Chrome Bolts",
+            "client_code": "chrome",
+            "type": "hardware",
+            "category": "chrome",
+            "unit_cost": 15.0,
+            "retail_price": 35.0,
+            "image": "design-203-bolt-chrome.png"
+          }
+        ]
+      },
+      "variant_map": {
+        "_note": "Populated after Shopify product creation with variant IDs"
+      }
+    }
+  },
+  {
+    "handle": "turbine-205",
+    "title": "Turbine 205 \u2014 3-Piece Forged",
+    "metafields": {
+      "is_configurable": true,
+      "design_code": "205",
+      "design_nickname": "Turbine",
+      "series": "three_piece",
+      "dealer_moq": 1,
+      "dealer_tier_1_price": 1015.0,
+      "dealer_tier_2_price": 955.0,
+      "dealer_tier_3_price": 895.0,
+      "dealer_only": false,
+      "lead_time_days": 10,
+      "bom": {
+        "components": [
+          {
+            "id": "BK",
+            "name": "Gloss Black",
+            "client_code": "bk",
+            "type": "center",
+            "category": "standard",
+            "unit_cost": 150.0,
+            "retail_price": 400.0,
+            "image": "design-205-center-bk.png"
+          },
+          {
+            "id": "BKUTI",
+            "name": "Black Titanium",
+            "client_code": "bkuti",
+            "type": "center",
+            "category": "premium",
+            "unit_cost": 180.0,
+            "retail_price": 480.0,
+            "image": "design-205-center-bkuti.png"
+          },
+          {
+            "id": "SU",
+            "name": "Satin Silver",
+            "client_code": "su",
+            "type": "center",
+            "category": "standard",
+            "unit_cost": 160.0,
+            "retail_price": 420.0,
+            "image": "design-205-center-su.png"
+          },
+          {
+            "id": "BK",
+            "name": "Black",
+            "client_code": "bk",
+            "type": "barrel",
+            "category": "standard",
+            "unit_cost": 120.0,
+            "retail_price": 300.0,
+            "image": "design-205-barrel-bk.png"
+          },
+          {
+            "id": "POLISH",
+            "name": "Polished",
+            "client_code": "polish",
+            "type": "barrel",
+            "category": "premium",
+            "unit_cost": 140.0,
+            "retail_price": 350.0,
+            "image": "design-205-barrel-polish.png"
+          },
+          {
+            "id": "BK",
+            "name": "Black Bolts",
+            "client_code": "bk",
+            "type": "hardware",
+            "category": "standard",
+            "unit_cost": 12.0,
+            "retail_price": 30.0,
+            "image": "design-205-bolt-bk.png"
+          },
+          {
+            "id": "CHROME",
+            "name": "Chrome Bolts",
+            "client_code": "chrome",
+            "type": "hardware",
+            "category": "chrome",
+            "unit_cost": 15.0,
+            "retail_price": 35.0,
+            "image": "design-205-bolt-chrome.png"
+          }
+        ]
+      },
+      "variant_map": {
+        "_note": "Populated after Shopify product creation with variant IDs"
+      }
+    }
+  },
+  {
+    "handle": "vortex-207",
+    "title": "Vortex 207 \u2014 3-Piece Forged",
+    "metafields": {
+      "is_configurable": true,
+      "design_code": "207",
+      "design_nickname": "Vortex",
+      "series": "three_piece",
+      "dealer_moq": 1,
+      "dealer_tier_1_price": 1015.0,
+      "dealer_tier_2_price": 955.0,
+      "dealer_tier_3_price": 895.0,
+      "dealer_only": false,
+      "lead_time_days": 10,
+      "bom": {
+        "components": [
+          {
+            "id": "BK",
+            "name": "Gloss Black",
+            "client_code": "bk",
+            "type": "center",
+            "category": "standard",
+            "unit_cost": 150.0,
+            "retail_price": 400.0,
+            "image": "design-207-center-bk.png"
+          },
+          {
+            "id": "BKUTI",
+            "name": "Black Titanium",
+            "client_code": "bkuti",
+            "type": "center",
+            "category": "premium",
+            "unit_cost": 180.0,
+            "retail_price": 480.0,
+            "image": "design-207-center-bkuti.png"
+          },
+          {
+            "id": "SU",
+            "name": "Satin Silver",
+            "client_code": "su",
+            "type": "center",
+            "category": "standard",
+            "unit_cost": 160.0,
+            "retail_price": 420.0,
+            "image": "design-207-center-su.png"
+          },
+          {
+            "id": "BK",
+            "name": "Black",
+            "client_code": "bk",
+            "type": "barrel",
+            "category": "standard",
+            "unit_cost": 120.0,
+            "retail_price": 300.0,
+            "image": "design-207-barrel-bk.png"
+          },
+          {
+            "id": "POLISH",
+            "name": "Polished",
+            "client_code": "polish",
+            "type": "barrel",
+            "category": "premium",
+            "unit_cost": 140.0,
+            "retail_price": 350.0,
+            "image": "design-207-barrel-polish.png"
+          },
+          {
+            "id": "BK",
+            "name": "Black Bolts",
+            "client_code": "bk",
+            "type": "hardware",
+            "category": "standard",
+            "unit_cost": 12.0,
+            "retail_price": 30.0,
+            "image": "design-207-bolt-bk.png"
+          },
+          {
+            "id": "CHROME",
+            "name": "Chrome Bolts",
+            "client_code": "chrome",
+            "type": "hardware",
+            "category": "chrome",
+            "unit_cost": 15.0,
+            "retail_price": 35.0,
+            "image": "design-207-bolt-chrome.png"
+          }
+        ]
+      },
+      "variant_map": {
+        "_note": "Populated after Shopify product creation with variant IDs"
+      }
+    }
+  }
+]

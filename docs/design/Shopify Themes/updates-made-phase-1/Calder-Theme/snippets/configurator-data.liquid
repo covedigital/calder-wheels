@@ -1,0 +1,52 @@
+{% comment %}
+  Calder Wheels — Configurator Data Provider
+  Injects resolved component data + image URLs as JS globals.
+  Trailing commas are valid in JS (not JSON), so this is simpler and more reliable.
+  Usage: {% render 'configurator-data', product: product %}
+{% endcomment %}
+
+{%- liquid
+  assign bom_json = product.metafields.custom.bom.value
+  assign components = bom_json.components | default: bom_json
+  assign design_code = product.metafields.custom.design_code.value | default: product.handle | split: '-' | last
+  assign variant_map = product.metafields.custom.variant_map.value | default: product.metafields.custom.config_map.value
+  assign lead_time = product.metafields.custom.lead_time_days.value | default: 10
+-%}
+
+<script id="configurator-data-{{ section.id }}">
+window._calderProductComponents = {
+  product_id: {{ product.id }},
+  base_price: {{ product.price }},
+  lead_time_days: {{ lead_time }},
+  variant_map: {{ variant_map | json }},
+  components: {
+    center: [
+{%- for c in components -%}
+  {%- if c.type == 'center' -%}
+      {id:{{ c.id | json }},name:{{ c.name | json }},client_code:{{ c.client_code | json }},type:'center',category:{{ c.category | json }},unit_cost:{{ c.unit_cost }},retail_price:{{ c.retail_price }},image:{{ c.image | default: '' | asset_url | json }},available:true},
+  {%- endif -%}
+{%- endfor -%}
+    ],
+    barrel: [
+{%- for c in components -%}
+  {%- if c.type == 'barrel' -%}
+      {id:{{ c.id | json }},name:{{ c.name | json }},client_code:{{ c.client_code | json }},type:'barrel',category:{{ c.category | json }},unit_cost:{{ c.unit_cost }},retail_price:{{ c.retail_price }},image:{{ c.image | default: '' | asset_url | json }},available:true},
+  {%- endif -%}
+{%- endfor -%}
+    ],
+    hardware: [
+{%- for c in components -%}
+  {%- if c.type == 'hardware' -%}
+      {id:{{ c.id | json }},name:{{ c.name | json }},client_code:{{ c.client_code | json }},type:'hardware',category:{{ c.category | json }},unit_cost:{{ c.unit_cost }},retail_price:{{ c.retail_price }},image:{{ c.image | default: '' | asset_url | json }},available:true},
+  {%- endif -%}
+{%- endfor -%}
+    ]
+  }
+};
+</script>
+
+{%- assign _ab = 'x' | asset_url | split: 'x' | first -%}
+<script>
+window._calderDesignCode = window._calderDesignCode || '{{ design_code }}';
+window.CALDER_ASSET_BASE = window.CALDER_ASSET_BASE || '{{ _ab }}';
+</script>

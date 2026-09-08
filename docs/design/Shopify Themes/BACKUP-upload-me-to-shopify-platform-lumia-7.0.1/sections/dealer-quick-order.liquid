@@ -1,0 +1,377 @@
+{% comment %}
+  Calder Wheels — Dealer Quick Order
+  Matches dealer-portal-mockups-exact.html Quick Order screen.
+  SKU-based fast order entry with line items, order summary, and NET-30 terms.
+{% endcomment %}
+
+{%- liquid
+  render 'dealer-context'
+  unless is_dealer
+    echo '<!-- not a dealer — quick order hidden -->'
+    break
+  endunless
+
+  render 'dealer-credit'
+
+  assign section_id = section.id
+-%}
+
+<div class="dp-root dealer-portal" id="dealer-quick-order-{{ section_id }}">
+  {% render 'dealer-sidebar' %}
+
+  <section class="dealer-portal__main">
+    <div class="dp-top-row">
+      <div class="dp-hero-title">
+        <h2>Quick Order</h2>
+        <p>Enter items quickly by SKU to add to your order.</p>
+      </div>
+      <div class="dp-pills">
+        <span class="dp-pill dp-pill--accent">Tier {{ dealer_tier | default: 1 }}</span>
+        {%- if dealer_net_terms -%}
+          <span class="dp-pill">NET-30</span>
+        {%- endif -%}
+      </div>
+    </div>
+
+    <div class="dp-qo-grid" data-quick-order>
+      <div>
+        <div class="dp-card dp-card--pad" style="margin-bottom:14px">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:end">
+            <div class="dp-field">
+              <label for="qo-po-{{ section_id }}">PO #</label>
+              <input type="text" class="dp-input" id="qo-po-{{ section_id }}" name="po_number" placeholder="Your internal PO reference" data-po-input>
+              <div class="dp-field__hint">Your PO will appear on the invoice.</div>
+            </div>
+            <div class="dp-field">
+              <label for="qo-address-{{ section_id }}">Shipping Address</label>
+              <div class="dp-select" id="qo-address-{{ section_id }}">
+                {%- if customer.default_address -%}
+                  {{ customer.default_address.company | default: customer.default_address.address1 | truncate: 35 }}
+                {%- else -%}
+                  Select shipping address
+                {%- endif -%}
+                <span aria-hidden="true">&#8964;</span>
+              </div>
+              <a href="{{ routes.account_addresses_url }}" class="dp-card__link" style="font-size:14px;margin-top:2px">Manage Addresses</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="dp-card dp-table-wrap" data-line-items>
+          <div class="dp-card__head">
+            <h3>Line Items</h3>
+          </div>
+          <table class="dp-table" data-line-items-table>
+            <thead>
+              <tr>
+                <th>SKU / Search</th>
+                <th>Size</th>
+                <th>Finish</th>
+                <th>Qty</th>
+                <th>Unit Price</th>
+                <th>Total</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr data-line-item="0">
+                <td>
+                  <input type="text" class="dp-input" placeholder="Search SKU or product name" style="min-width:160px" data-sku-search>
+                  <div class="dp-table__muted" style="margin-top:2px;display:none" data-sku-title></div>
+                </td>
+                <td>
+                  <div class="dp-select" style="min-width:100px">
+                    <select class="dp-input" data-size-select style="border:0;background:transparent;padding:0;appearance:none;-webkit-appearance:none">
+                      <option value="">Select size</option>
+                      <option value="18x9.5">18x9.5</option>
+                      <option value="18x10">18x10</option>
+                      <option value="19x9.5">19x9.5</option>
+                      <option value="19x10">19x10</option>
+                      <option value="20x10">20x10</option>
+                      <option value="20x11">20x11</option>
+                      <option value="20x12">20x12</option>
+                      <option value="22x10">22x10</option>
+                      <option value="22x11">22x11</option>
+                    </select>
+                  </div>
+                </td>
+                <td>
+                  <div class="dp-select" style="min-width:120px">
+                    <select class="dp-input" data-finish-select style="border:0;background:transparent;padding:0;appearance:none;-webkit-appearance:none">
+                      <option value="">Select finish</option>
+                      <option value="gloss-black">Gloss Black</option>
+                      <option value="matte-black">Matte Black</option>
+                      <option value="polished">Polished</option>
+                      <option value="brushed">Brushed</option>
+                      <option value="chrome">Chrome</option>
+                      <option value="gold">Gold</option>
+                      <option value="gunmetal">Gunmetal</option>
+                    </select>
+                  </div>
+                </td>
+                <td>
+                  <div class="dp-qty">
+                    <button type="button" data-qty-minus aria-label="Decrease quantity">&#8722;</button>
+                    <span data-qty-value>1</span>
+                    <button type="button" data-qty-plus aria-label="Increase quantity">+</button>
+                  </div>
+                </td>
+                <td data-unit-price>—</td>
+                <td data-line-total>—</td>
+                <td>
+                  <button type="button" class="dp-btn dp-btn--ghost dp-btn--sm" data-remove-line aria-label="Remove line" style="padding:0 8px;min-height:32px">&#10005;</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-top:14px">
+            <div class="dp-pills">
+              <button type="button" class="dp-pill dp-pill--accent" data-add-line style="height:40px">+ Add Line</button>
+              <button type="button" class="dp-pill" style="height:40px">Import CSV</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="dp-card dp-card--pad" style="margin-top:14px">
+          <h3 class="dp-card__title" style="margin:0 0 12px">Notes</h3>
+          <textarea class="dp-textarea" placeholder="Add any notes or special instructions for your order..." maxlength="500" data-order-notes></textarea>
+          <div style="display:flex;justify-content:flex-end;color:var(--text-color-light);font-size:13px;margin-top:6px">0 / 500</div>
+        </div>
+      </div>
+
+      <div>
+        <div class="dp-card dp-order-summary">
+          <h3 class="dp-card__title">Order Summary</h3>
+          <div class="dp-order-summary__line">
+            <span>Items (1)</span>
+            <span>$650.00</span>
+          </div>
+          <div class="dp-order-summary__line">
+            <span>Subtotal</span>
+            <span>$650.00</span>
+          </div>
+          <div class="dp-order-summary__line">
+            <span>Freight</span>
+            <span>—</span>
+          </div>
+          <div class="dp-order-summary__line">
+            <span>Taxes</span>
+            <span>{% if dealer_tax_exempt %}Exempt{% else %}Calculated at checkout{% endif %}</span>
+          </div>
+          <div class="dp-order-summary__line dp-order-summary__line--total">
+            <span>Estimated Total</span>
+            <span>$650.00</span>
+          </div>
+
+          <div class="dp-order-summary__block">
+            <div class="dp-order-summary__block-title">Payment Terms</div>
+            <div class="dp-order-summary__block-value">
+              {% if dealer_net_terms %}NET-30{% else %}Payment at Checkout{% endif %}
+            </div>
+            <div class="dp-table__muted" style="margin-top:4px">
+              {% if dealer_net_terms %}
+                Invoices are due 30 days from invoice date.
+              {% else %}
+                Card payment required at order confirmation.
+              {% endif %}
+            </div>
+          </div>
+
+          <div class="dp-order-summary__block">
+            <div class="dp-order-summary__block-title">Credit Available</div>
+            <div class="dp-order-summary__block-value dp-order-summary__block-value--good">{{ available_credit | money }}</div>
+            <div class="dp-table__muted" style="margin-top:2px">of {{ credit_limit | money }} limit</div>
+            <div class="dp-progress"><span style="width:{{ credit_usage_pct }}%"></span></div>
+          </div>
+
+          <div class="dp-order-summary__block">
+            <div class="dp-order-summary__block-title">Account Status</div>
+            <div>
+              {{ account_status | capitalize | replace: 'Active', 'In Good Standing' }}
+              <span class="dp-status-dot"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="dp-cta-stack" style="margin-top:14px">
+          <button type="button" class="dp-btn dp-btn--primary dp-btn--full" data-submit-order>Submit Order</button>
+          <button type="button" class="dp-btn dp-btn--ghost dp-btn--full" data-save-draft>Save as Draft</button>
+        </div>
+        <div class="dp-table__muted" style="text-align:center;margin-top:10px">
+          Orders are reviewed before confirmation.<br>You will receive an email confirmation.
+        </div>
+      </div>
+    </div>
+
+    <div class="dp-footer">
+      <div>&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. All rights reserved.</div>
+      <div class="dp-footer__links">
+        <a href="{{ routes.account_url }}">Dealer Portal</a>
+        <a href="/policies/terms-of-service">Terms & Conditions</a>
+        <a href="/policies/privacy-policy">Privacy Policy</a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var container = document.getElementById('dealer-quick-order-{{ section_id }}');
+    if (!container) return;
+    initQuickOrder(container);
+  });
+
+  function initQuickOrder(container) {
+    var addLineBtn = container.querySelector('[data-add-line]');
+    var tbody = container.querySelector('[data-line-items-table] tbody');
+
+    addLineBtn && addLineBtn.addEventListener('click', function() {
+      var rowCount = tbody.querySelectorAll('tr').length;
+      var template = tbody.querySelector('tr').cloneNode(true);
+      template.setAttribute('data-line-item', rowCount);
+
+      var inputs = template.querySelectorAll('input, select');
+      inputs.forEach(function(input) {
+        if (input.tagName === 'INPUT') input.value = '';
+        if (input.tagName === 'SELECT') input.selectedIndex = 0;
+      });
+
+      var qtySpan = template.querySelector('[data-qty-value]');
+      if (qtySpan) qtySpan.textContent = '1';
+
+      var unitPrice = template.querySelector('[data-unit-price]');
+      if (unitPrice) unitPrice.textContent = '—';
+
+      var lineTotal = template.querySelector('[data-line-total]');
+      if (lineTotal) lineTotal.textContent = '—';
+
+      var title = template.querySelector('[data-sku-title]');
+      if (title) { title.textContent = ''; title.style.display = 'none'; }
+
+      tbody.appendChild(template);
+      bindLineItemEvents(template, container);
+    });
+
+    tbody.querySelectorAll('tr').forEach(function(row) {
+      bindLineItemEvents(row, container);
+    });
+
+    function bindLineItemEvents(row, container) {
+      var minus = row.querySelector('[data-qty-minus]');
+      var plus = row.querySelector('[data-qty-plus]');
+      var qtyVal = row.querySelector('[data-qty-value]');
+      var removeBtn = row.querySelector('[data-remove-line]');
+
+      minus && minus.addEventListener('click', function() {
+        var val = parseInt(qtyVal.textContent, 10) || 0;
+        if (val > 1) { qtyVal.textContent = val - 1; updateTotals(container); }
+      });
+
+      plus && plus.addEventListener('click', function() {
+        var val = parseInt(qtyVal.textContent, 10) || 0;
+        qtyVal.textContent = val + 1;
+        updateTotals(container);
+      });
+
+      removeBtn && removeBtn.addEventListener('click', function() {
+        var rows = tbody.querySelectorAll('tr');
+        if (rows.length > 1) {
+          row.remove();
+          updateTotals(container);
+        }
+      });
+
+      var skuSearch = row.querySelector('[data-sku-search]');
+      skuSearch && skuSearch.addEventListener('input', function() {
+        var title = row.querySelector('[data-sku-title]');
+        if (title && this.value.length > 2) {
+          title.textContent = 'Searching...';
+          title.style.display = 'block';
+        }
+      });
+
+      var sizeSelect = row.querySelector('[data-size-select]');
+      var finishSelect = row.querySelector('[data-finish-select]');
+      sizeSelect && sizeSelect.addEventListener('change', function() { updateTotals(container); });
+      finishSelect && finishSelect.addEventListener('change', function() { updateTotals(container); });
+    }
+
+    function updateTotals(container) {
+      var itemCount = tbody.querySelectorAll('tr').length;
+      var summaryLines = container.querySelectorAll('.dp-order-summary__line span:last-child');
+      var orderSummary = container.querySelector('.dp-order-summary');
+      if (orderSummary) {
+        var lines = orderSummary.querySelectorAll('.dp-order-summary__line');
+        if (lines[0]) lines[0].querySelectorAll('span')[1].textContent = 'Items (' + itemCount + ')';
+      }
+    }
+
+    var submitBtn = container.querySelector('[data-submit-order]');
+    submitBtn && submitBtn.addEventListener('click', function() {
+      if (typeof DealerBackend !== 'undefined' && DealerBackend.submitOrder) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Submitting...';
+
+        var poInput = container.querySelector('[data-po-input]');
+        var orderNotes = container.querySelector('[data-order-notes]');
+        var lineItems = DealerBackend.collectLineItems(container);
+        var estimatedTotal = 0;
+        lineItems.forEach(function(li) { estimatedTotal += li.quantity * 650; });
+
+        DealerBackend.submitOrder({
+          container: container,
+          poNumber: poInput ? poInput.value : '',
+          notes: orderNotes ? orderNotes.value : '',
+          estimatedTotal: estimatedTotal
+        }, function(result) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Submit Order';
+
+          if (result.success) {
+            var msg = result.itemCount + ' item(s) added.';
+            if (result.redirect) {
+              msg += ' Redirecting to your order...';
+              setTimeout(function() { window.location.href = result.redirect; }, 1200);
+            }
+            alert(msg);
+          } else {
+            alert('Order cannot be submitted: ' + (result.error || 'Unknown error'));
+            if (result.moq_errors) {
+              var moqMsg = 'MOQ violations:\n';
+              result.moq_errors.forEach(function(e) {
+                moqMsg += '- ' + e.sku + ': need ' + e.required + ', have ' + e.actual + '\n';
+              });
+              alert(moqMsg);
+            }
+          }
+        });
+      } else {
+        alert('Order submission system is loading. Please try again.');
+      }
+    });
+
+    var saveDraftBtn = container.querySelector('[data-save-draft]');
+    saveDraftBtn && saveDraftBtn.addEventListener('click', function() {
+      var poInput = container.querySelector('[data-po-input]');
+      var orderNotes = container.querySelector('[data-order-notes]');
+      var lineItems = DealerBackend ? DealerBackend.collectLineItems(container) : [];
+      var draftData = {
+        po_number: poInput ? poInput.value : '',
+        notes: orderNotes ? orderNotes.value : '',
+        line_items: lineItems,
+        saved_at: new Date().toISOString()
+      };
+      localStorage.setItem('calder_dealer_draft_' + '{{ customer.id }}', JSON.stringify(draftData));
+      alert('Order saved as draft. You can resume from this page later.');
+    });
+  }
+</script>
+
+{% schema %}
+{
+  "name": "Dealer Quick Order",
+  "tag": "section",
+  "class": "section section--dealer-quick-order",
+  "settings": []
+}
+{% endschema %}

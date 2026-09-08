@@ -1,0 +1,71 @@
+{% comment %}
+  Calder Wheels — Dealer Credit Engine
+  Reads customer metafields for credit limits, outstanding balance, and account status.
+  Computes available credit dynamically. Ensures orders don't exceed credit limits.
+  Usage: {% render 'dealer-credit' %}
+  Requires: dealer-context rendered before this snippet.
+{% endcomment %}
+
+{%- liquid
+  render 'dealer-context'
+  unless is_dealer
+    echo '<!-- dealer-credit skipped — not a dealer -->'
+  endunless
+-%}
+
+{% if is_dealer %}
+{%- liquid
+  assign credit_limit = customer.metafields.custom.credit_limit.value | default: 50000.00 | plus: 0
+  assign credit_used = customer.metafields.custom.credit_used.value | default: 0 | plus: 0
+  assign outstanding_balance = customer.metafields.custom.outstanding_balance.value | default: 0 | plus: 0
+  assign past_due = customer.metafields.custom.past_due.value | default: 0 | plus: 0
+  assign account_status = customer.metafields.custom.account_status.value | default: 'active'
+
+  assign available_credit = credit_limit | minus: credit_used
+  if available_credit < 0
+    assign available_credit = 0
+  endif
+
+  assign credit_usage_pct = credit_used | times: 100 | divided_by: credit_limit
+  if credit_usage_pct > 100
+    assign credit_usage_pct = 100
+  endif
+
+  if account_status == 'frozen' or account_status == 'suspended'
+    assign can_order = false
+    assign reason = 'Account is ' | append: account_status
+  elsif past_due > 0
+    assign can_order = false
+    assign reason = 'Account has past-due balance of ' | append: past_due | money
+  elsif available_credit <= 0 and dealer_net_terms
+    assign can_order = false
+    assign reason = 'Credit limit reached'
+  else
+    assign can_order = true
+    assign reason = ''
+  endif
+
+  assign is_net_terms = dealer_net_terms
+  assign is_prepaid = false
+  unless dealer_net_terms
+    assign is_prepaid = true
+  endunless
+-%}
+
+<script type="application/json" id="dealer-credit-data-{{ section.id }}">
+{
+  "credit_limit": {{ credit_limit | json }},
+  "credit_used": {{ credit_used | json }},
+  "available_credit": {{ available_credit | json }},
+  "outstanding_balance": {{ outstanding_balance | json }},
+  "past_due": {{ past_due | json }},
+  "credit_usage_pct": {{ credit_usage_pct | json }},
+  "account_status": {{ account_status | json }},
+  "can_order": {{ can_order | json }},
+  "reason": {{ reason | json }},
+  "is_net_terms": {{ is_net_terms | json }},
+  "is_prepaid": {{ is_prepaid | json }},
+  "dealer_tier": {{ dealer_tier | json }}
+}
+</script>
+{% endif %}

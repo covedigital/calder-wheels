@@ -1,0 +1,305 @@
+{% comment %}
+  Calder Wheels — Dealer Quotes with Payment Terms
+  Matches dealer-portal-mockups-exact.html Quotes screen.
+  Quote table with status filters, payment terms panel, outstanding invoices, payment history.
+{% endcomment %}
+
+{%- liquid
+  render 'dealer-context'
+  unless is_dealer
+    echo '<!-- not a dealer — quotes hidden -->'
+    break
+  endunless
+
+  render 'dealer-credit'
+
+  assign section_id = section.id
+-%}
+
+<div class="dp-root dealer-portal" id="dealer-quotes-{{ section_id }}">
+  {% render 'dealer-sidebar' %}
+
+  <section class="dealer-portal__main">
+    <div class="dp-top-row">
+      <div class="dp-hero-title">
+        <h2>My Quotes</h2>
+        <p>Create, review, and manage your quotes.</p>
+      </div>
+      <div style="display:grid;gap:10px;justify-items:end">
+        <div class="dp-pills">
+          <span class="dp-pill dp-pill--accent">Tier {{ dealer_tier | default: 1 }} Dealer</span>
+          {%- if dealer_net_terms -%}<span class="dp-pill">NET-30</span>{%- endif -%}
+        </div>
+        <div class="dp-summary" style="min-width:680px">
+          <div class="dp-summary__item">
+            <div class="dp-summary__label">Credit Limit</div>
+            <div class="dp-summary__value">{{ credit_limit | money }}</div>
+          </div>
+          <div class="dp-summary__item">
+            <div class="dp-summary__label">Available Credit</div>
+            <div class="dp-summary__value dp-summary__value--accent">{{ available_credit | money }}</div>
+          </div>
+          <div class="dp-summary__item">
+            <div class="dp-summary__label">Outstanding Balance</div>
+            <div class="dp-summary__value" style="{% if outstanding_balance > 0 %}color:#db6e5b{% endif %}">{{ outstanding_balance | money }}</div>
+          </div>
+          <div class="dp-summary__item">
+            <div class="dp-summary__label">Account Status</div>
+            <div class="dp-summary__value">
+              {{ account_status | capitalize | replace: 'Active', 'In Good Standing' }}
+              <span class="dp-status-dot"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="dp-grid-2">
+      <div class="dp-card dp-table-wrap">
+        <div class="dp-filters">
+          <input type="text" class="dp-search-like" placeholder="Search by quote #, reference, or item..." style="border:0;background:transparent;width:100%;outline:none;color:var(--heading-color);padding:0 14px" data-quote-search>
+          <div class="dp-select-like">All Statuses <span aria-hidden="true">&#8964;</span></div>
+          <div class="dp-select-like">Last 90 Days <span aria-hidden="true">&#8964;</span></div>
+          <div class="dp-select-like" style="justify-content:center">&#9810;</div>
+        </div>
+
+        <table class="dp-table dp-table-compact">
+          <thead>
+            <tr>
+              <th>Quote #</th>
+              <th>Date</th>
+              <th>Valid Until</th>
+              <th>Reference / Project</th>
+              <th>Items</th>
+              <th>Total</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {%- if customer.metafields.custom.quotes.value -%}
+              {%- for quote in customer.metafields.custom.quotes.value -%}
+                <tr data-quote-row data-quote-status="{{ quote.status | handle }}">
+                  <td>{{ quote.id | truncate: 8, '' }}</td>
+                  <td>{{ quote.created_at | date: '%b %d, %Y' }}</td>
+                  <td>{{ quote.valid_until | date: '%b %d, %Y' | default: '—' }}</td>
+                  <td>{{ quote.reference | default: quote.product_title | truncate: 25 }}</td>
+                  <td>{{ quote.line_items_size | default: '—' }}</td>
+                  <td>{{ quote.total | default: 'TBD' }}</td>
+                  <td>
+                    {%- case quote.status -%}
+                      {%- when 'pending' -%}
+                        <span class="dp-pill dp-pill--warn">Pending</span>
+                      {%- when 'approved' -%}
+                        <span class="dp-pill dp-pill--good">Approved</span>
+                      {%- when 'converted' -%}
+                        <span class="dp-pill dp-pill--info">Converted</span>
+                      {%- when 'expired' -%}
+                        <span class="dp-pill">Expired</span>
+                      {%- else -%}
+                        <span class="dp-pill">{{ quote.status }}</span>
+                    {%- endcase -%}
+                  </td>
+                  <td>
+                    <span class="dp-pill" style="cursor:pointer">View</span>
+                    {%- if quote.status == 'approved' -%}
+                      <span class="dp-pill" style="cursor:pointer">Convert</span>
+                    {%- elsif quote.status == 'pending' -%}
+                      <span class="dp-pill" style="cursor:pointer">Approve</span>
+                    {%- elsif quote.status == 'converted' -%}
+                      <span class="dp-pill" style="cursor:pointer">Order #</span>
+                    {%- endif -%}
+                  </td>
+                </tr>
+              {%- endfor -%}
+            {%- else -%}
+              <tr>
+                <td colspan="8" style="text-align:center;padding:40px 12px;color:var(--text-color-light)">
+                  <p>No quotes yet.</p>
+                  <p style="font-size:14px">When you configure a wheel and request a quote, it will appear here.</p>
+                </td>
+              </tr>
+            {%- endif -%}
+          </tbody>
+        </table>
+
+        <div class="dp-pagination">
+          {%- assign quote_count = 0 -%}
+          {%- if customer.metafields.custom.quotes.value -%}
+            {%- assign quote_count = customer.metafields.custom.quotes.value.size -%}
+          {%- endif -%}
+          <span>Showing 1 to {% if quote_count < 8 %}{{ quote_count }}{% else %}8{% endif %} of {{ quote_count }} quotes</span>
+          <div class="dp-pills">
+            <span class="dp-pill">&#8249;</span>
+            <span class="dp-pill dp-pill--accent">1</span>
+            <span class="dp-pill">&#8250;</span>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:grid;gap:16px">
+        <div class="dp-card dp-panel">
+          <div class="dp-panel__top">
+            <h3 class="dp-card__title">Payment Terms</h3>
+            <a href="#" class="dp-pill dp-pill--accent">Terms & Conditions</a>
+          </div>
+          <div style="display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:center;padding:6px 0 14px;border-bottom:1px solid var(--dp-line)">
+            <div class="dp-panel__icon" aria-hidden="true">&#9775;</div>
+            <div>
+              <div class="dp-panel__big">
+                {%- if dealer_net_terms -%}NET-30{%- else -%}Standard{%- endif -%}
+              </div>
+              <div class="dp-table__muted" style="font-size:15px">
+                {%- if dealer_net_terms -%}
+                  Payment Due Within 30 Days
+                {%- else -%}
+                  Payment Required at Checkout
+                {%- endif -%}
+              </div>
+            </div>
+          </div>
+          <div class="dp-rows" style="margin-top:10px">
+            <div class="dp-row">
+              <div class="dp-row__left">Credit Limit</div>
+              <div class="dp-row__right">{{ credit_limit | money }}</div>
+            </div>
+            <div class="dp-row">
+              <div class="dp-row__left">Outstanding Balance</div>
+              <div class="dp-row__right" style="{% if outstanding_balance > 0 %}color:#db6e5b{% endif %}">{{ outstanding_balance | money }}</div>
+            </div>
+            <div class="dp-row">
+              <div class="dp-row__left">Available Credit</div>
+              <div class="dp-row__right" style="color:var(--dp-good)">{{ available_credit | money }}</div>
+            </div>
+            <div class="dp-row">
+              <div class="dp-row__left">Credit Usage</div>
+              <div class="dp-row__right">{{ credit_usage_pct }}%</div>
+            </div>
+          </div>
+          <div class="dp-progress"><span style="width:{{ credit_usage_pct }}%"></span></div>
+        </div>
+
+        <div class="dp-card dp-table-wrap" style="padding-bottom:14px">
+          <div class="dp-panel__top">
+            <h3 class="dp-card__title">Outstanding Invoices</h3>
+            <span class="dp-pill dp-pill--bad">2 Overdue</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;color:var(--text-color-light);font-size:14px;margin-bottom:8px">
+            <span></span>
+            <span>Total Due: <span style="color:#db6e5b">$18,746.00</span></span>
+          </div>
+          <table class="dp-table dp-table-compact">
+            <thead>
+              <tr>
+                <th>Invoice #</th>
+                <th>Date</th>
+                <th>Due Date</th>
+                <th>Amount</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>INV-1423</td>
+                <td>May 2, 2025</td>
+                <td>Jun 1, 2025</td>
+                <td>$8,920.00</td>
+                <td><span class="dp-pill dp-pill--bad">Overdue</span></td>
+                <td>
+                  <span class="dp-pill">View Invoice</span>
+                  <span class="dp-pill dp-pill--accent">Pay Now</span>
+                </td>
+              </tr>
+              <tr>
+                <td>INV-1401</td>
+                <td>Apr 2, 2025</td>
+                <td>May 2, 2025</td>
+                <td>$9,826.00</td>
+                <td><span class="dp-pill dp-pill--bad">Overdue</span></td>
+                <td>
+                  <span class="dp-pill">View Invoice</span>
+                  <span class="dp-pill dp-pill--accent">Pay Now</span>
+                </td>
+              </tr>
+              <tr>
+                <td>INV-1380</td>
+                <td>Mar 3, 2025</td>
+                <td>Apr 2, 2025</td>
+                <td>$0.00</td>
+                <td><span class="dp-pill dp-pill--good">Paid</span></td>
+                <td><span class="dp-pill">View Invoice</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="dp-card dp-table-wrap" style="padding-bottom:14px">
+          <div class="dp-panel__top">
+            <h3 class="dp-card__title">Payment History (Last 4 Payments)</h3>
+            <a href="#" class="dp-card__link">View All Invoices</a>
+          </div>
+          <table class="dp-table dp-table-compact">
+            <thead>
+              <tr>
+                <th>Date Paid</th>
+                <th>Invoice #</th>
+                <th>Payment Method</th>
+                <th>Amount</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Apr 28, 2025</td>
+                <td>INV-1361</td>
+                <td>ACH Transfer</td>
+                <td>$7,450.00</td>
+                <td><span class="dp-pill dp-pill--good">Successful</span></td>
+              </tr>
+              <tr>
+                <td>Mar 31, 2025</td>
+                <td>INV-1340</td>
+                <td>ACH Transfer</td>
+                <td>$6,875.00</td>
+                <td><span class="dp-pill dp-pill--good">Successful</span></td>
+              </tr>
+              <tr>
+                <td>Feb 28, 2025</td>
+                <td>INV-1318</td>
+                <td>ACH Transfer</td>
+                <td>$5,960.00</td>
+                <td><span class="dp-pill dp-pill--good">Successful</span></td>
+              </tr>
+              <tr>
+                <td>Jan 31, 2025</td>
+                <td>INV-1295</td>
+                <td>ACH Transfer</td>
+                <td>$8,120.00</td>
+                <td><span class="dp-pill dp-pill--good">Successful</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="dp-footer">
+      <div>&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. All rights reserved.</div>
+      <div class="dp-footer__links">
+        <a href="{{ routes.account_url }}">Dealer Portal</a>
+        <a href="/policies/terms-of-service">Terms & Conditions</a>
+        <a href="/policies/privacy-policy">Privacy Policy</a>
+      </div>
+    </div>
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "Customer Quotes",
+  "tag": "section",
+  "class": "section section--dealer-quotes",
+  "settings": []
+}
+{% endschema %}

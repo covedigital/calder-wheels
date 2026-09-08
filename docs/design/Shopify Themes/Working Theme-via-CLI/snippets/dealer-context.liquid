@@ -1,0 +1,45 @@
+{% comment %}
+  Calder Wheels — Dealer Context
+  Sets global variables for dealer state detection.
+  Detects tier, payment terms, credit status, tax exemption, and account standing.
+  Usage: {% render 'dealer-context' %}
+{% endcomment %}
+
+{%- liquid
+  assign is_dealer = false
+  assign dealer_tier = 0
+  assign dealer_approved = false
+  assign dealer_net_terms = false
+  assign dealer_tax_exempt = false
+  assign dealer_pending = false
+  assign dealer_moq = 1
+
+  if customer
+    if customer.tags contains 'dealer-applied'
+      assign dealer_pending = true
+    endif
+
+    if customer.tags contains 'dealer-approved'
+      assign dealer_approved = true
+      assign is_dealer = true
+    endif
+
+    if customer.tags contains 'dealer-tier-1'
+      assign dealer_tier = 1
+    elsif customer.tags contains 'dealer-tier-2'
+      assign dealer_tier = 2
+    elsif customer.tags contains 'dealer-tier-3'
+      assign dealer_tier = 3
+    endif
+
+    if customer.tags contains 'dealer-net-30'
+      assign dealer_net_terms = true
+    endif
+
+    if customer.tags contains 'dealer-tax-exempt'
+      assign dealer_tax_exempt = true
+    endif
+
+    assign dealer_moq = customer.metafields.custom.default_moq.value | default: 1 | plus: 0
+  endif
+-%}
