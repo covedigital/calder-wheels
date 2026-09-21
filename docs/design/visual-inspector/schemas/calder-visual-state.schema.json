@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "calder-visual-state.schema.json",
+  "title": "Calder Visual Inspector Page State",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "project",
+    "artifact_type",
+    "page",
+    "reference",
+    "baseline",
+    "status",
+    "current_iteration",
+    "current_render",
+    "latest_correction",
+    "accepted_render"
+  ],
+  "properties": {
+    "schema_version": {"type": "string", "const": "1.0"},
+    "project": {"type": "string", "const": "Calder Wheels"},
+    "artifact_type": {"type": "string", "const": 
+"visual_inspector_state"},
+    "page": {
+      "type": "string",
+      "enum": ["home", "category", "product", "cart", "checkout", 
+"dealer-dashboard"]
+    },
+    "reference": {"type": "string", "minLength": 1},
+    "baseline": {"type": ["string", "null"]},
+    "status": {
+      "type": "string",
+      "enum": [
+        "NOT_INSPECTED",
+        "SPEC_CREATED",
+        "SPEC_REVIEWED",
+        "READY_FOR_IMPLEMENTATION",
+        "IMPLEMENTING",
+        "READY_FOR_VISUAL_QA",
+        "REVISION_REQUIRED",
+        "IMPLEMENTING_CORRECTION",
+        "PASS_WITH_MINOR_NOTES",
+        "PASS",
+        "ACCEPTED",
+        "BLOCKED"
+      ]
+    },
+    "current_iteration": {"type": "integer", "minimum": 0},
+    "current_render": {"type": ["string", "null"]},
+    "latest_correction": {"type": ["string", "null"]},
+    "accepted_render": {"type": ["string", "null"]}
+  }
+}

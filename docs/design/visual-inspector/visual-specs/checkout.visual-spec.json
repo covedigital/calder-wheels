@@ -1,0 +1,350 @@
+{
+  "schema_version": "1.0",
+  "project": "Calder Wheels",
+  "artifact_type": "visual_specification",
+  "source": {
+    "file": "Calder - 5 - Checkout.png",
+    "viewport": {
+      "width": 1222,
+      "height": 1287
+    }
+  },
+  "page": {
+    "id": "checkout",
+    "type": "checkout",
+    "summary": "Distraction-minimized checkout using a white secure header, five-step progress, left information/shipping/delivery/payment form, right order summary and compact support footer."
+  },
+  "global_layout": {
+    "content_max_width": {
+      "value": "~1126px",
+      "confidence": 0.92,
+      "evidence": "ESTIMATED",
+      "range": "1110-1130px",
+      "tolerance": "\u00b112px"
+    },
+    "horizontal_gutters": {
+      "value": "~48px",
+      "confidence": 0.94,
+      "evidence": "ESTIMATED",
+      "range": "46-52px",
+      "tolerance": "\u00b14px"
+    },
+    "primary_alignment": "Centered checkout container with form and summary columns; marketing navigation is intentionally removed.",
+    "page_background": {
+      "value": "#FFFFFF",
+      "confidence": 0.98,
+      "evidence": "OBSERVED"
+    }
+  },
+  "sections": [
+    {
+      "id": "checkout-header",
+      "name": "Checkout header",
+      "bbox_px": [
+        0,
+        0,
+        1222,
+        62
+      ],
+      "bbox_normalized": [
+        0.0,
+        0.0,
+        1.0,
+        0.0482
+      ],
+      "layout": {
+        "structure": "minimal white checkout header",
+        "alignment": "logo left / reassurance right / return far right"
+      },
+      "components": [
+        {
+          "id": "checkout-logo",
+          "type": "brand_header",
+          "classification": "GLOBAL",
+          "bbox_px": [
+            49,
+            10,
+            223,
+            51
+          ],
+          "bbox_normalized": [
+            0.0401,
+            0.0078,
+            0.1825,
+            0.0396
+          ],
+          "description": "Calder logo at left on white background.",
+          "confidence": 0.96,
+          "evidence": "OBSERVED"
+        },
+        {
+          "id": "checkout-security",
+          "type": "security_message",
+          "classification": "SHARED",
+          "bbox_px": [
+            806,
+            16,
+            987,
+            48
+          ],
+          "bbox_normalized": [
+            0.6596,
+            0.0124,
+            0.8077,
+            0.0373
+          ],
+          "description": "Lock icon with Secure Checkout reassurance centered-right.",
+          "confidence": 0.94,
+          "evidence": "OBSERVED"
+        },
+        {
+          "id": "checkout-return",
+          "type": "return_link",
+          "classification": "PAGE_SPECIFIC",
+          "bbox_px": [
+            1072,
+            22,
+            1170,
+            43
+          ],
+          "bbox_normalized": [
+            0.8773,
+            0.0171,
+            0.9574,
+            0.0334
+          ],
+          "description": "Return to Cart link at far right.",
+          "confidence": 0.93,
+          "evidence": "OBSERVED"
+        }
+      ],
+      "relationships": [],
+      "confidence": 0.9,
+      "evidence": "OBSERVED"
+    },
+    {
+      "id": "checkout-progress",
+      "name": "Checkout progress",
+      "bbox_px": [
+        285,
+        64,
+        955,
+        130
+      ],
+      "bbox_normalized": [
+        0.2332,
+        0.0497,
+        0.7815,
+        0.101
+      ],
+      "layout": {
+        "structure": "centered five-step progress"
+      },
+      "components": [
+        {
+          "id": "checkout-stepper",
+          "type": "progress_indicator",
+          "classification": "SHARED",
+          "bbox_px": [
+            285,
+            78,
+            955,
+            127
+          ],
+          "bbox_normalized": [
+            0.2332,
+            0.0606,
+            0.7815,
+            0.0987
+          ],
+          "description": "Five-step horizontal stepper: Cart completed/gold, Information active/navy, Shipping, Payment, Confirmation inactive.",
+          "confidence": 0.96,
+          "evidence": "OBSERVED"
+        }
+      ],
+      "relationships": [],
+      "confidence": 0.9,
+      "evidence": "OBSERVED"
+    },
+    {
+      "id": "checkout-main",
+      "name": "Checkout form and summary",
+      "bbox_px": [
+        48,
+        145,
+        1174,
+        1215
+      ],
+      "bbox_normalized": [
+        0.0393,
+        0.1127,
+        0.9607,
+        0.9441
+      ],
+      "layout": {
+        "structure": "two-column checkout layout",
+        "columns": "~60/40",
+        "gap": "~32px"
+      },
+      "components": [
+        {
+          "id": "checkout-form",
+          "type": "checkout_form",
+          "classification": "PAGE_SPECIFIC",
+          "bbox_px": [
+            48,
+            145,
+            716,
+            1210
+          ],
+          "bbox_normalized": [
+            0.0393,
+            0.1127,
+            0.5859,
+            0.9402
+          ],
+          "description": "Left multi-section form with numbered Customer Information, Shipping Address, Delivery and Payment sections; inputs use thin gray borders and generous vertical spacing.",
+          "confidence": 0.98,
+          "evidence": "OBSERVED",
+          "layout": {
+            "width": "~668px",
+            "sections": 4
+          }
+        },
+        {
+          "id": "checkout-summary",
+          "type": "order_summary",
+          "classification": "SHARED",
+          "bbox_px": [
+            748,
+            158,
+            1174,
+            823
+          ],
+          "bbox_normalized": [
+            0.6121,
+            0.1228,
+            0.9607,
+            0.6395
+          ],
+          "description": "Right bordered order summary with wheel thumbnail, fitment status, totals, gold Place Order CTA, legal copy and three reassurance icons.",
+          "confidence": 0.98,
+          "evidence": "OBSERVED",
+          "layout": {
+            "width": "~426px"
+          }
+        }
+      ],
+      "relationships": [
+        "Order summary starts near top of form and ends before the form's payment section.",
+        "A second Place Order CTA appears at bottom of the form column."
+      ],
+      "confidence": 0.9,
+      "evidence": "OBSERVED"
+    },
+    {
+      "id": "checkout-footer",
+      "name": "Checkout support footer",
+      "bbox_px": [
+        0,
+        1219,
+        1222,
+        1287
+      ],
+      "bbox_normalized": [
+        0.0,
+        0.9472,
+        1.0,
+        1.0
+      ],
+      "layout": {
+        "structure": "minimal checkout-only footer"
+      },
+      "components": [
+        {
+          "id": "checkout-footer-bar",
+          "type": "footer_bar",
+          "classification": "PAGE_SPECIFIC",
+          "bbox_px": [
+            0,
+            1219,
+            1222,
+            1287
+          ],
+          "bbox_normalized": [
+            0.0,
+            0.9472,
+            1.0,
+            1.0
+          ],
+          "description": "Compact dark navy footer with Calder mark, centered brand phrase and support contact methods.",
+          "confidence": 0.96,
+          "evidence": "OBSERVED"
+        }
+      ],
+      "relationships": [],
+      "confidence": 0.9,
+      "evidence": "OBSERVED"
+    }
+  ],
+  "shared_components": [
+    {
+      "id": "checkout-progress",
+      "name": "Commerce progress indicator",
+      "classification": "SHARED",
+      "reason": "Related to cart progress pattern while expanded to five checkout stages."
+    },
+    {
+      "id": "order-summary",
+      "name": "Order summary",
+      "classification": "SHARED",
+      "reason": "Continuation of cart summary language with checkout-specific detail."
+    },
+    {
+      "id": "fitment-status",
+      "name": "Fitment confirmation state",
+      "classification": "SHARED",
+      "reason": "Green confirmation treatment persists through product, cart and checkout."
+    }
+  ],
+  "unique_components": [
+    {
+      "id": "checkout-form",
+      "name": "Checkout form",
+      "classification": "PAGE_SPECIFIC",
+      "reason": "Checkout-only customer/shipping/delivery/payment workflow."
+    },
+    {
+      "id": "checkout-footer-bar",
+      "name": "Minimal support footer",
+      "classification": "PAGE_SPECIFIC",
+      "reason": "Checkout intentionally replaces full marketing footer with compact support bar."
+    }
+  ],
+  "responsive_assumptions": [
+    {
+      "target": "checkout-main",
+      "assumption": "Two columns likely stack into a single checkout flow; summary may collapse or move above/below payment depending platform behavior.",
+      "confidence": 0.77,
+      "evidence": "ASSUMPTION"
+    },
+    {
+      "target": "checkout-progress",
+      "assumption": "Five-step labels likely compress or become a simplified progress representation on mobile.",
+      "confidence": 0.68,
+      "evidence": "ASSUMPTION"
+    }
+  ],
+  "implementation_notes": [
+    "Checkout is a deliberate global-header/footer variant; do not reuse the full consumer navigation here.",
+    "Preserve the repeated numbered section markers as strong scanning anchors.",
+    "Keep payment method tabs and Place Order action visually dominant but restrained."
+  ],
+  "uncertainties": [
+    {
+      "target": "platform checkout extensibility",
+      "unknown": "The screenshot does not establish which checkout areas are editable under the active Shopify plan/runtime.",
+      "resolution": "Implementation agent must verify Shopify checkout customization constraints before mapping visual requirements."
+    }
+  ]
+}

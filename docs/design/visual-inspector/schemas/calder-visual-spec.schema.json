@@ -1,0 +1,327 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "calder-visual-spec.schema.json",
+  "title": "Calder Visual Specification",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "project",
+    "artifact_type",
+    "source",
+    "page",
+    "global_layout",
+    "sections",
+    "shared_components",
+    "unique_components",
+    "responsive_assumptions",
+    "implementation_notes",
+    "uncertainties"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "1.0"
+    },
+    "project": {
+      "type": "string",
+      "const": "Calder Wheels"
+    },
+    "artifact_type": {
+      "type": "string",
+      "const": "visual_specification"
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["file", "viewport"],
+      "properties": {
+        "file": {"type": "string"},
+        "viewport": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["width", "height"],
+          "properties": {
+            "width": {"type": "integer", "minimum": 1},
+            "height": {"type": "integer", "minimum": 1}
+          }
+        }
+      }
+    },
+    "page": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "type", "summary"],
+      "properties": {
+        "id": {"type": "string"},
+        "type": {"type": "string"},
+        "summary": {"type": "string"}
+      }
+    },
+    "global_layout": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "content_max_width",
+        "horizontal_gutters",
+        "primary_alignment",
+        "page_background"
+      ],
+      "properties": {
+        "content_max_width": {"$ref": "#/$defs/measurement"},
+        "horizontal_gutters": {"$ref": "#/$defs/measurement"},
+        "primary_alignment": {"type": "string"},
+        "page_background": {"$ref": "#/$defs/colorEstimate"}
+      }
+    },
+    "sections": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/section"}
+    },
+    "shared_components": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/componentReference"}
+    },
+    "unique_components": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/componentReference"}
+    },
+    "responsive_assumptions": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/assumption"}
+    },
+    "implementation_notes": {
+      "type": "array",
+      "items": {"type": "string"}
+    },
+    "uncertainties": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/uncertainty"}
+    }
+  },
+  "$defs": {
+    "evidence": {
+      "type": "string",
+      "enum": [
+        "OBSERVED",
+        "ESTIMATED",
+        "ASSUMPTION",
+        "VERIFIED_PROJECT_CONTEXT"
+      ]
+    },
+    "confidence": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "measurement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["value", "confidence", "evidence"],
+      "properties": {
+        "value": {
+          "oneOf": [
+            {"type": "number"},
+            {"type": "string"}
+          ]
+        },
+        "range": {
+          "type": ["string", "null"]
+        },
+        "tolerance": {
+          "type": ["string", "null"]
+        },
+        "confidence": {"$ref": "#/$defs/confidence"},
+        "evidence": {"$ref": "#/$defs/evidence"}
+      }
+    },
+    "colorEstimate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["value", "confidence", "evidence"],
+      "properties": {
+        "value": {"type": "string"},
+        "confidence": {"$ref": "#/$defs/confidence"},
+        "evidence": {"$ref": "#/$defs/evidence"}
+      }
+    },
+    "bboxPx": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "prefixItems": [
+        {"type": "number"},
+        {"type": "number"},
+        {"type": "number"},
+        {"type": "number"}
+      ]
+    },
+    "bboxNormalized": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "prefixItems": [
+        {"type": "number", "minimum": 0, "maximum": 1},
+        {"type": "number", "minimum": 0, "maximum": 1},
+        {"type": "number", "minimum": 0, "maximum": 1},
+        {"type": "number", "minimum": 0, "maximum": 1}
+      ]
+    },
+    "typography": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "role": {"type": "string"},
+        "case": {"type": "string"},
+        "weight": {"type": "string"},
+        "font_size": {"$ref": "#/$defs/measurement"},
+        "line_height": {"$ref": "#/$defs/measurement"},
+        "letter_spacing": {"$ref": "#/$defs/measurement"},
+        "alignment": {"type": "string"},
+        "color": {"$ref": "#/$defs/colorEstimate"}
+      }
+    },
+    "style": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "background": {"type": "string"},
+        "border": {"type": "string"},
+        "border_radius": {"type": "string"},
+        "shadow": {"type": "string"},
+        "overlay": {"type": "string"},
+        "gradient": {"type": "string"}
+      }
+    },
+    "component": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "type",
+        "classification",
+        "bbox_px",
+        "bbox_normalized",
+        "description",
+        "confidence",
+        "evidence"
+      ],
+      "properties": {
+        "id": {"type": "string"},
+        "type": {"type": "string"},
+        "classification": {
+          "type": "string",
+          "enum": ["GLOBAL", "SHARED", "PAGE_SPECIFIC"]
+        },
+        "bbox_px": {"$ref": "#/$defs/bboxPx"},
+        "bbox_normalized": {"$ref": "#/$defs/bboxNormalized"},
+        "description": {"type": "string"},
+        "layout": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "typography": {"$ref": "#/$defs/typography"},
+        "style": {"$ref": "#/$defs/style"},
+        "imagery": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "relationships": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "implementation_guidance": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "confidence": {"$ref": "#/$defs/confidence"},
+        "evidence": {"$ref": "#/$defs/evidence"}
+      }
+    },
+    "section": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "name",
+        "bbox_px",
+        "bbox_normalized",
+        "layout",
+        "components",
+        "relationships",
+        "confidence",
+        "evidence"
+      ],
+      "properties": {
+        "id": {"type": "string"},
+        "name": {"type": "string"},
+        "bbox_px": {"$ref": "#/$defs/bboxPx"},
+        "bbox_normalized": {"$ref": "#/$defs/bboxNormalized"},
+        "layout": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "spacing": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "background": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "components": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/component"}
+        },
+        "relationships": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "implementation_guidance": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "confidence": {"$ref": "#/$defs/confidence"},
+        "evidence": {"$ref": "#/$defs/evidence"}
+      }
+    },
+    "componentReference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "name", "classification", "reason"],
+      "properties": {
+        "id": {"type": "string"},
+        "name": {"type": "string"},
+        "classification": {
+          "type": "string",
+          "enum": ["GLOBAL", "SHARED", "PAGE_SPECIFIC"]
+        },
+        "reason": {"type": "string"}
+      }
+    },
+    "assumption": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["target", "assumption", "confidence", "evidence"],
+      "properties": {
+        "target": {"type": "string"},
+        "assumption": {"type": "string"},
+        "confidence": {"$ref": "#/$defs/confidence"},
+        "evidence": {
+          "type": "string",
+          "const": "ASSUMPTION"
+        }
+      }
+    },
+    "uncertainty": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["target", "unknown", "resolution"],
+      "properties": {
+        "target": {"type": "string"},
+        "unknown": {"type": "string"},
+        "resolution": {"type": "string"}
+      }
+    }
+  }
+}

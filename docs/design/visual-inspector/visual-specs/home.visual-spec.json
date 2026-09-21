@@ -1,0 +1,830 @@
+{
+  "schema_version": "1.0",
+  "project": "Calder Wheels",
+  "artifact_type": "visual_specification",
+  "source": {
+    "file": "Calder - 1 - Home.png",
+    "viewport": {
+      "width": 824,
+      "height": 1908
+    }
+  },
+  "page": {
+    "id": "home",
+    "type": "marketing_home",
+    "summary": "Long-form consumer homepage establishing the Calder visual language: cinematic automotive hero, floating fitment finder, editorial product cards, engineering proof, lifestyle gallery, newsletter and global footer."
+  },
+  "global_layout": {
+    "content_max_width": {
+      "value": "~748px at 824px source width",
+      "confidence": 0.9,
+      "evidence": "ESTIMATED",
+      "range": "720-760px",
+      "tolerance": "\u00b116px"
+    },
+    "horizontal_gutters": {
+      "value": "~38-40px",
+      "confidence": 0.91,
+      "evidence": "ESTIMATED",
+      "range": "36-42px",
+      "tolerance": "\u00b14px"
+    },
+    "primary_alignment": "Centered desktop content container with full-bleed image bands and strong left-edge alignment across contained sections.",
+    "page_background": {
+      "value": "#FFFFFF",
+      "confidence": 0.94,
+      "evidence": "OBSERVED"
+    }
+  },
+  "sections": [
+    {
+      "id": "home-header",
+      "name": "Global header",
+      "bbox_px": [
+        0,
+        0,
+        824,
+        44
+      ],
+      "bbox_normalized": [
+        0.0,
+        0.0,
+        1.0,
+        0.0231
+      ],
+      "layout": {
+        "structure": "full-width single-row navigation",
+        "alignment": "vertically centered"
+      },
+      "components": [
+        {
+          "id": "global-header",
+          "type": "header",
+          "classification": "GLOBAL",
+          "bbox_px": [
+            0,
+            0,
+            824,
+            44
+          ],
+          "bbox_normalized": [
+            0.0,
+            0.0,
+            1.0,
+            0.0231
+          ],
+          "description": "Dark navy horizontal header with Calder wordmark at left, centered primary navigation, utility icons, and outlined gold FIND YOUR FIT CTA.",
+          "confidence": 0.96,
+          "evidence": "OBSERVED",
+          "layout": {
+            "height": "~44px",
+            "logo_region": "~18% width",
+            "nav": "centered compact links",
+            "utilities": "right aligned"
+          },
+          "style": {
+            "background": "approx #031B2A",
+            "border": "none",
+            "border_radius": "0"
+          },
+          "relationships": [
+            "Spans full viewport width.",
+            "Hero begins immediately beneath header."
+          ]
+        }
+      ],
+      "relationships": [],
+      "confidence": 0.9,
+      "evidence": "OBSERVED"
+    },
+    {
+      "id": "home-hero",
+      "name": "Hero",
+      "bbox_px": [
+        0,
+        44,
+        824,
+        353
+      ],
+      "bbox_normalized": [
+        0.0,
+        0.0231,
+        1.0,
+        0.185
+      ],
+      "layout": {
+        "structure": "full-bleed cinematic image with left copy and right dominant product",
+        "columns": "approx 43/57 visual split"
+      },
+      "components": [
+        {
+          "id": "home-hero-copy",
+          "type": "hero_copy",
+          "classification": "PAGE_SPECIFIC",
+          "bbox_px": [
+            48,
+            106,
+            303,
+            304
+          ],
+          "bbox_normalized": [
+            0.0583,
+            0.0556,
+            0.3677,
+            0.1593
+          ],
+          "description": "Left-aligned gold eyebrow, large two-line white headline MADE WITH PRECISION, supporting copy, two CTAs and three proof points.",
+          "confidence": 0.91,
+          "evidence": "OBSERVED",
+          "layout": {
+            "width": "~255px",
+            "vertical_alignment": "upper-middle",
+            "cta_row": "two buttons"
+          },
+          "typography": {
+            "role": "hero heading",
+            "case": "uppercase",
+            "weight": "heavy/bold",
+            "font_size": {
+              "value": "38-44px",
+              "confidence": 0.79,
+              "evidence": "ESTIMATED"
+            },
+            "line_height": {
+              "value": "0.92-1.0em",
+              "confidence": 0.74,
+              "evidence": "ESTIMATED"
+            },
+            "letter_spacing": {
+              "value": "tight",
+              "confidence": 0.7,
+              "evidence": "ESTIMATED"
+            },
+            "alignment": "left",
+            "color": {
+              "value": "#F6F5F0",
+              "confidence": 0.82,
+              "evidence": "ESTIMATED"
+            }
+          },
+          "relationships": [
+            "Copy is anchored to left safe area and does not cross the wheel focal region."
+          ]
+        },
+        {
+          "id": "home-hero-wheel",
+          "type": "hero_imagery",
+          "classification": "PAGE_SPECIFIC",
+          "bbox_px": [
+            382,
+            44,
+            824,
+            353
+          ],
+          "bbox_normalized": [
+            0.4636,
+            0.0231,
+            1.0,
+            0.185
+          ],
+          "description": "Dominant close-up wheel/car image occupying the right half and crossing visually into the center; warm mountain sunset environment.",
+          "confidence": 0.95,
+          "evidence": "OBSERVED",
+          "imagery": {
+            "fit": "cover",
+            "focal_point": "wheel center near x=530,y=190",
+            "crop": "tight wheel and fender crop",
+            "overlay": "darkened edges/left-side contrast support"
+          },
+          "relationships": [
+            "Wheel is the dominant visual anchor.",
+            "Copy remains readable over darker left image region."
+          ]
+        }
+      ],
+      "relationships": [],
+      "confidence": 0.9,
+      "evidence": "OBSERVED",
+      "background": {
+        "image": "mountain-road vehicle lifestyle image",
+        "overlay": "dark navy/black gradient strongest at left and right edges"
+      }
+    },
+    {
+      "id": "home-fitment",
+      "name": "Vehicle fitment finder",
+      "bbox_px": [
+        39,
+        354,
+        762,
+        500
+      ],
+      "bbox_normalized": [
+        0.0473,
+        0.1855,
+        0.9248,
+        0.2621
+      ],
+      "layout": {
+        "structure": "floating white card",
+        "width": "~88% viewport",
+        "columns": "fitment controls in one desktop row"
+      },
+      "components": [
+        {
+          "id": "home-fitment-tabs",
+          "type": "tabs",
+          "classification": "SHARED",
+          "bbox_px": [
+            52,
+            354,
+            333,
+            388
+          ],
+          "bbox_normalized": [
+            0.0631,
+            0.1855,
+            0.4041,
+            0.2034
+          ],
+          "description": "Two-tab control: Shop by Vehicle active; Shop by Wheel Style inactive.",
+          "confidence": 0.92,
+          "evidence": "OBSERVED"
+        },
+        {
+          "id": "home-fitment-form",
+          "type": "form",
+          "classification": "SHARED",
+          "bbox_px": [
+            51,
+            390,
+            750,
+            466
+          ],
+          "bbox_normalized": [
+            0.0619,
+            0.2044,
+            0.9102,
+            0.2442
+          ],
+          "description": "Four equal selectors for Year, Make, Model, Trim with dark FIND WHEELS button aligned at right.",
+          "confidence": 0.95,
+          "evidence": "OBSERVED",
+          "layout": {
+            "grid": "4 selectors + CTA",
+            "gap": "~14px",
+            "input_height": "~28px"
+          }
+        },
+        {
+          "id": "home-popular-searches",
+          "type": "link_row",
+          "classification": "PAGE_SPECIFIC",
+          "bbox_px": [
+            52,
+            470,
+            530,
+            493
+          ],
+          "bbox_normalized": [
+            0.0631,
+            0.2463,
+            0.6432,
+            0.2584
+          ],
+          "description": "Compact popular-search links beneath fitment controls.",
+          "confidence": 0.88,
+          "evidence": "OBSERVED"
+        }
+      ],
+      "relationships": [
+        "Card overlaps transition from hero to white content area."
+      ],
+      "confidence": 0.9,
+      "evidence": "OBSERVED",
+      "background": {
+        "color": "#FFFFFF",
+        "shadow": "soft large drop shadow"
+      }
+    },
+    {
+      "id": "home-signature",
+      "name": "Signature wheels",
+      "bbox_px": [
+        38,
+        516,
+        762,
+        811
+      ],
+      "bbox_normalized": [
+        0.0461,
+        0.2704,
+        0.9248,
+        0.4251
+      ],
+      "layout": {
+        "structure": "contained white section",
+        "grid": "three-column card grid"
+      },
+      "components": [
+        {
+          "id": "home-signature-heading",
+          "type": "section_heading",
+          "classification": "SHARED",
+          "bbox_px": [
+            39,
+            523,
+            759,
+            568
+          ],
+          "bbox_normalized": [
+            0.0473,
+            0.2741,
+            0.9211,
+            0.2977
+          ],
+          "description": "Gold eyebrow and navy SIGNATURE WHEELS heading with View All Wheels link at far right.",
+          "confidence": 0.92,
+          "evidence": "OBSERVED"
+        },
+        {
+          "id": "home-wheel-cards",
+          "type": "product_card_group",
+          "classification": "SHARED",
+          "bbox_px": [
+            39,
+            577,
+            761,
+            798
+          ],
+          "bbox_normalized": [
+            0.0473,
+            0.3024,
+            0.9235,
+            0.4182
+          ],
+          "description": "Three equal editorial product cards with lifestyle wheel imagery, C1/C2/C3 labels, construction type, short descriptors and View Details links.",
+          "confidence": 0.95,
+          "evidence": "OBSERVED",
+          "layout": {
+            "grid": "3 columns",
+            "gap": "~28px",
+            "card_width": "~220px"
+          }
+        }
+      ],
+      "relationships": [],
+      "confidence": 0.9,
+      "evidence": "OBSERVED"
+    },
+    {
+      "id": "home-customize",
+      "name": "Customize without limits",
+      "bbox_px": [
+        0,
+        812,
+        824,
+        1031
+      ],
+      "bbox_normalized": [
+        0.0,
+        0.4256,
+        1.0,
+        0.5404
+      ],
+      "layout": {
+        "structure": "full-width split band",
+        "columns": "~43/57"
+      },
+      "components": [
+        {
+          "id": "home-customize-image",
+          "type": "split_image",
+          "classification": "PAGE_SPECIFIC",
+          "bbox_px": [
+            0,
+            812,
+            356,
+            1031
+          ],
+          "bbox_normalized": [
+            0.0,
+            0.4256,
+            0.432,
+            0.5404
+          ],
+          "description": "Large close-up Calder wheel image cropped on left half.",
+          "confidence": 0.95,
+          "evidence": "OBSERVED",
+          "imagery": {
+            "fit": "cover",
+            "crop": "tight center-cap and spokes"
+          }
+        },
+        {
+          "id": "home-customize-copy",
+          "type": "split_copy",
+          "classification": "PAGE_SPECIFIC",
+          "bbox_px": [
+            360,
+            812,
+            824,
+            1031
+          ],
+          "bbox_normalized": [
+            0.4369,
+            0.4256,
+            1.0,
+            0.5404
+          ],
+          "description": "Dark navy panel with gold eyebrow, large white heading, body copy, gold Build Yours CTA and four-step process labels.",
+          "confidence": 0.94,
+          "evidence": "OBSERVED",
+          "layout": {
+            "padding": "~42px left",
+            "content_width": "~390px"
+          }
+        }
+      ],
+      "relationships": [],
+      "confidence": 0.9,
+      "evidence": "OBSERVED",
+      "background": {
+        "color": "#062333"
+      }
+    },
+    {
+      "id": "home-engineering",
+      "name": "Engineering difference",
+      "bbox_px": [
+        38,
+        1031,
+        780,
+        1194
+      ],
+      "bbox_normalized": [
+        0.0461,
+        0.5404,
+        0.9466,
+        0.6258
+      ],
+      "layout": {
+        "structure": "contained three-part editorial row",
+        "columns": "~35/34/31"
+      },
+      "components": [
+        {
+          "id": "home-engineering-copy",
+          "type": "content_block",
+          "classification": "PAGE_SPECIFIC",
+          "bbox_px": [
+            39,
+            1047,
+            297,
+            1180
+          ],
+          "bbox_normalized": [
+            0.0473,
+            0.5487,
+            0.3604,
+            0.6184
+          ],
+          "description": "Left text block with ENGINEERED TO PERFORM and engineering CTA.",
+          "confidence": 0.9,
+          "evidence": "OBSERVED"
+        },
+        {
+          "id": "home-engineering-image",
+          "type": "editorial_image",
+          "classification": "SHARED",
+          "bbox_px": [
+            314,
+            1047,
+            565,
+            1186
+          ],
+          "bbox_normalized": [
+            0.3811,
+            0.5487,
+            0.6857,
+            0.6216
+          ],
+          "description": "CNC/manufacturing image centered.",
+          "confidence": 0.93,
+          "evidence": "OBSERVED"
+        },
+        {
+          "id": "home-engineering-points",
+          "type": "feature_list",
+          "classification": "SHARED",
+          "bbox_px": [
+            584,
+            1048,
+            775,
+            1184
+          ],
+          "bbox_normalized": [
+            0.7087,
+            0.5493,
+            0.9405,
+            0.6205
+          ],
+          "description": "Four icon/text proof points: forged aluminum, CNC machined, strength tested, real world proven.",
+          "confidence": 0.92,
+          "evidence": "OBSERVED"
+        }
+      ],
+      "relationships": [],
+      "confidence": 0.9,
+      "evidence": "OBSERVED"
+    },
+    {
+      "id": "home-process",
+      "name": "Concept to reality",
+      "bbox_px": [
+        38,
+        1194,
+        762,
+        1382
+      ],
+      "bbox_normalized": [
+        0.0461,
+        0.6258,
+        0.9248,
+        0.7243
+      ],
+      "layout": {
+        "structure": "contained heading plus four-image strip"
+      },
+      "components": [
+        {
+          "id": "home-process-strip",
+          "type": "image_strip",
+          "classification": "PAGE_SPECIFIC",
+          "bbox_px": [
+            39,
+            1249,
+            761,
+            1363
+          ],
+          "bbox_normalized": [
+            0.0473,
+            0.6546,
+            0.9235,
+            0.7144
+          ],
+          "description": "Four equal automotive/manufacturing images in a horizontal strip.",
+          "confidence": 0.94,
+          "evidence": "OBSERVED",
+          "layout": {
+            "grid": "4 columns",
+            "gap": "~10px"
+          }
+        }
+      ],
+      "relationships": [],
+      "confidence": 0.9,
+      "evidence": "OBSERVED"
+    },
+    {
+      "id": "home-gallery",
+      "name": "Fitted gallery / vehicle CTA",
+      "bbox_px": [
+        38,
+        1382,
+        762,
+        1563
+      ],
+      "bbox_normalized": [
+        0.0461,
+        0.7243,
+        0.9248,
+        0.8192
+      ],
+      "layout": {
+        "structure": "contained two-panel promotional composition",
+        "columns": "~64/36"
+      },
+      "components": [
+        {
+          "id": "home-gallery-cta",
+          "type": "promotional_panel",
+          "classification": "PAGE_SPECIFIC",
+          "bbox_px": [
+            39,
+            1430,
+            503,
+            1556
+          ],
+          "bbox_normalized": [
+            0.0473,
+            0.7495,
+            0.6104,
+            0.8155
+          ],
+          "description": "Light panel with Built For Your Vehicle copy and exploded wheel assembly image.",
+          "confidence": 0.91,
+          "evidence": "OBSERVED"
+        },
+        {
+          "id": "home-gallery-image",
+          "type": "lifestyle_image",
+          "classification": "PAGE_SPECIFIC",
+          "bbox_px": [
+            503,
+            1430,
+            762,
+            1556
+          ],
+          "bbox_normalized": [
+            0.6104,
+            0.7495,
+            0.9248,
+            0.8155
+          ],
+          "description": "Blue sports car image with overlaid slogan.",
+          "confidence": 0.93,
+          "evidence": "OBSERVED"
+        }
+      ],
+      "relationships": [],
+      "confidence": 0.9,
+      "evidence": "OBSERVED"
+    },
+    {
+      "id": "home-newsletter",
+      "name": "Newsletter",
+      "bbox_px": [
+        0,
+        1574,
+        824,
+        1687
+      ],
+      "bbox_normalized": [
+        0.0,
+        0.8249,
+        1.0,
+        0.8842
+      ],
+      "layout": {
+        "structure": "full-width background image band with horizontal form"
+      },
+      "components": [
+        {
+          "id": "home-newsletter-form",
+          "type": "newsletter_form",
+          "classification": "SHARED",
+          "bbox_px": [
+            38,
+            1597,
+            787,
+            1646
+          ],
+          "bbox_normalized": [
+            0.0461,
+            0.837,
+            0.9551,
+            0.8627
+          ],
+          "description": "Mountain-image newsletter band with left title/copy and right email field plus gold Subscribe button.",
+          "confidence": 0.93,
+          "evidence": "OBSERVED"
+        }
+      ],
+      "relationships": [],
+      "confidence": 0.9,
+      "evidence": "OBSERVED",
+      "background": {
+        "image": "mountain valley",
+        "overlay": "dark navy translucent overlay"
+      }
+    },
+    {
+      "id": "home-footer",
+      "name": "Global footer",
+      "bbox_px": [
+        0,
+        1687,
+        824,
+        1908
+      ],
+      "bbox_normalized": [
+        0.0,
+        0.8842,
+        1.0,
+        1.0
+      ],
+      "layout": {
+        "structure": "full-width multi-column footer"
+      },
+      "components": [
+        {
+          "id": "global-footer",
+          "type": "footer",
+          "classification": "GLOBAL",
+          "bbox_px": [
+            0,
+            1687,
+            824,
+            1908
+          ],
+          "bbox_normalized": [
+            0.0,
+            0.8842,
+            1.0,
+            1.0
+          ],
+          "description": "Dark navy footer with logo/about/social area, three navigation columns, brand statement, divider and legal/country row.",
+          "confidence": 0.97,
+          "evidence": "OBSERVED"
+        }
+      ],
+      "relationships": [],
+      "confidence": 0.9,
+      "evidence": "OBSERVED"
+    }
+  ],
+  "shared_components": [
+    {
+      "id": "global-header",
+      "name": "Primary site header",
+      "classification": "GLOBAL",
+      "reason": "Repeated on Home, Category, Product and Cart with dark navy bar, Calder logo, nav, utility icons and outlined gold fitment CTA."
+    },
+    {
+      "id": "global-footer",
+      "name": "Primary site footer",
+      "classification": "GLOBAL",
+      "reason": "Repeated on consumer-facing pages with dark navy multi-column footer, Calder mark, social icons and legal row."
+    },
+    {
+      "id": "fitment-cta",
+      "name": "Find Your Fit CTA",
+      "classification": "SHARED",
+      "reason": "Repeated high-priority gold/outlined action in consumer header and fitment workflows."
+    },
+    {
+      "id": "gold-eyebrow",
+      "name": "Gold uppercase eyebrow",
+      "classification": "SHARED",
+      "reason": "Repeated section-label pattern across marketing, collection, cart and portal compositions."
+    },
+    {
+      "id": "navy-gold-button-system",
+      "name": "Navy / gold button system",
+      "classification": "SHARED",
+      "reason": "Repeated rectangular CTAs with low radius, uppercase tracked labels and arrow affordances."
+    }
+  ],
+  "unique_components": [
+    {
+      "id": "home-hero",
+      "name": "Cinematic precision hero",
+      "classification": "PAGE_SPECIFIC",
+      "reason": "Homepage-only large brand statement and wheel hero composition."
+    },
+    {
+      "id": "home-customize",
+      "name": "Customize without limits split band",
+      "classification": "PAGE_SPECIFIC",
+      "reason": "Homepage storytelling section combining wheel macro image and four-step customization flow."
+    }
+  ],
+  "responsive_assumptions": [
+    {
+      "target": "global-header",
+      "assumption": "Primary navigation likely collapses to a compact mobile menu while retaining logo and fitment access.",
+      "confidence": 0.74,
+      "evidence": "ASSUMPTION"
+    },
+    {
+      "target": "home-wheel-cards",
+      "assumption": "Three-card row likely becomes a swipeable or stacked card layout on narrow viewports.",
+      "confidence": 0.68,
+      "evidence": "ASSUMPTION"
+    },
+    {
+      "target": "home-customize",
+      "assumption": "Split image/copy composition likely stacks vertically, with image above copy.",
+      "confidence": 0.72,
+      "evidence": "ASSUMPTION"
+    }
+  ],
+  "implementation_notes": [
+    "Preserve the floating fitment card overlap at the hero/content transition.",
+    "Use relationship-first layout; full-bleed sections alternate with a consistent contained content edge.",
+    "Maintain navy/white/gold hierarchy and restrained square/low-radius controls."
+  ],
+  "uncertainties": [
+    {
+      "target": "exact typeface",
+      "unknown": "Exact font family cannot be verified from screenshots alone.",
+      "resolution": "Confirm approved Calder brand font files or theme typography tokens."
+    },
+    {
+      "target": "hero source asset crop",
+      "unknown": "Exact original image dimensions and object-position are unknown.",
+      "resolution": "Inspect supplied approved hero asset and compare crop at 824px reference width."
+    }
+  ]
+}

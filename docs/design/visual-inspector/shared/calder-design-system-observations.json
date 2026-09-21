@@ -1,0 +1,473 @@
+{
+  "schema_version": "1.0",
+  "project": "Calder Wheels",
+  "artifact_type": "shared_design_system_observations",
+  "scope": {
+    "basis": [
+      "Calder - 1 - Home.png",
+      "Calder - 2 - Category.png",
+      "Calder - 3 - Product.png",
+      "Calder - 4 - Cart.png",
+      "Calder - 5 - Checkout.png",
+      "Calder - 6 - Dealer Dashboard.png"
+    ],
+    "purpose": "Cross-page visual-system observations for implementation consistency. Page-specific visual specifications remain authoritative for page-specific geometry.",
+    "authority_rule": "These shared observations support reuse and consistency but must not override a clear page-specific observation in an approved mockup or page visual specification."
+  },
+  "design_language": {
+    "character": [
+      "premium automotive",
+      "precision engineered",
+      "performance-oriented",
+      "restrained luxury",
+      "technical rather than decorative"
+    ],
+    "composition": "Strong rectangular geometry, disciplined alignment, generous white space in commerce areas, cinematic dark photographic bands in brand/storytelling areas, and limited use of gold as emphasis.",
+    "confidence": 0.94,
+    "evidence": "OBSERVED"
+  },
+  "color_system": {
+    "primary_navy": {
+      "estimated": "#031B2A to #08283A",
+      "usage": [
+        "global consumer header/footer",
+        "dark CTA",
+        "hero overlays",
+        "dark promotional bands",
+        "dealer sidebar"
+      ],
+      "confidence": 0.84,
+      "evidence": "ESTIMATED"
+    },
+    "primary_white": {
+      "estimated": "#FFFFFF to #F8F9F9",
+      "usage": [
+        "commerce backgrounds",
+        "cards",
+        "forms",
+        "checkout shell"
+      ],
+      "confidence": 0.92,
+      "evidence": "ESTIMATED"
+    },
+    "accent_gold": {
+      "estimated": "#C89A5B to #D5AA70",
+      "usage": [
+        "eyebrows",
+        "primary CTA fills",
+        "borders/active accents",
+        "step emphasis",
+        "selected states"
+      ],
+      "confidence": 0.8,
+      "evidence": "ESTIMATED"
+    },
+    "text_navy": {
+      "estimated": "#061D3A to #0A2443",
+      "usage": [
+        "headings",
+        "labels",
+        "commerce text"
+      ],
+      "confidence": 0.86,
+      "evidence": "ESTIMATED"
+    },
+    "muted_text": {
+      "estimated": "#607086 to #7A8798",
+      "usage": [
+        "secondary copy",
+        "metadata",
+        "inactive progress labels"
+      ],
+      "confidence": 0.73,
+      "evidence": "ESTIMATED"
+    },
+    "success_green": {
+      "estimated": "#239B45 to #39A852",
+      "usage": [
+        "fitment-confirmed states",
+        "account-good-standing state"
+      ],
+      "confidence": 0.83,
+      "evidence": "ESTIMATED"
+    },
+    "rule": "Screenshot-derived colors are estimates, not verified brand tokens. Approved brand assets/theme tokens should replace these estimates when verified."
+  },
+  "typography": {
+    "display_headings": {
+      "observations": [
+        "uppercase",
+        "heavy/bold geometric sans-serif appearance",
+        "tight line height",
+        "high contrast",
+        "frequently navy on white or white on dark"
+      ],
+      "confidence": 0.91,
+      "evidence": "OBSERVED"
+    },
+    "eyebrows": {
+      "observations": [
+        "uppercase",
+        "gold",
+        "small",
+        "expanded tracking",
+        "used as section/category context"
+      ],
+      "confidence": 0.95,
+      "evidence": "OBSERVED"
+    },
+    "navigation_and_ctas": {
+      "observations": [
+        "uppercase or compact all-caps treatment",
+        "medium-to-bold weight",
+        "expanded letter spacing",
+        "short labels"
+      ],
+      "confidence": 0.91,
+      "evidence": "OBSERVED"
+    },
+    "body_copy": {
+      "observations": [
+        "clean sans-serif",
+        "regular weight",
+        "compact line lengths",
+        "secondary hierarchy"
+      ],
+      "confidence": 0.87,
+      "evidence": "OBSERVED"
+    },
+    "exact_font_family": {
+      "value": "UNKNOWN",
+      "resolution": "Verify against approved Calder brand font assets and current Shopify theme typography tokens."
+    }
+  },
+  "geometry_and_spacing": {
+    "container_behavior": "Consumer pages use centered desktop containers for primary content while selected hero, newsletter, contact and footer regions extend full width.",
+    "alignment_rule": "Repeated components within a page deliberately share left/right content edges. Preserve these relationships before matching isolated pixel values.",
+    "corner_language": "Predominantly square or very low-radius controls/cards; rounded/pill geometry is reserved mainly for compact status indicators.",
+    "borders": "Thin, restrained light-gray or navy/gold outlines; borders define commerce controls without creating heavy card chrome.",
+    "shadows": "Soft and restrained; most evident on floating fitment cards and selected elevated surfaces.",
+    "confidence": 0.91,
+    "evidence": "OBSERVED"
+  },
+  "button_system": {
+    "gold_primary": {
+      "appearance": "Warm gold rectangular fill, low radius, tracked uppercase label, often arrow or lock/cart affordance.",
+      "uses": [
+        "major conversion CTA",
+        "checkout/order CTA",
+        "build/configuration CTA"
+      ]
+    },
+    "navy_primary": {
+      "appearance": "Deep navy rectangular fill with white uppercase text and occasional right arrow.",
+      "uses": [
+        "Find Wheels",
+        "View Details",
+        "active dealer quick action"
+      ]
+    },
+    "outline_secondary": {
+      "appearance": "Transparent/white background with thin navy or gold border and uppercase label.",
+      "uses": [
+        "secondary navigation/action",
+        "contact",
+        "continue shopping",
+        "save/share"
+      ]
+    },
+    "invariant": "Primary and secondary actions remain rectangular and visually disciplined; avoid generic rounded SaaS buttons.",
+    "confidence": 0.94,
+    "evidence": "OBSERVED"
+  },
+  "form_system": {
+    "inputs": "White/light fields with thin gray border, low radius, compact labels and clear dropdown indicators.",
+    "fitment_controls": "Year/Make/Model/Trim is a recurring structured interaction. Selected vehicle context persists deeper into the commerce flow.",
+    "checkout_fields": "Larger form fields retain the same restrained border language with strong numbered section anchors.",
+    "confidence": 0.93,
+    "evidence": "OBSERVED"
+  },
+  "imagery_system": {
+    "marketing": "Cinematic installed-wheel/vehicle photography, mountain/road environments, wheel macro photography and manufacturing imagery.",
+    "commerce": "Clean isolated wheel renders on white/light backgrounds with high product prominence.",
+    "engineering": "Machining/manufacturing imagery reinforces precision and material claims.",
+    "rule": "Do not replace supplied/approved wheel renders with AI-recreated wheel designs. Product geometry and Calder branding must remain faithful to supplied assets.",
+    "crop_behavior": "Marketing imagery frequently uses tight cover crops and deliberate wheel focal points; commerce renders favor contain-like presentation with breathing room.",
+    "confidence": 0.95,
+    "evidence": "OBSERVED"
+  },
+  "iconography": {
+    "style": "Simple line/outline icons with technical automotive character; generally monochrome navy/white with gold accents.",
+    "uses": [
+      "navigation utilities",
+      "proof points",
+      "fitment",
+      "trust/reassurance",
+      "dealer operations"
+    ],
+    "confidence": 0.86,
+    "evidence": "OBSERVED"
+  },
+  "shared_semantic_states": {
+    "fitment_confirmed": {
+      "appearance": "Green check/status mark plus green uppercase confirmation and vehicle identification.",
+      "appears_on": [
+        "Category",
+        "Product",
+        "Cart",
+        "Checkout"
+      ],
+      "classification": "SHARED"
+    },
+    "selected_or_active": {
+      "appearance": "Gold border/accent, navy active fill, or stronger contrast depending component family.",
+      "examples": [
+        "finish selection",
+        "collection mode",
+        "progress step",
+        "dealer navigation/action"
+      ]
+    },
+    "status_pills": {
+      "appearance": "Compact rounded badges reserved for operational/order/account states.",
+      "scope": "Dealer portal and selected commerce status contexts"
+    }
+  },
+  "component_families": [
+    {
+      "id": "global-consumer-header",
+      "classification": "GLOBAL",
+      "pages": [
+        "home",
+        "category",
+        "product",
+        "cart"
+      ],
+      "invariants": [
+        "deep navy background",
+        "Calder logo left",
+        "compact horizontal nav",
+        "utility icons right",
+        "Find Your Fit CTA"
+      ],
+      "variant_note": "Navigation labels differ slightly among approved references; reconcile final copy against authoritative project navigation content rather than averaging screenshots."
+    },
+    {
+      "id": "global-consumer-footer",
+      "classification": "GLOBAL",
+      "pages": [
+        "home",
+        "category",
+        "product",
+        "cart"
+      ],
+      "invariants": [
+        "deep navy background",
+        "Calder brand block",
+        "multi-column links",
+        "social icons",
+        "legal row"
+      ],
+      "variant_note": "Column labels/content vary slightly by mockup."
+    },
+    {
+      "id": "fitment-system",
+      "classification": "SHARED",
+      "pages": [
+        "home",
+        "category",
+        "product",
+        "cart",
+        "checkout"
+      ],
+      "invariants": [
+        "vehicle context",
+        "clear confirmation state",
+        "navy/gold action hierarchy"
+      ],
+      "variants": [
+        "full finder",
+        "product fitment panel",
+        "confirmed vehicle state"
+      ]
+    },
+    {
+      "id": "product-card-family",
+      "classification": "SHARED",
+      "pages": [
+        "home",
+        "category",
+        "product",
+        "checkout",
+        "dealer-dashboard"
+      ],
+      "invariants": [
+        "wheel prominence",
+        "model identifier",
+        "construction/type context",
+        "restrained borders"
+      ],
+      "variants": [
+        "editorial",
+        "collection commerce",
+        "recommendation",
+        "summary item",
+        "dealer-priced"
+      ]
+    },
+    {
+      "id": "specialist-cta",
+      "classification": "SHARED",
+      "pages": [
+        "category",
+        "product",
+        "cart"
+      ],
+      "invariants": [
+        "dark automotive background",
+        "large white specialist message",
+        "gold/outlined action"
+      ]
+    },
+    {
+      "id": "newsletter-band",
+      "classification": "SHARED",
+      "pages": [
+        "home",
+        "category"
+      ],
+      "invariants": [
+        "dark mountain image",
+        "white heading/copy",
+        "email field",
+        "gold subscribe action"
+      ]
+    },
+    {
+      "id": "commerce-progress",
+      "classification": "SHARED",
+      "pages": [
+        "cart",
+        "checkout"
+      ],
+      "invariants": [
+        "horizontal staged flow",
+        "clear active state",
+        "muted future states"
+      ],
+      "variants": [
+        "3-step cart",
+        "5-step checkout"
+      ]
+    },
+    {
+      "id": "order-summary",
+      "classification": "SHARED",
+      "pages": [
+        "cart",
+        "checkout"
+      ],
+      "invariants": [
+        "right-side desktop card",
+        "monetary hierarchy",
+        "dominant gold conversion CTA",
+        "trust/reassurance"
+      ]
+    }
+  ],
+  "page_shells": [
+    {
+      "id": "consumer",
+      "pages": [
+        "home",
+        "category",
+        "product",
+        "cart"
+      ],
+      "description": "Full dark consumer header plus full marketing footer."
+    },
+    {
+      "id": "checkout",
+      "pages": [
+        "checkout"
+      ],
+      "description": "Distraction-minimized white secure header and compact dark support footer; no consumer marketing navigation."
+    },
+    {
+      "id": "dealer-portal",
+      "pages": [
+        "dealer-dashboard"
+      ],
+      "description": "Authenticated application shell with fixed-width dark sidebar and white account utility bar; shares Calder brand language but not consumer IA."
+    }
+  ],
+  "responsive_assumptions": [
+    {
+      "target": "consumer navigation",
+      "assumption": "Likely collapses on narrow viewports.",
+      "confidence": 0.76,
+      "evidence": "ASSUMPTION"
+    },
+    {
+      "target": "collection filters",
+      "assumption": "Likely become a drawer or compact filter control.",
+      "confidence": 0.83,
+      "evidence": "ASSUMPTION"
+    },
+    {
+      "target": "multi-column commerce layouts",
+      "assumption": "Likely stack vertically on narrow screens.",
+      "confidence": 0.84,
+      "evidence": "ASSUMPTION"
+    },
+    {
+      "target": "horizontal product/media strips",
+      "assumption": "Likely become swipeable/scrollable.",
+      "confidence": 0.72,
+      "evidence": "ASSUMPTION"
+    },
+    {
+      "target": "dealer sidebar",
+      "assumption": "Likely collapses/off-canvas on smaller screens.",
+      "confidence": 0.8,
+      "evidence": "ASSUMPTION"
+    }
+  ],
+  "implementation_invariants": [
+    "Preserve relationship-based alignment before tuning isolated pixel measurements.",
+    "Do not average page-specific container widths or gutters into a single forced token.",
+    "Treat navy/white/gold hierarchy as a system invariant while verifying exact tokens from brand assets.",
+    "Preserve fitment context through browse, product, cart and checkout.",
+    "Keep product renders faithful to supplied/approved wheel assets.",
+    "Use controlled variants for consumer, checkout and dealer shells rather than forcing one shell across all pages.",
+    "Use shared-component changes cautiously and regression-check previously accepted pages.",
+    "Do not convert screenshot bounding boxes into blanket absolute positioning."
+  ],
+  "uncertainties": [
+    {
+      "target": "font family",
+      "unknown": "Exact family/weights are not proven by screenshots.",
+      "resolution": "Verify brand kit and theme tokens."
+    },
+    {
+      "target": "exact color tokens",
+      "unknown": "Screenshot colors are raster-derived estimates.",
+      "resolution": "Verify approved brand color values."
+    },
+    {
+      "target": "global navigation/footer copy",
+      "unknown": "Minor content differences exist among approved page mockups.",
+      "resolution": "Use project content/navigation authority while preserving the approved visual treatment."
+    },
+    {
+      "target": "responsive designs",
+      "unknown": "No approved responsive screenshots are included.",
+      "resolution": "Treat responsive behavior as implementation inference until responsive references are approved."
+    },
+    {
+      "target": "sticky behavior",
+      "unknown": "Static references do not prove sticky/fixed behavior for most controls.",
+      "resolution": "Inspect existing theme functionality and project requirements."
+    }
+  ]
+}

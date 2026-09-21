@@ -1,0 +1,180 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "calder-visual-correction.schema.json",
+  "title": "Calder Visual Correction Specification",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "project",
+    "artifact_type",
+    "page",
+    "iteration",
+    "reference",
+    "implementation",
+    "structural_pass",
+    "visual_pass",
+    "final_status",
+    "summary",
+    "differences",
+    "preserve",
+    "blocked_by"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "1.0"
+    },
+    "project": {
+      "type": "string",
+      "const": "Calder Wheels"
+    },
+    "artifact_type": {
+      "type": "string",
+      "const": "visual_correction"
+    },
+    "page": {"type": "string"},
+    "iteration": {"type": "integer", "minimum": 1},
+    "reference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["file", "width", "height"],
+      "properties": {
+        "file": {"type": "string"},
+        "width": {"type": "integer", "minimum": 1},
+        "height": {"type": "integer", "minimum": 1}
+      }
+    },
+    "implementation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["file", "width", "height"],
+      "properties": {
+        "file": {"type": "string"},
+        "width": {"type": "integer", "minimum": 1},
+        "height": {"type": "integer", "minimum": 1}
+      }
+    },
+    "structural_pass": {"type": "boolean"},
+    "visual_pass": {"type": "boolean"},
+    "final_status": {
+      "type": "string",
+      "enum": [
+        "PASS",
+        "PASS_WITH_MINOR_NOTES",
+        "REVISION_REQUIRED",
+        "BLOCKED"
+      ]
+    },
+    "summary": {"type": "string"},
+    "differences": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/difference"}
+    },
+    "preserve": {
+      "type": "array",
+      "items": {"type": "string"}
+    },
+    "blocked_by": {
+      "type": "array",
+      "items": {"type": "string"}
+    }
+  },
+  "$defs": {
+    "bbox": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "prefixItems": [
+        {"type": "number"},
+        {"type": "number"},
+        {"type": "number"},
+        {"type": "number"}
+      ]
+    },
+    "normalizedBbox": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "prefixItems": [
+        {"type": "number", "minimum": 0, "maximum": 1},
+        {"type": "number", "minimum": 0, "maximum": 1},
+        {"type": "number", "minimum": 0, "maximum": 1},
+        {"type": "number", "minimum": 0, "maximum": 1}
+      ]
+    },
+    "difference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "component",
+        "category",
+        "severity",
+        "reference_state",
+        "implementation_state",
+        "desired_relationship",
+        "correction",
+        "confidence"
+      ],
+      "properties": {
+        "id": {"type": "string"},
+        "component": {"type": "string"},
+        "category": {
+          "type": "string",
+          "enum": [
+            "STRUCTURE",
+            "POSITION",
+            "SIZE",
+            "SPACING",
+            "ALIGNMENT",
+            "TYPOGRAPHY",
+            "COLOR",
+            "BACKGROUND",
+            "BORDER",
+            "RADIUS",
+            "SHADOW",
+            "IMAGERY",
+            "CROP",
+            "OVERLAY",
+            "GRID",
+            "RESPONSIVE",
+            "CONTENT",
+            "FUNCTIONAL_VISUAL_STATE",
+            "OTHER"
+          ]
+        },
+        "severity": {
+          "type": "string",
+          "enum": [
+            "CRITICAL",
+            "HIGH",
+            "MEDIUM",
+            "LOW",
+            "INFORMATIONAL"
+          ]
+        },
+        "reference_bbox_px": {"$ref": "#/$defs/bbox"},
+        "implementation_bbox_px": {"$ref": "#/$defs/bbox"},
+        "reference_bbox_normalized": {"$ref": 
+"#/$defs/normalizedBbox"},
+        "implementation_bbox_normalized": {"$ref": 
+"#/$defs/normalizedBbox"},
+        "reference_state": {"type": "string"},
+        "implementation_state": {"type": "string"},
+        "estimated_delta": {"type": ["string", "null"]},
+        "desired_relationship": {"type": "string"},
+        "correction": {"type": "string"},
+        "preserve": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "confidence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        }
+      }
+    }
+  }
+}

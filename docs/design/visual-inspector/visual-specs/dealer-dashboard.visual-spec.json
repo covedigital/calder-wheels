@@ -1,0 +1,512 @@
+{
+  "schema_version": "1.0",
+  "project": "Calder Wheels",
+  "artifact_type": "visual_specification",
+  "source": {
+    "file": "Calder - 6 - Dealer Dashboard.png",
+    "viewport": {
+      "width": 1536,
+      "height": 1024
+    }
+  },
+  "page": {
+    "id": "dealer-dashboard",
+    "type": "dealer_portal_dashboard",
+    "summary": "Authenticated B2B dashboard using a fixed dark sidebar, white account utility bar, branded welcome hero, overlapping KPI cards, quick actions, order table, production tracker, activity feed and dealer product cards."
+  },
+  "global_layout": {
+    "content_max_width": {
+      "value": "~1329px portal canvas excluding 207px sidebar",
+      "confidence": 0.96,
+      "evidence": "OBSERVED",
+      "range": "1325-1330px",
+      "tolerance": "\u00b14px"
+    },
+    "horizontal_gutters": {
+      "value": "~30-32px inside portal content",
+      "confidence": 0.9,
+      "evidence": "ESTIMATED",
+      "range": "28-34px",
+      "tolerance": "\u00b14px"
+    },
+    "primary_alignment": "Portal content begins after a fixed ~207px sidebar; dashboard cards align to a consistent x\u2248238 content edge.",
+    "page_background": {
+      "value": "#F7F8F8",
+      "confidence": 0.9,
+      "evidence": "ESTIMATED"
+    }
+  },
+  "sections": [
+    {
+      "id": "dealer-sidebar",
+      "name": "Dealer portal sidebar",
+      "bbox_px": [
+        0,
+        0,
+        207,
+        1024
+      ],
+      "bbox_normalized": [
+        0.0,
+        0.0,
+        0.1348,
+        1.0
+      ],
+      "layout": {
+        "structure": "fixed-width full-height sidebar",
+        "width": "~207px"
+      },
+      "components": [
+        {
+          "id": "dealer-brand",
+          "type": "portal_brand",
+          "classification": "PAGE_SPECIFIC",
+          "bbox_px": [
+            0,
+            0,
+            207,
+            158
+          ],
+          "bbox_normalized": [
+            0.0,
+            0.0,
+            0.1348,
+            0.1543
+          ],
+          "description": "Dark sidebar top with Calder emblem/wordmark and DEALER PORTAL label.",
+          "confidence": 0.96,
+          "evidence": "OBSERVED"
+        },
+        {
+          "id": "dealer-nav",
+          "type": "portal_navigation",
+          "classification": "PAGE_SPECIFIC",
+          "bbox_px": [
+            0,
+            158,
+            207,
+            777
+          ],
+          "bbox_normalized": [
+            0.0,
+            0.1543,
+            0.1348,
+            0.7588
+          ],
+          "description": "Vertical icon navigation; Dashboard active with gold accent strip; Account subsection divider and support/logout near bottom.",
+          "confidence": 0.98,
+          "evidence": "OBSERVED"
+        },
+        {
+          "id": "dealer-sidebar-image",
+          "type": "sidebar_brand_image",
+          "classification": "PAGE_SPECIFIC",
+          "bbox_px": [
+            0,
+            777,
+            207,
+            1024
+          ],
+          "bbox_normalized": [
+            0.0,
+            0.7588,
+            0.1348,
+            1.0
+          ],
+          "description": "Mountain image and brand statement at bottom of sidebar.",
+          "confidence": 0.94,
+          "evidence": "OBSERVED",
+          "imagery": {
+            "fit": "cover",
+            "overlay": "dark navy"
+          }
+        }
+      ],
+      "relationships": [],
+      "confidence": 0.9,
+      "evidence": "OBSERVED"
+    },
+    {
+      "id": "dealer-topbar",
+      "name": "Dealer account top bar",
+      "bbox_px": [
+        207,
+        0,
+        1536,
+        54
+      ],
+      "bbox_normalized": [
+        0.1348,
+        0.0,
+        1.0,
+        0.0527
+      ],
+      "layout": {
+        "structure": "horizontal account utility bar"
+      },
+      "components": [
+        {
+          "id": "dealer-account-bar",
+          "type": "portal_topbar",
+          "classification": "PAGE_SPECIFIC",
+          "bbox_px": [
+            207,
+            0,
+            1536,
+            54
+          ],
+          "bbox_normalized": [
+            0.1348,
+            0.0,
+            1.0,
+            0.0527
+          ],
+          "description": "White top bar with dealer selector, tier badge, Net-30 badge, account-standing status, notification icon and user/account menu.",
+          "confidence": 0.97,
+          "evidence": "OBSERVED"
+        }
+      ],
+      "relationships": [],
+      "confidence": 0.9,
+      "evidence": "OBSERVED"
+    },
+    {
+      "id": "dealer-hero",
+      "name": "Dealer dashboard hero",
+      "bbox_px": [
+        207,
+        54,
+        1536,
+        268
+      ],
+      "bbox_normalized": [
+        0.1348,
+        0.0527,
+        1.0,
+        0.2617
+      ],
+      "layout": {
+        "structure": "full-width portal hero with overlapping KPI row"
+      },
+      "components": [
+        {
+          "id": "dealer-welcome",
+          "type": "hero_copy",
+          "classification": "PAGE_SPECIFIC",
+          "bbox_px": [
+            242,
+            84,
+            690,
+            205
+          ],
+          "bbox_normalized": [
+            0.1576,
+            0.082,
+            0.4492,
+            0.2002
+          ],
+          "description": "Gold DEALER PORTAL eyebrow, large two-line welcome heading and supporting sentence.",
+          "confidence": 0.95,
+          "evidence": "OBSERVED"
+        },
+        {
+          "id": "dealer-hero-image",
+          "type": "hero_image",
+          "classification": "PAGE_SPECIFIC",
+          "bbox_px": [
+            613,
+            54,
+            1536,
+            235
+          ],
+          "bbox_normalized": [
+            0.3991,
+            0.0527,
+            1.0,
+            0.2295
+          ],
+          "description": "Mountain road/wheel image with dark right brand panel and statement.",
+          "confidence": 0.95,
+          "evidence": "OBSERVED",
+          "imagery": {
+            "fit": "cover",
+            "focal_point": "wheel near x=1080"
+          }
+        },
+        {
+          "id": "dealer-metrics",
+          "type": "metric_cards",
+          "classification": "PAGE_SPECIFIC",
+          "bbox_px": [
+            236,
+            234,
+            1507,
+            334
+          ],
+          "bbox_normalized": [
+            0.1536,
+            0.2285,
+            0.9811,
+            0.3262
+          ],
+          "description": "Four white KPI cards spanning dashboard: Open Orders, In Production, Pending Quotes, Available Credit.",
+          "confidence": 0.98,
+          "evidence": "OBSERVED",
+          "layout": {
+            "grid": "4 columns"
+          }
+        }
+      ],
+      "relationships": [],
+      "confidence": 0.9,
+      "evidence": "OBSERVED"
+    },
+    {
+      "id": "dealer-actions",
+      "name": "Quick actions",
+      "bbox_px": [
+        238,
+        349,
+        1508,
+        450
+      ],
+      "bbox_normalized": [
+        0.1549,
+        0.3408,
+        0.9818,
+        0.4395
+      ],
+      "layout": {
+        "structure": "heading plus four-card action row"
+      },
+      "components": [
+        {
+          "id": "dealer-action-cards",
+          "type": "action_cards",
+          "classification": "PAGE_SPECIFIC",
+          "bbox_px": [
+            239,
+            381,
+            1508,
+            449
+          ],
+          "bbox_normalized": [
+            0.1556,
+            0.3721,
+            0.9818,
+            0.4385
+          ],
+          "description": "Four horizontal quick-action cards; Quick Order active/dark, remaining cards white.",
+          "confidence": 0.97,
+          "evidence": "OBSERVED",
+          "layout": {
+            "grid": "4 columns",
+            "gap": "~14px"
+          }
+        }
+      ],
+      "relationships": [],
+      "confidence": 0.9,
+      "evidence": "OBSERVED"
+    },
+    {
+      "id": "dealer-orders",
+      "name": "Orders and production tracker",
+      "bbox_px": [
+        238,
+        469,
+        1508,
+        742
+      ],
+      "bbox_normalized": [
+        0.1549,
+        0.458,
+        0.9818,
+        0.7246
+      ],
+      "layout": {
+        "structure": "two-column operational dashboard",
+        "columns": "~65/35"
+      },
+      "components": [
+        {
+          "id": "dealer-recent-orders",
+          "type": "data_table",
+          "classification": "PAGE_SPECIFIC",
+          "bbox_px": [
+            239,
+            469,
+            1058,
+            741
+          ],
+          "bbox_normalized": [
+            0.1556,
+            0.458,
+            0.6888,
+            0.7236
+          ],
+          "description": "Recent Orders table with five rows, status pills and View actions.",
+          "confidence": 0.98,
+          "evidence": "OBSERVED"
+        },
+        {
+          "id": "dealer-production",
+          "type": "production_tracker",
+          "classification": "PAGE_SPECIFIC",
+          "bbox_px": [
+            1068,
+            469,
+            1508,
+            741
+          ],
+          "bbox_normalized": [
+            0.6953,
+            0.458,
+            0.9818,
+            0.7236
+          ],
+          "description": "Production tracker card with order metadata, six-stage timeline and compact wheel/order item.",
+          "confidence": 0.98,
+          "evidence": "OBSERVED"
+        }
+      ],
+      "relationships": [],
+      "confidence": 0.9,
+      "evidence": "OBSERVED"
+    },
+    {
+      "id": "dealer-lower",
+      "name": "Recent activity and featured wheels",
+      "bbox_px": [
+        238,
+        752,
+        1508,
+        984
+      ],
+      "bbox_normalized": [
+        0.1549,
+        0.7344,
+        0.9818,
+        0.9609
+      ],
+      "layout": {
+        "structure": "two-column lower dashboard",
+        "columns": "~45/55"
+      },
+      "components": [
+        {
+          "id": "dealer-activity",
+          "type": "activity_list",
+          "classification": "PAGE_SPECIFIC",
+          "bbox_px": [
+            239,
+            752,
+            807,
+            984
+          ],
+          "bbox_normalized": [
+            0.1556,
+            0.7344,
+            0.5254,
+            0.9609
+          ],
+          "description": "Recent Activity list with icons, event descriptions and timestamps.",
+          "confidence": 0.97,
+          "evidence": "OBSERVED"
+        },
+        {
+          "id": "dealer-featured",
+          "type": "dealer_product_cards",
+          "classification": "PAGE_SPECIFIC",
+          "bbox_px": [
+            817,
+            752,
+            1508,
+            984
+          ],
+          "bbox_normalized": [
+            0.5319,
+            0.7344,
+            0.9818,
+            0.9609
+          ],
+          "description": "Three dealer-priced wheel cards with MSRP comparison and View/Configure buttons.",
+          "confidence": 0.97,
+          "evidence": "OBSERVED",
+          "layout": {
+            "grid": "3 columns"
+          }
+        }
+      ],
+      "relationships": [],
+      "confidence": 0.9,
+      "evidence": "OBSERVED"
+    }
+  ],
+  "shared_components": [
+    {
+      "id": "dealer-card-shell",
+      "name": "Dealer portal card shell",
+      "classification": "SHARED",
+      "reason": "Repeated white card surfaces with thin borders/shadows across metrics, actions, tables and product modules."
+    },
+    {
+      "id": "dealer-status-pill",
+      "name": "Dealer status pill",
+      "classification": "SHARED",
+      "reason": "Repeated compact rounded state indicators across account standing and order statuses."
+    },
+    {
+      "id": "navy-gold-button-system",
+      "name": "Navy / gold action system",
+      "classification": "SHARED",
+      "reason": "Portal adapts consumer brand navy/gold hierarchy to operational cards and CTAs."
+    }
+  ],
+  "unique_components": [
+    {
+      "id": "dealer-sidebar",
+      "name": "Dealer portal sidebar",
+      "classification": "PAGE_SPECIFIC",
+      "reason": "Authenticated portal navigation architecture not used by consumer pages."
+    },
+    {
+      "id": "dealer-production",
+      "name": "Production tracker",
+      "classification": "PAGE_SPECIFIC",
+      "reason": "B2B manufacturing/order-status visualization."
+    }
+  ],
+  "responsive_assumptions": [
+    {
+      "target": "dealer-sidebar",
+      "assumption": "Sidebar likely collapses to an off-canvas or compact navigation on smaller viewports.",
+      "confidence": 0.8,
+      "evidence": "ASSUMPTION"
+    },
+    {
+      "target": "dealer-orders",
+      "assumption": "Table and production tracker likely stack; wide table may require horizontal scrolling.",
+      "confidence": 0.77,
+      "evidence": "ASSUMPTION"
+    },
+    {
+      "target": "dealer-metrics",
+      "assumption": "Four KPI cards likely wrap to 2x2 then single-column.",
+      "confidence": 0.79,
+      "evidence": "ASSUMPTION"
+    }
+  ],
+  "implementation_notes": [
+    "Dealer portal is visually the same Calder brand but a distinct authenticated application shell; do not force consumer header/footer into it.",
+    "Preserve dense information hierarchy while keeping white card surfaces and navy typography consistent.",
+    "KPI row visibly overlaps the hero lower boundary; this relationship is a key portal signature."
+  ],
+  "uncertainties": [
+    {
+      "target": "sidebar persistence",
+      "unknown": "Static screenshot cannot prove fixed/sticky scroll behavior.",
+      "resolution": "Inspect portal functional requirements and existing implementation."
+    }
+  ]
+}

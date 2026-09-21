@@ -1,0 +1,392 @@
+{
+  "schema_version": "1.0",
+  "project": "Calder Wheels",
+  "artifact_type": "visual_specification",
+  "source": {
+    "file": "Calder - 4 - Cart.png",
+    "viewport": {
+      "width": 1374,
+      "height": 1145
+    }
+  },
+  "page": {
+    "id": "cart",
+    "type": "shopping_cart",
+    "summary": "Simplified commerce cart with page title/progress, two-column cart-items/order-summary layout, specialist reassurance CTA and global footer."
+  },
+  "global_layout": {
+    "content_max_width": {
+      "value": "~1222px",
+      "confidence": 0.92,
+      "evidence": "ESTIMATED",
+      "range": "1210-1230px",
+      "tolerance": "\u00b112px"
+    },
+    "horizontal_gutters": {
+      "value": "~62px",
+      "confidence": 0.94,
+      "evidence": "ESTIMATED",
+      "range": "58-66px",
+      "tolerance": "\u00b14px"
+    },
+    "primary_alignment": "Centered wide container; title, cart panel and specialist banner share the same left edge.",
+    "page_background": {
+      "value": "#FFFFFF",
+      "confidence": 0.97,
+      "evidence": "OBSERVED"
+    }
+  },
+  "sections": [
+    {
+      "id": "cart-header",
+      "name": "Global header",
+      "bbox_px": [
+        0,
+        0,
+        1374,
+        62
+      ],
+      "bbox_normalized": [
+        0.0,
+        0.0,
+        1.0,
+        0.0541
+      ],
+      "layout": {
+        "structure": "full-width row"
+      },
+      "components": [
+        {
+          "id": "global-header",
+          "type": "header",
+          "classification": "GLOBAL",
+          "bbox_px": [
+            0,
+            0,
+            1374,
+            62
+          ],
+          "bbox_normalized": [
+            0.0,
+            0.0,
+            1.0,
+            0.0541
+          ],
+          "description": "Wide consumer header with logo, nav, utility icons/cart count and fitment CTA.",
+          "confidence": 0.97,
+          "evidence": "OBSERVED"
+        }
+      ],
+      "relationships": [],
+      "confidence": 0.9,
+      "evidence": "OBSERVED"
+    },
+    {
+      "id": "cart-title-progress",
+      "name": "Cart title and progress",
+      "bbox_px": [
+        62,
+        87,
+        1282,
+        158
+      ],
+      "bbox_normalized": [
+        0.0451,
+        0.076,
+        0.933,
+        0.138
+      ],
+      "layout": {
+        "structure": "two-ended header row",
+        "alignment": "title left / progress right"
+      },
+      "components": [
+        {
+          "id": "cart-title",
+          "type": "page_heading",
+          "classification": "PAGE_SPECIFIC",
+          "bbox_px": [
+            62,
+            91,
+            470,
+            151
+          ],
+          "bbox_normalized": [
+            0.0451,
+            0.0795,
+            0.3421,
+            0.1319
+          ],
+          "description": "Gold YOUR ORDER eyebrow above large navy SHOPPING CART title.",
+          "confidence": 0.96,
+          "evidence": "OBSERVED"
+        },
+        {
+          "id": "cart-progress",
+          "type": "progress_indicator",
+          "classification": "SHARED",
+          "bbox_px": [
+            968,
+            98,
+            1262,
+            145
+          ],
+          "bbox_normalized": [
+            0.7045,
+            0.0856,
+            0.9185,
+            0.1266
+          ],
+          "description": "Three-step horizontal progress with Cart active, Checkout and Confirmation inactive.",
+          "confidence": 0.95,
+          "evidence": "OBSERVED"
+        }
+      ],
+      "relationships": [],
+      "confidence": 0.9,
+      "evidence": "OBSERVED"
+    },
+    {
+      "id": "cart-content",
+      "name": "Cart items and order summary",
+      "bbox_px": [
+        62,
+        181,
+        1283,
+        726
+      ],
+      "bbox_normalized": [
+        0.0451,
+        0.1581,
+        0.9338,
+        0.6341
+      ],
+      "layout": {
+        "structure": "two-column checkout composition",
+        "columns": "~60/40",
+        "gap": "~29px"
+      },
+      "components": [
+        {
+          "id": "cart-items",
+          "type": "cart_item_list",
+          "classification": "PAGE_SPECIFIC",
+          "bbox_px": [
+            62,
+            181,
+            796,
+            656
+          ],
+          "bbox_normalized": [
+            0.0451,
+            0.1581,
+            0.5793,
+            0.5729
+          ],
+          "description": "Large bordered left panel containing two cart line items, each with wheel render, model/specs, green fitment confirmation, price, quantity control and edit/remove actions.",
+          "confidence": 0.98,
+          "evidence": "OBSERVED",
+          "layout": {
+            "rows": 2,
+            "row_height": "~220px"
+          }
+        },
+        {
+          "id": "cart-summary",
+          "type": "order_summary",
+          "classification": "SHARED",
+          "bbox_px": [
+            825,
+            181,
+            1283,
+            726
+          ],
+          "bbox_normalized": [
+            0.6004,
+            0.1581,
+            0.9338,
+            0.6341
+          ],
+          "description": "Right light-gray order summary card with subtotal/shipping/taxes, large estimated total, Affirm line, gold checkout CTA, outlined continue shopping and three trust items.",
+          "confidence": 0.98,
+          "evidence": "OBSERVED",
+          "layout": {
+            "width": "~458px"
+          }
+        }
+      ],
+      "relationships": [
+        "Order summary begins level with top of cart-item panel.",
+        "Primary checkout CTA spans most of summary width."
+      ],
+      "confidence": 0.9,
+      "evidence": "OBSERVED"
+    },
+    {
+      "id": "cart-specialist",
+      "name": "Wheel specialist CTA",
+      "bbox_px": [
+        62,
+        744,
+        1283,
+        881
+      ],
+      "bbox_normalized": [
+        0.0451,
+        0.6498,
+        0.9338,
+        0.7694
+      ],
+      "layout": {
+        "structure": "contained full-width CTA"
+      },
+      "components": [
+        {
+          "id": "cart-specialist-banner",
+          "type": "cta_banner",
+          "classification": "SHARED",
+          "bbox_px": [
+            62,
+            744,
+            1283,
+            881
+          ],
+          "bbox_normalized": [
+            0.0451,
+            0.6498,
+            0.9338,
+            0.7694
+          ],
+          "description": "Wide dark wheel-image banner with centered specialist copy and outlined Get in Touch button.",
+          "confidence": 0.94,
+          "evidence": "OBSERVED"
+        }
+      ],
+      "relationships": [],
+      "confidence": 0.9,
+      "evidence": "OBSERVED"
+    },
+    {
+      "id": "cart-footer",
+      "name": "Global footer",
+      "bbox_px": [
+        0,
+        893,
+        1374,
+        1145
+      ],
+      "bbox_normalized": [
+        0.0,
+        0.7799,
+        1.0,
+        1.0
+      ],
+      "layout": {
+        "structure": "full-width footer"
+      },
+      "components": [
+        {
+          "id": "global-footer",
+          "type": "footer",
+          "classification": "GLOBAL",
+          "bbox_px": [
+            0,
+            893,
+            1374,
+            1145
+          ],
+          "bbox_normalized": [
+            0.0,
+            0.7799,
+            1.0,
+            1.0
+          ],
+          "description": "Wide consumer footer with five content regions and legal row.",
+          "confidence": 0.97,
+          "evidence": "OBSERVED"
+        }
+      ],
+      "relationships": [],
+      "confidence": 0.9,
+      "evidence": "OBSERVED"
+    }
+  ],
+  "shared_components": [
+    {
+      "id": "global-header",
+      "name": "Primary site header",
+      "classification": "GLOBAL",
+      "reason": "Repeated on Home, Category, Product and Cart with dark navy bar, Calder logo, nav, utility icons and outlined gold fitment CTA."
+    },
+    {
+      "id": "global-footer",
+      "name": "Primary site footer",
+      "classification": "GLOBAL",
+      "reason": "Repeated on consumer-facing pages with dark navy multi-column footer, Calder mark, social icons and legal row."
+    },
+    {
+      "id": "fitment-cta",
+      "name": "Find Your Fit CTA",
+      "classification": "SHARED",
+      "reason": "Repeated high-priority gold/outlined action in consumer header and fitment workflows."
+    },
+    {
+      "id": "gold-eyebrow",
+      "name": "Gold uppercase eyebrow",
+      "classification": "SHARED",
+      "reason": "Repeated section-label pattern across marketing, collection, cart and portal compositions."
+    },
+    {
+      "id": "navy-gold-button-system",
+      "name": "Navy / gold button system",
+      "classification": "SHARED",
+      "reason": "Repeated rectangular CTAs with low radius, uppercase tracked labels and arrow affordances."
+    },
+    {
+      "id": "checkout-progress",
+      "name": "Commerce progress indicator",
+      "classification": "SHARED",
+      "reason": "Cart and Checkout both use staged progress, with different step counts/presentation."
+    },
+    {
+      "id": "order-summary",
+      "name": "Order summary card",
+      "classification": "SHARED",
+      "reason": "Cart and Checkout both present a right-side monetary summary and primary order action."
+    }
+  ],
+  "unique_components": [
+    {
+      "id": "cart-items",
+      "name": "Editable cart line-item list",
+      "classification": "PAGE_SPECIFIC",
+      "reason": "Cart-specific product review and quantity/edit/remove controls."
+    }
+  ],
+  "responsive_assumptions": [
+    {
+      "target": "cart-content",
+      "assumption": "Order summary likely moves below cart items on narrow screens.",
+      "confidence": 0.86,
+      "evidence": "ASSUMPTION"
+    },
+    {
+      "target": "cart-progress",
+      "assumption": "Progress labels may compress while preserving active-step state.",
+      "confidence": 0.62,
+      "evidence": "ASSUMPTION"
+    }
+  ],
+  "implementation_notes": [
+    "Keep the page materially simpler than marketing pages; whitespace is part of the design.",
+    "Maintain green fitment confirmation close to each line item's vehicle metadata.",
+    "Do not visually compete with the gold Proceed to Checkout CTA."
+  ],
+  "uncertainties": [
+    {
+      "target": "summary stickiness",
+      "unknown": "Static screenshot cannot establish whether order summary is sticky during scroll.",
+      "resolution": "Check existing cart behavior; preserve if functional unless it conflicts visually."
+    }
+  ]
+}

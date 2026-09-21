@@ -1,0 +1,13 @@
+{
+  "schema_version": "1.0",
+  "project": "Calder Wheels",
+  "artifact_type": "visual_inspector_state",
+  "page": "checkout",
+  "reference": "docs/design/mockups/approved-mockups/Calder - 5 - Checkout.png",
+  "baseline": "docs/design/visual-inspector/visual-specs/checkout.visual-spec.json",
+  "status": "READY_FOR_IMPLEMENTATION",
+  "current_iteration": 0,
+  "current_render": null,
+  "latest_correction": null,
+  "accepted_render": null
+}

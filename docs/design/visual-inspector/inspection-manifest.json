@@ -1,0 +1,53 @@
+{
+  "project": "Calder Wheels",
+  "inspection_contract": "calder-visual-inspector-v1.1",
+  "sequence": [
+    "home",
+    "category",
+    "product",
+    "cart",
+    "checkout",
+    "dealer-dashboard"
+  ],
+  "artifacts": [
+    "home.visual-spec.json",
+    "category.visual-spec.json",
+    "product.visual-spec.json",
+    "cart.visual-spec.json",
+    "checkout.visual-spec.json",
+    "dealer-dashboard.visual-spec.json",
+    "home.visual-spec.md",
+    "category.visual-spec.md",
+    "product.visual-spec.md",
+    "cart.visual-spec.md",
+    "checkout.visual-spec.md",
+    "dealer-dashboard.visual-spec.md",
+    "cross-page.shared-component-assessment.md"
+  ],
+  "source_dimensions": {
+    "home": {
+      "width": 824,
+      "height": 1908
+    },
+    "category": {
+      "width": 1024,
+      "height": 1536
+    },
+    "product": {
+      "width": 824,
+      "height": 1908
+    },
+    "cart": {
+      "width": 1374,
+      "height": 1145
+    },
+    "checkout": {
+      "width": 1222,
+      "height": 1287
+    },
+    "dealer-dashboard": {
+      "width": 1536,
+      "height": 1024
+    }
+  }
+}

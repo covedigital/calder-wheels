@@ -1,0 +1,13 @@
+{
+  "schema_version": "1.0",
+  "project": "Calder Wheels",
+  "artifact_type": "visual_inspector_state",
+  "page": "dealer-dashboard",
+  "reference": "docs/design/mockups/approved-mockups/Calder - 6 - Dealer Dashboard.png",
+  "baseline": "docs/design/visual-inspector/visual-specs/dealer-dashboard.visual-spec.json",
+  "status": "READY_FOR_IMPLEMENTATION",
+  "current_iteration": 0,
+  "current_render": null,
+  "latest_correction": null,
+  "accepted_render": null
+}

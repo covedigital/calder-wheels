@@ -1,0 +1,575 @@
+{
+  "schema_version": "1.0",
+  "project": "Calder Wheels",
+  "artifact_type": "visual_specification",
+  "source": {
+    "file": "Calder - 2 - Category.png",
+    "viewport": {
+      "width": 1024,
+      "height": 1536
+    }
+  },
+  "page": {
+    "id": "category",
+    "type": "collection_listing",
+    "summary": "Forged Wheels collection page with shallow branded hero, persistent fitment finder, category-mode tiles, left filter rail, three-column product grid, specialist CTA, newsletter and footer."
+  },
+  "global_layout": {
+    "content_max_width": {
+      "value": "~934px",
+      "confidence": 0.9,
+      "evidence": "ESTIMATED",
+      "range": "920-944px",
+      "tolerance": "\u00b112px"
+    },
+    "horizontal_gutters": {
+      "value": "~44-46px",
+      "confidence": 0.92,
+      "evidence": "ESTIMATED",
+      "range": "42-48px",
+      "tolerance": "\u00b14px"
+    },
+    "primary_alignment": "Centered wide content container; product main column aligns consistently from toolbar through CTA.",
+    "page_background": {
+      "value": "#FFFFFF",
+      "confidence": 0.96,
+      "evidence": "OBSERVED"
+    }
+  },
+  "sections": [
+    {
+      "id": "category-header",
+      "name": "Global header",
+      "bbox_px": [
+        0,
+        0,
+        1024,
+        52
+      ],
+      "bbox_normalized": [
+        0.0,
+        0.0,
+        1.0,
+        0.0339
+      ],
+      "layout": {
+        "structure": "full-width row"
+      },
+      "components": [
+        {
+          "id": "global-header",
+          "type": "header",
+          "classification": "GLOBAL",
+          "bbox_px": [
+            0,
+            0,
+            1024,
+            52
+          ],
+          "bbox_normalized": [
+            0.0,
+            0.0,
+            1.0,
+            0.0339
+          ],
+          "description": "Consumer global header variant matching the established dark navy Calder navigation.",
+          "confidence": 0.96,
+          "evidence": "OBSERVED"
+        }
+      ],
+      "relationships": [],
+      "confidence": 0.9,
+      "evidence": "OBSERVED"
+    },
+    {
+      "id": "category-hero",
+      "name": "Collection hero",
+      "bbox_px": [
+        0,
+        52,
+        1024,
+        216
+      ],
+      "bbox_normalized": [
+        0.0,
+        0.0339,
+        1.0,
+        0.1406
+      ],
+      "layout": {
+        "structure": "full-width shallow hero",
+        "columns": "copy left / imagery right"
+      },
+      "components": [
+        {
+          "id": "category-hero-copy",
+          "type": "hero_copy",
+          "classification": "PAGE_SPECIFIC",
+          "bbox_px": [
+            46,
+            82,
+            494,
+            181
+          ],
+          "bbox_normalized": [
+            0.0449,
+            0.0534,
+            0.4824,
+            0.1178
+          ],
+          "description": "Gold eyebrow OUR COLLECTION, large FORGED WHEELS title with gold emphasis on WHEELS, two-line description.",
+          "confidence": 0.93,
+          "evidence": "OBSERVED"
+        },
+        {
+          "id": "category-hero-wheel",
+          "type": "hero_image",
+          "classification": "PAGE_SPECIFIC",
+          "bbox_px": [
+            520,
+            52,
+            1024,
+            216
+          ],
+          "bbox_normalized": [
+            0.5078,
+            0.0339,
+            1.0,
+            0.1406
+          ],
+          "description": "Wheel/car crop against mountain road; wheel occupies upper-right center.",
+          "confidence": 0.94,
+          "evidence": "OBSERVED",
+          "imagery": {
+            "fit": "cover",
+            "focal_point": "wheel at ~690,105",
+            "crop": "wide banner"
+          }
+        }
+      ],
+      "relationships": [],
+      "confidence": 0.9,
+      "evidence": "OBSERVED"
+    },
+    {
+      "id": "category-fitment",
+      "name": "Vehicle fitment finder",
+      "bbox_px": [
+        43,
+        201,
+        982,
+        304
+      ],
+      "bbox_normalized": [
+        0.042,
+        0.1309,
+        0.959,
+        0.1979
+      ],
+      "layout": {
+        "structure": "floating contained white card"
+      },
+      "components": [
+        {
+          "id": "category-fitment-form",
+          "type": "form",
+          "classification": "SHARED",
+          "bbox_px": [
+            58,
+            235,
+            971,
+            292
+          ],
+          "bbox_normalized": [
+            0.0566,
+            0.153,
+            0.9482,
+            0.1901
+          ],
+          "description": "White fitment bar with title/status row and four selectors plus dark CTA.",
+          "confidence": 0.95,
+          "evidence": "OBSERVED"
+        }
+      ],
+      "relationships": [],
+      "confidence": 0.9,
+      "evidence": "OBSERVED"
+    },
+    {
+      "id": "category-nav",
+      "name": "Collection mode navigation",
+      "bbox_px": [
+        46,
+        324,
+        979,
+        387
+      ],
+      "bbox_normalized": [
+        0.0449,
+        0.2109,
+        0.9561,
+        0.252
+      ],
+      "layout": {
+        "structure": "five-column tile navigation"
+      },
+      "components": [
+        {
+          "id": "category-mode-cards",
+          "type": "nav_cards",
+          "classification": "PAGE_SPECIFIC",
+          "bbox_px": [
+            46,
+            324,
+            979,
+            387
+          ],
+          "bbox_normalized": [
+            0.0449,
+            0.2109,
+            0.9561,
+            0.252
+          ],
+          "description": "Five dark photographic category tiles: All Wheels, Forged Monoblock, Forged 3-Piece, By Vehicle, By Style.",
+          "confidence": 0.95,
+          "evidence": "OBSERVED",
+          "layout": {
+            "grid": "5 equal columns",
+            "gap": "~14px"
+          }
+        }
+      ],
+      "relationships": [],
+      "confidence": 0.9,
+      "evidence": "OBSERVED"
+    },
+    {
+      "id": "category-products",
+      "name": "Filters and product grid",
+      "bbox_px": [
+        45,
+        408,
+        982,
+        1074
+      ],
+      "bbox_normalized": [
+        0.0439,
+        0.2656,
+        0.959,
+        0.6992
+      ],
+      "layout": {
+        "structure": "sidebar + main content",
+        "columns": "~19/81"
+      },
+      "components": [
+        {
+          "id": "category-filters",
+          "type": "filter_sidebar",
+          "classification": "PAGE_SPECIFIC",
+          "bbox_px": [
+            45,
+            410,
+            225,
+            1046
+          ],
+          "bbox_normalized": [
+            0.0439,
+            0.2669,
+            0.2197,
+            0.681
+          ],
+          "description": "Left sidebar with collapsible filter groups and checkbox options for wheel type, diameter, width, bolt pattern, finish, fitment and collection.",
+          "confidence": 0.96,
+          "evidence": "OBSERVED",
+          "layout": {
+            "width": "~180px"
+          }
+        },
+        {
+          "id": "category-toolbar",
+          "type": "toolbar",
+          "classification": "SHARED",
+          "bbox_px": [
+            242,
+            408,
+            980,
+            449
+          ],
+          "bbox_normalized": [
+            0.2363,
+            0.2656,
+            0.957,
+            0.2923
+          ],
+          "description": "Results count, selected vehicle chip, sort selector and grid/list view controls.",
+          "confidence": 0.94,
+          "evidence": "OBSERVED"
+        },
+        {
+          "id": "category-product-grid",
+          "type": "product_grid",
+          "classification": "SHARED",
+          "bbox_px": [
+            241,
+            454,
+            979,
+            1039
+          ],
+          "bbox_normalized": [
+            0.2354,
+            0.2956,
+            0.9561,
+            0.6764
+          ],
+          "description": "Two rows of three bordered product cards with fitment badge, wheel render, favorite icon, model/type/finish/sizes/price and full-width View Details button.",
+          "confidence": 0.97,
+          "evidence": "OBSERVED",
+          "layout": {
+            "grid": "3 columns x 2 rows",
+            "gap": "~12px"
+          }
+        },
+        {
+          "id": "category-pagination",
+          "type": "pagination",
+          "classification": "SHARED",
+          "bbox_px": [
+            517,
+            1046,
+            665,
+            1072
+          ],
+          "bbox_normalized": [
+            0.5049,
+            0.681,
+            0.6494,
+            0.6979
+          ],
+          "description": "Centered compact pagination with active dark first page.",
+          "confidence": 0.9,
+          "evidence": "OBSERVED"
+        }
+      ],
+      "relationships": [],
+      "confidence": 0.9,
+      "evidence": "OBSERVED"
+    },
+    {
+      "id": "category-help",
+      "name": "Wheel specialist CTA",
+      "bbox_px": [
+        242,
+        1089,
+        981,
+        1201
+      ],
+      "bbox_normalized": [
+        0.2363,
+        0.709,
+        0.958,
+        0.7819
+      ],
+      "layout": {
+        "structure": "main-column CTA aligned with product grid"
+      },
+      "components": [
+        {
+          "id": "category-help-banner",
+          "type": "cta_banner",
+          "classification": "SHARED",
+          "bbox_px": [
+            242,
+            1089,
+            981,
+            1201
+          ],
+          "bbox_normalized": [
+            0.2363,
+            0.709,
+            0.958,
+            0.7819
+          ],
+          "description": "Dark navy help banner with large white question, gold Find Your Fit button, outlined Contact button and wheel crop at right.",
+          "confidence": 0.93,
+          "evidence": "OBSERVED"
+        }
+      ],
+      "relationships": [],
+      "confidence": 0.9,
+      "evidence": "OBSERVED"
+    },
+    {
+      "id": "category-newsletter",
+      "name": "Newsletter",
+      "bbox_px": [
+        0,
+        1218,
+        1024,
+        1345
+      ],
+      "bbox_normalized": [
+        0.0,
+        0.793,
+        1.0,
+        0.8757
+      ],
+      "layout": {
+        "structure": "full-width image band"
+      },
+      "components": [
+        {
+          "id": "category-newsletter-form",
+          "type": "newsletter_form",
+          "classification": "SHARED",
+          "bbox_px": [
+            45,
+            1246,
+            980,
+            1302
+          ],
+          "bbox_normalized": [
+            0.0439,
+            0.8112,
+            0.957,
+            0.8477
+          ],
+          "description": "Full-width mountain newsletter band with email and subscribe controls.",
+          "confidence": 0.93,
+          "evidence": "OBSERVED"
+        }
+      ],
+      "relationships": [],
+      "confidence": 0.9,
+      "evidence": "OBSERVED"
+    },
+    {
+      "id": "category-footer",
+      "name": "Global footer",
+      "bbox_px": [
+        0,
+        1345,
+        1024,
+        1536
+      ],
+      "bbox_normalized": [
+        0.0,
+        0.8757,
+        1.0,
+        1.0
+      ],
+      "layout": {
+        "structure": "full-width footer"
+      },
+      "components": [
+        {
+          "id": "global-footer",
+          "type": "footer",
+          "classification": "GLOBAL",
+          "bbox_px": [
+            0,
+            1345,
+            1024,
+            1536
+          ],
+          "bbox_normalized": [
+            0.0,
+            0.8757,
+            1.0,
+            1.0
+          ],
+          "description": "Dark navy multi-column consumer footer.",
+          "confidence": 0.97,
+          "evidence": "OBSERVED"
+        }
+      ],
+      "relationships": [],
+      "confidence": 0.9,
+      "evidence": "OBSERVED"
+    }
+  ],
+  "shared_components": [
+    {
+      "id": "global-header",
+      "name": "Primary site header",
+      "classification": "GLOBAL",
+      "reason": "Repeated on Home, Category, Product and Cart with dark navy bar, Calder logo, nav, utility icons and outlined gold fitment CTA."
+    },
+    {
+      "id": "global-footer",
+      "name": "Primary site footer",
+      "classification": "GLOBAL",
+      "reason": "Repeated on consumer-facing pages with dark navy multi-column footer, Calder mark, social icons and legal row."
+    },
+    {
+      "id": "fitment-cta",
+      "name": "Find Your Fit CTA",
+      "classification": "SHARED",
+      "reason": "Repeated high-priority gold/outlined action in consumer header and fitment workflows."
+    },
+    {
+      "id": "gold-eyebrow",
+      "name": "Gold uppercase eyebrow",
+      "classification": "SHARED",
+      "reason": "Repeated section-label pattern across marketing, collection, cart and portal compositions."
+    },
+    {
+      "id": "navy-gold-button-system",
+      "name": "Navy / gold button system",
+      "classification": "SHARED",
+      "reason": "Repeated rectangular CTAs with low radius, uppercase tracked labels and arrow affordances."
+    },
+    {
+      "id": "product-card",
+      "name": "Wheel product card",
+      "classification": "SHARED",
+      "reason": "Reusable commerce card pattern also echoed in Product recommendations and dealer featured wheels."
+    }
+  ],
+  "unique_components": [
+    {
+      "id": "category-filters",
+      "name": "Collection filter sidebar",
+      "classification": "PAGE_SPECIFIC",
+      "reason": "Collection discovery control unique to listing context."
+    },
+    {
+      "id": "category-mode-cards",
+      "name": "Collection mode tiles",
+      "classification": "PAGE_SPECIFIC",
+      "reason": "Collection navigation band specific to wheel browsing."
+    }
+  ],
+  "responsive_assumptions": [
+    {
+      "target": "category-filters",
+      "assumption": "Filter sidebar likely collapses into a drawer/filter button on tablet/mobile.",
+      "confidence": 0.83,
+      "evidence": "ASSUMPTION"
+    },
+    {
+      "target": "category-product-grid",
+      "assumption": "Three-column grid likely reduces to two then one column as width decreases.",
+      "confidence": 0.8,
+      "evidence": "ASSUMPTION"
+    },
+    {
+      "target": "category-mode-cards",
+      "assumption": "Five navigation tiles likely become horizontally scrollable or wrap.",
+      "confidence": 0.64,
+      "evidence": "ASSUMPTION"
+    }
+  ],
+  "implementation_notes": [
+    "Keep filter rail visually independent from the product-grid card borders.",
+    "Toolbar, grid and specialist CTA share the same main-column left/right edges.",
+    "Selected vehicle context is visually persistent above products."
+  ],
+  "uncertainties": [
+    {
+      "target": "filter accordion behavior",
+      "unknown": "Open/closed interaction states beyond the shown desktop state are not visible.",
+      "resolution": "Verify existing theme filter behavior and preserve it where functional."
+    }
+  ]
+}

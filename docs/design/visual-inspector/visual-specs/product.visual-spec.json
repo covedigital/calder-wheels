@@ -1,0 +1,529 @@
+{
+  "schema_version": "1.0",
+  "project": "Calder Wheels",
+  "artifact_type": "visual_specification",
+  "source": {
+    "file": "Calder - 3 - Product.png",
+    "viewport": {
+      "width": 824,
+      "height": 1908
+    }
+  },
+  "page": {
+    "id": "product",
+    "type": "product_detail",
+    "summary": "Two-column wheel PDP centered on gallery and configuration/purchase controls, followed by specifications, engineering proof, finish variants, real-world imagery, recommendations, specialist CTA and footer."
+  },
+  "global_layout": {
+    "content_max_width": {
+      "value": "~724px",
+      "confidence": 0.91,
+      "evidence": "ESTIMATED",
+      "range": "716-730px",
+      "tolerance": "\u00b18px"
+    },
+    "horizontal_gutters": {
+      "value": "~38px",
+      "confidence": 0.94,
+      "evidence": "ESTIMATED",
+      "range": "36-40px",
+      "tolerance": "\u00b13px"
+    },
+    "primary_alignment": "Contained PDP with repeated left/right edges at x\u224838 and x\u2248761; full-width contact/footer bands.",
+    "page_background": {
+      "value": "#FFFFFF",
+      "confidence": 0.97,
+      "evidence": "OBSERVED"
+    }
+  },
+  "sections": [
+    {
+      "id": "product-header",
+      "name": "Global header",
+      "bbox_px": [
+        0,
+        0,
+        824,
+        44
+      ],
+      "bbox_normalized": [
+        0.0,
+        0.0,
+        1.0,
+        0.0231
+      ],
+      "layout": {
+        "structure": "full-width row"
+      },
+      "components": [
+        {
+          "id": "global-header",
+          "type": "header",
+          "classification": "GLOBAL",
+          "bbox_px": [
+            0,
+            0,
+            824,
+            44
+          ],
+          "bbox_normalized": [
+            0.0,
+            0.0,
+            1.0,
+            0.0231
+          ],
+          "description": "Consumer global header.",
+          "confidence": 0.97,
+          "evidence": "OBSERVED"
+        }
+      ],
+      "relationships": [],
+      "confidence": 0.9,
+      "evidence": "OBSERVED"
+    },
+    {
+      "id": "product-main",
+      "name": "Product purchase area",
+      "bbox_px": [
+        38,
+        51,
+        762,
+        589
+      ],
+      "bbox_normalized": [
+        0.0461,
+        0.0267,
+        0.9248,
+        0.3087
+      ],
+      "layout": {
+        "structure": "contained two-column PDP",
+        "columns": "~56/44",
+        "gap": "~25px"
+      },
+      "components": [
+        {
+          "id": "product-gallery",
+          "type": "product_gallery",
+          "classification": "PAGE_SPECIFIC",
+          "bbox_px": [
+            38,
+            76,
+            441,
+            489
+          ],
+          "bbox_normalized": [
+            0.0461,
+            0.0398,
+            0.5352,
+            0.2563
+          ],
+          "description": "Large square-ish installed wheel image with thumbnail strip below and carousel arrows.",
+          "confidence": 0.97,
+          "evidence": "OBSERVED",
+          "layout": {
+            "main_image": "~403x320",
+            "thumbnails": "5 visible"
+          }
+        },
+        {
+          "id": "product-info",
+          "type": "product_info",
+          "classification": "PAGE_SPECIFIC",
+          "bbox_px": [
+            467,
+            75,
+            761,
+            559
+          ],
+          "bbox_normalized": [
+            0.5667,
+            0.0393,
+            0.9235,
+            0.293
+          ],
+          "description": "C1 title, construction label, description, rating/SKU, fitment confirmation, selectors, finish swatches, quantity, price, Add to Cart, Save/Share and reassurance row.",
+          "confidence": 0.98,
+          "evidence": "OBSERVED",
+          "layout": {
+            "width": "~294px",
+            "stack": "vertical form"
+          }
+        }
+      ],
+      "relationships": [
+        "Gallery and product info start at nearly the same y-position.",
+        "Purchase controls form a light-gray panel inside the right column."
+      ],
+      "confidence": 0.9,
+      "evidence": "OBSERVED"
+    },
+    {
+      "id": "product-specs",
+      "name": "Specifications and engineering proof",
+      "bbox_px": [
+        38,
+        613,
+        761,
+        862
+      ],
+      "bbox_normalized": [
+        0.0461,
+        0.3213,
+        0.9235,
+        0.4518
+      ],
+      "layout": {
+        "structure": "two-column section",
+        "columns": "~45/55"
+      },
+      "components": [
+        {
+          "id": "product-spec-table",
+          "type": "spec_table",
+          "classification": "PAGE_SPECIFIC",
+          "bbox_px": [
+            38,
+            616,
+            365,
+            852
+          ],
+          "bbox_normalized": [
+            0.0461,
+            0.3229,
+            0.443,
+            0.4465
+          ],
+          "description": "Left specifications table with alternating pale rows.",
+          "confidence": 0.94,
+          "evidence": "OBSERVED"
+        },
+        {
+          "id": "product-engineering-card",
+          "type": "editorial_card",
+          "classification": "SHARED",
+          "bbox_px": [
+            390,
+            616,
+            761,
+            861
+          ],
+          "bbox_normalized": [
+            0.4733,
+            0.3229,
+            0.9235,
+            0.4513
+          ],
+          "description": "Dark manufacturing image card with ENGINEERED TO PERFORM copy and four icon proof points.",
+          "confidence": 0.95,
+          "evidence": "OBSERVED"
+        }
+      ],
+      "relationships": [],
+      "confidence": 0.9,
+      "evidence": "OBSERVED"
+    },
+    {
+      "id": "product-finishes",
+      "name": "Available finishes",
+      "bbox_px": [
+        38,
+        875,
+        761,
+        1087
+      ],
+      "bbox_normalized": [
+        0.0461,
+        0.4586,
+        0.9235,
+        0.5697
+      ],
+      "layout": {
+        "structure": "heading plus horizontal variant carousel"
+      },
+      "components": [
+        {
+          "id": "product-finish-carousel",
+          "type": "product_variant_carousel",
+          "classification": "PAGE_SPECIFIC",
+          "bbox_px": [
+            39,
+            926,
+            761,
+            1070
+          ],
+          "bbox_normalized": [
+            0.0473,
+            0.4853,
+            0.9235,
+            0.5608
+          ],
+          "description": "Six wheel finish renders in a horizontal carousel; Brushed Bronze selected with thin gold outline.",
+          "confidence": 0.96,
+          "evidence": "OBSERVED",
+          "layout": {
+            "visible_items": 6,
+            "selected_state": "gold border"
+          }
+        }
+      ],
+      "relationships": [],
+      "confidence": 0.9,
+      "evidence": "OBSERVED"
+    },
+    {
+      "id": "product-real-world",
+      "name": "Real world gallery",
+      "bbox_px": [
+        38,
+        1099,
+        761,
+        1278
+      ],
+      "bbox_normalized": [
+        0.0461,
+        0.576,
+        0.9235,
+        0.6698
+      ],
+      "layout": {
+        "structure": "heading plus four-image strip"
+      },
+      "components": [
+        {
+          "id": "product-lifestyle-gallery",
+          "type": "image_carousel",
+          "classification": "SHARED",
+          "bbox_px": [
+            38,
+            1149,
+            761,
+            1268
+          ],
+          "bbox_normalized": [
+            0.0461,
+            0.6022,
+            0.9235,
+            0.6646
+          ],
+          "description": "Four equal vehicle images showing the wheel on different cars, with side arrows.",
+          "confidence": 0.96,
+          "evidence": "OBSERVED",
+          "layout": {
+            "grid": "4 images"
+          }
+        }
+      ],
+      "relationships": [],
+      "confidence": 0.9,
+      "evidence": "OBSERVED"
+    },
+    {
+      "id": "product-recommendations",
+      "name": "You may also like",
+      "bbox_px": [
+        38,
+        1288,
+        761,
+        1514
+      ],
+      "bbox_normalized": [
+        0.0461,
+        0.6751,
+        0.9235,
+        0.7935
+      ],
+      "layout": {
+        "structure": "four-column recommendation grid"
+      },
+      "components": [
+        {
+          "id": "product-recommendation-cards",
+          "type": "product_card_group",
+          "classification": "SHARED",
+          "bbox_px": [
+            38,
+            1335,
+            761,
+            1507
+          ],
+          "bbox_normalized": [
+            0.0461,
+            0.6997,
+            0.9235,
+            0.7898
+          ],
+          "description": "Four compact wheel recommendation cards with render, model/type and starting price.",
+          "confidence": 0.95,
+          "evidence": "OBSERVED",
+          "layout": {
+            "grid": "4 columns"
+          }
+        }
+      ],
+      "relationships": [],
+      "confidence": 0.9,
+      "evidence": "OBSERVED"
+    },
+    {
+      "id": "product-contact",
+      "name": "Fitment specialist CTA",
+      "bbox_px": [
+        0,
+        1534,
+        824,
+        1651
+      ],
+      "bbox_normalized": [
+        0.0,
+        0.804,
+        1.0,
+        0.8653
+      ],
+      "layout": {
+        "structure": "full-width CTA band"
+      },
+      "components": [
+        {
+          "id": "product-contact-banner",
+          "type": "cta_banner",
+          "classification": "SHARED",
+          "bbox_px": [
+            0,
+            1534,
+            824,
+            1651
+          ],
+          "bbox_normalized": [
+            0.0,
+            0.804,
+            1.0,
+            0.8653
+          ],
+          "description": "Full-width dark wheel-texture contact banner with large specialist message and gold Get in Touch CTA.",
+          "confidence": 0.95,
+          "evidence": "OBSERVED"
+        }
+      ],
+      "relationships": [],
+      "confidence": 0.9,
+      "evidence": "OBSERVED"
+    },
+    {
+      "id": "product-footer",
+      "name": "Global footer",
+      "bbox_px": [
+        0,
+        1651,
+        824,
+        1908
+      ],
+      "bbox_normalized": [
+        0.0,
+        0.8653,
+        1.0,
+        1.0
+      ],
+      "layout": {
+        "structure": "full-width footer"
+      },
+      "components": [
+        {
+          "id": "global-footer",
+          "type": "footer",
+          "classification": "GLOBAL",
+          "bbox_px": [
+            0,
+            1651,
+            824,
+            1908
+          ],
+          "bbox_normalized": [
+            0.0,
+            0.8653,
+            1.0,
+            1.0
+          ],
+          "description": "Dark navy consumer footer.",
+          "confidence": 0.97,
+          "evidence": "OBSERVED"
+        }
+      ],
+      "relationships": [],
+      "confidence": 0.9,
+      "evidence": "OBSERVED"
+    }
+  ],
+  "shared_components": [
+    {
+      "id": "global-header",
+      "name": "Primary site header",
+      "classification": "GLOBAL",
+      "reason": "Repeated on Home, Category, Product and Cart with dark navy bar, Calder logo, nav, utility icons and outlined gold fitment CTA."
+    },
+    {
+      "id": "global-footer",
+      "name": "Primary site footer",
+      "classification": "GLOBAL",
+      "reason": "Repeated on consumer-facing pages with dark navy multi-column footer, Calder mark, social icons and legal row."
+    },
+    {
+      "id": "fitment-cta",
+      "name": "Find Your Fit CTA",
+      "classification": "SHARED",
+      "reason": "Repeated high-priority gold/outlined action in consumer header and fitment workflows."
+    },
+    {
+      "id": "gold-eyebrow",
+      "name": "Gold uppercase eyebrow",
+      "classification": "SHARED",
+      "reason": "Repeated section-label pattern across marketing, collection, cart and portal compositions."
+    },
+    {
+      "id": "navy-gold-button-system",
+      "name": "Navy / gold button system",
+      "classification": "SHARED",
+      "reason": "Repeated rectangular CTAs with low radius, uppercase tracked labels and arrow affordances."
+    }
+  ],
+  "unique_components": [
+    {
+      "id": "product-gallery",
+      "name": "PDP media gallery",
+      "classification": "PAGE_SPECIFIC",
+      "reason": "Primary product-detail media interaction."
+    },
+    {
+      "id": "product-info",
+      "name": "PDP configuration and purchase panel",
+      "classification": "PAGE_SPECIFIC",
+      "reason": "Product-specific fitment, variant, quantity and purchase controls."
+    }
+  ],
+  "responsive_assumptions": [
+    {
+      "target": "product-main",
+      "assumption": "Gallery and product-info columns likely stack, gallery first, on narrow screens.",
+      "confidence": 0.84,
+      "evidence": "ASSUMPTION"
+    },
+    {
+      "target": "product-finish-carousel",
+      "assumption": "Finish options likely become horizontally swipeable rather than wrapping all items.",
+      "confidence": 0.74,
+      "evidence": "ASSUMPTION"
+    }
+  ],
+  "implementation_notes": [
+    "Preserve strong top alignment between gallery and product-information columns.",
+    "Maintain selected finish as a clear gold-outline state without changing wheel-render scale.",
+    "Reassurance icons remain subordinate to the primary Add to Cart action."
+  ],
+  "uncertainties": [
+    {
+      "target": "gallery zoom behavior",
+      "unknown": "Zoom/modal behavior is not inferable from static reference.",
+      "resolution": "Preserve existing functional gallery/zoom if present and style to reference."
+    }
+  ]
+}
