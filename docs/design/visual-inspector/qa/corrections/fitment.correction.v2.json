@@ -1,0 +1,188 @@
+{
+  "schema_version": "1.0",
+  "project": "Calder Wheels",
+  "artifact_type": "visual_correction",
+  "component": "Calder Find Your Fit / Fitment Finder",
+  "qa_type": "CORRECTION_VERIFICATION_PASS",
+  "iteration": 2,
+  "input_state": "READY_FOR_VISUAL_QA",
+  "status": "REVISION_REQUIRED",
+  "next_state": "IMPLEMENTATION",
+  "baseline": [
+    "docs/design/visual-inspector/component-specs/fitment/fitment.visual-spec.json",
+    "docs/design/visual-inspector/component-specs/fitment/fitment.visual-spec.md"
+  ],
+  "previous_correction": "docs/design/visual-inspector/qa/corrections/fitment.correction.v1.json",
+  "previous_correction_verification": [
+    {
+      "id": "FIT-QA-001",
+      "status": "PARTIALLY_RESOLVED",
+      "evidence": "Desktop shell is wider than v1, but still reads materially narrower than the approved reference relationship; By Vehicle and By Wheel Style also do not share identical shell geometry."
+    },
+    {
+      "id": "FIT-QA-002",
+      "status": "RESOLVED",
+      "evidence": "Desktop tabs are substantially taller and more substantial, with clear active bronze underline/icon treatment and consistent attached-cap behavior."
+    },
+    {
+      "id": "FIT-QA-003",
+      "status": "REGRESSED",
+      "evidence": "By Wheel Style shell height is now close to the intended compact premium utility, but By Vehicle expands to roughly 670px tall with a very large empty lower field. The two modes no longer preserve a stable shell."
+    },
+    {
+      "id": "FIT-QA-004",
+      "status": "PARTIALLY_RESOLVED",
+      "evidence": "FIND YOUR FIT now uses a much closer modern sans treatment, but supporting copy, select values/labels, CTA and selected-vehicle text still visibly mix in serif typography inconsistent with the approved unified Calder UI system."
+    },
+    {
+      "id": "FIT-QA-005",
+      "status": "NOT_RESOLVED",
+      "evidence": "Technical artwork is absent in By Vehicle and the By Wheel Style state still shows a large empty/broken-looking rectangular artwork region."
+    },
+    {
+      "id": "FIT-QA-006",
+      "status": "PARTIALLY_RESOLVED",
+      "evidence": "Controls are larger and more substantial than v1, but remain around the low-60px range and Wheel Style controls are noticeably narrower/denser than the By Vehicle control system."
+    },
+    {
+      "id": "FIT-QA-007",
+      "status": "PARTIALLY_RESOLVED",
+      "evidence": "CTA is significantly larger and more prominent than v1, but its dimensions/relationship differ between states and remain shorter than the approved ~78\u201382px desktop relationship."
+    },
+    {
+      "id": "FIT-QA-008",
+      "status": "REGRESSED",
+      "evidence": "Duplicate vehicle text remains in By Wheel Style. More importantly, the selected-vehicle panel is completely absent from the desktop By Vehicle render, breaking the persistent right-side context requirement."
+    },
+    {
+      "id": "FIT-QA-009",
+      "status": "RESOLVED",
+      "evidence": "Desktop shell now has a clear broad, soft elevation into the light section without a hard glow."
+    },
+    {
+      "id": "FIT-QA-010",
+      "status": "NOT_RESOLVED",
+      "evidence": "Popular Searches remains visible in the By Wheel Style desktop render. It is absent from the visible By Vehicle/mobile v2 renders, so resolution is inconsistent across states."
+    },
+    {
+      "id": "FIT-QA-011",
+      "status": "PARTIALLY_RESOLVED",
+      "evidence": "Mobile tabs, 2\u00d72 controls, touch targets, CTA and no-overflow behavior remain strong. However, the captured v2 viewport does not show the selected-vehicle status/actions, so full responsive conformance cannot be verified; mixed serif/sans UI typography also remains."
+    },
+    {
+      "id": "FIT-QA-012",
+      "status": "RESOLVED",
+      "evidence": "Bronze remains restrained, green is confirmation-only where shown, and the fitment utility remains subordinate to the hero."
+    }
+  ],
+  "regression_summary": [
+    "Desktop By Vehicle shell height materially regressed and the selected-vehicle region disappeared.",
+    "Desktop states no longer preserve invariant shell geometry.",
+    "Wheel Style still exposes a broken/empty artwork region and duplicated selected-vehicle text.",
+    "Popular Searches remains in Wheel Style and displays default-link styling."
+  ],
+  "new_corrections": [
+    {
+      "id": "FIT-QA2-001",
+      "affected_state": [
+        "DESKTOP_BY_VEHICLE"
+      ],
+      "severity": "CRITICAL",
+      "baseline_requirement": "The desktop shell is a unified finder/status component with an approximately 76/24 split; selected-vehicle context remains dedicated and available when vehicle context exists. Main shell height is approximately 370\u2013372px excluding tabs.",
+      "observed_implementation": "By Vehicle renders as a very tall single finder field with no visible selected-vehicle panel or divider. The shell extends from approximately y=340 to y=1012 in the 1080px render, leaving roughly 400+ px of empty lower space.",
+      "discrepancy": "The primary desktop state has lost the approved two-region structure and is roughly ~300px taller than the intended shell relationship.",
+      "recommended_correction": "Restore the desktop By Vehicle shell to the same stable geometry used by the By Wheel Style mode: approximately 370px main-shell height excluding tabs, with the persistent selected-vehicle region occupying roughly the rightmost 23\u201324% when vehicle context exists. Remove the large empty lower field.",
+      "measurement_evidence_status": "ESTIMATED from 1920\u00d71080 render"
+    },
+    {
+      "id": "FIT-QA2-002",
+      "affected_state": [
+        "DESKTOP_BY_VEHICLE",
+        "DESKTOP_BY_WHEEL_STYLE"
+      ],
+      "severity": "HIGH",
+      "baseline_requirement": "Both tabs are modes of one shared component; shell, technical artwork, CTA treatment, selected-vehicle region and overall visual system remain consistent.",
+      "observed_implementation": "By Vehicle and By Wheel Style currently produce materially different shell heights, internal splits and content regions.",
+      "discrepancy": "Tab switching appears to change the component structure rather than only the search methodology.",
+      "recommended_correction": "Normalize both desktop modes to one invariant shell: same outer width/height, same heading origin, same artwork layer, same right-side selected-vehicle region, same divider position, and same control/CTA baseline. Only labels/options and active tab should change.",
+      "measurement_evidence_status": "OBSERVED"
+    },
+    {
+      "id": "FIT-QA2-003",
+      "affected_state": [
+        "DESKTOP_BY_VEHICLE",
+        "DESKTOP_BY_WHEEL_STYLE"
+      ],
+      "severity": "HIGH",
+      "baseline_requirement": "Technical wheel/engineering artwork is subtle background support in the upper-middle/right finder area at approximately 8\u201322% effective opacity; no visible empty image container.",
+      "observed_implementation": "Artwork is absent in By Vehicle. By Wheel Style still displays a large empty/broken rectangular region approximately 400\u00d7240px.",
+      "discrepancy": "The technical-art correction from v1 was not implemented successfully.",
+      "recommended_correction": "Ensure the decorative asset actually resolves in both modes. Render it as a non-layout-breaking background/decorative layer; no image placeholder/border may remain if loading fails. Target approximately 8\u201322% effective opacity and the same position in both desktop modes.",
+      "measurement_evidence_status": "OBSERVED + ESTIMATED"
+    },
+    {
+      "id": "FIT-QA2-004",
+      "affected_state": [
+        "DESKTOP_BY_WHEEL_STYLE"
+      ],
+      "severity": "HIGH",
+      "baseline_requirement": "Selected vehicle value appears once and the panel preserves clear readable hierarchy.",
+      "observed_implementation": "Vehicle value still reads as duplicated/concatenated: '2026 BMW M4 Competition2026 BMW M4 Competition'.",
+      "discrepancy": "Visible content-rendering defect remains from v1.",
+      "recommended_correction": "Render exactly one selected-vehicle value. Verify the same data is not output by both a static/template value and a dynamic fitment binding.",
+      "measurement_evidence_status": "OBSERVED"
+    },
+    {
+      "id": "FIT-QA2-005",
+      "affected_state": [
+        "ALL"
+      ],
+      "severity": "MEDIUM",
+      "baseline_requirement": "The component uses the approved Calder typography hierarchy consistently; UI labels, values, CTA, status and actions should belong to one coherent supporting type system.",
+      "observed_implementation": "Heading is substantially improved, but supporting copy, labels/select values, CTA and selected-vehicle text still visibly mix serif and sans treatments.",
+      "discrepancy": "Typography correction is incomplete and the component still reads as two typographic systems.",
+      "recommended_correction": "Keep the corrected modern FIND YOUR FIT treatment. Apply the approved Calder supporting UI font tokens consistently to description, labels, select values, CTA, selected-vehicle eyebrow/value/status/actions. Preserve weights/scale hierarchy rather than introducing another face.",
+      "measurement_evidence_status": "VISUAL_OBSERVATION"
+    },
+    {
+      "id": "FIT-QA2-006",
+      "affected_state": [
+        "DESKTOP_BY_WHEEL_STYLE"
+      ],
+      "severity": "MEDIUM",
+      "baseline_requirement": "No Popular Searches row exists in the approved component; both modes preserve the same intentional lower spacing.",
+      "observed_implementation": "Popular Searches remains visible beneath the Wheel Style controls and appears partially unstyled/default-link blue.",
+      "discrepancy": "Unapproved row remains and now creates an obvious styling regression.",
+      "recommended_correction": "Remove the Popular Searches row from the fitment visual component in both modes unless separately approved. Confirm no default browser link styling remains inside the shell.",
+      "measurement_evidence_status": "OBSERVED"
+    },
+    {
+      "id": "FIT-QA2-007",
+      "affected_state": [
+        "MOBILE"
+      ],
+      "severity": "MEDIUM",
+      "baseline_requirement": "Mobile priority continues through selected vehicle status/actions after the CTA, with Change Vehicle and Reset available and no horizontal overflow.",
+      "observed_implementation": "The 390\u00d7844 render shows tabs, heading/copy, 2\u00d72 controls and CTA correctly, but no selected-vehicle status/actions are visible before the bottom of the captured component area.",
+      "discrepancy": "The required selected-vehicle portion cannot be visually verified in v2 and may be missing or pushed beyond the rendered capture by excessive vertical spacing.",
+      "recommended_correction": "Verify the complete mobile component at a full-page/capture height that includes the content following the CTA. If vehicle context is active, selected vehicle, fitment status, Change Vehicle and Reset must appear beneath the CTA with practical spacing and ~44px+ interactive targets. Do not add horizontal overflow or restore decorative art at the expense of readability.",
+      "measurement_evidence_status": "OBSERVED / VERIFICATION_INCOMPLETE"
+    }
+  ],
+  "priority_order": [
+    "FIT-QA2-001",
+    "FIT-QA2-002",
+    "FIT-QA2-003",
+    "FIT-QA2-004",
+    "FIT-QA2-005",
+    "FIT-QA2-006",
+    "FIT-QA2-007"
+  ],
+  "accepted_improvements": [
+    "Tabs are materially closer to the approved scale and treatment.",
+    "FIND YOUR FIT heading treatment is substantially closer to baseline.",
+    "Desktop shadow/elevation is improved.",
+    "Mobile 2\u00d72 controls and CTA remain usable with no evident horizontal overflow.",
+    "Bronze/green hierarchy and hero subordination remain appropriate."
+  ]
+}

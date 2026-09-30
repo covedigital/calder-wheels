@@ -1,25 +1,21 @@
 (function () {
-  if (window.FitmentFinderInitialized) return;
-  window.FitmentFinderInitialized = true;
+  if (window.CalderFitmentInitialized) return;
+  window.CalderFitmentInitialized = true;
 
   var fitmentData = null;
   var fitmentDataLoaded = false;
-  var activeSectionId = null;
 
-  /* ── API Base URL ── */
   var FITMENT_API_BASE = window.CALDER_FITMENT_API || '';
 
-  /**
-   * Load fitment data from the best available source.
-   * Priority: Middleware API → Embedded DOM → window.__fitmentData → Async section
-   */
+  var VEHICLE_STORAGE_KEY = 'calder_selected_vehicle';
+
+  /* ── Data Loading ── */
+
   function loadFitmentData(callback) {
     if (fitmentDataLoaded && fitmentData) {
       callback(fitmentData);
       return;
     }
-
-    // 1. Try the middleware API (live data, auto-synced with NHTSA)
     if (FITMENT_API_BASE) {
       callFitmentAPI(function (apiData) {
         if (apiData && apiData.vehicles && apiData.vehicles.length > 0) {
@@ -36,7 +32,6 @@
     }
 
     function tryEmbedded() {
-      // 2. Try the embedded DOM data (from fitment-data.liquid snippet)
       var embedded = document.getElementById('fitment-data-json');
       if (embedded) {
         try {
@@ -48,20 +43,14 @@
             callback(data);
             return;
           }
-        } catch (e) {
-          console.warn('Fitment: embedded data parse error', e);
-        }
+        } catch (e) {}
       }
-
-      // 3. Try window.__fitmentData
       if (window.__fitmentData) {
         fitmentData = window.__fitmentData;
         fitmentDataLoaded = true;
         callback(fitmentData);
         return;
       }
-
-      // 4. Try async section endpoint (last resort)
       var xhr = new XMLHttpRequest();
       xhr.open('GET', window.Shopify.routes.root + '?section_id=async-fitment-data', true);
       xhr.onload = function () {
@@ -81,7 +70,6 @@
             }
           } catch (e) {}
         }
-        console.warn('No fitment data available');
         callback({ vehicles: [] });
       };
       xhr.onerror = function () { callback({ vehicles: [] }); };
@@ -89,37 +77,214 @@
     }
   }
 
-  /**
-   * Call the middleware fitment API with a timeout.
-   */
   function callFitmentAPI(callback) {
     var xhr = new XMLHttpRequest();
     xhr.open('GET', FITMENT_API_BASE + '/api/fitment/vehicles', true);
     xhr.setRequestHeader('Accept', 'application/json');
     xhr.timeout = 5000;
-
     xhr.onload = function () {
       if (xhr.status === 200) {
-        try {
-          callback(JSON.parse(xhr.responseText));
-          return;
-        } catch (e) {}
+        try { callback(JSON.parse(xhr.responseText)); return; } catch (e) {}
       }
       callback(null);
     };
-
     xhr.onerror = function () { callback(null); };
     xhr.ontimeout = function () { callback(null); };
     xhr.send();
   }
 
-  function loadYears(sectionId) {
-    var yearSelect = document.getElementById('fitment-year-' + sectionId);
-    if (!yearSelect) return;
+  /* ── Vehicle Persistence ── */
 
+  function saveVehicle(vehicle) {
+    try {
+      localStorage.setItem(VEHICLE_STORAGE_KEY, JSON.stringify(vehicle));
+    } catch (e) {}
+  }
+
+  function loadVehicle() {
+    try {
+      var data = localStorage.getItem(VEHICLE_STORAGE_KEY);
+      return data ? JSON.parse(data) : null;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  function clearVehicle() {
+    try {
+      localStorage.removeItem(VEHICLE_STORAGE_KEY);
+    } catch (e) {}
+  }
+
+  function updateStatusPanel(sectionId, vehicle) {
+    var statusEl = document.querySelector('#calder-fitment-finder-' + sectionId + ' [data-fitment-status]');
+    if (!statusEl) return;
+    if (vehicle) {
+      var nameEl = statusEl.querySelector('[data-fitment-vehicle-name]');
+      if (nameEl) {
+        var parts = [];
+        if (vehicle.year) parts.push(vehicle.year);
+        if (vehicle.make) parts.push(vehicle.make);
+        if (vehicle.model) parts.push(vehicle.model);
+        if (vehicle.trim) parts.push(vehicle.trim);
+        nameEl.textContent = parts.join(' ') || vehicle.display_name || 'Vehicle selected';
+      }
+      statusEl.removeAttribute('hidden');
+      statusEl.style.display = '';
+    } else {
+      statusEl.setAttribute('hidden', '');
+      statusEl.style.display = 'none';
+    }
+  }
+
+  /* ── Tab Switching ── */
+
+  function initTabs(sectionId) {
+    var section = document.querySelector('#calder-fitment-finder-' + sectionId);
+    if (!section) return;
+    var tabs = section.querySelectorAll('.hf-fitment__tab');
+    var panels = {
+      vehicle: section.querySelector('[id^="hf-panel-vehicle-"]'),
+      style: section.querySelector('[id^="hf-panel-style-"]')
+    };
+
+    tabs.forEach(function (tab) {
+      tab.addEventListener('click', function () {
+        var target = this.getAttribute('data-tab');
+        tabs.forEach(function (t) {
+          t.classList.remove('hf-fitment__tab--active');
+          t.setAttribute('aria-selected', 'false');
+        });
+        this.classList.add('hf-fitment__tab--active');
+        this.setAttribute('aria-selected', 'true');
+        Object.keys(panels).forEach(function (key) {
+          if (panels[key]) {
+            if (key === target) {
+              panels[key].classList.add('hf-fitment__panel--active');
+              panels[key].removeAttribute('hidden');
+            } else {
+              panels[key].classList.remove('hf-fitment__panel--active');
+              panels[key].setAttribute('hidden', '');
+            }
+          }
+        });
+        // Toggle descriptions
+        var descVehicle = section.querySelector('[data-description-vehicle]');
+        var descStyle = section.querySelector('[data-description-style]');
+        if (descVehicle && descStyle) {
+          if (target === 'vehicle') {
+            descVehicle.removeAttribute('hidden');
+            descStyle.setAttribute('hidden', '');
+          } else {
+            descStyle.removeAttribute('hidden');
+            descVehicle.setAttribute('hidden', '');
+          }
+        }
+      });
+    });
+  }
+
+  /* ── By Wheel Style Form ── */
+
+  function initStyleTab(sectionId) {
+    var diameter = document.getElementById('hf-diameter-' + sectionId);
+    var width = document.getElementById('hf-width-' + sectionId);
+    var bolt = document.getElementById('hf-bolt-' + sectionId);
+    var finish = document.getElementById('hf-finish-' + sectionId);
+
+    if (diameter) {
+      var dias = ['All Diameters','18"','19"','20"','21"','22"','23"','24"'];
+      diameter.innerHTML = dias.map(function(v) { return '<option value="' + (v === dias[0] ? '' : v.replace('"','')) + '">' + v + '</option>'; }).join('');
+    }
+    if (width) {
+      var wids = ['All Widths','8.5"','9"','9.5"','10"','10.5"','11"','11.5"','12"','12.5"','13"','14"'];
+      width.innerHTML = wids.map(function(v) { return '<option value="' + (v === wids[0] ? '' : v.replace('"','')) + '">' + v + '</option>'; }).join('');
+    }
+    if (bolt) {
+      var bolts = ['All Bolt Patterns','5x100','5x112','5x114.3','5x120','5x120.7','5x127','5x130','5x135','5x139.7','5x150','6x135','6x139.7'];
+      bolt.innerHTML = bolts.map(function(v) { return '<option value="' + (v === bolts[0] ? '' : v) + '">' + v + '</option>'; }).join('');
+    }
+    if (finish) {
+      var fins = ['All Finishes','Gloss Black','Satin Black','Matte Black','Brushed Silver','Polished Silver','Gloss Silver','Brushed Bronze','Matte Bronze','Gloss Bronze','Brushed Titanium','Satin Titanium','Gloss White','Brushed Clear','Chrome','Gold'];
+      finish.innerHTML = fins.map(function(v) { return '<option value="' + (v === fins[0] ? '' : v.toLowerCase().replace(/ /g,'-')) + '">' + v + '</option>'; }).join('');
+    }
+  }
+
+  /* ── By Wheel Style Submit ── */
+
+  function initStyleSubmit(sectionId) {
+    var btn = document.getElementById('hf-style-submit-' + sectionId);
+    var btn = document.getElementById('hf-style-submit-' + sectionId);
+    if (!btn) return;
+    btn.addEventListener('click', function () {
+      var diameter = document.getElementById('hf-diameter-' + sectionId);
+      var width = document.getElementById('hf-width-' + sectionId);
+      var bolt = document.getElementById('hf-bolt-' + sectionId);
+      var finish = document.getElementById('hf-finish-' + sectionId);
+      var params = [];
+      if (diameter && diameter.value) params.push('filter.v.option.diameter=' + encodeURIComponent(diameter.value));
+      if (width && width.value) params.push('filter.v.option.width=' + encodeURIComponent(width.value));
+      if (bolt && bolt.value) params.push('filter.p.m.custom.bolt_pattern=' + encodeURIComponent(bolt.value));
+      if (finish && finish.value) params.push('filter.p.m.custom.finish=' + encodeURIComponent(finish.value));
+      var url = '/collections/all';
+      if (params.length) url += '?' + params.join('&');
+      window.location.href = url;
+    });
+  }
+
+  /* ── Change Vehicle / Reset ── */
+
+  function initStatusActions(sectionId) {
+    var section = document.querySelector('#calder-fitment-finder-' + sectionId);
+    if (!section) return;
+    var changeBtn = section.querySelector('[data-fitment-change]');
+    var resetBtn = section.querySelector('[data-fitment-reset]');
+    var resultsDiv = document.getElementById('hf-results-' + sectionId);
+
+    if (changeBtn) {
+      changeBtn.addEventListener('click', function () {
+        clearVehicle();
+        updateStatusPanel(sectionId, null);
+        var yearSelect = document.getElementById('hf-year-' + sectionId);
+        if (yearSelect) {
+          yearSelect.value = '';
+          yearSelect.dispatchEvent(new Event('change'));
+        }
+        if (resultsDiv) {
+          resultsDiv.style.display = 'none';
+          resultsDiv.innerHTML = '';
+        }
+        window.scrollTo({ top: section.offsetTop - 100, behavior: 'smooth' });
+      });
+    }
+
+    if (resetBtn) {
+      resetBtn.addEventListener('click', function () {
+        clearVehicle();
+        updateStatusPanel(sectionId, null);
+        var selects = ['hf-year-', 'hf-make-', 'hf-model-', 'hf-trim-'];
+        selects.forEach(function (prefix) {
+          var el = document.getElementById(prefix + sectionId);
+          if (el) {
+            el.value = '';
+            el.dispatchEvent(new Event('change'));
+          }
+        });
+        if (resultsDiv) {
+          resultsDiv.style.display = 'none';
+          resultsDiv.innerHTML = '';
+        }
+      });
+    }
+  }
+
+  /* ── By Vehicle Form ── */
+
+  function loadYears(sectionId) {
+    var yearSelect = document.getElementById('hf-year-' + sectionId);
+    if (!yearSelect) return;
     yearSelect.disabled = true;
     yearSelect.innerHTML = '<option value="">Loading...</option>';
-
     loadFitmentData(function (data) {
       var years = [];
       for (var i = 0; i < data.vehicles.length; i++) {
@@ -127,8 +292,8 @@
         if (years.indexOf(y) === -1) years.push(y);
       }
       years.sort(function (a, b) { return b - a; });
-
-      yearSelect.innerHTML = '<option value="">' + (yearSelect.dataset.placeholder || 'Select Year') + '</option>';
+      var placeholder = yearSelect.options[0] ? yearSelect.options[0].text : 'Year';
+      yearSelect.innerHTML = '<option value="">' + placeholder + '</option>';
       for (var j = 0; j < years.length; j++) {
         var opt = document.createElement('option');
         opt.value = years[j];
@@ -136,21 +301,79 @@
         yearSelect.appendChild(opt);
       }
       yearSelect.disabled = false;
+      restoreVehicleSelection(sectionId);
     });
   }
 
+  function restoreVehicleSelection(sectionId) {
+    var vehicle = loadVehicle();
+    if (!vehicle) return;
+    var yearSelect = document.getElementById('hf-year-' + sectionId);
+    if (yearSelect && vehicle.year) {
+      for (var i = 0; i < yearSelect.options.length; i++) {
+        if (yearSelect.options[i].value === vehicle.year.toString()) {
+          yearSelect.value = vehicle.year.toString();
+          break;
+        }
+      }
+      if (yearSelect.value) {
+        yearSelect.dispatchEvent(new Event('change'));
+        setTimeout(function () {
+          var makeSelect = document.getElementById('hf-make-' + sectionId);
+          if (makeSelect && vehicle.make) {
+            for (var j = 0; j < makeSelect.options.length; j++) {
+              if (makeSelect.options[j].value === vehicle.make) {
+                makeSelect.value = vehicle.make;
+                break;
+              }
+            }
+            if (makeSelect.value) {
+              makeSelect.dispatchEvent(new Event('change'));
+              setTimeout(function () {
+                var modelSelect = document.getElementById('hf-model-' + sectionId);
+                if (modelSelect && vehicle.model) {
+                  for (var k = 0; k < modelSelect.options.length; k++) {
+                    if (modelSelect.options[k].value === vehicle.model) {
+                      modelSelect.value = vehicle.model;
+                      break;
+                    }
+                  }
+                  if (modelSelect.value) {
+                    modelSelect.dispatchEvent(new Event('change'));
+                    setTimeout(function () {
+                      var trimSelect = document.getElementById('hf-trim-' + sectionId);
+                      if (trimSelect && vehicle.trim) {
+                        for (var l = 0; l < trimSelect.options.length; l++) {
+                          if (trimSelect.options[l].value === vehicle.trim || trimSelect.options[l].textContent.indexOf(vehicle.trim) !== -1) {
+                            trimSelect.value = trimSelect.options[l].value;
+                            break;
+                          }
+                        }
+                        if (trimSelect.value) {
+                          trimSelect.dispatchEvent(new Event('change'));
+                        }
+                      }
+                    }, 300);
+                  }
+                }
+              }, 300);
+            }
+          }
+        }, 300);
+      }
+    }
+  }
+
   function populateMakes(sectionId, year) {
-    var makeSelect = document.getElementById('fitment-make-' + sectionId);
-    var modelSelect = document.getElementById('fitment-model-' + sectionId);
-    var genSelect = document.getElementById('fitment-generation-' + sectionId);
-    var submitBtn = document.getElementById('fitment-submit-' + sectionId);
-
-    modelSelect.innerHTML = '<option value="">Select Model</option>';
+    var makeSelect = document.getElementById('hf-make-' + sectionId);
+    var modelSelect = document.getElementById('hf-model-' + sectionId);
+    var trimSelect = document.getElementById('hf-trim-' + sectionId);
+    var submitBtn = document.getElementById('hf-submit-' + sectionId);
+    modelSelect.innerHTML = '<option value="">Model</option>';
     modelSelect.disabled = true;
-    genSelect.innerHTML = '<option value="">Select Generation</option>';
-    genSelect.disabled = true;
-    submitBtn.disabled = true;
-
+    trimSelect.innerHTML = '<option value="">Trim</option>';
+    trimSelect.disabled = true;
+    if (submitBtn) submitBtn.disabled = true;
     loadFitmentData(function (data) {
       var makes = [];
       for (var i = 0; i < data.vehicles.length; i++) {
@@ -160,8 +383,7 @@
         }
       }
       makes.sort();
-
-      makeSelect.innerHTML = '<option value="">Select Make</option>';
+      makeSelect.innerHTML = '<option value="">Make</option>';
       for (var j = 0; j < makes.length; j++) {
         var opt = document.createElement('option');
         opt.value = makes[j];
@@ -173,14 +395,12 @@
   }
 
   function populateModels(sectionId, year, make) {
-    var modelSelect = document.getElementById('fitment-model-' + sectionId);
-    var genSelect = document.getElementById('fitment-generation-' + sectionId);
-    var submitBtn = document.getElementById('fitment-submit-' + sectionId);
-
-    genSelect.innerHTML = '<option value="">Select Generation</option>';
-    genSelect.disabled = true;
-    submitBtn.disabled = true;
-
+    var modelSelect = document.getElementById('hf-model-' + sectionId);
+    var trimSelect = document.getElementById('hf-trim-' + sectionId);
+    var submitBtn = document.getElementById('hf-submit-' + sectionId);
+    trimSelect.innerHTML = '<option value="">Trim</option>';
+    trimSelect.disabled = true;
+    if (submitBtn) submitBtn.disabled = true;
     loadFitmentData(function (data) {
       var models = [];
       for (var i = 0; i < data.vehicles.length; i++) {
@@ -190,8 +410,7 @@
         }
       }
       models.sort();
-
-      modelSelect.innerHTML = '<option value="">Select Model</option>';
+      modelSelect.innerHTML = '<option value="">Model</option>';
       for (var j = 0; j < models.length; j++) {
         var opt = document.createElement('option');
         opt.value = models[j];
@@ -202,12 +421,11 @@
     });
   }
 
-  function populateGenerations(sectionId, year, make, model) {
-    var genSelect = document.getElementById('fitment-generation-' + sectionId);
-    var submitBtn = document.getElementById('fitment-submit-' + sectionId);
-
+  function populateTrims(sectionId, year, make, model) {
+    var trimSelect = document.getElementById('hf-trim-' + sectionId);
+    var submitBtn = document.getElementById('hf-submit-' + sectionId);
     loadFitmentData(function (data) {
-      var generations = [];
+      var trims = [];
       var seen = {};
       for (var i = 0; i < data.vehicles.length; i++) {
         var v = data.vehicles[i];
@@ -215,153 +433,53 @@
           var key = v.generation + '|' + v.trim;
           if (!seen[key]) {
             seen[key] = true;
-            generations.push({
+            trims.push({
               key: key,
-              label: v.generation + (v.trim ? ' ' + v.trim : '')
+              label: v.trim || v.generation || 'Standard'
             });
           }
         }
       }
-
-      genSelect.innerHTML = '<option value="">Select Generation</option>';
-      var allBlank = true;
-      for (var j = 0; j < generations.length; j++) {
-        if (generations[j].key && generations[j].key !== '|') {
-          allBlank = false;
-          break;
-        }
-      }
-
-      if (allBlank || generations.length === 0) {
-        // No distinct generations — skip selection, enable submit directly
-        genSelect.innerHTML = '<option value="' + make + '|' + model + '|' + year + '">All ' + model + ' variants</option>';
-        genSelect.value = make + '|' + model + '|' + year;
-        genSelect.disabled = false;
-        submitBtn.disabled = false;
+      trimSelect.innerHTML = '<option value="">Trim</option>';
+      if (trims.length === 0) {
+        trimSelect.innerHTML = '<option value="' + make + '|' + model + '|' + year + '">Standard</option>';
+        trimSelect.value = make + '|' + model + '|' + year;
+        trimSelect.disabled = false;
+        if (submitBtn) submitBtn.disabled = false;
       } else {
-        for (var j = 0; j < generations.length; j++) {
+        for (var j = 0; j < trims.length; j++) {
           var opt = document.createElement('option');
-          opt.value = generations[j].key;
-          opt.textContent = generations[j].label;
-          genSelect.appendChild(opt);
+          opt.value = trims[j].key;
+          opt.textContent = trims[j].label;
+          trimSelect.appendChild(opt);
         }
-        genSelect.disabled = false;
+        trimSelect.disabled = false;
       }
     });
   }
 
-  function getFitmentFilterParams(sectionId) {
-    var genParts = (document.getElementById('fitment-generation-' + sectionId).value || '').split('|');
-    return {
-      generation: genParts[0],
-      trim: genParts[1] || ''
-    };
-  }
-
-  function getCompatibleProducts(vehicle, sectionId, callback) {
-    var params = 'section_id=async-fitment-results';
-    if (vehicle) {
-      if (vehicle.bolt_pattern) params += '&bolt_pattern=' + encodeURIComponent(vehicle.bolt_pattern);
-      if (vehicle.min_diameter) params += '&min_diameter=' + encodeURIComponent(vehicle.min_diameter);
-      if (vehicle.max_diameter) params += '&max_diameter=' + encodeURIComponent(vehicle.max_diameter);
-      if (vehicle.min_width) params += '&min_width=' + encodeURIComponent(vehicle.min_width);
-      if (vehicle.max_width) params += '&max_width=' + encodeURIComponent(vehicle.max_width);
-      if (vehicle.min_offset !== null && vehicle.min_offset !== undefined) params += '&min_offset=' + encodeURIComponent(vehicle.min_offset);
-      if (vehicle.max_offset !== null && vehicle.max_offset !== undefined) params += '&max_offset=' + encodeURIComponent(vehicle.max_offset);
-      if (vehicle.hub_bore) params += '&hub_bore=' + encodeURIComponent(vehicle.hub_bore);
-      if (vehicle.load_rating_min) params += '&load_rating_min=' + encodeURIComponent(vehicle.load_rating_min);
-    }
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', window.Shopify.routes.root + '?' + params, true);
-    xhr.onload = function () {
-      if (xhr.status === 200) {
-        try {
-          var parser = new DOMParser();
-          var doc = parser.parseFromString(xhr.responseText, 'text/html');
-          var scriptEl = doc.querySelector('#fitment-results-json');
-          if (scriptEl) {
-            var data = JSON.parse(scriptEl.textContent);
-            if (data && data.length > 0) {
-              callback({ products: data });
-              return;
-            }
-          }
-        } catch (e) {}
-      }
-      // Fallback: fetch all products from store's products.json
-      var fallback = new XMLHttpRequest();
-      fallback.open('GET', window.Shopify.routes.root + 'products.json?limit=50', true);
-      fallback.onload = function () {
-        if (fallback.status === 200) {
-          try {
-            var all = JSON.parse(fallback.responseText);
-            var prods = (all.products || []).map(function (p) {
-              return {
-                url: p.url,
-                title: p.title,
-                price: p.variants && p.variants[0] ? (p.variants[0].price / 100).toFixed(2) : '',
-                featured_image: p.images && p.images[0] ? p.images[0].src : ''
-              };
-            });
-            callback({ products: prods, fallback: true });
-            return;
-          } catch (e) {}
-        }
-        callback({ products: [] });
-      };
-      fallback.onerror = function () { callback({ products: [] }); };
-      fallback.send();
-    };
-    xhr.onerror = function () {
-      // Network error on async section — try products.json fallback
-      var fallback = new XMLHttpRequest();
-      fallback.open('GET', window.Shopify.routes.root + 'products.json?limit=50', true);
-      fallback.onload = function () {
-        if (fallback.status === 200) {
-          try {
-            var all = JSON.parse(fallback.responseText);
-            var prods = (all.products || []).map(function (p) {
-              return {
-                url: p.url,
-                title: p.title,
-                price: p.variants && p.variants[0] ? (p.variants[0].price / 100).toFixed(2) : '',
-                featured_image: p.images && p.images[0] ? p.images[0].src : ''
-              };
-            });
-            callback({ products: prods, fallback: true });
-            return;
-          } catch (e) {}
-        }
-        callback({ products: [] });
-      };
-      fallback.onerror = function () { callback({ products: [] }); };
-      fallback.send();
-    };
-    xhr.send();
-  }
-
   function submitFitment(sectionId) {
-    var year = document.getElementById('fitment-year-' + sectionId).value;
-    var make = document.getElementById('fitment-make-' + sectionId).value;
-    var model = document.getElementById('fitment-model-' + sectionId).value;
-    var genSelect = document.getElementById('fitment-generation-' + sectionId);
-    var generation = genSelect.value;
-    var genParts = generation.split('|');
+    var year = document.getElementById('hf-year-' + sectionId).value;
+    var make = document.getElementById('hf-make-' + sectionId).value;
+    var model = document.getElementById('hf-model-' + sectionId).value;
+    var trimSelect = document.getElementById('hf-trim-' + sectionId);
+    var trimValue = trimSelect.value;
+    var trimParts = trimValue.split('|');
 
-    var resultsDiv = document.getElementById('fitment-results-' + sectionId);
+    var resultsDiv = document.getElementById('hf-results-' + sectionId);
     if (!resultsDiv) return;
 
     resultsDiv.style.display = 'block';
-    resultsDiv.innerHTML = '<div class="fitment-finder__results-loading"><div class="loading-overlay__spinner" style="display:block;width:40px;height:40px;margin:0 auto;"><div data-load="loading"></div></div></div>';
+    resultsDiv.innerHTML = '<div class="fitment-finder__results-loading" style="text-align:center;padding:20px 0;"><div class="loading-overlay__spinner" style="display:block;width:40px;height:40px;margin:0 auto;"><div data-load="loading"></div></div></div>';
 
     loadFitmentData(function (data) {
       var selectedVehicle = null;
-      var isAllVariant = (genParts.length === 3 && genParts[0] === make);
+      var isAllVariant = (trimParts.length === 3 && trimParts[0] === make);
 
       for (var i = 0; i < data.vehicles.length; i++) {
         var v = data.vehicles[i];
         if (v.year.toString() === year && v.make === make && v.model === model) {
-          if (isAllVariant || v.generation === genParts[0]) {
+          if (isAllVariant || v.generation === trimParts[0]) {
             selectedVehicle = v;
             break;
           }
@@ -373,6 +491,21 @@
         return;
       }
 
+      var displayName = year + ' ' + make + ' ' + model;
+      if (trimParts[0] && trimParts[0] !== make) displayName += ' ' + trimParts[0];
+      if (trimParts[1]) displayName += ' ' + trimParts[1];
+
+      saveVehicle({
+        year: year,
+        make: make,
+        model: model,
+        trim: displayName,
+        generation: trimParts[0],
+        bolt_pattern: selectedVehicle.bolt_pattern
+      });
+
+      updateStatusPanel(sectionId, { year: year, make: make, model: model, trim: displayName });
+
       var filterUrl = '/collections/all?filter.p.m.custom.bolt_pattern=' + encodeURIComponent(selectedVehicle.bolt_pattern);
       if (selectedVehicle.min_diameter) filterUrl += '&filter.v.option.diameter=' + selectedVehicle.min_diameter;
       if (selectedVehicle.min_offset) filterUrl += '&filter.v.option.offset=' + selectedVehicle.min_offset;
@@ -380,7 +513,7 @@
       getCompatibleProducts(selectedVehicle, sectionId, function (result) {
         var html = '';
         if (result.products && result.products.length > 0) {
-          html += '<div class="fitment-finder__results-count">' + result.products.length + ' compatible wheels found for ' + make + ' ' + model + ' ' + genParts[0] + '</div>';
+          html += '<div class="fitment-finder__results-count">' + result.products.length + ' compatible wheels found for ' + displayName + '</div>';
           if (result.fallback) {
             html += '<p class="fitment-finder__results-note">Vehicle fitment specs are still being seeded — showing all available wheels for now.</p>';
           }
@@ -407,15 +540,109 @@
     });
   }
 
+  function getCompatibleProducts(vehicle, sectionId, callback) {
+    var params = 'section_id=async-fitment-results';
+    if (vehicle) {
+      if (vehicle.bolt_pattern) params += '&bolt_pattern=' + encodeURIComponent(vehicle.bolt_pattern);
+      if (vehicle.min_diameter) params += '&min_diameter=' + encodeURIComponent(vehicle.min_diameter);
+      if (vehicle.max_diameter) params += '&max_diameter=' + encodeURIComponent(vehicle.max_diameter);
+      if (vehicle.min_width) params += '&min_width=' + encodeURIComponent(vehicle.min_width);
+      if (vehicle.max_width) params += '&max_width=' + encodeURIComponent(vehicle.max_width);
+      if (vehicle.min_offset !== null && vehicle.min_offset !== undefined) params += '&min_offset=' + encodeURIComponent(vehicle.min_offset);
+      if (vehicle.max_offset !== null && vehicle.max_offset !== undefined) params += '&max_offset=' + encodeURIComponent(vehicle.max_offset);
+      if (vehicle.hub_bore) params += '&hub_bore=' + encodeURIComponent(vehicle.hub_bore);
+      if (vehicle.load_rating_min) params += '&load_rating_min=' + encodeURIComponent(vehicle.load_rating_min);
+    }
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', window.Shopify.routes.root + '?' + params, true);
+    xhr.onload = function () {
+      if (xhr.status === 200) {
+        try {
+          var parser = new DOMParser();
+          var doc = parser.parseFromString(xhr.responseText, 'text/html');
+          var scriptEl = doc.querySelector('#hf-results-json');
+          if (scriptEl) {
+            var data = JSON.parse(scriptEl.textContent);
+            if (data && data.length > 0) {
+              callback({ products: data });
+              return;
+            }
+          }
+        } catch (e) {}
+      }
+      var fallback = new XMLHttpRequest();
+      fallback.open('GET', window.Shopify.routes.root + 'products.json?limit=50', true);
+      fallback.onload = function () {
+        if (fallback.status === 200) {
+          try {
+            var all = JSON.parse(fallback.responseText);
+            var prods = (all.products || []).map(function (p) {
+              return {
+                url: p.url,
+                title: p.title,
+                price: p.variants && p.variants[0] ? (p.variants[0].price / 100).toFixed(2) : '',
+                featured_image: p.images && p.images[0] ? p.images[0].src : ''
+              };
+            });
+            callback({ products: prods, fallback: true });
+            return;
+          } catch (e) {}
+        }
+        callback({ products: [] });
+      };
+      fallback.onerror = function () { callback({ products: [] }); };
+      fallback.send();
+    };
+    xhr.onerror = function () {
+      var fallback = new XMLHttpRequest();
+      fallback.open('GET', window.Shopify.routes.root + 'products.json?limit=50', true);
+      fallback.onload = function () {
+        if (fallback.status === 200) {
+          try {
+            var all = JSON.parse(fallback.responseText);
+            var prods = (all.products || []).map(function (p) {
+              return {
+                url: p.url,
+                title: p.title,
+                price: p.variants && p.variants[0] ? (p.variants[0].price / 100).toFixed(2) : '',
+                featured_image: p.images && p.images[0] ? p.images[0].src : ''
+              };
+            });
+            callback({ products: prods, fallback: true });
+            return;
+          } catch (e) {}
+        }
+        callback({ products: [] });
+      };
+      fallback.onerror = function () { callback({ products: [] }); };
+      fallback.send();
+    };
+    xhr.send();
+  }
+
+  /* ── Section Initialization ── */
+
   function initSection(sectionEl) {
-    var id = sectionEl.getAttribute('id').replace('fitment-finder-', '');
-    var yearSelect = document.getElementById('fitment-year-' + id);
-    var makeSelect = document.getElementById('fitment-make-' + id);
-    var modelSelect = document.getElementById('fitment-model-' + id);
-    var genSelect = document.getElementById('fitment-generation-' + id);
-    var submitBtn = document.getElementById('fitment-submit-' + id);
+    var id = sectionEl.getAttribute('data-section-id');
+    if (!id) return;
+
+    var yearSelect = document.getElementById('hf-year-' + id);
+    var makeSelect = document.getElementById('hf-make-' + id);
+    var modelSelect = document.getElementById('hf-model-' + id);
+    var trimSelect = document.getElementById('hf-trim-' + id);
+    var submitBtn = document.getElementById('hf-submit-' + id);
 
     if (!yearSelect) return;
+
+    initTabs(id);
+    initStyleTab(id);
+    initStyleSubmit(id);
+    initStatusActions(id);
+
+    var savedVehicle = loadVehicle();
+    if (savedVehicle) {
+      updateStatusPanel(id, savedVehicle);
+    }
 
     loadYears(id);
 
@@ -423,14 +650,14 @@
       if (this.value) {
         populateMakes(id, this.value);
       } else {
-        makeSelect.innerHTML = '<option value="">Select Make</option>';
+        makeSelect.innerHTML = '<option value="">Make</option>';
         makeSelect.disabled = true;
-        modelSelect.innerHTML = '<option value="">Select Model</option>';
+        modelSelect.innerHTML = '<option value="">Model</option>';
         modelSelect.disabled = true;
-        genSelect.innerHTML = '<option value="">Select Generation</option>';
-        genSelect.disabled = true;
-        submitBtn.disabled = true;
-        var resultsDiv = document.getElementById('fitment-results-' + id);
+        trimSelect.innerHTML = '<option value="">Trim</option>';
+        trimSelect.disabled = true;
+        if (submitBtn) submitBtn.disabled = true;
+        var resultsDiv = document.getElementById('hf-results-' + id);
         if (resultsDiv) resultsDiv.style.display = 'none';
       }
     });
@@ -439,38 +666,44 @@
       if (this.value) {
         populateModels(id, yearSelect.value, this.value);
       } else {
-        modelSelect.innerHTML = '<option value="">Select Model</option>';
+        modelSelect.innerHTML = '<option value="">Model</option>';
         modelSelect.disabled = true;
-        genSelect.innerHTML = '<option value="">Select Generation</option>';
-        genSelect.disabled = true;
-        submitBtn.disabled = true;
+        trimSelect.innerHTML = '<option value="">Trim</option>';
+        trimSelect.disabled = true;
+        if (submitBtn) submitBtn.disabled = true;
       }
     });
 
     modelSelect.addEventListener('change', function () {
       if (this.value) {
-        populateGenerations(id, yearSelect.value, makeSelect.value, this.value);
+        populateTrims(id, yearSelect.value, makeSelect.value, this.value);
       } else {
-        genSelect.innerHTML = '<option value="">Select Generation</option>';
-        genSelect.disabled = true;
-        submitBtn.disabled = true;
+        trimSelect.innerHTML = '<option value="">Trim</option>';
+        trimSelect.disabled = true;
+        if (submitBtn) submitBtn.disabled = true;
       }
     });
 
-    genSelect.addEventListener('change', function () {
-      submitBtn.disabled = !this.value;
+    trimSelect.addEventListener('change', function () {
+      if (submitBtn) submitBtn.disabled = !this.value;
     });
 
     submitBtn.addEventListener('click', function () {
-      if (!genSelect.value) return;
+      if (!trimSelect.value) return;
       submitFitment(id);
     });
   }
 
   function init() {
-    var sections = document.querySelectorAll('.fitment-finder');
+    var sections = document.querySelectorAll('#calder-fitment-finder');
     for (var i = 0; i < sections.length; i++) {
       initSection(sections[i]);
+    }
+    if (sections.length === 0) {
+      var fallback = document.querySelectorAll('.hf-fitment');
+      for (var j = 0; j < fallback.length; j++) {
+        initSection(fallback[j]);
+      }
     }
   }
 

@@ -1,0 +1,101 @@
+{
+  "schema_version": "1.0",
+  "project": "Calder Wheels",
+  "artifact_type": "high_fidelity_visual_correction",
+  "component": "Calder Find Your Fit / Fitment Finder",
+  "correction_iteration": 6,
+  "source_implementation": "HIGH-FIDELITY v5",
+  "source_state": "READY_FOR_VISUAL_QA",
+  "recommended_state": "READY_FOR_HIGH_FIDELITY_CORRECTION",
+  "primary_visual_authority": "Original approved Calder Find Your Fit reference",
+  "stable_baseline": [
+    "docs/design/visual-inspector/component-specs/fitment/fitment.visual-spec.v2.json",
+    "docs/design/visual-inspector/component-specs/fitment/fitment.visual-spec.v2.md"
+  ],
+  "source_correction": [
+    "docs/design/visual-inspector/qa/corrections/fitment.high-fidelity.correction.v5.json",
+    "docs/design/visual-inspector/qa/corrections/fitment.high-fidelity.correction.v5.md"
+  ],
+  "corrections": [
+    {
+      "id": "HF6-001",
+      "origin": "UNRESOLVED_V5",
+      "source_correction_id": "HF5-001",
+      "severity": "HIGH",
+      "category": "DECORATIVE / ARTWORK",
+      "affected_state": [
+        "DESKTOP_BY_VEHICLE",
+        "DESKTOP_BY_WHEEL_STYLE"
+      ],
+      "source": "Approved Calder Find Your Fit reference; fitment.visual-spec.v2; High-Fidelity v5 desktop renders",
+      "reference_requirement": "The center-right artwork must reproduce the approved recognizable large cropped Calder multi-spoke wheel technical drawing. The wheel—not a radar/target construction—must be the primary readable artwork, while preserving the established crop, scale, placement, fade/opacity, color, clipping, and relationship to the controls and vehicle divider.",
+      "reference_measurement": {
+        "reference_dimensions_px": [
+          2048,
+          682
+        ],
+        "technical_wheel_region_approx_px": {
+          "x": [
+            1000,
+            1518
+          ],
+          "y": [
+            207,
+            500
+          ]
+        },
+        "measurement_classification": "ESTABLISHED_CONTEXT"
+      },
+      "hf_v5_measurement": "Artwork occupies the established center-right region, but its dominant visible structure remains concentric circular/radar geometry with sparse radial segments rather than the approved dense, recognizable multi-spoke Calder wheel.",
+      "delta": "Positioning/region is substantially retained, but the defining wheel identity is still absent. The approved reference reads immediately as a multi-spoke wheel; HF v5 reads primarily as technical/radar geometry.",
+      "evidence_classification": "OBSERVED",
+      "materiality": "MATERIAL",
+      "materiality_evidence": "The discrepancy is clearly visible in a normal side-by-side comparison without measurement overlays and materially changes the identity and visual weight of the principal decorative artwork in the center-right desktop panel.",
+      "why_material": "Artwork is an explicit high-fidelity property. The reference's recognizable multi-spoke wheel is a dominant visual feature; replacing it with concentric/radial geometry changes the composition's visual character rather than producing a negligible raster variance.",
+      "why_another_implementation_pass_is_required": "HF5-001 is a HIGH-severity active correction and its explicit artwork acceptance condition remains unsatisfied. The v6 gate therefore permits one narrowly scoped additional pass.",
+      "recommended_correction": "Replace the current center-right concentric/radar construction with the recognizable multi-spoke Calder wheel technical artwork shown in the approved reference. Match the established wheel-art region and reference-like crop, scale, opacity/fade, color and clipping. Do not alter the accepted shell, tabs, header, form geometry, CTA, selected-vehicle region, panel surfaces, or mobile layout. Do not attempt another incremental modification of the radar motif; the final rendered artwork must visibly read as the approved wheel.",
+      "acceptance_condition": "At the 2048 × 682 desktop capture, both By Vehicle and By Wheel Style visibly show a recognizable large cropped multi-spoke Calder wheel technical drawing in the established center-right artwork region. Its spoke/rim structure is immediately identifiable as a wheel in a normal side-by-side comparison with the approved reference; concentric radar/target geometry is no longer the dominant read. Scale, crop, placement, fade/opacity, color, clipping, and relationships to the controls and vehicle divider remain materially conformant. No protected resolved area is materially regressed."
+    }
+  ],
+  "protected_resolved_areas": [
+    "hero → fitment relationship",
+    "hero/light boundary",
+    "tab overlap",
+    "shell X/Y",
+    "shell width",
+    "shell height",
+    "shell radius",
+    "angled tab geometry",
+    "heading",
+    "description",
+    "contour artwork outside the active wheel correction",
+    "form baseline",
+    "differentiated control widths",
+    "control heights",
+    "CTA",
+    "selected vehicle region",
+    "panel colors",
+    "borders",
+    "By Wheel Style shared geometry",
+    "mobile responsive adaptation"
+  ],
+  "regressions": [],
+  "new_issues": [],
+  "implementation_constraints": [
+    "Do not redesign.",
+    "Do not rebaseline.",
+    "Do not modify fitment.visual-spec.v2.",
+    "Do not change fitment functionality.",
+    "Do not modify unrelated sections.",
+    "Do not reopen protected resolved areas without material regression evidence.",
+    "Do not add optional polish or new target measurements."
+  ],
+  "completion_gate": {
+    "required_result": "HF6-001 RESOLVED",
+    "no_material_regressions": true,
+    "desktop_by_vehicle": "PASS",
+    "desktop_by_wheel_style": "PASS",
+    "mobile": "PASS",
+    "target_state_after_successful_qa": "ACCEPTED"
+  }
+}

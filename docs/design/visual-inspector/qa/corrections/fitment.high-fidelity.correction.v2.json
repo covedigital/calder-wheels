@@ -1,0 +1,107 @@
+{
+  "schema_version": "2.0",
+  "project": "Calder Wheels",
+  "artifact_type": "high_fidelity_visual_correction",
+  "component": "Calder Find Your Fit / Fitment Finder",
+  "iteration": 2,
+  "baseline": "fitment.visual-spec.v2",
+  "reference": "calder-fitment-section-reference(3).png",
+  "current_evidence": [
+    "fitment.high-fidelity.by-vehicle.desktop.v1.png",
+    "fitment.high-fidelity.by-wheel-style.desktop.v1.png",
+    "fitment.high-fidelity.mobile.v1.png"
+  ],
+  "result": "REVISION_REQUIRED",
+  "normalization": {
+    "reference_px": [
+      2048,
+      682
+    ],
+    "desktop_capture_px": [
+      1920,
+      1080
+    ],
+    "horizontal_scale_reference_to_capture": 0.9375,
+    "method": "Desktop X dimensions normalized by 1920/2048. Vertical composition judged primarily from local hero-boundary/tab/panel relationships because the captures have different page/crop heights."
+  },
+  "corrections": [
+    {
+      "id": "HF2-001",
+      "severity": "HIGH",
+      "category": "STRUCTURAL",
+      "affected_state": "DESKTOP_ALL",
+      "reference_requirement": "Tabs overlap the hero/light transition while the main panel starts approximately 19 px below that transition in the 2048 px reference.",
+      "reference_measurement": "hero boundary\u2248188; tabs top\u2248118 (\u224870 px overlap); panel top\u2248207",
+      "current_implementation": "hero/light boundary\u2248380; tabs top\u2248290 (\u224890 px overlap); panel top\u2248364 (\u224816 px above boundary)",
+      "delta": "Tab overlap is \u224820 px too deep and, more importantly, the panel begins \u224835 px too high relative to the transition (reference +19 px below versus implementation \u224816 px above).",
+      "recommended_correction": "Preserve the restored direct hero\u2192tabs\u2192panel composition, but shift the panel/tab relationship so the panel begins just below the hero/light boundary while tabs retain the reference-like overlap.",
+      "measurement_status": "ESTIMATED_FROM_RASTER",
+      "acceptance_condition": "At desktop, tab overlap and panel start reproduce the reference transition relationship within ordinary raster/browser tolerance."
+    },
+    {
+      "id": "HF2-002",
+      "severity": "HIGH",
+      "category": "GEOMETRY",
+      "affected_state": "DESKTOP_ALL",
+      "reference_requirement": "Shell x\u224874\u20131978, width\u22481904 px (92.97%). At 1920 proportional width target\u22481785 px, x\u224869\u20131854.",
+      "reference_measurement": "normalized target\u22481785 px wide at x\u224869",
+      "current_implementation": "shell visually spans approximately x\u224846\u20131874, width\u22481828 px",
+      "delta": "Implementation is \u224843 px wider than normalized target and starts \u224823 px too far left; right edge is \u224820 px too far right.",
+      "recommended_correction": "Reduce desktop shell width and restore approximately symmetric reference-derived horizontal inset.",
+      "measurement_status": "ESTIMATED_FROM_RASTER",
+      "acceptance_condition": "At 1920 capture width, shell is approximately 1785 px wide with left/right position close to normalized reference."
+    },
+    {
+      "id": "HF2-003",
+      "severity": "HIGH",
+      "category": "DECORATIVE",
+      "affected_state": "DESKTOP_ALL",
+      "reference_requirement": "Large technical wheel line-art occupies the center-right finder area (reference x\u22481000\u20131518, y\u2248207\u2013500), with flowing contour lines behind the finder.",
+      "reference_measurement": "wheel art width\u2248518 px in reference; centered immediately left of vehicle divider and visibly cropped/faded",
+      "current_implementation": "Current render uses a comparatively small concentric/radar-style circular drawing centered mainly in/behind the selected-vehicle region, plus faint diagonal/flow lines near the divider.",
+      "delta": "Artwork subject, scale, placement and crop materially differ. The signature large wheel drawing behind the center-right finder is still absent.",
+      "recommended_correction": "Use/reproduce the approved technical wheel line-art composition at reference-like scale and center-right placement; keep contour lines separate and subordinate. Do not substitute the radar/concentric-circle motif for the wheel drawing.",
+      "measurement_status": "OBSERVED/ESTIMATED",
+      "acceptance_condition": "Side-by-side comparison shows a large cropped wheel line drawing in the same center-right zone and similar visual balance as the approved reference."
+    },
+    {
+      "id": "HF2-004",
+      "severity": "MEDIUM",
+      "category": "GEOMETRY",
+      "affected_state": "DESKTOP_ALL",
+      "reference_requirement": "Reference tabs are approximately 349\u00d792 and 387\u00d792 px at 2048 width, with large slanted adjoining faces and substantial label/icon scale.",
+      "reference_measurement": "normalized 1920 targets\u2248327\u00d786 and 363\u00d786 px",
+      "current_implementation": "Tabs are approximately x46\u2013239 and x239\u2013471, about 193 px and 232 px wide, with height\u224874 px.",
+      "delta": "Angled seam is now present, but both tabs are materially narrower and somewhat shorter than the reference.",
+      "recommended_correction": "Retain the corrected angled geometry but increase tab widths/heights toward normalized reference proportions; preserve active underline and shared seam.",
+      "measurement_status": "ESTIMATED_FROM_RASTER",
+      "acceptance_condition": "Desktop tab footprints and label/icon visual weight closely match the approved reference, not merely the angled silhouette."
+    },
+    {
+      "id": "HF2-005",
+      "severity": "MEDIUM",
+      "category": "GEOMETRY",
+      "affected_state": "DESKTOP_BY_VEHICLE,DESKTOP_BY_WHEEL_STYLE",
+      "reference_requirement": "At 2048 reference scale: controls\u2248201/217/218/249\u00d770 px; CTA\u2248365\u00d780 px. Normalized to 1920: \u2248188/203/204/233\u00d766; CTA\u2248342\u00d775.",
+      "reference_measurement": "differentiated field widths and CTA larger/taller than fields",
+      "current_implementation": "Fields appear approximately 200/217/217/249 px and \u224870 px high; CTA\u2248365\u00d770 px.",
+      "delta": "Field widths remain closer to unscaled 2048 measurements than normalized 1920 targets; CTA is too wide and not visibly taller than fields.",
+      "recommended_correction": "Normalize field/CTA footprints to viewport scale and restore the reference's CTA height emphasis relative to controls.",
+      "measurement_status": "ESTIMATED_FROM_RASTER",
+      "acceptance_condition": "At 1920 width, differentiated fields and CTA have reference-proportional widths, gaps, and CTA height emphasis."
+    },
+    {
+      "id": "HF2-006",
+      "severity": "MEDIUM",
+      "category": "GEOMETRY",
+      "affected_state": "DESKTOP_SELECTED_VEHICLE",
+      "reference_requirement": "Selected-vehicle region\u224824% of shell, separated by a strong vertical divider; internal content begins with generous inset and the artwork remains primarily left of the divider.",
+      "reference_measurement": "divider x\u22481521 in 2048 reference; normalized x\u22481426",
+      "current_implementation": "divider visually appears around x\u22481445, while the circular decorative motif extends strongly through the vehicle region and competes with its content.",
+      "delta": "Divider is reasonably near normalized target, but region composition is altered by the incorrect artwork placement and denser/smaller content treatment.",
+      "recommended_correction": "Keep divider near current normalized position, but restore reference artwork boundary/placement and reference-like selected-vehicle spacing/visual isolation.",
+      "measurement_status": "ESTIMATED_FROM_RASTER",
+      "acceptance_condition": "Vehicle region reads as a distinct right-side panel with reference-like whitespace, divider structure, status hierarchy and actions."
+    }
+  ]
+}

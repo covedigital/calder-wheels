@@ -1,0 +1,550 @@
+/* ============================================================
+   Calder Wheels — Product Card (B1 Specification)
+   Scoped to .calder-product-card
+   ============================================================ */
+
+/* --- Card Container --- */
+calder-product-card {
+  display: block;
+  background: #fff;
+  border-radius: 9px;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.07);
+  overflow: hidden;
+  transition: box-shadow 0.25s ease;
+  padding: 15px;
+  font-family: var(--font-body-family, inherit);
+}
+
+calder-product-card:hover {
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.10);
+}
+
+.calder-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* --- Media Area --- */
+.calder-card__media {
+  position: relative;
+  border-radius: 7px;
+  overflow: hidden;
+  background: #fafafa;
+  margin-bottom: 0;
+  aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.calder-card__media .prd-image-wrap {
+  position: static !important;
+  width: 100% !important;
+  height: 100% !important;
+  padding: 0 !important;
+  background: transparent !important;
+  aspect-ratio: unset !important;
+  --product-aspect-ratio: unset !important;
+  --aspect-ratio: unset !important;
+}
+
+.calder-card__media .prd-image-wrap > a {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100% !important;
+  height: 100% !important;
+  //padding: 12px !important;
+}
+
+.calder-card__media .prd-image-wrap > a img,
+.calder-card__media .prd-image-wrap > a .image-container {
+  object-fit: contain !important;
+  width: 100% !important;
+  height: 100% !important;
+  //max-width: 90% !important;
+  //max-height: 90% !important;
+}
+
+.calder-card__media .ic--bg,
+.calder-card__media .ic--bg-alt,
+.calder-card__media .ic--cover {
+  background: transparent !important;
+}
+
+/* Wishlist + Badge Overrides */
+.calder-card__media .prd-labels {
+  position: absolute !important;
+  top: 4px !important;
+  left: 4px !important;
+  z-index: 2;
+}
+
+.calder-card__media .prd-icons {
+  position: absolute !important;
+  top: 4px !important;
+  right: 4px !important;
+  z-index: 2;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 2px !important;
+}
+
+.calder-card__media .prd-icons .prd-icon {
+  width: 36px !important;
+  height: 36px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: rgba(255, 255, 255, 0.85) !important;
+  border-radius: 50% !important;
+  transition: background 0.2s ease;
+}
+
+.calder-card__media .prd-icons .prd-icon:hover {
+  background: #fff !important;
+}
+
+.calder-card__media .prd-icons svg {
+  width: 21px !important;
+  height: 21px !important;
+}
+
+/* Badge styling */
+.calder-card__media .prd-labels > .prd-label {
+  font-size: 10px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.15em !important;
+  text-transform: uppercase !important;
+  padding: 7px 13px !important;
+  border-radius: 5px !important;
+  line-height: 1 !important;
+  height: auto !important;
+  min-width: auto !important;
+}
+
+.calder-card__media .prd-labels > .prd-label--sale {
+  background: #5a6b4a !important;
+  color: #fff !important;
+}
+
+/* --- Thumbnail Rail --- */
+.calder-card__thumbs {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.calder-card__thumb {
+  flex: 1;
+  aspect-ratio: 1 / 1;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #f5f5f5;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: border-color 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.calder-card__thumb.is-active {
+  border-color: #1a1a1a;
+}
+
+.calder-card__thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 4px;
+}
+
+/* --- Content Area --- */
+.calder-card__content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding-top: 4px;
+}
+
+/* Taxonomy */
+.calder-card__type {
+  font-size: 11px !important;
+  font-weight: 650 !important;
+  letter-spacing: 0.16em !important;
+  text-transform: uppercase !important;
+  color: #666 !important;
+  margin-top: 10px !important;
+  margin-bottom: 3px !important;
+  line-height: 1.2 !important;
+}
+
+.calder-card__type a,
+.calder-card__type span {
+  color: #666 !important;
+  text-decoration: none !important;
+}
+
+/* Title */
+.calder-card__title {
+  font-family: var(--calder-ui-font);
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--calder-ink);
+  margin-bottom: 2px;
+  text-transform: uppercase;
+  line-height: 1.05 !important;
+  word-break: break-word;
+}
+
+.calder-card__title a {
+  color: inherit !important;
+  text-decoration: none !important;
+}
+
+.calder-card__title a:hover {
+  opacity: 0.75;
+}
+
+/* Rating */
+.calder-card__rating {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  margin-bottom: 8px !important;
+  min-height: 20px;
+}
+
+.calder-card__rating .rating {
+  display: flex !important;
+  align-items: center !important;
+  gap: 2px !important;
+}
+
+.calder-card__rating .rating-star {
+  --star-size: 15px !important;
+  font-size: 15px !important;
+  letter-spacing: 1px !important;
+}
+
+.calder-card__rating .rating-star:before {
+  font-size: 15px !important;
+  letter-spacing: 1px !important;
+}
+
+.calder-card__rating-text {
+  font-size: 13px !important;
+  color: #444 !important;
+  font-weight: 500 !important;
+}
+
+.calder-card__rating-text a,
+.calder-card__rating-text span {
+  color: #444 !important;
+  text-decoration: none !important;
+}
+
+/* Price */
+.calder-card__price {
+  margin-bottom: 10px !important;
+  margin-top: 0 !important;
+  display: flex !important;
+  align-items: baseline !important;
+  flex-wrap: wrap !important;
+  gap: 6px !important;
+}
+
+.calder-card__price .prd-price {
+  display: inline-flex !important;
+  align-items: baseline !important;
+  flex-wrap: wrap !important;
+  gap: 6px !important;
+  margin: 0 !important;
+}
+
+.calder-card__price .prd-price-regular {
+  font-size: 22px !important;
+  font-weight: 750 !important;
+  color: #1a1a1a !important;
+  line-height: 1 !important;
+}
+
+.calder-card__price .prd-price-old {
+  font-size: 16px !important;
+  font-weight: 400 !important;
+  color: #999 !important;
+  text-decoration: line-through !important;
+}
+
+.calder-card__price .prd-price-old.hidden {
+  display: none !important;
+}
+
+.calder-card__price-unit {
+  font-size: 14px !important;
+  font-weight: 400 !important;
+  color: #888 !important;
+  margin-left: 2px !important;
+}
+
+/* Swatches */
+.calder-card__swatches {
+  margin-bottom: 10px !important;
+  min-height: 28px;
+}
+
+.calder-card__swatches .prd-option-list {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  gap: 0 !important;
+  align-items: center !important;
+}
+
+.calder-card__swatches variant-radios,
+.calder-card__swatches variant-selects {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  gap: 8px !important;
+  align-items: center !important;
+}
+
+.calder-card__swatches .prd-option {
+  display: inline-flex !important;
+  align-items: center !important;
+}
+
+.calder-card__swatches .color-swatch {
+  width: 23px !important;
+  height: 23px !important;
+  border-radius: 50% !important;
+  border: 1px solid rgba(0, 0, 0, 0.10) !important;
+  cursor: pointer !important;
+  transition: transform 0.15s ease, box-shadow 0.15s ease !important;
+  display: block !important;
+  background-size: cover !important;
+  background-position: center !important;
+}
+
+.calder-card__swatches .color-swatch:hover {
+  transform: scale(1.1);
+}
+
+.calder-card__swatches .color-swatch.active,
+.calder-card__swatches .color-swatch.selected {
+  box-shadow: 0 0 0 2px #1a1a1a !important;
+}
+
+.calder-card__swatches .tr_d .td_d {
+  display: block !important;
+  width: 23px !important;
+  height: 23px !important;
+  border-radius: 50% !important;
+  border: 1px solid rgba(0, 0, 0, 0.10) !important;
+  background-size: cover !important;
+}
+
+.calder-card__swatches .swatch-more {
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  color: #666 !important;
+  margin-left: 6px !important;
+  white-space: nowrap !important;
+}
+
+/* --- Feature Row --- */
+.calder-card__features {
+  display: flex !important;
+  border-top: 1px solid #eee !important;
+  margin-top: auto !important;
+  padding-top: 6px !important;
+  margin-bottom: 0 !important;
+}
+
+.calder-card__features:not(:has(*)) {
+  display: none !important;
+}
+
+.calder-card__feature {
+  flex: 1 !important;
+  text-align: center !important;
+  padding: 8px 4px !important;
+  border-right: 1px solid #eee !important;
+}
+
+.calder-card__feature:last-child {
+  border-right: none !important;
+}
+
+.calder-card__feature-icon {
+  display: block !important;
+  margin: 0 auto 3px !important;
+  width: 24px !important;
+  height: 24px !important;
+}
+
+.calder-card__feature-icon svg {
+  width: 24px !important;
+  height: 24px !important;
+}
+
+.calder-card__feature-label {
+  display: block !important;
+  font-size: 10px !important;
+  font-weight: 550 !important;
+  color: #555 !important;
+  line-height: 1.2 !important;
+  max-width: 100% !important;
+}
+
+/* --- CTA (Primary Action) --- */
+.calder-card__action {
+  margin-top: 10px !important;
+}
+
+.calder-card__action .prd-action {
+  margin: 0 !important;
+}
+
+.calder-card__action .product-form {
+  display: block !important;
+}
+
+.calder-card__action .btn {
+  width: 100% !important;
+  height: 42px !important;
+  border-radius: 6px !important;
+  background: #1c1c1c !important;
+  color: #fff !important;
+  font-size: 12px !important;
+  font-weight: 650 !important;
+  letter-spacing: 0.14em !important;
+  text-transform: uppercase !important;
+  border: none !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 10px !important;
+  padding: 0 16px !important;
+  transition: background 0.2s ease, opacity 0.2s ease !important;
+  cursor: pointer !important;
+  line-height: 1 !important;
+}
+
+.calder-card__action .btn:hover {
+  background: #333 !important;
+}
+
+.calder-card__action .btn:disabled,
+.calder-card__action .btn[disabled] {
+  opacity: 0.5 !important;
+  cursor: default !important;
+  background: #555 !important;
+}
+
+.calder-card__action .btn svg,
+.calder-card__action .btn .btn-txt svg {
+  width: 14px !important;
+  height: 14px !important;
+}
+
+.calder-card__action .btn .btn-txt {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+}
+
+.calder-card__action .btn .btn-hover-txt {
+  display: inline-flex !important;
+  align-items: center !important;
+}
+
+.calder-card__action .btn .loading-overlay__spinner {
+  display: none;
+}
+
+/* Secondary Action (View Details) */
+.calder-card__details {
+  text-align: center !important;
+  margin-top: 14px !important;
+  margin-bottom: 3px !important;
+}
+
+.calder-card__details a,
+.calder-card__details button {
+  font-size: 12px !important;
+  font-weight: 650 !important;
+  color: #666 !important;
+  text-decoration: none !important;
+  background: none !important;
+  border: none !important;
+  cursor: pointer !important;
+  padding: 0 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  transition: color 0.2s ease !important;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+}
+
+.calder-card__details a:hover,
+.calder-card__details button:hover {
+  color: #1a1a1a !important;
+}
+
+.calder-card__details svg {
+  width: 12px !important;
+  height: 12px !important;
+}
+
+/* --- Hidden / Conditional --- */
+.calder-card__hidden {
+  display: none !important;
+}
+
+/* --- Hover overlay suppression --- */
+calder-product-card .prd-hover {
+  display: none !important;
+}
+
+calder-product-card .hide-on-hover {
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* --- Responsive --- */
+@media (max-width: 575px) {
+  calder-product-card {
+    padding: 12px;
+  }
+
+  .calder-card__title {
+    font-size: 24px !important;
+  }
+
+  .calder-card__price .prd-price-regular {
+    font-size: 19px !important;
+  }
+
+  .calder-card__action .btn {
+    height: 44px !important;
+  }
+
+  .calder-card__feature-label {
+    font-size: 9px !important;
+  }
+
+  .calder-card__thumbs {
+    display: none;
+  }
+}
+
+@media (max-width: 767px) {
+  .calder-card__thumbs {
+    display: none;
+  }
+}

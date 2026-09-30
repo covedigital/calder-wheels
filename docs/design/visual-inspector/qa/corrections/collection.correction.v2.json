@@ -1,0 +1,111 @@
+{
+  "schema_version": "1.0",
+  "project": "Calder Wheels",
+  "page": "collection",
+  "qa_iteration": 2,
+  "correction_iteration": 2,
+  "target_implementation": "v3",
+  "result": "REVISION_REQUIRED",
+  "reference": "docs/design/mockups/approved-mockups/Calder - 2 - Category.png",
+  "current_render": "docs/design/visual-inspector/qa/renders/collection/collection.implementation.v2.desktop.png",
+  "corrections": [
+    {
+      "id": "COL-V2-001",
+      "severity": "HIGH",
+      "region": "QA capture pipeline",
+      "issue": "Final QA artifacts delivered to Visual Inspector do not preserve the viewport dimensions OpenCode reported.",
+      "evidence": "Delivered files observed in QA were 963\u00d72048 desktop, 405\u00d72048 tablet, and 159\u00d72048 mobile, despite the report claiming 1440\u00d73061, 768\u00d73879, and 390\u00d74993.",
+      "target": "The exact final PNGs at the state/render paths must retain the intended 1440, 768, and 390 pixel widths with full-page height and no downstream resampling.",
+      "implementation_guidance": "Trace capture -> write -> copy/export -> final repository path. Verify dimensions on the exact final files after the last operation. Do not compensate with CSS.",
+      "verification": "Read PNG metadata from the exact final v3 files and report it. Desktop=1440px wide, tablet=768px, mobile=390px."
+    },
+    {
+      "id": "COL-V2-002",
+      "severity": "HIGH",
+      "region": "Desktop results architecture",
+      "issue": "Results region collapses into a narrow content cluster instead of the approved persistent sidebar + wide three-column results area.",
+      "target": "Within the Calder container, render a persistent desktop filter rail at left and a minmax(0,1fr) results column at right containing toolbar, exactly three product columns, pagination, and results-aligned help CTA.",
+      "implementation_guidance": "Inspect the rendered DOM and computed styles from collection section through product list/card parents. Find the width-constraining Lumia/Bootstrap classes or flex/grid rules. Fix the parent layout contract rather than stacking more card-level overrides.",
+      "verification": "At 1440px the results region uses the available container width, filter rail is visible, and three equal card columns occupy the right side without large unused whitespace."
+    },
+    {
+      "id": "COL-V2-003",
+      "severity": "HIGH",
+      "region": "B1 product card integration",
+      "issue": "B1 cards are compressed into tiny columns; images are absent and text/prices/CTAs wrap or truncate.",
+      "target": "Render the accepted calder-product-card at its intended listing width in three desktop columns, with visible product image, approved hierarchy, fitment badge/status, finish/sizes/price and full-width dark CTA.",
+      "implementation_guidance": "Do not redesign calder-product-card. Inspect its actual DOM, stylesheet loading, parent display/flex-basis/min-width/max-width rules, and any Lumia selectors still targeting product items. Remove integration conflicts at the collection wrapper/item level.",
+      "verification": "Three B1 cards fit the results column with normal internal proportions and no clipped/stacked micro-layout."
+    },
+    {
+      "id": "COL-V2-004",
+      "severity": "HIGH",
+      "region": "Footer and trailing whitespace",
+      "issue": "Complete dark Calder footer is still not visible and a large white trailing region remains.",
+      "target": "Newsletter/benefits must transition directly into the accepted dark global footer, matching the shared Home implementation, with no artificial blank spacer.",
+      "implementation_guidance": "Audit the collection template order and the added collection-negative-space/index-negative-space section. Compare with the accepted Home section order. Remove the spacer from Collection if it is not part of the approved page. Inspect footer computed display/background/height and any template conditions. Do not redesign footer.liquid.",
+      "verification": "Full footer logo, columns, social icons, brand statement and legal row are visible directly after newsletter/benefits with no giant white region."
+    },
+    {
+      "id": "COL-V2-005",
+      "severity": "HIGH",
+      "region": "Collection hero assets",
+      "issue": "Hero remains a gradient placeholder because required approved/project imagery is unassigned.",
+      "target": "Use available Calder project/Shopify assets to reproduce the approved scenic mountain/road background and dominant right-side wheel/vehicle composition.",
+      "implementation_guidance": "Inventory existing Shopify/project assets before creating or requesting anything. Assign suitable existing assets in collection.json/section settings. Do not mark resolved while required imagery is empty. Do not generate substitute imagery.",
+      "verification": "V3 desktop visibly contains the photographic scenic hero and dominant right-side wheel/vehicle focal image."
+    },
+    {
+      "id": "COL-V2-006",
+      "severity": "MEDIUM",
+      "region": "Category navigation",
+      "issue": "Structure/icons improved, but approved photographic tile backgrounds remain unassigned.",
+      "target": "Five dark photographic tiles with the existing icons/labels and gold active treatment.",
+      "implementation_guidance": "Reuse suitable existing project/Shopify images and configure each block image. Preserve destinations and active-state logic.",
+      "verification": "All five desktop tiles have intentional image-backed surfaces comparable in visual weight to the approved reference."
+    },
+    {
+      "id": "COL-V2-007",
+      "severity": "MEDIUM",
+      "region": "Help CTA",
+      "issue": "CTA structure exists but approved background/decorative wheel imagery remains unassigned.",
+      "target": "Results-column-aligned dark CTA with approved image-backed treatment and right-side wheel visual.",
+      "implementation_guidance": "Assign existing suitable assets; do not rebuild CTA functionality. Recheck width only after results architecture is fixed.",
+      "verification": "CTA begins at results-column X position, excludes filter rail, and visibly contains intended imagery."
+    },
+    {
+      "id": "COL-V2-008",
+      "severity": "MEDIUM",
+      "region": "Fitment",
+      "issue": "V2 structure is materially improved; final desktop fidelity cannot be accepted until valid capture and hero/container geometry are corrected.",
+      "target": "Retain current two-row structure while matching reference width, overlap, spacing and status/reset presentation at true desktop.",
+      "implementation_guidance": "Do not rewrite fitment engine. Make only bounded presentation adjustments after parent/hero layout stabilizes.",
+      "verification": "At 1440px four labeled controls plus CTA remain one row and panel relationship to hero matches reference."
+    },
+    {
+      "id": "COL-V2-009",
+      "severity": "MEDIUM",
+      "region": "Newsletter / benefits",
+      "issue": "Scenic treatment improved, but final desktop geometry and transition to footer remain unresolved.",
+      "target": "Retain accepted Home newsletter/benefits treatment and ensure direct transition into the complete footer.",
+      "implementation_guidance": "Avoid changing shared newsletter internals. Correct collection configuration/order/interference only.",
+      "verification": "Desktop shows scenic horizontal newsletter, complete benefit row, then full footer with no blank spacer."
+    }
+  ],
+  "protected_components": [
+    "accepted Home implementation",
+    "global header",
+    "global footer internal design",
+    "B1/calder-product-card internal design",
+    "fitment engine and data",
+    "home-newsletter internal design",
+    "global Calder design tokens"
+  ],
+  "state_update": {
+    "status": "REVISION_REQUIRED",
+    "current_iteration": 2,
+    "latest_correction": "docs/design/visual-inspector/qa/corrections/collection.correction.v2.json",
+    "accepted_render": null
+  },
+  "next_action": "OpenCode applies collection.correction.v2 to V2, produces implementation V3 and exact final 1440/768/390-width QA renders, then advances to READY_FOR_VISUAL_QA iteration 3."
+}

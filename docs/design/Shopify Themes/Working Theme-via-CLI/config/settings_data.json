@@ -76,9 +76,10 @@
     "fbt_source": "collection",
     "recommendations_limit": 6,
     "enable_account_popup": true,
-    "enable_language_selector": true,
-    "enable_country_selector": true,
+    "enable_language_selector": false,
+    "enable_country_selector": false,
     "mail_yes": true,
+    "header_settings": false,
     "header_settings_icon": "auto",
     "header_sticky_always_visible": false,
     "header_main_padding_top": 20,
@@ -91,6 +92,7 @@
     "header_cart_reserved_for": true,
     "header_cart_order_reverted": false,
     "header_cart_checkout_button": true,
+    "header_get_help": false,
     "header_get_help_icon_layout": "icon",
     "header_get_help_icon_text": "24/7 help",
     "header_get_help_links": "header-get-help",
@@ -113,8 +115,8 @@
     "mobile_bottom_navigation_wishlist": "default",
     "mobile_bottom_navigation_cart": "default",
     "product_card_color_options_name": "Color,اللون,Цвят,Barva,Farbe,Χρώμα,Color,Väri,Couleur,צֶבַע,रंग,Boja,Szín,Warna,Colore,色,Farge,Kleur,Farge,Kolor,顏色",
-    "newsletter_popup_yes": true,
-    "newsletter_popup_home_only_yes": true,
+    "newsletter_popup_yes": false,
+    "newsletter_popup_home_only_yes": false,
     "newsletter_popup_delay": 14,
     "newsletter_popup_expires": 1,
     "newsletter_image": "shopify://shop_images/popup-login.png",
@@ -202,7 +204,7 @@
     "shipping_calculator_static": false,
     "shipping_calculator_static_supplier_1_image": "shopify://shop_images/instagram-5_79e1acb4-9e61-4e5f-8d8c-31c38efc8cb5.png",
     "social_enable": true,
-    "social_twitter_link": "#",
+    "social_twitter_link": "",
     "social_twitter_title": "50k+ followers",
     "social_facebook_link": "#",
     "social_facebook_title": "1M+ followers",
@@ -252,14 +254,14 @@
     "font_heading_font_size_desktop": 23,
     "font_heading_font_size_mobile": 23,
     "font_heading_subtitle_font_size": 12,
-    "font_header_navigation_1_level_font_size_desktop": 15,
-    "font_header_navigation_1_level_font_size_mobile": 15,
+    "font_header_navigation_1_level_font_size_desktop": 14,
+    "font_header_navigation_1_level_font_size_mobile": 12,
     "collections_column_title_style": "1",
     "font_headings_weight": "700",
     "font_headings_style": "1",
     "demo": false,
     "quick_shop_min_height": true,
-    "color_global_primary_bg": "#f7f8fc",
+    "color_global_primary_bg": "#FFFFFF",
     "color_global_primary_theme": "#0067ff",
     "color_global_text": "#22292f",
     "color_global_primary_link": "rgba(0,0,0,0)",
@@ -334,7 +336,7 @@
     "color_header_top_bg": "#414c55",
     "color_header_top": "#ffffff",
     "color_header_top_link": "#ffffff",
-    "color_header_top_link_hover": "#ffcc16",
+    "color_header_top_link_hover": "#D5A35C",
     "color_header_main_bg": "rgba(0,0,0,0)",
     "color_header_main_text": "rgba(0,0,0,0)",
     "color_header_main_link": "",
@@ -351,12 +353,12 @@
     "color_header_transparent_global_bg": "rgba(0,0,0,0)",
     "color_header_transparent_global": "#ffffff",
     "color_header_transparent_global_link": "#ffffff",
-    "color_header_transparent_global_link_hover": "#ffe600",
+    "color_header_transparent_global_link_hover": "#D5A35C",
     "color_header_transparent_main_border": "rgba(0,0,0,0)",
     "color_header_transparent_main_badge_text": "rgba(0,0,0,0)",
     "color_header_transparent_main_badge_bg": "rgba(0,0,0,0)",
     "color_header_transparent_link_line_hover": "#ffffff",
-    "color_header_transparent_link_line_active": "#ffe600",
+    "color_header_transparent_link_line_active": "#D5A35C",
     "color_header_transparent_search_text": "",
     "color_header_transparent_search_placeholder": "#ffffff",
     "color_header_transparent_search_border": "",
@@ -515,7 +517,7 @@
           "announcement-bar-1"
         ],
         "settings": {
-          "enable": true,
+          "enable": false,
           "height_desktop": 53,
           "height_mobile": 46,
           "font_size_desktop": 21,
@@ -534,12 +536,12 @@
           "header_sticky_compact": "0",
           "header_transparent": true,
           "welcome_txt": "WELCOME TO OUR STORE LOGO",
-          "svg_logo": false,
-          "svg_logo_name": "logo.svg",
+          "svg_logo": true,
+          "svg_logo_name": "calder-full-logo-navy.svg",
           "logo_width": 144,
           "logo_width_mobile": 80,
-          "svg_logo_transparent": false,
-          "svg_logo_name_transparent": "logo-white.svg",
+          "svg_logo_transparent": true,
+          "svg_logo_name_transparent": "calder-text-cream.svg",
           "logo_sticky_width": 144,
           "show_cart_note": true,
           "header_search": true,
@@ -547,7 +549,7 @@
           "featured_link_url": "",
           "featured_link_badge": "Sale",
           "menu_categories_button": true,
-          "menu_categories": "catalog-cars",
+          "menu_categories": "",
           "menu_categories_previews": true,
           "tab_button_invert": false
         }
@@ -558,38 +560,44 @@
           "ed51d82f-c2bb-4cbd-824b-93e9b1db5f8f": {
             "type": "logo_text_socials",
             "settings": {
-              "text": "<p>Worldwide fashion store with wide collection of styles with over 100 international fashion brands.</p>",
+              "text": "<p>Precision engineered. Purpose built. Calder Wheels creates more than wheels, we create what moves you.</p>",
               "show_social": true,
-              "column_width": 40
+              "column_width": 35
             }
           },
           "footer-0": {
             "type": "link_list",
             "settings": {
-              "heading": "Information",
+              "heading": "Shop",
               "menu": "footer",
-              "column_width": 17,
+              "column_width": 15,
               "column_opened": true
             }
           },
           "3f4a7a2c-4cfe-42b0-b7b6-8ce4ea6dfc9f": {
             "type": "link_list",
             "settings": {
-              "heading": "Get Shopping",
-              "menu": "footer-menu-2",
-              "column_width": 17,
+              "heading": "Explore",
+              "menu": "footer-explore",
+              "column_width": 15,
               "column_opened": true
             }
           },
-          "f825b8ca-1a1b-455a-84f9-599c8d77aeca": {
-            "type": "contacts",
+          "link_list_VGqdYG": {
+            "type": "link_list",
             "settings": {
-              "show_captions": true,
-              "heading": "Contacts",
-              "phone": "+1-202-555-0158",
-              "email": "loremipsum@gmail.com",
-              "address": "165th St, Jamaica, NY 11",
-              "column_width": 26,
+              "heading": "Explore",
+              "menu": "footer-support",
+              "column_width": 15,
+              "column_opened": true
+            }
+          },
+          "text_9gcBrP": {
+            "type": "text",
+            "settings": {
+              "heading": "",
+              "subtext": "<p><strong>A HIGHER STANDARD</strong></p><p><strong>ALWAYS DRIVES</strong></p><p><strong>FORWARD.</strong></p>",
+              "column_width": 20,
               "column_opened": true
             }
           }
@@ -598,13 +606,14 @@
           "ed51d82f-c2bb-4cbd-824b-93e9b1db5f8f",
           "footer-0",
           "3f4a7a2c-4cfe-42b0-b7b6-8ce4ea6dfc9f",
-          "f825b8ca-1a1b-455a-84f9-599c8d77aeca"
+          "link_list_VGqdYG",
+          "text_9gcBrP"
         ],
         "settings": {
-          "layout": "1",
-          "svg_logo": false,
-          "svg_logo_name": "logo-white.svg",
-          "logo_width": 145,
+          "layout": "2",
+          "svg_logo": true,
+          "svg_logo_name": "calder-text-cream.svg",
+          "logo_width": 200,
           "logo_width_mobile": 145,
           "input_style": "shadow",
           "button_color": "btn--fifth",
@@ -617,7 +626,7 @@
           "space_between_columns": "gx-5",
           "columns_text_aligment": "start",
           "collections_column_title_style": "4",
-          "copyright": "<a href=\"https://themeforest.net/user/bigsteps/portfolio\" target=\"_blank\">Powered by Bigsteps</a>"
+          "copyright": ""
         }
       },
       "promo-products": {
@@ -760,13 +769,11 @@
               "button_text": "View all products",
               "button_url": "",
               "brands": "automatic",
-              "image_1_fullwidth": "shopify://shop_images/menu-banner-06.png",
               "color_placeholder_image_1_fullwidth": "#f4f5f9",
               "image_1_href_fullwidth": "shopify://collections/women",
               "image_1_caption_1_fullwidth": "SELECTED SHIRTS",
               "image_1_caption_2_fullwidth": "Summer Sale",
               "image_1_captions_invert_fullwidth": false,
-              "image_2_fullwidth": "shopify://shop_images/menu-banner-07.png",
               "color_placeholder_image_2_fullwidth": "#f1f6fa",
               "image_2_href_fullwidth": "shopify://collections/women",
               "image_2_caption_1_fullwidth": "DISCOUNT",
@@ -780,7 +787,6 @@
             "settings": {
               "layout": "boxed",
               "boxed_columns_count": 3,
-              "image_1_boxed": "shopify://shop_images/menu-banner-03.png",
               "color_placeholder_image_1_boxed": "#f0f6fd",
               "image_1_href_boxed": "shopify://collections/women",
               "image_1_caption_1_boxed": "TODAY ONLY",

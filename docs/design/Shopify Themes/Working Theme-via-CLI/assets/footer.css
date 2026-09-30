@@ -14,7 +14,8 @@
 }
 .footer-top {
   color: var(--footer-top-color);
-  background-color: var(--footer-top-bg)
+  background-color: var(--footer-top-bg);
+  display: none;
 }
 .footer-top a {
   color: var(--footer-top-link-color);
@@ -28,7 +29,7 @@
 }
 .footer-content {
   color: var(--footer-content-color);
-  background-color: var(--footer-content-bg)
+  background-color: var(--calder-navy)
 }
 .footer-content .footer-list a[href*=mailto],
 .footer-content a {
@@ -44,7 +45,12 @@
 }
 .footer-bottom {
   color: var(--footer-bottom-color);
-  background-color: var(--footer-bottom-bg)
+  background-color: var(--calder-navy)
+}
+.footer-bottom .container {
+  border-top: 1px solid #284254;
+  padding-top: 1.2rem;
+  padding-bottom: 0.2rem;
 }
 .footer-bottom a {
   color: var(--footer-bottom-link-color);

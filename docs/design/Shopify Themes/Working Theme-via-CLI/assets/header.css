@@ -186,7 +186,8 @@
   display: -ms-flexbox;
   display: flex;
   -ms-flex-align: center;
-  align-items: center
+  align-items: center;
+  padding-top: 0.5rem !important;
 }
 .hdr-logo > a {
   display: block;

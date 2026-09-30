@@ -1,0 +1,144 @@
+{
+  "schema_version": "product.visual-correction.v8",
+  "project": "Calder Wheels",
+  "status": "REVISION_REQUIRED",
+  "target_state": "READY_FOR_VISUAL_QA_V9",
+  "reference": "Calder - 3 - Product(7).png",
+  "current_render": "product.desktop.v8.png",
+  "inspection": "Direct vision comparison by GPT-5.6 Sol",
+  "summary": "V8 finally has the correct broad Calder palette and section order, but fidelity is still blocked primarily by wrong semantic imagery, underscaled/incorrect typography, hero proportions, Engineering composition, recommendation card implementation, and CTA/header/footer detail.",
+  "preserve": [
+    "Build Your Wheel functionality and section",
+    "Find Your Perfect Fit functionality and section",
+    "Shopify product/variant/cart logic",
+    "Apex 201 dynamic data"
+  ],
+  "findings": [
+    {
+      "id": "V8-001",
+      "priority": "P0",
+      "area": "hero media",
+      "current": "Large forest/stream lifestyle image and unrelated thumbnails.",
+      "reference": "Large close-up wheel mounted on vehicle/brake assembly; wheel fills almost entire media frame; five wheel/vehicle/detail thumbnails.",
+      "correction": "Hero must render wheel-centric Apex media. Never use generic scenic media. Use product.media filtered/prioritized for wheel/product imagery or explicit PDP hero media settings."
+    },
+    {
+      "id": "V8-002",
+      "priority": "P0",
+      "area": "hero scale",
+      "current": "Hero content is substantially smaller/lighter; product title and controls lack reference dominance.",
+      "reference": "Hero media and info dominate first screen; large C1 title, large construction line, larger controls and CTA.",
+      "correction": "Increase hero typography/control scale and maintain approx 57/43 media/info split. Remove excess whitespace beneath hero."
+    },
+    {
+      "id": "V8-003",
+      "priority": "P1",
+      "area": "header",
+      "current": "Correct dark direction but logo appears as placeholder/low-fidelity and nav/utilities are too small.",
+      "reference": "Prominent Calder logo, larger navigation/utilities, gold outlined Find Your Fit.",
+      "correction": "Reuse exact approved homepage header/logo asset and sizing."
+    },
+    {
+      "id": "V8-004",
+      "priority": "P0",
+      "area": "Build Your Wheel",
+      "current": "Layout is compact enough, but preview is beach/coast photography.",
+      "reference_extension": "Must visually integrate with approved PDP while preserving required functionality.",
+      "correction": "Configured wheel preview only; if unavailable use base Apex wheel image, never lifestyle/scenery. Keep current compact two-column size."
+    },
+    {
+      "id": "V8-005",
+      "priority": "P1",
+      "area": "Fitment",
+      "current": "Compact section is acceptable structurally but type/controls are smaller and lighter than Calder system.",
+      "correction": "Keep size; increase heading/control/CTA visual weight and use established Facundo/Garet/gold treatment."
+    },
+    {
+      "id": "V8-006",
+      "priority": "P0",
+      "area": "Engineering",
+      "current": "Panel is mostly flat gray/blue with text concentrated at bottom; heading breaks awkwardly outside/above image.",
+      "reference": "Full CNC manufacturing photograph, strong white ENGINEERED TO PERFORM overlay upper-left, four large icon capabilities across bottom.",
+      "correction": "Use one image-backed panel, overlay content within it, match reference hierarchy."
+    },
+    {
+      "id": "V8-007",
+      "priority": "P0",
+      "area": "Available Finishes",
+      "current": "Six unrelated lifestyle/scenic images.",
+      "reference": "Six isolated wheel renders, large and nearly card-width, labels below, selected gold outline.",
+      "correction": "Replace all finish imagery with finish-specific wheel renders; base wheel image is only acceptable temporary fallback."
+    },
+    {
+      "id": "V8-008",
+      "priority": "P0",
+      "area": "Real World",
+      "current": "Four blank gray boxes.",
+      "reference": "Four automotive lifestyle images showing vehicles/wheels installed.",
+      "correction": "Bind four Theme Editor/metafield automotive images. No blank fidelity placeholders in final capture."
+    },
+    {
+      "id": "V8-009",
+      "priority": "P0",
+      "area": "Recommendations",
+      "current": "Generic lifestyle photography; cards are smaller and visually unrelated to approved wheel cards.",
+      "reference": "Four large wheel-render cards with C2/C3/C4/C5-like hierarchy, construction, price, arrow.",
+      "correction": "Use shared B1 card and actual recommended wheel media. Remove generic image fallback."
+    },
+    {
+      "id": "V8-010",
+      "priority": "P1",
+      "area": "Specialist CTA",
+      "current": "Correct dark/gold direction but flat navy with no strong background image and undersized heading.",
+      "reference": "Wheel-detail image-backed dark banner with much larger heading and CTA.",
+      "correction": "Add approved/configured wheel-detail background with overlay and increase typography/CTA scale."
+    },
+    {
+      "id": "V8-011",
+      "priority": "P1",
+      "area": "Footer",
+      "current": "Broad structure is closer but logo appears placeholder and typography/content scale is too small.",
+      "reference": "Strong Calder logo/mission/social block, clear columns, newsletter and locale.",
+      "correction": "Reuse exact homepage footer and logo assets; do not approximate."
+    },
+    {
+      "id": "V8-012",
+      "priority": "P0",
+      "area": "fonts",
+      "current": "Headings are serif-like and do not visually match approved Facundo; body/UI also appears inconsistent.",
+      "reference": "Bold geometric Calder heading treatment and consistent Garet UI.",
+      "correction": "Verify actual Facundo/Garet @font-face URLs load; inspect computed font-family; fail validation if fallback fonts are active."
+    }
+  ],
+  "implementation_targets": {
+    "container": "1178px",
+    "hero_columns": "57% / 43%",
+    "hero_gap": "32\u201340px",
+    "major_heading": "Facundo, reference-comparable scale",
+    "ui_body": "Garet",
+    "primary_cta": "#C2A48A",
+    "primary_text": "#0E2A3E",
+    "engineering": "single image-backed CNC panel",
+    "finishes": "6 wheel renders desktop",
+    "real_world": "4 automotive landscape images desktop",
+    "recommendations": "4 shared B1 wheel cards desktop"
+  },
+  "acceptance_gate": [
+    "No scenic image in hero",
+    "No scenic image in Build Your Wheel preview",
+    "No scenic/lifestyle image in finish tiles",
+    "No blank Real World tiles",
+    "No generic lifestyle image in recommendation cards",
+    "Engineering visibly contains CNC/manufacturing photography",
+    "Computed major headings use Facundo, not fallback serif/sans",
+    "Computed UI/body uses Garet",
+    "Shared approved header/footer/logo assets are used",
+    "Build and Fitment remain functional"
+  ],
+  "required_outputs": [
+    "product.desktop.v9.png",
+    "product.tablet.v9.png",
+    "product.mobile.v9.png",
+    "product.asset-map.v9.json"
+  ]
+}

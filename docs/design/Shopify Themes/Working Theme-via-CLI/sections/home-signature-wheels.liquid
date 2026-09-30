@@ -1,0 +1,138 @@
+<section class="home-signature" id="home-signature-{{ section.id }}">
+  <div class="home-signature__container">
+    <div class="home-signature__header">
+      <div>
+        <div class="home-signature__eyebrow">{{ section.settings.eyebrow | default: 'Our Collection' }}</div>
+        <h2 class="home-signature__heading">{{ section.settings.heading | default: 'Signature Wheels' }}</h2>
+      </div>
+      {% if section.settings.view_all_text != blank %}
+        <a href="{{ section.settings.view_all_url }}" class="home-signature__view-all">
+          {{ section.settings.view_all_text }}
+          <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+            <path d="M3 1L7 5L3 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      {% endif %}
+    </div>
+
+    <div class="home-signature__grid">
+      {% for block in section.blocks %}
+        {% if block.type == 'wheel_card' %}
+          <a href="{{ block.settings.url | default: '#' }}" class="home-signature__card">
+            {% if block.settings.image != blank %}
+              {{ block.settings.image | image_url: width: 600 | image_tag: widths: '600,400,300', loading: 'lazy', alt: block.settings.title, class: 'home-signature__card-image' }}
+            {% else %}
+              <div class="home-signature__card-image" style="background:#e8e8e8;"></div>
+            {% endif %}
+            <div class="home-signature__card-label">{{ block.settings.label | default: 'C1' }}</div>
+            <div class="home-signature__card-title">{{ block.settings.title | default: 'Forged Monoblock' }}</div>
+            <div class="home-signature__card-type">{{ block.settings.construction_type | default: 'Forged Monoblock' }}</div>
+            <div class="home-signature__card-desc">{{ block.settings.description | default: 'Precision machined from a single billet of 6061-T6 aluminum.' }}</div>
+            <span class="home-signature__card-link">
+              View Details
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+                <path d="M3 1L7 5L3 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+          </a>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Signature Wheels",
+  "tag": "section",
+  "class": "section--home-signature",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow text",
+      "default": "Our Collection"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Signature Wheels"
+    },
+    {
+      "type": "text",
+      "id": "view_all_text",
+      "label": "View All text",
+      "default": "View All Wheels"
+    },
+    {
+      "type": "url",
+      "id": "view_all_url",
+      "label": "View All URL"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "wheel_card",
+      "name": "Wheel Card",
+      "limit": 6,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Wheel image"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label (e.g. C1)",
+          "default": "C1"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Forged Monoblock"
+        },
+        {
+          "type": "text",
+          "id": "construction_type",
+          "label": "Construction type",
+          "default": "Forged Monoblock"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "Precision machined from a single billet of 6061-T6 aluminum."
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "Product URL"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Signature Wheels",
+      "category": "Home",
+      "blocks": [
+        {
+          "type": "wheel_card",
+          "settings": { "label": "C1", "title": "Forged Monoblock", "construction_type": "Forged Monoblock" }
+        },
+        {
+          "type": "wheel_card",
+          "settings": { "label": "C2", "title": "Forged 3-Piece", "construction_type": "Forged 3-Piece" }
+        },
+        {
+          "type": "wheel_card",
+          "settings": { "label": "C3", "title": "Hybrid Forged", "construction_type": "Hybrid Forged" }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

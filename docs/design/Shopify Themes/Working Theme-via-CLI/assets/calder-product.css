@@ -1,0 +1,1419 @@
+/* ============================================================
+   Calder Wheels — Product Page v2 (Approved Light Visual System)
+   ============================================================ */
+
+/* ── Design Tokens ── */
+.page-calder {
+  --c-navy: #0E2A3E;
+  --c-blue: #1E4C68;
+  --c-gold: #C2A48A;
+  --c-slate: #876E5A;
+  --c-cream: #F2EFE9;
+  --c-near-black: #231F20;
+  --c-white: #FFFFFF;
+  --c-bg: #FFFFFF;
+  --c-bg-alt: #F8F8F8;
+  --c-bg-section: #F5F5F5;
+  --c-border: #E8E8E8;
+  --c-border-light: #F0F0F0;
+  --c-text: #666666;
+  --c-text-strong: #333333;
+  --c-text-heading: #0E2A3E;
+  --c-text-dim: #999999;
+  --heading-font: 'Facundo', 'Poppins', serif;
+  --ui-font: 'Garet', 'Poppins', sans-serif;
+  --container-width: 1178px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+
+  /* PDP Geometry — controlled here, Sol provides exact values */
+  --pdp-container-width: 1178px;
+  --pdp-hero-gap: 36px;
+  --pdp-hero-padding-y: 0px 0px 60px;
+  --pdp-hero-gallery-min-height: 500px;
+  --pdp-title-size: 52px;
+  --pdp-title-line-height: 1.0;
+  --pdp-construction-size: 20px;
+  --pdp-body-size: 16px;
+  --pdp-body-line-height: 1.6;
+  --pdp-control-height: 48px;
+  --pdp-primary-btn-height: 52px;
+  --pdp-price-size: 36px;
+  --pdp-section-padding-y: 48px;
+  --pdp-section-gap: 32px;
+  --pdp-build-preview-max-height: 420px;
+  --pdp-build-column-gap: 40px;
+  --pdp-build-control-size: 64px;
+  --pdp-fitment-min-height: 240px;
+  --pdp-fitment-control-height: 48px;
+  --pdp-engineering-min-height: 380px;
+  --pdp-finish-card-width: 160px;
+  --pdp-finish-gap: 20px;
+  --pdp-real-world-gap: 8px;
+  --pdp-recs-gap: 20px;
+  --pdp-specialist-min-height: 190px;
+  --pdp-specialist-cta-height: 48px;
+}
+
+.page-calder {
+  background: var(--c-bg);
+  color: var(--c-text);
+  font-family: var(--ui-font);
+  font-weight: 400;
+}
+
+/* ── Heading Font Enforcement ── */
+.page-calder h1,
+.page-calder h2,
+.page-calder .calder-pdp__title,
+.page-calder .calder-specs__heading,
+.page-calder .calder-engineering__heading,
+.page-calder .calder-engineering__body h3,
+.page-calder .calder-finishes__heading,
+.page-calder .calder-gallery-section__heading,
+.page-calder .calder-recommendations__heading,
+.page-calder .calder-specialist-cta__heading,
+.page-calder .wheel-configurator__title,
+.page-calder .fitment-finder__heading {
+  font-family: var(--heading-font);
+  font-weight: 700;
+}
+
+/* ── Body/UI Font Enforcement ── */
+.page-calder .calder-pdp__tagline,
+.page-calder .calder-pdp__construction,
+.page-calder .calder-pdp__meta,
+.page-calder .calder-pdp__fitment-text,
+.page-calder .calder-pdp__config-label,
+.page-calder .calder-pdp__config-select,
+.page-calder .calder-pdp__price,
+.page-calder .calder-add-btn,
+.page-calder .calder-pdp__action-btn,
+.page-calder .wheel-configurator__subtitle,
+.page-calder .wheel-configurator__label,
+.page-calder .fitment-finder__subheading,
+.page-calder .fitment-finder__select,
+.page-calder .fitment-finder__submit,
+.page-calder .calder-eyebrow,
+.page-calder .calder-specs__table,
+.page-calder .calder-engineering__cap-text,
+.page-calder .calder-finishes__card-label,
+.page-calder .calder-recommendations .calder-card__type,
+.page-calder .calder-recommendations .calder-card__title,
+.page-calder .calder-recommendations .calder-card__price,
+.page-calder .calder-specialist-cta__text,
+.page-calder .calder-specialist-cta__action,
+.page-calder .calder-specialist-cta__method {
+  font-family: var(--ui-font);
+}
+
+/* ── Container ── */
+.page-calder .container {
+  max-width: var(--container-width);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+/* ── Calder Eyebrow ── */
+.calder-eyebrow {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  color: var(--c-gold);
+  font-family: var(--ui-font);
+  margin-bottom: 8px;
+}
+
+/* ── Breadcrumbs ── */
+.page-calder .breadcrumbs {
+  padding: 24px 0 12px;
+  font-size: 12px;
+  letter-spacing: 0.4px;
+  color: var(--c-text-dim);
+  font-family: var(--ui-font);
+}
+
+.page-calder .breadcrumbs a {
+  color: var(--c-text);
+  text-decoration: none;
+}
+
+.page-calder .breadcrumbs a:hover {
+  color: var(--c-gold);
+}
+
+.page-calder .breadcrumbs span {
+  color: var(--c-text-dim);
+}
+
+/* ============================================================
+   CALDER PRODUCT HERO
+   ============================================================ */
+.calder-pdp {
+  background: var(--c-white);
+}
+
+.calder-pdp__hero {
+  display: grid;
+  grid-template-columns: minmax(0, 57fr) minmax(0, 43fr);
+  gap: 36px;
+  padding: 20px 0 64px;
+  align-items: flex-start;
+}
+
+.calder-pdp__gallery {
+  position: sticky;
+  top: 100px;
+  min-height: 500px;
+}
+
+.calder-pdp__info {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ── Gallery ── */
+.calder-pdp__main-image {
+  width: 100%;
+  aspect-ratio: 1;
+  background: var(--c-bg-alt);
+  border-radius: 4px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+}
+
+.calder-pdp__main-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 20px;
+}
+
+.calder-pdp__thumbs {
+  display: flex;
+  gap: 10px;
+  margin-top: 14px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding-bottom: 4px;
+}
+
+.calder-pdp__thumbs::-webkit-scrollbar {
+  display: none;
+}
+
+.calder-pdp__thumb {
+  flex: 0 0 80px;
+  width: 80px;
+  height: 80px;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  background: var(--c-bg-alt);
+  cursor: pointer;
+  border: 2px solid var(--c-border-light);
+  transition: border-color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.calder-pdp__thumb:hover {
+  border-color: var(--c-border);
+}
+
+.calder-pdp__thumb.is-active {
+  border-color: var(--c-gold);
+}
+
+.calder-pdp__thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* ── Product Info ── */
+.calder-pdp__construction {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  color: var(--c-gold);
+  font-family: var(--ui-font);
+  margin-bottom: 0;
+}
+
+.calder-pdp__title {
+  font-family: var(--heading-font);
+  font-size: 52px;
+  font-weight: 700;
+  color: var(--c-text-heading);
+  line-height: 1.0;
+  margin: 0;
+  letter-spacing: -0.5px;
+}
+
+.calder-pdp__tagline {
+  font-size: 19px;
+  line-height: 1.5;
+  color: var(--c-text);
+  margin: 0;
+  font-family: var(--ui-font);
+}
+
+.calder-pdp__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: center;
+  font-size: 13px;
+  color: var(--c-text);
+}
+
+.calder-pdp__stars {
+  color: var(--c-gold);
+  font-size: 15px;
+  letter-spacing: 2px;
+}
+
+.calder-pdp__sku {
+  font-size: 12px;
+  color: var(--c-text-dim);
+}
+
+.calder-pdp__badge {
+  display: inline-block;
+  padding: 3px 12px;
+  background: var(--c-bg-alt);
+  color: var(--c-text-heading);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  border-radius: 4px;
+  border: 1px solid var(--c-border-light);
+}
+
+/* ── Fitment Panel ── */
+.calder-pdp__fitment {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  margin: 2px 0;
+}
+
+.calder-pdp__fitment--unset {
+  background: var(--c-bg-alt);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-sm);
+}
+
+.calder-pdp__fitment--confirmed {
+  background: #F6F8F4;
+  border: 1px solid #DCE8D5;
+  border-radius: var(--radius-sm);
+}
+
+.calder-pdp__fitment-icon {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+}
+
+.calder-pdp__fitment--unset .calder-pdp__fitment-icon {
+  color: var(--c-text-dim);
+}
+
+.calder-pdp__fitment--confirmed .calder-pdp__fitment-icon {
+  color: #5A8A4A;
+}
+
+.calder-pdp__fitment-text {
+  font-size: 13px;
+  color: var(--c-text);
+  font-family: var(--ui-font);
+}
+
+.calder-pdp__fitment-vehicle {
+  font-weight: 600;
+  color: var(--c-text-heading);
+}
+
+.calder-pdp__fitment-action {
+  margin-left: auto;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--c-text);
+  white-space: nowrap;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: var(--ui-font);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.calder-pdp__fitment-action:hover {
+  color: var(--c-gold);
+}
+
+/* ── Configuration Controls ── */
+.calder-pdp__config {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 0;
+}
+
+.calder-pdp__config-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.calder-pdp__config-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.calder-pdp__config-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--c-text-heading);
+  font-family: var(--ui-font);
+}
+
+.calder-pdp__config-select {
+  width: 100%;
+  padding: 10px 14px;
+  background: var(--c-bg);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-sm);
+  color: var(--c-text-strong);
+  font-size: 13px;
+  font-family: var(--ui-font);
+  cursor: pointer;
+  transition: border-color 0.2s;
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%230E2A3E' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 32px;
+}
+
+.calder-pdp__config-select:focus {
+  border-color: var(--c-gold);
+  outline: none;
+}
+
+/* ── Finish Swatches ── */
+.calder-pdp__finishes {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 2px 0;
+  scrollbar-width: none;
+}
+
+.calder-pdp__finishes::-webkit-scrollbar {
+  display: none;
+}
+
+.calder-pdp__finish-chip {
+  flex: 0 0 48px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  overflow: hidden;
+  cursor: pointer;
+  border: 2px solid var(--c-border-light);
+  transition: border-color 0.2s, transform 0.15s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--c-bg-alt);
+}
+
+.calder-pdp__finish-chip:hover {
+  border-color: var(--c-border);
+  transform: scale(1.05);
+}
+
+.calder-pdp__finish-chip.is-selected {
+  border-color: var(--c-gold);
+  box-shadow: 0 0 0 2px var(--c-gold);
+}
+
+.calder-pdp__finish-chip img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.calder-pdp__finish-chip span {
+  font-size: 9px;
+  color: var(--c-text);
+  text-align: center;
+  padding: 4px;
+  line-height: 1.2;
+}
+
+/* ── Purchase Row ── */
+.calder-pdp__purchase {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding: 8px 0;
+}
+
+.calder-pdp__price {
+  font-family: var(--heading-font);
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--c-text-heading);
+  line-height: 1;
+}
+
+.calder-pdp__price-compare {
+  font-size: 16px;
+  color: var(--c-text-dim);
+  text-decoration: line-through;
+  font-weight: 400;
+  margin-left: 8px;
+}
+
+.calder-pdp__qty {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  background: var(--c-bg);
+}
+
+.calder-pdp__qty-btn {
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  color: var(--c-text-strong);
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.15s;
+  font-family: var(--ui-font);
+}
+
+.calder-pdp__qty-btn:hover {
+  background: var(--c-bg-alt);
+}
+
+.calder-pdp__qty-input {
+  width: 42px;
+  height: 38px;
+  text-align: center;
+  background: none;
+  border: none;
+  border-left: 1px solid var(--c-border);
+  border-right: 1px solid var(--c-border);
+  color: var(--c-text-strong);
+  font-size: 14px;
+  font-family: var(--ui-font);
+  -moz-appearance: textfield;
+}
+
+.calder-pdp__qty-input::-webkit-inner-spin-button,
+.calder-pdp__qty-input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.calder-pdp__qty-input:focus {
+  outline: none;
+}
+
+/* ── Add to Cart ── */
+.calder-pdp__add-btn {
+  flex: 1;
+  min-width: 200px;
+  height: 50px;
+  border-radius: var(--radius-sm);
+  background: var(--c-gold);
+  color: var(--c-white);
+  font-family: var(--ui-font);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.calder-pdp__add-btn:hover {
+  background: #b89575;
+}
+
+.calder-pdp__add-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ── Secondary Actions ── */
+.calder-pdp__actions {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.calder-pdp__action-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  color: var(--c-text);
+  font-size: 13px;
+  font-family: var(--ui-font);
+  cursor: pointer;
+  padding: 4px 0;
+  transition: color 0.2s;
+}
+
+.calder-pdp__action-btn:hover {
+  color: var(--c-gold);
+}
+
+.calder-pdp__action-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* ── Trust Row ── */
+.calder-pdp__trust {
+  display: flex;
+  gap: 24px;
+  padding: 14px 0;
+  border-top: 1px solid var(--c-border-light);
+  font-size: 12px;
+  color: var(--c-text);
+  font-family: var(--ui-font);
+  flex-wrap: wrap;
+}
+
+.calder-pdp__trust-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.calder-pdp__trust-item svg {
+  width: 14px;
+  height: 14px;
+  color: var(--c-gold);
+  flex-shrink: 0;
+}
+
+/* ============================================================
+   SPECIFICATIONS + ENGINEERING
+   ============================================================ */
+.calder-specs-section {
+  background: var(--c-bg);
+  padding: 60px 0;
+  border-top: 1px solid var(--c-border-light);
+}
+
+.calder-specs-grid {
+  display: grid;
+  grid-template-columns: 47% 53%;
+  gap: 32px;
+}
+
+.calder-specs__heading {
+  font-family: var(--heading-font);
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--c-text-heading);
+  margin: 0 0 24px;
+}
+
+.calder-specs__table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.calder-specs__table td {
+  padding: 10px 16px;
+  font-size: 13px;
+  border-bottom: 1px solid var(--c-border-light);
+}
+
+.calder-specs__table tr:last-child td {
+  border-bottom: none;
+}
+
+.calder-specs__table td:first-child {
+  color: var(--c-text-dim);
+  font-weight: 500;
+  width: 120px;
+}
+
+.calder-specs__table td:last-child {
+  color: var(--c-text-strong);
+  font-weight: 500;
+}
+
+/* ── Engineering Panel ── */
+.calder-engineering {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.calder-engineering__heading {
+  font-family: var(--heading-font);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--c-text-heading);
+  margin: 0 0 20px;
+}
+
+.calder-engineering__panel {
+  background: var(--c-navy);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: none;
+}
+
+.calder-engineering__hero-img {
+  width: 100%;
+  aspect-ratio: 16/9;
+  object-fit: cover;
+  display: block;
+  background: var(--c-navy);
+}
+
+.calder-engineering__body {
+  padding: 28px 24px;
+}
+
+.calder-engineering__body h3 {
+  font-family: var(--heading-font);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--c-white);
+  margin: 0 0 10px;
+}
+
+.calder-engineering__body p {
+  font-size: 14px;
+  line-height: 1.7;
+  color: rgba(255,255,255,0.7);
+  margin: 0 0 24px;
+}
+
+.calder-engineering__capabilities {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.calder-engineering__cap {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 4px;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.calder-engineering__cap-icon {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(194, 164, 138, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--c-gold);
+}
+
+.calder-engineering__cap-icon svg {
+  width: 14px;
+  height: 14px;
+}
+
+.calder-engineering__cap-text {
+  font-size: 12px;
+  color: rgba(255,255,255,0.65);
+  line-height: 1.4;
+}
+
+.calder-engineering__cap-text strong {
+  display: block;
+  color: var(--c-white);
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 3px;
+}
+
+/* ============================================================
+   WHEEL CONFIGURATOR — Light Theme Restyle
+   ============================================================ */
+.calder-configurator {
+  padding: 60px 0;
+  background: var(--c-bg);
+  border-top: 1px solid var(--c-border-light);
+}
+
+.calder-configurator .wheel-configurator {
+  padding: 0;
+  background: none;
+}
+
+.calder-configurator .wheel-configurator__header {
+  margin-bottom: 32px;
+}
+
+.calder-configurator .wheel-configurator__title {
+  font-family: var(--heading-font);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--c-text-heading);
+  margin-bottom: 8px;
+}
+
+.calder-configurator .wheel-configurator__subtitle {
+  font-size: 14px;
+  color: var(--c-text);
+  font-family: var(--ui-font);
+}
+
+.calder-configurator .wheel-configurator__layout {
+  gap: 40px;
+}
+
+.calder-configurator .wheel-configurator__canvas {
+  background: var(--c-bg-alt);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--c-border-light);
+}
+
+.calder-configurator .wheel-configurator__label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: var(--c-text-heading);
+  font-family: var(--ui-font);
+  margin-bottom: 12px;
+}
+
+.calder-configurator .wheel-configurator__option {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  border: 2px solid var(--c-border-light);
+  background: var(--c-white);
+}
+
+.calder-configurator .wheel-configurator__option:hover {
+  border-color: var(--c-border);
+  transform: scale(1.08);
+}
+
+.calder-configurator .wheel-configurator__option--selected {
+  border-color: var(--c-gold);
+  box-shadow: 0 0 0 2px var(--c-gold);
+}
+
+.calder-configurator .wheel-configurator__add-btn {
+  height: 48px;
+  background: var(--c-gold);
+  color: var(--c-white);
+  font-family: var(--ui-font);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border: none;
+  border-radius: var(--radius-sm);
+  transition: background 0.2s;
+}
+
+.calder-configurator .wheel-configurator__add-btn:hover:not(:disabled) {
+  background: #b89575;
+}
+
+.calder-configurator .wheel-configurator__quote-btn {
+  background: transparent;
+  border: 1px solid var(--c-gold);
+  color: var(--c-gold);
+  font-family: var(--ui-font);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border-radius: var(--radius-sm);
+  transition: background 0.2s;
+}
+
+.calder-configurator .wheel-configurator__quote-btn:hover:not(:disabled) {
+  background: rgba(194, 164, 138, 0.08);
+}
+
+.calder-configurator .wheel-configurator__summary {
+  border-top-color: var(--c-border-light);
+  color: var(--c-text);
+}
+
+.calder-configurator .wheel-configurator__summary-item strong {
+  color: var(--c-gold);
+}
+
+/* ============================================================
+   AVAILABLE FINISHES
+   ============================================================ */
+.calder-finishes {
+  padding: 60px 0;
+  background: var(--c-bg-alt);
+  border-top: 1px solid var(--c-border-light);
+}
+
+.calder-finishes__heading {
+  font-family: var(--heading-font);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--c-text-heading);
+  margin: 0 0 24px;
+}
+
+.calder-finishes__carousel {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  padding: 4px 0;
+  scrollbar-width: none;
+}
+
+.calder-finishes__carousel::-webkit-scrollbar {
+  display: none;
+}
+
+.calder-finishes__card {
+  flex: 0 0 150px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.calder-finishes__card:hover {
+  transform: translateY(-2px);
+}
+
+.calder-finishes__card-media {
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 4px;
+  overflow: hidden;
+  background: var(--c-white);
+  border: 2px solid var(--c-border-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.2s;
+}
+
+.calder-finishes__card.is-selected .calder-finishes__card-media {
+  border-color: var(--c-gold);
+  box-shadow: 0 0 0 2px var(--c-gold);
+}
+
+.calder-finishes__card-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 12px;
+}
+
+.calder-finishes__card-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--c-text-heading);
+  text-align: center;
+  font-family: var(--ui-font);
+}
+
+.calder-finishes__card-meta {
+  font-size: 11px;
+  color: var(--c-text-dim);
+  text-align: center;
+}
+
+/* ============================================================
+   FITMENT FINDER — Light Restyle
+   ============================================================ */
+.page-calder .fitment-finder {
+  padding: 60px 0;
+  background: var(--c-bg-alt);
+  border-top: 1px solid var(--c-border-light);
+  border-bottom: 1px solid var(--c-border-light);
+}
+
+.page-calder .fitment-finder__heading {
+  color: var(--c-text-heading);
+  font-family: var(--heading-font);
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.page-calder .fitment-finder__subheading {
+  color: var(--c-text);
+  font-family: var(--ui-font);
+}
+
+.page-calder .fitment-finder__select {
+  background: var(--c-white);
+  border-color: var(--c-border);
+  color: var(--c-text-strong);
+  font-family: var(--ui-font);
+}
+
+.page-calder .fitment-finder__select:focus {
+  border-color: var(--c-gold);
+}
+
+.page-calder .fitment-finder__submit {
+  background: var(--c-gold);
+  color: var(--c-white);
+  font-family: var(--ui-font);
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border: none;
+  border-radius: var(--radius-sm);
+  height: 48px;
+}
+
+.page-calder .fitment-finder__submit:hover:not(:disabled) {
+  background: #b89575;
+}
+
+.page-calder .fitment-finder__result-item {
+  background: var(--c-white);
+  border-color: var(--c-border-light);
+}
+
+.page-calder .fitment-finder__result-item:hover {
+  border-color: var(--c-gold);
+}
+
+.page-calder .fitment-finder__result-title {
+  color: var(--c-text-heading);
+}
+
+.page-calder .fitment-finder__result-price {
+  color: var(--c-gold);
+}
+
+/* ============================================================
+   REAL WORLD GALLERY
+   ============================================================ */
+.calder-gallery-section {
+  padding: 60px 0;
+  background: var(--c-white);
+  border-top: 1px solid var(--c-border-light);
+}
+
+.calder-gallery-section__header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.calder-gallery-section__heading {
+  font-family: var(--heading-font);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--c-text-heading);
+  margin: 0;
+}
+
+.calder-gallery-section__subheading {
+  font-size: 14px;
+  color: var(--c-text);
+  margin: 4px 0 0;
+}
+
+.calder-gallery-section__action {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--c-gold);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.calder-gallery-section__action:hover {
+  text-decoration: underline;
+}
+
+.calder-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.calder-gallery-grid__item {
+  width: 100%;
+  aspect-ratio: 4/3;
+  border-radius: 2px;
+  overflow: hidden;
+  background: var(--c-bg-alt);
+}
+
+.calder-gallery-grid__item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s;
+}
+
+.calder-gallery-grid__item:hover img {
+  transform: scale(1.03);
+}
+
+/* ============================================================
+   RECOMMENDATIONS — Light B1 Cards
+   ============================================================ */
+.calder-recommendations {
+  padding: 60px 0;
+  background: var(--c-bg-alt);
+  border-top: 1px solid var(--c-border-light);
+}
+
+.calder-recommendations__heading {
+  font-family: var(--heading-font);
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--c-text-heading);
+  margin: 0 0 28px;
+  text-align: center;
+}
+
+.calder-recommendations__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.calder-recommendations calder-product-card {
+  background: var(--c-white);
+  border: 1px solid var(--c-border-light);
+  box-shadow: 0 1px 6px rgba(0,0,0,0.04);
+}
+
+.calder-recommendations calder-product-card:hover {
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+
+.calder-recommendations .calder-card__title,
+.calder-recommendations .calder-card__title a {
+  color: var(--c-text-heading);
+}
+
+.calder-recommendations .calder-card__type,
+.calder-recommendations .calder-card__type a {
+  color: var(--c-gold);
+}
+
+.calder-recommendations .calder-card__price .prd-price-regular {
+  color: var(--c-text-heading);
+}
+
+.calder-recommendations .calder-card__action .btn {
+  background: var(--c-gold);
+  color: var(--c-white);
+}
+
+.calder-recommendations .calder-card__action .btn:hover {
+  background: #b89575;
+}
+
+.calder-recommendations .calder-card__details a {
+  color: var(--c-text);
+}
+
+.calder-recommendations .calder-card__features {
+  border-top-color: var(--c-border-light);
+}
+
+.calder-recommendations .calder-card__feature {
+  border-right-color: var(--c-border-light);
+}
+
+/* ============================================================
+   SPECIALIST CTA — Navy Band
+   ============================================================ */
+.calder-specialist-cta {
+  background: var(--c-navy);
+  color: var(--c-white);
+  padding: 70px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.calder-specialist-cta.has-bg {
+  background-size: cover;
+  background-position: center;
+}
+
+.calder-specialist-cta.has-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(14,42,62,0.85);
+  z-index: 1;
+}
+
+.calder-specialist-cta__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  position: relative;
+  z-index: 2;
+}
+
+.calder-specialist-cta__content {
+  flex: 1;
+}
+
+.calder-specialist-cta__heading {
+  font-family: var(--heading-font);
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--c-white);
+  margin: 0 0 12px;
+}
+
+.calder-specialist-cta__text {
+  font-size: 14px;
+  line-height: 1.6;
+  color: rgba(255,255,255,0.75);
+  margin: 0 0 20px;
+  max-width: 480px;
+}
+
+.calder-specialist-cta__action {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 32px;
+  background: var(--c-gold);
+  color: var(--c-near-black);
+  font-family: var(--ui-font);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.calder-specialist-cta__action:hover {
+  background: #b89575;
+}
+
+.calder-specialist-cta__methods {
+  display: flex;
+  gap: 24px;
+  margin-top: 16px;
+}
+
+.calder-specialist-cta__method {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: rgba(255,255,255,0.7);
+}
+
+.calder-specialist-cta__method svg {
+  width: 18px;
+  height: 18px;
+  color: var(--c-gold);
+}
+
+/* ============================================================
+   RESPONSIVE — 768px Tablet
+   ============================================================ */
+@media (max-width: 991px) {
+  .calder-pdp__hero {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .calder-pdp__gallery {
+    position: static;
+    min-height: auto;
+  }
+
+  .calder-pdp__info {
+    max-width: 100%;
+  }
+
+  .calder-pdp__main-image {
+    aspect-ratio: 1;
+    max-height: 70vw;
+  }
+
+  .calder-specs-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .calder-finishes__carousel {
+    gap: 12px;
+  }
+
+  .calder-finishes__card {
+    flex: 0 0 180px;
+  }
+
+  .calder-gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .calder-recommendations__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .calder-configurator .wheel-configurator__layout {
+    grid-template-columns: 1fr;
+  }
+
+  .page-calder .fitment-finder__select-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .calder-specialist-cta__inner {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .calder-specialist-cta__text {
+    max-width: none;
+  }
+
+  .calder-specialist-cta__methods {
+    justify-content: center;
+  }
+
+  .calder-engineering__capabilities {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ============================================================
+   RESPONSIVE — 390px Mobile
+   ============================================================ */
+@media (max-width: 575px) {
+  .calder-pdp__title {
+    font-size: 34px;
+  }
+
+  .calder-pdp__config-row {
+    grid-template-columns: 1fr;
+  }
+
+  .calder-pdp__purchase {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .calder-pdp__price {
+    font-size: 22px;
+  }
+
+  .calder-pdp__add-btn {
+    min-width: auto;
+  }
+
+  .calder-specs__table td {
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+
+  .calder-specs__table td:first-child {
+    width: 90px;
+  }
+
+  .calder-finishes__card {
+    flex: 0 0 150px;
+  }
+
+  .calder-gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+
+  .calder-recommendations__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .calder-specs-grid {
+    gap: 24px;
+  }
+
+  .calder-specs-section,
+  .calder-configurator,
+  .calder-finishes,
+  .calder-gallery-section,
+  .calder-recommendations {
+    padding: 40px 0;
+  }
+
+  .calder-specialist-cta__methods {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .calder-pdp__thumb {
+    flex: 0 0 60px;
+    width: 60px;
+    height: 60px;
+  }
+
+  .calder-pdp__trust {
+    gap: 16px;
+  }
+}

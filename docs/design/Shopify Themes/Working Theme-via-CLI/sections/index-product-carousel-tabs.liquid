@@ -14,6 +14,7 @@
 
 <div class="{% render 'section-class', layout: layout %}" {% render 'section-style', layout: layout %}>
   <div class="{% render 'section-container-class', layout: layout %}">
+    {{ 'calder-product-card.css' | asset_url | stylesheet_tag }}
     <tab-slider>
       {% render 'section-heading', section: section %}
       <div class="text-center">

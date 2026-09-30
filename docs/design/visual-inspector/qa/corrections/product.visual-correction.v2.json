@@ -1,0 +1,137 @@
+{
+  "schema_version": "product.visual-correction.v2",
+  "project": "Calder Wheels",
+  "page": "Product Detail Page",
+  "qa_iteration": 2,
+  "state": "REVISION_REQUIRED",
+  "target_state": "READY_FOR_VISUAL_QA_ITERATION_3",
+  "primary_visual_authority": "Calder - 3 - Product(4).png",
+  "functional_reference": "Calder-existing-product-reference(1).png",
+  "diagnostic_renders": [
+    "product.desktop.v2.png",
+    "product.tablet.v2.png",
+    "product.mobile.v2.png"
+  ],
+  "authority_rules": [
+    "Approved screenshot governs visual composition, scale, hierarchy, color, spacing and section treatment.",
+    "V2 renders are diagnostic evidence only, not design references.",
+    "Existing product reference governs Build Your Wheel and Fitment behavior only.",
+    "Native Lumia behavior may be reused, but its presentation cannot override approved fidelity."
+  ],
+  "corrections": [
+    {
+      "id": "PDP-V2-001",
+      "priority": "P0",
+      "area": "media",
+      "requirement": "Replace unrelated scenic/furniture/flower/rock imagery with actual wheel, configurator and automotive media."
+    },
+    {
+      "id": "PDP-V2-002",
+      "priority": "P0",
+      "area": "scale",
+      "requirement": "Increase desktop media/type/control scale to approach the approved 1178px-container composition."
+    },
+    {
+      "id": "PDP-V2-003",
+      "priority": "P0",
+      "area": "hero",
+      "requirement": "Match approved gallery/configuration proportions and hierarchy."
+    },
+    {
+      "id": "PDP-V2-004",
+      "priority": "P0",
+      "area": "typography",
+      "requirement": "Restore Facundo/Garet hierarchy at reference-comparable scale."
+    },
+    {
+      "id": "PDP-V2-005",
+      "priority": "P0",
+      "area": "configurator",
+      "requirement": "Preserve Build Your Wheel logic while integrating preview and Center/Barrel/Hardware controls into approved light presentation."
+    },
+    {
+      "id": "PDP-V2-006",
+      "priority": "P0",
+      "area": "finishes",
+      "requirement": "Implement approved wheel-based Choose Your Finish showcase with large wheel renders, labels and gold selected state."
+    },
+    {
+      "id": "PDP-V2-007",
+      "priority": "P1",
+      "area": "specifications",
+      "requirement": "Match approved Product Details/Specifications hierarchy, striped rows and spacing."
+    },
+    {
+      "id": "PDP-V2-008",
+      "priority": "P1",
+      "area": "engineering",
+      "requirement": "Rebuild as one large image-led dark Engineered to Perform panel with four capabilities."
+    },
+    {
+      "id": "PDP-V2-009",
+      "priority": "P1",
+      "area": "fitment",
+      "requirement": "Preserve engine; confirmed hero status is primary and full finder is selection/change workflow."
+    },
+    {
+      "id": "PDP-V2-010",
+      "priority": "P0",
+      "area": "real_world",
+      "requirement": "Replace empty boxes with configured automotive imagery and approved four-wide landscape gallery."
+    },
+    {
+      "id": "PDP-V2-011",
+      "priority": "P0",
+      "area": "recommendations",
+      "requirement": "Reuse actual approved B1 wheel card and recommended wheel media."
+    },
+    {
+      "id": "PDP-V2-012",
+      "priority": "P1",
+      "area": "specialist_cta",
+      "requirement": "Match approved full-width image-backed Contact a Wheel Specialist composition."
+    },
+    {
+      "id": "PDP-V2-013",
+      "priority": "P0",
+      "area": "footer",
+      "requirement": "Reuse complete approved homepage Calder footer."
+    },
+    {
+      "id": "PDP-V2-014",
+      "priority": "P1",
+      "area": "tablet",
+      "requirement": "At 768px retain readable scale and intentional responsive composition."
+    },
+    {
+      "id": "PDP-V2-015",
+      "priority": "P1",
+      "area": "mobile",
+      "requirement": "At 390px use full usable width, readable typography and suitable horizontal carousels without page overflow."
+    }
+  ],
+  "comparison_dimensions": [
+    "x/y placement",
+    "width",
+    "height",
+    "relative proportions",
+    "image aspect ratio",
+    "typography scale",
+    "content density",
+    "whitespace",
+    "borders/dividers",
+    "background treatment",
+    "CTA dimensions",
+    "alignment"
+  ],
+  "qa_viewports": [
+    1440,
+    768,
+    390
+  ],
+  "required_outputs": [
+    "product.desktop.v3.png",
+    "product.tablet.v3.png",
+    "product.mobile.v3.png"
+  ]
+}

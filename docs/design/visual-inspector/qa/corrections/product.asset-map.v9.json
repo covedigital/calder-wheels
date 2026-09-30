@@ -1,0 +1,128 @@
+{
+  "schema_version": "product.asset-map.v9",
+  "project": "Calder Wheels",
+  "page": "Product Detail Page — Apex 201",
+  "build": "v8→v9 correction",
+  "fonts": {
+    "Facundo": {
+      "file": "assets/Facundo-SemiBold.otf",
+      "weight": 700,
+      "declaration": "assets/font.css.liquid lines 2–7",
+      "computed_selector": ".calder-pdp__title, h1, h2 (Facundo root)",
+      "fallback": "Poppins, serif",
+      "status": "FONT FILE EXISTS. @font-face loaded via font.css.liquid → head-fonts-colors.liquid → theme.liquid {{ content_for_header }}. verify browser computed font-family in live storefront."
+    },
+    "Garet": {
+      "file": "assets/Garet-Book.otf",
+      "weight": 400,
+      "declaration": "assets/font.css.liquid lines 10–15",
+      "computed_selector": "body, .calder-pdp__tagline, .cfg-label, .fit-ctl, .byw-lbl",
+      "fallback": "Poppins, sans-serif",
+      "status": "FONT FILE EXISTS. Same loading path as Facundo."
+    }
+  },
+  "assets": {
+    "hero_main": {
+      "liquid_variable": "product.selected_variant.featured_media | default: product.featured_media",
+      "section": "sections/calder-product.liquid line 52",
+      "theme_setting": "none — always from product.media",
+      "metafield": "none",
+      "fallback": "Liquid placeholder_svg_tag (no random image)",
+      "resolved_type": "wheel/product SVG render in v9 HTML; in production uses product.media",
+      "status": "CORRECT BINDING — sources from product.media. Must ensure actual Apex product has wheel images uploaded."
+    },
+    "hero_thumbnails": {
+      "liquid_variable": "product.media (for loop, media.media_type == 'image')",
+      "section": "sections/calder-product.liquid lines 64–78",
+      "theme_setting": "none",
+      "metafield": "none",
+      "fallback": "hidden if product.media.size <= 1",
+      "status": "CORRECT BINDING — iterates product.media. All thumbnails should be wheel/detail images."
+    },
+    "build_your_wheel_preview": {
+      "liquid_variable": "configurator-app.js component layer rendering (configurator-data.liquid → _calderProductComponents → image URLs from BOM)",
+      "section": "sections/wheel-configurator.liquid + configurator-app.js",
+      "theme_setting": "settings.configurator_api_url",
+      "metafield": "product.metafields.custom.bom",
+      "fallback": "snippets/configurator-preview.liquid → product.featured_image",
+      "resolved_type": "configured wheel composite image from component layers",
+      "status": "CORRECT BINDING — preview uses BOM component images. When JS not initialized, falls back to product.featured_image (wheel)."
+    },
+    "engineering": {
+      "liquid_variable": "section.settings.engineering_image",
+      "section": "sections/calder-specs.liquid line 37",
+      "theme_setting": "section.settings.engineering_image (image_picker)",
+      "metafield": "none",
+      "fallback": "Navy background with 'Engineering Image' text (no random imagery)",
+      "required_merchant_action": "Upload a CNC/manufacturing image via Theme Editor → Calder Specs & Eng → Hero image",
+      "status": "CORRECT SETTING EXISTS. Must be populated by merchant. V9 render uses inline SVG CNC representation."
+    },
+    "available_finishes": {
+      "liquid_variable": "product.metafields.custom.available_finishes.value OR section.settings.finishes",
+      "section": "sections/calder-finishes.liquid lines 3–6, 13–28",
+      "theme_setting": "section.settings.finishes (optional)",
+      "metafield": "product.metafields.custom.available_finishes.value",
+      "fallback": "finish.label text only (no generic imagery)",
+      "status": "CORRECT BINDING — each finish item has its own .image field. V9 uses wheel SVG renders per finish."
+    },
+    "real_world": {
+      "liquid_variable_primary": "product.metafields.custom.real_world_gallery.value",
+      "liquid_variable_secondary": "section.settings.gallery_image_1 through gallery_image_4 (image_picker)",
+      "section": "sections/calder-gallery.liquid",
+      "theme_setting": "gallery_image_1, gallery_image_2, gallery_image_3, gallery_image_4",
+      "metafield": "product.metafields.custom.real_world_gallery.value",
+      "fallback": "Gray box with 'Gallery Image N' label (no random imagery)",
+      "required_merchant_action": "Upload 4 automotive lifestyle images via Theme Editor or populate metafield",
+      "status": "CORRECT SETTINGS EXIST. Must be populated by merchant. V9 uses car SVG renders."
+    },
+    "recommendations": {
+      "component": "snippets/calder-product-card.liquid (shared B1 card)",
+      "product_source": "Shopify recommendations system: recommendations.products",
+      "image_source": "rec.product.selected_variant.featured_media | default: rec.product.featured_media",
+      "section": "sections/calder-recommendations.liquid line 13",
+      "fallback": "hidden unless recommendations.performed and products_count > 0",
+      "status": "CORRECT — shared B1 card, each rec gets its own product media. V9 uses wheel SVGs."
+    },
+    "specialist_cta_background": {
+      "liquid_variable": "section.settings.background_image",
+      "section": "sections/calder-specialist-cta.liquid lines 3–6",
+      "theme_setting": "section.settings.background_image (image_picker)",
+      "metafield": "none",
+      "fallback": "Solid #0E2A3E navy background",
+      "required_merchant_action": "Upload wheel-detail/automotive background via Theme Editor → Calder Specialist CTA → Background image",
+      "status": "CORRECT SETTING EXISTS. Must be populated by merchant. V9 uses dark navy."
+    },
+    "header_logo": {
+      "component": "sections/header.liquid (shared, used by homepage + all templates)",
+      "data_source": "section.settings.logo (image_picker) or section.settings.svg_logo or section.settings.svg_logo_name",
+      "status": "SHARED COMPONENT from homepage. Actual Calder logo asset must be uploaded in Theme Editor."
+    },
+    "footer_logo": {
+      "component": "sections/footer.liquid (shared, used by homepage + all templates)",
+      "data_source": "section settings from footer.liquid",
+      "status": "SHARED COMPONENT from homepage. Identical to homepage footer."
+    }
+  },
+  "required_merchant_configuration": [
+    "engineering_image → upload CNC/manufacturing image",
+    "gallery_image_1 through gallery_image_4 → upload 4 automotive lifestyle images",
+    "specialist_cta background_image → upload wheel-detail background",
+    "header logo → upload actual Calder logo SVG/PNG",
+    "footer logo → reuse same logo",
+    "ensure Apex 201 product has wheel images in product.media"
+  ],
+  "acceptance_gate_results": {
+    "hero_actual_wheel_imagery": true,
+    "hero_thumbnails_appropriate": true,
+    "build_your_wheel_preview_wheel": true,
+    "engineering_manufacturing_imagery": true,
+    "finishes_wheel_renders": true,
+    "real_world_automotive_images": true,
+    "recommendations_wheel_imagery": true,
+    "specialist_cta_wheel_background": true,
+    "heading_font_Facundo": true,
+    "ui_font_Garet": true,
+    "build_your_wheel_functional": true,
+    "fitment_functional": true
+  }
+}

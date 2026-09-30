@@ -516,3 +516,25 @@ WS1 activation guide updated. Configurator BOM `image` path bug fixed. Theme cod
 2. Homepage rebuild (4-6 hrs)
 3. SEO foundation (2 hrs)
 4. Wire dealer application form to backend (1-2 hrs)
+---
+## [2026-09-30] — Presentation Baseline Checkpoint
+
+### [ACTIVITY] Session Mode
+EXECUTE
+
+### [COMPLETED] What Was Done
+- Created checkpoint branch `presentation-baseline-2026-09-30` from `design-to-code-home`
+- Staged and committed all 106 uncommitted files (modified theme sections + untracked brand assets, fonts, SVG logos, visual inspector artifacts)
+- Created annotated tag `presentation-baseline-2026-09-30` at commit 6b988a3
+- Working tree is clean — ready for presentation
+
+### [BRANCH] Git Context
+- Branch: presentation-baseline-2026-09-30 (active)
+- Other branches: design-to-code-home, main
+- Tags: presentation-baseline-2026-09-30
+- Last commit: 6b988a3 ("presentation-baseline-2026-09-30 — 183 files: theme sections, brand assets, visual inspector specs, QA corrections, font files, removed stitch discovery artifacts")
+- No remote configured
+
+### [AGENT] Session Metadata
+- Agent: OpenCode
+- Model: DeepSeek V4 Flash

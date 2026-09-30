@@ -1,0 +1,450 @@
+{
+  "schema_version": "1.0",
+  "project": "Calder Wheels",
+  "artifact_type": "component_visual_spec",
+  "component": "Calder Product Listing Card",
+  "reference_variant": "B1",
+  "classification": "SHARED",
+  "reference": "calder-product-card-b1-reference.png",
+  "implementation_context": {
+    "immediate_target": "Lumia index-product-carousel-tabs",
+    "reuse_contexts": [
+      "Home page product listings",
+      "Collection/product grids where compatible",
+      "Product page related products",
+      "Product recommendations",
+      "Other product-listing contexts"
+    ],
+    "boundary": "Visual specification only. Existing Shopify/Lumia selection, variant, fitment, cart, pricing, wishlist, carousel and product-card behavior remains authoritative unless the implementation agent verifies a visual requirement cannot be achieved by reuse, restyling, or extension."
+  },
+  "reference_geometry": {
+    "status": "OBSERVED",
+    "reference_pixel_size": {
+      "width": 264,
+      "height": 682
+    },
+    "approx_aspect_ratio": "0.387:1 (W:H), approximately 1:2.58",
+    "note": "Measurements are inferred from the supplied raster reference and should be treated as implementation targets rather than source-design dimensions."
+  },
+  "visual_invariants": [
+    "Wheel/product image is the dominant visual element.",
+    "Card reads as one premium light-surface commerce unit with restrained rounding and subtle elevation.",
+    "Information hierarchy is media \u2192 taxonomy/title \u2192 rating \u2192 price \u2192 swatches \u2192 optional attributes \u2192 primary CTA \u2192 secondary action.",
+    "Typography is predominantly black/dark charcoal on white, with compact uppercase tracking used for technical labels/actions.",
+    "Primary CTA is visually dominant over View Details.",
+    "Optional or unavailable data must collapse cleanly without leaving empty vertical gaps.",
+    "Native Shopify/Lumia functional behavior remains authoritative; this specification governs presentation."
+  ],
+  "card_container": {
+    "status": "OBSERVED",
+    "background": "#FFFFFF / very light neutral",
+    "border": "No prominent stroke; edge definition comes primarily from light shadow/contrast.",
+    "border_radius": {
+      "status": "ESTIMATED",
+      "value_px": "8-10"
+    },
+    "shadow": {
+      "status": "ESTIMATED",
+      "value": "soft, low-opacity, diffuse shadow; approximately 0 2px 12-18px rgba(0,0,0,0.06-0.10)"
+    },
+    "internal_padding": {
+      "status": "ESTIMATED",
+      "desktop_px": "14-16",
+      "media_top_px": "14-16"
+    },
+    "vertical_rhythm": "Compact, consistent 8-14px gaps; stronger separation before feature row and CTA.",
+    "content_hierarchy": [
+      "media",
+      "thumbnail rail",
+      "taxonomy",
+      "title",
+      "rating",
+      "price",
+      "swatches",
+      "feature row",
+      "primary CTA",
+      "secondary action"
+    ]
+  },
+  "product_media": {
+    "status": "OBSERVED",
+    "complete_card_height_share": {
+      "status": "ESTIMATED",
+      "value": "approximately 38-42% including thumbnail rail"
+    },
+    "main_image_area": {
+      "status": "ESTIMATED",
+      "aspect_ratio": "near-square, approximately 1:1",
+      "height_px_at_264_card": "235-250"
+    },
+    "image_padding": {
+      "status": "ESTIMATED",
+      "value_px": "10-18"
+    },
+    "object_fit": {
+      "status": "ASSUMPTION",
+      "value": "contain"
+    },
+    "object_position": {
+      "status": "ASSUMPTION",
+      "value": "center center"
+    },
+    "prominence": "Product occupies roughly 80-90% of the usable main-media width and remains visually dominant.",
+    "background": "white/light neutral, no decorative scene",
+    "separation": "No heavy divider between main media and thumbnails; separation is achieved through spacing and thumbnail boundaries.",
+    "thumbnail_rail": {
+      "status": "OBSERVED",
+      "count_in_reference": 3,
+      "layout": "three equal visual cells",
+      "gap_px": {
+        "status": "ESTIMATED",
+        "value": "8-10"
+      },
+      "cell_radius_px": {
+        "status": "ESTIMATED",
+        "value": "7-9"
+      },
+      "selected_state": "thin dark outline around active thumbnail",
+      "dependency": "CONDITIONAL; render only when compatible gallery/alternate media behavior is available."
+    }
+  },
+  "product_badge": {
+    "status": "OBSERVED",
+    "optional": true,
+    "position": "top-left within media area",
+    "size": {
+      "status": "ESTIMATED",
+      "height_px": "27-30",
+      "min_width_px": "88-92"
+    },
+    "padding": {
+      "status": "ESTIMATED",
+      "value": "6-9px vertical, 12-14px horizontal"
+    },
+    "typography": "small uppercase, bold/semibold, widely tracked",
+    "capitalization": "uppercase",
+    "radius_px": {
+      "status": "ESTIMATED",
+      "value": "5-6"
+    },
+    "background": "dark muted olive/green in reference",
+    "foreground": "white",
+    "relationship_to_image": "overlays unused top-left image whitespace without covering the wheel",
+    "data_rule": "CONDITIONAL; driven by product data, metafield, tag mapping, or verified theme configuration."
+  },
+  "wishlist": {
+    "status": "OBSERVED",
+    "position": "top-right of media area",
+    "icon": "outline heart",
+    "icon_size_px": {
+      "status": "ESTIMATED",
+      "value": "21-23"
+    },
+    "control_size_px": {
+      "status": "ESTIMATED",
+      "value": "36-40 square minimum visual region"
+    },
+    "background": "transparent",
+    "radius": "not visually expressed in default state",
+    "states": {
+      "default": "dark outline heart",
+      "hover_focus": {
+        "status": "ASSUMPTION",
+        "value": "visible hover/focus feedback without moving control"
+      },
+      "selected": {
+        "status": "ASSUMPTION",
+        "value": "filled or otherwise clearly active heart using existing Lumia wishlist semantics"
+      }
+    },
+    "dependency": "Implementation agent must verify existing Lumia wishlist markup, app integration, and state classes."
+  },
+  "taxonomy": {
+    "status": "OBSERVED",
+    "example": "BEADLOCK-STYLE",
+    "typography": {
+      "size_px": {
+        "status": "ESTIMATED",
+        "value": "11-12"
+      },
+      "weight": "600-700",
+      "letter_spacing_em": {
+        "status": "ESTIMATED",
+        "value": "0.14-0.18"
+      },
+      "case": "uppercase"
+    },
+    "spacing": {
+      "above_px": {
+        "status": "ESTIMATED",
+        "value": "10-12"
+      },
+      "below_px": {
+        "status": "ESTIMATED",
+        "value": "2-4"
+      }
+    },
+    "dependency": "CONDITIONAL; source must be verified (product type, collection, tag, metafield, or theme mapping)."
+  },
+  "product_title": {
+    "status": "OBSERVED",
+    "example": "B1",
+    "size_px": {
+      "status": "ESTIMATED",
+      "value": "28-31"
+    },
+    "weight": "700-800",
+    "line_height": {
+      "status": "ESTIMATED",
+      "value": "1.0-1.08"
+    },
+    "spacing_to_taxonomy_px": {
+      "status": "ESTIMATED",
+      "value": "2-4"
+    },
+    "spacing_to_rating_px": {
+      "status": "ESTIMATED",
+      "value": "4-7"
+    },
+    "overflow": {
+      "status": "ASSUMPTION",
+      "value": "allow up to two lines in reusable contexts; preserve equal-card layout through existing theme strategy where applicable"
+    }
+  },
+  "rating": {
+    "status": "OBSERVED",
+    "conditional": true,
+    "stars": "five compact gold stars; reference visually shows a partial/less-prominent fifth state consistent with 4.7",
+    "star_size_px": {
+      "status": "ESTIMATED",
+      "value": "15-17"
+    },
+    "value": "dark text, smaller than title/price",
+    "review_count": "parenthesized immediately after rating value",
+    "alignment": "single horizontal row, vertically centered",
+    "gap": {
+      "status": "ESTIMATED",
+      "stars_to_value_px": "8-10",
+      "between_stars_px": "1-2"
+    },
+    "dependency": "Do not synthesize ratings. Implementation agent must verify Lumia rating snippet and product review/metafield source."
+  },
+  "price": {
+    "status": "OBSERVED",
+    "normal": {
+      "primary_size_px": {
+        "status": "ESTIMATED",
+        "value": "21-24"
+      },
+      "weight": "700-800",
+      "secondary": "'/ wheel' at approximately 14-16px, regular weight, muted dark gray"
+    },
+    "spacing": {
+      "above_px": {
+        "status": "ESTIMATED",
+        "value": "10-12"
+      },
+      "below_px": {
+        "status": "ESTIMATED",
+        "value": "10-12"
+      }
+    },
+    "sale_state": {
+      "status": "ASSUMPTION",
+      "value": "preserve native Shopify sale-price semantics; sale price remains primary and compare-at price becomes subordinate/struck-through without disrupting hierarchy"
+    },
+    "compare_at_state": {
+      "status": "ASSUMPTION",
+      "value": "use existing Lumia/Shopify compare-at rendering when present"
+    },
+    "unit_suffix_dependency": "Implementation agent must verify whether '/ wheel' is globally valid, product-specific, or theme-configured before rendering."
+  },
+  "swatches": {
+    "status": "OBSERVED",
+    "conditional": true,
+    "diameter_px": {
+      "status": "ESTIMATED",
+      "value": "22-24"
+    },
+    "gap_px": {
+      "status": "ESTIMATED",
+      "value": "8-9"
+    },
+    "border": "subtle 1px neutral border where needed for contrast",
+    "selected_state": {
+      "status": "ASSUMPTION",
+      "value": "clear ring/outline or existing Lumia selected-state treatment"
+    },
+    "overflow_indicator": "plain '+N' text after visible swatches; reference shows +2",
+    "relationship_to_price": "directly below price with compact spacing",
+    "boundary": "Visual treatment only; do not redefine Lumia variant-selection architecture.",
+    "dependency": "Implementation agent must verify swatch source, variant option naming, swatch assets/colors, and interaction behavior."
+  },
+  "feature_row": {
+    "status": "OBSERVED",
+    "optional": true,
+    "columns": 3,
+    "examples": [
+      "Off-Road Ready",
+      "Custom Finishes",
+      "Built for Performance"
+    ],
+    "top_separator": "thin light-gray horizontal rule",
+    "column_separators": "thin light-gray vertical rules between columns",
+    "icon_size_px": {
+      "status": "ESTIMATED",
+      "value": "22-27"
+    },
+    "label_size_px": {
+      "status": "ESTIMATED",
+      "value": "9-11"
+    },
+    "label_weight": "500-600",
+    "distribution": "equal thirds",
+    "alignment": "centered icon over centered two-line label",
+    "spacing": {
+      "status": "ESTIMATED",
+      "top_padding_px": "12-14",
+      "bottom_padding_px": "12-14"
+    },
+    "data_rule": "Render only for verified product attributes/metafields or explicit theme configuration. Never hard-code unsupported claims."
+  },
+  "primary_cta": {
+    "status": "OBSERVED",
+    "reference_label": "ADD TO CART",
+    "width": "full content width",
+    "height_px": {
+      "status": "ESTIMATED",
+      "value": "41-44"
+    },
+    "background": "near-black with subtle cool/green cast",
+    "foreground": "white",
+    "typography": {
+      "size_px": {
+        "status": "ESTIMATED",
+        "value": "12-13"
+      },
+      "weight": "600-700",
+      "letter_spacing_em": {
+        "status": "ESTIMATED",
+        "value": "0.12-0.16"
+      },
+      "case": "uppercase"
+    },
+    "icon": "small cart icon left of label",
+    "icon_gap_px": {
+      "status": "ESTIMATED",
+      "value": "10-12"
+    },
+    "radius_px": {
+      "status": "ESTIMATED",
+      "value": "5-6"
+    },
+    "spacing_above_px": {
+      "status": "ESTIMATED",
+      "value": "10-12"
+    },
+    "states": {
+      "hover": {
+        "status": "ASSUMPTION",
+        "value": "clear tonal/contrast change"
+      },
+      "focus": {
+        "status": "ASSUMPTION",
+        "value": "visible keyboard focus indicator"
+      },
+      "disabled": {
+        "status": "ASSUMPTION",
+        "value": "use existing Shopify/Lumia disabled/unavailable semantics"
+      }
+    },
+    "functional_boundary": "Presentation does not mandate direct add-to-cart. Required variant, fitment, finish, size, configuration, availability, or product-detail routing remains governed by verified Lumia/Shopify behavior."
+  },
+  "secondary_action": {
+    "status": "OBSERVED",
+    "label": "View Details",
+    "arrow": "right arrow placed after label",
+    "alignment": "centered",
+    "typography": {
+      "size_px": {
+        "status": "ESTIMATED",
+        "value": "12-13"
+      },
+      "weight": "600-700"
+    },
+    "spacing": {
+      "above_px": {
+        "status": "ESTIMATED",
+        "value": "13-16"
+      },
+      "bottom_px": {
+        "status": "ESTIMATED",
+        "value": "2-5"
+      }
+    },
+    "hierarchy": "tertiary/text action; materially quieter than primary CTA"
+  },
+  "responsive": {
+    "status": "ASSUMPTION",
+    "principles": [
+      "Preserve a near-square dominant product-media region.",
+      "Maintain minimum practical touch targets around wishlist and CTA controls.",
+      "Keep taxonomy, title, rating/price readable without horizontal compression.",
+      "Allow optional feature row and thumbnail rail to simplify or hide when card width becomes too narrow.",
+      "Prefer fewer visible swatches plus +N rather than wrapping multiple swatch rows.",
+      "Do not introduce new drawers, hover-only controls, or elaborate mobile interactions.",
+      "Respect existing Lumia carousel/grid breakpoints and slide behavior unless implementation verification shows a visual conflict."
+    ],
+    "suggested_compaction": {
+      "card_padding_px": "12-14",
+      "title_size_px": "24-28",
+      "cta_min_height_px": "44",
+      "wishlist_touch_target_px": "at least 44 where layout permits",
+      "feature_row": "may reduce typography/icon scale or be omitted if configured as nonessential"
+    }
+  },
+  "optional_elements": [
+    "product badge",
+    "thumbnail rail",
+    "rating",
+    "finish/color swatches",
+    "feature/attribute row"
+  ],
+  "conditional_elements": [
+    "rating/review content",
+    "sale and compare-at pricing",
+    "badge",
+    "wishlist state/control if supported",
+    "swatches and overflow count",
+    "feature/attribute row",
+    "direct Add to Cart behavior",
+    "unit suffix '/ wheel'"
+  ],
+  "unknown_shopify_data_dependencies": [
+    "Source for taxonomy/type label",
+    "Badge source and allowed values",
+    "Rating/review metafield or app integration",
+    "Wishlist implementation and state classes",
+    "Swatch option naming, color/image source, and variant interaction",
+    "Whether '/ wheel' applies to every product",
+    "Feature-row metafields/configuration and approved claims",
+    "Rules determining direct add-to-cart versus configuration/product-detail routing",
+    "Required fitment/size/finish/configuration dependencies",
+    "Existing product-card snippet markup and CSS hooks used by Lumia"
+  ],
+  "implementation_agent_verification": [
+    "Inspect index-product-carousel-tabs and the shared product-card snippet(s) before editing.",
+    "Confirm whether the section reuses the same product-card renderer as grid/recommendation contexts.",
+    "Map every optional visual region to existing theme settings, product fields, metafields, tags, or verified extensions.",
+    "Preserve native carousel breakpoints, pagination/navigation, product URLs, price rendering, variant/cart logic, wishlist logic, and accessibility semantics where available.",
+    "Verify equal-height behavior and overflow with realistic Calder titles, prices, swatches, ratings, and missing-data states.",
+    "Verify desktop, tablet, and mobile in both carousel and grid contexts.",
+    "Treat all mobile dimensions/behavior in this document as assumptions until visually QA'd."
+  ],
+  "project_context": {
+    "status": "VERIFIED_PROJECT_CONTEXT",
+    "lumia_carousel": "The supplied Lumia products-carousel section renders the shared 'product-card' snippet for multi-product carousel slides and contains responsive Swiper breakpoints.",
+    "lumia_grid": "The supplied Lumia products-grid section also renders the shared 'product-card' snippet in its default grid and fixed-banner product-grid modes.",
+    "implication": "The existing shared product-card renderer is the first reuse/restyle/extension point to inspect; this does not prescribe final Liquid architecture."
+  }
+}

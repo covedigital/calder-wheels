@@ -1,0 +1,785 @@
+{
+  "schema_version": "1.0",
+  "project": "Calder Wheels",
+  "artifact_type": "visual_specification",
+  "source": {
+    "file": "calder-fitment-section-reference.png",
+    "viewport": {
+      "width": 2048,
+      "height": 682
+    }
+  },
+  "page": {
+    "id": "fitment-component",
+    "type": "component-level shared premium commerce tool",
+    "summary": "Approved Calder Find Your Fit component: attached tabs over a deep navy fitment shell with vehicle selectors, restrained technical wheel artwork, dark bronze-accent CTA, and persistent selected-vehicle status."
+  },
+  "global_layout": {
+    "content_max_width": {
+      "value": "align to established Calder primary content container; reference shell ~1904px at 2048px source",
+      "confidence": 0.84,
+      "evidence": "ESTIMATED",
+      "range": "approximately 92-93vw in this component reference",
+      "tolerance": "do not infer a new global container token"
+    },
+    "horizontal_gutters": {
+      "value": "~74px at 2048px source",
+      "confidence": 0.9,
+      "evidence": "ESTIMATED",
+      "range": "~3.6vw each side",
+      "tolerance": "\u00b18px"
+    },
+    "primary_alignment": "Centered shared site container; component visually bridges hero above and light product-discovery content below.",
+    "page_background": {
+      "value": "context transitions from cinematic dark hero to warm off-white below",
+      "confidence": 0.9,
+      "evidence": "OBSERVED"
+    }
+  },
+  "sections": [
+    {
+      "id": "calder-fitment-finder",
+      "name": "Calder Find Your Fit / Fitment Finder",
+      "bbox_px": [
+        74,
+        118,
+        1978,
+        580
+      ],
+      "bbox_normalized": [
+        0.0361,
+        0.173,
+        0.9658,
+        0.8504
+      ],
+      "layout": {
+        "classification": "SHARED / PREMIUM COMMERCE TOOL",
+        "desktop_structure": "tabs attached above a single dark shell; shell split into finder area and selected-vehicle area",
+        "finder_to_status_ratio_estimate": "approximately 76/24",
+        "shell_width_estimate": "1900px in the 2048px reference image; approximately 92-93% of viewport",
+        "shell_height_estimate": "370-372px excluding tabs; ~462px including tabs",
+        "container_relationship": "centered and aligned to the site's primary content container; do not widen the global container for this component",
+        "hero_overlap": "tabs/panel transition begins over the lower cinematic hero region; dark shell then bridges into light following content",
+        "z_order": "hero/background < fitment shell/decorative art < content/controls"
+      },
+      "spacing": {
+        "outer_horizontal_estimate": "~74px each side at source viewport",
+        "panel_inner_left_estimate": "~54px",
+        "panel_bottom_estimate": "~34px",
+        "finder_control_gap_estimate": "~26-28px between first controls; ~24-26px to CTA",
+        "negative_space": "intentional around heading and technical art; not to be filled with photography"
+      },
+      "background": {
+        "shell_color": "deep Calder navy/near-black, approximate #031823 to #061C27",
+        "following_page_color": "warm off-white/light neutral",
+        "technical_art": "low-contrast wheel line-art and contour lines",
+        "shadow": "broad soft shadow below shell, approximately 0 18-32px 35-55px rgba(0,0,0,0.14-0.22)",
+        "border": "thin muted blue-gray outline",
+        "radius": "~16-18px lower/right outer corners"
+      },
+      "components": [
+        {
+          "id": "fitment-tab-nav",
+          "type": "tab_navigation",
+          "classification": "SHARED",
+          "bbox_px": [
+            74,
+            118,
+            798,
+            210
+          ],
+          "bbox_normalized": [
+            0.0361,
+            0.173,
+            0.3896,
+            0.3079
+          ],
+          "description": "Two-tab search-method navigation. By Vehicle is active; By Wheel Style is inactive. Both belong to one persistent component shell.",
+          "confidence": 0.9,
+          "evidence": "OBSERVED",
+          "layout": {
+            "tab_count": 2,
+            "height_estimate": "90-94px",
+            "active_width_estimate": "340-350px",
+            "inactive_width_estimate": "380-390px",
+            "gap": "0; tabs visually meet at angled/shared boundary"
+          },
+          "typography": {
+            "role": "tab label",
+            "case": "Title Case",
+            "weight": "600-700",
+            "font_size": {
+              "value": "21-24px",
+              "confidence": 0.82,
+              "evidence": "ESTIMATED"
+            },
+            "line_height": {
+              "value": "1.1-1.25",
+              "confidence": 0.78,
+              "evidence": "ESTIMATED"
+            },
+            "letter_spacing": {
+              "value": "0 to 0.02em",
+              "confidence": 0.65,
+              "evidence": "ESTIMATED"
+            },
+            "alignment": "left/centered vertically",
+            "color": {
+              "value": "active bronze approx #D9A467; inactive cool gray approx #AAB4BC",
+              "confidence": 0.74,
+              "evidence": "ESTIMATED"
+            }
+          },
+          "style": {
+            "background": "active near-black/deep navy; inactive softened blue-navy",
+            "border": "~2px cool gray outer edge; bronze active bottom indicator",
+            "border_radius": "18-20px top corners; active lower-left integrates into panel",
+            "shadow": "minimal; shell elevation carries tabs"
+          },
+          "relationships": [
+            "Tabs overlap/attach to the upper edge of the main panel.",
+            "Active tab bronze line aligns with the restrained bronze accent system.",
+            "Tab navigation remains subordinate to the hero imagery above."
+          ],
+          "implementation_guidance": [
+            "ACTIVE: dark near-black surface, bronze icon/text and ~2-3px bronze lower indicator.",
+            "INACTIVE: slightly lighter navy surface, cool-gray icon/text, no bronze indicator.",
+            "HOVER: increase text/icon contrast without introducing glow or a new accent color.",
+            "FOCUS: provide a clearly visible keyboard focus ring/outline that does not rely on color alone.",
+            "Do not introduce elaborate tab animation."
+          ]
+        },
+        {
+          "id": "fitment-heading-group",
+          "type": "content_header",
+          "classification": "SHARED",
+          "bbox_px": [
+            128,
+            258,
+            690,
+            409
+          ],
+          "bbox_normalized": [
+            0.0625,
+            0.3783,
+            0.3369,
+            0.5997
+          ],
+          "description": "Primary utility heading and supporting copy. FIT is the only heading word receiving bronze emphasis.",
+          "confidence": 0.92,
+          "evidence": "OBSERVED",
+          "layout": {
+            "max_text_width_estimate": "560-600px",
+            "heading_to_copy_gap": "14-20px"
+          },
+          "typography": {
+            "role": "component heading",
+            "case": "UPPERCASE",
+            "weight": "700-800",
+            "font_size": {
+              "value": "52-58px",
+              "confidence": 0.86,
+              "evidence": "ESTIMATED"
+            },
+            "line_height": {
+              "value": "0.98-1.08",
+              "confidence": 0.84,
+              "evidence": "ESTIMATED"
+            },
+            "letter_spacing": {
+              "value": "0 to 0.015em",
+              "confidence": 0.68,
+              "evidence": "ESTIMATED"
+            },
+            "alignment": "left",
+            "color": {
+              "value": "white approx #F5F6F5; FIT bronze approx #D9A467",
+              "confidence": 0.82,
+              "evidence": "ESTIMATED"
+            }
+          },
+          "style": {
+            "background": "transparent"
+          },
+          "relationships": [
+            "Heading is visually dominant within the utility but materially smaller/less cinematic than the homepage hero headline.",
+            "Supporting copy uses cool gray and wraps to two lines."
+          ],
+          "implementation_guidance": [
+            "Preserve exact content hierarchy: FIND YOUR FIT, then supporting copy.",
+            "Keep bronze confined to FIT; do not turn the full heading bronze."
+          ]
+        },
+        {
+          "id": "fitment-technical-art",
+          "type": "decorative_background",
+          "classification": "SHARED",
+          "bbox_px": [
+            655,
+            209,
+            1515,
+            478
+          ],
+          "bbox_normalized": [
+            0.3198,
+            0.3065,
+            0.7397,
+            0.7009
+          ],
+          "description": "Low-contrast engineering artwork combining wheel line-art, contour/flow lines, and small technical details behind the finder area.",
+          "confidence": 0.86,
+          "evidence": "OBSERVED",
+          "layout": {
+            "placement": "upper-middle/right of finder area",
+            "content_overlap": "may sit behind empty space and controls only at very low contrast"
+          },
+          "style": {
+            "background": "transparent line-art over deep navy",
+            "overlay": "dark navy fade/gradient used to suppress artwork behind text and controls"
+          },
+          "imagery": {
+            "type": "technical wheel drawing + contour/flow lines",
+            "opacity_estimate": "roughly 8-22% depending on local line density",
+            "fit_behavior": "decorative cover/positioned background",
+            "focal_point": "wheel center around x 1280-1330, y 325-345"
+          },
+          "relationships": [
+            "Artwork fills otherwise empty space to the right of heading without becoming a primary image.",
+            "Artwork fades before selected-vehicle content and remains below all interactive controls."
+          ],
+          "implementation_guidance": [
+            "Treat as non-semantic decorative support.",
+            "Do not substitute a large vehicle photograph.",
+            "At narrow widths reduce, reposition, or hide artwork if needed for legibility."
+          ]
+        },
+        {
+          "id": "fitment-year",
+          "type": "select_control",
+          "classification": "SHARED",
+          "bbox_px": [
+            128,
+            449,
+            331,
+            546
+          ],
+          "bbox_normalized": [
+            0.0625,
+            0.6584,
+            0.1616,
+            0.8006
+          ],
+          "description": "YEAR dependent fitment selector shown with value 2026.",
+          "confidence": 0.88,
+          "evidence": "OBSERVED",
+          "layout": {
+            "label_position": "above control",
+            "control_height_estimate": "70-72px",
+            "label_to_control_gap_estimate": "8-10px"
+          },
+          "typography": {
+            "role": "form label/value",
+            "case": "label uppercase; value title/data case",
+            "weight": "label 600-700; value 600-700",
+            "font_size": {
+              "value": "label 16-18px; value 20-22px",
+              "confidence": 0.8,
+              "evidence": "ESTIMATED"
+            },
+            "line_height": {
+              "value": "1.2-1.35",
+              "confidence": 0.72,
+              "evidence": "ESTIMATED"
+            },
+            "letter_spacing": {
+              "value": "label ~0.08-0.12em",
+              "confidence": 0.72,
+              "evidence": "ESTIMATED"
+            },
+            "alignment": "left",
+            "color": {
+              "value": "label cool gray; value near-white",
+              "confidence": 0.83,
+              "evidence": "ESTIMATED"
+            }
+          },
+          "style": {
+            "background": "soft deep navy/slate approx #102431",
+            "border": "~2px muted blue-gray approx #4B606C",
+            "border_radius": "8-10px",
+            "shadow": "none/minimal"
+          },
+          "relationships": [
+            "Controls share one baseline and consistent height.",
+            "Year \u2192 Make \u2192 Model \u2192 Trim reads as a dependent sequence."
+          ],
+          "implementation_guidance": [
+            "Preserve visible labels; do not rely on placeholder text as the label.",
+            "Disabled/loading states must remain legible and clearly non-active without collapsing control dimensions."
+          ]
+        },
+        {
+          "id": "fitment-make",
+          "type": "select_control",
+          "classification": "SHARED",
+          "bbox_px": [
+            357,
+            449,
+            574,
+            546
+          ],
+          "bbox_normalized": [
+            0.1743,
+            0.6584,
+            0.2803,
+            0.8006
+          ],
+          "description": "MAKE dependent fitment selector shown with value BMW.",
+          "confidence": 0.88,
+          "evidence": "OBSERVED",
+          "layout": {
+            "label_position": "above control",
+            "control_height_estimate": "70-72px",
+            "label_to_control_gap_estimate": "8-10px"
+          },
+          "typography": {
+            "role": "form label/value",
+            "case": "label uppercase; value title/data case",
+            "weight": "label 600-700; value 600-700",
+            "font_size": {
+              "value": "label 16-18px; value 20-22px",
+              "confidence": 0.8,
+              "evidence": "ESTIMATED"
+            },
+            "line_height": {
+              "value": "1.2-1.35",
+              "confidence": 0.72,
+              "evidence": "ESTIMATED"
+            },
+            "letter_spacing": {
+              "value": "label ~0.08-0.12em",
+              "confidence": 0.72,
+              "evidence": "ESTIMATED"
+            },
+            "alignment": "left",
+            "color": {
+              "value": "label cool gray; value near-white",
+              "confidence": 0.83,
+              "evidence": "ESTIMATED"
+            }
+          },
+          "style": {
+            "background": "soft deep navy/slate approx #102431",
+            "border": "~2px muted blue-gray approx #4B606C",
+            "border_radius": "8-10px",
+            "shadow": "none/minimal"
+          },
+          "relationships": [
+            "Controls share one baseline and consistent height.",
+            "Year \u2192 Make \u2192 Model \u2192 Trim reads as a dependent sequence."
+          ],
+          "implementation_guidance": [
+            "Preserve visible labels; do not rely on placeholder text as the label.",
+            "Disabled/loading states must remain legible and clearly non-active without collapsing control dimensions."
+          ]
+        },
+        {
+          "id": "fitment-model",
+          "type": "select_control",
+          "classification": "SHARED",
+          "bbox_px": [
+            599,
+            449,
+            817,
+            546
+          ],
+          "bbox_normalized": [
+            0.2925,
+            0.6584,
+            0.3989,
+            0.8006
+          ],
+          "description": "MODEL dependent fitment selector shown with value M4.",
+          "confidence": 0.88,
+          "evidence": "OBSERVED",
+          "layout": {
+            "label_position": "above control",
+            "control_height_estimate": "70-72px",
+            "label_to_control_gap_estimate": "8-10px"
+          },
+          "typography": {
+            "role": "form label/value",
+            "case": "label uppercase; value title/data case",
+            "weight": "label 600-700; value 600-700",
+            "font_size": {
+              "value": "label 16-18px; value 20-22px",
+              "confidence": 0.8,
+              "evidence": "ESTIMATED"
+            },
+            "line_height": {
+              "value": "1.2-1.35",
+              "confidence": 0.72,
+              "evidence": "ESTIMATED"
+            },
+            "letter_spacing": {
+              "value": "label ~0.08-0.12em",
+              "confidence": 0.72,
+              "evidence": "ESTIMATED"
+            },
+            "alignment": "left",
+            "color": {
+              "value": "label cool gray; value near-white",
+              "confidence": 0.83,
+              "evidence": "ESTIMATED"
+            }
+          },
+          "style": {
+            "background": "soft deep navy/slate approx #102431",
+            "border": "~2px muted blue-gray approx #4B606C",
+            "border_radius": "8-10px",
+            "shadow": "none/minimal"
+          },
+          "relationships": [
+            "Controls share one baseline and consistent height.",
+            "Year \u2192 Make \u2192 Model \u2192 Trim reads as a dependent sequence."
+          ],
+          "implementation_guidance": [
+            "Preserve visible labels; do not rely on placeholder text as the label.",
+            "Disabled/loading states must remain legible and clearly non-active without collapsing control dimensions."
+          ]
+        },
+        {
+          "id": "fitment-trim",
+          "type": "select_control",
+          "classification": "SHARED",
+          "bbox_px": [
+            843,
+            449,
+            1094,
+            546
+          ],
+          "bbox_normalized": [
+            0.4116,
+            0.6584,
+            0.5342,
+            0.8006
+          ],
+          "description": "TRIM dependent fitment selector shown with value Competition.",
+          "confidence": 0.88,
+          "evidence": "OBSERVED",
+          "layout": {
+            "label_position": "above control",
+            "control_height_estimate": "70-72px",
+            "label_to_control_gap_estimate": "8-10px"
+          },
+          "typography": {
+            "role": "form label/value",
+            "case": "label uppercase; value title/data case",
+            "weight": "label 600-700; value 600-700",
+            "font_size": {
+              "value": "label 16-18px; value 20-22px",
+              "confidence": 0.8,
+              "evidence": "ESTIMATED"
+            },
+            "line_height": {
+              "value": "1.2-1.35",
+              "confidence": 0.72,
+              "evidence": "ESTIMATED"
+            },
+            "letter_spacing": {
+              "value": "label ~0.08-0.12em",
+              "confidence": 0.72,
+              "evidence": "ESTIMATED"
+            },
+            "alignment": "left",
+            "color": {
+              "value": "label cool gray; value near-white",
+              "confidence": 0.83,
+              "evidence": "ESTIMATED"
+            }
+          },
+          "style": {
+            "background": "soft deep navy/slate approx #102431",
+            "border": "~2px muted blue-gray approx #4B606C",
+            "border_radius": "8-10px",
+            "shadow": "none/minimal"
+          },
+          "relationships": [
+            "Controls share one baseline and consistent height.",
+            "Year \u2192 Make \u2192 Model \u2192 Trim reads as a dependent sequence."
+          ],
+          "implementation_guidance": [
+            "Preserve visible labels; do not rely on placeholder text as the label.",
+            "Disabled/loading states must remain legible and clearly non-active without collapsing control dimensions."
+          ]
+        },
+        {
+          "id": "fitment-find-wheels",
+          "type": "primary_action",
+          "classification": "SHARED",
+          "bbox_px": [
+            1120,
+            465,
+            1487,
+            546
+          ],
+          "bbox_normalized": [
+            0.5469,
+            0.6818,
+            0.7261,
+            0.8006
+          ],
+          "description": "Dark primary FIND WHEELS action with restrained bronze border and right arrow.",
+          "confidence": 0.92,
+          "evidence": "OBSERVED",
+          "layout": {
+            "width_estimate": "360-370px",
+            "height_estimate": "78-82px",
+            "content_alignment": "center; arrow offset toward right"
+          },
+          "typography": {
+            "role": "primary utility CTA",
+            "case": "UPPERCASE",
+            "weight": "700",
+            "font_size": {
+              "value": "18-21px",
+              "confidence": 0.82,
+              "evidence": "ESTIMATED"
+            },
+            "line_height": {
+              "value": "1.0-1.2",
+              "confidence": 0.75,
+              "evidence": "ESTIMATED"
+            },
+            "letter_spacing": {
+              "value": "0.08-0.12em",
+              "confidence": 0.75,
+              "evidence": "ESTIMATED"
+            },
+            "alignment": "center",
+            "color": {
+              "value": "near-white #F4F4F1",
+              "confidence": 0.88,
+              "evidence": "ESTIMATED"
+            }
+          },
+          "style": {
+            "background": "near-black approx #050708",
+            "border": "~2px restrained bronze approx #D9A467",
+            "border_radius": "8-10px",
+            "shadow": "subtle warm edge glow only; no dominant bloom"
+          },
+          "relationships": [
+            "CTA completes the selector row and is stronger than controls but not brighter than the homepage hero CTA system."
+          ],
+          "implementation_guidance": [
+            "HOVER: modest bronze/contrast lift; avoid large glow.",
+            "FOCUS: obvious keyboard focus outline with sufficient contrast.",
+            "DISABLED: preserve dimensions; reduce emphasis and indicate unavailable state without removing label."
+          ]
+        },
+        {
+          "id": "fitment-selected-vehicle",
+          "type": "status_panel",
+          "classification": "SHARED",
+          "bbox_px": [
+            1520,
+            232,
+            1931,
+            556
+          ],
+          "bbox_normalized": [
+            0.7422,
+            0.3402,
+            0.9429,
+            0.8152
+          ],
+          "description": "Dedicated persistent selected-vehicle context separated from the finder by a vertical divider.",
+          "confidence": 0.93,
+          "evidence": "OBSERVED",
+          "layout": {
+            "width_estimate": "400-420px",
+            "left_divider": "~1-2px",
+            "left_padding_estimate": "54-58px",
+            "top_padding_estimate": "25-30px"
+          },
+          "typography": {
+            "role": "persistent vehicle context",
+            "case": "eyebrow uppercase; vehicle name title/data case",
+            "weight": "eyebrow 600-700; vehicle 700",
+            "font_size": {
+              "value": "eyebrow 16-18px; vehicle 25-29px; status/actions 18-20px",
+              "confidence": 0.82,
+              "evidence": "ESTIMATED"
+            },
+            "line_height": {
+              "value": "1.2-1.4",
+              "confidence": 0.76,
+              "evidence": "ESTIMATED"
+            },
+            "letter_spacing": {
+              "value": "eyebrow ~0.08-0.12em",
+              "confidence": 0.7,
+              "evidence": "ESTIMATED"
+            },
+            "alignment": "left",
+            "color": {
+              "value": "white/cool gray; confirmation green approx #38E778",
+              "confidence": 0.8,
+              "evidence": "ESTIMATED"
+            }
+          },
+          "style": {
+            "background": "same dark shell; no separate card fill",
+            "border": "left vertical divider ~#AAB2B5; internal horizontal separator muted #42515A",
+            "border_radius": "inherits outer shell right corners",
+            "shadow": "none independent"
+          },
+          "relationships": [
+            "Status panel occupies roughly the rightmost 23-24% of the shell.",
+            "No vehicle photograph appears in this region.",
+            "Green is reserved for positive fitment confirmation.",
+            "Change Vehicle and Reset sit below an internal horizontal separator."
+          ],
+          "implementation_guidance": [
+            "Keep selected vehicle context available when appropriate even if search method changes; technical persistence mechanism is UNKNOWN_IMPLEMENTATION_DEPENDENCY.",
+            "Change Vehicle is secondary; Reset is tertiary/secondary and separated by a vertical divider.",
+            "Do not let either secondary action compete with FIND WHEELS."
+          ]
+        }
+      ],
+      "relationships": [
+        "The component is a functional bridge between cinematic hero storytelling and product discovery.",
+        "It must remain visually subordinate to the hero: smaller heading scale, restrained bronze, lower-contrast imagery, no competing lifestyle photograph.",
+        "Tabs, finder content, CTA, and selected-vehicle status read as one unified utility.",
+        "The main panel transitions into light page content below, with elevation/shadow providing separation."
+      ],
+      "implementation_guidance": [
+        "Preserve priority REUSE \u2192 RESTYLE \u2192 EXTEND \u2192 CREATE after auditing the existing Lumia/theme fitment functionality.",
+        "Do not replace working fitment behavior solely to match styling.",
+        "Do not widen the site's global content container to accommodate this component.",
+        "All Shopify data architecture, filtering sources, persistence storage, and app/framework choices remain implementation-agent responsibilities."
+      ],
+      "confidence": 0.91,
+      "evidence": "OBSERVED"
+    }
+  ],
+  "shared_components": [
+    {
+      "id": "calder-fitment-finder",
+      "name": "Calder Find Your Fit / Fitment Finder",
+      "classification": "SHARED",
+      "reason": "Explicitly designated shared premium commerce utility; fitment context can support homepage and other shopping contexts."
+    },
+    {
+      "id": "fitment-tab-nav",
+      "name": "Fitment Search Method Tabs",
+      "classification": "SHARED",
+      "reason": "Two states belong to the same shared finder shell."
+    },
+    {
+      "id": "fitment-form-control-system",
+      "name": "Fitment Select Control System",
+      "classification": "SHARED",
+      "reason": "Year/Make/Model/Trim and Wheel Type/Diameter/Finish/Style should use one consistent presentation system."
+    },
+    {
+      "id": "fitment-selected-vehicle",
+      "name": "Persistent Selected Vehicle Context",
+      "classification": "SHARED",
+      "reason": "Selected vehicle state is intended to remain available across site fitment/product-discovery contexts where appropriate."
+    }
+  ],
+  "unique_components": [],
+  "responsive_assumptions": [
+    {
+      "target": "tablet layout",
+      "assumption": "Finder/status columns may reorganize; preserve tabs first, finder controls and CTA next, selected-vehicle context after or beside depending on available width. Avoid compressed selects.",
+      "confidence": 0.68,
+      "evidence": "ASSUMPTION"
+    },
+    {
+      "target": "mobile layout",
+      "assumption": "Stack in order: tabs \u2192 Find Your Fit header \u2192 controls \u2192 Find Wheels \u2192 selected vehicle status. Controls become full/near-full width and no horizontal overflow is allowed.",
+      "confidence": 0.82,
+      "evidence": "ASSUMPTION"
+    },
+    {
+      "target": "mobile tabs",
+      "assumption": "Tabs remain a two-choice semantic tab control; labels may reduce typography/padding but should remain readable and touch-friendly.",
+      "confidence": 0.7,
+      "evidence": "ASSUMPTION"
+    },
+    {
+      "target": "technical background artwork",
+      "assumption": "At narrow widths artwork may be reduced, repositioned, or hidden to protect readability and interaction clarity.",
+      "confidence": 0.86,
+      "evidence": "ASSUMPTION"
+    },
+    {
+      "target": "touch targets",
+      "assumption": "Interactive controls and secondary actions should maintain practical touch targets of roughly 44px minimum height/target size.",
+      "confidence": 0.88,
+      "evidence": "ASSUMPTION"
+    }
+  ],
+  "implementation_notes": [
+    "VISUAL_INVARIANT: premium Calder appearance using deep navy/near-black, white/cool-gray typography, restrained bronze, and green only for positive fitment confirmation.",
+    "VISUAL_INVARIANT: FIND YOUR FIT remains the component title; FIT alone receives restrained bronze emphasis.",
+    "VISUAL_INVARIANT: By Vehicle / By Wheel Style are states of one component, not unrelated components.",
+    "VISUAL_INVARIANT: consistent dark select-control system and dark bronze-accent FIND WHEELS CTA across both tabs.",
+    "VISUAL_INVARIANT: subtle technical wheel/engineering artwork remains background support and never becomes a primary image.",
+    "VISUAL_INVARIANT: dedicated selected-vehicle context with fitment confirmation, Change Vehicle, and Reset; no redundant car photograph.",
+    "VISUAL_INVARIANT: component remains visually subordinate to the homepage hero.",
+    "BY_VEHICLE: Year \u2192 Make \u2192 Model \u2192 Trim is a dependent selection sequence; implementation mechanism is not prescribed.",
+    "BY_WHEEL_STYLE: preserve shell/header/art/control/CTA/status styling; controls conceptually become Wheel Type, Diameter, Finish, Style. Exact option lists are not production taxonomy.",
+    "UNKNOWN_IMPLEMENTATION_DEPENDENCY: authoritative data source for Wheel Type (product option, variant, metafield, metaobject, tag, collection filter, Search & Discovery filter, Lumia filter, or custom data) must be audited.",
+    "UNKNOWN_IMPLEMENTATION_DEPENDENCY: authoritative data source for Diameter must be audited.",
+    "UNKNOWN_IMPLEMENTATION_DEPENDENCY: authoritative data source for Finish must be audited.",
+    "UNKNOWN_IMPLEMENTATION_DEPENDENCY: authoritative data source for Style must be audited.",
+    "UNKNOWN_IMPLEMENTATION_DEPENDENCY: existing vehicle-fitment provider/data flow and Year/Make/Model/Trim dependency mechanism must be audited.",
+    "UNKNOWN_IMPLEMENTATION_DEPENDENCY: persistence mechanism for selected vehicle / 'Fitment enabled across the site' must be audited.",
+    "UNKNOWN_IMPLEMENTATION_DEPENDENCY: Change Vehicle behavior must be mapped to existing Lumia/custom workflow before alteration.",
+    "UNKNOWN_IMPLEMENTATION_DEPENDENCY: Reset behavior and scope must be verified before alteration.",
+    "UNKNOWN_IMPLEMENTATION_DEPENDENCY: current section/snippet architecture, JavaScript framework, app integrations, and storage mechanism must be audited by OpenCode/DeepSeek.",
+    "INTERACTION: semantic tab state, visible keyboard focus, persistent form labels, adequate contrast, disabled/loading states, hover states, selected states, and error states are required.",
+    "INTERACTION: FIND WHEELS remains primary; Change Vehicle and Reset remain secondary.",
+    "OPTIONAL_ELEMENT: decorative technical background artwork may be reduced/hidden responsively but should be present on desktop when asset/implementation allows.",
+    "CONDITIONAL_ELEMENT: selected-vehicle content is populated only when a vehicle context exists; empty/no-vehicle behavior must preserve the shell hierarchy without fabricated vehicle data.",
+    "IMPLEMENTATION_AGENT_VERIFICATION: audit existing equivalent first and classify each requirement REUSE, RESTYLE, EXTEND, or CREATE in that priority order.",
+    "IMPLEMENTATION_AGENT_VERIFICATION: preserve known-working Shopify/theme functionality and data bindings wherever practical.",
+    "IMPLEMENTATION_AGENT_VERIFICATION: verify actual store taxonomy/data before populating By Wheel Style options; do not hard-code conceptual examples as final Calder taxonomy."
+  ],
+  "uncertainties": [
+    {
+      "target": "By Wheel Style exact geometry",
+      "unknown": "The approved reference does not show the expanded By Wheel Style control state.",
+      "resolution": "Use the observed By Vehicle control system as the visual baseline; treat Wheel Type/Diameter/Finish/Style widths and option contents as ASSUMPTION until implementation/render QA."
+    },
+    {
+      "target": "exact font family/tokens",
+      "unknown": "The component image alone does not prove exact source font tokens.",
+      "resolution": "Use approved Calder brand/theme font assets and existing accepted typography tokens; match observed hierarchy and scale."
+    },
+    {
+      "target": "exact color tokens",
+      "unknown": "Screenshot-derived colors are estimates, not verified source design tokens.",
+      "resolution": "Prefer approved Calder brand tokens/theme variables when they reproduce the observed relationships."
+    },
+    {
+      "target": "responsive breakpoints",
+      "unknown": "No approved tablet/mobile reference is supplied.",
+      "resolution": "Use established Calder/Lumia responsive patterns, document assumptions, and validate at project test viewports."
+    },
+    {
+      "target": "selected vehicle persistence implementation",
+      "unknown": "Storage/provider mechanism is not visible in the design.",
+      "resolution": "OpenCode/DeepSeek must inspect existing fitment architecture before implementation."
+    },
+    {
+      "target": "hero overlap in live page",
+      "unknown": "The supplied component reference shows surrounding hero tail but not the full current homepage screenshot as a separate inspectable source in this task package.",
+      "resolution": "During implementation, align overlap/spacing to the accepted homepage visual spec and live hero container without changing global container width."
+    }
+  ]
+}

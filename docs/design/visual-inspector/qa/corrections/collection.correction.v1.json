@@ -1,0 +1,161 @@
+{
+  "schema_version": "1.0",
+  "project": "Calder Wheels",
+  "page": "collection",
+  "qa_iteration": 1,
+  "result": "REVISION_REQUIRED",
+  "state": "REVISION_REQUIRED",
+  "reference": "docs/design/mockups/approved-mockups/Calder - 2 - Category.png",
+  "implementation_renders": [
+    "docs/design/visual-inspector/qa/renders/collection/collection.implementation.v1.desktop.png",
+    "docs/design/visual-inspector/qa/renders/collection/collection.implementation.v1.tablet.png",
+    "docs/design/visual-inspector/qa/renders/collection/collection.implementation.v1.mobile.png"
+  ],
+  "render_evidence": {
+    "reference_px": [
+      1024,
+      1536
+    ],
+    "desktop_file_px": [
+      367,
+      2048
+    ],
+    "tablet_file_px": [
+      293,
+      2048
+    ],
+    "mobile_file_px": [
+      104,
+      2048
+    ],
+    "note": "The supplied files labeled desktop/tablet/mobile do not have desktop/tablet/mobile pixel widths. Re-capture at the intended QA viewport dimensions before fidelity acceptance. Findings below are limited to discrepancies still visually evident in the supplied captures."
+  },
+  "corrections": [
+    {
+      "id": "COL-V1-001",
+      "severity": "HIGH",
+      "region": "QA render capture",
+      "issue": "The implementation screenshots are not captured/exported at the intended QA viewport widths; the file labeled desktop is 367 px wide versus the 1024 px approved reference.",
+      "visual_evidence": "Reference is 1024\u00d71536. Supplied implementation files measure desktop 367\u00d72048, tablet 293\u00d72048, and mobile 104\u00d72048. This prevents reliable desktop geometry comparison and makes breakpoint behavior ambiguous.",
+      "target": "Produce browser screenshots at the project\u2019s actual desktop/tablet/mobile QA viewport widths with no post-capture horizontal downscaling. Desktop must expose the desktop layout breakpoint and be directly comparable to the approved desktop reference.",
+      "implementation_guidance": "Do not alter page styling merely to compensate for these narrow exported files. Correct the screenshot/capture procedure first, then use the corrected desktop render to verify layout.",
+      "protected_components": [
+        "B1 product card",
+        "fitment engine",
+        "accepted Home",
+        "global header",
+        "global footer"
+      ],
+      "verification": "Image metadata matches intended QA viewport width and desktop render visibly activates desktop header, filter rail, and three-column collection layout."
+    },
+    {
+      "id": "COL-V1-002",
+      "severity": "HIGH",
+      "region": "Collection hero",
+      "issue": "The implemented hero does not reproduce the approved image-led hero composition.",
+      "visual_evidence": "Approved reference has mountain/road scenery across the hero, a large wheel/vehicle crop on the right, and the 'DRIVEN BY HIGHER STANDARDS' treatment. V1 renders show a mostly flat dark hero with text and no comparable dominant right-side wheel/scenic composition.",
+      "target": "Match the approved hero hierarchy and visual mass: full-bleed scenic background, large right-side wheel/vehicle focal image, left text block, gold WHEELS emphasis, and right-side standards treatment, while retaining the shared Calder header/container system.",
+      "implementation_guidance": "Correct Collection-specific hero assets/settings/layout. Do not redesign the global header or create a new cross-page design system.",
+      "protected_components": [
+        "global header",
+        "accepted Home typography/tokens"
+      ],
+      "verification": "Corrected desktop render visibly matches the reference\u2019s image-led hero composition and fitment transition."
+    },
+    {
+      "id": "COL-V1-003",
+      "severity": "HIGH",
+      "region": "Results region / filter rail / product grid",
+      "issue": "The approved desktop architecture is not demonstrated: persistent left filter rail plus right-side three-column product grid.",
+      "visual_evidence": "Approved reference clearly shows a persistent faceted sidebar and three product columns. The supplied V1 capture presents compact filter controls and a two-column/narrow product layout rather than the reference desktop structure.",
+      "target": "At the true desktop QA breakpoint, render a persistent left filter sidebar and a right results area containing the toolbar and three B1 card columns. Pagination and help CTA must align to the results column, excluding the sidebar.",
+      "implementation_guidance": "First re-capture at the correct desktop width. If the true desktop page still fails, correct Collection-specific grid/facet CSS and breakpoint behavior only. Preserve Shopify facet functionality and B1 internals.",
+      "protected_components": [
+        "B1 product card internals",
+        "Shopify facets",
+        "sorting",
+        "pagination",
+        "fitment engine"
+      ],
+      "verification": "Desktop render shows the filter rail continuously at left and exactly three product columns at right with stable gaps and no B1 distortion."
+    },
+    {
+      "id": "COL-V1-004",
+      "severity": "HIGH",
+      "region": "Global footer / page vertical rhythm",
+      "issue": "The complete approved Calder footer is not visibly rendered; a very large blank region follows the newsletter/benefits area.",
+      "visual_evidence": "Approved reference transitions directly from newsletter/benefits into a full dark footer with logo, link columns, social icons, brand statement and legal row. V1 captures show newsletter/benefits followed by extensive white space with only faint Calder branding/rules.",
+      "target": "Restore the accepted global footer immediately after the shared newsletter/benefits section with no abnormal blank page region.",
+      "implementation_guidance": "Determine whether Collection-specific CSS/layout is hiding, recoloring, displacing or expanding the shared footer. Prefer removing Collection interference rather than editing the accepted footer itself.",
+      "protected_components": [
+        "global footer markup/design",
+        "accepted Home"
+      ],
+      "verification": "Corrected render shows the complete dark shared footer directly below newsletter/benefits and no excessive trailing whitespace."
+    },
+    {
+      "id": "COL-V1-005",
+      "severity": "MEDIUM",
+      "region": "Vehicle fitment entry",
+      "issue": "Fitment presentation is materially different from the approved compact desktop panel.",
+      "visual_evidence": "Reference uses a heading/status row plus one horizontal row of YEAR, MAKE, MODEL, TRIM and a right-aligned FIND WHEELS CTA. V1 capture shows a smaller stacked/2\u00d72 control arrangement and lacks the same selected-vehicle/reset presentation.",
+      "target": "At desktop width, reproduce the approved compact single-row selector geometry and heading/status relationship while preserving the existing fitment engine.",
+      "implementation_guidance": "Change Collection presentation/layout only; do not rewrite fitment data or event behavior.",
+      "protected_components": [
+        "fitment-finder.js",
+        "fitment-data",
+        "CALDER_FITMENT_API",
+        "window.__fitmentData"
+      ],
+      "verification": "Desktop render shows four labeled selectors in one row plus CTA, with selected vehicle/reset state in the panel header."
+    },
+    {
+      "id": "COL-V1-006",
+      "severity": "MEDIUM",
+      "region": "Category navigation",
+      "issue": "Category tiles lack the approved image-backed visual treatment and scale.",
+      "visual_evidence": "Reference uses five wide photographic tiles with prominent white line icons and labels. V1 shows small pale/white tiles with minimal imagery and substantially less visual weight.",
+      "target": "Reproduce five horizontal image-backed tiles with approved active gold accent, icon hierarchy, label placement, dark photographic surfaces and reference-like height/gaps.",
+      "implementation_guidance": "Use Collection-specific tile settings/assets and styling; retain all five destinations and active-state logic.",
+      "protected_components": [
+        "global tokens",
+        "navigation destinations"
+      ],
+      "verification": "Desktop render presents five visually substantial image-backed tiles aligned across the shared container."
+    },
+    {
+      "id": "COL-V1-007",
+      "severity": "MEDIUM",
+      "region": "B1 product card integration",
+      "issue": "The product cards do not visually resemble the approved Collection card presentation at the available width; existing Lumia controls/content dominate and image scale is excessive.",
+      "visual_evidence": "Reference cards have controlled wheel-image scale, green fitment badge, concise C1/C2/C3-style hierarchy, finish/sizes/price, and dark View Details CTA. V1 cards show large cropped wheel imagery and multiple small legacy controls/labels that materially change card density.",
+      "target": "Preserve the approved shared B1 internals while ensuring the Collection grid supplies the intended card width and does not expose conflicting legacy/Lumia presentation that is not part of B1.",
+      "implementation_guidance": "Do not redesign B1. Verify that the collection is actually rendering the accepted B1 implementation and that collection CSS is not forcing a width/state that triggers incompatible legacy presentation.",
+      "protected_components": [
+        "B1 visual authority",
+        "dynamic Shopify product data"
+      ],
+      "verification": "At corrected desktop width, B1 cards retain their approved internal hierarchy and fit cleanly in three columns without oversized imagery or conflicting legacy controls."
+    },
+    {
+      "id": "COL-V1-008",
+      "severity": "MEDIUM",
+      "region": "Newsletter / benefits",
+      "issue": "The shared lower-page newsletter does not reproduce the approved scenic image-backed treatment.",
+      "visual_evidence": "Reference newsletter is a scenic mountain band with horizontal email form and five benefit items. V1 renders show a dark flat band with a different visual density and fewer/stacked benefits at narrower captures.",
+      "target": "Reuse the accepted Home newsletter/benefits presentation and assets so desktop matches the approved scenic horizontal band; responsive stacking may follow accepted shared behavior.",
+      "implementation_guidance": "Verify section settings/assets and Collection CSS interference before modifying the shared component.",
+      "protected_components": [
+        "accepted Home newsletter/benefits"
+      ],
+      "verification": "Desktop shows the accepted scenic background, horizontal newsletter form and full benefits row; tablet/mobile remain usable without clipping."
+    }
+  ],
+  "state_update": {
+    "status": "REVISION_REQUIRED",
+    "current_iteration": 1,
+    "latest_correction": "docs/design/visual-inspector/qa/corrections/collection.correction.v1.json",
+    "accepted_render": null
+  },
+  "next_action": "OpenCode applies only these bounded corrections, re-captures valid QA viewport screenshots, and produces collection.implementation.v2.* for Sol Visual QA Iteration 2."
+}

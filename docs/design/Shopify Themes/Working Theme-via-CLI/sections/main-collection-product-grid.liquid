@@ -1,4 +1,5 @@
 {% comment %}theme-check-disable NestedSnippet, ContentForHeaderModification, UnusedAssign{% endcomment %}
+{{ 'calder-product-card.css' | asset_url | stylesheet_tag }}
 {%- liquid
   assign store_width = settings.container_max_width
 
@@ -312,7 +313,7 @@
                         -%}
                         {%- if show -%}
                           <div class="col">
-                            {% render 'product-card',
+                            {% render 'calder-product-card',
                               product: product,
                               sizes: sizes,
                               widths: card_widths,

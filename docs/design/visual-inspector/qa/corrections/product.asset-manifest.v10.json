@@ -1,0 +1,100 @@
+{
+  "schema_version": "product.asset-manifest.v10",
+  "project": "Calder Wheels",
+  "target": "Apex 201 PDP",
+  "regions": [
+    {
+      "region": "hero",
+      "section": "sections/calder-product.liquid",
+      "source": "product.selected_variant.featured_media | default: product.featured_media",
+      "fallback": "Liquid placeholder SVG (no random imagery)",
+      "setting": "none — always from product.media",
+      "availability": "PRODUCT_DATA_BLOCKED — requires actual Apex wheel images in product.media",
+      "semantics": "wheel — must be wheel/product photography, not scenery/people"
+    },
+    {
+      "region": "hero_thumbnails",
+      "section": "sections/calder-product.liquid",
+      "source": "product.media (for loop, media.media_type == 'image')",
+      "fallback": "hidden if product.media.size <= 1",
+      "setting": "none",
+      "availability": "PRESENT — iterates available media",
+      "semantics": "wheel/detail images"
+    },
+    {
+      "region": "build_your_wheel_preview",
+      "section": "sections/wheel-configurator.liquid + configurator-app.js",
+      "source": "configurator-app.js → BOM component layers from product.metafields.custom.bom",
+      "fallback": "snippets/configurator-preview.liquid → product.featured_image",
+      "setting": "settings.configurator_api_url (API endpoint for component images)",
+      "availability": "PRESENT — functional when JS initializes; falls back to product wheel media",
+      "semantics": "wheel composite — never scenery/bokeh"
+    },
+    {
+      "region": "engineering",
+      "section": "sections/calder-specs.liquid",
+      "source": "section.settings.engineering_image (image_picker)",
+      "fallback": "Navy background with text label (no random imagery)",
+      "setting": "engineering_image in Calder Specs & Eng settings",
+      "availability": "MISSING — requires merchant upload of manufacturing/CNC image",
+      "semantics": "manufacturing/CNC"
+    },
+    {
+      "region": "finishes",
+      "section": "sections/calder-finishes.liquid",
+      "source_primary": "product.metafields.custom.available_finishes.value (each item has .image)",
+      "source_secondary": "section.settings.finishes",
+      "fallback": "finish.label text only (no imagery)",
+      "setting": "product metafield or section settings",
+      "availability": "PRESENT — data structure exists; finish-specific images depend on product data",
+      "semantics": "wheel renders — each finish has own image field, never scenery"
+    },
+    {
+      "region": "real_world",
+      "section": "sections/calder-gallery.liquid",
+      "source_primary": "product.metafields.custom.real_world_gallery.value",
+      "source_secondary": "section.settings.gallery_image_1 through gallery_image_4",
+      "fallback": "Gray placeholder box with label (no random imagery)",
+      "settings": "gallery_image_1, gallery_image_2, gallery_image_3, gallery_image_4",
+      "availability": "MISSING — requires merchant upload of 4 automotive lifestyle images",
+      "semantics": "automotive lifestyle"
+    },
+    {
+      "region": "recommendations",
+      "section": "sections/calder-recommendations.liquid",
+      "component": "snippets/calder-product-card.liquid (shared B1 card)",
+      "product_source": "Shopify recommendations.products",
+      "image_source": "rec.product.selected_variant.featured_media | default: rec.product.featured_media",
+      "fallback": "hidden unless recommendations.performed and products_count > 0",
+      "availability": "PRESENT — depends on Shopify recommendation data",
+      "semantics": "wheel product media"
+    },
+    {
+      "region": "specialist_cta",
+      "section": "sections/calder-specialist-cta.liquid",
+      "source": "section.settings.background_image (image_picker)",
+      "fallback": "Solid #0E2A3E navy background",
+      "setting": "background_image in Calder Specialist CTA settings",
+      "availability": "MISSING — requires merchant upload",
+      "semantics": "wheel/automotive detail"
+    },
+    {
+      "region": "header_logo",
+      "section": "sections/header.liquid (shared global)",
+      "source": "section.settings.logo or svg_logo or svg_logo_name",
+      "fallback": "Logo text in header.liquid",
+      "setting": "logo in theme header settings",
+      "availability": "MISSING — requires merchant upload of Calder logo asset",
+      "semantics": "Calder brand logo"
+    }
+  ],
+  "non_regression": [
+    "Shopify product form/variants/price/quantity/Add to Cart",
+    "product.media gallery + thumbnails",
+    "Build Your Wheel Center/Barrel/Hardware/preview/availability/cart/quote",
+    "Fitment Year/Make/Model/Generation/selected vehicle/Change Vehicle",
+    "Recommendations via B1 card",
+    "Shared header/footer from layout",
+    "Theme Editor schema compatibility"
+  ]
+}

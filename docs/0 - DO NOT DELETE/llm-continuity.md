@@ -198,3 +198,27 @@ THINK
 ### [AGENT] Session Metadata
 - Agent: OpenCode (think)
 - Model: DeepSeek V4 Pro
+
+---
+
+## [2026-09-30] — Presentation Baseline Checkpoint
+
+### [ACTIVITY] Session Mode
+EXECUTE
+
+### [COMPLETED] What Was Done
+- Created checkpoint branch `presentation-baseline-2026-09-30` from `design-to-code-home`
+- Staged and committed all 106 uncommitted files (modified theme sections + untracked brand assets, fonts, SVG logos, visual inspector artifacts)
+- Created annotated tag `presentation-baseline-2026-09-30` at commit 6b988a3
+- Updated both continuity docs with session record
+- Working tree is clean
+
+### [BRANCH] Git Context
+- Branch: presentation-baseline-2026-09-30 (active)
+- Other branches: design-to-code-home, main
+- Tags: presentation-baseline-2026-09-30
+- Last commit: 6b988a3
+
+### [AGENT] Session Metadata
+- Agent: OpenCode
+- Model: DeepSeek V4 Flash

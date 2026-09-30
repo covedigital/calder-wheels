@@ -1,0 +1,104 @@
+<section class="home-customize" id="home-customize-{{ section.id }}">
+  <div class="home-customize__image">
+    {% if section.settings.image != blank %}
+      {{ section.settings.image | image_url: width: 800 | image_tag: widths: '800,600,400', loading: 'lazy', alt: section.settings.heading | default: 'Customize Without Limits' }}
+    {% else %}
+      <div style="width:100%;height:100%;"></div>
+    {% endif %}
+  </div>
+  <div class="home-customize__copy">
+    <div class="home-customize__eyebrow">{{ section.settings.eyebrow | default: 'Built Your Way' }}</div>
+    <h2 class="home-customize__heading">{{ section.settings.heading | default: 'Customize<br>Without Limits' }}</h2>
+    <div class="home-customize__body">{{ section.settings.body_text | default: 'Every Calder wheel is built to your specifications. Choose your center finish, barrel finish, and hardware for a truly unique creation.' }}</div>
+    <a href="{{ section.settings.cta_url | default: '/pages/configurator' }}" class="home-customize__cta">
+      {{ section.settings.cta_text | default: 'Build Yours' }}
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+        <path d="M4 2L8 6L4 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+    <div class="home-customize__steps">
+      <span class="home-customize__step active"><span class="home-customize__step-num">1.</span> {{ section.settings.step_1 | default: 'Select Design' }}</span>
+      <span class="home-customize__step"><span class="home-customize__step-num">2.</span> {{ section.settings.step_2 | default: 'Choose Finish' }}</span>
+      <span class="home-customize__step"><span class="home-customize__step-num">3.</span> {{ section.settings.step_3 | default: 'Review Specs' }}</span>
+      <span class="home-customize__step"><span class="home-customize__step-num">4.</span> {{ section.settings.step_4 | default: 'Bring It to Life' }}</span>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Customize Band",
+  "tag": "section",
+  "class": "section--home-customize",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Wheel close-up image"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Built Your Way"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Customize<br>Without Limits"
+    },
+    {
+      "type": "textarea",
+      "id": "body_text",
+      "label": "Body text",
+      "default": "Every Calder wheel is built to your specifications. Choose your center finish, barrel finish, and hardware for a truly unique creation."
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "CTA text",
+      "default": "Build Yours"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "CTA URL"
+    },
+    {
+      "type": "header",
+      "content": "Process Steps"
+    },
+    {
+      "type": "text",
+      "id": "step_1",
+      "label": "Step 1",
+      "default": "Select Design"
+    },
+    {
+      "type": "text",
+      "id": "step_2",
+      "label": "Step 2",
+      "default": "Choose Finish"
+    },
+    {
+      "type": "text",
+      "id": "step_3",
+      "label": "Step 3",
+      "default": "Review Specs"
+    },
+    {
+      "type": "text",
+      "id": "step_4",
+      "label": "Step 4",
+      "default": "Bring It to Life"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Customize Band",
+      "category": "Home"
+    }
+  ]
+}
+{% endschema %}

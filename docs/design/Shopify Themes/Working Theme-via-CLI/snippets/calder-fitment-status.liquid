@@ -1,0 +1,80 @@
+{% comment %}
+  Calder Wheels — Fitment Status Panel
+  Renders the compact "Fits Your Vehicle" panel in the product hero.
+  Connects to the existing fitment system via JS events and localStorage.
+  Usage: {% render 'calder-fitment-status' %}
+{% endcomment %}
+
+<div
+  class="calder-fitment-panel calder-fitment-panel--unset"
+  data-calder-fitment-panel
+  data-section-id="{{ section.id }}"
+>
+  <svg class="calder-fitment-panel__icon" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+    <rect x="3" y="7" width="14" height="9" rx="1.5" stroke="currentColor" stroke-width="1.4"/>
+    <circle cx="7" cy="13" r="1.8" stroke="currentColor" stroke-width="1"/>
+    <circle cx="13" cy="13" r="1.8" stroke="currentColor" stroke-width="1"/>
+    <path d="M5 7V5.5A2.5 2.5 0 017.5 3h5A2.5 2.5 0 0115 5.5V7" stroke="currentColor" stroke-width="1.2"/>
+  </svg>
+  <div class="calder-fitment-panel__text">
+    <span data-calder-fitment-text>{{ section.settings.text_no_vehicle | default: 'Select vehicle to check fitment' }}</span>
+    <span data-calder-fitment-vehicle class="calder-fitment-panel__vehicle" style="display:none"></span>
+  </div>
+  <button class="calder-fitment-panel__action" data-calder-fitment-action type="button">
+    <span data-calder-fitment-action-text>{{ section.settings.action_text | default: 'Select Vehicle' }}</span>
+  </button>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const fitmentPanel = document.querySelector('[data-calder-fitment-panel]');
+    if (!fitmentPanel) return;
+
+    const fitmentAction = fitmentPanel.querySelector('[data-calder-fitment-action]');
+    const fitmentText = fitmentPanel.querySelector('[data-calder-fitment-text]');
+    const fitmentVehicle = fitmentPanel.querySelector('[data-calder-fitment-vehicle]');
+    const fitmentActionText = fitmentPanel.querySelector('[data-calder-fitment-action-text]');
+
+    if (!fitmentAction) return;
+
+    document.addEventListener('calder:vehicle-selected', function(e) {
+      const vehicle = e.detail;
+      if (vehicle && vehicle.year && vehicle.make) {
+        fitmentPanel.classList.remove('calder-fitment-panel--unset');
+        fitmentText.textContent = 'Fits your ';
+        fitmentVehicle.textContent = vehicle.year + ' ' + vehicle.make + ' ' + (vehicle.model || '');
+        fitmentVehicle.style.display = 'inline';
+        fitmentActionText.textContent = 'Change Vehicle';
+      }
+    });
+
+    document.addEventListener('calder:vehicle-cleared', function() {
+      fitmentPanel.classList.add('calder-fitment-panel--unset');
+      fitmentText.textContent = 'Select vehicle to check fitment';
+      fitmentVehicle.style.display = 'none';
+      fitmentActionText.textContent = 'Select Vehicle';
+    });
+
+    try {
+      var saved = localStorage.getItem('calder_selected_vehicle');
+      if (saved) {
+        var v = JSON.parse(saved);
+        if (v && v.year && v.make) {
+          fitmentPanel.classList.remove('calder-fitment-panel--unset');
+          fitmentText.textContent = 'Fits your ';
+          fitmentVehicle.textContent = v.year + ' ' + v.make + ' ' + (v.model || '');
+          fitmentVehicle.style.display = 'inline';
+          fitmentActionText.textContent = 'Change Vehicle';
+        }
+      }
+    } catch(e) {}
+
+    fitmentAction.addEventListener('click', function() {
+      document.dispatchEvent(new CustomEvent('calder:open-fitment'));
+      var fitmentSection = document.querySelector('.section--fitment-finder, .fitment-finder');
+      if (fitmentSection) {
+        fitmentSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+</script>

@@ -1,0 +1,165 @@
+{
+  "schema_version": "product.visual-qa.v5",
+  "project": "Calder Wheels",
+  "status": "REVISION_REQUIRED",
+  "reference": "Calder - 3 - Product(5).png",
+  "renders": [
+    "product.desktop.v5.png",
+    "product.tablet.v5.png",
+    "product.mobile.v5.png"
+  ],
+  "inspection_summary": "V5 has most required components but is not visually converged. The dominant failure is not micro-spacing; it is wrong imagery, missing/incorrect global chrome, underscaled typography/components, and section compositions that differ materially from the approved mockup.",
+  "reference_measurements": {
+    "reference_canvas_px": [
+      824,
+      1908
+    ],
+    "desktop_content_bounds_approx_px": {
+      "left": 38,
+      "right": 762,
+      "width": 724
+    },
+    "desktop_content_width_percent": 87.9,
+    "header_height_approx_px": 45,
+    "hero": {
+      "top_approx_px": 77,
+      "left_gallery_width_approx_px": 404,
+      "right_panel_width_approx_px": 295,
+      "column_gap_approx_px": 25,
+      "left_right_ratio": "~57/43",
+      "main_media_approx_px": [
+        404,
+        320
+      ],
+      "hero_bottom_approx_px": 592
+    },
+    "spec_engineering": {
+      "top_approx_px": 616,
+      "spec_width_approx_px": 328,
+      "engineering_width_approx_px": 372,
+      "gap_approx_px": 24,
+      "bottom_approx_px": 862
+    },
+    "finishes": {
+      "top_approx_px": 883,
+      "bottom_approx_px": 1085,
+      "visible_items": 6
+    },
+    "real_world": {
+      "top_approx_px": 1100,
+      "bottom_approx_px": 1282,
+      "visible_images": 4
+    },
+    "recommendations": {
+      "top_approx_px": 1296,
+      "bottom_approx_px": 1530,
+      "visible_cards": 4
+    },
+    "specialist_cta": {
+      "top_approx_px": 1534,
+      "bottom_approx_px": 1650
+    },
+    "footer": {
+      "top_approx_px": 1650,
+      "bottom_approx_px": 1908
+    }
+  },
+  "findings": [
+    {
+      "id": "QA5-001",
+      "severity": "BLOCKER",
+      "area": "global",
+      "current": "Desktop render does not visually reproduce the approved global header and overall premium scale.",
+      "reference": "Dark Calder header is a strong 45px visual anchor; content below is dense, large and polished.",
+      "correction": "Reuse the approved homepage header and restore reference-comparable component/type scale."
+    },
+    {
+      "id": "QA5-002",
+      "severity": "BLOCKER",
+      "area": "media",
+      "current": "Hero uses black-and-white feet photography; configurator uses bokeh; finish cards use landscapes; recommendations use landscapes/people.",
+      "reference": "Wheel/product photography dominates hero, configurator, finishes and recommendations; automotive photography dominates Real World; CNC/manufacturing image dominates Engineering.",
+      "correction": "Stop using fallback/random placeholder media in product contexts. Bind each region to correct asset class."
+    },
+    {
+      "id": "QA5-003",
+      "severity": "HIGH",
+      "area": "hero",
+      "current": "Hero is visually small and sparse with controls compressed into a narrow/lightweight panel.",
+      "reference": "Hero fills roughly first 515px below breadcrumb; gallery ~57%, info ~43%; large C1 title and substantial configuration panel.",
+      "correction": "Increase gallery/info scale, typography, control heights and vertical density; use ~57/43 desktop split."
+    },
+    {
+      "id": "QA5-004",
+      "severity": "HIGH",
+      "area": "build_your_wheel",
+      "current": "Extra functional section is large and visually disconnected from approved mockup.",
+      "reference": "Approved mockup has no standalone advanced configurator section.",
+      "correction": "Keep required functionality but compress and style it as an intentional Calder extension; do not let it visually overpower approved PDP sections."
+    },
+    {
+      "id": "QA5-005",
+      "severity": "HIGH",
+      "area": "fitment",
+      "current": "Standalone finder is a broad centered band with small controls.",
+      "reference": "Fitment is primarily a compact pale-green status panel inside hero.",
+      "correction": "Make hero fitment primary; keep full finder as secondary change/search workflow with reduced visual weight."
+    },
+    {
+      "id": "QA5-006",
+      "severity": "HIGH",
+      "area": "engineering",
+      "current": "Top half is a flat blue placeholder labeled Manufacturing Image; bottom is a separate card-like dark block.",
+      "reference": "Single continuous photographic CNC panel with text overlay and four icon capabilities across bottom.",
+      "correction": "Use one background image container with gradient overlay; eliminate split placeholder/card composition."
+    },
+    {
+      "id": "QA5-007",
+      "severity": "BLOCKER",
+      "area": "finishes",
+      "current": "Landscape photo cards.",
+      "reference": "Six large isolated wheel renders on white, labels below, selected wheel outlined gold.",
+      "correction": "Render finish wheel imagery, not generic images; 6 visible desktop."
+    },
+    {
+      "id": "QA5-008",
+      "severity": "BLOCKER",
+      "area": "real_world",
+      "current": "Four empty gray placeholders.",
+      "reference": "Four edge-to-edge automotive lifestyle images.",
+      "correction": "Require configured automotive images; hide/flag section in QA if assets absent rather than presenting blank fidelity placeholders."
+    },
+    {
+      "id": "QA5-009",
+      "severity": "BLOCKER",
+      "area": "recommendations",
+      "current": "Generic photo cards with Quick Add buttons.",
+      "reference": "Large wheel renders, model names, construction, price and restrained arrow; no dominant Quick Add.",
+      "correction": "Use actual shared B1 card and wheel product media."
+    },
+    {
+      "id": "QA5-010",
+      "severity": "HIGH",
+      "area": "specialist_cta",
+      "current": "Plain navy block with text concentrated left; little/no image treatment.",
+      "reference": "Full-width dark image-backed wheel-detail banner, large heading left, gold CTA right, contact methods below.",
+      "correction": "Use image-backed CTA, two-column desktop layout and approved sizing."
+    },
+    {
+      "id": "QA5-011",
+      "severity": "HIGH",
+      "area": "footer",
+      "current": "Footer content is sparse/small and does not reproduce approved newsletter/social/locale composition.",
+      "reference": "Substantial dark footer with logo/mission/social, Shop/Explore/Support, Journey newsletter, legal and locale.",
+      "correction": "Reuse homepage footer component exactly rather than PDP-local approximation."
+    },
+    {
+      "id": "QA5-012",
+      "severity": "HIGH",
+      "area": "responsive",
+      "current": "Tablet/mobile inherit underscaled type and generic imagery; mobile sections become long but not visually equivalent.",
+      "reference": "Responsive version should preserve visual hierarchy and wheel-centric media.",
+      "correction": "Fix desktop visual system first, then reflow without shrinking typography excessively."
+    }
+  ]
+}

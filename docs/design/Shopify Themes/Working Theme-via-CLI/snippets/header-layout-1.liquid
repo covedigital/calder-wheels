@@ -11,20 +11,9 @@
     <div class="container">
       <div class="row justify-content-between">
         <div class="hdr-logo col-auto" id="Header-logo-{{ section.id }}">
-          {% render 'logo',
-            header_transparent: header_transparent,
-            logo: logo,
-            svg_logo: svg_logo,
-            svg_logo_name: svg_logo_name,
-            logo_transparent: logo_transparent,
-            svg_logo_transparent: svg_logo_transparent,
-            svg_logo_name_transparent: svg_logo_name_transparent,
-            logo_width: section.settings.logo_width,
-            logo_width_mobile: section.settings.logo_width_mobile,
-            prefix: 'Header-logo-',
-            id: section.id,
-            class: 'logo'
-          %}
+          <a href="{{ routes.root_url }}" class="logo" title="{{ shop.name }}" style="--logo-max-width:120px;--logo-max-width-mobile:80px;">
+            <img src="{{ 'calder-text-cream.svg' | asset_url }}" alt="Calder Wheels" width="200" height="64">
+          </a>
         </div>
         <div class="hdr-nav hide-mobile nav-holder text-center col" role="navigation">
           {% render 'header-navigation', show_dropdowns: false, section: section %}
@@ -39,6 +28,7 @@
               render 'header-wishlist'
               render 'header-cart'
             -%}
+            <a href="{{ routes.root_url }}pages/fitment" class="fitment-cta">Find Your Fit</a>
           </div>
           <div class="hdr-inline-link show-mobile">
             {% render 'header-get-help' %}

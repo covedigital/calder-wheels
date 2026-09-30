@@ -1,0 +1,150 @@
+{
+  "schema_version": "product.asset-manifest.v6",
+  "project": "Calder Wheels",
+  "page": "Product Detail Page",
+  "created": "2026-09-30",
+  "assets": {
+    "header": {
+      "component": "layout/theme.liquid (line 35: {% section 'header' %})",
+      "shared_component": "sections/header.liquid — global shared, used by homepage and all templates",
+      "data_source": "Theme settings / section settings",
+      "image_source": "section.settings.logo or svg_logo",
+      "fallback": "Logo text fallback in header.liquid",
+      "status": "CORRECT — globally shared, not PDP-specific"
+    },
+    "hero_gallery": {
+      "component": "sections/calder-product.liquid (lines 48–80)",
+      "data_source": "product.media — Shopify product media object",
+      "image_source_main": "product.selected_variant.featured_media | default: product.featured_media",
+      "image_source_thumbs": "product.media (for loop, media.media_type == 'image')",
+      "fallback_main": "{% if featured_media %}...{% else %} placeholder SVG {% endif %}",
+      "fallback_thumbs": "only rendered if product.media.size > 1",
+      "status": "CORRECT — sources from actual product.media"
+    },
+    "product_info": {
+      "component": "sections/calder-product.liquid (lines 84–111)",
+      "data_sources": {
+        "title": "product.title",
+        "description": "product.description",
+        "construction": "product.metafields.custom.design_code + design_nickname + series",
+        "rating": "product.metafields.reviews.rating_count.value or default 12",
+        "sku": "current_variant.sku",
+        "made_to_order_badge": "section.settings.show_made_to_order"
+      },
+      "status": "CORRECT — all from Shopify product data"
+    },
+    "fitment_status": {
+      "component": "sections/calder-product.liquid (lines 113–128)",
+      "data_source": "section.settings.text_no_vehicle / action_text; vehicle from localStorage via JS events",
+      "state_management": "calder:vehicle-selected / calder:vehicle-cleared events + localStorage calder_selected_vehicle",
+      "fallback": "section settings defaults: 'Select vehicle to check fitment' / 'Select Vehicle'",
+      "status": "CORRECT — connects to existing fitment system via events"
+    },
+    "configuration_controls": {
+      "component": "sections/calder-product.liquid (lines 130–187)",
+      "data_sources": {
+        "diameters": "product.metafields.custom.diameters.value",
+        "widths": "product.metafields.custom.widths.value",
+        "finish_options": "product.metafields.custom.finish_options.value",
+        "applications": "product.metafields.custom.applications.value"
+      },
+      "fallback": "section.settings placeholder text",
+      "status": "CORRECT — sources from product metafields"
+    },
+    "purchase": {
+      "component": "sections/calder-product.liquid (lines 189–211)",
+      "data_sources": {
+        "price": "current_variant.price",
+        "compare_at": "current_variant.compare_at_price",
+        "add_to_cart_form": "{% form 'product', product, id: form_id %}",
+        "variant_id": "current_variant.id"
+      },
+      "status": "CORRECT — standard Shopify product form"
+    },
+    "build_your_wheel": {
+      "component": "sections/wheel-configurator.liquid (separate section in template)",
+      "preview_source": "configurator-app.js — fetches component images based on BOM and selected finishes",
+      "fallback_preview": "snippets/configurator-preview.liquid — rendered via main-product wheel_configurator block",
+      "data_source": "product.metafields.custom.bom.value (BOM JSON)",
+      "finish_options": "window._calderProductComponents from snippets/configurator-data.liquid",
+      "api_endpoint": "settings.configurator_api_url or window.CALDER_API_BASE",
+      "availability": "computed from component availability data",
+      "add_configured_cart": "JS: configurator-app.js handles cart addition for configured combinations",
+      "request_quote": "configurator-app.js handles quote request",
+      "status": "CORRECT — existing working configurator, preview from configured components, not generic"
+    },
+    "fitment_finder": {
+      "component": "sections/fitment-finder.liquid (separate section in template)",
+      "data_source": "window.CALDER_FITMENT_API or embedded fitment-data.liquid JSON",
+      "state": "Share localStorage calder_selected_vehicle with hero fitment_status",
+      "dependencies": "Year → Make → Model → Generation cascading selects",
+      "results": "sections/async-fitment-results.liquid via JS",
+      "status": "CORRECT — existing working fitment engine, shared state with hero"
+    },
+    "specifications": {
+      "component": "sections/calder-specs.liquid (lines 12–31)",
+      "data_source_primary": "product.metafields.custom.specifications.value",
+      "data_source_fallback": "section.settings.spec_* values",
+      "status": "CORRECT — shows dynamic spec data with Theme Editor fallback"
+    },
+    "engineering": {
+      "component": "sections/calder-specs.liquid (lines 34–65)",
+      "image_source": "section.settings.engineering_image (image_picker)",
+      "fallback": "Navy background with 'Engineering Image' label (no random placeholders)",
+      "text_source": "section.settings.engineering_heading / engineering_text",
+      "capabilities": "Hardcoded: Precision Machined, Assembled to Order, Load Tested, Finish Verified",
+      "status": "CORRECT — engineering_image must be configured by merchant"
+    },
+    "available_finishes": {
+      "component": "sections/calder-finishes.liquid",
+      "data_source_primary": "product.metafields.custom.available_finishes.value",
+      "data_source_fallback": "section.settings.finishes",
+      "image_source": "finish.image (from metafield or section setting per finish item)",
+      "fallback": "finish.label text (no generic imagery)",
+      "status": "CORRECT — each finish has own image, no cross-contamination"
+    },
+    "real_world_gallery": {
+      "component": "sections/calder-gallery.liquid",
+      "data_source_primary": "product.metafields.custom.real_world_gallery.value",
+      "data_source_secondary": "section.settings.gallery_image_1 through gallery_image_4 (image_picker)",
+      "data_source_tertiary": "section.settings.gallery_images (metaobject)",
+      "fallback": "Gray box with 'Gallery Image N' label (no random imagery)",
+      "status": "CORRECT — sources from configured images; neutral fallback"
+    },
+    "recommendations": {
+      "component": "sections/calder-recommendations.liquid",
+      "product_source": "Shopify recommendations system: recommendations.products",
+      "card_component": "snippets/calder-product-card.liquid (shared B1 card)",
+      "image_source": "Each recommended product's own product.media via calder-product-card",
+      "fallback": "Only rendered if recommendations.performed and products_count > 0",
+      "status": "CORRECT — uses shared B1 card, real recommended product media"
+    },
+    "specialist_cta": {
+      "component": "sections/calder-specialist-cta.liquid",
+      "background_source": "section.settings.background_image (image_picker, newly added)",
+      "fallback": "Solid navy background via .calder-specialist-cta class",
+      "text_sources": "section.settings heading/text/button_text/phone/email",
+      "status": "CORRECT — background_image available via Theme Editor; navy fallback if unset"
+    },
+    "footer": {
+      "component": "layout/theme.liquid (line 150: {% section 'footer' %})",
+      "shared_component": "sections/footer.liquid — global shared, used by homepage and all templates",
+      "data_source": "Theme settings / section settings",
+      "status": "CORRECT — globally shared, not PDP-specific"
+    }
+  },
+  "generic_fallbacks_removed": [
+    "calder-specs.liquid: replaced 'product-1' placeholder_svg_tag with neutral navy 'Engineering Image' label",
+    "calder-specs.liquid: removed duplicate 'Engineered to Perform' heading (h2 at line 35, kept h3 inside panel)",
+    "calder-specialist-cta.liquid: added background_image image_picker setting previously missing",
+    "calder-gallery.liquid: added gallery_image_1-4 image_picker settings + Liquid logic to render them"
+  ],
+  "source_comment_cleanup": "All Calder-specific files verified: zero {# markers. The only remaining {# occurrences are in index-instagram.liquid (Dawn template variables, not debug comments).",
+  "missing_assets": [
+    "engineering_image: must be uploaded by merchant via Theme Editor (section engineering settings)",
+    "real_world gallery_image_1-4: should be uploaded by merchant via Theme Editor",
+    "specialist_cta background_image: should be uploaded by merchant via Theme Editor"
+  ],
+  "template": "templates/product.calder.json",
+  "layout": "layout/theme.liquid (handles shared header/footer globally)"
+}

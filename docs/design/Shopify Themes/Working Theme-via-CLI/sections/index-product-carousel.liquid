@@ -150,6 +150,7 @@
 
   <div class="{% render 'section-class', layout: layout %}" {% render 'section-style', layout: layout %}>
     <div class="{% render 'section-container-class', layout: layout %}">
+      {{ 'calder-product-card.css' | asset_url | stylesheet_tag }}
 
       {%- if background != false -%}
         <div class="lazyload bg-contain bg-top py-6" {{ background }} data-sizes="auto">
@@ -510,7 +511,7 @@
               <div class="swiper-container swiper-container-prd-carousel swiper-container-center">
                 <div class="swiper-wrapper">
                   {%- for product in collections[section.settings.collection].products limit: section.settings.limit -%}
-                    <div class="swiper-slide">{% render 'product-card', product: product, collection: section.settings.collection %}</div>
+                    <div class="swiper-slide">{% render 'calder-product-card', product: product, collection: section.settings.collection %}</div>
                   {%- else -%}
                     {%- for i in (1..section.settings.limit) -%}
                       {% render 'product-placeholder' %}

@@ -7,7 +7,7 @@
 {%- assign catalog_arr = catalog_json | parse_json -%}
 {%- assign count = catalog_arr | size -%}
 {%- assign first_handle = catalog_arr[0].handle -%}
-<script type="application/json" id="fitment-results-json">
+<script type="application/json" id="hf-results-json">
 {
   "debug": true,
   "catalog_count": {{ count }},

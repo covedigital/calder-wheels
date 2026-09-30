@@ -1,0 +1,194 @@
+{
+  "schema_version": "1.0",
+  "project": "Calder Wheels",
+  "artifact_type": "visual_correction",
+  "component": "Calder Find Your Fit / Fitment Finder",
+  "qa_type": "IMPLEMENTATION_CORRECTION_PASS",
+  "baseline": [
+    "docs/design/visual-inspector/component-specs/fitment/fitment.visual-spec.json",
+    "docs/design/visual-inspector/component-specs/fitment/fitment.visual-spec.md",
+    "approved Find Your Fit reference"
+  ],
+  "renders": [
+    "fitment.by-vehicle.desktop.v1.png",
+    "fitment.by-wheel-style.desktop.v1.png",
+    "fitment.mobile.v1.png"
+  ],
+  "status": "REVISION_REQUIRED",
+  "hero_competition_assessment": "Does not compete with hero; desktop is materially under-scaled/compressed relative to baseline.",
+  "severity_counts": {
+    "CRITICAL": 0,
+    "HIGH": 6,
+    "MEDIUM": 5,
+    "LOW": 1
+  },
+  "corrections": [
+    {
+      "id": "FIT-QA-001",
+      "render_state_affected": [
+        "DESKTOP_BY_VEHICLE",
+        "DESKTOP_BY_WHEEL_STYLE"
+      ],
+      "severity": "HIGH",
+      "baseline_requirement": "Desktop shell approximately 92\u201393% of 2048px reference / ~1904px, aligned to established Calder container.",
+      "observed_implementation": "Shell is roughly 1440px / ~70% viewport.",
+      "discrepancy": "Desktop component is ~450\u2013470px too narrow, compressing all internal proportions.",
+      "recommended_correction": "Restore established Calder container relationship; at 2048px QA width target ~1900px shell / ~74px gutters unless verified accepted container token differs. Do not create a new global container.",
+      "measurement_evidence_status": "ESTIMATED"
+    },
+    {
+      "id": "FIT-QA-002",
+      "render_state_affected": [
+        "DESKTOP_BY_VEHICLE",
+        "DESKTOP_BY_WHEEL_STYLE"
+      ],
+      "severity": "HIGH",
+      "baseline_requirement": "Tabs approximately 90\u201394px high with substantial attached premium cap geometry.",
+      "observed_implementation": "Tabs are approximately 43\u201345px high and compact.",
+      "discrepancy": "Tabs are materially underscaled.",
+      "recommended_correction": "Increase desktop tabs toward 88\u201394px height and restore proportional horizontal padding/width; preserve active bronze indicator and inactive cool-gray state.",
+      "measurement_evidence_status": "ESTIMATED"
+    },
+    {
+      "id": "FIT-QA-003",
+      "render_state_affected": [
+        "DESKTOP_BY_VEHICLE",
+        "DESKTOP_BY_WHEEL_STYLE"
+      ],
+      "severity": "HIGH",
+      "baseline_requirement": "Main shell approximately 370\u2013372px excluding tabs; ~462px including tabs.",
+      "observed_implementation": "Main shell approximately 275\u2013300px.",
+      "discrepancy": "Vertical composition is compressed and loses intentional negative space.",
+      "recommended_correction": "Increase shell toward ~370px excluding tabs; restore top/bottom padding and header-to-control breathing room rather than merely stretching controls.",
+      "measurement_evidence_status": "ESTIMATED"
+    },
+    {
+      "id": "FIT-QA-004",
+      "render_state_affected": [
+        "ALL"
+      ],
+      "severity": "HIGH",
+      "baseline_requirement": "FIND YOUR FIT uses approved Calder typography, ~52\u201358px desktop, 700\u2013800 visual weight; supporting UI uses approved supporting typography.",
+      "observed_implementation": "Heading and much UI appear in a different high-contrast serif/display treatment; desktop heading ~47\u201350px.",
+      "discrepancy": "Typography materially changes the approved premium technical character.",
+      "recommended_correction": "Use approved Calder/theme font tokens; target ~52\u201358px desktop heading with tight ~1.0 line height, white FIND YOUR and bronze FIT; correct labels/selects/status/actions to approved supporting typography.",
+      "measurement_evidence_status": "VISUAL_OBSERVATION + ESTIMATED"
+    },
+    {
+      "id": "FIT-QA-005",
+      "render_state_affected": [
+        "DESKTOP_BY_VEHICLE",
+        "DESKTOP_BY_WHEEL_STYLE"
+      ],
+      "severity": "HIGH",
+      "baseline_requirement": "Shared low-contrast wheel technical drawing plus contour/flow detail at ~8\u201322% effective opacity.",
+      "observed_implementation": "By Vehicle artwork is barely visible; By Wheel Style shows a large empty/broken-looking rectangular image region.",
+      "discrepancy": "Approved technical artwork is not reproduced consistently and Wheel Style exposes an apparent asset/container failure.",
+      "recommended_correction": "Restore one shared decorative technical-art layer in both modes; remove visible empty/broken image box; position wheel upper-middle/right with subdued contour detail and navy fade.",
+      "measurement_evidence_status": "OBSERVED + ESTIMATED"
+    },
+    {
+      "id": "FIT-QA-006",
+      "render_state_affected": [
+        "DESKTOP_BY_VEHICLE",
+        "DESKTOP_BY_WHEEL_STYLE"
+      ],
+      "severity": "MEDIUM",
+      "baseline_requirement": "Desktop selects approximately 70\u201372px high with consistent labels, values, borders and alignment.",
+      "observed_implementation": "Controls approximately 55\u201357px high.",
+      "discrepancy": "Selectors are materially smaller/denser than baseline.",
+      "recommended_correction": "Increase desktop selects to ~70\u201372px and scale padding/value typography accordingly; use same dimensions for Wheel Type/Diameter/Finish/Style.",
+      "measurement_evidence_status": "ESTIMATED"
+    },
+    {
+      "id": "FIT-QA-007",
+      "render_state_affected": [
+        "DESKTOP_BY_VEHICLE",
+        "DESKTOP_BY_WHEEL_STYLE"
+      ],
+      "severity": "MEDIUM",
+      "baseline_requirement": "FIND WHEELS approximately 360\u2013370px \u00d7 78\u201382px at reference desktop scale.",
+      "observed_implementation": "CTA approximately 190px \u00d7 55px.",
+      "discrepancy": "Primary action is significantly undersized.",
+      "recommended_correction": "Increase CTA toward 360\u2013370px \u00d7 78\u201382px at reference scale, preserving near-black fill, restrained ~2px bronze border, 8\u201310px radius and arrow.",
+      "measurement_evidence_status": "ESTIMATED"
+    },
+    {
+      "id": "FIT-QA-008",
+      "render_state_affected": [
+        "DESKTOP_BY_VEHICLE",
+        "DESKTOP_BY_WHEEL_STYLE"
+      ],
+      "severity": "HIGH",
+      "baseline_requirement": "Selected-vehicle region roughly rightmost 23\u201324%, ~400\u2013420px at reference scale, with generous padding, strong vehicle typography, status and separated lower actions.",
+      "observed_implementation": "Region is ~230px wide and compressed; Wheel Style visibly duplicates/concatenates the vehicle name.",
+      "discrepancy": "Status panel proportions diverge and Wheel Style has a content-rendering defect.",
+      "recommended_correction": "Restore ~76/24 finder/status relationship as shell expands, targeting ~400\u2013420px status width at 2048px reference scale; restore padding/typography and fix duplicate vehicle name so it appears once.",
+      "measurement_evidence_status": "OBSERVED + ESTIMATED"
+    },
+    {
+      "id": "FIT-QA-009",
+      "render_state_affected": [
+        "DESKTOP_BY_VEHICLE",
+        "DESKTOP_BY_WHEEL_STYLE"
+      ],
+      "severity": "MEDIUM",
+      "baseline_requirement": "Thin outline, ~16\u201318px radius and broad soft shadow into light content.",
+      "observed_implementation": "Radius/outline present but elevation is weak.",
+      "discrepancy": "Bottom transition reads flatter than approved.",
+      "recommended_correction": "Preserve border/radius and strengthen only broad soft bottom elevation toward ~18\u201332px offset / 35\u201355px blur / low-opacity black; no hard/glowing shadow.",
+      "measurement_evidence_status": "ESTIMATED"
+    },
+    {
+      "id": "FIT-QA-010",
+      "render_state_affected": [
+        "ALL"
+      ],
+      "severity": "MEDIUM",
+      "baseline_requirement": "Approved composition contains intentional negative space and no Popular Searches row.",
+      "observed_implementation": "Popular Searches links appear beneath controls.",
+      "discrepancy": "Unapproved visual element consumes approved spacing.",
+      "recommended_correction": "Remove Popular Searches from this component for visual conformance unless independently approved as a required feature.",
+      "measurement_evidence_status": "OBSERVED"
+    },
+    {
+      "id": "FIT-QA-011",
+      "render_state_affected": [
+        "MOBILE"
+      ],
+      "severity": "MEDIUM",
+      "baseline_requirement": "Mobile priority: tabs \u2192 heading/copy \u2192 inputs \u2192 CTA \u2192 selected vehicle; near/full-width practical controls, no overflow, ~44px+ touch targets; artwork may be hidden.",
+      "observed_implementation": "Ordering, 2\u00d72 controls, CTA and no-overflow behavior are broadly sound; artwork is suppressed. Typography remains mismatched and selected-vehicle area is dense.",
+      "discrepancy": "Core mobile structure conforms to assumptions; shared typography/status spacing still diverge.",
+      "recommended_correction": "Retain mobile structural approach and 2\u00d72 grid. Correct typography, preserve ~44px+ targets, and add sufficient selected-vehicle padding/readability. Do not restore art if it harms readability.",
+      "measurement_evidence_status": "OBSERVED + ASSUMPTION"
+    },
+    {
+      "id": "FIT-QA-012",
+      "render_state_affected": [
+        "ALL"
+      ],
+      "severity": "LOW",
+      "baseline_requirement": "Bronze restrained, green confirmation-only, fitment visually subordinate to hero.",
+      "observed_implementation": "Color hierarchy is broadly compliant and fitment does not overpower hero.",
+      "discrepancy": "No major hierarchy failure; desktop is under-scaled rather than over-dominant.",
+      "recommended_correction": "Preserve restrained colors while correcting dimensions; do not add brightness, glow or decorative dominance.",
+      "measurement_evidence_status": "OBSERVED"
+    }
+  ],
+  "priority": [
+    "FIT-QA-001",
+    "FIT-QA-003",
+    "FIT-QA-002",
+    "FIT-QA-004",
+    "FIT-QA-005",
+    "FIT-QA-008",
+    "FIT-QA-006",
+    "FIT-QA-007",
+    "FIT-QA-010",
+    "FIT-QA-009",
+    "FIT-QA-011",
+    "FIT-QA-012"
+  ],
+  "implementation_boundary": "Visual corrections only. Preserve working functionality and use REUSE \u2192 RESTYLE \u2192 EXTEND \u2192 CREATE."
+}

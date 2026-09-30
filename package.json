@@ -1,0 +1,21 @@
+{
+  "name": "calder-wheels",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "puppeteer": "^25.12.0"
+  },
+  "devDependencies": {
+    "pngjs": "^7.0.0"
+  }
+}

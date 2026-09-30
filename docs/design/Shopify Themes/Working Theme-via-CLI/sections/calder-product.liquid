@@ -1,0 +1,440 @@
+{% comment %}theme-check-disable NestedSnippet, ImgLazyLoading{% endcomment %}
+{{ 'calder-product.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  render 'dealer-context'
+  assign section_id = section.id
+  assign current_variant = product.selected_or_first_available_variant | default: product.variants.first
+  assign featured_media = product.selected_variant.featured_media | default: product.featured_media
+
+  assign design_code = product.metafields.custom.design_code.value
+  assign design_nickname = product.metafields.custom.design_nickname.value
+  assign series = product.metafields.custom.series.value
+  assign construction_type = product.metafields.custom.construction_type.value | default: product.type
+  assign finish_options = product.metafields.custom.finish_options.value
+  assign diameters = product.metafields.custom.diameters.value
+  assign widths = product.metafields.custom.widths.value
+  assign applications = product.metafields.custom.applications.value
+
+  assign form_id = 'calder-form-' | append: section_id
+
+  assign is_configurable = product.metafields.custom.is_configurable.value | default: false
+  unless is_configurable
+    for tag in product.tags
+      if tag == 'configurable'
+        assign is_configurable = true
+        break
+      endif
+    endfor
+  endunless
+-%}
+
+<div class="calder-pdp" data-section-id="{{ section.id }}">
+
+  {%- if section.settings.show_breadcrumbs -%}
+  <nav class="breadcrumbs container" aria-label="Breadcrumb">
+    <a href="{{ routes.root_url }}">Home</a>
+    <span> / </span>
+    {%- if collection -%}
+      <a href="{{ collection.url }}">{{ collection.title }}</a>
+      <span> / </span>
+    {%- endif -%}
+    <span>{{ product.title | escape }}</span>
+  </nav>
+  {%- endif -%}
+
+  <div class="calder-pdp__hero container">
+    {% comment %} === Gallery === {% endcomment %}
+    <div class="calder-pdp__gallery" data-calder-gallery>
+      <div class="calder-pdp__main-image">
+        {%- if featured_media -%}
+          <img
+            src="{{ featured_media | img_url: '800x' }}"
+            alt="{{ featured_media.alt | escape | default: product.title | escape }}"
+            loading="eager"
+            width="800"
+            height="800"
+            data-calder-main-img
+          >
+        {%- else -%}
+          <div style="color:var(--c-text-dim);font-size:13px;">{{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}</div>
+        {%- endif -%}
+      </div>
+
+      {%- if product.media.size > 1 -%}
+      <div class="calder-pdp__thumbs" data-calder-thumbs>
+        {%- for media in product.media -%}
+          {%- if media.media_type == 'image' -%}
+            <div class="calder-pdp__thumb{% if forloop.first %} is-active{% endif %}" data-calder-thumb data-media-id="{{ media.id }}">
+              <img
+                src="{{ media | img_url: '100x' }}"
+                alt="{{ media.alt | escape }}"
+                loading="lazy"
+                width="80"
+                height="80"
+              >
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+      {%- endif -%}
+    </div>
+
+    {% comment %} === Product Info === {% endcomment %}
+    <div class="calder-pdp__info">
+      {%- if construction_type or design_code or series -%}
+        <div class="calder-pdp__construction">
+          {%- if design_code and design_nickname -%}{{ design_code }} &middot; {{ design_nickname }}{% endif -%}
+          {%- if series -%}&nbsp;&mdash;&nbsp;{{ series }}{% endif -%}
+          {%- if construction_type and design_code == blank -%}{{ construction_type }}{% endif -%}
+        </div>
+      {%- endif -%}
+
+      <h1 class="calder-pdp__title">{{ product.title | escape }}</h1>
+
+      {%- if product.description != blank -%}
+        <p class="calder-pdp__tagline">{{ product.description | strip_html | truncate: 180 }}</p>
+      {%- endif -%}
+
+      {% comment %} === Meta: review + SKU + badge === {% endcomment %}
+      <div class="calder-pdp__meta">
+        {%- if section.settings.show_rating -%}
+          <span class="calder-pdp__stars">★★★★<span style="color:var(--c-border-light);">☆</span></span>
+          <span>({{ product.metafields.reviews.rating_count.value | default: 12 }})</span>
+        {%- endif -%}
+        {%- if current_variant.sku != blank -%}
+          <span class="calder-pdp__sku">SKU: {{ current_variant.sku }}</span>
+        {%- endif -%}
+        {%- if section.settings.show_made_to_order -%}
+          <span class="calder-pdp__badge">Made to Order</span>
+        {%- endif -%}
+      </div>
+
+      {% comment %} === Fitment Status Panel === {% endcomment %}
+      <div class="calder-pdp__fitment calder-pdp__fitment--unset" data-calder-fitment>
+        <svg class="calder-pdp__fitment-icon" width="18" height="18" viewBox="0 0 18 18" fill="none">
+          <rect x="2.5" y="6" width="13" height="8" rx="1.5" stroke="currentColor" stroke-width="1.3"/>
+          <circle cx="6" cy="12" r="1.5" stroke="currentColor" stroke-width="1"/>
+          <circle cx="12" cy="12" r="1.5" stroke="currentColor" stroke-width="1"/>
+          <path d="M4.5 6V5a2 2 0 012-2h5a2 2 0 012 2v1" stroke="currentColor" stroke-width="1.2"/>
+        </svg>
+        <div class="calder-pdp__fitment-text">
+          <span data-calder-fitment-text>{{ section.settings.text_no_vehicle | default: 'Select vehicle to check fitment' }}</span>
+          <span class="calder-pdp__fitment-vehicle" data-calder-fitment-vehicle style="display:none"></span>
+        </div>
+        <button class="calder-pdp__fitment-action" data-calder-fitment-action type="button">
+          <span data-calder-fitment-action-text>{{ section.settings.action_text | default: 'Select Vehicle' }}</span>
+        </button>
+      </div>
+
+      {% comment %} === Configuration Controls === {% endcomment %}
+      <div class="calder-pdp__config">
+        {%- if diameters or widths -%}
+        <div class="calder-pdp__config-row">
+          {%- if diameters -%}
+          <div class="calder-pdp__config-group">
+            <label class="calder-pdp__config-label">Diameter</label>
+            <select class="calder-pdp__config-select" data-calder-diameter>
+              <option value="">{{ section.settings.placeholder_diameter | default: 'Select Diameter' }}</option>
+              {%- for d in diameters -%}
+                <option value="{{ d }}">{{ d }}"</option>
+              {%- endfor -%}
+            </select>
+          </div>
+          {%- endif -%}
+          {%- if widths -%}
+          <div class="calder-pdp__config-group">
+            <label class="calder-pdp__config-label">Width</label>
+            <select class="calder-pdp__config-select" data-calder-width>
+              <option value="">{{ section.settings.placeholder_width | default: 'Select Width' }}</option>
+              {%- for w in widths -%}
+                <option value="{{ w }}">{{ w }}"</option>
+              {%- endfor -%}
+            </select>
+          </div>
+          {%- endif -%}
+        </div>
+        {%- endif -%}
+
+        {%- if finish_options -%}
+        <div class="calder-pdp__config-group">
+          <label class="calder-pdp__config-label">Finish</label>
+          <div class="calder-pdp__finishes" data-calder-finishes>
+            {%- for finish in finish_options -%}
+            <div class="calder-pdp__finish-chip{% if forloop.first %} is-selected{% endif %}" data-calder-finish data-value="{{ finish.value | default: finish }}">
+              {%- if finish.image -%}
+                <img src="{{ finish.image | img_url: '100x' }}" alt="{{ finish.label | default: finish }}" loading="lazy" width="48" height="48">
+              {%- else -%}
+                <span>{{ finish.label | default: finish }}</span>
+              {%- endif -%}
+            </div>
+            {%- endfor -%}
+          </div>
+        </div>
+        {%- endif -%}
+
+        {%- if applications -%}
+        <div class="calder-pdp__config-group">
+          <label class="calder-pdp__config-label">Application</label>
+          <select class="calder-pdp__config-select" data-calder-application>
+            <option value="">{{ section.settings.placeholder_application | default: 'Select Application' }}</option>
+            {%- for app in applications -%}
+              <option value="{{ app }}">{{ app }}</option>
+            {%- endfor -%}
+          </select>
+        </div>
+        {%- endif -%}
+      </div>
+
+      {% comment %} === Price + Qty + Add to Cart === {% endcomment %}
+      <div class="calder-pdp__purchase">
+        <div class="calder-pdp__price" data-calder-price>
+          {{ current_variant.price | money }}
+          {%- if current_variant.compare_at_price > current_variant.price -%}
+            <span class="calder-pdp__price-compare">{{ current_variant.compare_at_price | money }}</span>
+          {%- endif -%}
+        </div>
+
+        <div class="calder-pdp__qty" data-calder-qty>
+          <button class="calder-pdp__qty-btn" data-calder-qty-minus type="button">&minus;</button>
+          <input class="calder-pdp__qty-input" type="number" name="quantity" value="1" min="1" data-calder-qty-input>
+          <button class="calder-pdp__qty-btn" data-calder-qty-plus type="button">+</button>
+        </div>
+
+        {%- form 'product', product, id: form_id, class: 'calder-pdp__form', novalidate: 'novalidate', data-product-form: true -%}
+          <input type="hidden" name="id" value="{{ current_variant.id }}" data-calder-variant-id>
+          <button type="submit" name="add" class="calder-pdp__add-btn" {% unless current_variant.available %}disabled{% endunless %} data-calder-add-btn>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6h8l1.5 7.5a1 1 0 01-1 1h-9a1 1 0 01-1-1L4 6zM6 4a2 2 0 014 0" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span data-calder-add-text>{% if current_variant.available %}Add to Cart{% else %}Sold Out{% endif %}</span>
+          </button>
+        {%- endform -%}
+      </div>
+
+      {% comment %} === Save / Share === {% endcomment %}
+      <div class="calder-pdp__actions">
+        <button class="calder-pdp__action-btn" data-calder-save type="button">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 3.5C6.5 1.5 3.5 1.5 2.5 3.5s0 4 2.5 5.5L8 13l3-4c2.5-1.5 3.5-3.5 2.5-5.5S9.5 1.5 8 3.5z" stroke="currentColor" stroke-width="1.3"/></svg>
+          Save
+        </button>
+        <button class="calder-pdp__action-btn" data-calder-share type="button">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M12 9v3a1 1 0 01-1 1H4a1 1 0 01-1-1V9M8 1v9M6 3.5L8 1l2 2.5" stroke="currentColor" stroke-width="1.3"/></svg>
+          Share
+        </button>
+      </div>
+
+      {% comment %} === Trust Row === {% endcomment %}
+      <div class="calder-pdp__trust">
+        <span class="calder-pdp__trust-item">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M11 7.5V11a1 1 0 01-1 1H4a1 1 0 01-1-1V7.5M7 1v8M5 5.5L7 3l2 2.5" stroke="currentColor" stroke-width="1.2"/></svg>
+          Made to Order
+        </span>
+        <span class="calder-pdp__trust-item">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1.5" y="4.5" width="11" height="8" rx="1.5" stroke="currentColor" stroke-width="1.2"/><path d="M4 4.5V3a2 2 0 014 0v1.5" stroke="currentColor" stroke-width="1.2"/></svg>
+          Secure Checkout
+        </span>
+        <span class="calder-pdp__trust-item">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 5.5h10l-1 6H3l-1-6zM4 5.5V3.5a2 2 0 014 0v2" stroke="currentColor" stroke-width="1.2"/></svg>
+          Free Shipping
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const section = document.querySelector('[data-section-id="{{ section.id }}"]');
+  if (!section) return;
+
+  {% comment %} Gallery thumb switching {% endcomment %}
+  const mainImg = section.querySelector('[data-calder-main-img]');
+  const thumbs = section.querySelectorAll('[data-calder-thumb]');
+  if (thumbs.length && mainImg) {
+    thumbs.forEach(function(thumb) {
+      thumb.addEventListener('click', function() {
+        const newSrc = this.querySelector('img').getAttribute('src').replace('100x', '800x');
+        mainImg.setAttribute('src', newSrc);
+        thumbs.forEach(function(t) { t.classList.remove('is-active'); });
+        this.classList.add('is-active');
+      });
+    });
+  }
+
+  {% comment %} Finish chip selection {% endcomment %}
+  const chips = section.querySelectorAll('[data-calder-finish]');
+  chips.forEach(function(chip) {
+    chip.addEventListener('click', function() {
+      chips.forEach(function(c) { c.classList.remove('is-selected'); });
+      this.classList.add('is-selected');
+    });
+  });
+
+  {% comment %} Quantity controls {% endcomment %}
+  const qtyInput = section.querySelector('[data-calder-qty-input]');
+  const qtyMinus = section.querySelector('[data-calder-qty-minus]');
+  const qtyPlus = section.querySelector('[data-calder-qty-plus]');
+  if (qtyInput && qtyMinus && qtyPlus) {
+    qtyMinus.addEventListener('click', function() {
+      let val = parseInt(qtyInput.value, 10) || 1;
+      if (val > 1) qtyInput.value = val - 1;
+    });
+    qtyPlus.addEventListener('click', function() {
+      qtyInput.value = (parseInt(qtyInput.value, 10) || 1) + 1;
+    });
+  }
+
+  {% comment %} Fitment panel integration with existing fitment system {% endcomment %}
+  const fitmentPanel = section.querySelector('[data-calder-fitment]');
+  if (fitmentPanel) {
+    const action = fitmentPanel.querySelector('[data-calder-fitment-action]');
+    const text = fitmentPanel.querySelector('[data-calder-fitment-text]');
+    const vehicle = fitmentPanel.querySelector('[data-calder-fitment-vehicle]');
+    const actionText = fitmentPanel.querySelector('[data-calder-fitment-action-text]');
+
+    document.addEventListener('calder:vehicle-selected', function(e) {
+      const v = e.detail;
+      if (v && v.year && v.make) {
+        fitmentPanel.classList.remove('calder-pdp__fitment--unset');
+        fitmentPanel.classList.add('calder-pdp__fitment--confirmed');
+        text.textContent = 'Fits your ';
+        vehicle.textContent = v.year + ' ' + v.make + ' ' + (v.model || '');
+        vehicle.style.display = 'inline';
+        actionText.textContent = 'Change Vehicle';
+      }
+    });
+
+    document.addEventListener('calder:vehicle-cleared', function() {
+      fitmentPanel.classList.add('calder-pdp__fitment--unset');
+      fitmentPanel.classList.remove('calder-pdp__fitment--confirmed');
+      text.textContent = 'Select vehicle to check fitment';
+      vehicle.style.display = 'none';
+      actionText.textContent = 'Select Vehicle';
+    });
+
+    try {
+      var saved = localStorage.getItem('calder_selected_vehicle');
+      if (saved) {
+        var v = JSON.parse(saved);
+        if (v && v.year && v.make) {
+          fitmentPanel.classList.remove('calder-pdp__fitment--unset');
+          fitmentPanel.classList.add('calder-pdp__fitment--confirmed');
+          text.textContent = 'Fits your ';
+          vehicle.textContent = v.year + ' ' + v.make + ' ' + (v.model || '');
+          vehicle.style.display = 'inline';
+          actionText.textContent = 'Change Vehicle';
+        }
+      }
+    } catch(e) {}
+
+    if (action) {
+      action.addEventListener('click', function() {
+        document.dispatchEvent(new CustomEvent('calder:open-fitment'));
+        var fs = document.querySelector('.section--fitment-finder, .fitment-finder');
+        if (fs) fs.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    }
+  }
+
+  {% comment %} AJAX add to cart {% endcomment %}
+  const form = section.querySelector('[data-product-form]');
+  if (form) {
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      var fd = new FormData(form);
+      var btn = form.querySelector('[data-calder-add-btn]');
+      var txt = form.querySelector('[data-calder-add-text]');
+      if (btn) btn.disabled = true;
+      if (txt) txt.textContent = 'Adding...';
+      fetch('/cart/add.js', { method: 'POST', body: fd, headers: { 'X-Requested-With': 'XMLHttpRequest' } })
+        .then(function(r) { return r.json(); })
+        .then(function() {
+          if (txt) txt.textContent = 'Added!';
+          if (btn) setTimeout(function() { btn.disabled = false; }, 1500);
+          document.dispatchEvent(new CustomEvent('cart:updated'));
+          var hc = document.querySelector('[data-header-cart]');
+          if (hc) hc.dispatchEvent(new Event('cart:refresh'));
+        })
+        .catch(function() {
+          if (txt) txt.textContent = 'Add to Cart';
+          if (btn) btn.disabled = false;
+        });
+    });
+  }
+});
+</script>
+
+{% schema %}
+{
+  "name": "Calder Product",
+  "tag": "section",
+  "class": "calder-pdp-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_breadcrumbs",
+      "label": "Show breadcrumbs",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_rating",
+      "label": "Show rating",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_made_to_order",
+      "label": "Show 'Made to Order' badge",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Fitment Panel"
+    },
+    {
+      "type": "text",
+      "id": "text_no_vehicle",
+      "label": "Text when no vehicle",
+      "default": "Select vehicle to check fitment"
+    },
+    {
+      "type": "text",
+      "id": "action_text",
+      "label": "Action button text",
+      "default": "Select Vehicle"
+    },
+    {
+      "type": "header",
+      "content": "Placeholder Text"
+    },
+    {
+      "type": "text",
+      "id": "placeholder_diameter",
+      "label": "Diameter placeholder",
+      "default": "Select Diameter"
+    },
+    {
+      "type": "text",
+      "id": "placeholder_width",
+      "label": "Width placeholder",
+      "default": "Select Width"
+    },
+    {
+      "type": "text",
+      "id": "placeholder_application",
+      "label": "Application placeholder",
+      "default": "Select Application"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Calder Product",
+      "category": "Calder"
+    }
+  ]
+}
+{% endschema %}

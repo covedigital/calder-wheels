@@ -1,0 +1,138 @@
+{
+  "schema_version": "product.visual-correction.v1",
+  "project": "Calder Wheels",
+  "page": "Product Detail Page",
+  "qa_iteration": 1,
+  "state": "REVISION_REQUIRED",
+  "severity": "MAJOR_VISUAL_DIVERGENCE",
+  "authorities": {
+    "visual": "Calder - 3 - Product(3).png",
+    "functional": "Calder-existing-product-reference(1).png",
+    "renders": [
+      "product.desktop.v1.png",
+      "product.tablet.v1.png",
+      "product.mobile.v1.png"
+    ],
+    "prior_spec": [
+      "product.visual-spec.v1.json",
+      "product.visual-spec.v1.md"
+    ]
+  },
+  "diagnosis": [
+    {
+      "id": "PDP-V1-001",
+      "priority": "P0",
+      "area": "global visual system",
+      "issue": "Implementation uses a near-black/dark PDP treatment while the approved mockup is predominantly white/light with navy typography and gold accents.",
+      "correction": "Remove the page-wide dark reinterpretation. Match the approved mockup's white/light content surfaces, navy typography, subtle light-gray rules/panels, gold accents, and dark styling only where explicitly shown such as CTA/footer imagery."
+    },
+    {
+      "id": "PDP-V1-002",
+      "priority": "P0",
+      "area": "product media",
+      "issue": "Hero and thumbnails show unrelated scenic placeholder photography rather than wheel/product imagery represented by the approved mockup and product data.",
+      "correction": "Do not introduce generic/scenic placeholders. Render the actual Shopify product media dynamically. If source product media is unavailable, preserve the product media slot without inventing unrelated imagery. The hero must visually read as a wheel PDP."
+    },
+    {
+      "id": "PDP-V1-003",
+      "priority": "P0",
+      "area": "desktop composition",
+      "issue": "Desktop composition, scale, spacing and hierarchy substantially differ from the approved mockup.",
+      "correction": "Reconstruct the top PDP as the approved light two-column composition: large gallery left and product/configuration panel right, with comparable relative widths, density and vertical alignment. Use the approved 1178px Calder container baseline."
+    },
+    {
+      "id": "PDP-V1-004",
+      "priority": "P0",
+      "area": "product information/configuration",
+      "issue": "Product controls are visually compressed and reorganized compared with the approved configuration card.",
+      "correction": "Match the approved hierarchy: title/construction/subtitle/description, review+SKU row, fitment-confirmed box, Diameter+Width row, Finish with swatches, Vehicle Fitment/Application, Quantity+price, full-width gold Add to Cart, Save/Share, trust row."
+    },
+    {
+      "id": "PDP-V1-005",
+      "priority": "P0",
+      "area": "Build Your Wheel",
+      "issue": "Existing configurator functionality was retained but visually presented as a large separate dark section that dominates the page and does not integrate with the approved design.",
+      "correction": "Preserve every existing configurator binding and action, but visually migrate it into the approved light product system. The approved Choose Your Finish section is the primary visual model. Multi-part Center/Barrel/Hardware choices may remain, but must be integrated as a refined Calder configurator rather than retaining the old/reference-page visual structure."
+    },
+    {
+      "id": "PDP-V1-006",
+      "priority": "P0",
+      "area": "Fitment",
+      "issue": "Full Fitment Finder remains a large standalone dark band rather than being visually integrated with the approved product flow.",
+      "correction": "Preserve fitment logic. Use the approved compact Fits Your Vehicle state in the hero. Full selector should appear as the change/unselected workflow, styled in the approved light Calder system and not dominate the normal confirmed state."
+    },
+    {
+      "id": "PDP-V1-007",
+      "priority": "P1",
+      "area": "specifications/engineering",
+      "issue": "Specs and engineering treatment is structurally and visually different from the approved table + image-led Engineered to Perform panel.",
+      "correction": "Match the approved section: left light specifications table; right large manufacturing image/background panel with heading, supporting copy and four capability icons. Keep data dynamic/configurable."
+    },
+    {
+      "id": "PDP-V1-008",
+      "priority": "P0",
+      "area": "missing finish showcase",
+      "issue": "Approved Available Finishes / Choose Your Finish wheel carousel is not represented with comparable fidelity.",
+      "correction": "Implement the approved horizontal wheel-finish showcase using actual configurable/product finish media where available, selected gold outline, labels, and carousel behavior. Bind to existing configurator state where applicable."
+    },
+    {
+      "id": "PDP-V1-009",
+      "priority": "P1",
+      "area": "real-world gallery",
+      "issue": "Gallery is rendered as empty dark placeholders.",
+      "correction": "Use configured Shopify section images/product lifestyle media. Match the approved four-wide landscape image treatment and heading/subheading/View Gallery hierarchy. Do not ship empty dark boxes as the intended design."
+    },
+    {
+      "id": "PDP-V1-010",
+      "priority": "P0",
+      "area": "recommendations",
+      "issue": "Recommendation cards do not visually match the approved B1 Calder product card and use unrelated placeholder photography.",
+      "correction": "Reuse the actual approved shared B1 component and dynamic recommended wheel products/media. Match the approved white card treatment shown on the product mockup."
+    },
+    {
+      "id": "PDP-V1-011",
+      "priority": "P1",
+      "area": "specialist CTA/footer",
+      "issue": "Specialist CTA is a minimal centered block and approved branded CTA/footer composition is absent from the render.",
+      "correction": "Reuse the established homepage Calder specialist CTA/footer pattern: dark navy image-led band, left-aligned heading/copy, gold Get in Touch action and contact methods, followed by approved global footer."
+    },
+    {
+      "id": "PDP-V1-012",
+      "priority": "P0",
+      "area": "responsive",
+      "issue": "Tablet render behaves like an extremely narrow/mobile layout rather than a deliberate tablet adaptation; mobile typography and content density are also excessively compressed.",
+      "correction": "Implement explicit desktop/tablet/mobile responsive rules. 768px must read as tablet, not a 241px squeezed desktop capture. At 390px use single-column hierarchy with full usable viewport width, readable typography and horizontal carousels where appropriate."
+    },
+    {
+      "id": "PDP-V1-013",
+      "priority": "P0",
+      "area": "implementation strategy",
+      "issue": "The 'native Lumia foundation + CSS restyle' decision constrained fidelity and allowed Lumia structure/visual assumptions to override the approved mockup.",
+      "correction": "Native functionality may be reused, but native markup is not authoritative. Refactor/wrap/reorder markup or introduce Calder-specific presentation sections/snippets when required for fidelity, while preserving underlying Shopify/configurator/fitment behavior."
+    }
+  ],
+  "non_negotiables": [
+    "Do not change the approved mockup into a dark theme.",
+    "Do not use unrelated scenic/stock placeholder images for product wheels or recommendation products.",
+    "Do not delete or rewrite working Build Your Wheel business logic.",
+    "Do not delete or rewrite working Fitment business logic.",
+    "Do not let native Lumia markup prevent matching the approved Calder mockup.",
+    "Do not duplicate configurator or fitment engines.",
+    "Use the approved homepage header/footer and approved B1 product card."
+  ],
+  "qa_viewports": [
+    1440,
+    768,
+    390
+  ],
+  "exit_criteria": [
+    "Desktop immediately reads as the same design system/composition as the approved product mockup.",
+    "Light/white PDP color system matches reference.",
+    "Actual wheel/product media replaces unrelated scenic placeholders.",
+    "Hero configuration hierarchy closely matches approved mockup.",
+    "Build Your Wheel and Fitment remain functional but are visually integrated.",
+    "Specifications/engineering, finish showcase, real-world gallery, recommendations, specialist CTA and footer match approved hierarchy.",
+    "Tablet and mobile are intentional responsive adaptations.",
+    "No new Theme Check errors and functional smoke tests pass."
+  ]
+}

@@ -1,0 +1,138 @@
+<section class="collection-hero" id="collection-hero-{{ section.id }}">
+  <div class="collection-hero__media" aria-hidden="true">
+    {% if section.settings.hero_image != blank %}
+      {{ section.settings.hero_image | image_url: width: 2400 | image_tag: widths: '768, 1200, 1600, 1920, 2400', loading: 'eager', fetchpriority: 'high', class: 'collection-hero__image', alt: '' }}
+    {% else %}
+      <div class="collection-hero__image-placeholder"></div>
+    {% endif %}
+  </div>
+
+  <div class="collection-hero__overlay" aria-hidden="true"></div>
+
+  <div class="collection-hero__container">
+    <div class="collection-hero__content">
+      {% if section.settings.eyebrow != blank %}
+        <div class="collection-hero__eyebrow">{{ section.settings.eyebrow }}</div>
+      {% endif %}
+
+      {% if section.settings.heading != blank %}
+        <h1 class="collection-hero__heading">{{ section.settings.heading }}</h1>
+      {% endif %}
+
+      {% if section.settings.body_text != blank %}
+        <div class="collection-hero__body">{{ section.settings.body_text }}</div>
+      {% endif %}
+    </div>
+
+    <div class="collection-hero__standards">
+      {% if section.settings.standards_heading != blank %}
+        <div class="collection-hero__standards-heading">{{ section.settings.standards_heading }}</div>
+      {% endif %}
+      <div class="collection-hero__standards-divider" aria-hidden="true"></div>
+      <div class="collection-hero__standard">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <path d="M7 1L9 5L13 5.5L10 8.5L10.5 13L7 11L3.5 13L4 8.5L1 5.5L5 5L7 1Z" fill="#C2A48A"/>
+        </svg>
+        <span>{{ section.settings.standard_1 | default: 'OEM Quality' }}</span>
+      </div>
+      <div class="collection-hero__standard">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <path d="M7 1L9 5L13 5.5L10 8.5L10.5 13L7 11L3.5 13L4 8.5L1 5.5L5 5L7 1Z" fill="#C2A48A"/>
+        </svg>
+        <span>{{ section.settings.standard_2 | default: 'TUV Certified' }}</span>
+      </div>
+      <div class="collection-hero__standard">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <path d="M7 1L9 5L13 5.5L10 8.5L10.5 13L7 11L3.5 13L4 8.5L1 5.5L5 5L7 1Z" fill="#C2A48A"/>
+        </svg>
+        <span>{{ section.settings.standard_3 | default: 'Built to Order' }}</span>
+      </div>
+    </div>
+  </div>
+
+  {% if section.settings.decorative_image != blank %}
+    <div class="collection-hero__decorative" aria-hidden="true">
+      {{ section.settings.decorative_image | image_url: width: 800 | image_tag: widths: '400, 600, 800', loading: 'lazy', class: 'collection-hero__decorative-image', alt: '' }}
+    </div>
+  {% endif %}
+</section>
+
+{% schema %}
+{
+  "name": "Collection Hero",
+  "tag": "section",
+  "class": "section section--collection-hero",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Hero Background"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Scenic background image"
+    },
+    {
+      "type": "image_picker",
+      "id": "decorative_image",
+      "label": "Decorative wheel/vehicle image (right side)"
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "OUR COLLECTION"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "default": "FORGED <span>WHEELS</span>"
+    },
+    {
+      "type": "textarea",
+      "id": "body_text",
+      "label": "Body text",
+      "default": "Every Calder wheel is precision engineered from the finest materials. Browse our complete collection of forged monoblock and 3-piece wheels."
+    },
+    {
+      "type": "header",
+      "content": "Standards"
+    },
+    {
+      "type": "text",
+      "id": "standards_heading",
+      "label": "Standards heading",
+      "default": "DRIVEN BY HIGHER STANDARDS"
+    },
+    {
+      "type": "text",
+      "id": "standard_1",
+      "label": "Standard 1",
+      "default": "OEM Quality"
+    },
+    {
+      "type": "text",
+      "id": "standard_2",
+      "label": "Standard 2",
+      "default": "TUV Certified"
+    },
+    {
+      "type": "text",
+      "id": "standard_3",
+      "label": "Standard 3",
+      "default": "Built to Order"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collection Hero",
+      "category": "Collection"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,112 @@
+<section class="collection-help-cta" id="collection-help-cta-{{ section.id }}">
+  <div class="collection-help-cta__media" aria-hidden="true">
+    {% if section.settings.background_image != blank %}
+      {{ section.settings.background_image | image_url: width: 1200 | image_tag: widths: '600, 900, 1200', loading: 'lazy', class: 'collection-help-cta__image', alt: '' }}
+    {% else %}
+      <div class="collection-help-cta__image-placeholder"></div>
+    {% endif %}
+  </div>
+
+  <div class="collection-help-cta__overlay" aria-hidden="true"></div>
+
+  <div class="collection-help-cta__content">
+    {% if section.settings.heading != blank %}
+      <h2 class="collection-help-cta__heading">{{ section.settings.heading }}</h2>
+    {% endif %}
+
+    {% if section.settings.body_text != blank %}
+      <div class="collection-help-cta__body">{{ section.settings.body_text }}</div>
+    {% endif %}
+
+    <div class="collection-help-cta__actions">
+      {% if section.settings.primary_cta_text != blank %}
+        <a href="{{ section.settings.primary_cta_url }}" class="collection-help-cta__btn-primary">
+          {{ section.settings.primary_cta_text }}
+        </a>
+      {% endif %}
+      {% if section.settings.secondary_cta_text != blank %}
+        <a href="{{ section.settings.secondary_cta_url }}" class="collection-help-cta__btn-secondary">
+          {{ section.settings.secondary_cta_text }}
+        </a>
+      {% endif %}
+    </div>
+  </div>
+
+  {% if section.settings.decorative_image != blank %}
+    <div class="collection-help-cta__decorative" aria-hidden="true">
+      {{ section.settings.decorative_image | image_url: width: 400 | image_tag: widths: '200, 400', loading: 'lazy', class: 'collection-help-cta__decorative-image', alt: '' }}
+    </div>
+  {% endif %}
+</section>
+
+{% schema %}
+{
+  "name": "Collection Help CTA",
+  "tag": "section",
+  "class": "section--collection-help-cta",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Background"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background image"
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "default": "NEED HELP FINDING<br>THE RIGHT SETUP?"
+    },
+    {
+      "type": "textarea",
+      "id": "body_text",
+      "label": "Body text",
+      "default": "Our wheel specialists can help you find the perfect fitment for your vehicle."
+    },
+    {
+      "type": "text",
+      "id": "primary_cta_text",
+      "label": "Primary CTA",
+      "default": "Find Your Fit"
+    },
+    {
+      "type": "url",
+      "id": "primary_cta_url",
+      "label": "Primary CTA link"
+    },
+    {
+      "type": "text",
+      "id": "secondary_cta_text",
+      "label": "Secondary CTA",
+      "default": "Contact a Wheel Specialist"
+    },
+    {
+      "type": "url",
+      "id": "secondary_cta_url",
+      "label": "Secondary CTA link"
+    },
+    {
+      "type": "header",
+      "content": "Decorative"
+    },
+    {
+      "type": "image_picker",
+      "id": "decorative_image",
+      "label": "Decorative wheel image"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collection Help CTA",
+      "category": "Collection"
+    }
+  ]
+}
+{% endschema %}

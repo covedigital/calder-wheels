@@ -1,0 +1,73 @@
+{% comment %}theme-check-disable NestedSnippet{% endcomment %}
+{%- liquid
+  assign finishes = section.settings.finishes
+  if product.metafields.custom.available_finishes.value
+    assign finishes = product.metafields.custom.available_finishes.value
+  endif
+-%}
+
+<div class="calder-finishes">
+  <div class="container">
+    <div class="calder-eyebrow">Available Finishes</div>
+    <h2 class="calder-finishes__heading">{{ section.settings.heading | default: 'Choose Your Finish' }}</h2>
+    <div class="calder-finishes__carousel" data-calder-finishes-carousel>
+      {%- if finishes -%}
+        {%- for finish in finishes -%}
+          <div class="calder-finishes__card{% if forloop.first %} is-selected{% endif %}" data-calder-finish-card>
+            <div class="calder-finishes__card-media">
+              {%- if finish.image -%}
+                <img src="{{ finish.image | img_url: '400x' }}" alt="{{ finish.label | default: finish.name }}" loading="lazy" width="220" height="220">
+              {%- else -%}
+                <div style="color:var(--c-text-dim);font-size:11px;text-align:center;padding:20px;">{{ finish.label | default: finish.name | default: finish }}</div>
+              {%- endif -%}
+            </div>
+            <div class="calder-finishes__card-label">{{ finish.label | default: finish.name | default: finish }}</div>
+            {%- if finish.price -%}
+              <div class="calder-finishes__card-meta">{{ finish.price | money }}</div>
+            {%- endif -%}
+          </div>
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var carousel = document.querySelector('[data-calder-finishes-carousel]');
+  if (!carousel) return;
+  var cards = carousel.querySelectorAll('[data-calder-finish-card]');
+  cards.forEach(function(card) {
+    card.addEventListener('click', function() {
+      cards.forEach(function(c) { c.classList.remove('is-selected'); });
+      this.classList.add('is-selected');
+    });
+  });
+});
+</script>
+
+{% schema %}
+{
+  "name": "Calder Available Finishes",
+  "tag": "section",
+  "class": "calder-finishes-wrap",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Available Finishes"
+    },
+    {
+      "type": "paragraph",
+      "content": "Finishes are populated from product metafield 'available_finishes'. Configure in Theme Editor below."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Calder Available Finishes",
+      "category": "Calder"
+    }
+  ]
+}
+{% endschema %}

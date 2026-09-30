@@ -1,0 +1,83 @@
+<section class="home-process" id="home-process-{{ section.id }}">
+  <div class="home-process__container">
+    <div class="home-process__header">
+      <div class="home-process__eyebrow">{{ section.settings.eyebrow | default: 'Our Process' }}</div>
+      <h2 class="home-process__heading">{{ section.settings.heading | default: 'From Concept to Reality' }}</h2>
+      {% if section.settings.subtitle != blank %}
+        <div class="home-process__subtitle">{{ section.settings.subtitle }}</div>
+      {% endif %}
+    </div>
+
+    <div class="home-process__strip">
+      {% for block in section.blocks %}
+        {% if block.type == 'process_image' %}
+          <div class="home-process__item">
+            {% if block.settings.image != blank %}
+              {{ block.settings.image | image_url: width: 400 | image_tag: widths: '400,300,200', loading: 'lazy', alt: block.settings.caption | default: 'Process image' }}
+            {% else %}
+              <div style="width:100%;aspect-ratio:1.2;background:#e0e0e0;"></div>
+            {% endif %}
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Process Gallery",
+  "tag": "section",
+  "class": "section--home-process",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Our Process"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "From Concept to Reality"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "process_image",
+      "name": "Process Image",
+      "limit": 8,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "caption",
+          "label": "Caption"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Process Gallery",
+      "category": "Home",
+      "blocks": [
+        { "type": "process_image" },
+        { "type": "process_image" },
+        { "type": "process_image" },
+        { "type": "process_image" }
+      ]
+    }
+  ]
+}
+{% endschema %}

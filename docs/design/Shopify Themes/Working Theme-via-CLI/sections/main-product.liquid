@@ -504,6 +504,10 @@
                 {% render 'configurator-preview', product: product %}
               </div>
             {%- endif -%}
+          {%- when 'calder_fitment_status' -%}
+            <div class="mt-product-global" {% render 'product-block-style', block: block %} {{ block.shopify_attributes }}>
+              {% render 'calder-fitment-status' %}
+            </div>
           {%- when 'dealer_price' -%}
             {%- if is_dealer and dealer_tier > 0 -%}
               <div class="mt-product-global" {% render 'product-block-style', block: block %} {{ block.shopify_attributes }}>
@@ -2585,6 +2589,50 @@
           "id": "show_quote",
           "label": "Show 'Request Quote' button",
           "default": true
+        }
+      ]
+    },
+    {
+      "type": "calder_fitment_status",
+      "name": "Calder Fitment Status",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "header",
+          "content": "Layout"
+        },
+        {
+          "type": "range",
+          "id": "spacing_blocks",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Vertical space above the section on Desktop",
+          "default": 20
+        },
+        {
+          "type": "checkbox",
+          "id": "use_global_blocks_desktop_space",
+          "label": "Use global space on desktop",
+          "default": true,
+          "info": "from Section settings / Layout"
+        },
+        {
+          "type": "header",
+          "content": "Content"
+        },
+        {
+          "type": "text",
+          "id": "text_no_vehicle",
+          "label": "Text when no vehicle selected",
+          "default": "Select vehicle to check fitment"
+        },
+        {
+          "type": "text",
+          "id": "action_text",
+          "label": "Button text",
+          "default": "Select Vehicle"
         }
       ]
     },

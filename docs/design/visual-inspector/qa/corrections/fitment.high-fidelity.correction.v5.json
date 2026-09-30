@@ -1,0 +1,58 @@
+{
+  "schema_version": "1.0",
+  "project": "Calder Wheels",
+  "artifact_type": "high_fidelity_visual_correction",
+  "component": "Calder Find Your Fit / Fitment Finder",
+  "correction_iteration": 5,
+  "implementation_source": "HIGH-FIDELITY v4",
+  "baseline": {
+    "visual_spec_json": "docs/design/visual-inspector/component-specs/fitment/fitment.visual-spec.v2.json",
+    "visual_spec_md": "docs/design/visual-inspector/component-specs/fitment/fitment.visual-spec.v2.md",
+    "visual_authority": "Original approved Calder Find Your Fit reference"
+  },
+  "source_correction": "docs/design/visual-inspector/qa/corrections/fitment.high-fidelity.correction.v4.json",
+  "status": "READY_FOR_HIGH_FIDELITY_CORRECTION",
+  "corrections": [
+    {
+      "id": "HF5-001",
+      "source_id": "HF4-001",
+      "severity": "HIGH",
+      "category": "DECORATIVE / ARTWORK",
+      "affected_state": [
+        "DESKTOP_BY_VEHICLE",
+        "DESKTOP_BY_WHEEL_STYLE"
+      ],
+      "source": "fitment.high-fidelity.correction.v4 / approved reference / fitment.visual-spec.v2",
+      "reference_requirement": "The center-right technical artwork must use the approved recognizable large cropped Calder wheel/spoke technical line drawing, with subordinate flowing/contour line treatment.",
+      "reference_measurement": {
+        "wheel_art_region_approx": "x 1000\u20131518, y 207\u2013500 at 2048\u00d7682",
+        "evidence_classification": "ESTIMATED"
+      },
+      "hf_v4_measurement": {
+        "implementation_dimensions": "2048\u00d7682",
+        "observed_condition": "The center-right artwork remains a concentric/radar/target motif with rings, crosshair axes and radial arrows. It is not a recognizable multi-spoke Calder wheel technical drawing.",
+        "evidence_classification": "OBSERVED"
+      },
+      "delta": "The primary artwork subject remains materially different from the approved reference. The v4 motif is still radar/target geometry rather than the approved wheel/spoke line-art.",
+      "evidence_classification": "OBSERVED",
+      "why_material": "The difference is clearly visible at normal side-by-side scale and changes the approved artwork composition and visual identity in the center-right panel. It directly fails HF4-001's explicit acceptance condition.",
+      "why_another_implementation_pass_is_required": "HF4-001 is HIGH severity and remains materially unresolved; PASS requires every HIGH correction.v4 item to be resolved.",
+      "recommended_correction": "Replace the radar/target motif with the approved recognizable cropped Calder wheel/spoke technical line-art. Retain the subordinate contour/flow lines and match the established artwork region, crop, scale, fade/opacity, clipping and relationship to the form and vehicle divider. Do not alter protected accepted geometry or styling.",
+      "acceptance_condition": "At 2048\u00d7682, both desktop states visibly show the approved recognizable large cropped Calder multi-spoke wheel technical line drawing in the center-right artwork region, with reference-like crop, scale, placement, fade/opacity and clipping. Radar/target geometry must not remain the primary artwork. Previously accepted areas must remain materially unchanged."
+    }
+  ],
+  "protected_accepted_areas": [
+    "hero/light boundary and hero-to-fitment relationship",
+    "tab overlap and slanted tab geometry",
+    "shell position, width, height and radius",
+    "FIND YOUR FIT hierarchy and bronze FIT treatment",
+    "description",
+    "form baseline, differentiated control widths, control height and gaps",
+    "Find Wheels CTA",
+    "selected vehicle region",
+    "panel surface",
+    "By Wheel Style shared geometry",
+    "mobile responsive adaptation"
+  ],
+  "completion_gate": "Implement HF5-001 only, then return to READY_FOR_VISUAL_QA. Do not reopen protected resolved areas without material regression evidence."
+}

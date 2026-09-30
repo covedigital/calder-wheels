@@ -1,0 +1,53 @@
+{% comment %}theme-check-disable NestedSnippet{% endcomment %}
+{%- liquid
+  assign heading = section.settings.heading | default: 'You May Also Like'
+  assign limit = section.settings.limit | default: 4
+-%}
+
+<div class="calder-recommendations">
+  <div class="container">
+    <h2 class="calder-recommendations__heading">{{ heading }}</h2>
+    <div class="calder-recommendations__grid" data-calder-rec-grid>
+      {%- if recommendations.performed and recommendations.products_count > 0 -%}
+        {%- for rec in recommendations.products limit: limit -%}
+          <div>{% render 'calder-product-card', product: rec, section: section, section_id: section.id %}</div>
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var grid = document.querySelector('[data-calder-rec-grid]');
+  if (!grid) return;
+  var url = '{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ product.id }}&limit={{ limit }}';
+  fetch(url)
+    .then(function(r) { return r.text(); })
+    .then(function(html) {
+      var d = new DOMParser();
+      var doc = d.parseFromString(html, 'text/html');
+      var items = doc.querySelectorAll('[data-calder-rec-grid] > div');
+      if (items.length > 0) {
+        grid.innerHTML = '';
+        items.forEach(function(it) { grid.appendChild(it); });
+      }
+    })
+    .catch(function() {});
+});
+</script>
+
+{% schema %}
+{
+  "name": "Calder Recommendations",
+  "tag": "section",
+  "class": "calder-recs-wrap",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "You May Also Like" },
+    { "type": "range", "id": "limit", "label": "Products shown", "min": 2, "max": 8, "step": 1, "default": 4 }
+  ],
+  "presets": [
+    { "name": "Calder Recommendations", "category": "Calder" }
+  ]
+}
+{% endschema %}

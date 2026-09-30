@@ -1,0 +1,13 @@
+{
+  "schema_version": "1.0",
+  "project": "Calder Wheels",
+  "artifact_type": "visual_inspector_state",
+  "page": "collection",
+  "reference": "docs/design/mockups/approved-mockups/Calder - 2 - Category.png",
+  "baseline": "docs/design/visual-inspector/visual-specs/collection.visual-spec.json",
+  "status": "ACCEPTED",
+  "current_iteration": 4,
+  "current_render": "docs/design/visual-inspector/qa/renders/collection/collection.implementation.v4.desktop.png",
+  "latest_correction": "docs/design/visual-inspector/qa/corrections/collection.correction.v2.json",
+  "accepted_render": "docs/design/visual-inspector/qa/renders/collection/collection.implementation.v4.desktop.png"
+}

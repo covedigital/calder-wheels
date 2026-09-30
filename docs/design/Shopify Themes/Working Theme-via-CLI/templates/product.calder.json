@@ -1,0 +1,58 @@
+{
+  "sections": {
+    "calder-pdp": {
+      "type": "calder-product",
+      "settings": {
+        "show_breadcrumbs": true,
+        "show_rating": true,
+        "show_made_to_order": true,
+        "text_no_vehicle": "Select vehicle to check fitment",
+        "action_text": "Select Vehicle",
+        "placeholder_diameter": "Select Diameter",
+        "placeholder_width": "Select Width",
+        "placeholder_application": "Select Application"
+      }
+    },
+    "calder-configurator": {
+      "type": "wheel-configurator",
+      "settings": {}
+    },
+    "calder-fitment": {
+      "type": "fitment-finder",
+      "settings": {}
+    },
+    "calder-specs": {
+      "type": "calder-specs",
+      "settings": {}
+    },
+    "calder-finishes": {
+      "type": "calder-finishes",
+      "settings": {}
+    },
+    "calder-gallery": {
+      "type": "calder-gallery",
+      "settings": {}
+    },
+    "calder-recommendations": {
+      "type": "calder-recommendations",
+      "settings": {
+        "heading": "You May Also Like",
+        "limit": 4
+      }
+    },
+    "calder-specialist": {
+      "type": "calder-specialist-cta",
+      "settings": {}
+    }
+  },
+  "order": [
+    "calder-pdp",
+    "calder-configurator",
+    "calder-fitment",
+    "calder-specs",
+    "calder-finishes",
+    "calder-gallery",
+    "calder-recommendations",
+    "calder-specialist"
+  ]
+}

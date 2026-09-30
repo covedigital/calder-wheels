@@ -5,9 +5,9 @@
   "page": "home",
   "reference": "docs/design/mockups/approved-mockups/Calder - 1 - Home.png",
   "baseline": "docs/design/visual-inspector/visual-specs/home.visual-spec.json",
-  "status": "READY_FOR_IMPLEMENTATION",
-  "current_iteration": 0,
-  "current_render": null,
-  "latest_correction": null,
+  "status": "READY_FOR_VISUAL_QA",
+  "current_iteration": 6,
+  "current_render": "docs/design/visual-inspector/qa/renders/fitment/fitment.high-fidelity.by-vehicle.desktop.v6.png",
+  "latest_correction": "docs/design/visual-inspector/qa/corrections/fitment.high-fidelity.correction.v6.json",
   "accepted_render": null
 }

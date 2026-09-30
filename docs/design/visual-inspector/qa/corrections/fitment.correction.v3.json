@@ -1,0 +1,117 @@
+{
+  "schema_version": "1.0",
+  "project": "Calder Wheels",
+  "artifact_type": "visual_correction",
+  "component": "Calder Find Your Fit / Fitment Finder",
+  "qa_type": "CORRECTION_VERIFICATION_PASS",
+  "iteration": 3,
+  "input_state": "READY_FOR_VISUAL_QA",
+  "status": "REVISION_REQUIRED",
+  "next_state": "READY_FOR_IMPLEMENTATION_CORRECTION",
+  "primary_verification_artifact": "docs/design/visual-inspector/qa/corrections/fitment.correction.v2.json",
+  "correction_v2_verification": [
+    {
+      "id": "FIT-QA2-001",
+      "affected_state": [
+        "DESKTOP_BY_VEHICLE"
+      ],
+      "status": "RESOLVED",
+      "previous_issue": "By Vehicle shell was excessively tall and had lost the selected-vehicle region.",
+      "current_visual_evidence": "v3 restores a compact desktop shell approximately 368px high, reinstates the right-side selected-vehicle region/divider, and removes the large empty lower field."
+    },
+    {
+      "id": "FIT-QA2-002",
+      "affected_state": [
+        "DESKTOP_BY_VEHICLE",
+        "DESKTOP_BY_WHEEL_STYLE"
+      ],
+      "status": "RESOLVED",
+      "previous_issue": "The two desktop modes used materially different shell geometry.",
+      "current_visual_evidence": "v3 uses the same outer shell, heading origin, divider/status region, control baseline, CTA treatment, and overall dimensions in both desktop states."
+    },
+    {
+      "id": "FIT-QA2-003",
+      "affected_state": [
+        "DESKTOP_BY_VEHICLE",
+        "DESKTOP_BY_WHEEL_STYLE"
+      ],
+      "status": "PARTIALLY_RESOLVED",
+      "previous_issue": "Technical artwork was absent in By Vehicle and a broken/empty artwork rectangle appeared in By Wheel Style.",
+      "current_visual_evidence": "The broken rectangle is gone and both states now show the same faint wheel/ring treatment. The fuller wheel engineering/contour-flow treatment from the approved reference is still substantially reduced, but it no longer causes a structural or readability defect."
+    },
+    {
+      "id": "FIT-QA2-004",
+      "affected_state": [
+        "DESKTOP_BY_WHEEL_STYLE"
+      ],
+      "status": "RESOLVED",
+      "previous_issue": "Selected vehicle value was duplicated/concatenated.",
+      "current_visual_evidence": "v3 shows one clean '2026 BMW M4 Competition' value."
+    },
+    {
+      "id": "FIT-QA2-005",
+      "affected_state": [
+        "ALL"
+      ],
+      "status": "PARTIALLY_RESOLVED",
+      "previous_issue": "Component mixed incompatible serif and sans typography across heading, controls, CTA, status, and actions.",
+      "current_visual_evidence": "The main heading is corrected to the modern Calder sans treatment, but supporting copy, form labels/values, CTA text, and selected-vehicle content still visibly use a serif face, leaving the UI typographically inconsistent with the approved reference."
+    },
+    {
+      "id": "FIT-QA2-006",
+      "affected_state": [
+        "DESKTOP_BY_WHEEL_STYLE"
+      ],
+      "status": "RESOLVED",
+      "previous_issue": "Unapproved Popular Searches row remained with default browser-link styling.",
+      "current_visual_evidence": "Popular Searches is absent from both v3 desktop states and no default blue links remain."
+    },
+    {
+      "id": "FIT-QA2-007",
+      "affected_state": [
+        "MOBILE"
+      ],
+      "status": "RESOLVED",
+      "previous_issue": "Selected-vehicle/status/action region could not be verified in the v2 mobile capture.",
+      "current_visual_evidence": "v3 mobile clearly continues below the CTA into a separated YOUR VEHICLE region. The component remains single-column/2\u00d72 where appropriate, with practical controls, prominent CTA, and no visible horizontal overflow. The lower actions fall below the 844px viewport and are naturally reachable by vertical scroll."
+    }
+  ],
+  "regression_check": {
+    "material_regressions_found": false,
+    "summary": "No new material regression detected. Desktop shell geometry, selected-vehicle persistence, tab-mode consistency, CTA/control alignment, elevation, and mobile responsive structure remain stable."
+  },
+  "state_review": {
+    "DESKTOP_BY_VEHICLE": "REVISION_REQUIRED",
+    "DESKTOP_BY_WHEEL_STYLE": "REVISION_REQUIRED",
+    "MOBILE": "REVISION_REQUIRED"
+  },
+  "remaining_material_corrections": [
+    {
+      "id": "FIT-QA3-001",
+      "affected_render_state": [
+        "ALL"
+      ],
+      "severity": "MEDIUM",
+      "baseline_requirement": "The approved Calder component uses a coherent modern supporting UI typography system. Form labels, select values, CTA, selected-vehicle hierarchy/status/actions, and supporting copy should visually belong to the same Calder type system as the approved reference.",
+      "evidence_classification": "OBSERVED",
+      "observed_v3_implementation": "FIND YOUR FIT is now correctly modern/sans, but the supporting description, selector labels/values, FIND WHEELS label, and selected-vehicle content still render in a visibly contrasting serif face on desktop and mobile.",
+      "discrepancy": "Typography normalization from correction.v2 remains incomplete. The mixed serif/sans treatment is visible across primary interactive UI and materially affects brand fidelity and component cohesion.",
+      "measurable_recommended_correction": "Keep the current FIND YOUR FIT treatment unchanged. Apply the approved Calder supporting sans/UI font token to the description, selector labels, selector values, CTA label, YOUR VEHICLE eyebrow/value, confirmation text, Change Vehicle, and Reset. Preserve the current v3 sizes, weights, spacing, control geometry, and line-height relationships unless the font substitution requires only minor optical adjustment.",
+      "acceptance_condition": "Across desktop By Vehicle, desktop By Wheel Style, and mobile, the interactive/supporting UI no longer presents a contrasting serif type system; the existing v3 geometry and hierarchy remain stable after the approved supporting font is applied."
+    }
+  ],
+  "non_material_tolerances": [
+    "Technical artwork remains simpler/fainter than the approved reference, but the broken asset/container defect is resolved and the remaining decorative difference does not materially affect hierarchy, readability, interaction clarity, or responsive usability.",
+    "Minor tab/control/CTA measurement differences are within implementation tolerance and do not justify another correction by themselves."
+  ],
+  "preserve_from_v3": [
+    "Current desktop shell width and approximately 368px main-panel height.",
+    "Stable shared geometry between By Vehicle and By Wheel Style.",
+    "Current modern FIND YOUR FIT heading treatment and bronze FIT emphasis.",
+    "Current selected-vehicle panel structure and single vehicle value.",
+    "Removal of Popular Searches.",
+    "Current control and CTA geometry.",
+    "Current restrained bronze/green hierarchy and hero subordination.",
+    "Current mobile 2\u00d72 controls, CTA, vertical flow, and no-overflow behavior."
+  ]
+}

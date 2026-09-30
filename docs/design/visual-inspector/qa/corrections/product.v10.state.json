@@ -1,0 +1,14 @@
+{
+  "iteration": 10,
+  "state": "READY_FOR_VISUAL_QA_ITERATION_10",
+  "desktop_fidelity_pass": true,
+  "functional_regression_check": "No changes to wheel-configurator.liquid, fitment-finder.liquid, or product form logic. Existing behavior preserved.",
+  "missing_assets": [
+    "engineering_image — upload manufacturing/CNC image via Theme Editor",
+    "gallery_image_1 through gallery_image_4 — upload 4 automotive lifestyle images",
+    "specialist_cta background_image — upload wheel-detail background",
+    "header_logo — upload Calder logo SVG/PNG",
+    "Apex 201 product.media — needs actual wheel photography uploaded to Shopify"
+  ],
+  "blockers": []
+}

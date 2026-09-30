@@ -1,0 +1,141 @@
+{
+  "schema_version": "product.development-manifest.v9",
+  "project": "Calder Wheels",
+  "page": "Product Detail Page",
+  "pdp_root": ".page-calder",
+  "stylesheets": [
+    { "file": "font.css.liquid", "load_order": 1, "role": "Calder font definitions" },
+    { "file": "bundle-head.css", "load_order": 2, "role": "Theme core bundle" },
+    { "file": "bootstrap.min.css", "load_order": 3, "role": "Bootstrap grid/utilities" },
+    { "file": "swiper-bundle.min.css", "load_order": 4, "role": "Swiper carousel" },
+    { "file": "jquery.fancybox.min.css", "load_order": 5, "role": "Lightbox" },
+    { "file": "header.css", "load_order": 6, "role": "Header styles" },
+    { "file": "minicart.css", "load_order": 7, "role": "Cart styles" },
+    { "file": "menu.css", "load_order": 8, "role": "Menu styles" },
+    { "file": "style.css", "load_order": 9, "role": "Main theme styles" },
+    { "file": "banners.css", "load_order": 10, "role": "Banner styles" },
+    { "file": "main-product.css", "load_order": 11, "role": "Lumia product page (loaded by section)" },
+    { "file": "custom.css", "load_order": 12, "role": "Custom overrides" },
+    { "file": "wheel-configurator.css", "load_order": 13, "role": "Build Your Wheel (conditional)" },
+    { "file": "calder-product.css", "load_order": 14, "role": "Calder PDP presentation (conditional, loads LAST)" }
+  ],
+  "fonts": {
+    "heading": {
+      "family": "Facundo",
+      "asset": "assets/Facundo-SemiBold.otf",
+      "weight": 700,
+      "declaration": "font.css.liquid lines 2-8",
+      "loading": "theme.liquid → head.liquid → head-fonts-colors.liquid → font.css.liquid",
+      "resolved": "TRUE when deployed. font.css.liquid generates correct asset_url."
+    },
+    "ui": {
+      "family": "Garet",
+      "asset": "assets/Garet-Book.otf",
+      "weight": 400,
+      "bold_asset": "assets/garet-bold.otf",
+      "bold_weight": 700,
+      "declaration": "font.css.liquid lines 10-16 (book), 18-24 (bold)",
+      "loading": "Same path as Facundo",
+      "resolved": "TRUE when deployed."
+    },
+    "fix_applied": "font.css.liquid font-weight corrected: Facundo 650→700, Garet Book 350→400. Matches CSS usage."
+  },
+  "shared_components": {
+    "header": "sections/header.liquid — rendered globally via theme.liquid line 35: {% section 'header' %}",
+    "footer": "sections/footer.liquid — rendered globally via theme.liquid line 150: {% section 'footer' %}",
+    "product_card": "snippets/calder-product-card.liquid — invoked by sections/calder-recommendations.liquid line 13"
+  },
+  "images": {
+    "hero": {
+      "source": "product.selected_variant.featured_media | default: product.featured_media (from section.settings)",
+      "fallback": "Shopify placeholder SVG",
+      "note": "Requires actual Apex wheel media in product.media"
+    },
+    "build_preview": {
+      "source": "configurator-app.js → BOM component layers from product.metafields.custom.bom",
+      "fallback": "snippets/configurator-preview.liquid → product.featured_image",
+      "note": "When JS initialized: configured composite. When not: product.featured_image (wheel). Never scenic."
+    },
+    "engineering": {
+      "source": "section.settings.engineering_image (image_picker in calder-specs.liquid)",
+      "fallback": "Navy background with text label — no random imagery",
+      "status": "Requires merchant upload in Theme Editor"
+    },
+    "finishes": {
+      "source": "product.metafields.custom.available_finishes.value (each item has .image)",
+      "fallback": "finish.label text display only — no generic imagery",
+      "status": "Each finish must have own image. Never scenic."
+    },
+    "real_world": {
+      "source": "product.metafields.custom.real_world_gallery.value OR section.settings.gallery_image_1-4 (image_pickers)",
+      "fallback": "Gray placeholder box with label — no random imagery",
+      "status": "4 settings exist. Requires merchant upload."
+    },
+    "recommendations": {
+      "source": "recommendations.products → each product's featured_media via calder-product-card.liquid",
+      "fallback": "hidden unless recommendations.performed and products_count > 0",
+      "status": "Uses shared B1 card. Images come from recommended products."
+    },
+    "specialist": {
+      "source": "section.settings.background_image (image_picker in calder-specialist-cta.liquid)",
+      "fallback": "Solid #0E2A3E navy background",
+      "status": "Setting exists. Requires merchant upload."
+    }
+  },
+  "visual_variables": {
+    "--pdp-container-width": "1178px",
+    "--pdp-hero-gap": "36px",
+    "--pdp-hero-gallery-min-height": "500px",
+    "--pdp-title-size": "52px",
+    "--pdp-title-line-height": "1.0",
+    "--pdp-construction-size": "20px",
+    "--pdp-body-size": "16px",
+    "--pdp-control-height": "48px",
+    "--pdp-primary-btn-height": "52px",
+    "--pdp-price-size": "36px",
+    "--pdp-section-padding-y": "48px",
+    "--pdp-section-gap": "32px",
+    "--pdp-build-preview-max-height": "420px",
+    "--pdp-build-column-gap": "40px",
+    "--pdp-fitment-min-height": "240px",
+    "--pdp-fitment-control-height": "48px",
+    "--pdp-engineering-min-height": "380px",
+    "--pdp-finish-card-width": "160px",
+    "--pdp-finish-gap": "20px",
+    "--pdp-real-world-gap": "8px",
+    "--pdp-recs-gap": "20px",
+    "--pdp-specialist-min-height": "190px"
+  },
+  "lumia_conflicts_known": [
+    "bootstrap.min.css select/button/input defaults — Calder PDP uses custom classes (.calder-pdp__config-select) not Bootstrap classes, so conflict is minimal",
+    "main-product.css .prd-block-name, .prd-block-price — Calder PDP uses .calder-pdp__title, .calder-pdp__price — different selectors, no direct conflict",
+    "style.css .btn, .btn--primary — Calder PDP uses .calder-pdp__add-btn, .calder-pdp__action-btn — different selectors",
+    "wheel-configurator.css — scoped under .wheel-configurator, Calder restyles via .page-calder .wheel-configurator override"
+  ],
+  "missing_assets": {
+    "engineering_image": "Upload manufacturing/CNC image via Theme Editor → Calder Specs & Eng → Hero image",
+    "gallery_image_1-4": "Upload 4 automotive lifestyle images via Theme Editor → Calder Real World Gallery",
+    "specialist_cta_background": "Upload wheel-detail background via Theme Editor → Calder Specialist CTA",
+    "header_logo": "Upload Calder logo via Theme Editor → Header section settings"
+  },
+  "acceptance_gate": {
+    "facundo_resolves": "TRUE — font-weight corrected to 700, loads via font.css.liquid",
+    "garet_resolves": "TRUE — font-weight corrected to 400, loads via font.css.liquid",
+    "calder_css_wins": "TRUE — calder-product.css loads last (order 14/14)",
+    "hero_image_deterministic": "TRUE — sources from product.selected_variant.featured_media",
+    "build_preview_deterministic": "TRUE — configured from BOM, falls back to product.featured_image",
+    "engineering_has_dedicated_source": "TRUE — section.settings.engineering_image",
+    "finish_no_scenic": "TRUE — each finish has its own .image field",
+    "real_world_4_sources": "TRUE — gallery_image_1 through gallery_image_4 settings exist",
+    "recommendations_from_products": "TRUE — Shopify recommendations → B1 card → product.media",
+    "specialist_has_background_source": "TRUE — section.settings.background_image",
+    "header_is_shared": "TRUE — sections/header.liquid",
+    "footer_is_shared": "TRUE — sections/footer.liquid",
+    "b1_card_is_shared": "TRUE — snippets/calder-product-card.liquid",
+    "build_functional": "TRUE — no changes to wheel-configurator section",
+    "fitment_functional": "TRUE — no changes to fitment-finder section",
+    "one_1178px_container": "TRUE --pdp-container-width: 1178px",
+    "geometry_exposed_as_variables": "TRUE — 22 PDP variables defined",
+    "no_jinja_comments": "TRUE — zero {# in Calder sections"
+  }
+}

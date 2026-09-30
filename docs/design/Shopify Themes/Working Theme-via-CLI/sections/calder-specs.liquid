@@ -1,0 +1,94 @@
+{% comment %}theme-check-disable NestedSnippet{% endcomment %}
+{%- liquid
+  assign spec_metafields = product.metafields.custom.specifications.value
+  assign eng_image = section.settings.engineering_image
+  assign eng_text = section.settings.engineering_text
+-%}
+
+<div class="calder-specs-section">
+  <div class="container">
+    <div class="calder-specs-grid">
+      <div>
+        <div class="calder-eyebrow">Product Details</div>
+        <h2 class="calder-specs__heading">{{ section.settings.specs_heading | default: 'Specifications' }}</h2>
+        {%- if spec_metafields -%}
+        <table class="calder-specs__table">
+          {%- for spec in spec_metafields -%}
+          <tr><td>{{ spec.label }}</td><td>{{ spec.value }}</td></tr>
+          {%- endfor -%}
+        </table>
+        {%- else -%}
+        <table class="calder-specs__table">
+          <tr><td>Diameter</td><td>{{ section.settings.spec_diameter | default: '18" — 22"' }}</td></tr>
+          <tr><td>Width</td><td>{{ section.settings.spec_width | default: '8.5" — 11"' }}</td></tr>
+          <tr><td>Bolt Pattern</td><td>{{ section.settings.spec_bolt | default: '5x112' }}</td></tr>
+          <tr><td>Offset</td><td>{{ section.settings.spec_offset | default: '+22 to +45' }}</td></tr>
+          <tr><td>Construction</td><td>{{ section.settings.spec_construction | default: '3-Piece Forged' }}</td></tr>
+          <tr><td>Weight</td><td>{{ section.settings.spec_weight | default: '24.5 lbs' }}</td></tr>
+          <tr><td>Load Rating</td><td>{{ section.settings.spec_load | default: '1,600 lbs' }}</td></tr>
+          <tr><td>Finish</td><td>{{ section.settings.spec_finish | default: 'Multiple Options' }}</td></tr>
+        </table>
+        {%- endif -%}
+      </div>
+
+      <div class="calder-engineering">
+        <div class="calder-engineering__panel">
+          {%- if eng_image -%}
+            <img class="calder-engineering__hero-img" src="{{ eng_image | img_url: '600x' }}" alt="" loading="lazy" width="600" height="338">
+          {%- else -%}
+            <div class="calder-engineering__hero-img" style="background:var(--c-navy);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.2);font-size:12px;">Engineering Image</div>
+          {%- endif -%}
+          <div class="calder-engineering__body">
+            <h3 style="color:var(--c-white);font-size:32px;margin-bottom:10px;font-family:var(--heading-font);">Engineered<br>to Perform</h3>
+            <p>{{ eng_text | default: 'Every Calder wheel is precision-engineered from aerospace-grade materials, assembled to order by master craftsmen, and validated through rigorous testing before delivery.' }}</p>
+            <div class="calder-engineering__capabilities">
+              <div class="calder-engineering__cap">
+                <div class="calder-engineering__cap-icon"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="7" cy="7" r="5.5"/><path d="M7 4v3l2 1.5"/></svg></div>
+                <div class="calder-engineering__cap-text"><strong>Forged Aluminum</strong>Aerospace-grade 6061-T6</div>
+              </div>
+              <div class="calder-engineering__cap">
+                <div class="calder-engineering__cap-icon"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M2.5 11.5V7L7 3.5 11.5 7v4.5"/><path d="M5.5 7L7 5.5 8.5 7"/></svg></div>
+                <div class="calder-engineering__cap-text"><strong>CNC Machined</strong>Precision to ±0.005mm</div>
+              </div>
+              <div class="calder-engineering__cap">
+                <div class="calder-engineering__cap-icon"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M7 1v12M1 7h12"/><path d="M7 1v12M1 7h12" transform="rotate(45 7 7)"/></svg></div>
+                <div class="calder-engineering__cap-text"><strong>Strength Tested</strong>Exceeds SAE J2530</div>
+              </div>
+              <div class="calder-engineering__cap">
+                <div class="calder-engineering__cap-icon"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M3 13l8-8M7 13l4-4M9 13l2-2M11 5V2H8M11 2L7 6"/></svg></div>
+                <div class="calder-engineering__cap-text"><strong>Real World Proven</strong>Track and street validated</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+"name": "Calder Specs & Eng",
+  "tag": "section",
+  "class": "calder-specs-wrap",
+  "settings": [
+    { "type": "header", "content": "Specifications" },
+    { "type": "text", "id": "specs_heading", "label": "Heading", "default": "Specifications" },
+    { "type": "text", "id": "spec_diameter", "label": "Diameter", "default": "18\" — 22\"" },
+    { "type": "text", "id": "spec_width", "label": "Width", "default": "8.5\" — 11\"" },
+    { "type": "text", "id": "spec_bolt", "label": "Bolt Pattern", "default": "5x112" },
+    { "type": "text", "id": "spec_offset", "label": "Offset", "default": "+22 to +45" },
+    { "type": "text", "id": "spec_construction", "label": "Construction", "default": "3-Piece Forged" },
+    { "type": "text", "id": "spec_weight", "label": "Weight", "default": "24.5 lbs" },
+    { "type": "text", "id": "spec_load", "label": "Load Rating", "default": "1,600 lbs" },
+    { "type": "text", "id": "spec_finish", "label": "Finish", "default": "Multiple Options" },
+    { "type": "header", "content": "Engineering" },
+    { "type": "text", "id": "engineering_heading", "label": "Heading", "default": "Engineered to Perform" },
+    { "type": "textarea", "id": "engineering_text", "label": "Description", "default": "Every Calder wheel is precision-engineered from aerospace-grade materials, assembled to order by master craftsmen, and validated through rigorous testing before delivery." },
+    { "type": "image_picker", "id": "engineering_image", "label": "Hero image" }
+  ],
+  "presets": [
+    { "name": "Calder Specs & Eng", "category": "Calder" }
+  ]
+}
+{% endschema %}

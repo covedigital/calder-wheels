@@ -1,0 +1,120 @@
+<section class="home-gallery" id="home-gallery-{{ section.id }}">
+  <div class="home-gallery__container">
+    <div class="home-gallery__header">
+      <div>
+        <div class="home-gallery__eyebrow">{{ section.settings.eyebrow | default: 'Fitted Gallery' }}</div>
+        <h2 class="home-gallery__heading">{{ section.settings.heading | default: 'Real Builds. Real Drivers.' }}</h2>
+      </div>
+      {% if section.settings.view_all_text != blank %}
+        <a href="{{ section.settings.view_all_url }}" class="home-gallery__view-all">
+          {{ section.settings.view_all_text }}
+          <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+            <path d="M3 1L7 5L3 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      {% endif %}
+    </div>
+
+    <div class="home-gallery__panels">
+      <div class="home-gallery__cta-panel">
+        <div class="home-gallery__cta-eyebrow">{{ section.settings.cta_eyebrow | default: 'Your Vehicle' }}</div>
+        <h3 class="home-gallery__cta-heading">{{ section.settings.cta_heading | default: 'Built For Your Vehicle' }}</h3>
+        <div class="home-gallery__cta-body">{{ section.settings.cta_body | default: 'Every Calder wheel is precision engineered to fit your specific make and model. Explore fitment for your vehicle.' }}</div>
+        <a href="{{ section.settings.cta_url | default: '/pages/fitment' }}" class="home-gallery__cta-btn">
+          {{ section.settings.cta_text | default: 'Start Your Build' }}
+          <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+            <path d="M3 1L7 5L3 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+      <div class="home-gallery__image-wrap">
+        {% if section.settings.image != blank %}
+          {{ section.settings.image | image_url: width: 600 | image_tag: widths: '600,400,300', loading: 'lazy', alt: section.settings.heading, class: 'home-gallery__image' }}
+        {% else %}
+          <div class="home-gallery__image" style="background:#c0c0c0;"></div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Fitted Gallery",
+  "tag": "section",
+  "class": "section--home-gallery",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Header"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Fitted Gallery"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Real Builds. Real Drivers."
+    },
+    {
+      "type": "text",
+      "id": "view_all_text",
+      "label": "View All text",
+      "default": "View Gallery"
+    },
+    {
+      "type": "url",
+      "id": "view_all_url",
+      "label": "View All URL"
+    },
+    {
+      "type": "header",
+      "content": "CTA Panel"
+    },
+    {
+      "type": "text",
+      "id": "cta_eyebrow",
+      "label": "CTA Eyebrow",
+      "default": "Your Vehicle"
+    },
+    {
+      "type": "text",
+      "id": "cta_heading",
+      "label": "CTA Heading",
+      "default": "Built For Your Vehicle"
+    },
+    {
+      "type": "textarea",
+      "id": "cta_body",
+      "label": "CTA Body",
+      "default": "Every Calder wheel is precision engineered to fit your specific make and model. Explore fitment for your vehicle."
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "CTA Button text",
+      "default": "Start Your Build"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "CTA URL"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Gallery image"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Fitted Gallery",
+      "category": "Home"
+    }
+  ]
+}
+{% endschema %}

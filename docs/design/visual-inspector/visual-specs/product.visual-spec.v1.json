@@ -1,0 +1,166 @@
+{
+  "schema_version": "product.visual-spec.v1",
+  "project": "Calder Wheels",
+  "page": "Product Detail Page",
+  "classification": "PAGE",
+  "status": "READY_FOR_IMPLEMENTATION",
+  "visual_authority": {
+    "primary": "Calder - 3 - Product(2).png",
+    "functional_reference": "Calder-existing-product-reference.png",
+    "governing_contract": "calder-visual-inspector-v1.1.md",
+    "brand_continuity": "Approved Calder homepage and shared B1 product-card system"
+  },
+  "implementation_principle": "Restyle and integrate existing product-page functionality; do not replace working Build Your Wheel or Fitment logic.",
+  "preserve_functionality": [
+    "Existing Build Your Wheel option/variant/configuration logic",
+    "Existing Build Your Wheel availability, pricing, add-to-cart and request-quote behavior",
+    "Existing Fitment selectors, dependencies, compatibility logic and result actions",
+    "Shopify product/variant state and existing theme/app integration hooks",
+    "Existing cart, quote, inventory and product-form behavior unless a visual wrapper change requires non-destructive adaptation"
+  ],
+  "page_regions": [
+    {
+      "id": "product-main",
+      "priority": "P0",
+      "target": "Approved mockup",
+      "requirements": [
+        "Two-column desktop product hero: gallery left, product/configuration right",
+        "Large primary wheel/lifestyle image with thumbnail rail below",
+        "Breadcrumbs above product content",
+        "Product title, construction/category label, short description, rating/SKU metadata",
+        "Fitment-confirmed status panel integrated into configuration area",
+        "Diameter, width, finish, application and quantity controls",
+        "Price and primary Add to Cart CTA",
+        "Secondary Save and Share controls",
+        "Made-to-order / shipping / secure-checkout trust row"
+      ]
+    },
+    {
+      "id": "specifications",
+      "priority": "P1",
+      "target": "Approved mockup",
+      "requirements": [
+        "Specifications table on left",
+        "Engineered to Perform manufacturing/lifestyle panel on right",
+        "Use real Shopify/product metafield data where available; do not hardcode product-specific values"
+      ]
+    },
+    {
+      "id": "build-your-wheel",
+      "priority": "P0",
+      "target": "Function from existing reference, presentation adapted to approved mockup",
+      "requirements": [
+        "PRESERVE existing working Build Your Wheel logic and bindings",
+        "Do not recreate, fork, or substitute its functional implementation",
+        "Map existing configurable finish choices into the approved Choose Your Finish visual language where technically compatible",
+        "Keep center/barrel/hardware configuration controls when required by the existing product type even if the approved mockup shows a simplified finish carousel",
+        "Use progressive disclosure or a visually integrated configurator when multiple component finishes are required",
+        "Preserve live configuration image/preview, availability, price, cart and quote actions",
+        "Approved mockup controls visual hierarchy; existing reference controls functional requirements"
+      ]
+    },
+    {
+      "id": "fitment",
+      "priority": "P0",
+      "target": "Function from existing reference, presentation adapted to Calder system",
+      "requirements": [
+        "PRESERVE existing working Fitment logic and data flow",
+        "Do not replace with static dropdowns",
+        "Retain Year, Make, Model and Generation/Trim dependencies as implemented",
+        "Integrate fitment state into the product hero where the approved mockup shows Fits Your Vehicle",
+        "Retain a full fitment-selection interface where needed to establish/change vehicle",
+        "Reuse existing Calder fitment system/API bindings and state rather than introducing a second fitment implementation"
+      ]
+    },
+    {
+      "id": "available-finishes",
+      "priority": "P1",
+      "target": "Approved mockup",
+      "requirements": [
+        "Horizontal wheel-finish selector/carousel",
+        "Selected state uses restrained Calder gold accent",
+        "Selection must bind to existing product/configurator state where applicable"
+      ]
+    },
+    {
+      "id": "real-world-gallery",
+      "priority": "P1",
+      "target": "Approved mockup",
+      "requirements": [
+        "Four-up desktop lifestyle gallery",
+        "View Gallery action",
+        "Responsive horizontal/stacked behavior without changing source content semantics"
+      ]
+    },
+    {
+      "id": "recommendations",
+      "priority": "P1",
+      "target": "Approved mockup + approved B1 shared card",
+      "requirements": [
+        "You May Also Like product grid",
+        "Use approved shared Calder B1 product listing card rather than inventing a new card",
+        "Preserve Shopify recommendation/product-list data source"
+      ]
+    },
+    {
+      "id": "help-footer",
+      "priority": "P1",
+      "target": "Approved mockup + homepage authority",
+      "requirements": [
+        "Wheel specialist CTA above footer",
+        "Reuse the same Calder footer/header design system established by the approved homepage",
+        "Do not create page-specific competing header/footer styling"
+      ]
+    }
+  ],
+  "responsive": {
+    "desktop_reference_width": 1440,
+    "qa_widths": [
+      1440,
+      768,
+      390
+    ],
+    "rules": [
+      "Preserve hierarchy rather than proportionally shrinking the desktop composition",
+      "Stack product gallery and product information on narrow screens",
+      "Keep controls touch-usable and prevent configurator/fitment overflow",
+      "Allow horizontal carousels where appropriate for thumbnails, finishes, gallery and recommendations"
+    ]
+  },
+  "design_tokens": {
+    "navy": "#0E2A3E",
+    "blue": "#1E4C68",
+    "gold": "#C2A48A",
+    "slate": "#876E5A",
+    "cream": "#F2EFE9",
+    "near_black": "#231F20",
+    "surface": "#1A1A1A",
+    "dark_bg": "#0A0A0A",
+    "heading_font": "Facundo",
+    "ui_font": "Garet",
+    "fallback_font": "Poppins",
+    "container_max_width": "1178px"
+  },
+  "implementation_constraints": [
+    "Inspect existing theme code before editing and identify exact product template/sections/snippets/assets involved",
+    "Prefer extending existing sections/snippets over duplicating business logic",
+    "Do not break Shopify Theme Editor schema or merchant-configurable settings",
+    "Do not hardcode product IDs, variant IDs, vehicle values, prices, inventory or URLs",
+    "Preserve Liquid objects, JS event handlers, data attributes, app hooks and form semantics required by existing functionality",
+    "Do not replace existing functional Build Your Wheel or Fitment sections with visual-only mock implementations",
+    "Keep changes scoped to the product page/shared components intentionally used by it",
+    "Reuse established Calder brand tokens and shared components from the homepage/collection implementation"
+  ],
+  "acceptance_criteria": [
+    "Product page visually tracks the approved product mockup at desktop",
+    "Build Your Wheel remains fully functional after visual integration",
+    "Fitment remains fully functional after visual integration",
+    "No duplicate configurator or duplicate fitment business logic is introduced",
+    "Product/variant/cart/quote interactions remain functional",
+    "Header/footer remain consistent with approved homepage",
+    "Recommendations use approved B1 card",
+    "No horizontal overflow at 1440, 768 or 390 widths",
+    "Theme Check introduces no new product-page errors",
+    "Implementation is ready for screenshot-based Sol visual QA"
+  ]
+}

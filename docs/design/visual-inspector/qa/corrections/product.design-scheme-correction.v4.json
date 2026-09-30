@@ -1,0 +1,159 @@
+{
+  "schema_version": "product.design-scheme-correction.v4",
+  "project": "Calder Wheels",
+  "page": "Product Detail Page",
+  "target_url": "https://wvpnpr-t7.myshopify.com/products/apex-201",
+  "state": "REVISION_REQUIRED",
+  "target_state": "READY_FOR_VISUAL_QA_ITERATION_5",
+  "authorities": {
+    "visual": "Calder - 3 - Product(5).png",
+    "functional": "Current live Apex 201 PDP",
+    "behavioral_reference": "Calder-existing-product-reference(1).png",
+    "global_brand": "Approved Calder homepage",
+    "product_card": "Approved shared B1 card",
+    "governing_contract": "calder-visual-inspector-v1.1.md"
+  },
+  "scope": "Components/sections now exist. Correct design scheme, media treatment, banners, colors, typography, scale and composition without unnecessary architecture replacement.",
+  "live_verified": {
+    "components_present": [
+      "product gallery",
+      "product info",
+      "fitment status",
+      "price/quantity/cart",
+      "Save/Share",
+      "trust row",
+      "Build Your Wheel",
+      "Fitment Finder",
+      "Specifications",
+      "Engineered to Perform",
+      "Available Finishes",
+      "Real World Gallery",
+      "Wheel Specialist CTA",
+      "Recommendations",
+      "footer"
+    ],
+    "source_defect": "Jinja-style {# ... #} development markers are still present in live storefront output."
+  },
+  "corrections": [
+    {
+      "id": "PDP-DS-001",
+      "priority": "P0",
+      "area": "global palette",
+      "requirement": "Match approved white/light content system, navy typography, Calder gold actions/selection, subtle cool-gray panels/rules; reserve dark navy for approved header, engineering panel, specialist CTA and footer."
+    },
+    {
+      "id": "PDP-DS-002",
+      "priority": "P0",
+      "area": "hero",
+      "requirement": "Match approved hero proportions, gallery scale, right configuration-panel hierarchy and light panel treatment using actual Apex data/media."
+    },
+    {
+      "id": "PDP-DS-003",
+      "priority": "P0",
+      "area": "media",
+      "requirement": "Use wheel/product/automotive/manufacturing imagery appropriate to each section. No unrelated generic scenic/furniture/flower/rock imagery and no empty final gallery placeholders."
+    },
+    {
+      "id": "PDP-DS-004",
+      "priority": "P0",
+      "area": "typography",
+      "requirement": "Use established Facundo heading and Garet UI hierarchy at reference-comparable scale; do not miniaturize page."
+    },
+    {
+      "id": "PDP-DS-005",
+      "priority": "P1",
+      "area": "fitment",
+      "requirement": "Style compact fitment status to approved pale-green confirmation treatment; full finder is subordinate light workflow."
+    },
+    {
+      "id": "PDP-DS-006",
+      "priority": "P0",
+      "area": "configurator",
+      "requirement": "Preserve Build Your Wheel behavior but style as premium light Calder configurator with large wheel preview, refined controls and gold selected states."
+    },
+    {
+      "id": "PDP-DS-007",
+      "priority": "P1",
+      "area": "specifications",
+      "requirement": "Approved Product Details eyebrow + navy Specifications heading + alternating light rows."
+    },
+    {
+      "id": "PDP-DS-008",
+      "priority": "P0",
+      "area": "engineering",
+      "requirement": "Single dark image-backed manufacturing banner/panel with white heading/copy and four bottom capability icons."
+    },
+    {
+      "id": "PDP-DS-009",
+      "priority": "P0",
+      "area": "finishes",
+      "requirement": "Approved Available Finishes/Choose Your Finish horizontal wheel-render showcase; gold selected border; no generic photo cards."
+    },
+    {
+      "id": "PDP-DS-010",
+      "priority": "P0",
+      "area": "real world",
+      "requirement": "Approved four-wide landscape automotive gallery with real configured images, navy heading and View Gallery action."
+    },
+    {
+      "id": "PDP-DS-011",
+      "priority": "P0",
+      "area": "recommendations",
+      "requirement": "Use approved B1 visual system: white cards, dominant wheel image, navy product identity, restrained pricing/action."
+    },
+    {
+      "id": "PDP-DS-012",
+      "priority": "P0",
+      "area": "specialist banner",
+      "requirement": "Match approved full-width dark navy/image-backed banner: Need Help With Fitment eyebrow, Contact a Wheel Specialist heading, gold Get in Touch CTA, contact methods."
+    },
+    {
+      "id": "PDP-DS-013",
+      "priority": "P0",
+      "area": "footer",
+      "requirement": "Reuse approved dark Calder homepage footer unchanged where possible."
+    },
+    {
+      "id": "PDP-DS-014",
+      "priority": "P0",
+      "area": "source hygiene",
+      "requirement": "Remove or convert all {# ... #} markers to valid Liquid comments; zero markers in final storefront output."
+    },
+    {
+      "id": "PDP-DS-015",
+      "priority": "P1",
+      "area": "responsive",
+      "requirement": "Maintain approved visual language at 1440/768/390 with deliberate reflow, readable scale and no page overflow."
+    }
+  ],
+  "brand_tokens": {
+    "navy": "#0E2A3E",
+    "blue": "#1E4C68",
+    "gold": "#C2A48A",
+    "slate": "#876E5A",
+    "cream": "#F2EFE9",
+    "near_black": "#231F20",
+    "surface": "#1A1A1A",
+    "dark_bg": "#0A0A0A",
+    "heading_font": "Facundo",
+    "ui_font": "Garet",
+    "fallback_font": "Poppins",
+    "container_max_width": "1178px"
+  },
+  "non_regression": [
+    "Shopify product/variant form",
+    "actual Apex product data",
+    "product.media",
+    "price/quantity/Add to Cart",
+    "Save/Share",
+    "Build Your Wheel logic/state/preview/cart/quote",
+    "Fitment engine/dependencies/selected vehicle",
+    "recommendations",
+    "Theme Editor schema"
+  ],
+  "required_renders": [
+    "product.desktop.v5.png",
+    "product.tablet.v5.png",
+    "product.mobile.v5.png"
+  ]
+}

@@ -1,0 +1,136 @@
+{
+  "schema_version": "product.live-visual-spec.v3",
+  "project": "Calder Wheels",
+  "page": "Product Detail Page",
+  "target_url": "https://wvpnpr-t7.myshopify.com/products/apex-201",
+  "inspection_type": "LIVE_PAGE_VISUAL_INSPECTION",
+  "state": "READY_FOR_OPENCODE_CORRECTION",
+  "target_state_after_implementation": "READY_FOR_VISUAL_QA_ITERATION_4",
+  "authorities": {
+    "primary_visual_authority": "Calder - 3 - Product(5).png",
+    "live_functional_authority": "Live Apex 201 product page",
+    "functional_reference": "Calder-existing-product-reference(1).png",
+    "governing_contract": "calder-visual-inspector-v1.1.md",
+    "shared_component_authority": "Approved B1 Calder product listing card",
+    "global_brand_authority": "Approved Calder homepage"
+  },
+  "core_rule": "Match the approved C1 mockup presentation while rendering real Apex 201 Shopify data and preserving working Build Your Wheel and Fitment behavior.",
+  "product_data_policy": {
+    "do_not_hardcode_mockup_data": true,
+    "dynamic_fields": [
+      "title",
+      "description",
+      "SKU",
+      "price",
+      "compare-at price",
+      "product media",
+      "variants",
+      "finishes",
+      "dimensions",
+      "inventory",
+      "specifications",
+      "recommendations"
+    ]
+  },
+  "priorities": [
+    {
+      "id": "LIVE-PDP-001",
+      "priority": "P0",
+      "area": "storefront artifacts",
+      "requirement": "Remove/convert all {# ... #} development markers; zero may render in storefront."
+    },
+    {
+      "id": "LIVE-PDP-002",
+      "priority": "P0",
+      "area": "hero",
+      "requirement": "Match approved large gallery + coherent right configuration-panel proportions/hierarchy using real product data/media."
+    },
+    {
+      "id": "LIVE-PDP-003",
+      "priority": "P0",
+      "area": "Build Your Wheel",
+      "requirement": "Preserve Center/Barrel/Hardware, preview, availability, price, configured cart and quote; visually integrate into light Calder PDP."
+    },
+    {
+      "id": "LIVE-PDP-004",
+      "priority": "P0",
+      "area": "fitment",
+      "requirement": "Preserve existing engine; selected vehicle uses compact hero confirmation; full finder remains selection/change workflow."
+    },
+    {
+      "id": "LIVE-PDP-005",
+      "priority": "P1",
+      "area": "specifications",
+      "requirement": "Match Product Details/Specifications table hierarchy with real product/metafield data."
+    },
+    {
+      "id": "LIVE-PDP-006",
+      "priority": "P1",
+      "area": "engineering",
+      "requirement": "Use one large image-led dark Engineered to Perform panel with four capability items."
+    },
+    {
+      "id": "LIVE-PDP-007",
+      "priority": "P0",
+      "area": "finishes",
+      "requirement": "Use large wheel/finish renders, labels and gold selected state; no generic photography."
+    },
+    {
+      "id": "LIVE-PDP-008",
+      "priority": "P0",
+      "area": "real world",
+      "requirement": "Use four configured landscape automotive images on desktop; no empty placeholders."
+    },
+    {
+      "id": "LIVE-PDP-009",
+      "priority": "P0",
+      "area": "recommendations",
+      "requirement": "Reuse actual approved shared B1 card with Shopify recommendation products and wheel media."
+    },
+    {
+      "id": "LIVE-PDP-010",
+      "priority": "P1",
+      "area": "CTA/footer",
+      "requirement": "Match approved image-backed specialist CTA and reuse approved homepage footer."
+    },
+    {
+      "id": "LIVE-PDP-011",
+      "priority": "P1",
+      "area": "responsive",
+      "requirement": "Validate intentional 1440/768/390 layouts with readable scale and no page overflow."
+    }
+  ],
+  "visual_comparison_dimensions": [
+    "placement",
+    "width",
+    "height",
+    "relative proportions",
+    "image aspect ratio",
+    "typography scale",
+    "content density",
+    "whitespace",
+    "background treatment",
+    "borders/dividers",
+    "control dimensions",
+    "CTA dimensions",
+    "alignment",
+    "vertical rhythm"
+  ],
+  "non_regression": [
+    "Shopify product form/variants",
+    "quantity",
+    "pricing",
+    "normal Add to Cart",
+    "product media",
+    "Save/Share",
+    "Build Your Wheel state/preview/availability/price/configured cart/quote",
+    "Fitment data/dependencies/vehicle state/Change Vehicle",
+    "recommendations",
+    "Theme Editor compatibility"
+  ],
+  "required_renders": [
+    "product.desktop.v4.png",
+    "product.tablet.v4.png",
+    "product.mobile.v4.png"
+  ]
+}

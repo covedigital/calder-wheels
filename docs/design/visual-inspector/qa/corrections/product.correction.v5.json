@@ -1,0 +1,181 @@
+{
+  "schema_version": "product.correction.v5",
+  "project": "Calder Wheels",
+  "state": "REVISION_REQUIRED",
+  "target_state": "READY_FOR_VISUAL_QA_ITERATION_6",
+  "implementation_model_assumption": "No image/vision access. This file is self-contained; do not require OpenCode to inspect PNGs.",
+  "desktop_container_px": 1178,
+  "targets": {
+    "global": {
+      "header": "Reuse approved homepage header component; dark navy; approximately 64px rendered desktop height unless existing shared header token differs.",
+      "page_surface": "#FFFFFF",
+      "primary_text": "#0E2A3E",
+      "gold": "#C2A48A",
+      "light_panel": "#F6F7F7"
+    },
+    "hero": {
+      "grid": "minmax(0, 57fr) minmax(0, 43fr)",
+      "gap_px_range": [
+        32,
+        40
+      ],
+      "gallery_min_height_px_range": [
+        500,
+        560
+      ],
+      "main_media_aspect": "~1.25:1 landscape/near-square visual footprint matching reference; use actual wheel product media",
+      "title_desktop_px_range": [
+        48,
+        58
+      ],
+      "construction_px_range": [
+        18,
+        22
+      ],
+      "body_px_range": [
+        15,
+        17
+      ],
+      "control_height_px_range": [
+        44,
+        50
+      ],
+      "primary_cta_height_px_range": [
+        48,
+        54
+      ]
+    },
+    "spec_engineering": {
+      "grid": "~47% / 53%",
+      "gap_px_range": [
+        28,
+        36
+      ],
+      "engineering_min_height_px_range": [
+        360,
+        400
+      ]
+    },
+    "finishes": {
+      "desktop_visible": 6,
+      "image_target_px_range": [
+        145,
+        180
+      ],
+      "surface": "white/minimal card chrome",
+      "selected": "1\u20132px Calder gold outline"
+    },
+    "real_world": {
+      "desktop_columns": 4,
+      "image_aspect": "~1.55:1 landscape",
+      "gap_px_range": [
+        4,
+        8
+      ]
+    },
+    "recommendations": {
+      "desktop_columns": 4,
+      "card_surface": "#FFFFFF",
+      "wheel_image_dominant": true,
+      "quick_add_dominant": false
+    },
+    "specialist_cta": {
+      "desktop_min_height_px_range": [
+        170,
+        210
+      ],
+      "layout": "text left / CTA right, contact methods below CTA",
+      "background": "dark navy plus wheel-detail image"
+    },
+    "footer": {
+      "action": "reuse approved homepage footer component"
+    }
+  },
+  "asset_binding_rules": [
+    "hero -> actual product.media wheel/product imagery only",
+    "Build Your Wheel preview -> actual configured wheel preview only",
+    "Available Finishes -> wheel/finish render media only",
+    "Real World -> automotive lifestyle media only",
+    "Engineering -> CNC/forging/manufacturing media only",
+    "Recommendations -> recommended product wheel media only",
+    "Specialist CTA -> approved wheel-detail/background asset"
+  ],
+  "implementation_actions": [
+    {
+      "id": "COR5-001",
+      "priority": "P0",
+      "action": "Replace all generic/fallback media bindings by semantic section-specific media bindings. Never use first arbitrary Shopify image or generic placeholder collection for wheel-specific sections."
+    },
+    {
+      "id": "COR5-002",
+      "priority": "P0",
+      "action": "Reuse approved homepage header and footer shared components; do not approximate them locally."
+    },
+    {
+      "id": "COR5-003",
+      "priority": "P0",
+      "action": "Set desktop hero to ~57/43 columns with 32\u201340px gap, increase gallery and right panel scale, and restore premium title/control hierarchy."
+    },
+    {
+      "id": "COR5-004",
+      "priority": "P0",
+      "action": "Convert Engineering to one continuous image-backed panel with dark gradient overlay, text upper-left, four capability items distributed along bottom."
+    },
+    {
+      "id": "COR5-005",
+      "priority": "P0",
+      "action": "Replace finish photo cards with six wheel-render items visible desktop; label beneath; selected gold outline."
+    },
+    {
+      "id": "COR5-006",
+      "priority": "P0",
+      "action": "Populate Real World from automotive gallery settings/metafields; four landscape images desktop. Do not render empty gray QA placeholders."
+    },
+    {
+      "id": "COR5-007",
+      "priority": "P0",
+      "action": "Replace recommendation markup/presentation with actual shared B1 component; remove Quick Add as dominant visual action."
+    },
+    {
+      "id": "COR5-008",
+      "priority": "P1",
+      "action": "Restyle Build Your Wheel using actual configured wheel preview and light Calder system; preserve all logic."
+    },
+    {
+      "id": "COR5-009",
+      "priority": "P1",
+      "action": "Reduce standalone fitment visual dominance; compact hero fitment status remains primary."
+    },
+    {
+      "id": "COR5-010",
+      "priority": "P0",
+      "action": "Rebuild specialist CTA presentation with approved image-backed dark treatment and desktop two-column hierarchy."
+    },
+    {
+      "id": "COR5-011",
+      "priority": "P0",
+      "action": "Remove/convert every {# ... #} marker to valid Liquid comments."
+    },
+    {
+      "id": "COR5-012",
+      "priority": "P1",
+      "action": "After desktop convergence, reflow at 768 and 390 while retaining readable typography and correct semantic media."
+    }
+  ],
+  "acceptance_checks": [
+    "No feet, bokeh, landscape finish cards, unrelated people/scenery in product/wheel slots",
+    "Hero visually dominated by actual wheel product media",
+    "Engineering contains visible manufacturing/CNC image",
+    "Six wheel finish renders visible at desktop when data/assets support six",
+    "Real World contains four automotive images at desktop",
+    "Recommendations contain wheel product imagery and B1 presentation",
+    "Approved shared header/footer present",
+    "No {# markers in rendered storefront",
+    "Build Your Wheel and Fitment functional smoke tests pass"
+  ],
+  "required_renders": [
+    "product.desktop.v6.png",
+    "product.tablet.v6.png",
+    "product.mobile.v6.png"
+  ]
+}

@@ -1,0 +1,231 @@
+{
+  "schema_version": "2.0",
+  "project": "Calder Wheels",
+  "artifact_type": "component_visual_spec",
+  "component": "Calder Find Your Fit / Fitment Finder",
+  "baseline_type": "high_fidelity_reference_rebaseline",
+  "primary_reference": "calder-fitment-section-reference(2).png",
+  "reference_image": {
+    "width_px": 2048,
+    "height_px": 682
+  },
+  "evidence_note": "Measurements are reference-derived estimates from the supplied raster mockup; anti-aliasing and crop boundaries imply \u00b12\u20136 px tolerance unless otherwise noted.",
+  "geometry": {
+    "component_shell": {
+      "left_px": 74,
+      "right_px": 1978,
+      "width_px": 1904,
+      "top_px": 207,
+      "bottom_px": 580,
+      "height_px": 373,
+      "width_pct": 92.97,
+      "evidence": "ESTIMATED"
+    },
+    "tabs": {
+      "top_px": 118,
+      "bottom_px": 210,
+      "height_px": 92,
+      "left_px": 74,
+      "by_vehicle_width_px": 349,
+      "by_wheel_style_width_px": 387,
+      "active_accent_px": 3,
+      "evidence": "ESTIMATED"
+    },
+    "hero_transition": {
+      "hero_light_transition_y_px": 188,
+      "tab_top_px": 118,
+      "tab_overlap_into_hero_px": 70,
+      "panel_top_px": 207,
+      "panel_extension_into_light_section_px": 373,
+      "evidence": "ESTIMATED"
+    },
+    "panel_radius_px": 15,
+    "content_left_px": 129,
+    "content_left_inset_px": 55,
+    "vehicle_divider": {
+      "x_px": 1521,
+      "top_px": 233,
+      "bottom_px": 556,
+      "height_px": 323,
+      "evidence": "ESTIMATED"
+    },
+    "vehicle_region": {
+      "left_px": 1521,
+      "right_px": 1978,
+      "width_px": 457,
+      "width_pct_of_shell": 24.0,
+      "content_left_px": 1576,
+      "evidence": "ESTIMATED"
+    }
+  },
+  "typography": {
+    "heading": {
+      "text": "FIND YOUR FIT",
+      "x_px": 129,
+      "top_px": 264,
+      "font_character": "geometric/grotesk sans",
+      "size_px_est": 52,
+      "weight_est": 700,
+      "line_height_px_est": 62,
+      "fit_color": "#D7A15E",
+      "primary_color": "#F7F7F5",
+      "evidence": "ESTIMATED"
+    },
+    "description": {
+      "x_px": 129,
+      "top_px": 351,
+      "width_px_est": 575,
+      "size_px_est": 20,
+      "line_height_px_est": 31,
+      "color": "#AEB6BC",
+      "wrap": [
+        "Select your vehicle to see compatible wheels,",
+        "real builds, and fitment details."
+      ],
+      "evidence": "ESTIMATED"
+    },
+    "labels": {
+      "size_px_est": 16,
+      "weight_est": 700,
+      "letter_spacing_px_est": 1.4,
+      "color": "#AEB6BC",
+      "evidence": "ESTIMATED"
+    },
+    "control_value": {
+      "size_px_est": 19,
+      "weight_est": 600,
+      "color": "#F4F5F4",
+      "evidence": "ESTIMATED"
+    },
+    "cta": {
+      "size_px_est": 18,
+      "weight_est": 700,
+      "letter_spacing_px_est": 2.0,
+      "evidence": "ESTIMATED"
+    }
+  },
+  "form": {
+    "label_top_px": 450,
+    "control_top_px": 475,
+    "control_bottom_px": 545,
+    "control_height_px": 70,
+    "gap_after_label_px_est": 9,
+    "controls": [
+      {
+        "name": "Year",
+        "x_px": 129,
+        "width_px": 201
+      },
+      {
+        "name": "Make",
+        "x_px": 357,
+        "width_px": 217
+      },
+      {
+        "name": "Model",
+        "x_px": 599,
+        "width_px": 218
+      },
+      {
+        "name": "Trim",
+        "x_px": 844,
+        "width_px": 249
+      }
+    ],
+    "control_radius_px_est": 7,
+    "control_background": "#102938",
+    "control_border": "#52616A",
+    "control_border_px_est": 2,
+    "evidence": "ESTIMATED"
+  },
+  "cta": {
+    "x_px": 1121,
+    "top_px": 465,
+    "width_px": 365,
+    "height_px": 80,
+    "bottom_px": 545,
+    "background": "#050A0D",
+    "border": "#D8A15F",
+    "border_px_est": 2,
+    "radius_px_est": 8,
+    "evidence": "ESTIMATED"
+  },
+  "selected_vehicle": {
+    "heading_top_px": 261,
+    "title_top_px": 300,
+    "status_top_px": 371,
+    "horizontal_divider": {
+      "x1_px": 1576,
+      "x2_px": 1931,
+      "y_px": 438,
+      "width_px": 355
+    },
+    "actions_top_px": 483,
+    "action_separator": {
+      "x_px": 1787,
+      "top_px": 483,
+      "bottom_px": 519,
+      "height_px": 36
+    },
+    "success_green": "#39D36B",
+    "evidence": "ESTIMATED"
+  },
+  "artwork": {
+    "contour_lines": {
+      "region_est": [
+        650,
+        207,
+        1110,
+        445
+      ],
+      "opacity_est": "8\u201316%",
+      "tone": "muted bronze/gray",
+      "evidence": "ESTIMATED"
+    },
+    "wheel_line_art": {
+      "region_est": [
+        1000,
+        207,
+        1518,
+        500
+      ],
+      "visual_width_px_est": 518,
+      "opacity_est": "16\u201328% with edge fade",
+      "crop": "large wheel/hub drawing cropped at panel top and vehicle-divider side",
+      "evidence": "ESTIMATED"
+    }
+  },
+  "colors": {
+    "panel_navy": "#001C2A",
+    "cta_black": "#050A0D",
+    "control_navy": "#102938",
+    "control_border": "#52616A",
+    "white": "#F7F7F5",
+    "secondary_gray": "#AEB6BC",
+    "bronze": "#D7A15E",
+    "success_green": "#39D36B",
+    "divider_gray": "#718089",
+    "technical_art": "rgba(177,139,92,0.20)"
+  },
+  "by_wheel_style": {
+    "requirement": "Use identical shell, tabs, heading, description, artwork, form baseline, CTA geometry, vehicle region and overall height. Change only active tab plus field labels/values unless functionality requires otherwise.",
+    "fields": [
+      "WHEEL TYPE",
+      "DIAMETER",
+      "FINISH",
+      "STYLE"
+    ],
+    "evidence": "ASSUMPTION_FROM_REFERENCE_AND_TASK"
+  },
+  "responsive": {
+    "evidence": "ASSUMPTION",
+    "requirements": [
+      "retain two usable tabs",
+      "retain heading hierarchy and bronze FIT",
+      "reflow controls without horizontal overflow",
+      "retain CTA prominence",
+      "place selected vehicle context after finder controls",
+      "decorative artwork may crop/fade more aggressively"
+    ]
+  }
+}

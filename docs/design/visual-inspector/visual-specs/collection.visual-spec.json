@@ -1,0 +1,566 @@
+{
+  "schema_version": "1.0",
+  "project": "Calder Wheels",
+  "artifact_type": "visual_specification",
+  "source": {
+    "file": "docs/design/mockups/approved-mockups/Calder - 2 - Category.png",
+    "viewport": {
+      "width": 1024,
+      "height": 1536
+    }
+  },
+  "page": {
+    "id": "collection",
+    "type": "Shopify Collection Page",
+    "summary": "Desktop collection page with global header, image-backed forged-wheels hero, vehicle-fitment bar, five-tile category navigation, left filter rail, three-column B1 wheel grid, pagination, assistance CTA, newsletter/benefits and global footer."
+  },
+  "global_layout": {
+    "content_max_width": {
+      "value": "~934px in 1024px reference; implementation should reuse verified Calder --container-max-width: 1178px at production desktop widths",
+      "range": "~91-92% of reference width",
+      "tolerance": "\u00b112px in reference-scale comparison",
+      "confidence": 0.94,
+      "evidence": "VERIFIED_PROJECT_CONTEXT"
+    },
+    "horizontal_gutters": {
+      "value": "~45px",
+      "range": "42-48px",
+      "tolerance": "\u00b16px",
+      "confidence": 0.92,
+      "evidence": "ESTIMATED"
+    },
+    "primary_alignment": "Main collection content aligns to a shared centered Calder container; hero text, fitment bar, category tiles, listing region and CTA share the same left/right system.",
+    "page_background": {
+      "value": "#FFFFFF / very light neutral surfaces",
+      "confidence": 0.94,
+      "evidence": "OBSERVED"
+    }
+  },
+  "sections": [
+    {
+      "id": "global-header",
+      "name": "Global Header",
+      "bbox_px": [
+        0,
+        0,
+        1024,
+        52
+      ],
+      "bbox_normalized": [
+        0.0,
+        0.0,
+        1.0,
+        0.0339
+      ],
+      "layout": {
+        "structure": "Dark full-width header; centered inner navigation with Calder logo left, primary nav center, utilities and gold-outline Find Your Fit CTA right."
+      },
+      "components": [
+        {
+          "id": "global-header-primary",
+          "type": "region",
+          "classification": "GLOBAL",
+          "bbox_px": [
+            0,
+            0,
+            1024,
+            52
+          ],
+          "bbox_normalized": [
+            0.0,
+            0.0,
+            1.0,
+            0.0339
+          ],
+          "description": "Dark full-width header; centered inner navigation with Calder logo left, primary nav center, utilities and gold-outline Find Your Fit CTA right.",
+          "relationships": [],
+          "implementation_guidance": [],
+          "confidence": 0.9,
+          "evidence": "ESTIMATED"
+        }
+      ],
+      "relationships": [],
+      "implementation_guidance": [],
+      "confidence": 0.9,
+      "evidence": "ESTIMATED"
+    },
+    {
+      "id": "collection-hero",
+      "name": "Collection Hero",
+      "bbox_px": [
+        0,
+        52,
+        1024,
+        216
+      ],
+      "bbox_normalized": [
+        0.0,
+        0.0339,
+        1.0,
+        0.1406
+      ],
+      "layout": {
+        "structure": "Full-width image-backed hero; left-aligned eyebrow/H1/copy within shared content gutter; wheel/car imagery dominates center-right; right-side standards statement."
+      },
+      "components": [
+        {
+          "id": "collection-hero-primary",
+          "type": "region",
+          "classification": "PAGE_SPECIFIC",
+          "bbox_px": [
+            0,
+            52,
+            1024,
+            216
+          ],
+          "bbox_normalized": [
+            0.0,
+            0.0339,
+            1.0,
+            0.1406
+          ],
+          "description": "Full-width image-backed hero; left-aligned eyebrow/H1/copy within shared content gutter; wheel/car imagery dominates center-right; right-side standards statement.",
+          "relationships": [],
+          "implementation_guidance": [],
+          "confidence": 0.9,
+          "evidence": "ESTIMATED"
+        }
+      ],
+      "relationships": [
+        "Hero begins immediately below global header.",
+        "Hero H1/copy align to the shared left content gutter.",
+        "Fitment panel overlaps the hero's lower boundary."
+      ],
+      "implementation_guidance": [
+        "Preserve full-bleed hero image treatment while constraining text to the shared Calder container.",
+        "Use existing display typography; the H1 is large uppercase with gold emphasis on 'WHEELS'."
+      ],
+      "confidence": 0.9,
+      "evidence": "ESTIMATED"
+    },
+    {
+      "id": "fitment-entry",
+      "name": "Vehicle Fitment Entry",
+      "bbox_px": [
+        43,
+        201,
+        981,
+        304
+      ],
+      "bbox_normalized": [
+        0.042,
+        0.1309,
+        0.958,
+        0.1979
+      ],
+      "layout": {
+        "structure": "White elevated panel overlapping hero/listing transition; heading row plus four selectors and dark CTA."
+      },
+      "components": [
+        {
+          "id": "fitment-entry-primary",
+          "type": "region",
+          "classification": "SHARED",
+          "bbox_px": [
+            43,
+            201,
+            981,
+            304
+          ],
+          "bbox_normalized": [
+            0.042,
+            0.1309,
+            0.958,
+            0.1979
+          ],
+          "description": "White elevated panel overlapping hero/listing transition; heading row plus four selectors and dark CTA.",
+          "relationships": [],
+          "implementation_guidance": [],
+          "confidence": 0.9,
+          "evidence": "ESTIMATED"
+        }
+      ],
+      "relationships": [
+        "Panel spans nearly the full shared content width and visually bridges hero to collection navigation."
+      ],
+      "implementation_guidance": [
+        "Preserve existing fitment logic/data bindings; match compact collection presentation without forking functionality."
+      ],
+      "confidence": 0.9,
+      "evidence": "ESTIMATED"
+    },
+    {
+      "id": "collection-category-nav",
+      "name": "Category Navigation",
+      "bbox_px": [
+        46,
+        324,
+        979,
+        386
+      ],
+      "bbox_normalized": [
+        0.0449,
+        0.2109,
+        0.9561,
+        0.2513
+      ],
+      "layout": {
+        "structure": "Five equal/near-equal image tiles: All Wheels, Forged Monoblock, Forged 3-Piece, By Vehicle, By Style; first tile active with gold edge.",
+        "columns": 5,
+        "gap": "~14px",
+        "tile_height": "~62px"
+      },
+      "components": [
+        {
+          "id": "collection-category-nav-primary",
+          "type": "region",
+          "classification": "PAGE_SPECIFIC",
+          "bbox_px": [
+            46,
+            324,
+            979,
+            386
+          ],
+          "bbox_normalized": [
+            0.0449,
+            0.2109,
+            0.9561,
+            0.2513
+          ],
+          "description": "Five equal/near-equal image tiles: All Wheels, Forged Monoblock, Forged 3-Piece, By Vehicle, By Style; first tile active with gold edge.",
+          "relationships": [],
+          "implementation_guidance": [],
+          "confidence": 0.9,
+          "evidence": "ESTIMATED"
+        }
+      ],
+      "relationships": [],
+      "implementation_guidance": [],
+      "confidence": 0.9,
+      "evidence": "ESTIMATED"
+    },
+    {
+      "id": "collection-results",
+      "name": "Collection Results Region",
+      "bbox_px": [
+        44,
+        407,
+        981,
+        1041
+      ],
+      "bbox_normalized": [
+        0.043,
+        0.265,
+        0.958,
+        0.6777
+      ],
+      "layout": {
+        "structure": "Two-column outer layout: ~181px filter rail plus remaining listing area; listing contains toolbar and 3-column product grid.",
+        "outer_columns": "~181px filter rail + ~1fr results",
+        "product_grid": "3 columns",
+        "card_gap": "~10-12px",
+        "toolbar": "single row above grid"
+      },
+      "components": [
+        {
+          "id": "collection-results-primary",
+          "type": "region",
+          "classification": "PAGE_SPECIFIC",
+          "bbox_px": [
+            44,
+            407,
+            981,
+            1041
+          ],
+          "bbox_normalized": [
+            0.043,
+            0.265,
+            0.958,
+            0.6777
+          ],
+          "description": "Two-column outer layout: ~181px filter rail plus remaining listing area; listing contains toolbar and 3-column product grid.",
+          "relationships": [],
+          "implementation_guidance": [],
+          "confidence": 0.9,
+          "evidence": "ESTIMATED"
+        }
+      ],
+      "relationships": [
+        "Filter rail starts level with results toolbar.",
+        "Three product columns align consistently under toolbar.",
+        "Help CTA aligns to results column, excluding filter rail."
+      ],
+      "implementation_guidance": [
+        "Keep Shopify facets/sort/pagination dynamic.",
+        "Use B1 shared card internals; collection controls card width/gap only."
+      ],
+      "confidence": 0.9,
+      "evidence": "ESTIMATED"
+    },
+    {
+      "id": "collection-help-cta",
+      "name": "Collection Help CTA",
+      "bbox_px": [
+        241,
+        1089,
+        982,
+        1200
+      ],
+      "bbox_normalized": [
+        0.2354,
+        0.709,
+        0.959,
+        0.7812
+      ],
+      "layout": {
+        "structure": "Wide dark image-backed conversion banner aligned to product-listing column, not filter rail."
+      },
+      "components": [
+        {
+          "id": "collection-help-cta-primary",
+          "type": "region",
+          "classification": "PAGE_SPECIFIC",
+          "bbox_px": [
+            241,
+            1089,
+            982,
+            1200
+          ],
+          "bbox_normalized": [
+            0.2354,
+            0.709,
+            0.959,
+            0.7812
+          ],
+          "description": "Wide dark image-backed conversion banner aligned to product-listing column, not filter rail.",
+          "relationships": [],
+          "implementation_guidance": [],
+          "confidence": 0.9,
+          "evidence": "ESTIMATED"
+        }
+      ],
+      "relationships": [],
+      "implementation_guidance": [],
+      "confidence": 0.9,
+      "evidence": "ESTIMATED"
+    },
+    {
+      "id": "newsletter-benefits",
+      "name": "Newsletter + Benefits",
+      "bbox_px": [
+        0,
+        1219,
+        1024,
+        1347
+      ],
+      "bbox_normalized": [
+        0.0,
+        0.7936,
+        1.0,
+        0.877
+      ],
+      "layout": {
+        "structure": "Full-width scenic newsletter band with heading left, email form right, and benefits strip below."
+      },
+      "components": [
+        {
+          "id": "newsletter-benefits-primary",
+          "type": "region",
+          "classification": "SHARED",
+          "bbox_px": [
+            0,
+            1219,
+            1024,
+            1347
+          ],
+          "bbox_normalized": [
+            0.0,
+            0.7936,
+            1.0,
+            0.877
+          ],
+          "description": "Full-width scenic newsletter band with heading left, email form right, and benefits strip below.",
+          "relationships": [],
+          "implementation_guidance": [],
+          "confidence": 0.9,
+          "evidence": "ESTIMATED"
+        }
+      ],
+      "relationships": [],
+      "implementation_guidance": [],
+      "confidence": 0.9,
+      "evidence": "ESTIMATED"
+    },
+    {
+      "id": "global-footer",
+      "name": "Global Footer",
+      "bbox_px": [
+        0,
+        1347,
+        1024,
+        1536
+      ],
+      "bbox_normalized": [
+        0.0,
+        0.877,
+        1.0,
+        1.0
+      ],
+      "layout": {
+        "structure": "Dark global footer with logo/description/socials left, link columns center, brand statement right, legal row bottom."
+      },
+      "components": [
+        {
+          "id": "global-footer-primary",
+          "type": "region",
+          "classification": "GLOBAL",
+          "bbox_px": [
+            0,
+            1347,
+            1024,
+            1536
+          ],
+          "bbox_normalized": [
+            0.0,
+            0.877,
+            1.0,
+            1.0
+          ],
+          "description": "Dark global footer with logo/description/socials left, link columns center, brand statement right, legal row bottom.",
+          "relationships": [],
+          "implementation_guidance": [],
+          "confidence": 0.9,
+          "evidence": "ESTIMATED"
+        }
+      ],
+      "relationships": [],
+      "implementation_guidance": [],
+      "confidence": 0.9,
+      "evidence": "ESTIMATED"
+    }
+  ],
+  "shared_components": [
+    {
+      "id": "global-header",
+      "name": "Calder global header",
+      "classification": "GLOBAL",
+      "reason": "Reuse accepted Home header; collection mockup shows same site-wide navigation system."
+    },
+    {
+      "id": "fitment-entry",
+      "name": "Calder vehicle fitment entry",
+      "classification": "SHARED",
+      "reason": "Shared vehicle-selection behavior; do not fork fitment functionality."
+    },
+    {
+      "id": "b1-product-card",
+      "name": "Calder B1 product listing card",
+      "classification": "SHARED",
+      "reason": "B1 remains authority for internal product-card composition; collection controls grid placement only."
+    },
+    {
+      "id": "newsletter-benefits",
+      "name": "Newsletter and benefits band",
+      "classification": "SHARED",
+      "reason": "Lower-page system should reuse accepted Home implementation."
+    },
+    {
+      "id": "global-footer",
+      "name": "Calder global footer",
+      "classification": "GLOBAL",
+      "reason": "Site-wide footer treatment."
+    }
+  ],
+  "unique_components": [
+    {
+      "id": "collection-hero",
+      "name": "Forged Wheels collection hero",
+      "classification": "PAGE_SPECIFIC",
+      "reason": "Collection-specific title/copy/image composition."
+    },
+    {
+      "id": "collection-category-nav",
+      "name": "Collection category tile navigation",
+      "classification": "PAGE_SPECIFIC",
+      "reason": "Five collection discovery modes shown directly under fitment."
+    },
+    {
+      "id": "collection-filter-rail",
+      "name": "Collection filter sidebar",
+      "classification": "PAGE_SPECIFIC",
+      "reason": "Desktop faceted filter rail for wheel discovery."
+    },
+    {
+      "id": "collection-toolbar",
+      "name": "Results/vehicle/sort/view toolbar",
+      "classification": "PAGE_SPECIFIC",
+      "reason": "Coordinates results count, selected vehicle, sorting and grid/list view."
+    },
+    {
+      "id": "collection-help-cta",
+      "name": "Need help finding the right setup CTA",
+      "classification": "PAGE_SPECIFIC",
+      "reason": "Collection-specific conversion banner below results."
+    }
+  ],
+  "responsive_assumptions": [
+    {
+      "target": "global-header",
+      "assumption": "Follow the accepted Home responsive header behavior rather than creating collection-specific navigation behavior.",
+      "confidence": 0.9,
+      "evidence": "ASSUMPTION"
+    },
+    {
+      "target": "collection-category-nav",
+      "assumption": "At narrow widths, preserve all five destinations using wrapping or horizontal scrolling rather than shrinking labels below legibility.",
+      "confidence": 0.72,
+      "evidence": "ASSUMPTION"
+    },
+    {
+      "target": "collection-filter-rail",
+      "assumption": "Desktop sidebar should collapse to a filter trigger/drawer on tablet/mobile while retaining Shopify facet behavior.",
+      "confidence": 0.86,
+      "evidence": "ASSUMPTION"
+    },
+    {
+      "target": "product-grid",
+      "assumption": "Three desktop columns reduce to two on tablet and one or two on mobile according to accepted Calder/Lumia responsive conventions and B1 minimum viable card width.",
+      "confidence": 0.78,
+      "evidence": "ASSUMPTION"
+    },
+    {
+      "target": "fitment-entry",
+      "assumption": "Reuse the accepted shared fitment component's existing responsive behavior; do not infer a new collection-only mobile form.",
+      "confidence": 0.9,
+      "evidence": "ASSUMPTION"
+    }
+  ],
+  "implementation_notes": [
+    "Approved collection mockup is authority for page-specific composition; accepted Home is authority for shared Calder design language.",
+    "Reuse the established Calder container system; known project context sets --container-max-width: 1178px.",
+    "Reuse Facundo for display/headings and Garet for UI/body with Poppins fallback where already established; verify exact accepted implementation classes/tokens before editing.",
+    "Map screenshot colors to existing Calder brand tokens instead of sampling near-duplicate values.",
+    "Preserve dynamic Shopify collection data, facets, sorting, pagination and product links.",
+    "Reuse B1 product card internally; do not create a collection-specific card fork.",
+    "Reuse fitment behavior; collection may present a compact entry treatment only if that is how the existing shared component supports the reference.",
+    "Do not alter accepted Home/shared components unless a change is safe for all consumers.",
+    "Capture v1 desktop render at the approved comparison viewport and optional tablet/mobile renders for responsive QA."
+  ],
+  "uncertainties": [
+    {
+      "target": "accepted-home-runtime-values",
+      "unknown": "Exact current accepted Home CSS values for button heights/radii, field treatment, breakpoints, and spacing tokens are not contained in the supplied collection screenshot.",
+      "resolution": "OpenCode must inspect the current accepted Home implementation before editing Collection and reuse its actual tokens/classes."
+    },
+    {
+      "target": "collection-filter-data",
+      "unknown": "Exact live facet counts and available values vary with Shopify product data.",
+      "resolution": "Use authoritative Shopify collection/filter/metafield data; do not hard-code mockup counts."
+    },
+    {
+      "target": "responsive-layout",
+      "unknown": "No approved tablet/mobile collection reference was supplied.",
+      "resolution": "Treat responsive behavior as ASSUMPTION and follow accepted Home/shared/Lumia behavior until a responsive reference is approved."
+    }
+  ]
+}

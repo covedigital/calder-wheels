@@ -1,0 +1,136 @@
+<section class="home-engineering" id="home-engineering-{{ section.id }}">
+  <div class="home-engineering__container">
+    <div class="home-engineering__copy">
+      <div class="home-engineering__eyebrow">{{ section.settings.eyebrow | default: 'The Process' }}</div>
+      <h2 class="home-engineering__heading">{{ section.settings.heading | default: 'Engineered<br>To Perform' }}</h2>
+      <div class="home-engineering__body">{{ section.settings.body_text | default: 'Every Calder wheel undergoes rigorous engineering and testing to ensure the highest standards of strength, weight, and durability.' }}</div>
+      <a href="{{ section.settings.cta_url }}" class="home-engineering__cta">
+        {{ section.settings.cta_text | default: 'Learn More' }}
+        <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+          <path d="M3 1L7 5L3 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+
+    <div class="home-engineering__media">
+      {% if section.settings.image != blank %}
+        {{ section.settings.image | image_url: width: 600 | image_tag: widths: '600,400,300', loading: 'lazy', alt: 'Engineering', class: 'home-engineering__image' }}
+      {% else %}
+        <div class="home-engineering__image" style="background:#d0d0d0;"></div>
+      {% endif %}
+    </div>
+
+    <div class="home-engineering__points">
+      <div class="home-engineering__point">
+        <svg class="home-engineering__point-icon" viewBox="0 0 18 18" fill="none">
+          <rect x="1" y="1" width="16" height="16" rx="2" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M6 9L8 11L12 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="home-engineering__point-text">{{ section.settings.point_1 | default: 'Forged Aluminum' }}</span>
+      </div>
+      <div class="home-engineering__point">
+        <svg class="home-engineering__point-icon" viewBox="0 0 18 18" fill="none">
+          <rect x="1" y="1" width="16" height="16" rx="2" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M6 9L8 11L12 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="home-engineering__point-text">{{ section.settings.point_2 | default: 'CNC Machined' }}</span>
+      </div>
+      <div class="home-engineering__point">
+        <svg class="home-engineering__point-icon" viewBox="0 0 18 18" fill="none">
+          <rect x="1" y="1" width="16" height="16" rx="2" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M6 9L8 11L12 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="home-engineering__point-text">{{ section.settings.point_3 | default: 'Strength Tested' }}</span>
+      </div>
+      <div class="home-engineering__point">
+        <svg class="home-engineering__point-icon" viewBox="0 0 18 18" fill="none">
+          <rect x="1" y="1" width="16" height="16" rx="2" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M6 9L8 11L12 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="home-engineering__point-text">{{ section.settings.point_4 | default: 'Real World Proven' }}</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Engineering Difference",
+  "tag": "section",
+  "class": "section--home-engineering",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "The Process"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Engineered<br>To Perform"
+    },
+    {
+      "type": "textarea",
+      "id": "body_text",
+      "label": "Body text",
+      "default": "Every Calder wheel undergoes rigorous engineering and testing to ensure the highest standards of strength, weight, and durability."
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "CTA text",
+      "default": "Learn More"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "CTA URL"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Engineering image"
+    },
+    {
+      "type": "header",
+      "content": "Feature Points"
+    },
+    {
+      "type": "text",
+      "id": "point_1",
+      "label": "Point 1",
+      "default": "Forged Aluminum"
+    },
+    {
+      "type": "text",
+      "id": "point_2",
+      "label": "Point 2",
+      "default": "CNC Machined"
+    },
+    {
+      "type": "text",
+      "id": "point_3",
+      "label": "Point 3",
+      "default": "Strength Tested"
+    },
+    {
+      "type": "text",
+      "id": "point_4",
+      "label": "Point 4",
+      "default": "Real World Proven"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Engineering Difference",
+      "category": "Home"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,106 @@
+{
+  "schema_version": "1.0",
+  "project": "Calder Wheels",
+  "artifact_type": "high_fidelity_visual_correction",
+  "component": "Calder Find Your Fit / Fitment Finder",
+  "baseline": "fitment.visual-spec.v2.json",
+  "result": "REVISION_REQUIRED",
+  "corrections": [
+    {
+      "id": "HF-001",
+      "affected_state": "DESKTOP_ALL",
+      "severity": "CRITICAL",
+      "classification": "STRUCTURAL",
+      "baseline_requirement": "Fitment tabs intentionally overlap the bottom of the hero; panel immediately bridges hero to light content.",
+      "observed": "Current implementation is separated from the hero by a large Make We Support section and blank/light vertical space.",
+      "material_discrepancy": "The defining hero\u2192fitment overlap/composition is absent.",
+      "recommended_correction": "Reposition the fitment component into the hero transition so tab top is approximately 70 px above the hero/light boundary in the 2048\u00d7682 reference coordinate system; remove unrelated intervening vertical separation from the reference composition.",
+      "measurement_status": "ESTIMATED",
+      "acceptance_condition": "At matched viewport/crop, fitment visually bridges hero and light section with tabs overlapping hero as in reference."
+    },
+    {
+      "id": "HF-002",
+      "affected_state": "DESKTOP_ALL",
+      "severity": "HIGH",
+      "classification": "GEOMETRY",
+      "baseline_requirement": "Reference shell \u22481904\u00d7373 px at x\u224874, y\u2248207; tabs \u224892 px tall.",
+      "observed": "Current shell is substantially taller in the browser capture and tabs are taller/blockier; content occupies more vertical space.",
+      "material_discrepancy": "Component proportions do not reproduce the compact reference panel.",
+      "recommended_correction": "Target reference shell aspect/proportions: width \u224893% of reference width, height \u2248373 px at 2048 reference width; normalize tab height to \u224892 px and finder row to the lower third of panel.",
+      "measurement_status": "ESTIMATED",
+      "acceptance_condition": "Shell and tab proportions visually match reference within normal browser tolerance."
+    },
+    {
+      "id": "HF-003",
+      "affected_state": "DESKTOP_ALL",
+      "severity": "HIGH",
+      "classification": "GEOMETRY",
+      "baseline_requirement": "Tabs have distinctive angled/slanted adjoining geometry, thin outline, and active bronze lower accent.",
+      "observed": "Current tabs are conventional rounded rectangles with a straight shared boundary.",
+      "material_discrepancy": "A major signature shape from the approved mockup is missing.",
+      "recommended_correction": "Reproduce the reference tab silhouettes: By Vehicle \u2248349\u00d792 px, By Wheel Style \u2248387\u00d792 px at reference scale, with angled adjoining edges and \u22483 px bronze active accent.",
+      "measurement_status": "ESTIMATED",
+      "acceptance_condition": "Tab silhouettes, overlap/join, border and active accent closely match reference."
+    },
+    {
+      "id": "HF-004",
+      "affected_state": "DESKTOP_ALL",
+      "severity": "HIGH",
+      "classification": "DECORATIVE",
+      "baseline_requirement": "Reference includes visible contour-flow lines plus a large technical wheel drawing spanning the center-right finder region.",
+      "observed": "Current implementation screenshot shows essentially flat navy with no comparable technical wheel composition.",
+      "material_discrepancy": "A major visual characteristic and center-panel balance is absent.",
+      "recommended_correction": "Restore both artwork systems. Wheel line art should occupy roughly x\u22481000\u20131518 and y\u2248207\u2013500 at reference scale with restrained 16\u201328% perceived opacity/fade; contour lines should span approximately x\u2248650\u20131110.",
+      "measurement_status": "ESTIMATED",
+      "acceptance_condition": "Wheel and contour artwork are clearly perceptible at reference-like scale/placement but remain subordinate to controls."
+    },
+    {
+      "id": "HF-005",
+      "affected_state": "DESKTOP_ALL",
+      "severity": "HIGH",
+      "classification": "TYPOGRAPHY",
+      "baseline_requirement": "Reference heading \u224852 px, description \u224820 px and single/two-line width \u2248575 px; tab labels are smaller than current implementation.",
+      "observed": "Current heading/tab typography and surrounding spacing are visibly larger/heavier relative to panel.",
+      "material_discrepancy": "Typography changes visual weight and contributes to oversized component feel.",
+      "recommended_correction": "Rebase typography to reference-derived scale and line-height; preserve bronze FIT and reference description wrapping.",
+      "measurement_status": "ESTIMATED",
+      "acceptance_condition": "Heading, description, tab labels and form typography match reference hierarchy and wrapping closely."
+    },
+    {
+      "id": "HF-006",
+      "affected_state": "DESKTOP_BY_VEHICLE",
+      "severity": "HIGH",
+      "classification": "GEOMETRY",
+      "baseline_requirement": "Reference controls share a 70 px height and differentiated widths: \u2248201/217/218/249 px with gaps \u224827/25/27 px; CTA \u2248365\u00d780 px.",
+      "observed": "Current controls are much wider due to distributing the row across nearly the entire shell, and CTA geometry differs.",
+      "material_discrepancy": "Form rhythm and CTA relationship do not match the reference.",
+      "recommended_correction": "Use reference-proportional individual widths rather than equal/flex-expanded fields; align all labels and controls to the reference baseline and set CTA to reference-proportional \u2248365\u00d780 px.",
+      "measurement_status": "ESTIMATED",
+      "acceptance_condition": "At matched reference scale, field widths, gaps, row baseline and CTA footprint closely reproduce reference."
+    },
+    {
+      "id": "HF-007",
+      "affected_state": "DESKTOP_SELECTED_VEHICLE",
+      "severity": "HIGH",
+      "classification": "STRUCTURAL",
+      "baseline_requirement": "Right vehicle region begins at x\u22481521, width\u2248457 px, with vertical divider, title/status, horizontal divider and action separator.",
+      "observed": "The supplied current browser screenshot is an unselected state and does not visually demonstrate the reference selected-vehicle composition.",
+      "material_discrepancy": "High-fidelity conformance of a major reference region cannot be verified and the current visible layout devotes the full row to finder controls.",
+      "recommended_correction": "Implement/verify selected state using the reference region geometry: \u224824% shell width, divider height \u2248323 px, \u224855 px content inset, horizontal divider \u2248355 px, separate Change Vehicle and Reset actions with small vertical separator.",
+      "measurement_status": "ESTIMATED/UNVERIFIED_CURRENT_STATE",
+      "acceptance_condition": "Provide selected-state render matching reference geometry and styling."
+    },
+    {
+      "id": "HF-008",
+      "affected_state": "DESKTOP_ALL",
+      "severity": "MEDIUM",
+      "classification": "COLOR",
+      "baseline_requirement": "Reference uses dark panel navy, darker CTA, brighter bronze outline/accent, medium-gray control borders and subtle gray structural dividers.",
+      "observed": "Current implementation is broadly on-palette but controls/panel have flatter tonal separation and the CTA is disabled/dim in supplied state.",
+      "material_discrepancy": "Surface contrast and bronze emphasis are weaker than reference.",
+      "recommended_correction": "Tune surfaces toward sampled/estimated baseline colors and verify enabled CTA state against reference rather than disabled-state appearance.",
+      "measurement_status": "ESTIMATED",
+      "acceptance_condition": "Surface hierarchy and bronze/gray contrast visually match reference."
+    }
+  ]
+}

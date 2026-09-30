@@ -1,0 +1,102 @@
+{
+  "schema_version": "2.0",
+  "project": "Calder Wheels",
+  "artifact_type": "high_fidelity_visual_correction",
+  "component": "Calder Find Your Fit / Fitment Finder",
+  "iteration": 3,
+  "baseline": "fitment.visual-spec.v2",
+  "reference": "calder-fitment-section-reference(4).png",
+  "implementation_version": "HIGH-FIDELITY v2",
+  "result": "REVISION_REQUIRED",
+  "normalization": {
+    "reference_dimensions": [
+      2048,
+      682
+    ],
+    "implementation_desktop_dimensions": [
+      2048,
+      682
+    ],
+    "method": "Direct 1:1 pixel-coordinate comparison; no desktop scaling required."
+  },
+  "corrections": [
+    {
+      "id": "HF3-001",
+      "severity": "HIGH",
+      "category": "STRUCTURAL",
+      "affected_state": "DESKTOP_ALL",
+      "reference_requirement": "Hero/light boundary\u2248y188; tabs top\u2248y118; overlap\u224870px; main panel top\u2248y207.",
+      "reference_measurement": "boundary\u2248188; tabs\u2248118\u2013210; panel top\u2248207",
+      "implementation_v2_measurement": "boundary\u2248379; tabs\u2248310\u2013387; panel top\u2248386",
+      "delta": "Boundary +\u2248191px; tab top +\u2248192px; panel top +\u2248179px. Overlap itself is near target (~69px), but the complete component is vertically displaced by the oversized hero.",
+      "evidence_classification": "DIRECT_1_TO_1_RASTER_ESTIMATE",
+      "recommended_correction": "Restore the reference desktop hero height/component vertical placement. Preserve the now-correct approximate tab overlap while moving the hero/light boundary, tabs and panel upward as one composition.",
+      "acceptance_condition": "At 2048\u00d7682, hero boundary, tabs and panel reproduce the reference y positions within normal browser/raster tolerance."
+    },
+    {
+      "id": "HF3-002",
+      "severity": "HIGH",
+      "category": "GEOMETRY",
+      "affected_state": "DESKTOP_ALL",
+      "reference_requirement": "Main shell x\u224874\u20131978; width\u22481904px (92.97%).",
+      "reference_measurement": "x\u224874; width\u22481904px",
+      "implementation_v2_measurement": "x\u2248168; right\u22481880; width\u22481712px",
+      "delta": "Left +\u224894px; right \u2212\u224898px; width \u2212\u2248192px.",
+      "evidence_classification": "DIRECT_1_TO_1_RASTER_ESTIMATE",
+      "recommended_correction": "Increase shell width and reduce desktop side insets to the reference footprint. Do not apply the prior 1920 normalization to these new 2048 captures.",
+      "acceptance_condition": "At 2048\u00d7682, shell spans approximately x74\u20131978 with reference-like width and radius."
+    },
+    {
+      "id": "HF3-003",
+      "severity": "MEDIUM",
+      "category": "GEOMETRY",
+      "affected_state": "DESKTOP_ALL",
+      "reference_requirement": "Tabs approximately 349\u00d792px and 387\u00d792px with the approved slanted adjoining geometry.",
+      "reference_measurement": "By Vehicle\u2248349\u00d792; By Wheel Style\u2248387\u00d792",
+      "implementation_v2_measurement": "By Vehicle\u2248291\u00d777; By Wheel Style\u2248331\u00d777",
+      "delta": "By Vehicle \u2248\u221258W/\u221215H; Wheel Style \u2248\u221256W/\u221215H.",
+      "evidence_classification": "DIRECT_1_TO_1_RASTER_ESTIMATE",
+      "recommended_correction": "Retain the improved slanted silhouette but enlarge both tabs to the established 2048 reference footprint.",
+      "acceptance_condition": "Tab widths/heights, seam and active underline closely reproduce the approved reference."
+    },
+    {
+      "id": "HF3-004",
+      "severity": "HIGH",
+      "category": "DECORATIVE",
+      "affected_state": "DESKTOP_ALL",
+      "reference_requirement": "Large technical wheel line-art occupies approximately x1000\u20131518, y207\u2013500, with separate flowing contour lines.",
+      "reference_measurement": "wheel artwork region\u2248518px wide in center-right finder",
+      "implementation_v2_measurement": "Concentric/radar target remains centered around x\u22481220; approved large wheel/spoke line-art is not reproduced.",
+      "delta": "Material asset/content, crop, scale and visual-balance mismatch remains.",
+      "evidence_classification": "DIRECT_VISUAL",
+      "recommended_correction": "Replace the radar/concentric motif with the approved large technical wheel/spoke line-art composition and reproduce the reference contour-line treatment.",
+      "acceptance_condition": "Side-by-side view shows the same recognizable large cropped technical wheel drawing in the reference center-right zone."
+    },
+    {
+      "id": "HF3-005",
+      "severity": "MEDIUM",
+      "category": "GEOMETRY",
+      "affected_state": "DESKTOP_ALL",
+      "reference_requirement": "Reference controls\u2248201/217/218/249\u00d770px and CTA\u2248365\u00d780px at the same 2048 width.",
+      "reference_measurement": "201/217/218/249\u00d770; CTA\u2248365\u00d780",
+      "implementation_v2_measurement": "controls visually\u2248187/203/204/234\u00d765; CTA\u2248341\u00d774",
+      "delta": "Fields and CTA are approximately 6\u20138% undersized, consistent with a stale 1920\u21922048 normalization.",
+      "evidence_classification": "DIRECT_1_TO_1_RASTER_ESTIMATE",
+      "recommended_correction": "Use the stable baseline's native 2048 reference measurements for this 2048 capture; restore the larger differentiated controls and CTA.",
+      "acceptance_condition": "At 2048\u00d7682, control and CTA footprints closely match the stated reference dimensions and lower-row rhythm."
+    },
+    {
+      "id": "HF3-006",
+      "severity": "MEDIUM",
+      "category": "GEOMETRY",
+      "affected_state": "DESKTOP_SELECTED_VEHICLE",
+      "reference_requirement": "Vehicle divider x\u22481521; vehicle region\u2248457px / \u224824% shell, with reference-like inset and action spacing.",
+      "reference_measurement": "divider\u22481521; region\u2248457px",
+      "implementation_v2_measurement": "divider\u22481495; region to shell right\u2248385px",
+      "delta": "Divider \u2248\u221226px; region \u2248\u221272px, compounded by the shell being \u2248192px too narrow.",
+      "evidence_classification": "DIRECT_1_TO_1_RASTER_ESTIMATE",
+      "recommended_correction": "After restoring shell width, re-establish divider/vehicle-region width and internal spacing from the reference. Keep the currently coherent success/action hierarchy.",
+      "acceptance_condition": "Selected vehicle region occupies approximately the reference 24% shell share and preserves reference divider/action geometry."
+    }
+  ]
+}

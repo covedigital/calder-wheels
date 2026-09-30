@@ -1,0 +1,106 @@
+{
+  "schema_version": "product.visual-spec.v10",
+  "project": "Calder Wheels",
+  "target": "Apex 201 PDP",
+  "desktop": {
+    "viewport": 1440,
+    "container_px": 1178,
+    "hero_columns": [
+      "57%",
+      "43%"
+    ],
+    "hero_gap_px": [
+      32,
+      38
+    ],
+    "h1_px": [
+      50,
+      54
+    ],
+    "h2_px": [
+      34,
+      40
+    ],
+    "body_px": [
+      15,
+      16
+    ],
+    "control_height_px": [
+      44,
+      48
+    ],
+    "primary_button_height_px": [
+      50,
+      54
+    ]
+  },
+  "fonts": {
+    "heading": {
+      "family": "Facundo",
+      "weight": 700
+    },
+    "ui": {
+      "family": "Garet",
+      "weights": [
+        400,
+        700
+      ]
+    },
+    "fallback": "Poppins"
+  },
+  "sections": {
+    "hero": "large wheel media + compact info",
+    "configurator": {
+      "columns": [
+        "52%",
+        "48%"
+      ],
+      "preview_max_height_px": [
+        400,
+        430
+      ]
+    },
+    "fitment": "secondary utility",
+    "specs_engineering": {
+      "columns": [
+        "47%",
+        "53%"
+      ],
+      "engineering": "single image-backed panel"
+    },
+    "finishes": {
+      "visible_desktop_target": 6,
+      "wheel_px": [
+        145,
+        175
+      ]
+    },
+    "real_world": {
+      "columns": 4,
+      "aspect_ratio": [
+        1.5,
+        1.6
+      ],
+      "gap_px": [
+        4,
+        8
+      ]
+    },
+    "recommendations": "shared B1",
+    "specialist_cta": {
+      "height_px": [
+        180,
+        210
+      ]
+    }
+  },
+  "known_v9_fixes": [
+    "construction font -> Garet",
+    "remove rounded hero card",
+    "single-panel Engineering",
+    "remove 260px finish cards",
+    "Real World landscape strip",
+    "fix tablet grid breakpoint",
+    "remove 22px mobile H1 override"
+  ]
+}
