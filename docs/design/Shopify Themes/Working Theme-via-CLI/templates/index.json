@@ -13,7 +13,7 @@
       "type": "home-hero",
       "settings": {
         "hero_image": "shopify://shop_images/hero-placeholder.png",
-        "eyebrow": "Precision Engineering",
+        "eyebrow": "Luxury Performance",
         "heading": "MADE WITH<br><span>PRECISION</span>",
         "body_text": "Forged from the finest materials. Engineered for those who demand performance. Every Calder wheel is a masterwork of automotive design.",
         "primary_cta_text": "Explore Wheels",
@@ -50,11 +50,11 @@
     "index_brands_carousel_LcDYLF": {
       "type": "index-brands-carousel",
       "blocks": {
-        "brand_hEHQna": {
+        "brand_eGARd9": {
           "type": "brand",
           "settings": {
             "title": "Title",
-            "image": "shopify://shop_images/calder-badge-teal.png",
+            "image": "shopify://shop_images/Ford-Motor-Company-Logo.png",
             "color_placeholder": "",
             "url": ""
           }
@@ -63,7 +63,7 @@
           "type": "brand",
           "settings": {
             "title": "Title",
-            "image": "shopify://shop_images/calder-badge-teal.png",
+            "image": "shopify://shop_images/GMC-Logo.png",
             "color_placeholder": "",
             "url": ""
           }
@@ -72,56 +72,66 @@
           "type": "brand",
           "settings": {
             "title": "Title",
-            "image": "shopify://shop_images/calder-badge-teal.png",
+            "image": "shopify://shop_images/cadillac_PNG42.png",
             "color_placeholder": "",
             "url": ""
           }
         },
-        "brand_eGARd9": {
+        "brand_iqbGbh": {
           "type": "brand",
           "settings": {
             "title": "Title",
-            "image": "shopify://shop_images/calder-badge-teal.png",
+            "image": "shopify://shop_images/16-land-rover-car-logo-png-brand-image.png",
+            "color_placeholder": "",
+            "url": ""
+          }
+        },
+        "brand_hEHQna": {
+          "type": "brand",
+          "settings": {
+            "title": "Title",
+            "image": "shopify://shop_images/land_rover_PNG79.png",
             "color_placeholder": "",
             "url": ""
           }
         }
       },
       "block_order": [
-        "brand_hEHQna",
+        "brand_eGARd9",
         "brand_8YEexy",
         "brand_pjdWFz",
-        "brand_eGARd9"
+        "brand_iqbGbh",
+        "brand_hEHQna"
       ],
       "name": "Brands / preset 6 (Ticker)",
       "settings": {
         "section_animation": true,
         "layout": "grid",
         "ticker_speed": 50,
-        "style": "quadrangular",
+        "style": "circle",
         "images_auto_height": true,
         "images_auto_height_padding": 34,
         "show_brands_auto": false,
         "brands_auto_limit": 100,
-        "bg": "bg-white",
+        "bg": "bg-none",
         "border": "none",
         "slides_per_view": "4",
         "slides_per_column": "1",
         "slides_per_view_mobile": "2",
         "slides_per_column_mobile": 2,
         "heading_alignment": "center",
-        "heading": "",
-        "subtitle": "",
+        "heading": "Luxury Vehicles",
+        "subtitle": "Trusted By World-Class Brands",
         "button": false,
         "button_bottom_on_mobile": false,
         "button_text": "View all",
         "button_url": "",
-        "section_width": "custom",
+        "section_width": "global",
         "container_max_width": 1978,
-        "spacing_sections": 100,
-        "use_global_desktop_space": true,
-        "spacing_sections_mobile": 70,
-        "use_global_mobile_space": true,
+        "spacing_sections": 30,
+        "use_global_desktop_space": false,
+        "spacing_sections_mobile": 30,
+        "use_global_mobile_space": false,
         "spacing_padding_sections": 100,
         "use_global_desktop_space_padding": true,
         "spacing_padding_sections_mobile": 70,
@@ -139,103 +149,54 @@
         "section_decoration_bottom_color": ""
       }
     },
-    "home-signature-wheels": {
-      "type": "home-signature-wheels",
-      "blocks": {
-        "wheel-1": {
-          "type": "wheel_card",
-          "settings": {
-            "image": "shopify://shop_images/wheel-mock-placeholder-1.png",
-            "label": "C1",
-            "title": "Forged Monoblock",
-            "construction_type": "Forged Monoblock",
-            "description": "Precision machined from a single billet of 6061-T6 aluminum. Uncompromising strength meets elegant design.",
-            "url": "/products/c1-forged-monoblock"
-          }
-        },
-        "wheel-2": {
-          "type": "wheel_card",
-          "settings": {
-            "image": "shopify://shop_images/wheel-mock-placeholder-2.png",
-            "label": "C2",
-            "title": "Forged 3-Piece",
-            "construction_type": "Forged 3-Piece",
-            "description": "Modular construction allows unlimited customization. Choose your center, barrel, and hardware finishes.",
-            "url": "/products/c2-forged-3-piece"
-          }
-        },
-        "wheel-3": {
-          "type": "wheel_card",
-          "settings": {
-            "image": "shopify://shop_images/wheel-mock-placeholder-3.png",
-            "label": "C3",
-            "title": "Hybrid Forged",
-            "construction_type": "Hybrid Forged",
-            "description": "The perfect balance of weight savings and durability. Track-proven performance for the street.",
-            "url": "/products/c3-hybrid-forged"
-          }
-        }
-      },
-      "block_order": [
-        "wheel-1",
-        "wheel-2",
-        "wheel-3"
-      ],
-      "disabled": true,
-      "settings": {
-        "eyebrow": "Our Collection",
-        "heading": "Signature Wheels",
-        "view_all_text": "View All Wheels",
-        "view_all_url": "/collections/all"
-      }
-    },
-    "index_product_carousel_dRxcDH": {
+    "index_product_carousel_7mf37j": {
       "type": "index-product-carousel",
-      "name": "Products carousel / preset 1 Default",
+      "name": "Products carousel / preset 3 Wide banner",
       "settings": {
         "section_animation": true,
-        "limit": 4,
-        "slides_per_view": "4",
+        "limit": 6,
+        "slides_per_view": "3",
         "compact": false,
         "reverse": false,
         "countdown": "none",
         "heading_alignment": "center",
-        "heading": "Signature Wheels",
-        "subtitle": "Our Collection",
+        "heading": "",
+        "subtitle": "",
         "collection": "frontpage",
-        "banner": false,
+        "banner": true,
         "banner_position": "flex-row",
         "layout": "wide",
         "color_placeholder": "",
-        "banner_title": "Best Offer",
-        "banner_subtitle": "DISCOUNT",
-        "invert_color": false,
-        "banner_text_decor": true,
-        "button": false,
-        "button_bottom_on_mobile": false,
+        "banner_title": "Signature Wheels",
+        "banner_subtitle": "Our Collection",
+        "invert_color": true,
+        "banner_text_decor": false,
+        "button": true,
+        "button_bottom_on_mobile": true,
         "button_text": "View all",
         "button_url": "",
         "button_color": "btn--invert",
         "image_bg_preset": "none",
         "pagination_invert_color": false,
-        "background_inner_type": "bg-alt",
+        "background_inner_type": "custom",
         "background_inner_color": "",
         "placeholder": true,
         "hide_on_mobile": false,
         "section_width": "global",
         "container_max_width": 1178,
-        "spacing_sections": 100,
-        "use_global_desktop_space": true,
-        "spacing_sections_mobile": 70,
-        "use_global_mobile_space": true,
-        "spacing_padding_sections": 100,
-        "use_global_desktop_space_padding": true,
-        "spacing_padding_sections_mobile": 70,
-        "use_global_mobile_space_padding": true,
-        "background": false,
+        "spacing_sections": 30,
+        "use_global_desktop_space": false,
+        "spacing_sections_mobile": 30,
+        "use_global_mobile_space": false,
+        "spacing_padding_sections": 0,
+        "use_global_desktop_space_padding": false,
+        "spacing_padding_sections_mobile": 0,
+        "use_global_mobile_space_padding": false,
+        "background": true,
         "background_preset": "none",
+        "background_image": "shopify://shop_images/signature-wheels-bg.png",
         "background_behavior": "bg-cover",
-        "background_image_placeholder_type": "color_global_secondary_bg",
+        "background_image_placeholder_type": "custom",
         "background_image_placeholder": "",
         "section_decoration_top": "none",
         "section_decoration_top_color_type": "color_global_primary_bg",
@@ -274,51 +235,6 @@
         "point_4": "Real World Proven"
       }
     },
-    "home-process": {
-      "type": "home-process",
-      "blocks": {
-        "process-3": {
-          "type": "process_image",
-          "settings": {
-            "image": "shopify://shop_images/luxury-cars-mock-placeholder-2.png",
-            "caption": "Machining"
-          }
-        },
-        "process_image_jrcqjb": {
-          "type": "process_image",
-          "settings": {
-            "image": "shopify://shop_images/luxury-cars-mock-placeholder-5.png",
-            "caption": "Machining"
-          }
-        },
-        "process_image_W7B8PX": {
-          "type": "process_image",
-          "settings": {
-            "image": "shopify://shop_images/luxury-cars-mock-placeholder-3.png",
-            "caption": "Machining"
-          }
-        },
-        "process_image_gn4ywi": {
-          "type": "process_image",
-          "settings": {
-            "image": "shopify://shop_images/luxury-cars-mock-placeholder-4.png",
-            "caption": "Machining"
-          }
-        }
-      },
-      "block_order": [
-        "process-3",
-        "process_image_jrcqjb",
-        "process_image_W7B8PX",
-        "process_image_gn4ywi"
-      ],
-      "disabled": true,
-      "settings": {
-        "eyebrow": "Our Process",
-        "heading": "From Concept to Reality",
-        "subtitle": "From raw billet to finished wheel — every step is precision controlled."
-      }
-    },
     "index_gallery_xqtAnR": {
       "type": "index-gallery",
       "blocks": {
@@ -335,7 +251,7 @@
         "image_xkGwYc": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/luxury-cars-mock-placeholder-4_c0d53d8a-06e7-44c1-9555-7c35de15254a.png",
+            "image": "shopify://shop_images/luxury-cars-mock-placeholder-5_d307c70b-9ee2-4c65-9955-471abdb7f279.png",
             "color_placeholder": "",
             "title": "#image1",
             "description": "Lorem ipsum dolor sit adipiscing elit, sed",
@@ -345,7 +261,7 @@
         "image_8iE46f": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/luxury-cars-mock-placeholder-4_c0d53d8a-06e7-44c1-9555-7c35de15254a.png",
+            "image": "shopify://shop_images/scenic-mock-placeholder-1.png",
             "color_placeholder": "",
             "title": "#image1",
             "description": "Lorem ipsum dolor sit adipiscing elit, sed",
@@ -355,7 +271,7 @@
         "image_48atPj": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/luxury-cars-mock-placeholder-4_c0d53d8a-06e7-44c1-9555-7c35de15254a.png",
+            "image": "shopify://shop_images/luxury-cars-placeholder-02.jpg",
             "color_placeholder": "",
             "title": "#image1",
             "description": "Lorem ipsum dolor sit adipiscing elit, sed",
@@ -382,10 +298,10 @@
         "subtitle": "Our Process",
         "section_width": "global",
         "container_max_width": 1178,
-        "spacing_sections": 100,
-        "use_global_desktop_space": true,
-        "spacing_sections_mobile": 70,
-        "use_global_mobile_space": true,
+        "spacing_sections": 70,
+        "use_global_desktop_space": false,
+        "spacing_sections_mobile": 40,
+        "use_global_mobile_space": false,
         "spacing_padding_sections": 100,
         "use_global_desktop_space_padding": true,
         "spacing_padding_sections_mobile": 70,
@@ -476,11 +392,9 @@
     "home-hero",
     "home-fitment",
     "index_brands_carousel_LcDYLF",
-    "home-signature-wheels",
-    "index_product_carousel_dRxcDH",
+    "index_product_carousel_7mf37j",
     "home-customize-band",
     "home-engineering",
-    "home-process",
     "index_gallery_xqtAnR",
     "home-gallery",
     "home-newsletter",

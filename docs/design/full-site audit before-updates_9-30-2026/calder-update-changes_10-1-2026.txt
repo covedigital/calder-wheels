@@ -1,0 +1,10 @@
+Calder Update Changes
+10-1-2026
+=========
+
+# Home
+- add video to hero
+- bolden hero title
+- fix fitment tab shape
+- add 4 process icons
+- fix gallery, not showing :|

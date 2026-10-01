@@ -1,0 +1,101 @@
+{
+  "operation": "CALDER_GLOBAL_DESIGN_SYSTEM_CORRECTION_V1",
+  "status": "COMPLETE_WITH_DEFERRED_ITEMS",
+  "global_rules_created": [
+    "Header: dark gradient, nav typography, links, icons, cart count, fitment CTA",
+    "Footer: dark gradient background, link colors, hover states",
+    "Section heading patterns (.h-custom-style, .h-sub)",
+    "Product carousel tab styling",
+    "Vertical slider styling",
+    "About benefits card styling",
+    "Brand ticker styling",
+    "Global eyebrow enforcement on collection",
+    "Container normalization across all pages",
+    "Cart page container/typography scoped rules"
+  ],
+  "global_rules_modified": [
+    "calder-base.css.liquid — added header, footer, and shared component styling",
+    "home.css.liquid — removed global header/footer/component rules",
+    "collection.css — replaced hardcoded colors/tokens with var(--calder-*)",
+    "calder-product.css — container normalization, eyebrow dedup",
+    "cart-page.css — added calc-site scoped Calder overrides"
+  ],
+  "page_overrides_removed": [
+    "home.css: header section (11-113) — moved to calder-base.css",
+    "home.css: footer section (1807-1822) — moved to calder-base.css",
+    "home.css: product carousel tabs — moved to calder-base.css",
+    "home.css: vertical slider — moved to calder-base.css",
+    "home.css: about-benefits cards — moved to calder-base.css",
+    "home.css: brand ticker — moved to calder-base.css",
+    "home.css: native section headings — moved to calder-base.css",
+    "collection.css: hardcoded gold #C2A48A → var(--calder-gold)",
+    "collection.css: hardcoded white #ffffff → var(--calder-white)", 
+    "collection.css: hardcoded navy #0E2A3E → var(--calder-navy)",
+    "collection.css: hardcoded dark #0A0A0A → var(--calder-dark)",
+    "collection.css: hardcoded gray #ddd/#555/#999 → var(--calder-*)",
+    "collection.css: hardcoded font-size/weight → var(--calder-*)",
+    "collection.css: container formula → var(--calder-content-max-width)",
+    "calder-product.css: redundant .calder-eyebrow redefinition",
+    "calder-product.css: container padding override"
+  ],
+  "page_exceptions_retained": [
+    "home.css: hero composition (page-specific layout)",
+    "home.css: fitment layout (page-specific component)",
+    "home.css: signature wheels grid (page-specific composition)",
+    "home.css: customize band layout (page-specific composition)",
+    "home.css: engineering grid (page-specific composition)",
+    "home.css: process strip (page-specific composition)",
+    "home.css: gallery panels (page-specific composition)",
+    "home.css: newsletter form (page-specific composition)",
+    "collection.css: hero layout (page composition)",
+    "collection.css: filter toolbar (page-specific component)",
+    "collection.css: product grid (page-specific composition)",
+    "collection.css: pagination (page-specific component)",
+    "calder-product.css: PDP hero grid (page composition)",
+    "calder-product.css: gallery (page-specific component)",
+    "calder-product.css: info panel (page-specific component)",
+    "calder-product.css: configurator (page-specific component)",
+    "calder-product.css: specs table (page-specific component)",
+    "calder-product.css: finishes (page-specific component)",
+    "calder-product.css: recommendations (page-specific component)",
+    "calder-product.css: specialist CTA (page-specific component)",
+    "cart: full cart shell reconstruction deferred to CART PAGE pass"
+  ],
+  "lumia_conflicts_neutralized": [
+    "Header bg — Lumia --header-bg overridden by Calder dark gradient",
+    "Footer bg — Lumia footer colors overridden by Calder dark styling",
+    "Navigation font — Lumia body font overridden by --calder-ui-font",
+    "Container width — Lumia --container-max-width aligned with --calder-container",
+    "Collection eyebrow — Hardcoded Lumia-like colors replaced with Calder tokens",
+    "Collection hero — Hardcoded rgba values replaced with Calder tokens"
+  ],
+  "files_created": [],
+  "files_modified": [
+    "docs/design/Shopify Themes/Working Theme-via-CLI/assets/calder-base.css.liquid",
+    "docs/design/Shopify Themes/Working Theme-via-CLI/assets/home.css.liquid",
+    "docs/design/Shopify Themes/Working Theme-via-CLI/assets/collection.css",
+    "docs/design/Shopify Themes/Working Theme-via-CLI/assets/calder-product.css",
+    "docs/design/Shopify Themes/Working Theme-via-CLI/assets/cart-page.css"
+  ],
+  "functional_regressions": [],
+  "visual_regressions": [],
+  "deferred_page_issues": [
+    "Cart full shell reconstruction (CART-001 to CART-008)",
+    "Product gallery/configuration composition (PROD-002 to PROD-008)",
+    "Collection fitment treatment (COL-004)",
+    "Collection product cards (COL-006)",
+    "Collection filter styling (COL-008)",
+    "Home hero composition (HOME-001)",
+    "Home fitment finder (HOME-002)"
+  ],
+  "user_managed_items_untouched": [
+    "Hero imagery",
+    "Collection hero imagery",
+    "Collection CTA imagery",
+    "Filter configuration data",
+    "Screenshot assets",
+    "Decorative imagery",
+    "Nonessential copy"
+  ],
+  "ready_for_cross_page_qa": true
+}

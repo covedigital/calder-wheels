@@ -55,6 +55,9 @@
 
 {%- liquid render 'head-fonts-colors' -%}
 
+{{ 'font.css' | asset_url | stylesheet_tag }}
+{{ 'calder-base.css' | asset_url | stylesheet_tag }}
+
 {%- if settings.use_bundles -%}
   {{ 'bundle-head' | append: rtl | append: '.css' | asset_url | stylesheet_tag }}
 {%- else -%}

@@ -28,6 +28,8 @@
       "settings": {
         "tab_1_label": "By Vehicle",
         "tab_2_label": "By Wheel Style",
+        "heading": "Find Your FIT",
+        "description": "Select your vehicle to see compatible wheels, real builds, and fitment details.",
         "label_year": "YEAR",
         "placeholder_year": "Year",
         "label_make": "MAKE",
@@ -50,6 +52,7 @@
           "type": "category",
           "settings": {
             "title": "All Wheels",
+            "url": "",
             "icon": "grid",
             "image": "shopify://shop_images/wheel-mock-placeholder-1.png",
             "active": true
@@ -59,6 +62,7 @@
           "type": "category",
           "settings": {
             "title": "Forged Monoblock",
+            "url": "",
             "icon": "monoblock",
             "image": "shopify://shop_images/wheel-mock-placeholder-2.png",
             "active": false
@@ -68,6 +72,7 @@
           "type": "category",
           "settings": {
             "title": "Forged 3-Piece",
+            "url": "",
             "icon": "3piece",
             "image": "shopify://shop_images/wheel-mock-placeholder-3.png",
             "active": false
@@ -77,6 +82,7 @@
           "type": "category",
           "settings": {
             "title": "By Vehicle",
+            "url": "",
             "icon": "car",
             "image": "shopify://shop_images/luxury-cars-mock-placeholder-2.png",
             "active": false
@@ -86,6 +92,7 @@
           "type": "category",
           "settings": {
             "title": "By Style",
+            "url": "",
             "icon": "sparkles",
             "image": "shopify://shop_images/luxury-cars-mock-placeholder-3.png",
             "active": false
@@ -119,6 +126,91 @@
         "infinite_scroll": true,
         "update_url": false,
         "product_reviews": false
+      }
+    },
+    "index_icons_BA4Mew": {
+      "type": "index-icons",
+      "blocks": {
+        "icon_dUQxFK": {
+          "type": "icon",
+          "settings": {
+            "icon": "icon-truck",
+            "icon_custom_svg": "",
+            "only_image": false,
+            "title": "FREE SHIPPING",
+            "subtitle": "When you spend $100+"
+          }
+        },
+        "icon_dbrTeH": {
+          "type": "icon",
+          "settings": {
+            "icon": "icon-return",
+            "icon_custom_svg": "",
+            "only_image": false,
+            "title": "FREE RETURNS",
+            "subtitle": "Within 14 days"
+          }
+        },
+        "icon_NRxzTV": {
+          "type": "icon",
+          "settings": {
+            "icon": "icon-secure",
+            "icon_custom_svg": "",
+            "only_image": false,
+            "title": "SECURED PAYMENTS",
+            "subtitle": "We are officially registered"
+          }
+        },
+        "icon_8FzH3k": {
+          "type": "icon",
+          "settings": {
+            "icon": "icon-support",
+            "icon_custom_svg": "",
+            "only_image": false,
+            "title": "SUPPORT 24/7",
+            "subtitle": "Ready to help our clients"
+          }
+        }
+      },
+      "block_order": [
+        "icon_dUQxFK",
+        "icon_dbrTeH",
+        "icon_NRxzTV",
+        "icon_8FzH3k"
+      ],
+      "name": "Icons / constructor",
+      "settings": {
+        "section_animation": true,
+        "heading_alignment": "center",
+        "layout": "layout_2",
+        "icons_font_size": "default",
+        "icons_background": false,
+        "icons_text_background": false,
+        "icons_bordered": false,
+        "under_slider": false,
+        "per_view": "4",
+        "per_view_mobile": "2",
+        "heading": "",
+        "subtitle": "",
+        "spacing_sections": 0,
+        "use_global_desktop_space": false,
+        "spacing_sections_mobile": 0,
+        "use_global_mobile_space": false,
+        "spacing_padding_sections": 40,
+        "use_global_desktop_space_padding": false,
+        "spacing_padding_sections_mobile": 40,
+        "use_global_mobile_space_padding": false,
+        "background": false,
+        "background_preset": "none",
+        "background_behavior": "bg-cover",
+        "background_image_placeholder_type": "color_global_secondary_bg",
+        "background_image_placeholder": "",
+        "section_decoration_top": "none",
+        "section_decoration_top_color_type": "color_global_primary_bg",
+        "section_decoration_top_color": "",
+        "section_decoration_bottom": "none",
+        "section_decoration_bottom_color_type": "color_global_primary_bg",
+        "section_decoration_bottom_color": ""
       }
     },
     "collection-help-cta": {
@@ -176,6 +268,16 @@
         "placeholder": "Your email address",
         "button_text": "Subscribe"
       }
+    },
+    "index_negative_space_FKebij": {
+      "type": "index-negative-space",
+      "name": "Negative space for footer",
+      "settings": {
+        "spacing_sections": 0,
+        "use_global_desktop_space": true,
+        "spacing_sections_mobile": 0,
+        "use_global_mobile_space": true
+      }
     }
   },
   "order": [
@@ -183,7 +285,9 @@
     "collection-fitment",
     "collection-category-nav",
     "product-grid",
+    "index_icons_BA4Mew",
     "collection-help-cta",
-    "collection-newsletter"
+    "collection-newsletter",
+    "index_negative_space_FKebij"
   ]
 }

@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "calder-pdp": {
@@ -13,25 +22,146 @@
         "placeholder_application": "Select Application"
       }
     },
-    "calder-configurator": {
-      "type": "wheel-configurator",
-      "settings": {}
-    },
-    "calder-fitment": {
-      "type": "fitment-finder",
-      "settings": {}
+    "index_icons_AafpRF": {
+      "type": "index-icons",
+      "blocks": {
+        "icon_98wbkw": {
+          "type": "icon",
+          "settings": {
+            "icon": "icon-truck",
+            "icon_custom_svg": "",
+            "only_image": false,
+            "title": "FREE SHIPPING",
+            "subtitle": "When you spend $100+"
+          }
+        },
+        "icon_gizKfD": {
+          "type": "icon",
+          "settings": {
+            "icon": "icon-return",
+            "icon_custom_svg": "",
+            "only_image": false,
+            "title": "FREE RETURNS",
+            "subtitle": "Within 14 days"
+          }
+        },
+        "icon_VNqwXi": {
+          "type": "icon",
+          "settings": {
+            "icon": "icon-secure",
+            "icon_custom_svg": "",
+            "only_image": false,
+            "title": "SECURED PAYMENTS",
+            "subtitle": "We are officially registered"
+          }
+        },
+        "icon_7cDdtQ": {
+          "type": "icon",
+          "settings": {
+            "icon": "icon-support",
+            "icon_custom_svg": "",
+            "only_image": false,
+            "title": "SUPPORT 24/7",
+            "subtitle": "Ready to help our clients"
+          }
+        }
+      },
+      "block_order": [
+        "icon_98wbkw",
+        "icon_gizKfD",
+        "icon_VNqwXi",
+        "icon_7cDdtQ"
+      ],
+      "name": "Icons / constructor",
+      "settings": {
+        "section_animation": true,
+        "heading_alignment": "center",
+        "layout": "layout_2",
+        "icons_font_size": "default",
+        "icons_background": false,
+        "icons_text_background": false,
+        "icons_bordered": false,
+        "under_slider": false,
+        "per_view": "4",
+        "per_view_mobile": "2",
+        "heading": "",
+        "subtitle": "",
+        "spacing_sections": 0,
+        "use_global_desktop_space": false,
+        "spacing_sections_mobile": 0,
+        "use_global_mobile_space": false,
+        "spacing_padding_sections": 40,
+        "use_global_desktop_space_padding": false,
+        "spacing_padding_sections_mobile": 40,
+        "use_global_mobile_space_padding": false,
+        "background": false,
+        "background_preset": "none",
+        "background_behavior": "bg-cover",
+        "background_image_placeholder_type": "color_global_secondary_bg",
+        "background_image_placeholder": "",
+        "section_decoration_top": "none",
+        "section_decoration_top_color_type": "color_global_primary_bg",
+        "section_decoration_top_color": "",
+        "section_decoration_bottom": "none",
+        "section_decoration_bottom_color_type": "color_global_primary_bg",
+        "section_decoration_bottom_color": ""
+      }
     },
     "calder-specs": {
       "type": "calder-specs",
-      "settings": {}
+      "settings": {
+        "specs_heading": "Specifications",
+        "spec_diameter": "18\" — 22\"",
+        "spec_width": "8.5\" — 11\"",
+        "spec_bolt": "5x112",
+        "spec_offset": "+22 to +45",
+        "spec_construction": "3-Piece Forged",
+        "spec_weight": "24.5 lbs",
+        "spec_load": "1,600 lbs",
+        "spec_finish": "Multiple Options",
+        "engineering_heading": "Engineered to Perform",
+        "engineering_text": "Every Calder wheel is precision-engineered from aerospace-grade materials, assembled to order by master craftsmen, and validated through rigorous testing before delivery."
+      }
+    },
+    "calder-configurator": {
+      "type": "wheel-configurator",
+      "settings": {
+        "spacing_blocks": 30,
+        "use_global_blocks_desktop_space": true,
+        "title": "Build Your Wheel",
+        "subtitle": "Select finishes to preview and order",
+        "show_3d": false,
+        "show_quote": true
+      }
+    },
+    "calder-fitment": {
+      "type": "fitment-finder",
+      "settings": {
+        "section_width": "global",
+        "container_max_width": 1180,
+        "heading": "Find Your Perfect Fit",
+        "subheading": "Select your vehicle to see compatible wheels",
+        "placeholder_year": "Select Year",
+        "placeholder_make": "Select Make",
+        "placeholder_model": "Select Model",
+        "placeholder_generation": "Select Generation",
+        "button_text": "View Compatible Wheels"
+      }
     },
     "calder-finishes": {
       "type": "calder-finishes",
-      "settings": {}
+      "settings": {
+        "heading": "Available Finishes"
+      }
     },
     "calder-gallery": {
       "type": "calder-gallery",
-      "settings": {}
+      "settings": {
+        "heading": "See It in the Real World",
+        "subheading": "",
+        "action_text": "View Gallery",
+        "gallery_link": ""
+      }
     },
     "calder-recommendations": {
       "type": "calder-recommendations",
@@ -42,17 +172,36 @@
     },
     "calder-specialist": {
       "type": "calder-specialist-cta",
-      "settings": {}
+      "settings": {
+        "heading": "Talk to a Wheel Specialist",
+        "text": "Have questions about fitment, finishes, or lead times? Our team of wheel specialists is here to help you find the perfect setup.",
+        "button_text": "Get in Touch",
+        "button_link": "",
+        "phone": "(555) 123-4567",
+        "email": "hello@calderwheels.com"
+      }
+    },
+    "index_negative_space_kiKQgx": {
+      "type": "index-negative-space",
+      "name": "Negative space for footer",
+      "settings": {
+        "spacing_sections": 0,
+        "use_global_desktop_space": true,
+        "spacing_sections_mobile": 0,
+        "use_global_mobile_space": true
+      }
     }
   },
   "order": [
     "calder-pdp",
+    "index_icons_AafpRF",
+    "calder-specs",
     "calder-configurator",
     "calder-fitment",
-    "calder-specs",
     "calder-finishes",
     "calder-gallery",
     "calder-recommendations",
-    "calder-specialist"
+    "calder-specialist",
+    "index_negative_space_kiKQgx"
   ]
 }

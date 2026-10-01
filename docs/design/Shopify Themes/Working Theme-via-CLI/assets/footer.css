@@ -1,7 +1,9 @@
 :root {
   --footer-logo-max-width: 145px;
-  --footer-logo-max-width-mobile: 120px
+  --footer-logo-max-width-mobile: 120px;
+  --column-caption-style-4-size: 15px !important;
 }
+
 .page-footer {
   position: relative;
   --container-max-width: var(--container-max-width-boxed);
@@ -250,7 +252,7 @@ body:not(.has-button-rounded) .subscribe-footer-input-group .btn {
   }
 }
 .footer-list-title {
-  margin-bottom: 26px;
+  margin-bottom: 0.5rem;
   color: var(--footer-content-color)
 }
 .footer-list-title .toggle-arrow {

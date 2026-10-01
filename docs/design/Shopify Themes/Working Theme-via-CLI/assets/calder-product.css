@@ -1,65 +1,13 @@
 /* ============================================================
-   Calder Wheels — Product Page v2 (Approved Light Visual System)
-   ============================================================ */
-
-/* ── Design Tokens ── */
-.page-calder {
-  --c-navy: #0E2A3E;
-  --c-blue: #1E4C68;
-  --c-gold: #C2A48A;
-  --c-slate: #876E5A;
-  --c-cream: #F2EFE9;
-  --c-near-black: #231F20;
-  --c-white: #FFFFFF;
-  --c-bg: #FFFFFF;
-  --c-bg-alt: #F8F8F8;
-  --c-bg-section: #F5F5F5;
-  --c-border: #E8E8E8;
-  --c-border-light: #F0F0F0;
-  --c-text: #666666;
-  --c-text-strong: #333333;
-  --c-text-heading: #0E2A3E;
-  --c-text-dim: #999999;
-  --heading-font: 'Facundo', 'Poppins', serif;
-  --ui-font: 'Garet', 'Poppins', sans-serif;
-  --container-width: 1178px;
-  --radius-sm: 6px;
-  --radius-md: 10px;
-  --radius-lg: 16px;
-
-  /* PDP Geometry — controlled here, Sol provides exact values */
-  --pdp-container-width: 1178px;
-  --pdp-hero-gap: 36px;
-  --pdp-hero-padding-y: 0px 0px 60px;
-  --pdp-hero-gallery-min-height: 500px;
-  --pdp-title-size: 52px;
-  --pdp-title-line-height: 1.0;
-  --pdp-construction-size: 20px;
-  --pdp-body-size: 16px;
-  --pdp-body-line-height: 1.6;
-  --pdp-control-height: 48px;
-  --pdp-primary-btn-height: 52px;
-  --pdp-price-size: 36px;
-  --pdp-section-padding-y: 48px;
-  --pdp-section-gap: 32px;
-  --pdp-build-preview-max-height: 420px;
-  --pdp-build-column-gap: 40px;
-  --pdp-build-control-size: 64px;
-  --pdp-fitment-min-height: 240px;
-  --pdp-fitment-control-height: 48px;
-  --pdp-engineering-min-height: 380px;
-  --pdp-finish-card-width: 160px;
-  --pdp-finish-gap: 20px;
-  --pdp-real-world-gap: 8px;
-  --pdp-recs-gap: 20px;
-  --pdp-specialist-min-height: 190px;
-  --pdp-specialist-cta-height: 48px;
-}
+    Calder Wheels — Product Page v2 (Approved Light Visual System)
+    Page-specific composition. Relies on calder-base.css.liquid
+    for all design tokens.
+    ============================================================ */
 
 .page-calder {
-  background: var(--c-bg);
-  color: var(--c-text);
-  font-family: var(--ui-font);
+  background: var(--calder-white);
+  color: var(--calder-muted);
+  font-family: var(--calder-ui-font);
   font-weight: 400;
 }
 
@@ -76,7 +24,7 @@
 .page-calder .calder-specialist-cta__heading,
 .page-calder .wheel-configurator__title,
 .page-calder .fitment-finder__heading {
-  font-family: var(--heading-font);
+  font-family: var(--calder-heading-font);
   font-weight: 700;
 }
 
@@ -105,27 +53,16 @@
 .page-calder .calder-specialist-cta__text,
 .page-calder .calder-specialist-cta__action,
 .page-calder .calder-specialist-cta__method {
-  font-family: var(--ui-font);
+  font-family: var(--calder-ui-font);
 }
 
 /* ── Container ── */
 .page-calder .container {
-  max-width: var(--container-width);
+  max-width: var(--calder-content-max-width);
   margin-left: auto;
   margin-right: auto;
-  padding-left: 15px;
-  padding-right: 15px;
-}
-
-/* ── Calder Eyebrow ── */
-.calder-eyebrow {
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 1.8px;
-  text-transform: uppercase;
-  color: var(--c-gold);
-  font-family: var(--ui-font);
-  margin-bottom: 8px;
+  padding-left: var(--calder-gutter);
+  padding-right: var(--calder-gutter);
 }
 
 /* ── Breadcrumbs ── */
@@ -133,28 +70,28 @@
   padding: 24px 0 12px;
   font-size: 12px;
   letter-spacing: 0.4px;
-  color: var(--c-text-dim);
-  font-family: var(--ui-font);
+  color: var(--calder-muted);
+  font-family: var(--calder-ui-font);
 }
 
 .page-calder .breadcrumbs a {
-  color: var(--c-text);
+  color: var(--calder-muted);
   text-decoration: none;
 }
 
 .page-calder .breadcrumbs a:hover {
-  color: var(--c-gold);
+  color: var(--calder-gold);
 }
 
 .page-calder .breadcrumbs span {
-  color: var(--c-text-dim);
+  color: var(--calder-muted);
 }
 
 /* ============================================================
    CALDER PRODUCT HERO
    ============================================================ */
 .calder-pdp {
-  background: var(--c-white);
+  background: var(--calder-white);
 }
 
 .calder-pdp__hero {
@@ -181,7 +118,7 @@
 .calder-pdp__main-image {
   width: 100%;
   aspect-ratio: 1;
-  background: var(--c-bg-alt);
+  background: var(--calder-warm-white);
   border-radius: 4px;
   overflow: hidden;
   display: flex;
@@ -214,11 +151,11 @@
   flex: 0 0 80px;
   width: 80px;
   height: 80px;
-  border-radius: var(--radius-sm);
+  border-radius: var(--calder-radius-sm);
   overflow: hidden;
-  background: var(--c-bg-alt);
+  background: var(--calder-warm-white);
   cursor: pointer;
-  border: 2px solid var(--c-border-light);
+  border: 2px solid var(--calder-border-light);
   transition: border-color 0.2s;
   display: flex;
   align-items: center;
@@ -226,11 +163,11 @@
 }
 
 .calder-pdp__thumb:hover {
-  border-color: var(--c-border);
+  border-color: var(--calder-border-color);
 }
 
 .calder-pdp__thumb.is-active {
-  border-color: var(--c-gold);
+  border-color: var(--calder-gold);
 }
 
 .calder-pdp__thumb img {
@@ -245,16 +182,16 @@
   font-weight: 700;
   letter-spacing: 1.8px;
   text-transform: uppercase;
-  color: var(--c-gold);
-  font-family: var(--ui-font);
+  color: var(--calder-gold);
+  font-family: var(--calder-ui-font);
   margin-bottom: 0;
 }
 
 .calder-pdp__title {
-  font-family: var(--heading-font);
+  font-family: var(--calder-heading-font);
   font-size: 52px;
   font-weight: 700;
-  color: var(--c-text-heading);
+  color: var(--calder-navy);
   line-height: 1.0;
   margin: 0;
   letter-spacing: -0.5px;
@@ -263,9 +200,9 @@
 .calder-pdp__tagline {
   font-size: 19px;
   line-height: 1.5;
-  color: var(--c-text);
+  color: var(--calder-muted);
   margin: 0;
-  font-family: var(--ui-font);
+  font-family: var(--calder-ui-font);
 }
 
 .calder-pdp__meta {
@@ -274,31 +211,31 @@
   gap: 16px;
   align-items: center;
   font-size: 13px;
-  color: var(--c-text);
+  color: var(--calder-muted);
 }
 
 .calder-pdp__stars {
-  color: var(--c-gold);
+  color: var(--calder-gold);
   font-size: 15px;
   letter-spacing: 2px;
 }
 
 .calder-pdp__sku {
   font-size: 12px;
-  color: var(--c-text-dim);
+  color: var(--calder-muted);
 }
 
 .calder-pdp__badge {
   display: inline-block;
   padding: 3px 12px;
-  background: var(--c-bg-alt);
-  color: var(--c-text-heading);
+  background: var(--calder-warm-white);
+  color: var(--calder-navy);
   font-size: 10px;
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: 0.5px;
   text-transform: uppercase;
   border-radius: 4px;
-  border: 1px solid var(--c-border-light);
+  border: 1px solid var(--calder-border-light);
 }
 
 /* ── Fitment Panel ── */
@@ -311,15 +248,15 @@
 }
 
 .calder-pdp__fitment--unset {
-  background: var(--c-bg-alt);
-  border: 1px solid var(--c-border);
-  border-radius: var(--radius-sm);
+  background: var(--calder-warm-white);
+  border: 1px solid var(--calder-border-color);
+  border-radius: var(--calder-radius-sm);
 }
 
 .calder-pdp__fitment--confirmed {
   background: #F6F8F4;
   border: 1px solid #DCE8D5;
-  border-radius: var(--radius-sm);
+  border-radius: var(--calder-radius-sm);
 }
 
 .calder-pdp__fitment-icon {
@@ -329,7 +266,7 @@
 }
 
 .calder-pdp__fitment--unset .calder-pdp__fitment-icon {
-  color: var(--c-text-dim);
+  color: var(--calder-muted);
 }
 
 .calder-pdp__fitment--confirmed .calder-pdp__fitment-icon {
@@ -338,32 +275,32 @@
 
 .calder-pdp__fitment-text {
   font-size: 13px;
-  color: var(--c-text);
-  font-family: var(--ui-font);
+  color: var(--calder-muted);
+  font-family: var(--calder-ui-font);
 }
 
 .calder-pdp__fitment-vehicle {
-  font-weight: 600;
-  color: var(--c-text-heading);
+  font-weight: 700;
+  color: var(--calder-navy);
 }
 
 .calder-pdp__fitment-action {
   margin-left: auto;
   font-size: 12px;
-  font-weight: 500;
-  color: var(--c-text);
+  font-weight: 400;
+  color: var(--calder-muted);
   white-space: nowrap;
   cursor: pointer;
   background: none;
   border: none;
   padding: 0;
-  font-family: var(--ui-font);
+  font-family: var(--calder-ui-font);
   text-decoration: underline;
   text-underline-offset: 2px;
 }
 
 .calder-pdp__fitment-action:hover {
-  color: var(--c-gold);
+  color: var(--calder-gold);
 }
 
 /* ── Configuration Controls ── */
@@ -391,19 +328,19 @@
   font-weight: 700;
   letter-spacing: 0.5px;
   text-transform: uppercase;
-  color: var(--c-text-heading);
-  font-family: var(--ui-font);
+  color: var(--calder-navy);
+  font-family: var(--calder-ui-font);
 }
 
 .calder-pdp__config-select {
   width: 100%;
   padding: 10px 14px;
-  background: var(--c-bg);
-  border: 1px solid var(--c-border);
-  border-radius: var(--radius-sm);
-  color: var(--c-text-strong);
+  background: var(--calder-white);
+  border: 1px solid var(--calder-border-color);
+  border-radius: var(--calder-radius-sm);
+  color: var(--calder-ink);
   font-size: 13px;
-  font-family: var(--ui-font);
+  font-family: var(--calder-ui-font);
   cursor: pointer;
   transition: border-color 0.2s;
   appearance: none;
@@ -415,7 +352,7 @@
 }
 
 .calder-pdp__config-select:focus {
-  border-color: var(--c-gold);
+  border-color: var(--calder-gold);
   outline: none;
 }
 
@@ -439,22 +376,22 @@
   border-radius: 50%;
   overflow: hidden;
   cursor: pointer;
-  border: 2px solid var(--c-border-light);
+  border: 2px solid var(--calder-border-light);
   transition: border-color 0.2s, transform 0.15s;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--c-bg-alt);
+  background: var(--calder-warm-white);
 }
 
 .calder-pdp__finish-chip:hover {
-  border-color: var(--c-border);
+  border-color: var(--calder-border-color);
   transform: scale(1.05);
 }
 
 .calder-pdp__finish-chip.is-selected {
-  border-color: var(--c-gold);
-  box-shadow: 0 0 0 2px var(--c-gold);
+  border-color: var(--calder-gold);
+  box-shadow: 0 0 0 2px var(--calder-gold);
 }
 
 .calder-pdp__finish-chip img {
@@ -465,7 +402,7 @@
 
 .calder-pdp__finish-chip span {
   font-size: 9px;
-  color: var(--c-text);
+  color: var(--calder-muted);
   text-align: center;
   padding: 4px;
   line-height: 1.2;
@@ -481,16 +418,16 @@
 }
 
 .calder-pdp__price {
-  font-family: var(--heading-font);
+  font-family: var(--calder-heading-font);
   font-size: 26px;
   font-weight: 700;
-  color: var(--c-text-heading);
+  color: var(--calder-navy);
   line-height: 1;
 }
 
 .calder-pdp__price-compare {
   font-size: 16px;
-  color: var(--c-text-dim);
+  color: var(--calder-muted);
   text-decoration: line-through;
   font-weight: 400;
   margin-left: 8px;
@@ -499,10 +436,10 @@
 .calder-pdp__qty {
   display: flex;
   align-items: center;
-  border: 1px solid var(--c-border);
-  border-radius: var(--radius-sm);
+  border: 1px solid var(--calder-border-color);
+  border-radius: var(--calder-radius-sm);
   overflow: hidden;
-  background: var(--c-bg);
+  background: var(--calder-white);
 }
 
 .calder-pdp__qty-btn {
@@ -513,15 +450,15 @@
   justify-content: center;
   background: none;
   border: none;
-  color: var(--c-text-strong);
+  color: var(--calder-ink);
   font-size: 16px;
   cursor: pointer;
   transition: background 0.15s;
-  font-family: var(--ui-font);
+  font-family: var(--calder-ui-font);
 }
 
 .calder-pdp__qty-btn:hover {
-  background: var(--c-bg-alt);
+  background: var(--calder-warm-white);
 }
 
 .calder-pdp__qty-input {
@@ -530,11 +467,11 @@
   text-align: center;
   background: none;
   border: none;
-  border-left: 1px solid var(--c-border);
-  border-right: 1px solid var(--c-border);
-  color: var(--c-text-strong);
+  border-left: 1px solid var(--calder-border-color);
+  border-right: 1px solid var(--calder-border-color);
+  color: var(--calder-ink);
   font-size: 14px;
-  font-family: var(--ui-font);
+  font-family: var(--calder-ui-font);
   -moz-appearance: textfield;
 }
 
@@ -553,10 +490,10 @@
   flex: 1;
   min-width: 200px;
   height: 50px;
-  border-radius: var(--radius-sm);
-  background: var(--c-gold);
-  color: var(--c-white);
-  font-family: var(--ui-font);
+  border-radius: var(--calder-radius-sm);
+  background: var(--calder-gold);
+  color: var(--calder-white);
+  font-family: var(--calder-ui-font);
   font-size: 13px;
   font-weight: 700;
   letter-spacing: 1px;
@@ -592,16 +529,16 @@
   gap: 6px;
   background: none;
   border: none;
-  color: var(--c-text);
+  color: var(--calder-muted);
   font-size: 13px;
-  font-family: var(--ui-font);
+  font-family: var(--calder-ui-font);
   cursor: pointer;
   padding: 4px 0;
   transition: color 0.2s;
 }
 
 .calder-pdp__action-btn:hover {
-  color: var(--c-gold);
+  color: var(--calder-gold);
 }
 
 .calder-pdp__action-btn svg {
@@ -614,10 +551,10 @@
   display: flex;
   gap: 24px;
   padding: 14px 0;
-  border-top: 1px solid var(--c-border-light);
+  border-top: 1px solid var(--calder-border-light);
   font-size: 12px;
-  color: var(--c-text);
-  font-family: var(--ui-font);
+  color: var(--calder-muted);
+  font-family: var(--calder-ui-font);
   flex-wrap: wrap;
 }
 
@@ -630,7 +567,7 @@
 .calder-pdp__trust-item svg {
   width: 14px;
   height: 14px;
-  color: var(--c-gold);
+  color: var(--calder-gold);
   flex-shrink: 0;
 }
 
@@ -638,9 +575,9 @@
    SPECIFICATIONS + ENGINEERING
    ============================================================ */
 .calder-specs-section {
-  background: var(--c-bg);
+  background: var(--calder-white);
   padding: 60px 0;
-  border-top: 1px solid var(--c-border-light);
+  border-top: 1px solid var(--calder-border-light);
 }
 
 .calder-specs-grid {
@@ -650,10 +587,10 @@
 }
 
 .calder-specs__heading {
-  font-family: var(--heading-font);
+  font-family: var(--calder-heading-font);
   font-size: 26px;
   font-weight: 700;
-  color: var(--c-text-heading);
+  color: var(--calder-navy);
   margin: 0 0 24px;
 }
 
@@ -665,7 +602,7 @@
 .calder-specs__table td {
   padding: 10px 16px;
   font-size: 13px;
-  border-bottom: 1px solid var(--c-border-light);
+  border-bottom: 1px solid var(--calder-border-light);
 }
 
 .calder-specs__table tr:last-child td {
@@ -673,14 +610,14 @@
 }
 
 .calder-specs__table td:first-child {
-  color: var(--c-text-dim);
-  font-weight: 500;
+  color: var(--calder-muted);
+  font-weight: 400;
   width: 120px;
 }
 
 .calder-specs__table td:last-child {
-  color: var(--c-text-strong);
-  font-weight: 500;
+  color: var(--calder-ink);
+  font-weight: 400;
 }
 
 /* ── Engineering Panel ── */
@@ -691,16 +628,16 @@
 }
 
 .calder-engineering__heading {
-  font-family: var(--heading-font);
+  font-family: var(--calder-heading-font);
   font-size: 22px;
   font-weight: 700;
-  color: var(--c-text-heading);
+  color: var(--calder-navy);
   margin: 0 0 20px;
 }
 
 .calder-engineering__panel {
-  background: var(--c-navy);
-  border-radius: var(--radius-md);
+  background: var(--calder-navy);
+  border-radius: var(--calder-radius-md);
   overflow: hidden;
   border: none;
 }
@@ -710,7 +647,7 @@
   aspect-ratio: 16/9;
   object-fit: cover;
   display: block;
-  background: var(--c-navy);
+  background: var(--calder-navy);
 }
 
 .calder-engineering__body {
@@ -718,10 +655,10 @@
 }
 
 .calder-engineering__body h3 {
-  font-family: var(--heading-font);
+  font-family: var(--calder-heading-font);
   font-size: 20px;
   font-weight: 700;
-  color: var(--c-white);
+  color: var(--calder-white);
   margin: 0 0 10px;
 }
 
@@ -757,7 +694,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--c-gold);
+  color: var(--calder-gold);
 }
 
 .calder-engineering__cap-icon svg {
@@ -773,9 +710,9 @@
 
 .calder-engineering__cap-text strong {
   display: block;
-  color: var(--c-white);
+  color: var(--calder-white);
   font-size: 13px;
-  font-weight: 600;
+  font-weight: 700;
   margin-bottom: 3px;
 }
 
@@ -784,8 +721,8 @@
    ============================================================ */
 .calder-configurator {
   padding: 60px 0;
-  background: var(--c-bg);
-  border-top: 1px solid var(--c-border-light);
+  background: var(--calder-white);
+  border-top: 1px solid var(--calder-border-light);
 }
 
 .calder-configurator .wheel-configurator {
@@ -798,17 +735,17 @@
 }
 
 .calder-configurator .wheel-configurator__title {
-  font-family: var(--heading-font);
+  font-family: var(--calder-heading-font);
   font-size: 22px;
   font-weight: 700;
-  color: var(--c-text-heading);
+  color: var(--calder-navy);
   margin-bottom: 8px;
 }
 
 .calder-configurator .wheel-configurator__subtitle {
   font-size: 14px;
-  color: var(--c-text);
-  font-family: var(--ui-font);
+  color: var(--calder-muted);
+  font-family: var(--calder-ui-font);
 }
 
 .calder-configurator .wheel-configurator__layout {
@@ -816,9 +753,9 @@
 }
 
 .calder-configurator .wheel-configurator__canvas {
-  background: var(--c-bg-alt);
-  border-radius: var(--radius-lg);
-  border: 1px solid var(--c-border-light);
+  background: var(--calder-warm-white);
+  border-radius: var(--calder-radius-lg);
+  border: 1px solid var(--calder-border-light);
 }
 
 .calder-configurator .wheel-configurator__label {
@@ -826,8 +763,8 @@
   font-weight: 700;
   letter-spacing: 0.8px;
   text-transform: uppercase;
-  color: var(--c-text-heading);
-  font-family: var(--ui-font);
+  color: var(--calder-navy);
+  font-family: var(--calder-ui-font);
   margin-bottom: 12px;
 }
 
@@ -835,31 +772,31 @@
   width: 64px;
   height: 64px;
   border-radius: 50%;
-  border: 2px solid var(--c-border-light);
-  background: var(--c-white);
+  border: 2px solid var(--calder-border-light);
+  background: var(--calder-white);
 }
 
 .calder-configurator .wheel-configurator__option:hover {
-  border-color: var(--c-border);
+  border-color: var(--calder-border-color);
   transform: scale(1.08);
 }
 
 .calder-configurator .wheel-configurator__option--selected {
-  border-color: var(--c-gold);
-  box-shadow: 0 0 0 2px var(--c-gold);
+  border-color: var(--calder-gold);
+  box-shadow: 0 0 0 2px var(--calder-gold);
 }
 
 .calder-configurator .wheel-configurator__add-btn {
   height: 48px;
-  background: var(--c-gold);
-  color: var(--c-white);
-  font-family: var(--ui-font);
+  background: var(--calder-gold);
+  color: var(--calder-white);
+  font-family: var(--calder-ui-font);
   font-size: 13px;
   font-weight: 700;
   letter-spacing: 1px;
   text-transform: uppercase;
   border: none;
-  border-radius: var(--radius-sm);
+  border-radius: var(--calder-radius-sm);
   transition: background 0.2s;
 }
 
@@ -869,14 +806,14 @@
 
 .calder-configurator .wheel-configurator__quote-btn {
   background: transparent;
-  border: 1px solid var(--c-gold);
-  color: var(--c-gold);
-  font-family: var(--ui-font);
+  border: 1px solid var(--calder-gold);
+  color: var(--calder-gold);
+  font-family: var(--calder-ui-font);
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 1px;
   text-transform: uppercase;
-  border-radius: var(--radius-sm);
+  border-radius: var(--calder-radius-sm);
   transition: background 0.2s;
 }
 
@@ -885,12 +822,12 @@
 }
 
 .calder-configurator .wheel-configurator__summary {
-  border-top-color: var(--c-border-light);
-  color: var(--c-text);
+  border-top-color: var(--calder-border-light);
+  color: var(--calder-muted);
 }
 
 .calder-configurator .wheel-configurator__summary-item strong {
-  color: var(--c-gold);
+  color: var(--calder-gold);
 }
 
 /* ============================================================
@@ -898,15 +835,15 @@
    ============================================================ */
 .calder-finishes {
   padding: 60px 0;
-  background: var(--c-bg-alt);
-  border-top: 1px solid var(--c-border-light);
+  background: var(--calder-warm-white);
+  border-top: 1px solid var(--calder-border-light);
 }
 
 .calder-finishes__heading {
-  font-family: var(--heading-font);
+  font-family: var(--calder-heading-font);
   font-size: 22px;
   font-weight: 700;
-  color: var(--c-text-heading);
+  color: var(--calder-navy);
   margin: 0 0 24px;
 }
 
@@ -939,8 +876,8 @@
   aspect-ratio: 1;
   border-radius: 4px;
   overflow: hidden;
-  background: var(--c-white);
-  border: 2px solid var(--c-border-light);
+  background: var(--calder-white);
+  border: 2px solid var(--calder-border-light);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -948,8 +885,8 @@
 }
 
 .calder-finishes__card.is-selected .calder-finishes__card-media {
-  border-color: var(--c-gold);
-  box-shadow: 0 0 0 2px var(--c-gold);
+  border-color: var(--calder-gold);
+  box-shadow: 0 0 0 2px var(--calder-gold);
 }
 
 .calder-finishes__card-media img {
@@ -961,15 +898,15 @@
 
 .calder-finishes__card-label {
   font-size: 13px;
-  font-weight: 600;
-  color: var(--c-text-heading);
+  font-weight: 700;
+  color: var(--calder-navy);
   text-align: center;
-  font-family: var(--ui-font);
+  font-family: var(--calder-ui-font);
 }
 
 .calder-finishes__card-meta {
   font-size: 11px;
-  color: var(--c-text-dim);
+  color: var(--calder-muted);
   text-align: center;
 }
 
@@ -978,43 +915,43 @@
    ============================================================ */
 .page-calder .fitment-finder {
   padding: 60px 0;
-  background: var(--c-bg-alt);
-  border-top: 1px solid var(--c-border-light);
-  border-bottom: 1px solid var(--c-border-light);
+  background: var(--calder-warm-white);
+  border-top: 1px solid var(--calder-border-light);
+  border-bottom: 1px solid var(--calder-border-light);
 }
 
 .page-calder .fitment-finder__heading {
-  color: var(--c-text-heading);
-  font-family: var(--heading-font);
+  color: var(--calder-navy);
+  font-family: var(--calder-heading-font);
   font-size: 20px;
   font-weight: 700;
 }
 
 .page-calder .fitment-finder__subheading {
-  color: var(--c-text);
-  font-family: var(--ui-font);
+  color: var(--calder-muted);
+  font-family: var(--calder-ui-font);
 }
 
 .page-calder .fitment-finder__select {
-  background: var(--c-white);
-  border-color: var(--c-border);
-  color: var(--c-text-strong);
-  font-family: var(--ui-font);
+  background: var(--calder-white);
+  border-color: var(--calder-border-color);
+  color: var(--calder-ink);
+  font-family: var(--calder-ui-font);
 }
 
 .page-calder .fitment-finder__select:focus {
-  border-color: var(--c-gold);
+  border-color: var(--calder-gold);
 }
 
 .page-calder .fitment-finder__submit {
-  background: var(--c-gold);
-  color: var(--c-white);
-  font-family: var(--ui-font);
+  background: var(--calder-gold);
+  color: var(--calder-white);
+  font-family: var(--calder-ui-font);
   font-weight: 700;
   letter-spacing: 1px;
   text-transform: uppercase;
   border: none;
-  border-radius: var(--radius-sm);
+  border-radius: var(--calder-radius-sm);
   height: 48px;
 }
 
@@ -1023,20 +960,20 @@
 }
 
 .page-calder .fitment-finder__result-item {
-  background: var(--c-white);
-  border-color: var(--c-border-light);
+  background: var(--calder-white);
+  border-color: var(--calder-border-light);
 }
 
 .page-calder .fitment-finder__result-item:hover {
-  border-color: var(--c-gold);
+  border-color: var(--calder-gold);
 }
 
 .page-calder .fitment-finder__result-title {
-  color: var(--c-text-heading);
+  color: var(--calder-navy);
 }
 
 .page-calder .fitment-finder__result-price {
-  color: var(--c-gold);
+  color: var(--calder-gold);
 }
 
 /* ============================================================
@@ -1044,8 +981,8 @@
    ============================================================ */
 .calder-gallery-section {
   padding: 60px 0;
-  background: var(--c-white);
-  border-top: 1px solid var(--c-border-light);
+  background: var(--calder-white);
+  border-top: 1px solid var(--calder-border-light);
 }
 
 .calder-gallery-section__header {
@@ -1056,23 +993,23 @@
 }
 
 .calder-gallery-section__heading {
-  font-family: var(--heading-font);
+  font-family: var(--calder-heading-font);
   font-size: 22px;
   font-weight: 700;
-  color: var(--c-text-heading);
+  color: var(--calder-navy);
   margin: 0;
 }
 
 .calder-gallery-section__subheading {
   font-size: 14px;
-  color: var(--c-text);
+  color: var(--calder-muted);
   margin: 4px 0 0;
 }
 
 .calder-gallery-section__action {
   font-size: 13px;
-  font-weight: 600;
-  color: var(--c-gold);
+  font-weight: 700;
+  color: var(--calder-gold);
   text-decoration: none;
   white-space: nowrap;
 }
@@ -1092,7 +1029,7 @@
   aspect-ratio: 4/3;
   border-radius: 2px;
   overflow: hidden;
-  background: var(--c-bg-alt);
+  background: var(--calder-warm-white);
 }
 
 .calder-gallery-grid__item img {
@@ -1111,15 +1048,15 @@
    ============================================================ */
 .calder-recommendations {
   padding: 60px 0;
-  background: var(--c-bg-alt);
-  border-top: 1px solid var(--c-border-light);
+  background: var(--calder-warm-white);
+  border-top: 1px solid var(--calder-border-light);
 }
 
 .calder-recommendations__heading {
-  font-family: var(--heading-font);
+  font-family: var(--calder-heading-font);
   font-size: 26px;
   font-weight: 700;
-  color: var(--c-text-heading);
+  color: var(--calder-navy);
   margin: 0 0 28px;
   text-align: center;
 }
@@ -1131,8 +1068,8 @@
 }
 
 .calder-recommendations calder-product-card {
-  background: var(--c-white);
-  border: 1px solid var(--c-border-light);
+  background: var(--calder-white);
+  border: 1px solid var(--calder-border-light);
   box-shadow: 0 1px 6px rgba(0,0,0,0.04);
 }
 
@@ -1142,21 +1079,21 @@
 
 .calder-recommendations .calder-card__title,
 .calder-recommendations .calder-card__title a {
-  color: var(--c-text-heading);
+  color: var(--calder-navy);
 }
 
 .calder-recommendations .calder-card__type,
 .calder-recommendations .calder-card__type a {
-  color: var(--c-gold);
+  color: var(--calder-gold);
 }
 
 .calder-recommendations .calder-card__price .prd-price-regular {
-  color: var(--c-text-heading);
+  color: var(--calder-navy);
 }
 
 .calder-recommendations .calder-card__action .btn {
-  background: var(--c-gold);
-  color: var(--c-white);
+  background: var(--calder-gold);
+  color: var(--calder-white);
 }
 
 .calder-recommendations .calder-card__action .btn:hover {
@@ -1164,23 +1101,23 @@
 }
 
 .calder-recommendations .calder-card__details a {
-  color: var(--c-text);
+  color: var(--calder-muted);
 }
 
 .calder-recommendations .calder-card__features {
-  border-top-color: var(--c-border-light);
+  border-top-color: var(--calder-border-light);
 }
 
 .calder-recommendations .calder-card__feature {
-  border-right-color: var(--c-border-light);
+  border-right-color: var(--calder-border-light);
 }
 
 /* ============================================================
    SPECIALIST CTA — Navy Band
    ============================================================ */
 .calder-specialist-cta {
-  background: var(--c-navy);
-  color: var(--c-white);
+  background: var(--calder-navy);
+  color: var(--calder-white);
   padding: 70px 0;
   position: relative;
   overflow: hidden;
@@ -1213,10 +1150,10 @@
 }
 
 .calder-specialist-cta__heading {
-  font-family: var(--heading-font);
+  font-family: var(--calder-heading-font);
   font-size: 24px;
   font-weight: 700;
-  color: var(--c-white);
+  color: var(--calder-white);
   margin: 0 0 12px;
 }
 
@@ -1233,15 +1170,15 @@
   align-items: center;
   gap: 8px;
   padding: 14px 32px;
-  background: var(--c-gold);
-  color: var(--c-near-black);
-  font-family: var(--ui-font);
+  background: var(--calder-gold);
+  color: var(--calder-ink);
+  font-family: var(--calder-ui-font);
   font-size: 13px;
   font-weight: 700;
   letter-spacing: 1px;
   text-transform: uppercase;
   border: none;
-  border-radius: var(--radius-sm);
+  border-radius: var(--calder-radius-sm);
   cursor: pointer;
   text-decoration: none;
   transition: background 0.2s;
@@ -1268,7 +1205,7 @@
 .calder-specialist-cta__method svg {
   width: 18px;
   height: 18px;
-  color: var(--c-gold);
+  color: var(--calder-gold);
 }
 
 /* ============================================================

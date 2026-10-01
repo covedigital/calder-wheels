@@ -713,3 +713,68 @@
 .cart-empty-icon > svg path {
   fill: var(--cart-empty-svg-color)
 }
+
+
+/* ============================================================
+   CALDER CART OVERRIDES
+   Scoped to Calder site. Typography and shell consistency.
+   Full cart shell reconstruction is in the CART PAGE pass.
+   ============================================================ */
+
+.calder-site .cart-table {
+  border-top-color: var(--calder-border-color);
+  border-bottom-color: var(--calder-border-color);
+}
+
+.calder-site .cart-table-page-title h1 {
+  font-family: var(--calder-heading-font);
+  font-weight: 700;
+  font-size: var(--calder-h2-size);
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  color: var(--calder-ink);
+}
+
+.calder-site .cart-table td {
+  font-family: var(--calder-ui-font);
+}
+
+.calder-site .cart-table td a {
+  font-family: var(--calder-ui-font);
+  color: var(--calder-ink);
+  text-decoration: none;
+}
+
+.calder-site .cart-table td a:hover {
+  color: var(--calder-copper);
+}
+
+.calder-site .card-total {
+  background-color: var(--calder-warm-white);
+  border: 1px solid var(--calder-border-color);
+  border-radius: var(--calder-radius-md);
+}
+
+.calder-site .card-total-title {
+  font-family: var(--calder-ui-font);
+  font-weight: 700;
+  font-size: 18px;
+  text-transform: uppercase;
+  color: var(--calder-ink);
+}
+
+.calder-site .card-total-summa {
+  font-family: var(--calder-ui-font);
+  font-weight: 700;
+  color: var(--calder-ink);
+}
+
+.calder-site .cart-table-page-title .cart-table-info-text {
+  font-family: var(--calder-ui-font);
+  font-weight: 300;
+  color: var(--calder-muted);
+}
+
+.calder-site .cart-table-dropdn svg path {
+  fill: var(--calder-ink);
+}
