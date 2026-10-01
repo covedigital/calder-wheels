@@ -107,10 +107,8 @@
   fill: currentColor
 }
 .masonry-grid-container:not(.masonry-initialized) {
-  opacity: 0;
-  transition: opacity .2s;
-  max-height: 100vh;
-  overflow: hidden
+  opacity: 1;
+  transition: opacity .3s
 }
 .masonry-grid-container:not(.masonry-initialized) .gallery-grid-item {
   position: relative
