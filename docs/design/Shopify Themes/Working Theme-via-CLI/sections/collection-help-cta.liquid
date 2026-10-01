@@ -1,4 +1,13 @@
-<section class="collection-help-cta" id="collection-help-cta-{{ section.id }}">
+{%- liquid
+  assign section_animation_enabled = section.settings.section_animation | default: true
+  if settings.animation_sections == false
+    assign section_animation_enabled = false
+  endif
+  if section.settings.section_decoration_top != 'none' or section.settings.section_decoration_bottom != 'none'
+    assign section_animation_enabled = false
+  endif
+-%}
+<section class="{% if section_animation_enabled %}show-on-scroll {% endif %}collection-help-cta" id="collection-help-cta-{{ section.id }}">
   <div class="collection-help-cta__media" aria-hidden="true">
     {% if section.settings.help_cta_bg_image != blank %}
       {{ section.settings.help_cta_bg_image | image_url: width: 1200 | image_tag: widths: '600, 900, 1200', loading: 'lazy', class: 'collection-help-cta__image', alt: '' }}

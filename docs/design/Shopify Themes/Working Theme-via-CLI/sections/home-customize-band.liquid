@@ -1,4 +1,13 @@
-<section class="home-customize" id="home-customize-{{ section.id }}">
+{%- liquid
+  assign section_animation_enabled = section.settings.section_animation | default: true
+  if settings.animation_sections == false
+    assign section_animation_enabled = false
+  endif
+  if section.settings.section_decoration_top != 'none' or section.settings.section_decoration_bottom != 'none'
+    assign section_animation_enabled = false
+  endif
+-%}
+<section class="{% if section_animation_enabled %}show-on-scroll {% endif %}home-customize" id="home-customize-{{ section.id }}">
   <div class="home-customize__image">
     {% if section.settings.image != blank %}
       {{ section.settings.image | image_url: width: 800 | image_tag: widths: '800,600,400', loading: 'lazy', alt: section.settings.heading | default: 'Customize Without Limits' }}

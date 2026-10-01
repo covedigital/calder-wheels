@@ -1,4 +1,13 @@
-<section class="home-signature" id="home-signature-{{ section.id }}">
+{%- liquid
+  assign section_animation_enabled = section.settings.section_animation | default: true
+  if settings.animation_sections == false
+    assign section_animation_enabled = false
+  endif
+  if section.settings.section_decoration_top != 'none' or section.settings.section_decoration_bottom != 'none'
+    assign section_animation_enabled = false
+  endif
+-%}
+<section class="{% if section_animation_enabled %}show-on-scroll {% endif %}home-signature" id="home-signature-{{ section.id }}">
   <div class="home-signature__container">
     <div class="home-signature__header">
       <div>

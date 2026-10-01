@@ -1,4 +1,13 @@
-<section class="collection-hero" id="collection-hero-{{ section.id }}">
+{%- liquid
+  assign section_animation_enabled = section.settings.section_animation | default: true
+  if settings.animation_sections == false
+    assign section_animation_enabled = false
+  endif
+  if section.settings.section_decoration_top != 'none' or section.settings.section_decoration_bottom != 'none'
+    assign section_animation_enabled = false
+  endif
+-%}
+<section class="{% if section_animation_enabled %}show-on-scroll {% endif %}collection-hero" id="collection-hero-{{ section.id }}">
   <div class="collection-hero__media" aria-hidden="true">
     {% if section.settings.hero_image != blank %}
       {{ section.settings.hero_image | image_url: width: 2400 | image_tag: widths: '768, 1200, 1600, 1920, 2400', loading: 'eager', fetchpriority: 'high', class: 'collection-hero__image', alt: '' }}

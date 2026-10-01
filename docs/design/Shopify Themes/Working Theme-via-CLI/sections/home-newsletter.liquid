@@ -1,5 +1,14 @@
+{%- liquid
+  assign section_animation_enabled = section.settings.section_animation | default: true
+  if settings.animation_sections == false
+    assign section_animation_enabled = false
+  endif
+  if section.settings.section_decoration_top != 'none' or section.settings.section_decoration_bottom != 'none'
+    assign section_animation_enabled = false
+  endif
+-%}
 <section
-  class="home-newsletter"
+  class="home-newsletter{% if section_animation_enabled %} show-on-scroll{% endif %}"
   id="home-newsletter-{{ section.id }}"
 >
   <!-- Background -->

@@ -197,6 +197,52 @@
 }
 
 
+/* Hero Caption Box (Right Side) */
+
+.home-hero__caption-box {
+  margin-left: auto;
+  padding: 2rem;
+  background: rgba(3, 26, 39, 0.45);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 6px;
+  max-width: 35%;
+}
+
+.home-hero__caption-title {
+  font-family: var(--calder-ui-font);
+  font-weight: 700;
+  font-size: 0.7rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--calder-white);
+  margin-bottom: 6px;
+}
+
+.home-hero__caption-subtitle {
+  font-family: var(--calder-ui-font);
+  font-weight: 400;
+  font-size: 0.65rem;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+
+/* Responsive Caption Box */
+
+@media (max-width: 900px) {
+  .home-hero__container {
+    flex-direction: column;
+  }
+  .home-hero__caption-box {
+    margin-left: 0;
+    margin-top: 1rem;
+    max-width: 100%;
+  }
+}
+
+
 /* ==========================================================
    HOME FITMENT — HIGH-FIDELITY
    Matches fitment.visual-spec.v2.json

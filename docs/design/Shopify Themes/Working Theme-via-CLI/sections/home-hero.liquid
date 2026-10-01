@@ -1,9 +1,14 @@
 {{ 'home.css' | asset_url | stylesheet_tag }}
 
 {%- liquid
-  assign media_type = section.settings.hero_media_type | default: 'image'
   assign hero_image = section.settings.hero_image
+  assign hero_video_type = section.settings.hero_video_type | default: 'url'
   assign hero_video_url = section.settings.hero_video_url
+  assign hero_video_file = section.settings.hero_video_file
+  assign is_youtube = false
+  if hero_video_type == 'youtube' and hero_video_url != blank
+    assign is_youtube = true
+  endif
   assign eyebrow = section.settings.eyebrow | default: 'Precision Engineering'
   assign heading = section.settings.heading | default: 'MADE WITH<br>PRECISION'
   assign body_text = section.settings.body_text | default: 'Forged from the finest materials. Engineered for those who demand performance.'
@@ -17,14 +22,31 @@
   assign proof_icon_1 = section.settings.proof_icon_1
   assign proof_icon_2 = section.settings.proof_icon_2
   assign proof_icon_3 = section.settings.proof_icon_3
+  assign section_animation_enabled = section.settings.section_animation | default: true
+  if settings.animation_sections == false
+    assign section_animation_enabled = false
+  endif
+  if section.settings.section_decoration_top != 'none' or section.settings.section_decoration_bottom != 'none'
+    assign section_animation_enabled = false
+  endif
 -%}
 
-<section class="home-hero" id="home-hero-{{ section.id }}">
+<section class="home-hero{% if section_animation_enabled %} show-on-scroll{% endif %}" id="home-hero-{{ section.id }}">
   <div class="home-hero__media">
-    {% if media_type == 'video' and hero_video_url != blank %}
-      <video class="home-hero__video" autoplay muted loop playsinline poster="{{ hero_image | image_url: width: 1920 }}">
-        <source src="{{ hero_video_url }}" type="video/mp4">
-      </video>
+    {% if section.settings.hero_media_type == 'video' %}
+      {% if is_youtube %}
+        <div class="home-hero__video-embed" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;">
+          <iframe src="https://www.youtube-nocookie.com/embed/{{ hero_video_url | replace: 'https://www.youtube.com/watch?v=', '' | replace: 'https://youtu.be/', '' | replace: 'https://www.youtube-nocookie.com/embed/', '' | url_encode }}?autoplay=1&loop=1&mute=1&controls=0&playlist={{ hero_video_url | replace: 'https://www.youtube.com/watch?v=', '' | replace: 'https://youtu.be/', '' | replace: 'https://www.youtube-nocookie.com/embed/', '' }}" width="100%" height="100%" style="width:100%;height:100%;object-fit:cover;border:0;" frameborder="0" allow="autoplay;encrypted-media" allowfullscreen></iframe>
+        </div>
+      {% elsif hero_video_type == 'file' and hero_video_file != blank %}
+        <video class="home-hero__video" autoplay muted loop playsinline poster="{{ hero_image | image_url: width: 1920 }}">
+          <source src="{{ hero_video_file | image_url: width: 1920 }}" type="video/mp4">
+        </video>
+      {% elsif hero_video_url != blank %}
+        <video class="home-hero__video" autoplay muted loop playsinline poster="{{ hero_image | image_url: width: 1920 }}">
+          <source src="{{ hero_video_url }}" type="video/mp4">
+        </video>
+      {% endif %}
     {% elsif hero_image != blank %}
       <img src="{{ hero_image | image_url: width: 1920 }}" alt="{{ heading | strip_html }}" width="1920" height="1000" loading="eager" fetchpriority="high" style="width:100%;height:100%;object-fit:cover;object-position:60% 50%;">
     {% else %}
@@ -33,14 +55,6 @@
   </div>
   <div class="home-hero__overlay"></div>
   <div class="home-hero__container">
-    {% if section.settings.caption_title != blank %}
-    <div class="home-hero__caption-box">
-      <div class="home-hero__caption-title">{{ section.settings.caption_title }}</div>
-      {% if section.settings.caption_subtitle != blank %}
-      <div class="home-hero__caption-subtitle">{{ section.settings.caption_subtitle }}</div>
-      {% endif %}
-    </div>
-    {% endif %}
     <div class="home-hero__content">
       <div class="home-hero__eyebrow">{{ eyebrow }}</div>
       <h1 class="home-hero__heading">{{ heading }}</h1>
@@ -92,6 +106,14 @@
         </span>
       </div>
     </div>
+    {% if section.settings.caption_title != blank %}
+    <div class="home-hero__caption-box">
+      <div class="home-hero__caption-title">{{ section.settings.caption_title }}</div>
+      {% if section.settings.caption_subtitle != blank %}
+      <div class="home-hero__caption-subtitle">{{ section.settings.caption_subtitle }}</div>
+      {% endif %}
+    </div>
+    {% endif %}
   </div>
 </section>
 
@@ -225,9 +247,34 @@
       "default": "image"
     },
     {
+      "type": "select",
+      "id": "hero_video_type",
+      "label": "Video source",
+      "options": [
+        {
+          "value": "url",
+          "label": "Video URL (MP4)"
+        },
+        {
+          "value": "youtube",
+          "label": "YouTube video URL"
+        },
+        {
+          "value": "file",
+          "label": "Attach video file"
+        }
+      ],
+      "default": "url"
+    },
+    {
       "type": "text",
       "id": "hero_video_url",
-      "label": "Hero video URL (MP4)"
+      "label": "Video URL or YouTube link"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_video_file",
+      "label": "Upload video file"
     },
     {
       "type": "header",
