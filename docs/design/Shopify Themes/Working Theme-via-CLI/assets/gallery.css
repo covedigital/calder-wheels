@@ -106,6 +106,9 @@
 .gallery-grid-item-links svg path {
   fill: currentColor
 }
+.masonry-grid-container.masonry-initialized {
+  min-height: 120px
+}
 .masonry-grid-container:not(.masonry-initialized) {
   opacity: 1;
   transition: opacity .3s

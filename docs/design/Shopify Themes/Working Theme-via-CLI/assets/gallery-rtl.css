@@ -106,10 +106,18 @@
 .gallery-grid-item-links svg path {
   fill: currentColor
 }
+.masonry-grid-container.masonry-initialized {
+  min-height: 120px
+}
 .masonry-grid-container:not(.masonry-initialized) {
   opacity: 1;
   transition: opacity .3s
 }
 .masonry-grid-container:not(.masonry-initialized) .gallery-grid-item {
   position: relative
+}
+.masonry-grid-container:not(.masonry-initialized) .gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 30px
 }
