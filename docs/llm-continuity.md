@@ -796,3 +796,27 @@ Client asked why the universal gallery lacks the native Lumia zoom. Answer: the 
 ### [AGENT] Session Metadata
 - Agent: OpenCode (build)
 - Model: DeepSeek V4 Pro
+
+---
+## [2026-10-29 #8] — Fitment panel: action + reset in one row
+
+### [COMPLETED] What Was Done
+Client request: move .calder-pdp__fitment-reset next to .calder-pdp__fitment-action in one row; explicit constraints — do not touch the product gallery, do not change the client's CSS edits in calder-universal-controls.css / calder-product.css, keep template sections as-is. Commit c07d8a3.
+- Root cause of the layout: .calder-pdp__fitment is a space-between flex row with THREE children (status | action | reset) — a visible reset got pushed to the panel's far edge.
+- Fix: wrapped the two buttons in .calder-pdp__fitment-actions-row (markup order preserved: action then reset). Desktop: status left, tight pair right. Mobile (≤767px): pair shares one full-width row (buttons keep their authored width:100%, flex shares space; row gap 8px; reset margin-top neutralized inside the row).
+- All new CSS went into calder-pdp-fitment-form.css (loads after calder-product.css; owns the reset styles) — the client's protected CSS files were NOT edited, gallery untouched, section structure unchanged.
+- JS contract untouched (reset toggling still via [data-calder-fitment-reset]; theme's .lumia-body [hidden]{display:none!important} still governs visibility).
+- +1 structural test; 65 node + 77 python green.
+- NOTE: working tree contains the client's own WIP edits (fitment-finder-guide.css/.js, fitment-finder-guide.liquid, home-fitment.liquid) — intentionally NOT committed; left as-is.
+
+### [FILES] Files Modified This Session
+- `sections/calder-product.liquid` (fitment buttons wrapper only)
+- `assets/calder-pdp-fitment-form.css` (row rules)
+- `docs/architecture/tests/calder-universal-controls.test.mjs` (+1 test)
+
+### [NEXT] Client re-push (2 files)
+- `sections/calder-product.liquid`, `assets/calder-pdp-fitment-form.css`
+
+### [AGENT] Session Metadata
+- Agent: OpenCode (build)
+- Model: DeepSeek V4 Pro
