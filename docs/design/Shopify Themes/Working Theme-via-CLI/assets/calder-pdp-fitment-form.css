@@ -104,3 +104,24 @@
     margin-top: 8px;
   }
 }
+
+/* Action + Reset in one row (client layout 2026-10-29).
+   The panel (.calder-pdp__fitment, in calder-product.css) is a
+   space-between flex row; without this wrapper a visible reset was pushed
+   to the panel's far edge as a third child. The row keeps the pair tight:
+   desktop -> status | action+reset; mobile -> the pair shares one row
+   (both buttons keep their authored width:100%, flex shares the space). */
+.calder-pdp__fitment-actions-row {
+  display: flex;
+  align-items: center;
+  flex: 0 0 auto;
+}
+@media (max-width: 767px) {
+  .calder-pdp__fitment-actions-row {
+    width: 100%;
+    gap: 8px;
+  }
+  .calder-pdp__fitment-actions-row .calder-pdp__fitment-reset {
+    margin-top: 0;
+  }
+}

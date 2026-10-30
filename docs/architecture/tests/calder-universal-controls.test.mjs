@@ -463,3 +463,19 @@ test('gallery zoom: native Lumia parity (ezPlus hover zoom + fancybox lightbox) 
   /* goTo still owns ONLY slide class/thumb/arrow sync + the additive zoom hook */
   assert.ok(/galSetThumbActive\(\);\s*\n\s*activateSlideZoom\(galActive\);/.test(pdpSrc), 'zoom activation is an additive hook in goTo, slider logic unchanged');
 });
+
+test('fitment action + reset share one row (client layout 2026-10-29)', () => {
+  /* both buttons live inside .calder-pdp__fitment-actions-row, in order */
+  const rowStart = productSection.indexOf('calder-pdp__fitment-actions-row');
+  const actionAt = productSection.indexOf('calder-pdp__fitment-action"');
+  const resetAt = productSection.indexOf('calder-pdp__fitment-reset"');
+  assert.ok(rowStart !== -1, 'actions row wrapper exists');
+  assert.ok(actionAt > rowStart && resetAt > actionAt, 'action then reset inside the row wrapper');
+  /* row layout lives in the fitment stylesheet — not in the client-protected calder-product.css / calder-universal-controls.css */
+  assert.ok(fitmentFormCss.includes('.calder-pdp__fitment-actions-row'), 'row rules in calder-pdp-fitment-form.css');
+  assert.ok(fitmentFormCss.includes('display: flex'), 'row is a flex row');
+  assert.ok(fitmentFormCss.includes('.calder-pdp__fitment-actions-row .calder-pdp__fitment-reset'), 'mobile reset margin-top neutralized inside the row');
+  /* JS contract untouched: reset toggling still targets [data-calder-fitment-reset] */
+  assert.ok(productSection.includes('data-calder-fitment-reset'), 'reset keeps its data-calder-fitment-reset hook');
+  assert.ok(!/calder-pdp__fitment\s*>\s*\.calder-pdp__fitment-(action|reset)/.test(fitmentFormCss), 'no direct-child selectors broken by the wrapper');
+});

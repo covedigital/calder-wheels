@@ -548,25 +548,27 @@
             </div>
           </div>
         </div>
-        <button
-          class="calder-pdp__fitment-action"
-          data-calder-fitment-action
-          type="button"
-          aria-expanded="false"
-          aria-controls="calder-fitment-mini-form-{{ section.id }}"
-        >
-          <span data-calder-fitment-action-text>
-            {{ section.settings.action_text }}
-          </span>
-        </button>
-        <button
-          class="calder-pdp__fitment-reset"
-          data-calder-fitment-reset
-          type="button"
-          hidden
-        >
-          Reset
-        </button>
+        <div class="calder-pdp__fitment-actions-row">
+          <button
+            class="calder-pdp__fitment-action"
+            data-calder-fitment-action
+            type="button"
+            aria-expanded="false"
+            aria-controls="calder-fitment-mini-form-{{ section.id }}"
+          >
+            <span data-calder-fitment-action-text>
+              {{ section.settings.action_text }}
+            </span>
+          </button>
+          <button
+            class="calder-pdp__fitment-reset"
+            data-calder-fitment-reset
+            type="button"
+            hidden
+          >
+            Reset
+          </button>
+        </div>
         <div
           class="calder-pdp__fitment-form"
           id="calder-fitment-mini-form-{{ section.id }}"
