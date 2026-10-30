@@ -1,0 +1,13 @@
+{
+  "sections": {
+    "main": {
+      "type": "calder-gallery-detail",
+      "settings": {
+        "section_width": "global"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "sections": {
+    "main": {
+      "type": "calder-gallery-detail",
+      "settings": {
+        "section_width": "global",
+        "hero_height": 560,
+        "show_trusted": true,
+        "show_specs": true,
+        "show_related": true,
+        "hero_auto_rotate": false,
+        "hero_rotate_seconds": 6,
+        "hero_overlay": 20,
+        "specs_background": "#0b1117",
+        "hero_text_title": "",
+        "show_thumbnails": true
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

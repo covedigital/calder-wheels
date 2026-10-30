@@ -1,0 +1,32 @@
+{% comment %}
+  Calder Gallery — Filter Bar
+  Parameters: filter_keys (comma-sep), filter_labels (comma-sep), filter_options (pipe-sep option strings)
+{% endcomment %}
+{%- liquid
+  assign keys = filter_keys | split: ','
+  assign labels = filter_labels | split: ','
+  assign option_sets = filter_options | default: '' | split: '|'
+-%}
+<div class="calder-gallery-filters">
+  <button class="calder-gallery-filters__mobile-toggle" type="button" aria-expanded="false">Filters</button>
+  <div class="calder-gallery-filters__desktop calder-gallery-filters__inner">
+    {%- for key in keys -%}
+      {%- assign idx = forloop.index0 -%}
+      {%- assign label = labels[idx] | default: key -%}
+      {%- assign opts = option_sets[idx] | default: '' | split: ',' -%}
+      <div class="calder-gallery-filters__group">
+        <select class="calder-gallery-filters__select" name="{{ key }}" data-filter-key="{{ key }}">
+          <option value="__all__">{{ label }}</option>
+          {%- for opt in opts -%}
+            {%- assign ot = opt | strip -%}
+            {%- if ot != '' -%}
+              <option value="{{ ot | escape }}">{{ ot }}</option>
+            {%- endif -%}
+          {%- endfor -%}
+        </select>
+        <span class="calder-gallery-filters__select-arrow">▾</span>
+      </div>
+    {%- endfor -%}
+    <button type="button" class="calder-gallery-filters__reset">Reset</button>
+  </div>
+</div>

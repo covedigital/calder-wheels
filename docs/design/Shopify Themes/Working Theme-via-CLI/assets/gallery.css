@@ -10,9 +10,14 @@
   width: 100%;
   display: inline-block;
   position: absolute;
-  border-radius: var(--radius-md,16px);
+  border-radius: 8px;
   overflow: hidden
 }
+
+.gallery-grid-item .image-container:not(.ic--ignore-global-round) {
+  border-radius: 8px;
+}
+
 @media (hover:hover),
 (hover:none) and (min-width:1025px) {
   .gallery-grid-item:hover .gallery-grid-item-caption {

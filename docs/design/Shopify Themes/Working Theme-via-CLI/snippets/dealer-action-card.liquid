@@ -1,0 +1,16 @@
+<a href="{{ link | default: '#' }}" class="dp-action-card{% if primary %} dp-action-card--primary{% endif %}">
+  <div class="dp-action-card__icon">
+    {% if icon %}
+      {{ icon }}
+    {% else %}
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor"><rect x="4" y="4" width="12" height="12" rx="2" fill="currentColor"/></svg>
+    {% endif %}
+  </div>
+  <div class="dp-action-card__body">
+    <span class="dp-action-card__title">{{ title | default: 'Action' }}</span>
+    <span class="dp-action-card__desc">{{ desc | default: '' }}</span>
+  </div>
+  <span class="dp-action-card__arrow">
+    <svg width="14" height="10" viewBox="0 0 14 10" fill="currentColor"><path d="M2 2 L10 5 L14 2" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>
+  </span>
+</a>

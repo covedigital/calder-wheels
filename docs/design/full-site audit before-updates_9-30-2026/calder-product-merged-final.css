@@ -1,0 +1,2469 @@
+/* ==========================================================================
+   CALDER PRODUCT — MAIN PDP
+   --------------------------------------------------------------------------
+   Tuned for:
+   - sections/calder-product.liquid
+   - Lumia native product gallery / variant / price / buy-button components
+   - Approved Calder C1 PDP reference
+
+   DESIGN TARGET
+   Desktop:
+   - 57% gallery / 43% information
+   - Large square-ish lifestyle/product hero
+   - Horizontal five-thumbnail strip
+   - Oversized C1 / product heading
+   - Made-to-order badge top right
+   - Compact product information
+   - Light configuration panel
+   - Gold full-width Add to Cart
+   - Equal Save / Share controls
+   - Three-column trust row
+
+   IMPORTANT:
+   Everything is scoped to .calder-pdp to avoid altering native Lumia
+   product components elsewhere in the theme.
+   ========================================================================== */
+
+
+/* ==========================================================================
+   1. TOKENS
+   ========================================================================== */
+
+.calder-pdp {
+  --calder-navy: #0e2a3e;
+  --calder-blue: #1e4c68;
+  --calder-gold: #c2a48a;
+  --calder-gold-dark: #a98667;
+  --calder-gold-light: #d5c0aa;
+
+  --calder-slate: #876e5a;
+  --calder-cream: #f2efe9;
+  --calder-warm-white: #faf9f7;
+  --calder-white: #ffffff;
+
+  --calder-black: #231f20;
+  --calder-text: #263a4a;
+  --calder-muted: #6d7882;
+
+  --calder-border: #dce2e6;
+  --calder-border-dark: #aebbc4;
+
+  --calder-panel: #f4f7f8;
+  --calder-panel-alt: #eef3f5;
+
+  --calder-success: #3f9959;
+
+  --calder-heading-font: "Facundo", "Poppins", Arial, sans-serif;
+  --calder-ui-font: "Garet", "Poppins", Arial, sans-serif;
+
+  --calder-radius: 0px;
+  --calder-control-height: 48px;
+  --calder-button-height: 60px;
+
+  position: relative;
+  width: 100%;
+  background: var(--calder-white);
+  color: var(--calder-text);
+  font-family: var(--calder-ui-font);
+  box-sizing: border-box;
+}
+
+.calder-pdp *,
+.calder-pdp *::before,
+.calder-pdp *::after {
+  box-sizing: border-box;
+}
+
+
+/* ==========================================================================
+   2. CONTAINER
+   ========================================================================== */
+
+.calder-pdp > .container {
+  width: min(
+    calc(100% - 48px),
+    var(--container-max-width, 1418px)
+  );
+  max-width: var(--container-max-width, 1418px);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+/* ==========================================================================
+   3. BREADCRUMBS
+   ========================================================================== */
+
+.calder-pdp__breadcrumbs {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+
+  padding-top: 18px;
+  padding-bottom: 18px;
+
+  font-size: 12px;
+  line-height: 1.4;
+  letter-spacing: 0.02em;
+  color: var(--calder-muted);
+}
+
+.calder-pdp__breadcrumbs a {
+  color: var(--calder-muted);
+  text-decoration: none;
+  transition:
+    color 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.calder-pdp__breadcrumbs a:hover {
+  color: var(--calder-navy);
+}
+
+.calder-pdp__breadcrumbs [aria-current="page"] {
+  color: var(--calder-navy);
+  font-weight: 600;
+}
+
+
+/* ==========================================================================
+   4. HERO — 57 / 43
+   ========================================================================== */
+
+.calder-pdp__hero {
+  display: grid;
+  grid-template-columns:
+    minmax(0, 57fr)
+    minmax(420px, 43fr);
+
+  align-items: start;
+
+  gap: clamp(34px, 3.2vw, 58px);
+
+  padding-top: 24px;
+  padding-bottom: 64px;
+}
+
+
+/* ==========================================================================
+   5. GALLERY COLUMN
+   ========================================================================== */
+
+.calder-pdp__gallery {
+  position: relative;
+  min-width: 0;
+  width: 100%;
+}
+
+.calder-pdp__native-gallery {
+  display: flex !important;
+  flex-direction: column !important;
+
+  width: 100% !important;
+  max-width: none !important;
+
+  gap: 18px;
+}
+
+
+/* ==========================================================================
+   6. MAIN MEDIA
+   ========================================================================== */
+
+.calder-pdp__main-image {
+  position: relative;
+
+  width: 100%;
+
+  /* Approved mockup is slightly wider than tall. */
+  aspect-ratio: 1.26 / 1;
+
+  overflow: hidden;
+
+  background: #f2f3f3;
+  border: 1px solid #e1e5e7;
+}
+
+
+/*
+  Lumia may insert its own media wrappers with intrinsic sizing.
+  Inside Calder we force them to occupy the approved media canvas.
+*/
+
+.calder-pdp__main-image > * {
+  width: 100%;
+}
+
+.calder-pdp__main-image .prd-block-gallery-main,
+.calder-pdp__main-image .prd-block-gallery-main-wrap,
+.calder-pdp__main-image .swiper,
+.calder-pdp__main-image .swiper-wrapper,
+.calder-pdp__main-image .swiper-slide,
+.calder-pdp__main-image .product-media,
+.calder-pdp__main-image .product-media-container,
+.calder-pdp__main-image .product-media-main,
+.calder-pdp__main-image .prd-block-gallery-main-item {
+  height: 100%;
+  min-height: 100%;
+}
+
+.calder-pdp__main-image img {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+  object-position: center;
+
+  margin: 0;
+}
+
+
+/*
+  Preserve video/model behavior while maintaining the approved canvas.
+*/
+
+.calder-pdp__main-image video,
+.calder-pdp__main-image iframe,
+.calder-pdp__main-image model-viewer {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+
+/* Placeholder */
+
+.calder-pdp__main-image .placeholder-svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+/* ==========================================================================
+   7. LUMIA GALLERY CLEANUP
+   ========================================================================== */
+
+.calder-pdp__gallery .prd-block-gallery-container-hor {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.calder-pdp__gallery .prd-block-gallery-main {
+  width: 100%;
+  max-width: 100%;
+  flex: 0 0 auto;
+}
+
+.calder-pdp__gallery .prd-block-gallery-main-wrap {
+  width: 100%;
+}
+
+
+/*
+  Keep Lumia's zoom/media buttons but make them visually closer
+  to the approved screenshot.
+*/
+
+.calder-pdp__gallery
+  button[class*="zoom"],
+.calder-pdp__gallery
+  [class*="zoom"] button {
+  border-radius: 50%;
+}
+
+.calder-pdp__gallery
+  .prd-block-gallery-main
+  button {
+  color: var(--calder-white);
+}
+
+
+/* ==========================================================================
+   8. THUMBNAIL STRIP
+   ========================================================================== */
+
+.calder-pdp__thumbs-wrap {
+  position: relative;
+
+  width: 100%;
+  min-width: 0;
+
+  margin-top: 0;
+}
+
+
+/*
+  Approved reference:
+  5 visible thumbnails across.
+*/
+
+.calder-pdp__thumbs-wrap .prd-block-gallery-thumbs,
+.calder-pdp__thumbs-wrap .prd-block-gallery-thumbs-wrap,
+.calder-pdp__thumbs-wrap .swiper {
+  width: 100%;
+  max-width: 100%;
+}
+
+.calder-pdp__thumbs-wrap .swiper-wrapper {
+  align-items: stretch;
+}
+
+
+/*
+  Lumia's exact slide width can be generated inline by JS.
+  This gives the intended five-across baseline while allowing
+  the slider to retain control when necessary.
+*/
+
+.calder-pdp__thumbs-wrap .swiper-slide {
+  height: auto;
+}
+
+.calder-pdp__thumbs-wrap
+  .prd-block-gallery-thumbs-item,
+.calder-pdp__thumbs-wrap
+  [class*="gallery-thumbs"] .swiper-slide > * {
+  position: relative;
+
+  aspect-ratio: 1 / 1;
+
+  overflow: hidden;
+
+  background: #f3f3f3;
+  border: 2px solid transparent;
+
+  transition:
+    border-color 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.calder-pdp__thumbs-wrap img {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+  object-position: center;
+}
+
+
+/* Active thumbnail */
+
+.calder-pdp__thumbs-wrap
+  .swiper-slide-thumb-active
+  .prd-block-gallery-thumbs-item,
+.calder-pdp__thumbs-wrap
+  .swiper-slide-active
+  .prd-block-gallery-thumbs-item,
+.calder-pdp__thumbs-wrap
+  .active
+  .prd-block-gallery-thumbs-item,
+.calder-pdp__thumbs-wrap
+  .is-active {
+  border-color: var(--calder-gold);
+}
+
+
+/*
+  Five-item fallback grid if Lumia outputs a normal list instead
+  of a Swiper track.
+*/
+
+.calder-pdp__thumbs-wrap > ul,
+.calder-pdp__thumbs-wrap > .row {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 14px;
+
+  width: 100%;
+}
+
+
+/* ==========================================================================
+   9. PRODUCT INFO COLUMN
+   ========================================================================== */
+
+.calder-pdp__info {
+  position: relative;
+
+  min-width: 0;
+  width: 100%;
+
+  padding-top: 0;
+
+  color: var(--calder-text);
+}
+
+
+/* ==========================================================================
+   10. HEADING
+   ========================================================================== */
+
+.calder-pdp__heading {
+  position: relative;
+
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  gap: 24px;
+
+  width: 100%;
+
+  margin-bottom: 8px;
+}
+
+.calder-pdp__heading-main {
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+
+/*
+  C1 / design code:
+  deliberately very large, condensed visually, and close to title.
+*/
+
+.calder-pdp__design-code {
+  margin: 0;
+
+  color: var(--calder-navy);
+
+  font-family: var(--calder-heading-font);
+  font-size: clamp(64px, 5vw, 92px);
+  font-weight: 700;
+  line-height: 0.82;
+
+  letter-spacing: -0.055em;
+  text-transform: uppercase;
+}
+
+
+/*
+  Product title sits immediately below the C1 code.
+*/
+
+.calder-pdp__title {
+  margin: 8px 0 0;
+
+  color: var(--calder-navy);
+
+  font-family: var(--calder-heading-font);
+  font-size: clamp(24px, 2vw, 34px);
+  font-weight: 700;
+  line-height: 1.05;
+
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+
+
+/*
+  If the product title itself is "C1", avoid it visually competing
+  with design_code. This still allows stores that use a longer
+  descriptive product title.
+*/
+
+.calder-pdp__design-code + .calder-pdp__title {
+  font-size: clamp(22px, 1.7vw, 30px);
+}
+
+
+/* Construction */
+
+.calder-pdp__construction {
+  margin-top: 8px;
+
+  color: var(--calder-navy);
+
+  font-family: var(--calder-heading-font);
+  font-size: clamp(19px, 1.45vw, 25px);
+  font-weight: 700;
+  line-height: 1.1;
+
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+
+/* ==========================================================================
+   11. MADE TO ORDER BADGE
+   ========================================================================== */
+
+.calder-pdp__badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  flex: 0 0 auto;
+
+  min-height: 34px;
+
+  padding: 8px 15px 7px;
+
+  margin-top: 0;
+
+  border: 1px solid var(--calder-gold);
+  background: transparent;
+
+  color: var(--calder-slate);
+
+  font-family: var(--calder-ui-font);
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1;
+
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+
+/* ==========================================================================
+   12. TAGLINE
+   ========================================================================== */
+
+.calder-pdp__tagline {
+  margin-top: 10px;
+
+  color: #34475a;
+
+  font-family: var(--calder-heading-font);
+  font-size: clamp(18px, 1.35vw, 23px);
+  font-weight: 500;
+  line-height: 1.25;
+
+  letter-spacing: -0.015em;
+}
+
+
+/* ==========================================================================
+   13. DESCRIPTION
+   ========================================================================== */
+
+.calder-pdp__description {
+  max-width: 680px;
+
+  margin-top: 14px;
+
+  color: #536371;
+
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.65;
+}
+
+.calder-pdp__description p {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.calder-pdp__description p:last-child {
+  margin-bottom: 0;
+}
+
+
+/* ==========================================================================
+   14. META — RATING / SKU
+   ========================================================================== */
+
+.calder-pdp__meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 24px;
+
+  margin-top: 18px;
+  margin-bottom: 18px;
+}
+
+.calder-pdp__rating {
+  display: flex;
+  align-items: center;
+
+  gap: 9px;
+
+  min-width: 0;
+}
+
+.calder-pdp__rating-stars {
+  display: inline-flex;
+  align-items: center;
+
+  color: #c8a45d;
+}
+
+
+/*
+  Normalize common Lumia rating output.
+*/
+
+.calder-pdp__rating-stars svg {
+  width: 17px;
+  height: 17px;
+}
+
+.calder-pdp__rating-stars
+  [class*="rating"] {
+  margin: 0;
+}
+
+.calder-pdp__rating-value {
+  color: var(--calder-navy);
+
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.calder-pdp__rating-count {
+  color: #657582;
+
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.calder-pdp__sku {
+  margin-left: auto;
+
+  color: #77828b;
+
+  font-size: 11px;
+  line-height: 1.3;
+
+  white-space: nowrap;
+}
+
+
+/* ==========================================================================
+   15. FITMENT PANEL
+   ========================================================================== */
+
+.calder-pdp__fitment {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 20px;
+
+  width: 100%;
+
+  min-height: 82px;
+
+  padding: 16px 18px;
+
+  background: var(--calder-panel-alt);
+  border: 1px solid #e3e9ec;
+}
+
+.calder-pdp__fitment-status {
+  display: flex;
+  align-items: center;
+
+  gap: 14px;
+
+  min-width: 0;
+}
+
+.calder-pdp__fitment-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  flex: 0 0 42px;
+
+  width: 42px;
+  height: 42px;
+
+  color: var(--calder-success);
+}
+
+.calder-pdp__fitment-icon svg {
+  display: block;
+
+  width: 42px;
+  height: 42px;
+}
+
+.calder-pdp__fitment-copy {
+  min-width: 0;
+}
+
+.calder-pdp__fitment-label {
+  display: block;
+
+  margin-bottom: 3px;
+
+  color: var(--calder-success);
+
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.25;
+
+  letter-spacing: 0.035em;
+  text-transform: uppercase;
+}
+
+.calder-pdp__fitment-text {
+  color: #455868;
+
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+.calder-pdp__fitment-vehicle {
+  display: inline;
+}
+
+
+/* Unset */
+
+.calder-pdp__fitment--unset
+  .calder-pdp__fitment-icon {
+  color: var(--calder-navy);
+}
+
+.calder-pdp__fitment--unset
+  .calder-pdp__fitment-label {
+  color: var(--calder-navy);
+}
+
+
+/* Fitment action */
+
+.calder-pdp__fitment-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  flex: 0 0 auto;
+
+  min-width: 156px;
+  min-height: 42px;
+
+  padding: 10px 18px;
+
+  border: 1px solid var(--calder-navy);
+  background: transparent;
+
+  color: var(--calder-navy);
+
+  font-family: var(--calder-ui-font);
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1;
+
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.calder-pdp__fitment-action:hover {
+  background: var(--calder-navy);
+  color: var(--calder-white);
+}
+
+
+/* ==========================================================================
+   16. CONFIGURATION PANEL
+   ========================================================================== */
+
+.calder-pdp__config {
+  display: flex;
+  flex-direction: column;
+
+  gap: 17px;
+
+  width: 100%;
+
+  padding: 20px 18px 18px;
+
+  background: var(--calder-panel);
+  border-left: 1px solid #e3e9ec;
+  border-right: 1px solid #e3e9ec;
+  border-bottom: 1px solid #e3e9ec;
+}
+
+.calder-pdp__config-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  gap: 18px;
+}
+
+.calder-pdp__config-group {
+  min-width: 0;
+}
+
+.calder-pdp__config-label {
+  display: block;
+
+  margin-bottom: 8px;
+
+  color: var(--calder-navy);
+
+  font-family: var(--calder-ui-font);
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+
+/* ==========================================================================
+   17. CUSTOM SELECTS
+   ========================================================================== */
+
+.calder-pdp__config-select {
+  display: block;
+
+  width: 100%;
+  height: var(--calder-control-height);
+
+  padding: 0 42px 0 14px;
+
+  border: 1px solid #d8e0e5;
+  border-radius: 0;
+
+  background-color: var(--calder-white);
+
+  color: #5d6b77;
+
+  font-family: var(--calder-ui-font);
+  font-size: 12px;
+  font-weight: 400;
+
+  appearance: auto;
+  -webkit-appearance: auto;
+
+  outline: none;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.calder-pdp__config-select:hover {
+  border-color: #b7c3ca;
+}
+
+.calder-pdp__config-select:focus {
+  border-color: var(--calder-navy);
+  box-shadow: 0 0 0 1px var(--calder-navy);
+}
+
+
+/* ==========================================================================
+   18. FINISH CHIPS
+   ========================================================================== */
+
+.calder-pdp__finish-group {
+  width: 100%;
+}
+
+.calder-pdp__finishes {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+
+  gap: 11px;
+}
+
+.calder-pdp__finish-chip {
+  position: relative;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  flex: 0 0 auto;
+
+  width: 38px;
+  height: 38px;
+
+  padding: 2px;
+
+  overflow: hidden;
+
+  border: 2px solid transparent;
+  border-radius: 50%;
+
+  background: transparent;
+
+  color: var(--calder-navy);
+
+  font-family: var(--calder-ui-font);
+  font-size: 9px;
+
+  cursor: pointer;
+
+  transition:
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.calder-pdp__finish-chip:hover {
+  transform: translateY(-1px);
+}
+
+.calder-pdp__finish-chip.is-selected {
+  border-color: var(--calder-gold);
+}
+
+.calder-pdp__finish-chip img {
+  display: block;
+
+  width: 30px;
+  height: 30px;
+
+  object-fit: cover;
+
+  border-radius: 50%;
+}
+
+.calder-pdp__finish-chip > span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 30px;
+  height: 30px;
+
+  overflow: hidden;
+
+  border-radius: 50%;
+
+  background: #d6d6d6;
+
+  font-size: 0;
+}
+
+.calder-pdp__finish-chip:nth-child(2) > span {
+  background: #a87c51;
+}
+
+.calder-pdp__finish-chip:nth-child(3) > span {
+  background: #aeb4b8;
+}
+
+.calder-pdp__finish-chip:nth-child(4) > span {
+  background: #d6d7d5;
+}
+
+.calder-pdp__finish-chip:nth-child(5) > span {
+  background: #222;
+}
+
+
+/* ==========================================================================
+   19. LUMIA NATIVE VARIANT PICKER — CALDER SKIN
+   ========================================================================== */
+
+.calder-pdp__native-variants {
+  width: 100%;
+}
+
+.calder-pdp__native-variants .mt-product-global {
+  margin-top: 0 !important;
+}
+
+.calder-pdp__native-variants
+  variant-selects,
+.calder-pdp__native-variants
+  variant-radios {
+  display: block;
+
+  width: 100%;
+}
+
+
+/* Common fieldsets */
+
+.calder-pdp__native-variants fieldset {
+  min-width: 0;
+
+  margin: 0 0 17px;
+  padding: 0;
+
+  border: 0;
+}
+
+.calder-pdp__native-variants fieldset:last-child {
+  margin-bottom: 0;
+}
+
+.calder-pdp__native-variants legend,
+.calder-pdp__native-variants
+  .form__label,
+.calder-pdp__native-variants
+  label[class*="label"] {
+  margin-bottom: 8px;
+
+  color: var(--calder-navy);
+
+  font-family: var(--calder-ui-font);
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+
+/* Dropdowns */
+
+.calder-pdp__native-variants select {
+  width: 100%;
+  min-height: var(--calder-control-height);
+
+  padding: 0 40px 0 14px;
+
+  border: 1px solid #d8e0e5;
+  border-radius: 0;
+
+  background-color: var(--calder-white);
+
+  color: #536371;
+
+  font-family: var(--calder-ui-font);
+  font-size: 12px;
+}
+
+
+/* Variant buttons */
+
+.calder-pdp__native-variants
+  input[type="radio"] + label {
+  min-height: 40px;
+
+  padding: 10px 14px;
+
+  border: 1px solid #d4dce1;
+  border-radius: 0;
+
+  background: var(--calder-white);
+
+  color: var(--calder-navy);
+
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.calder-pdp__native-variants
+  input[type="radio"]:checked + label {
+  border-color: var(--calder-gold);
+  box-shadow: inset 0 0 0 1px var(--calder-gold);
+}
+
+
+/* ==========================================================================
+   20. PURCHASE AREA
+   ========================================================================== */
+
+.calder-pdp__purchase {
+  width: 100%;
+
+  padding: 18px;
+
+  background: var(--calder-panel);
+  border-left: 1px solid #e3e9ec;
+  border-right: 1px solid #e3e9ec;
+  border-bottom: 1px solid #e3e9ec;
+}
+
+.calder-pdp__purchase-top {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+
+  gap: 30px;
+
+  margin-bottom: 18px;
+}
+
+.calder-pdp__purchase-label {
+  display: block;
+
+  margin-bottom: 8px;
+
+  color: var(--calder-navy);
+
+  font-size: 11px;
+  font-weight: 700;
+}
+
+
+/* ==========================================================================
+   21. QUANTITY
+   ========================================================================== */
+
+.calder-pdp__quantity-column {
+  flex: 0 0 auto;
+}
+
+.calder-pdp__qty {
+  display: grid;
+  grid-template-columns: 40px 74px 40px;
+
+  height: 44px;
+
+  border: 1px solid #d6dee3;
+
+  background: var(--calder-white);
+}
+
+.calder-pdp__qty-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 40px;
+  height: 42px;
+
+  padding: 0;
+
+  border: 0;
+
+  background: #f5f7f8;
+
+  color: var(--calder-navy);
+
+  font-family: Arial, sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+
+  cursor: pointer;
+}
+
+.calder-pdp__qty-input {
+  width: 74px;
+  height: 42px;
+
+  padding: 0 4px;
+
+  border: 0;
+  border-left: 1px solid #d6dee3;
+  border-right: 1px solid #d6dee3;
+
+  background: var(--calder-white);
+
+  color: var(--calder-navy);
+
+  font-family: var(--calder-ui-font);
+  font-size: 14px;
+  font-weight: 700;
+  text-align: center;
+
+  appearance: textfield;
+  -moz-appearance: textfield;
+
+  outline: none;
+}
+
+.calder-pdp__qty-input::-webkit-inner-spin-button,
+.calder-pdp__qty-input::-webkit-outer-spin-button {
+  margin: 0;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+
+/* ==========================================================================
+   22. PRICE
+   ========================================================================== */
+
+.calder-pdp__price-column {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+
+  margin-left: auto;
+
+  text-align: right;
+}
+
+.calder-pdp__price-prefix {
+  margin-bottom: 3px;
+
+  color: #536371;
+
+  font-size: 11px;
+  line-height: 1;
+}
+
+.calder-pdp__price {
+  color: var(--calder-navy);
+}
+
+.calder-pdp__price .price,
+.calder-pdp__price .price-item,
+.calder-pdp__price .price__regular,
+.calder-pdp__price .price__sale {
+  color: var(--calder-navy);
+}
+
+.calder-pdp__price
+  .price-item--regular,
+.calder-pdp__price
+  .price-item--sale {
+  font-family: var(--calder-heading-font);
+  font-size: clamp(25px, 2vw, 32px);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.025em;
+}
+
+.calder-pdp__price
+  .price-item--regular {
+  margin: 0;
+}
+
+.calder-pdp__price-suffix {
+  margin-top: 2px;
+
+  color: var(--calder-navy);
+
+  font-size: 14px;
+  font-weight: 600;
+}
+
+
+/* ==========================================================================
+   23. BUY AREA
+   ========================================================================== */
+
+.calder-pdp__buy {
+  width: 100%;
+}
+
+
+/*
+  Remove native spacing so the Lumia snippet behaves like a component
+  inside the Calder purchase panel.
+*/
+
+.calder-pdp__buy .mt-product-global {
+  margin-top: 0 !important;
+}
+
+.calder-pdp__buy
+  .product-form,
+.calder-pdp__buy
+  form {
+  width: 100%;
+}
+
+
+/* ==========================================================================
+   24. GOLD ADD TO CART
+   ========================================================================== */
+
+/*
+  Supports both:
+  - fallback .calder-pdp__add-btn
+  - Lumia's native product-buy-buttons output
+*/
+
+.calder-pdp__add-btn,
+.calder-pdp__buy
+  button[name="add"],
+.calder-pdp__buy
+  .product-form__submit,
+.calder-pdp__buy
+  [class*="add-to-cart"],
+.calder-pdp__buy
+  [class*="addtocart"] {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+
+  gap: 12px;
+
+  width: 100% !important;
+  min-width: 100% !important;
+  height: var(--calder-button-height);
+  min-height: var(--calder-button-height);
+
+  margin: 0 !important;
+  padding: 0 24px !important;
+
+  border: 1px solid var(--calder-gold) !important;
+  border-radius: 0 !important;
+
+  background: var(--calder-gold) !important;
+
+  color: var(--calder-white) !important;
+
+  font-family: var(--calder-ui-font) !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  line-height: 1 !important;
+
+  letter-spacing: 0.16em !important;
+  text-transform: uppercase !important;
+
+  box-shadow: none !important;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease !important;
+}
+
+.calder-pdp__add-btn:hover,
+.calder-pdp__buy
+  button[name="add"]:hover,
+.calder-pdp__buy
+  .product-form__submit:hover,
+.calder-pdp__buy
+  [class*="add-to-cart"]:hover,
+.calder-pdp__buy
+  [class*="addtocart"]:hover {
+  background: var(--calder-gold-dark) !important;
+  border-color: var(--calder-gold-dark) !important;
+}
+
+.calder-pdp__add-btn:active,
+.calder-pdp__buy
+  button[name="add"]:active,
+.calder-pdp__buy
+  .product-form__submit:active {
+  transform: translateY(1px);
+}
+
+.calder-pdp__add-btn:disabled,
+.calder-pdp__buy
+  button[name="add"]:disabled,
+.calder-pdp__buy
+  .product-form__submit:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+
+/* Preserve white icons */
+
+.calder-pdp__buy button[name="add"] svg,
+.calder-pdp__buy .product-form__submit svg,
+.calder-pdp__add-btn svg {
+  color: currentColor;
+  fill: none;
+}
+
+
+/* ==========================================================================
+   25. DYNAMIC CHECKOUT
+   ========================================================================== */
+
+.calder-pdp__buy
+  .shopify-payment-button {
+  width: 100%;
+
+  margin-top: 10px;
+}
+
+.calder-pdp__buy
+  .shopify-payment-button__button {
+  min-height: 52px;
+
+  border-radius: 0 !important;
+
+  font-family: var(--calder-ui-font);
+}
+
+
+/* ==========================================================================
+   26. SAVE / SHARE
+   ========================================================================== */
+
+.calder-pdp__actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  gap: 12px;
+
+  width: 100%;
+
+  margin-top: 14px;
+}
+
+.calder-pdp__action,
+.calder-pdp__action-btn {
+  min-width: 0;
+  width: 100%;
+}
+
+
+/* Share */
+
+.calder-pdp__action-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 10px;
+
+  min-height: 52px;
+
+  padding: 0 18px;
+
+  border: 1px solid var(--calder-navy);
+
+  background: transparent;
+
+  color: var(--calder-navy);
+
+  font-family: var(--calder-ui-font);
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1;
+
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.calder-pdp__action-btn:hover {
+  background: var(--calder-navy);
+  color: var(--calder-white);
+}
+
+
+/* ==========================================================================
+   27. NATIVE LUMIA WISHLIST AS SAVE BUTTON
+   ========================================================================== */
+
+.calder-pdp__action--wishlist {
+  display: flex;
+}
+
+.calder-pdp__action--wishlist > * {
+  width: 100%;
+}
+
+.calder-pdp__action--wishlist button,
+.calder-pdp__action--wishlist a {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+
+  gap: 10px;
+
+  width: 100% !important;
+  min-height: 52px !important;
+
+  margin: 0 !important;
+  padding: 0 18px !important;
+
+  border: 1px solid var(--calder-navy) !important;
+  border-radius: 0 !important;
+
+  background: transparent !important;
+
+  color: var(--calder-navy) !important;
+
+  font-family: var(--calder-ui-font) !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+
+  box-shadow: none !important;
+
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease !important;
+}
+
+.calder-pdp__action--wishlist button:hover,
+.calder-pdp__action--wishlist a:hover {
+  background: var(--calder-navy) !important;
+  color: var(--calder-white) !important;
+}
+
+
+/*
+  If Lumia outputs "Add to wishlist", keep the control visually compact.
+*/
+
+.calder-pdp__action--wishlist svg {
+  width: 18px;
+  height: 18px;
+}
+
+
+/* ==========================================================================
+   28. TRUST ROW
+   ========================================================================== */
+
+.calder-pdp__trust {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+
+  gap: 10px;
+
+  width: 100%;
+
+  margin-top: 24px;
+  padding-top: 20px;
+
+  border-top: 1px solid #e1e6e9;
+}
+
+.calder-pdp__trust-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  min-width: 0;
+
+  color: var(--calder-navy);
+
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1.25;
+
+  text-align: center;
+}
+
+.calder-pdp__trust-item svg {
+  flex: 0 0 auto;
+
+  width: 18px;
+  height: 18px;
+}
+
+
+/* ==========================================================================
+   29. APP BLOCKS
+   ========================================================================== */
+
+.calder-pdp__app-block {
+  width: 100%;
+
+  margin-top: 18px;
+}
+
+
+/* ==========================================================================
+   30. FOCUS STATES
+   ========================================================================== */
+
+.calder-pdp button:focus-visible,
+.calder-pdp a:focus-visible,
+.calder-pdp select:focus-visible,
+.calder-pdp input:focus-visible {
+  outline: 2px solid var(--calder-blue);
+  outline-offset: 2px;
+}
+
+
+/* ==========================================================================
+   31. LARGE DESKTOP — 1440+
+   ========================================================================== */
+
+@media (min-width: 1440px) {
+
+  .calder-pdp__hero {
+    grid-template-columns:
+      minmax(0, 57fr)
+      minmax(470px, 43fr);
+
+    gap: 52px;
+  }
+
+  .calder-pdp__main-image {
+    aspect-ratio: 1.27 / 1;
+  }
+
+  .calder-pdp__design-code {
+    font-size: clamp(74px, 5.25vw, 94px);
+  }
+
+  .calder-pdp__description {
+    font-size: 14px;
+  }
+
+}
+
+
+/* ==========================================================================
+   32. EXTRA-WIDE DESKTOP — 1600+
+   ========================================================================== */
+
+@media (min-width: 1600px) {
+
+  .calder-pdp__hero {
+    gap: 60px;
+  }
+
+  .calder-pdp__design-code {
+    font-size: 96px;
+  }
+
+  .calder-pdp__title {
+    font-size: 32px;
+  }
+
+  .calder-pdp__construction {
+    font-size: 25px;
+  }
+
+}
+
+
+/* ==========================================================================
+   33. STANDARD LAPTOP / SMALL DESKTOP
+   ========================================================================== */
+
+@media (min-width: 1200px) and (max-width: 1439px) {
+
+  .calder-pdp__hero {
+    grid-template-columns:
+      minmax(0, 56fr)
+      minmax(410px, 44fr);
+
+    gap: 36px;
+  }
+
+  .calder-pdp__design-code {
+    font-size: 68px;
+  }
+
+  .calder-pdp__title {
+    font-size: 24px;
+  }
+
+  .calder-pdp__construction {
+    font-size: 19px;
+  }
+
+  .calder-pdp__tagline {
+    font-size: 18px;
+  }
+
+  .calder-pdp__description {
+    margin-top: 10px;
+
+    font-size: 12.5px;
+    line-height: 1.55;
+  }
+
+  .calder-pdp__meta {
+    margin-top: 14px;
+    margin-bottom: 14px;
+  }
+
+  .calder-pdp__fitment {
+    min-height: 74px;
+
+    padding: 13px 15px;
+  }
+
+  .calder-pdp__config {
+    gap: 14px;
+
+    padding: 16px;
+  }
+
+  .calder-pdp__purchase {
+    padding: 16px;
+  }
+
+}
+
+
+/* ==========================================================================
+   34. TABLET / NARROW DESKTOP
+   ========================================================================== */
+
+@media (min-width: 992px) and (max-width: 1199px) {
+
+  .calder-pdp > .container {
+    width: min(
+      calc(100% - 36px),
+      var(--container-max-width, 1418px)
+    );
+  }
+
+  .calder-pdp__hero {
+    grid-template-columns:
+      minmax(0, 53fr)
+      minmax(390px, 47fr);
+
+    gap: 28px;
+
+    padding-bottom: 50px;
+  }
+
+  .calder-pdp__main-image {
+    aspect-ratio: 1.05 / 1;
+  }
+
+  .calder-pdp__design-code {
+    font-size: 60px;
+  }
+
+  .calder-pdp__title {
+    font-size: 21px;
+  }
+
+  .calder-pdp__construction {
+    font-size: 17px;
+  }
+
+  .calder-pdp__badge {
+    min-height: 30px;
+
+    padding: 7px 10px;
+
+    font-size: 8px;
+  }
+
+  .calder-pdp__tagline {
+    font-size: 17px;
+  }
+
+  .calder-pdp__description {
+    font-size: 12px;
+  }
+
+  .calder-pdp__fitment {
+    align-items: stretch;
+    flex-direction: column;
+
+    gap: 12px;
+  }
+
+  .calder-pdp__fitment-action {
+    width: 100%;
+  }
+
+  .calder-pdp__config-row {
+    gap: 12px;
+  }
+
+  .calder-pdp__purchase-top {
+    gap: 18px;
+  }
+
+  .calder-pdp__trust {
+    gap: 5px;
+  }
+
+  .calder-pdp__trust-item {
+    gap: 5px;
+
+    font-size: 8.5px;
+  }
+
+}
+
+
+/* ==========================================================================
+   35. TABLET — STACK PDP
+   ========================================================================== */
+
+@media (max-width: 991px) {
+
+  .calder-pdp > .container {
+    width: min(
+      calc(100% - 36px),
+      var(--container-max-width, 1418px)
+    );
+  }
+
+  .calder-pdp__hero {
+    display: grid;
+    grid-template-columns: 1fr;
+
+    gap: 38px;
+
+    padding-top: 14px;
+    padding-bottom: 52px;
+  }
+
+  .calder-pdp__gallery,
+  .calder-pdp__info {
+    width: 100%;
+  }
+
+  .calder-pdp__main-image {
+    aspect-ratio: 1.28 / 1;
+  }
+
+  .calder-pdp__design-code {
+    font-size: clamp(62px, 11vw, 86px);
+  }
+
+  .calder-pdp__title {
+    font-size: clamp(23px, 4vw, 30px);
+  }
+
+  .calder-pdp__construction {
+    font-size: clamp(18px, 3vw, 23px);
+  }
+
+  .calder-pdp__tagline {
+    font-size: 20px;
+  }
+
+  .calder-pdp__description {
+    max-width: 760px;
+
+    font-size: 14px;
+  }
+
+}
+
+
+/* ==========================================================================
+   36. MOBILE — <= 767
+   ========================================================================== */
+
+@media (max-width: 767px) {
+
+  .calder-pdp {
+    --calder-control-height: 50px;
+    --calder-button-height: 56px;
+  }
+
+
+  /* Container */
+
+  .calder-pdp > .container {
+    width: calc(100% - 28px);
+  }
+
+
+  /* Breadcrumbs */
+
+  .calder-pdp__breadcrumbs {
+    padding-top: 12px;
+    padding-bottom: 12px;
+
+    font-size: 10px;
+  }
+
+
+  /* Hero */
+
+  .calder-pdp__hero {
+    gap: 30px;
+
+    padding-top: 8px;
+    padding-bottom: 42px;
+  }
+
+
+  /* Gallery */
+
+  .calder-pdp__native-gallery {
+    gap: 11px;
+  }
+
+  .calder-pdp__main-image {
+    aspect-ratio: 1 / 1;
+  }
+
+
+  /*
+    Mobile keeps approximately 4.5 thumbnails visible when Lumia's
+    slider controls widths. Fallback normal-list layout uses five.
+  */
+
+  .calder-pdp__thumbs-wrap > ul,
+  .calder-pdp__thumbs-wrap > .row {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+
+    gap: 7px;
+  }
+
+  .calder-pdp__thumbs-wrap
+    .prd-block-gallery-thumbs-item {
+    border-width: 1px;
+  }
+
+
+  /* Heading */
+
+  .calder-pdp__heading {
+    gap: 12px;
+
+    margin-bottom: 7px;
+  }
+
+  .calder-pdp__design-code {
+    font-size: clamp(54px, 17vw, 72px);
+    line-height: 0.84;
+  }
+
+  .calder-pdp__title {
+    margin-top: 7px;
+
+    font-size: clamp(19px, 5.7vw, 25px);
+    line-height: 1.08;
+
+    letter-spacing: 0.08em;
+  }
+
+  .calder-pdp__design-code + .calder-pdp__title {
+    font-size: clamp(18px, 5.4vw, 23px);
+  }
+
+  .calder-pdp__construction {
+    margin-top: 6px;
+
+    font-size: clamp(15px, 4.6vw, 20px);
+
+    letter-spacing: 0.11em;
+  }
+
+
+  /* Badge */
+
+  .calder-pdp__badge {
+    min-height: 28px;
+
+    padding: 6px 8px;
+
+    font-size: 7.5px;
+
+    letter-spacing: 0.12em;
+  }
+
+
+  /* Tagline */
+
+  .calder-pdp__tagline {
+    margin-top: 12px;
+
+    font-size: 18px;
+  }
+
+
+  /* Description */
+
+  .calder-pdp__description {
+    margin-top: 10px;
+
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+
+  /* Meta */
+
+  .calder-pdp__meta {
+    align-items: flex-start;
+
+    gap: 12px;
+
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+
+  .calder-pdp__rating {
+    gap: 6px;
+  }
+
+  .calder-pdp__rating-stars svg {
+    width: 15px;
+    height: 15px;
+  }
+
+  .calder-pdp__rating-value,
+  .calder-pdp__rating-count,
+  .calder-pdp__sku {
+    font-size: 10px;
+  }
+
+
+  /* Fitment */
+
+  .calder-pdp__fitment {
+    flex-direction: column;
+    align-items: stretch;
+
+    gap: 13px;
+
+    min-height: 0;
+
+    padding: 15px;
+  }
+
+  .calder-pdp__fitment-status {
+    gap: 11px;
+  }
+
+  .calder-pdp__fitment-icon {
+    flex-basis: 36px;
+
+    width: 36px;
+    height: 36px;
+  }
+
+  .calder-pdp__fitment-icon svg {
+    width: 36px;
+    height: 36px;
+  }
+
+  .calder-pdp__fitment-label {
+    font-size: 11px;
+  }
+
+  .calder-pdp__fitment-text {
+    font-size: 11px;
+  }
+
+  .calder-pdp__fitment-action {
+    width: 100%;
+    min-height: 44px;
+  }
+
+
+  /* Config */
+
+  .calder-pdp__config {
+    gap: 16px;
+
+    padding: 16px 14px;
+  }
+
+  .calder-pdp__config-row {
+    grid-template-columns: 1fr;
+
+    gap: 16px;
+  }
+
+  .calder-pdp__config-label {
+    margin-bottom: 7px;
+
+    font-size: 11px;
+  }
+
+
+  /* Finish */
+
+  .calder-pdp__finishes {
+    gap: 9px;
+  }
+
+  .calder-pdp__finish-chip {
+    width: 36px;
+    height: 36px;
+  }
+
+  .calder-pdp__finish-chip img,
+  .calder-pdp__finish-chip > span {
+    width: 28px;
+    height: 28px;
+  }
+
+
+  /* Purchase */
+
+  .calder-pdp__purchase {
+    padding: 16px 14px;
+  }
+
+  .calder-pdp__purchase-top {
+    align-items: flex-end;
+
+    gap: 15px;
+
+    margin-bottom: 16px;
+  }
+
+  .calder-pdp__qty {
+    grid-template-columns: 36px 54px 36px;
+
+    height: 42px;
+  }
+
+  .calder-pdp__qty-btn {
+    width: 36px;
+    height: 40px;
+  }
+
+  .calder-pdp__qty-input {
+    width: 54px;
+    height: 40px;
+  }
+
+  .calder-pdp__price
+    .price-item--regular,
+  .calder-pdp__price
+    .price-item--sale {
+    font-size: 25px;
+  }
+
+  .calder-pdp__price-suffix {
+    font-size: 12px;
+  }
+
+
+  /* Buttons */
+
+  .calder-pdp__add-btn,
+  .calder-pdp__buy
+    button[name="add"],
+  .calder-pdp__buy
+    .product-form__submit,
+  .calder-pdp__buy
+    [class*="add-to-cart"],
+  .calder-pdp__buy
+    [class*="addtocart"] {
+    min-height: 56px;
+
+    font-size: 11px !important;
+  }
+
+
+  /* Save/share */
+
+  .calder-pdp__actions {
+    gap: 9px;
+
+    margin-top: 10px;
+  }
+
+  .calder-pdp__action-btn,
+  .calder-pdp__action--wishlist button,
+  .calder-pdp__action--wishlist a {
+    min-height: 48px !important;
+
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+
+    font-size: 10px !important;
+  }
+
+
+  /* Trust */
+
+  .calder-pdp__trust {
+    gap: 8px;
+
+    margin-top: 20px;
+    padding-top: 16px;
+  }
+
+  .calder-pdp__trust-item {
+    flex-direction: column;
+
+    gap: 5px;
+
+    font-size: 8.5px;
+    line-height: 1.2;
+  }
+
+  .calder-pdp__trust-item svg {
+    width: 17px;
+    height: 17px;
+  }
+
+}
+
+
+/* ==========================================================================
+   37. SMALL MOBILE — <= 479
+   ========================================================================== */
+
+@media (max-width: 479px) {
+
+  .calder-pdp > .container {
+    width: calc(100% - 24px);
+  }
+
+
+  /* Heading/badge */
+
+  .calder-pdp__heading {
+    align-items: flex-start;
+  }
+
+  .calder-pdp__design-code {
+    font-size: clamp(50px, 16vw, 64px);
+  }
+
+  .calder-pdp__badge {
+    margin-top: 1px;
+
+    padding-left: 7px;
+    padding-right: 7px;
+
+    white-space: normal;
+    text-align: center;
+  }
+
+
+  /* Meta */
+
+  .calder-pdp__meta {
+    flex-wrap: wrap;
+  }
+
+  .calder-pdp__sku {
+    width: 100%;
+
+    margin-left: 0;
+  }
+
+
+  /* Purchase */
+
+  .calder-pdp__purchase-top {
+    display: grid;
+    grid-template-columns: auto 1fr;
+
+    width: 100%;
+  }
+
+  .calder-pdp__price-column {
+    min-width: 0;
+  }
+
+
+  /* Actions */
+
+  .calder-pdp__actions {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+
+  /* Trust */
+
+  .calder-pdp__trust {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+}
+
+
+/* ==========================================================================
+   38. VERY SMALL MOBILE — <= 374
+   ========================================================================== */
+
+@media (max-width: 374px) {
+
+  .calder-pdp__design-code {
+    font-size: 48px;
+  }
+
+  .calder-pdp__title {
+    font-size: 18px;
+  }
+
+  .calder-pdp__construction {
+    font-size: 14px;
+  }
+
+  .calder-pdp__badge {
+    font-size: 6.5px;
+  }
+
+  .calder-pdp__purchase-top {
+    grid-template-columns: 1fr;
+  }
+
+  .calder-pdp__price-column {
+    align-items: flex-start;
+
+    margin-left: 0;
+
+    text-align: left;
+  }
+
+  .calder-pdp__actions {
+    grid-template-columns: 1fr;
+  }
+
+  .calder-pdp__trust {
+    grid-template-columns: 1fr;
+
+    gap: 12px;
+  }
+
+  .calder-pdp__trust-item {
+    flex-direction: row;
+  }
+
+}
+
+
+/* ==========================================================================
+   39. REDUCED MOTION
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .calder-pdp *,
+  .calder-pdp *::before,
+  .calder-pdp *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+
+}
+
+
+/* ==========================================================================
+   40. PRINT
+   ========================================================================== */
+
+@media print {
+
+  .calder-pdp__fitment-action,
+  .calder-pdp__buy,
+  .calder-pdp__actions {
+    display: none !important;
+  }
+
+}
+
+
+/* ============================================================
+   CALDER PDP — APPROVED MOCKUP GALLERY RESTORATION
+   Direct Shopify media; no Lumia Swiper dependency.
+   ============================================================ */
+.page-calder .calder-pdp__hero,
+.calder-pdp .calder-pdp__hero {
+  align-items: start;
+}
+
+.page-calder .calder-pdp__gallery,
+.calder-pdp .calder-pdp__gallery {
+  position: relative;
+  top: auto;
+  min-width: 0;
+  width: 100%;
+}
+
+.page-calder .calder-pdp__main-image,
+.calder-pdp .calder-pdp__main-image {
+  position: relative;
+  width: 100%;
+  min-height: 0;
+  aspect-ratio: 1 / 1;
+  background: #f4f5f5;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.page-calder .calder-pdp__main-image img,
+.calder-pdp .calder-pdp__main-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  padding: clamp(20px, 2.6vw, 42px);
+}
+
+.page-calder .calder-pdp__thumb-rail,
+.calder-pdp .calder-pdp__thumb-rail {
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr) 34px;
+  align-items: center;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.page-calder .calder-pdp__thumbs,
+.calder-pdp .calder-pdp__thumbs {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  padding: 1px;
+}
+
+.page-calder .calder-pdp__thumb,
+.calder-pdp .calder-pdp__thumb {
+  flex: 0 0 calc((100% - 40px) / 5);
+  min-width: 72px;
+  aspect-ratio: 1 / 1;
+  border: 1px solid #dfe3e5;
+  border-radius: 0;
+  background: #f7f7f6;
+  padding: 5px;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.page-calder .calder-pdp__thumb.is-active,
+.calder-pdp .calder-pdp__thumb.is-active {
+  border: 2px solid var(--calder-gold);
+  padding: 4px;
+}
+
+.page-calder .calder-pdp__thumb img,
+.calder-pdp .calder-pdp__thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 0;
+}
+
+.page-calder .calder-pdp__gallery-arrow,
+.calder-pdp .calder-pdp__gallery-arrow {
+  width: 34px;
+  height: 44px;
+  color: var(--calder-navy);
+  border: 0;
+  background: transparent;
+  padding: 0;
+}
+
+.page-calder .calder-pdp__zoom,
+.calder-pdp .calder-pdp__zoom {
+  right: 18px;
+  bottom: 18px;
+  width: 42px;
+  height: 42px;
+  background: #fff;
+  border: 1px solid #dfe3e5;
+  color: var(--calder-navy);
+}
+
+@media (max-width: 991px) {
+  .page-calder .calder-pdp__gallery,
+  .calder-pdp .calder-pdp__gallery {
+    position: relative;
+    top: auto;
+  }
+}
+
+@media (max-width: 575px) {
+  .page-calder .calder-pdp__thumb,
+  .calder-pdp .calder-pdp__thumb {
+    flex-basis: 72px;
+    min-width: 72px;
+  }
+}

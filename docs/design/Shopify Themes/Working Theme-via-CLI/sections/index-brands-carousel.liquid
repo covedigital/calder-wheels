@@ -260,6 +260,9 @@
                   endif
                 -%}
                 <div class="{%- if section.settings.layout == 'grid_carousel' -%}swiper-slide{%- else -%}col{% endif %}" {{ block.shopify_attributes }}>
+                  {% if section.settings.show_brand_title and section.settings.brand_title_position == 'above' %}
+                  <div class="cw-brand-title" style="text-align:{{ section.settings.brand_title_alignment }};color:{{ section.settings.brand_title_color }};font-size:{{ section.settings.brand_title_font_size }}px;font-weight:{{ section.settings.brand_title_font_weight }};">{{ block.settings.title }}</div>
+                  {% endif %}
                   {% render 'image-container',
                     sizes: '(min-width: 1200px) 255px, (min-width: 992px) 217px, calc(100vw - 50px) / 2',
                     image: block.settings.image,
@@ -275,6 +278,9 @@
                     bg_alt_secondary: 1,
                     style: ic_style
                   %}
+                  {% if section.settings.show_brand_title and section.settings.brand_title_position == 'below' %}
+                  <div class="cw-brand-title" style="text-align:{{ section.settings.brand_title_alignment }};color:{{ section.settings.brand_title_color }};font-size:{{ section.settings.brand_title_font_size }}px;font-weight:{{ section.settings.brand_title_font_weight }};">{{ block.settings.title }}</div>
+                  {% endif %}
                 </div>
                 {% if section.settings.layout == 'grid' %}<div class='line-break'></div>{% endif %}
               {%- endfor -%}
@@ -610,6 +616,66 @@
       "id": "subtitle",
       "default": "Subtitle",
       "label": "Subtitle"
+    },
+    {
+      "type": "header",
+      "content": "Brand Title"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_brand_title",
+      "label": "Show brand title",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "brand_title_position",
+      "label": "Brand title position",
+      "options": [
+        { "value": "above", "label": "Above image" },
+        { "value": "below", "label": "Below image" }
+      ],
+      "default": "below"
+    },
+    {
+      "type": "select",
+      "id": "brand_title_alignment",
+      "label": "Brand title alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "color",
+      "id": "brand_title_color",
+      "label": "Brand title color",
+      "default": "#231F20"
+    },
+    {
+      "type": "range",
+      "id": "brand_title_font_size",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Brand title font size",
+      "default": 14
+    },
+    {
+      "type": "select",
+      "id": "brand_title_font_weight",
+      "label": "Brand title font weight",
+      "options": [
+        { "value": "300", "label": "Light" },
+        { "value": "400", "label": "Regular" },
+        { "value": "500", "label": "Medium" },
+        { "value": "600", "label": "Semi Bold" },
+        { "value": "700", "label": "Bold" }
+      ],
+      "default": "600"
     },
     {
       "type": "header",

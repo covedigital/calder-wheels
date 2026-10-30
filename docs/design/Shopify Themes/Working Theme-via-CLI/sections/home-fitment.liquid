@@ -1,6 +1,17 @@
 {{ 'fitment-finder.css' | asset_url | stylesheet_tag }}
 {{ 'home.css' | asset_url | stylesheet_tag }}
+{{ 'calder-product-fitment-guide.css' | asset_url | stylesheet_tag }}
+{{ 'calder-fitment-finder-guide.css' | asset_url | stylesheet_tag }}
 {% render 'fitment-data' %}
+{% render 'fitment-catalog' %}
+{% render 'calder-fitment-guide-data' %}
+
+{% comment %}
+  By Vehicle tab renders the approved PDP fitment guide card
+  (.cw-fitment-guide__card, powered by calder-product-fitment-guide.js and
+  the calder-fitment-data.json dataset). By Wheel Style tab and the shared
+  results/status machinery from fitment-finder.js are unchanged.
+{% endcomment %}
 
 <section class="hf-fitment hf-fitment--light" id="calder-fitment-finder-{{ section.id }}" data-section-id="{{ section.id }}">
   <!-- Background fills behind the shell -->
@@ -11,23 +22,28 @@
     <!-- Tabs -->
     <div class="hf-fitment__tabs" role="tablist" aria-label="Fitment search method">
       <button class="hf-fitment__tab hf-fitment__tab--active hf-fitment__tab--vehicle" role="tab" aria-selected="true" data-tab="vehicle" id="hf-tab-vehicle-{{ section.id }}">
-        <svg class="hf-fitment__tab-icon" width="18" height="18" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-          <rect x="2" y="5" width="12" height="8" rx="1.5" stroke="currentColor" stroke-width="1.2" fill="none"/>
-          <circle cx="5.5" cy="11" r="1.5" stroke="currentColor" stroke-width="1" fill="none"/>
-          <circle cx="10.5" cy="11" r="1.5" stroke="currentColor" stroke-width="1" fill="none"/>
-          <path d="M4 5V4a2 2 0 012-2h4a2 2 0 012 2v1" stroke="currentColor" stroke-width="1" fill="none"/>
+        <svg class="hf-fitment__tab-icon" width="18" height="18" viewBox="0 0 512 512" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+          <path d="M469.71 234.6c-7.33-9.73-34.56-16.43-46.08-33.94s-20.95-55.43-50.27-70S288 112 256 112s-88 4-117.36 18.63-38.75 52.52-50.27 70-38.75 24.24-46.08 33.97S29.8 305.84 32.94 336s9 48 9 48h86c14.08 0 18.66-5.29 47.46-8 31.6-3 62.6-4 80.6-4s50 1 81.58 4c28.8 2.73 33.53 8 47.46 8h85s5.86-17.84 9-48-2.04-91.67-9.33-101.4M400 384h56v16h-56zM56 384h56v16H56z"
+            stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"/>
+
+          <path d="M364.47 309.16c-5.91-6.83-25.17-12.53-50.67-16.35S279 288 256.2 288s-33.17 1.64-57.61 4.81-42.79 8.81-50.66 16.35C136.12 320.6 153.42 333.44 167 335c13.16 1.5 39.47.95 89.31.95s76.15.55 89.31-.95c13.56-1.65 29.62-13.6 18.85-25.84M431.57 243.05a3.23 3.23 0 0 0-3.1-3c-11.81-.42-23.8.42-45.07 6.69a93.9 93.9 0 0 0-30.08 15.06c-2.28 1.78-1.47 6.59 1.39 7.1a455 455 0 0 0 52.82 3.1c10.59 0 21.52-3 23.55-12.44a52.4 52.4 0 0 0 .49-16.51M80.43 243.05a3.23 3.23 0 0 1 3.1-3c11.81-.42 23.8.42 45.07 6.69a93.9 93.9 0 0 1 30.08 15.06c2.28 1.78 1.47 6.59-1.39 7.1a455 455 0 0 1-52.82 3.1c-10.59 0-21.52-3-23.55-12.44a52.4 52.4 0 0 1-.49-16.51"
+            fill="currentColor" stroke="none"/>
+
+          <path d="M432 192h16M64 192h16M78 211s46.35-12 178-12 178 12 178 12"
+            stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"/>
         </svg>
+
         <span>{{ section.settings.tab_1_label | default: 'By Vehicle' }}</span>
       </button>
-      <button class="hf-fitment__tab hf-fitment__tab--style" role="tab" aria-selected="false" data-tab="style" id="hf-tab-style-{{ section.id }}">
-        <svg class="hf-fitment__tab-icon" width="18" height="18" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-          <circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.2" fill="none"/>
-          <circle cx="8" cy="8" r="2.5" stroke="currentColor" stroke-width="1" fill="none"/>
-          <line x1="8" y1="2" x2="8" y2="4" stroke="currentColor" stroke-width="1"/>
-          <line x1="8" y1="12" x2="8" y2="14" stroke="currentColor" stroke-width="1"/>
-          <line x1="2" y1="8" x2="4" y2="8" stroke="currentColor" stroke-width="1"/>
-          <line x1="12" y1="8" x2="14" y2="8" stroke="currentColor" stroke-width="1"/>
+      <button class="hf-fitment__tab hf-fitment__tab--style" role="tab" aria-selected="false" data-tab="style" id="hf-tab-style-{{ section.id }}">  
+        <svg class="hf-fitment__tab-icon" width="18" height="18" viewBox="0 0 512 512" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+          <path d="M448 256c0-106-86-192-192-192S64 150 64 256s86 192 192 192 192-86 192-192Z"
+            stroke="currentColor" stroke-miterlimit="10" stroke-width="32"/>
+
+          <path d="M360 94.59V296M443.13 212.87 296 360M417.41 360H216M299.13 443.13l-144-144M152 416V216M68.87 299.13l144-144M94.59 152H288M212.87 68.87 360 216"
+            stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"/>
         </svg>
+
         <span>{{ section.settings.tab_2_label | default: 'By Wheel Style' }}</span>
       </button>
     </div>
@@ -50,41 +66,65 @@
             <p class="hf-fitment__description" data-description-style hidden>Browse Calder wheels by size, bolt pattern, and finish.</p>
           </div>
 
-          <!-- BY VEHICLE form -->
-          <div id="hf-panel-vehicle-{{ section.id }}" class="hf-fitment__form-panel hf-fitment__form-panel--active">
-            <div class="hf-fitment__controls">
-              <div class="hf-fitment__control hf-fitment__control--year">
-                <label class="hf-fitment__label" for="hf-year-{{ section.id }}">{{ section.settings.label_year | default: 'YEAR' }}</label>
-                <select id="hf-year-{{ section.id }}" class="hf-fitment__select" data-fitment="year">
-                  <option value="">{{ section.settings.placeholder_year | default: 'Year' }}</option>
-                </select>
-              </div>
-              <div class="hf-fitment__control hf-fitment__control--make">
-                <label class="hf-fitment__label" for="hf-make-{{ section.id }}">{{ section.settings.label_make | default: 'MAKE' }}</label>
-                <select id="hf-make-{{ section.id }}" class="hf-fitment__select" data-fitment="make" disabled>
-                  <option value="">{{ section.settings.placeholder_make | default: 'Make' }}</option>
-                </select>
-              </div>
-              <div class="hf-fitment__control hf-fitment__control--model">
-                <label class="hf-fitment__label" for="hf-model-{{ section.id }}">{{ section.settings.label_model | default: 'MODEL' }}</label>
-                <select id="hf-model-{{ section.id }}" class="hf-fitment__select" data-fitment="model" disabled>
-                  <option value="">{{ section.settings.placeholder_model | default: 'Model' }}</option>
-                </select>
-              </div>
-              <div class="hf-fitment__control hf-fitment__control--trim">
-                <label class="hf-fitment__label" for="hf-trim-{{ section.id }}">{{ section.settings.label_trim | default: 'TRIM' }}</label>
-                <select id="hf-trim-{{ section.id }}" class="hf-fitment__select" data-fitment="trim" disabled>
-                  <option value="">{{ section.settings.placeholder_trim | default: 'Trim' }}</option>
-                </select>
-              </div>
-              <div class="hf-fitment__action">
-                <button id="hf-submit-{{ section.id }}" class="hf-fitment__cta" disabled>
-                  <span class="hf-fitment__cta-text">{{ section.settings.button_text | default: 'Find Wheels' }}</span>
-                  <svg class="hf-fitment__cta-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                    <path d="M4 8h8M8 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
+          <!-- BY VEHICLE — approved PDP fitment guide card -->
+          <div id="hf-panel-vehicle-{{ section.id }}" class="hf-fitment__form-panel hf-fitment__form-panel--active cw-fitment-guide">
+            <div class="cw-fitment-guide__card">
+              <div class="cw-fitment-guide__controls">
+                <div class="cw-fitment-guide__field cw-fitment-guide__field--year">
+                  <label class="cw-fitment-guide__label" for="cw-guide-year-{{ section.id }}">Select Year</label>
+                  <div class="cw-fitment-guide__select-wrapper">
+                    <select
+                      id="cw-guide-year-{{ section.id }}"
+                      class="cw-fitment-guide__select"
+                      data-guide-year
+                      data-placeholder="{{ section.settings.placeholder_year | default: 'Select Year' }}"
+                      disabled
+                    >
+                      <option value="">{{ section.settings.placeholder_year | default: 'Select Year' }}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="cw-fitment-guide__field cw-fitment-guide__field--make">
+                  <label class="cw-fitment-guide__label" for="cw-guide-make-{{ section.id }}">Select Make</label>
+                  <div class="cw-fitment-guide__select-wrapper">
+                    <select
+                      id="cw-guide-make-{{ section.id }}"
+                      class="cw-fitment-guide__select"
+                      data-guide-make
+                      data-placeholder="{{ section.settings.placeholder_make | default: 'Select Make' }}"
+                      disabled
+                    >
+                      <option value="">{{ section.settings.placeholder_make | default: 'Select Make' }}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="cw-fitment-guide__field cw-fitment-guide__field--model">
+                  <label class="cw-fitment-guide__label" for="cw-guide-model-{{ section.id }}">Select Model</label>
+                  <div class="cw-fitment-guide__select-wrapper">
+                    <select
+                      id="cw-guide-model-{{ section.id }}"
+                      class="cw-fitment-guide__select"
+                      data-guide-model
+                      data-placeholder="{{ section.settings.placeholder_model | default: 'Select Model' }}"
+                      disabled
+                    >
+                      <option value="">{{ section.settings.placeholder_model | default: 'Select Model' }}</option>
+                    </select>
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  class="cw-fitment-guide__submit"
+                  data-guide-submit
+                  disabled
+                >
+                  {{ section.settings.guide_button_text | default: 'SEE FITMENT' }}
                 </button>
               </div>
+
+              <div class="cw-fitment-guide__divider"></div>
+
+              <div class="cw-fitment-guide__results" data-guide-results style="display:none;"></div>
             </div>
           </div>
 
@@ -130,6 +170,47 @@
         <!-- Vertical divider -->
         <div class="hf-fitment__divider" aria-hidden="true"></div>
 
+        <!-- Empty vehicle state -->
+        <div class="hf-fitment__vehicle-empty" data-fitment-empty-state>
+          <div class="hf-fitment__vehicle-empty-icon" aria-hidden="true">
+            <svg
+              class="hf-fitment__empty-icon"
+              width="30"
+              height="30"
+              viewBox="0 0 512 512"
+              fill="none"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M469.71 234.6c-7.33-9.73-34.56-16.43-46.08-33.94s-20.95-55.43-50.27-70S288 112 256 112s-88 4-117.36 18.63-38.75 52.52-50.27 70-38.75 24.24-46.08 33.97S29.8 305.84 32.94 336s9 48 9 48h86c14.08 0 18.66-5.29 47.46-8 31.6-3 62.6-4 80.6-4s50 1 81.58 4c28.8 2.73 33.53 8 47.46 8h85s5.86-17.84 9-48-2.04-91.67-9.33-101.4M400 384h56v16h-56zM56 384h56v16H56z"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="32"
+              />
+
+              <path
+                d="M364.47 309.16c-5.91-6.83-25.17-12.53-50.67-16.35S279 288 256.2 288s-33.17 1.64-57.61 4.81-42.79 8.81-50.66 16.35C136.12 320.6 153.42 333.44 167 335c13.16 1.5 39.47.95 89.31.95s76.15.55 89.31-.95c13.56-1.65 29.62-13.6 18.85-25.84M431.57 243.05a3.23 3.23 0 0 0-3.1-3c-11.81-.42-23.8.42-45.07 6.69a93.9 93.9 0 0 0-30.08 15.06c-2.28 1.78-1.47 6.59 1.39 7.1a455 455 0 0 0 52.82 3.1c10.59 0 21.52-3 23.55-12.44a52.4 52.4 0 0 0 .49-16.51M80.43 243.05a3.23 3.23 0 0 1 3.1-3c11.81-.42 23.8.42 45.07 6.69a93.9 93.9 0 0 1 30.08 15.06c2.28 1.78 1.47 6.59-1.39 7.1a455 455 0 0 1-52.82 3.1c-10.59 0-21.52-3-23.55-12.44a52.4 52.4 0 0 1 .49-16.51"
+                fill="currentColor"
+                stroke="none"
+              />
+
+              <path
+                d="M432 192h16M64 192h16M78 211s46.35-12 178-12 178 12 178 12"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="32"
+              />
+            </svg>
+          </div>
+          <div class="hf-fitment__vehicle-empty-title">YOUR VEHICLE</div>
+          <div class="hf-fitment__vehicle-empty-name">No vehicle selected</div>
+          <p class="hf-fitment__vehicle-empty-description">Select your year, make, and model to see fitment specs and wheels that fit.</p>
+          <div class="hf-fitment__vehicle-empty-status"><span class="hf-fitment__vehicle-empty-indicator" aria-hidden="true"></span>Awaiting vehicle selection</div>
+        </div>
+
         <!-- Selected vehicle region -->
         <div class="hf-fitment__vehicle" data-fitment-status hidden>
           <div class="hf-fitment__vehicle-inner">
@@ -168,7 +249,38 @@
   </div>
 </section>
 
+<style>
+  #calder-fitment-finder-{{ section.id }} .hf-fitment__vehicle-empty {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    flex: 1; min-width: 0; padding: 24px 18px; text-align: center; color: #0E2A3E;
+  }
+  #calder-fitment-finder-{{ section.id }} .hf-fitment__vehicle-empty[hidden] { display: none !important; }
+  #calder-fitment-finder-{{ section.id }} .hf-fitment__vehicle-empty-icon {
+    display: grid; place-items: center; width: 60px; height: 60px;
+    margin-bottom: 14px; border-radius: 50%; background: #F2EFE9; color: #747A80;
+  }
+  #calder-fitment-finder-{{ section.id }} .hf-fitment__vehicle-empty-title { font-size: 14px; font-weight: 700; line-height: 1.3; }
+  #calder-fitment-finder-{{ section.id }} .hf-fitment__vehicle-empty-name { margin-top: 8px; font-size: 13px; color: #343B42; }
+  #calder-fitment-finder-{{ section.id }} .hf-fitment__vehicle-empty-description { max-width: 260px; margin: 8px 0 14px; font-size: 12px; line-height: 1.5; color: #747A80; }
+  #calder-fitment-finder-{{ section.id }} .hf-fitment__vehicle-empty-status { display: flex; align-items: center; gap: 9px; font-size: 12px; color: #747A80; }
+  #calder-fitment-finder-{{ section.id }} .hf-fitment__vehicle-empty-indicator { width: 15px; height: 15px; border: 1.5px dashed currentColor; border-radius: 50%; }
+</style>
+<script>
+  (() => {
+    const root = document.getElementById('calder-fitment-finder-{{ section.id }}');
+    if (!root) return;
+    const selected = root.querySelector('[data-fitment-status]');
+    const empty = root.querySelector('[data-fitment-empty-state]');
+    if (!selected || !empty) return;
+    const sync = () => { empty.hidden = !selected.hidden; };
+    sync();
+    new MutationObserver(sync).observe(selected, { attributes: true, attributeFilter: ['hidden'] });
+  })();
+</script>
+
 <script src="{{ 'fitment-finder.js' | asset_url }}" defer></script>
+<script src="{{ 'calder-product-fitment-guide.js' | asset_url }}" defer></script>
+<script src="{{ 'calder-fitment-finder-guide.js' | asset_url }}" defer></script>
 
 {% schema %}
 {
@@ -297,6 +409,12 @@
       "id": "button_text",
       "label": "Button text",
       "default": "Find Wheels"
+    },
+    {
+      "type": "text",
+      "id": "guide_button_text",
+      "label": "By Vehicle card button text",
+      "default": "SEE FITMENT"
     },
     {
       "type": "header",

@@ -4,6 +4,11 @@
     Relies on calder-base.css.liquid for all design tokens.
     ============================================================ */
 
+.template-collection.calder-site .hdr-wrap .hdr {
+  background: #0E2A3E;
+  border-bottom: 0;
+}
+
 /* ------------------------------------------------------------
     COLLECTION HERO
     Image-led composition with DRIVEN BY HIGHER STANDARDS
@@ -15,6 +20,10 @@
   overflow: hidden;
   background: var(--calder-dark);
   color: var(--calder-white);
+}
+
+body.has-transparent-hdr .section--collection-hero {
+  min-height: 50vh;
 }
 
 .collection-hero {
@@ -54,9 +63,9 @@
   z-index: 1;
   background: linear-gradient(
     90deg,
-    rgba(10, 10, 10, 0.75) 0%,
-    rgba(10, 10, 10, 0.40) 60%,
-    rgba(10, 10, 10, 0.15) 100%
+    #0a0a0abf 0%,
+    #0a0a0aab 95%,
+    #0a0a0a4d 100%
   );
 }
 
@@ -68,8 +77,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  min-height: 380px;
-  padding: 64px 0;
+  min-height: 450px;
+  padding: 2rem 0;
 }
 
 .collection-hero__content {
@@ -80,7 +89,7 @@
 
 .collection-hero__eyebrow {
   margin: 0 0 14px;
-  color: #C2A48A;
+  color: var(--calder-champagne);
   font-size: 12px;
   font-weight: 700;
   line-height: 1.2;
@@ -94,12 +103,12 @@
   font-size: clamp(34px, 4vw, 54px);
   font-weight: 700;
   line-height: 1.05;
-  letter-spacing: 0.03em;
+  letter-spacing: -0.02em;
   text-transform: uppercase;
 }
 
 .collection-hero__heading span {
-  color: var(--calder-gold);
+  color: var(--calder-champagne);
 }
 
 .collection-hero__body {
@@ -122,9 +131,9 @@
 }
 
 .collection-hero__standards-heading {
-  color: var(--calder-gold);
+  color: var(--calder-champagne);
   font-size: var(--calder-eyebrow-size);
-  font-weight: 700;
+  font-weight: 500;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   text-align: right;
@@ -145,13 +154,17 @@
   gap: 8px;
   color: rgba(255, 255, 255, 0.80);
   font-size: 12px;
-  font-weight: 700;
+  font-weight: 500;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
 .collection-hero__standard svg {
   flex: 0 0 14px;
+}
+
+.collection-hero__standard svg path {
+  fill: var(--calder-champagne);
 }
 
 .collection-hero__decorative {
@@ -193,6 +206,7 @@
 .section--hf-fitment .hf-fitment__shell {
   width: min(calc(100% - 48px), var(--calder-content-max-width));
   margin-inline: auto;
+  padding: 0;
 }
 
 
@@ -360,6 +374,11 @@
   max-width: calc(100% / 3);
 }
 
+.has-product-style1 .collection-grid-section .prd-grid > *, 
+.has-product-style3 .collection-grid-section .prd-grid > * {
+  margin-top: 20px;
+}
+
 .collection-grid-section .prd-grid .col > calder-product-card,
 .collection-grid-section .prd-grid .col > .prd {
   height: 100%;
@@ -379,8 +398,8 @@
 }
 
 .collection-grid-section .sidebar-block {
-  border-bottom: 1px solid #e8e8e8;
-  padding: 14px 0;
+  //border-bottom: 1px solid #e8e8e8;
+  //padding: 14px 0;
 }
 
 .collection-grid-section .sidebar-block_title {
@@ -394,9 +413,9 @@
 
 .collection-grid-section .sidebar-block_title_text {
   color: #0E2A3E;
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 700;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
 }
 
@@ -463,7 +482,7 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  color: #C2A48A;
+  color: var(--calder-champagne);
   font-size: 12px;
   font-weight: 700;
   text-transform: uppercase;
@@ -642,26 +661,42 @@
 }
 
 
-/* ------------------------------------------------------------
-   HELP CTA — aligned to results column only
-   ------------------------------------------------------------ */
+/* ==========================================================
+   CALDER — COLLECTION HELP CTA
+   Reference layout:
+   [ Heading + Description ]   [ CTA 1 ] [ CTA 2 ]
+   ========================================================== */
+
+/* ----------------------------------------------------------
+   SECTION WRAPPER
+   ---------------------------------------------------------- */
 
 .section--collection-help-cta {
   position: relative;
   margin-top: 0;
   margin-bottom: 0;
+  width: 100%;
 }
+
+/* ----------------------------------------------------------
+   OUTER CTA / BACKGROUND
+   Full-width visual area
+   ---------------------------------------------------------- */
 
 .collection-help-cta {
   position: relative;
-  min-height: 170px;
-  //border-radius: 8px;
-  overflow: hidden;
   display: flex;
   align-items: center;
   width: 100%;
-  margin-left: auto;
+  min-height: 350px;
+  margin: 0;
+  overflow: hidden;
+  margin-top: 4rem;
 }
+
+/* ----------------------------------------------------------
+   BACKGROUND IMAGE
+   ---------------------------------------------------------- */
 
 .collection-help-cta__media,
 .collection-help-cta__overlay {
@@ -678,118 +713,364 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center;
 }
 
 .collection-help-cta__image-placeholder {
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, #0E2A3E 0%, #1a1a2e 100%);
+  background:
+    linear-gradient(
+      135deg,
+      #0E2A3E 0%,
+      #071A26 100%
+    );
 }
+
+/* ----------------------------------------------------------
+   OVERLAY
+   Keeps text readable regardless of chosen image
+   ---------------------------------------------------------- */
 
 .collection-help-cta__overlay {
   z-index: 1;
-  background: linear-gradient(135deg, rgba(10, 10, 10, 0.88) 0%, rgba(14, 42, 62, 0.72) 100%);
+  background:
+    linear-gradient(
+      90deg,
+      rgba(4, 25, 38, 0.96) 0%,
+      rgba(4, 29, 43, 0.90) 38%,
+      rgba(4, 29, 43, 0.70) 68%,
+      rgba(4, 20, 30, 0.48) 100%
+    );
 }
+
+/* ==========================================================
+   INNER CONTAINER
+
+   This is the important part.
+
+   The background remains full width while the actual
+   heading/body/buttons are constrained to Calder's
+   standard content width.
+   ========================================================== */
 
 .collection-help-cta__content {
   position: relative;
-  z-index: 2;
-  padding: 38px 44px;
-  max-width: 70%;
+  z-index: 3;
+  width: calc(100% - 48px);
+  max-width: var(--container-max-width, 1178px);
+  margin-left: auto;
+  margin-right: auto;
+  padding: 38px 0;
+  box-sizing: border-box;
+
+
+  /* LEFT CONTENT + RIGHT BUTTONS */
+  display: grid;
+  grid-template-columns:
+    minmax(320px, 1fr)
+    auto;
+
+  grid-template-areas:
+    "heading actions"
+    "body    actions";
+
+  column-gap: clamp(50px, 7vw, 120px);
+  row-gap: 10px;
+  align-items: center;
 }
 
+/* ----------------------------------------------------------
+   HEADING
+   ---------------------------------------------------------- */
+
 .collection-help-cta__heading {
-  margin: 0 0 12px;
-  color: #ffffff;
-  font-size: clamp(18px, 1.8vw, 24px);
+  grid-area: heading;
+  margin: 0;
+  max-width: 430px;
+  color: #FFFFFF;
+  font-family:
+    var(--calder-heading-font),
+    "Facundo",
+    sans-serif;
+
+  font-size: clamp(26px, 2.25vw, 38px);
   font-weight: 700;
-  line-height: 1.15;
-  letter-spacing: 0.04em;
+  line-height: 1.05;
+  letter-spacing: 0.025em;
   text-transform: uppercase;
 }
 
+/* ----------------------------------------------------------
+   DESCRIPTION
+   ---------------------------------------------------------- */
+
 .collection-help-cta__body {
-  margin: 0 0 20px;
-  color: rgba(255, 255, 255, 0.80);
+  grid-area: body;
+  margin: 4px 0 0;
+  max-width: 470px;
+  color: rgba(255, 255, 255, 0.78);
+  font-family:
+    var(--calder-ui-font),
+    "Garet",
+    sans-serif;
+
   font-size: 14px;
-  line-height: 1.5;
-  max-width: 480px;
+  font-weight: 400;
+  line-height: 1.55;
 }
 
+/* ==========================================================
+   ACTIONS
+   Places BOTH buttons to right of caption
+   ========================================================== */
+
 .collection-help-cta__actions {
+  grid-area: actions;
   display: flex;
   align-items: center;
-  gap: 14px;
-  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 18px;
+  flex-wrap: nowrap;
+  margin: 0;
 }
+
+/* ----------------------------------------------------------
+   SHARED BUTTON STYLING
+   ---------------------------------------------------------- */
+
+.collection-help-cta__btn-primary,
+.collection-help-cta__btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 58px;
+  padding: 0 30px;
+  box-sizing: border-box;
+  border-radius: 4px;
+
+  font-family:
+    var(--calder-ui-font),
+    "Garet",
+    sans-serif;
+
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+/* ----------------------------------------------------------
+   PRIMARY CTA — GOLD
+   ---------------------------------------------------------- */
 
 .collection-help-cta__btn-primary {
   display: inline-flex;
   align-items: center;
-  height: 44px;
-  padding: 0 24px;
-  border: none;
-  border-radius: 4px;
-  background: #C2A48A;
-  color: #ffffff;
-  font-size: 11px;
+  gap: 8px;
+  padding: 10px 22px;
+  background: var(--calder-gradient-button);
+  color: var(--calder-navy-dark);
+  font-family: var(--calder-ui-font);
   font-weight: 700;
-  letter-spacing: 0.12em;
+  font-size: .65rem;
+  letter-spacing: .02em;
   text-transform: uppercase;
-  text-decoration: none;
+  border: 1px solid transparent;
+  border-radius: 4px;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  text-decoration: none;
+  box-shadow: var(--calder-shadow-gold);
+  transition: background .25s ease,transform .25s ease,box-shadow .25s ease;
 }
 
 .collection-help-cta__btn-primary:hover {
-  background: #b39175;
-  color: #ffffff;
+  background: #E0AE70;
+  border-color: #E0AE70;
+  color: #071A26;
+  transform: translateY(-1px);
 }
 
+/* Add arrow without changing Liquid */
+
+.collection-help-cta__btn-primary::after {
+  content: "→";
+  margin-left: 18px;
+  font-family: Arial, sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1;
+  transition: transform 0.2s ease;
+}
+
+.collection-help-cta__btn-primary:hover::after {
+  transform: translateX(3px);
+}
+
+/* ----------------------------------------------------------
+   SECONDARY CTA — OUTLINE
+   ---------------------------------------------------------- */
+
 .collection-help-cta__btn-secondary {
-  display: inline-flex;
-  align-items: center;
-  height: 44px;
-  padding: 0 24px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 4px;
-  background: transparent;
-  color: #ffffff;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  text-decoration: none;
-  cursor: pointer;
-  transition: all 0.2s ease;
+  min-width: 315px;
+  background: rgba(0, 20, 32, 0.20);
+  border: 1px solid rgba(255, 255, 255, 0.70);
+  color: #FFFFFF;
 }
 
 .collection-help-cta__btn-secondary:hover {
-  border-color: #ffffff;
-  color: #ffffff;
+  background: rgba(255, 255, 255, 0.08);
+  border-color: #FFFFFF;
+  color: #FFFFFF;
+  transform: translateY(-1px);
 }
+
+/* ----------------------------------------------------------
+   OPTIONAL DECORATIVE IMAGE
+
+   Keep behind the content/buttons.
+   ---------------------------------------------------------- */
 
 .collection-help-cta__decorative {
   position: absolute;
-  right: 24px;
+  right: 0;
+  top: 0;
   bottom: 0;
   z-index: 2;
-  width: 200px;
-  height: 170px;
+  width: 30%;
+  height: 100%;
   display: flex;
-  align-items: flex-end;
-  justify-content: center;
+  align-items: center;
+  justify-content: flex-end;
   overflow: hidden;
+  pointer-events: none;
 }
 
 .collection-help-cta__decorative-image {
   display: block;
-  max-width: 100%;
-  max-height: 100%;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
   object-fit: contain;
-  object-position: bottom center;
+  object-position: right center;
 }
 
+/* ==========================================================
+   RESPONSIVE — MEDIUM DESKTOP / TABLET
+   ========================================================== */
+
+@media (max-width: 1199px) {
+
+  .collection-help-cta__content {
+    grid-template-columns:
+      minmax(280px, 1fr)
+      minmax(420px, auto);
+
+    column-gap: 40px;
+  }
+
+  .collection-help-cta__actions {
+    gap: 12px;
+  }
+
+  .collection-help-cta__btn-primary {
+    min-width: 190px;
+  }
+
+  .collection-help-cta__btn-secondary {
+    min-width: 250px;
+  }
+
+  .collection-help-cta__btn-primary,
+  .collection-help-cta__btn-secondary {
+    padding-left: 20px;
+    padding-right: 20px;
+    font-size: 10px;
+  }
+}
+
+/* ==========================================================
+   TABLET
+   Stack actions below copy before layout becomes cramped
+   ========================================================== */
+
+@media (max-width: 900px) {
+
+  .collection-help-cta {
+    min-height: 280px;
+  }
+
+  .collection-help-cta__content {
+    width: calc(100% - 48px);
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "heading"
+      "body"
+      "actions";
+
+    row-gap: 12px;
+  }
+
+  .collection-help-cta__actions {
+    justify-content: flex-start;
+    margin-top: 14px;
+  }
+}
+
+/* ==========================================================
+   MOBILE
+   ========================================================== */
+
+@media (max-width: 600px) {
+
+  .collection-help-cta {
+    min-height: 390px;
+  }
+
+  .collection-help-cta__content {
+    width: calc(100% - 40px);
+    padding: 36px 0;
+  }
+
+  .collection-help-cta__heading {
+    max-width: 340px;
+    font-size: clamp(24px, 8vw, 32px);
+  }
+
+  .collection-help-cta__body {
+    max-width: 360px;
+    font-size: 13px;
+  }
+
+  .collection-help-cta__actions {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .collection-help-cta__btn-primary,
+  .collection-help-cta__btn-secondary {
+    width: 100%;
+    min-width: 0;
+    min-height: 54px;
+  }
+
+  .collection-help-cta__decorative {
+    width: 55%;
+    opacity: 0.35;
+  }
+}
 
 /* ------------------------------------------------------------
    RESPONSIVE: TABLET
@@ -870,8 +1151,7 @@
   .collection-help-cta__decorative {
     display: none;
   }
-
-
+}
 
 /* ------------------------------------------------------------
    RESPONSIVE: MOBILE
@@ -933,7 +1213,6 @@
     justify-content: center;
   }
 }
-
 
 /* ------------------------------------------------------------
    RESPONSIVE: VERY SMALL

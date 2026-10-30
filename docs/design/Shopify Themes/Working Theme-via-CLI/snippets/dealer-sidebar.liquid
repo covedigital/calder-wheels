@@ -1,91 +1,193 @@
-{% comment %}
-  Dealer Portal — shared sidebar navigation
-  Renders the persistent left sidebar with brand, nav, help box, and logout.
-  Usage: {% render 'dealer-sidebar' %}
-  Requires: dealer-context snippet rendered before this
-{% endcomment %}
+{%- liquid
+  assign sb_bg = sidebar_bg_image | default: ''
+  assign sb_pos = sidebar_bg_position | default: 'center'
+  assign sb_size = sidebar_bg_size | default: 'cover'
+  assign sb_overlay_color = sidebar_overlay_color | default: '#081D2D'
+  assign sb_overlay_opacity = sidebar_overlay_opacity | default: 60
+  assign sb_overlay_alpha = sb_overlay_opacity | divided_by: 100.0
+-%}
+<aside class="dp-sidebar" data-dealer-sidebar
+  {% if sb_bg != blank %}
+  style="--sidebar-bg:url('{{ sb_bg | img_url: 'master' }}');--sidebar-bg-pos:{{ sb_pos }};--sidebar-bg-size:{{ sb_size }};--sidebar-overlay:{{ sb_overlay_color }};--sidebar-overlay-alpha:{{ sb_overlay_alpha }}"
+  {% endif %}>
+  <div class="dp-sidebar__brand">
+    <a href="/" class="dp-sidebar__logo">
+      {% if dealer_logo != blank %}
+        <img src="{{ dealer_logo | img_url: 'master' }}" alt="Calder Wheels" class="dp-sidebar__logo-img" style="width:{{ dealer_logo_width | default: 120 }}px;max-height:60px;object-fit:contain">
+      {% else %}
+      <div class="dp-sidebar__logo-mark">
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+          <circle cx="14" cy="14" r="12" stroke="#C9A96E" stroke-width="1.5" fill="none"/>
+          <path d="M7 7 L14 10 L21 7" stroke="#C9A96E" stroke-width="1.5" fill="none"/>
+          <path d="M7 21 L14 18 L21 21" stroke="#C9A96E" stroke-width="1.5" fill="none"/>
+        </svg>
+      </div>
+      {% endif %}
+      <div class="dp-sidebar__logo-text">
+        <span class="dp-sidebar__logo-name">CALDER</span>
+        <span class="dp-sidebar__logo-label">DEALER PORTAL</span>
+      </div>
+    </a>
+  </div>
 
-<aside class="dealer-portal__sidebar">
-  <a href="{{ routes.account_url }}" class="dp-brand">
-    <div class="dp-brand__mark">{{ shop.name | slice: 0, 2 | upcase }}</div>
-    <div class="dp-brand__name">
-      <strong>{{ shop.name }}</strong>
-      <span>DEALER PORTAL</span>
-    </div>
-  </a>
-
-  <div class="dp-nav-title">Dealer Portal</div>
-  <nav class="dp-nav" role="navigation" aria-label="Dealer Portal Navigation">
+  <nav class="dp-sidebar__nav" role="navigation" aria-label="Dealer Portal">
     {%- liquid
-      assign current_view = request.path | replace: routes.account_url, '' | default: 'dashboard'
-      if current_view == routes.account_url or current_view == blank or current_view == '/'
-        assign current_view = 'dashboard'
+      assign current_page = request.page_type
+      assign current_suffix = template.suffix
+      assign is_dashboard = false
+      assign is_catalog = false
+      assign is_quick_order = false
+      assign is_orders = false
+      assign is_quotes = false
+      assign is_invoices = false
+      assign is_returns = false
+      assign is_marketing = false
+      assign is_account = false
+      assign is_users = false
+      assign is_notifications = false
+
+      if current_suffix == 'dealer-dashboard' or request.path contains '/pages/dealer-dashboard'
+        assign is_dashboard = true
+      elsif current_suffix == 'dealer-quick-order' or request.path contains '/pages/quick-order'
+        assign is_quick_order = true
+      elsif current_suffix == 'dealer-orders'
+        assign is_orders = true
+      elsif current_suffix == 'dealer-quotes'
+        assign is_quotes = true
+      elsif current_suffix == 'dealer-invoices'
+        assign is_invoices = true
+      elsif current_suffix == 'dealer-returns'
+        assign is_returns = true
+      elsif current_suffix == 'dealer-marketing'
+        assign is_marketing = true
+      elsif current_suffix == 'dealer-account' or request.path contains '/account'
+        assign is_account = true
+      elsif current_suffix == 'dealer-users'
+        assign is_users = true
+      elsif current_suffix == 'dealer-notifications'
+        assign is_notifications = true
+      elsif request.path contains '/collections' or request.path contains '/products'
+        assign is_catalog = true
       endif
     -%}
-    <a href="{{ routes.account_url }}#dashboard"
-       class="dp-nav__link {% if current_view == 'dashboard' %}active{% endif %}"
-       data-dp-tab="dashboard">
-      <span class="dp-nav__icon" aria-hidden="true">&#8998;</span>Dashboard
+
+    <div class="dp-sidebar__section-label">PRIMARY</div>
+
+    <a href="/pages/dealer-dashboard" class="dp-sidebar__link{% if is_dashboard %} dp-sidebar__link--active{% endif %}">
+      <span class="dp-sidebar__icon">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><rect x="2" y="1" width="12" height="3" rx="1"/><rect x="2" y="6" width="12" height="3" rx="1"/><rect x="2" y="11" width="12" height="3" rx="1"/></svg>
+      </span>
+      <span>Dashboard</span>
     </a>
-    <a href="/collections/all"
-       class="dp-nav__link"
-       data-dp-tab="catalog">
-      <span class="dp-nav__icon" aria-hidden="true">&#9638;</span>Catalog
+
+    <a href="/collections/all" class="dp-sidebar__link{% if is_catalog %} dp-sidebar__link--active{% endif %}">
+      <span class="dp-sidebar__icon">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><rect x="2" y="2" width="12" height="12" rx="2"/><circle cx="8" cy="8" r="4" stroke="currentColor" stroke-width="0.6" fill="none"/><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="0.4" fill="none"/></svg>
+      </span>
+      <span>Catalog</span>
     </a>
-    <a href="{{ routes.account_url }}#quick-order"
-       class="dp-nav__link"
-       data-dp-tab="quick-order">
-      <span class="dp-nav__icon" aria-hidden="true">&#8595;</span>Quick Order
+
+    <a href="/pages/dealer-portal#quick-order" class="dp-sidebar__link{% if is_quick_order %} dp-sidebar__link--active{% endif %}">
+      <span class="dp-sidebar__icon">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M3 12 L6 2 L12 4 L10 12 L13 10 L6 12" stroke="currentColor" stroke-width="1" fill="none"/></svg>
+      </span>
+      <span>Quick Order</span>
     </a>
-    <a href="{{ routes.account_url }}#orders"
-       class="dp-nav__link"
-       data-dp-tab="orders">
-      <span class="dp-nav__icon" aria-hidden="true">&#9638;</span>Orders
+
+    <a href="/account" class="dp-sidebar__link{% if is_orders %} dp-sidebar__link--active{% endif %}">
+      <span class="dp-sidebar__icon">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><rect x="2" y="2" width="12" height="2"/><rect x="2" y="6" width="12" height="2"/><rect x="2" y="10" width="12" height="2"/></svg>
+      </span>
+      <span>Orders</span>
     </a>
-    <a href="{{ routes.account_url }}#quotes"
-       class="dp-nav__link"
-       data-dp-tab="quotes">
-      <span class="dp-nav__icon" aria-hidden="true">&#9810;</span>Quotes
+
+    <a href="/pages/dealer-portal#quotes" class="dp-sidebar__link{% if is_quotes %} dp-sidebar__link--active{% endif %}">
+      <span class="dp-sidebar__icon">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><rect x="3" y="2" width="10" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="0.8"/><text x="8" y="11" font-size="7" text-anchor="middle" fill="currentColor">$</text></svg>
+      </span>
+      <span>Quotes</span>
     </a>
-    <a href="{{ routes.account_url }}#invoices"
-       class="dp-nav__link"
-       data-dp-tab="invoices">
-      <span class="dp-nav__icon" aria-hidden="true">&#9634;</span>Invoices
+
+    <a href="/pages/dealer-portal#invoices" class="dp-sidebar__link{% if is_invoices %} dp-sidebar__link--active{% endif %}">
+      <span class="dp-sidebar__icon">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><rect x="2" y="2" width="12" height="8" rx="1" fill="none" stroke="currentColor" stroke-width="0.8"/><line x1="2" y1="10" x2="14" y2="10" stroke="currentColor" stroke-width="0.8"/><line x1="2" y1="12" x2="14" y2="12" stroke="currentColor" stroke-width="0.4"/><line x1="2" y1="14" x2="14" y2="14" stroke="currentColor" stroke-width="0.4"/></svg>
+      </span>
+      <span>Invoices</span>
     </a>
-    <a href="{{ routes.account_url }}#returns"
-       class="dp-nav__link"
-       data-dp-tab="returns">
-      <span class="dp-nav__icon" aria-hidden="true">&#8627;</span>Returns
+
+    <a href="/pages/dealer-portal#returns" class="dp-sidebar__link{% if is_returns %} dp-sidebar__link--active{% endif %}">
+      <span class="dp-sidebar__icon">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 2 L10 5 L15 5 L12 10 L15 10 L10 12 L8 12 L8 2" stroke="currentColor" stroke-width="0.8" fill="none"/><line x1="8" y1="2" x2="8" y2="12" stroke="currentColor" stroke-width="0.8"/></svg>
+      </span>
+      <span>Returns</span>
     </a>
-    <a href="#"
-       class="dp-nav__link"
-       data-dp-tab="marketing">
-      <span class="dp-nav__icon" aria-hidden="true">&#8999;</span>Marketing Assets
+
+    <a href="/pages/dealer-portal" class="dp-sidebar__link{% if is_marketing %} dp-sidebar__link--active{% endif %}">
+      <span class="dp-sidebar__icon">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><rect x="2" y="2" width="12" height="8" rx="1" fill="none" stroke="currentColor" stroke-width="0.8"/><circle cx="8" cy="8" r="2.5" fill="currentColor"/></svg>
+      </span>
+      <span>Marketing Assets</span>
     </a>
-    <a href="{{ routes.account_addresses_url }}"
-       class="dp-nav__link"
-       data-dp-tab="account">
-      <span class="dp-nav__icon" aria-hidden="true">&#9678;</span>Account
+
+    <div class="dp-sidebar__divider"></div>
+
+    <div class="dp-sidebar__section-label">ACCOUNT</div>
+
+    <a href="{{ routes.account_url }}" class="dp-sidebar__link{% if is_account %} dp-sidebar__link--active{% endif %}">
+      <span class="dp-sidebar__icon">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="currentColor"><circle cx="9" cy="9" r="7" fill="none" stroke="currentColor" stroke-width="1.2"/><circle cx="6" cy="6" r="2.5" fill="currentColor"/><circle cx="12" cy="6" r="2.5" fill="currentColor"/><path d="M5 12 Q9 10 13 12" stroke="currentColor" stroke-width="1" fill="none"/></svg>
+      </span>
+      <span>Account</span>
     </a>
-    <a href="#"
-       class="dp-nav__link"
-       data-dp-tab="users">
-      <span class="dp-nav__icon" aria-hidden="true">&#9699;</span>Users
+
+    <a href="/account" class="dp-sidebar__link{% if is_users %} dp-sidebar__link--active{% endif %}">
+      <span class="dp-sidebar__icon">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><circle cx="8" cy="4" r="2.5" fill="currentColor"/><circle cx="4" cy="10" r="2.5" fill="currentColor"/><circle cx="12" cy="10" r="2.5" fill="currentColor"/></svg>
+      </span>
+      <span>Users</span>
     </a>
-    <a href="#"
-       class="dp-nav__link"
-       data-dp-tab="notifications">
-      <span class="dp-nav__icon" aria-hidden="true">&#9776;</span>Notifications
+
+    <a href="/pages/dealer-portal" class="dp-sidebar__link{% if is_notifications %} dp-sidebar__link--active{% endif %}">
+      <span class="dp-sidebar__icon">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><circle cx="8" cy="8" r="6" fill="none" stroke="currentColor" stroke-width="1"/><circle cx="13" cy="2" r="2" fill="currentColor"/></svg>
+      </span>
+      <span>Notifications</span>
     </a>
   </nav>
 
-  <div class="dp-help">
-    <strong>Need Help?</strong><br>
-    888.587.4511
-    <span class="dp-help__small">Mon–Fri 8am – 5pm PST</span>
+  <div class="dp-sidebar__footer">
+    <div class="dp-sidebar__support">
+      <div class="dp-sidebar__support-icon">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><circle cx="8" cy="8" r="6" fill="none" stroke="currentColor" stroke-width="0.8"/><text x="8" y="10" font-size="7" text-anchor="middle" fill="currentColor">?</text></svg>
+      </div>
+      <div class="dp-sidebar__support-text">
+        <a href="/pages/dealer-support" class="dp-sidebar__support-link">Dealer Support</a>
+      </div>
+    </div>
+
+    <a href="{{ routes.account_logout_url | default: '/account/logout' }}" class="dp-sidebar__logout">
+      <span class="dp-sidebar__logout-icon">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M3 3 L13 3 L13 13 L3 13" stroke="currentColor" stroke-width="1.2" fill="none"/><path d="M3 3 L13 13" stroke="currentColor" stroke-width="1.2"/></svg>
+      </span>
+      <span>Log Out</span>
+    </a>
   </div>
 
-  <a href="{{ routes.account_logout_url }}" class="dp-logout" data-action="logout">
-    <span class="dp-logout__icon" aria-hidden="true">&#8644;</span>Log Out
-  </a>
+  <div class="dp-sidebar__image">
+    <div class="dp-sidebar__image-overlay">
+      <svg width="207" height="120" viewBox="0 0 207 120" preserveAspectRatio="none">
+        <defs>
+          <linearGradient id="mount-grad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#0B1628"/>
+            <stop offset="100%" stop-color="#162D4A"/>
+          </linearGradient>
+        </defs>
+        <rect width="207" height="120" fill="url(#mount-grad)"/>
+        <path d="M0 90 Q30 60 60 75 Q90 40 120 60 Q150 50 180 70 Q207 60 207 90" fill="#0F1F35" opacity="0.4"/>
+        <path d="M0 95 Q40 70 80 80 Q120 55 160 70 Q207 65 207 95" fill="#132A42" opacity="0.3"/>
+        <path d="M0 100 Q60 85 120 88 Q180 75 207 85" fill="#1A3555" opacity="0.2"/>
+      </svg>
+      <div class="dp-sidebar__image-text">A HIGHER<br/>STANDARD<br/>TOGETHER.<br/><span style="border-top:1px solid rgba(194,164,138,0.4);display:block;width:20px;margin-top:2px"></span></div>
+    </div>
+  </div>
 </aside>

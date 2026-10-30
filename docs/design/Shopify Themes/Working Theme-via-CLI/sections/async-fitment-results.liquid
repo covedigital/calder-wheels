@@ -1,17 +1,96 @@
-{%- capture catalog_json -%}
+{%- liquid
+  assign collection_handle = 'all-calder-wheels'
+  assign calder_collection = collections[collection_handle]
+  assign products_arr = calder_collection.products | default: collections.all.products
+  assign limit = 100
+  assign count = 0
+
+  assign _bp_map = '201:6x139.7,6x135|202:6x139.7,6x135,5x130,5x120|203:6x139.7,6x135|205:6x139.7,6x135|206:6x139.7,6x135,5x130,5x120|207:6x139.7,6x135,5x130,5x120'
+  assign _bp_entries = _bp_map | split: '|'
+-%}
+
+{%- capture result_json -%}
 [
-  { "handle": "apex-201", "title": "Apex 201", "bolt_patterns": ["5x114.3"] },
-  { "handle": "vortex-207", "title": "Vortex 207", "bolt_patterns": ["5x114.3"] }
+{%- for product in products_arr -%}
+  {%- if count >= limit -%}{% break %}{% endif -%}
+  {%- assign dc = product.metafields.custom.design_code.value -%}
+  {%- if dc == blank -%}
+    {%- assign dc_parts = product.handle | split: '-' -%}
+    {%- assign dc = dc_parts[1] -%}
+  {%- endif -%}
+  {%- assign lr = product.metafields.custom.load_rating.value -%}
+
+  {%- assign curated_bolts = '' -%}
+  {%- for entry in _bp_entries -%}
+    {%- assign eid = entry | split: ':' | first | strip -%}
+    {%- if eid == dc -%}
+      {%- assign curated_bolts = entry | split: ':' | last | strip -%}
+    {%- endif -%}
+  {%- endfor -%}
+  {%- assign meta_bp = product.metafields.custom.bolt_pattern.value | strip -%}
+  {%- assign bp_primary = meta_bp -%}
+  {%- if bp_primary == blank -%}
+    {%- assign bp_primary = curated_bolts | split: ',' | first | strip -%}
+  {%- endif -%}
+
+  {%- assign diameters = '' -%}
+  {%- assign diameter_labels = '' -%}
+  {%- assign widths = '' -%}
+  {%- assign finishes = '' -%}
+  {%- for variant in product.variants -%}
+    {%- assign opt = variant.option1 | strip -%}
+    {%- if opt != blank and opt != 'Default Title' -%}
+      {%- assign d_raw = opt | split: 'x' | first | strip | remove: '"' | remove: 'in' | remove: 'inch' | strip | plus: 0 -%}
+      {%- if d_raw > 0 -%}
+        {%- unless diameters contains d_raw -%}
+          {%- if diameters != '' -%}{%- assign diameters = diameters | append: ',' -%}{%- endif -%}
+          {%- assign diameters = diameters | append: d_raw -%}
+          {%- if diameter_labels != '' -%}{%- assign diameter_labels = diameter_labels | append: ',' -%}{%- endif -%}
+          {%- assign diameter_labels = diameter_labels | append: opt -%}
+        {%- endunless -%}
+        {%- if opt contains 'x' -%}
+          {%- assign w_raw = opt | split: 'x' | last | strip | remove: '"' | remove: 'in' | strip | plus: 0 -%}
+          {%- if w_raw > 0 -%}
+            {%- unless widths contains w_raw -%}
+              {%- if widths != '' -%}{%- assign widths = widths | append: ',' -%}{%- endif -%}
+              {%- assign widths = widths | append: w_raw -%}
+            {%- endunless -%}
+          {%- endif -%}
+        {%- endif -%}
+      {%- endif -%}
+    {%- endif -%}
+    {%- assign finish = variant.option2 | strip -%}
+    {%- if finish != blank and finish != 'Default Title' -%}
+      {%- unless finishes contains finish -%}
+        {%- if finishes != '' -%}{%- assign finishes = finishes | append: ',' -%}{%- endif -%}
+        {%- assign finishes = finishes | append: finish -%}
+      {%- endunless -%}
+    {%- endif -%}
+  {%- endfor -%}
+
+  {%- if count > 0 -%},{%- endif -%}
+  {
+    "handle": {{ product.handle | json }},
+    "title": {{ product.title | json }},
+    "url": {{ product.url | json }},
+    "price": {{ product.price | divided_by: 100.0 | round: 2 }},
+    "featured_image": {{ product.featured_image | image_url: width: 400 | json }},
+    "bolt_pattern": {{ bp_primary | json }},
+    "bolt_patterns": [{%- assign _bp_out = bp_primary -%}{%- if curated_bolts != '' -%}{%- assign _bp_out = bp_primary | append: ',' | append: curated_bolts -%}{%- endif -%}{%- assign _bp_uniq = _bp_out | split: ',' -%}{%- assign _bp_seen = '' -%}{%- assign _bp_json = '' -%}{%- for _p in _bp_uniq -%}{%- assign _p2 = _p | strip -%}{%- assign _s = _bp_seen | split: ',' -%}{%- unless _s contains _p2 -%}{%- assign _bp_seen = _bp_seen | append: _p2 | append: ',' -%}{%- if _bp_json != '' -%}{%- assign _bp_json = _bp_json | append: ',' -%}{%- endif -%}{%- capture _tok_bp -%}{{ _p2 | json }}{%- endcapture -%}{%- assign _bp_json = _bp_json | append: _tok_bp -%}{%- endunless -%}{%- endfor -%}{{ _bp_json }}],
+    "load_rating": {{ lr | default: 0 }},
+    "design_code": {{ dc | json }},
+    "nickname": {{ product.metafields.custom.design_nickname.value | default: '' | json }},
+    "diameters": [{{ diameters }}],
+    "diameter_labels": [{%- assign _dl_arr = diameter_labels | split: ',' -%}{%- assign _dl_seen = '' -%}{%- assign _dl_json = '' -%}{%- for _dl in _dl_arr -%}{%- assign _dlv = _dl | strip -%}{%- assign _s = _dl_seen | split: ',' -%}{%- unless _s contains _dlv -%}{%- assign _dl_seen = _dl_seen | append: _dlv | append: ',' -%}{%- if _dl_json != '' -%}{%- assign _dl_json = _dl_json | append: ',' -%}{%- endif -%}{%- capture _tok_dl -%}{{ _dlv | json }}{%- endcapture -%}{%- assign _dl_json = _dl_json | append: _tok_dl -%}{%- endunless -%}{%- endfor -%}{{ _dl_json }}],
+    "widths": [{{ widths }}],
+    "finishes": [{{ finishes | prepend: '"' | append: '"' | replace: ',', '","' }}],
+    "tags": {{ product.tags | json }}
+  }
+  {%- assign count = count | plus: 1 -%}
+{%- endfor -%}
 ]
 {%- endcapture -%}
-{%- assign catalog_arr = catalog_json | parse_json -%}
-{%- assign count = catalog_arr | size -%}
-{%- assign first_handle = catalog_arr[0].handle -%}
+
 <script type="application/json" id="hf-results-json">
-{
-  "debug": true,
-  "catalog_count": {{ count }},
-  "first_handle": {{ first_handle | json }},
-  "products": []
-}
+{{ result_json }}
 </script>

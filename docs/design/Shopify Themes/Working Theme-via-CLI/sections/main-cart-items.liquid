@@ -35,22 +35,23 @@
           <h2 class="cart-empty-title">{{ 'theme-sections.sections.cart.empty' | t }}</h2>
           <div class="cart-empty-text">{{ 'theme.general.empty_description' | t }}</div>
           <div class="mt-3">
-            <a href="{{ routes.all_products_collection_url }}" class="btn btn--showmore">{{ 'general.continue_shopping' | t }}</a>
+            <a href="{{ routes.all_products_collection_url }}" class="calder-btn calder-btn--outline">{{ 'general.continue_shopping' | t }}</a>
           </div>
         </div>
       </div>
 
-      <div class="row vert-margin-middle">
+      <div class="calder-cart-heading"><div><p class="calder-eyebrow">YOUR ORDER</p><h1 class="calder-h2">SHOPPING CART</h1></div><ol class="calder-cart-progress" aria-label="Checkout progress"><li aria-current="step"><span>1</span>Cart</li><li><span>2</span>Checkout</li><li><span>3</span>Confirmation</li></ol></div>
+      <div class="row vert-margin-middle calder-cart-layout">
         <div class="col-xl-8 aside aside--content">
           <div class="js-contents-cart-items">
-            <div class="cart-table-page-title align-items-center d-flex mb-2">
+            <div class="cart-table-page-title align-items-center d-flex mb-2 calder-cart-legacy-heading">
               <h1 class="h1-style col-auto m-0">{{ 'theme-sections.sections.cart.title' | t }}</h1>
               {% render 'free-shipping-status' layout: layout %}
             </div>
             <form action="{{ routes.cart_url }}" class="critical-hidden" method="post" id="cart">
               <div data-id="{{ section.id }}">
                 {%- if cart != empty -%}
-                  <div class="cart-table border-bottom-0" id="cartTable">
+                  <div class="cart-table" id="cartTable">
                     <div class="visually-hidden">{{ 'theme-sections.sections.cart.title' | t }}</div>
                     {%- liquid
                       assign cart_items = cart.items
@@ -67,7 +68,7 @@
                           assign product_url_collection = item.url | within: collection
                         endif
                       -%}
-                      <div class="cart-table-prd" id="CartItem-{{ item.index | plus: 1 }}">
+                      <div class="cart-table-prd calder-cart-item" id="CartItem-{{ item.index | plus: 1 }}">
                         <div class="cart-table-prd-image {% unless item.image %}d-none{% endunless %}">
                           {% if item.image %}
                             <a href="{{ product_url_collection }}">
@@ -125,6 +126,8 @@
                             {%- if item.selling_plan_allocation.selling_plan.name != blank -%}
                               <p class="prd-prepay-text"  data-tippy-placement="bottom" data-tippy-content="{{ item.selling_plan_allocation.selling_plan.description | escape }}">{{ item.selling_plan_allocation.selling_plan.name }}</p>
                             {%- endif -%}
+                            {%- assign fitment_vehicle = item.properties['Vehicle'] | default: item.properties['Fitment Vehicle'] -%}
+                            {%- if fitment_vehicle != blank -%}<p class="calder-cart-fitment"><span aria-hidden="true">✓</span> <span><strong>FITMENT CONFIRMED</strong><small>{{ fitment_vehicle | escape }}</small></span></p>{%- endif -%}
                           </div>
                           <div class="cart-table-prd-price">
                             {% render 'main-cart-item-component-price', item: item %}
@@ -181,8 +184,8 @@
                       </div>
                     {%- endfor -%}
                   </div>
-                  <div class="mt-3 text-center d-none d-lg-block">
-                    <a href="{{ routes.all_products_collection_url }}" class="btn btn--grey"><span>{{ 'general.continue_shopping' | t }}</span></a>
+                  <div class="mt-3 text-center calder-cart-continue">
+                    <a href="{{ routes.all_products_collection_url }}" class="calder-btn calder-btn--outline"><span>{{ 'general.continue_shopping' | t }}</span></a>
                   </div>
                 {%- endif -%}
               </div>
@@ -193,7 +196,7 @@
         </div>
         <div class="cart-page-column aside aside--sidebar aside--right aside--sticky--xl js-sticky-collision" role="complementary">
           <div class="aside-content">
-            <div class="card-total bg-alt">
+            <div class="card-total bg-alt calder-cart-summary">
               <div class="card-total-inside">
                 {% for block in section.blocks %}
                   {%- case block.type -%}
@@ -201,7 +204,7 @@
                   {% render block %}
                   {%- when 'subtotal' -%}
                     <div class="js-contents-subtotal" {{ block.shopify_attributes }}>
-                      <h4 class="card-total-title">{{ 'theme.general.your_order' | t }}</h4>
+                      <h4 class="card-total-title">ORDER SUMMARY</h4><div class="calder-cart-subtotal-line"><span>Subtotal ({{ cart.item_count }} items)</span><strong>{{ cart.total_price | money }}</strong></div>
 
                       {%- if cart.cart_level_discount_applications.size > 0 -%}
                       <div class="row mt-1">
@@ -233,8 +236,9 @@
                         </div>
                       </div>
 
-                      <div class="row card-total-summa mt-1">
-                        <div class="col text-uppercase">{{ 'theme-sections.sections.cart.subtotal' | t }}:</div>
+                      <div class="calder-cart-summary-lines"><div class="calder-cart-summary-line"><span>Shipping</span><span>Calculated at checkout</span></div><div class="calder-cart-summary-line"><span>Taxes</span><span>Calculated at checkout</span></div></div>
+                      <div class="row card-total-summa mt-1" aria-live="polite" aria-atomic="true">
+                        <div class="col text-uppercase">Estimated Total:</div>
                         <div class="col-auto">
                           {% if settings.currency_code_enabled %}
                             {{ cart.total_price | money_with_currency }}
@@ -245,10 +249,16 @@
                       </div>
                     </div>
                     {%- else -%}
-                    <div class="row flex-column" {{ block.shopify_attributes }}>
+                    <div class="row flex-column calder-cart-checkout-actions" {{ block.shopify_attributes }}>
                       <div class="col  position-relative">
-                        <button name="checkout"{% if cart == empty %} disabled{% endif %} form="cart" type="submit" data-button=".shopify-payment-agree" id="checkout" class="btn w-100 btn--cartpage-checkout {% if settings.checkout_agreement %}shopify-payment-agree disabled{% endif %}"><span>{{ 'theme-sections.sections.cart.checkout' | t }}</span></button>
+                        <button name="checkout"{% if cart == empty %} disabled{% endif %} form="cart" type="submit" data-button=".shopify-payment-agree" id="checkout" class="calder-btn calder-btn--primary calder-btn--lg w-100 btn--cartpage-checkout {% if settings.checkout_agreement %}shopify-payment-agree disabled{% endif %}"><span>PROCEED TO CHECKOUT →</span></button>
                         {% if settings.checkout_agreement %}<info-popup data-ajax="{{ routes.root_url }}?section_id=async-agreement-info" data-selector="#agreementInfo"><span></span></info-popup>{% endif %}
+                      </div>
+                      <div class="calder-cart-summary-shopping" aria-label="Continue shopping">
+                        <div class="calder-cart-summary-shopping__divider"><span>OR</span></div>
+                        <a href="{{ routes.all_products_collection_url }}" class="calder-cart-summary-shopping__button">
+                          {{ 'general.continue_shopping' | t }}
+                        </a>
                       </div>
                       {%- if additional_checkout_buttons -%}
                         <div class="col">
@@ -266,9 +276,16 @@
                     </div>
                   {%- endcase -%}
                 {% endfor %}
+                {% if section.settings.show_trust_features %}
+                  <div class="calder-cart-trust" aria-label="Shopping assurances">
+                    <div class="calder-cart-trust__item"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><rect x="7" y="14" width="18" height="15" rx="2" stroke="currentColor" stroke-width="1.7"/><path d="M11 14V9a5 5 0 0 1 10 0v5M16 20v4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg><strong>SECURE CHECKOUT</strong><p>Your information is encrypted and secure.</p></div>
+                    <div class="calder-cart-trust__item"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="12" stroke="currentColor" stroke-width="1.7"/><path d="m10 16 4 4 8-9" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg><strong>FITMENT VERIFIED</strong><p>Wheels verified to fit your vehicle when fitment is confirmed.</p></div>
+                    <div class="calder-cart-trust__item"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M5 18v-3a11 11 0 0 1 22 0v3M5 18h4v9H7a3 3 0 0 1-3-3v-3a3 3 0 0 1 3-3Zm22 0h-4v9h2a3 3 0 0 0 3-3v-3a3 3 0 0 0-3-3ZM23 27c0 2-3 3-7 3" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg><strong>CUSTOMER SUPPORT</strong><p>Expert help when you need it.</p></div>
+                  </div>
+                {% endif %}
                 <div id="cart-errors"></div>
-                <div class="mt-3 d-lg-none">
-                  <a href="{{ routes.all_products_collection_url }}" class="btn btn--showmore w-100 btn btn--grey">{{ 'general.continue_shopping' | t }}</a>
+                <div class="mt-3 d-lg-none calder-cart-mobile-shopping">
+                  <a href="{{ routes.all_products_collection_url }}" class="calder-btn calder-btn--outline">{{ 'general.continue_shopping' | t }}</a>
                 </div>
               </div>
             </div>
@@ -309,6 +326,7 @@
           </div>
         </div>
       </div>
+
     </div>
   </div>
 </cart-items>
@@ -448,6 +466,16 @@
       "id": "show_vendor",
       "default": false,
       "label": "Show vendor"
+    },
+    {
+      "type": "header",
+      "content": "Calder order summary"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_trust_features",
+      "label": "Show checkout assurance features",
+      "default": true
     }
   ],
   "blocks": [

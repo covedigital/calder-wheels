@@ -1,0 +1,38 @@
+{%- liquid
+  assign fitment_data_url = 'calder-fitment-data.json' | asset_url
+  assign default_suv = 'vehicle_type-suv.png' | asset_url
+  assign default_truck = 'vehicle_type-full_size_truck.png' | asset_url
+  assign default_offroad = 'vehicle_type-off_road.png' | asset_url
+  assign default_sport = 'vehicle_type-sport.png' | asset_url
+  assign default_custom = 'vehicle_type-custom.png' | asset_url
+-%}
+
+<script id="calder-fitment-guide-config" type="application/json">
+{
+  "dataUrl": {{ fitment_data_url | json }},
+  "defaultImages": {
+    "SUV / Crossover": {{ default_suv | json }},
+    "Full-size Pickup Truck": {{ default_truck | json }},
+    "Off-road Vehicle": {{ default_offroad | json }},
+    "Sports / Performance Vehicle": {{ default_sport | json }},
+    "Custom / Specialty Vehicle": {{ default_custom | json }}
+  },
+  "vehicleCategories": {
+    "GM": "SUV / Crossover",
+    "FORD": "SUV / Crossover",
+    "DODGE / JEEP": "SUV / Crossover",
+    "LEXUS": "SUV / Crossover",
+    "NISSAN / INFINITI": "SUV / Crossover",
+    "BMW": "SUV / Crossover",
+    "MERCEDES BENZ": "SUV / Crossover",
+    "LAMBORGINI": "Sports / Performance Vehicle",
+    "AUDI": "SUV / Crossover",
+    "RANGE ROVER": "SUV / Crossover",
+    "ROLLS ROYCE": "SUV / Crossover"
+  },
+  "vehicleModelImages": {
+    "FORD|F150": "Full-size Pickup Truck",
+    "2024|FORD|F150": "Full-size Pickup Truck"
+  }
+}
+</script>

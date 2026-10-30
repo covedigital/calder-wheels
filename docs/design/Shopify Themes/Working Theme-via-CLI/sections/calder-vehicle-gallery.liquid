@@ -1,0 +1,324 @@
+{% assign gallery_type = 'vehicle' %}
+{% assign filter_keys = 'make,model,wheel,size,finish,bolt,series,style' %}
+{% assign filter_labels = 'Make,Model,Wheel Model,Diameter,Finish,Bolt Pattern,Series,Wheel Style' %}
+{% comment %}Calder gallery listing v2 — does not modify theme header/footer{% endcomment %}
+{{ 'calder-gallery-v2.css' | asset_url | stylesheet_tag }}
+<section class="cg-v2" data-gallery-root style="--cg-columns:{{ section.settings.columns_desktop }};--cg-mobile:{{ section.settings.columns_mobile }};--cg-width:{{ section.settings.container_max_width | default: 1178 }}px;">
+ <div class="cg-hero" style="--cg-hero-height:{{ section.settings.hero_height }}px;--cg-overlay:{{ section.settings.hero_overlay | divided_by: 100.0 }};{% if section.settings.hero_image != blank %}background-image:url('{{ section.settings.hero_image | image_url: width: 2200 }}');{% endif %}">
+  <div class="cg-hero__content"><p class="cg-eyebrow">{{ section.settings.hero_eyebrow | escape }}</p><h1>{{ section.settings.hero_title | escape }}</h1><p>{{ section.settings.hero_subtitle | escape }}</p></div>
+ </div>
+ <div class="cg-tabs"><div class="cg-container"><a href="/pages/vehicle-gallery" {% if gallery_type == 'vehicle' %}aria-current="page"{% endif %}>VEHICLE GALLERY</a><a href="/pages/wheel-gallery" {% if gallery_type == 'wheel' %}aria-current="page"{% endif %}>WHEEL GALLERY</a>{% if section.settings.show_search %}<label class="cg-search"><span class="visually-hidden">Search gallery</span><input data-gallery-search type="search" placeholder="Search wheels, series, or finish..."></label>{% endif %}</div></div>
+ <div class="cg-container cg-listing">
+ {% if section.settings.show_filters %}{% render 'calder-gallery-filters', filter_keys: filter_keys, filter_labels: filter_labels %}{% endif %}
+ {% if section.settings.show_sort %}<label class="cg-sort">SORT BY <select data-gallery-sort><option value="default">Featured</option><option value="az">Name A–Z</option><option value="za">Name Z–A</option></select></label>{% endif %}
+ <div class="calder-gallery-grid" data-gallery-grid data-items-per-page="{{ section.settings.per_page }}">
+ {% assign all_builds = shop.metaobjects.gallery_build.values %}
+ {% for build in all_builds %}
+ {% assign gtype = build.gallery_type.value | default: build.gallery_type | default: 'vehicle' %}
+ {% if gtype == gallery_type %}
+ {% assign featured = build.featured_image.value | default: build.featured_image | default: build.gallery_images.value.first %}
+ {% assign title = build.wheel_model.value | default: build.wheel_model %}
+ {% if gallery_type == 'vehicle' %}{% capture title %}{{ build.vehicle_year.value }} {{ build.vehicle_make.value }} {{ build.vehicle_model.value }}{% endcapture %}{% endif %}
+ {% assign detail_link = build.system.url | default: '' %}{% if detail_link == blank %}{% assign detail_link = '/pages/gallery-build?build=' | append: build.system.handle %}{% endif %}
+ {% render 'calder-gallery-card', image: featured, heading: title, url: detail_link, make: build.vehicle_make.value, model: build.vehicle_model.value, wheel: build.wheel_model.value, series: build.wheel_series.value, finish: build.overall_finish.value, construction: build.construction.value, size: build.front_wheel_size.value, bolt: build.bolt_pattern.value, style: build.wheel_style.value %}
+ {% endif %}{% endfor %}
+ {% for block in section.blocks %}
+ {% assign item = block.settings %}
+ {% capture item_title %}{% if gallery_type == 'vehicle' %}{{ item.vehicle_year }} {{ item.vehicle_make }} {{ item.vehicle_model }}{% else %}{{ item.wheel_model }}{% endif %}{% endcapture %}
+ {% assign detail_link = item.detail_url %}{% if item.gallery_handle != blank %}{% assign detail_link = '/pages/gallery-build?build=' | append: item.gallery_handle %}{% endif %}
+ {% assign card_finish = item.overall_finish | default: item.finish %}
+ {% assign card_size = item.wheel_diameter | default: item.wheel_size %}
+ {% render 'calder-gallery-card', image: item.image, heading: item_title, url: detail_link, make: item.vehicle_make, model: item.vehicle_model, wheel: item.wheel_model, series: item.wheel_series, finish: card_finish, construction: item.construction, size: card_size, bolt: item.bolt_pattern, style: item.wheel_style %}
+ {% endfor %}
+ </div><p class="cg-no-results" data-gallery-empty hidden>No matching gallery items. Try another filter.</p>
+ <nav class="cg-pagination" data-gallery-pagination aria-label="Gallery pages"></nav>
+ {% if section.settings.show_cta %}<div class="cg-cta" {% if section.settings.cta_background != blank %}style="background-image:linear-gradient(90deg,rgba(5,16,25,.9),rgba(5,16,25,.5)),url('{{ section.settings.cta_background | image_url: width: 1800 }}')"{% endif %}><h2>{{ section.settings.cta_heading | escape }}</h2><p>{{ section.settings.cta_text | escape }}</p><a href="{{ section.settings.cta_url | default: '/pages/build-your-wheel' }}">{{ section.settings.cta_label | escape }} →</a></div>{% endif %}
+ </div>
+</section><script src="{{ 'calder-gallery-v2.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "Calder Vehicle Gallery",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Hero"
+    },
+    {
+      "type": "text",
+      "id": "hero_title",
+      "label": "Hero title",
+      "default": "Vehicle Gallery"
+    },
+    {
+      "type": "textarea",
+      "id": "hero_subtitle",
+      "label": "Hero subtitle"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "per_page",
+      "min": 6,
+      "max": 48,
+      "step": 3,
+      "label": "Items per page",
+      "default": 12
+    },
+    {
+      "type": "header",
+      "content": "CTA"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_cta",
+      "label": "Show CTA",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "cta_heading",
+      "label": "CTA heading",
+      "default": "Find Your Perfect Fitment"
+    },
+    {
+      "type": "textarea",
+      "id": "cta_text",
+      "label": "CTA text"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "CTA link"
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "CTA button label",
+      "default": "Find Your Fit"
+    },
+    {
+      "type": "header",
+      "content": "Section Width"
+    },
+    {
+      "type": "select",
+      "id": "section_width",
+      "label": "Width source",
+      "options": [
+        {
+          "value": "global",
+          "label": "Use store width"
+        },
+        {
+          "value": "custom",
+          "label": "Custom width"
+        }
+      ],
+      "default": "global"
+    },
+    {
+      "type": "range",
+      "id": "container_max_width",
+      "min": 1178,
+      "max": 1978,
+      "step": 8,
+      "unit": "px",
+      "label": "Custom width",
+      "default": 1178
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero background image"
+    },
+    {
+      "type": "text",
+      "id": "hero_eyebrow",
+      "label": "Hero eyebrow",
+      "default": "CALDER WHEELS"
+    },
+    {
+      "type": "range",
+      "id": "hero_height",
+      "label": "Hero height",
+      "min": 200,
+      "max": 600,
+      "step": 20,
+      "unit": "px",
+      "default": 300
+    },
+    {
+      "type": "range",
+      "id": "hero_overlay",
+      "label": "Hero overlay opacity",
+      "min": 0,
+      "max": 90,
+      "step": 5,
+      "unit": "%",
+      "default": 55
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "label": "Cards per row (desktop)",
+      "min": 2,
+      "max": 6,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "select",
+      "id": "columns_mobile",
+      "label": "Cards per row (mobile)",
+      "options": [
+        {
+          "value": "1",
+          "label": "1"
+        },
+        {
+          "value": "2",
+          "label": "2"
+        }
+      ],
+      "default": "2"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_search",
+      "label": "Show search",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_sort",
+      "label": "Show sort",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_filters",
+      "label": "Show filters",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "style_filter_values",
+      "label": "Wheel style values (match fitment finder)",
+      "info": "Comma-separated canonical style values used by Shop by Wheel Style. Use the same labels in gallery entry Wheel style fields."
+    },
+    {
+      "type": "image_picker",
+      "id": "cta_background",
+      "label": "CTA background image"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "build",
+      "name": "Gallery Build",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Featured image"
+        },
+        {
+          "type": "text",
+          "id": "vehicle_year",
+          "label": "Vehicle year"
+        },
+        {
+          "type": "text",
+          "id": "vehicle_make",
+          "label": "Vehicle make"
+        },
+        {
+          "type": "text",
+          "id": "vehicle_model",
+          "label": "Vehicle model"
+        },
+        {
+          "type": "text",
+          "id": "wheel_model",
+          "label": "Wheel model"
+        },
+        {
+          "type": "text",
+          "id": "wheel_series",
+          "label": "Wheel series"
+        },
+        {
+          "type": "text",
+          "id": "wheel_size",
+          "label": "Wheel size"
+        },
+        {
+          "type": "text",
+          "id": "overall_finish",
+          "label": "Finish"
+        },
+        {
+          "type": "url",
+          "id": "detail_url",
+          "label": "Detail page URL"
+        },
+        {
+          "type": "text",
+          "id": "gallery_handle",
+          "label": "Gallery Build metaobject handle",
+          "info": "Links to /pages/gallery-build?build=HANDLE; populate the matching metaobject with full detail images and specs."
+        },
+        {
+          "type": "text",
+          "id": "wheel_style",
+          "label": "Wheel style (same value as fitment finder)"
+        },
+        {
+          "type": "text",
+          "id": "construction",
+          "label": "Construction"
+        },
+        {
+          "type": "text",
+          "id": "bolt_pattern",
+          "label": "Bolt pattern"
+        },
+        {
+          "type": "text",
+          "id": "wheel_diameter",
+          "label": "Wheel diameter"
+        },
+        {
+          "type": "text",
+          "id": "description",
+          "label": "Short description"
+        },
+        {
+          "type": "image_picker",
+          "id": "detail_image_2",
+          "label": "Detail image 2 (listing preview only)"
+        },
+        {
+          "type": "image_picker",
+          "id": "detail_image_3",
+          "label": "Detail image 3 (listing preview only)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Calder Vehicle Gallery",
+      "settings": {
+        "hero_title": "Vehicle Gallery",
+        "per_page": 12
+      }
+    }
+  ]
+}
+{% endschema %}

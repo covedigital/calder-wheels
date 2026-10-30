@@ -1,0 +1,568 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "calder-pdp": {
+      "type": "calder-product",
+      "settings": {
+        "show_breadcrumbs": true,
+        "section_width": "global",
+        "container_max_width": 1178,
+        "thumbs": true,
+        "thumbs_position": "bottom",
+        "product_media_main_fill_color": "bg-white",
+        "pjpg": false,
+        "enable_video_looping": false,
+        "show_rating": true,
+        "show_made_to_order": true,
+        "made_to_order_text": "Made to Order",
+        "description_words": 35,
+        "picker_type": "dropdown",
+        "use_variant_images": true,
+        "fitment_unset_heading": "Check Vehicle Fitment",
+        "text_no_vehicle": "Select vehicle to check fitment",
+        "action_text": "Select Vehicle",
+        "placeholder_diameter": "Select Diameter",
+        "placeholder_width": "Select Width",
+        "placeholder_application": "Select Application",
+        "price_prefix": "Starting at",
+        "price_suffix": "/ wheel",
+        "show_wishlist": true,
+        "show_share": true,
+        "share_text": "Share",
+        "show_trust_made_to_order": true,
+        "trust_made_to_order": "Made to Order",
+        "show_trust_shipping": true,
+        "trust_shipping": "Lifetime Warranty",
+        "show_trust_checkout": true,
+        "trust_checkout": "Secure Checkout"
+      }
+    },
+    "index_icons_AafpRF": {
+      "type": "index-icons",
+      "blocks": {
+        "icon_98wbkw": {
+          "type": "icon",
+          "settings": {
+            "icon": "icon-truck",
+            "icon_custom_svg": "",
+            "only_image": false,
+            "title": "FITMENT GUARANTEED",
+            "subtitle": "Verified for your vehicle"
+          }
+        },
+        "icon_gizKfD": {
+          "type": "icon",
+          "settings": {
+            "icon": "icon-return",
+            "icon_custom_svg": "",
+            "only_image": false,
+            "title": "PREMIUM CRAFTSMANSHIP",
+            "subtitle": "Engineered for performance"
+          }
+        },
+        "icon_VNqwXi": {
+          "type": "icon",
+          "settings": {
+            "icon": "icon-secure",
+            "icon_custom_svg": "",
+            "only_image": false,
+            "title": "SECURED PAYMENTS",
+            "subtitle": "Safe & protected payments"
+          }
+        },
+        "icon_7cDdtQ": {
+          "type": "icon",
+          "settings": {
+            "icon": "icon-support",
+            "icon_custom_svg": "",
+            "only_image": false,
+            "title": "WHEEL EXPERT SUPPORT",
+            "subtitle": "Specialists ready to help"
+          }
+        }
+      },
+      "block_order": [
+        "icon_98wbkw",
+        "icon_gizKfD",
+        "icon_VNqwXi",
+        "icon_7cDdtQ"
+      ],
+      "disabled": true,
+      "name": "Icons / constructor",
+      "settings": {
+        "section_animation": true,
+        "heading_alignment": "center",
+        "layout": "layout_2",
+        "icons_font_size": "default",
+        "icons_background": false,
+        "icons_text_background": false,
+        "icons_bordered": false,
+        "under_slider": false,
+        "per_view": "4",
+        "per_view_mobile": "2",
+        "heading": "",
+        "subtitle": "",
+        "spacing_sections": 0,
+        "use_global_desktop_space": false,
+        "spacing_sections_mobile": 0,
+        "use_global_mobile_space": false,
+        "spacing_padding_sections": 40,
+        "use_global_desktop_space_padding": false,
+        "spacing_padding_sections_mobile": 40,
+        "use_global_mobile_space_padding": false,
+        "background": false,
+        "background_preset": "none",
+        "background_behavior": "bg-cover",
+        "background_image_placeholder_type": "color_global_secondary_bg",
+        "background_image_placeholder": "",
+        "section_decoration_top": "none",
+        "section_decoration_top_color_type": "color_global_primary_bg",
+        "section_decoration_top_color": "",
+        "section_decoration_bottom": "none",
+        "section_decoration_bottom_color_type": "color_global_primary_bg",
+        "section_decoration_bottom_color": ""
+      }
+    },
+    "calder-specs": {
+      "type": "calder-specs",
+      "settings": {
+        "specs_heading": "Specifications",
+        "spec_diameter": "18\" — 22\"",
+        "spec_width": "8.5\" — 11\"",
+        "spec_bolt": "5x112",
+        "spec_offset": "+22 to +45",
+        "spec_construction": "3-Piece Forged",
+        "spec_weight": "24.5 lbs",
+        "spec_load": "1,600 lbs",
+        "spec_finish": "Multiple Options",
+        "engineering_heading": "Engineered to Perform",
+        "engineering_text": "Every Calder wheel is precision-engineered from aerospace-grade materials, assembled to order by master craftsmen, and validated through rigorous testing before delivery.",
+        "engineering_image": "shopify://shop_images/Calder-Wheels-Close-up_2.png",
+        "section_animation": true,
+        "section_width": "global",
+        "container_max_width": 1178,
+        "spacing_sections": 100,
+        "use_global_desktop_space": false,
+        "spacing_sections_mobile": 70,
+        "use_global_mobile_space": true,
+        "spacing_padding_sections": 100,
+        "use_global_desktop_space_padding": true,
+        "spacing_padding_sections_mobile": 70,
+        "use_global_mobile_space_padding": true,
+        "background": false,
+        "background_preset": "none",
+        "background_behavior": "bg-cover",
+        "background_image_placeholder_type": "color_global_secondary_bg",
+        "background_image_placeholder": "",
+        "section_decoration_top": "none",
+        "section_decoration_top_color_type": "color_global_primary_bg",
+        "section_decoration_top_color": "",
+        "section_decoration_bottom": "none",
+        "section_decoration_bottom_color_type": "color_global_primary_bg",
+        "section_decoration_bottom_color": ""
+      }
+    },
+    "calder_specs_v2_68FE7K": {
+      "type": "calder-specs-v2",
+      "disabled": true,
+      "name": "Calder Specs V2",
+      "settings": {
+        "panel_order": "visual_left",
+        "specs_feature_image": "shopify://shop_images/Calder-Wheels-Close-up_2.png",
+        "specs_heading": "Specifications",
+        "engineering_heading": "Engineered to Perform",
+        "engineering_text": "Every Calder wheel is precision-engineered from aerospace-grade materials, assembled to order by master craftsmen, and validated through rigorous testing before delivery.",
+        "engineering_image": "shopify://shop_images/Calder-Wheels-Close-up_3.png",
+        "section_animation": true,
+        "section_width": "global",
+        "container_max_width": 1178,
+        "spacing_sections": 100,
+        "use_global_desktop_space": true,
+        "spacing_sections_mobile": 70,
+        "use_global_mobile_space": true,
+        "spacing_padding_sections": 100,
+        "use_global_desktop_space_padding": true,
+        "spacing_padding_sections_mobile": 70,
+        "use_global_mobile_space_padding": true,
+        "background": false,
+        "background_preset": "none",
+        "background_image": "shopify://shop_images/Silverado-Red_1.png",
+        "background_behavior": "bg-cover",
+        "background_image_placeholder_type": "color_global_secondary_bg",
+        "background_image_placeholder": "",
+        "section_decoration_top": "none",
+        "section_decoration_top_color_type": "color_global_primary_bg",
+        "section_decoration_top_color": "",
+        "section_decoration_bottom": "none",
+        "section_decoration_bottom_color_type": "color_global_primary_bg",
+        "section_decoration_bottom_color": ""
+      }
+    },
+    "calder-configurator": {
+      "type": "wheel-configurator",
+      "settings": {
+        "spacing_blocks": 30,
+        "use_global_blocks_desktop_space": true,
+        "title": "Build Your Wheel",
+        "subtitle": "Select finishes to preview and order",
+        "show_3d": false,
+        "show_quote": true,
+        "lead_time": "Ships in 5-10 business days",
+        "section_animation": true,
+        "section_width": "global",
+        "container_max_width": 1178,
+        "spacing_sections": 100,
+        "use_global_desktop_space": true,
+        "spacing_sections_mobile": 70,
+        "use_global_mobile_space": true,
+        "spacing_padding_sections": 100,
+        "use_global_desktop_space_padding": true,
+        "spacing_padding_sections_mobile": 70,
+        "use_global_mobile_space_padding": true,
+        "background": false,
+        "background_preset": "none",
+        "background_image": "shopify://shop_images/01_warm_studio.png",
+        "background_behavior": "bg-contain",
+        "background_image_placeholder_type": "color_global_secondary_bg",
+        "background_image_placeholder": "",
+        "section_decoration_top": "none",
+        "section_decoration_top_color_type": "color_global_primary_bg",
+        "section_decoration_top_color": "",
+        "section_decoration_bottom": "none",
+        "section_decoration_bottom_color_type": "color_global_primary_bg",
+        "section_decoration_bottom_color": ""
+      }
+    },
+    "calder-fitment": {
+      "type": "fitment-finder",
+      "settings": {
+        "section_width": "global",
+        "container_max_width": 1180,
+        "heading": "Find Your Perfect Fit",
+        "subheading": "Select your vehicle to see compatible wheels",
+        "background_image": "shopify://shop_images/Range-Rover-M-07_1.png",
+        "placeholder_year": "Select Year",
+        "placeholder_make": "Select Make",
+        "placeholder_model": "Select Model",
+        "placeholder_generation": "Select Generation",
+        "button_text": "View Compatible Wheels",
+        "section_animation": true,
+        "spacing_sections": 100,
+        "use_global_desktop_space": true,
+        "spacing_sections_mobile": 70,
+        "use_global_mobile_space": true,
+        "spacing_padding_sections": 100,
+        "use_global_desktop_space_padding": true,
+        "spacing_padding_sections_mobile": 70,
+        "use_global_mobile_space_padding": true,
+        "background": false,
+        "background_preset": "none",
+        "background_behavior": "bg-cover",
+        "background_image_placeholder_type": "color_global_secondary_bg",
+        "background_image_placeholder": "",
+        "section_decoration_top": "none",
+        "section_decoration_top_color_type": "color_global_primary_bg",
+        "section_decoration_top_color": "",
+        "section_decoration_bottom": "none",
+        "section_decoration_bottom_color_type": "color_global_primary_bg",
+        "section_decoration_bottom_color": ""
+      }
+    },
+    "calder-product-fitment-guide": {
+      "type": "calder-product-fitment-guide",
+      "settings": {}
+    },
+    "calder-finishes": {
+      "type": "calder-finishes",
+      "disabled": true,
+      "settings": {
+        "heading": "Available Finishes",
+        "section_animation": true,
+        "section_width": "global",
+        "container_max_width": 1178,
+        "spacing_sections": 100,
+        "use_global_desktop_space": true,
+        "spacing_sections_mobile": 70,
+        "use_global_mobile_space": true,
+        "spacing_padding_sections": 100,
+        "use_global_desktop_space_padding": true,
+        "spacing_padding_sections_mobile": 70,
+        "use_global_mobile_space_padding": true,
+        "background": false,
+        "background_preset": "none",
+        "background_behavior": "bg-cover",
+        "background_image_placeholder_type": "color_global_secondary_bg",
+        "background_image_placeholder": "",
+        "section_decoration_top": "none",
+        "section_decoration_top_color_type": "color_global_primary_bg",
+        "section_decoration_top_color": "",
+        "section_decoration_bottom": "none",
+        "section_decoration_bottom_color_type": "color_global_primary_bg",
+        "section_decoration_bottom_color": ""
+      }
+    },
+    "index_gallery_MycPPQ": {
+      "type": "index-gallery",
+      "blocks": {
+        "image_cMxfAk": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Silverado-Red_1.png",
+            "color_placeholder": "",
+            "title": "Silverado",
+            "description": "",
+            "link": ""
+          }
+        },
+        "image_9iTTaW": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Tahoe-M-2_1.png",
+            "color_placeholder": "",
+            "title": "G-Wagon G63",
+            "description": "",
+            "link": ""
+          }
+        },
+        "image_qbPDNY": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Escalade-V-White_1.png",
+            "color_placeholder": "",
+            "title": "Escalade V",
+            "description": "",
+            "link": ""
+          }
+        },
+        "image_amiBfB": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Escalade-V-01_1.png",
+            "color_placeholder": "",
+            "title": "Escalade V-01",
+            "description": "",
+            "link": ""
+          }
+        },
+        "image_ticYJY": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Range-Rover-M-07_1.png",
+            "color_placeholder": "",
+            "title": "Range Rover M-07",
+            "description": "",
+            "link": ""
+          }
+        },
+        "image_TatmVt": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Silverado-Black_1.png",
+            "color_placeholder": "",
+            "title": "Silverado",
+            "description": "",
+            "link": ""
+          }
+        },
+        "image_MedUW9": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Escalade-M-01_2.png",
+            "color_placeholder": "",
+            "title": "Escalade M-01",
+            "description": "",
+            "link": ""
+          }
+        },
+        "image_QUdQAi": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Tahoe-Black_1.png",
+            "color_placeholder": "",
+            "title": "Tahoe",
+            "description": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_cMxfAk",
+        "image_9iTTaW",
+        "image_qbPDNY",
+        "image_amiBfB",
+        "image_ticYJY",
+        "image_TatmVt",
+        "image_MedUW9",
+        "image_QUdQAi"
+      ],
+      "name": "Gallery",
+      "settings": {
+        "section_animation": true,
+        "columns": "4",
+        "images_auto_height": true,
+        "images_auto_height_padding": 64,
+        "ticker_mode": false,
+        "ticker_mode_size": "md",
+        "heading_alignment": "center",
+        "heading": "See It in the Real World",
+        "subtitle": "BUILT TO STAND OUT",
+        "section_width": "global",
+        "container_max_width": 1178,
+        "spacing_sections": 100,
+        "use_global_desktop_space": true,
+        "spacing_sections_mobile": 70,
+        "use_global_mobile_space": true,
+        "spacing_padding_sections": 100,
+        "use_global_desktop_space_padding": true,
+        "spacing_padding_sections_mobile": 70,
+        "use_global_mobile_space_padding": true,
+        "background": false,
+        "background_preset": "none",
+        "background_behavior": "bg-cover",
+        "background_image_placeholder_type": "color_global_secondary_bg",
+        "background_image_placeholder": "",
+        "section_decoration_top": "none",
+        "section_decoration_top_color_type": "color_global_primary_bg",
+        "section_decoration_top_color": "",
+        "section_decoration_bottom": "none",
+        "section_decoration_bottom_color_type": "color_global_primary_bg",
+        "section_decoration_bottom_color": ""
+      }
+    },
+    "calder-recommendations": {
+      "type": "calder-recommendations",
+      "settings": {
+        "heading": "You May Also Like",
+        "limit": 4,
+        "section_animation": true,
+        "section_width": "global",
+        "container_max_width": 1178,
+        "spacing_sections": 100,
+        "use_global_desktop_space": true,
+        "spacing_sections_mobile": 70,
+        "use_global_mobile_space": true,
+        "spacing_padding_sections": 100,
+        "use_global_desktop_space_padding": true,
+        "spacing_padding_sections_mobile": 70,
+        "use_global_mobile_space_padding": true,
+        "background": false,
+        "background_preset": "none",
+        "background_behavior": "bg-cover",
+        "background_image_placeholder_type": "color_global_secondary_bg",
+        "background_image_placeholder": "",
+        "section_decoration_top": "none",
+        "section_decoration_top_color_type": "color_global_primary_bg",
+        "section_decoration_top_color": "",
+        "section_decoration_bottom": "none",
+        "section_decoration_bottom_color_type": "color_global_primary_bg",
+        "section_decoration_bottom_color": ""
+      }
+    },
+    "product-related": {
+      "type": "product-related",
+      "disabled": true,
+      "settings": {
+        "section_width": "global",
+        "container_max_width": 1178,
+        "spacing_sections": 100,
+        "use_global_desktop_space": true,
+        "spacing_sections_mobile": 70,
+        "use_global_mobile_space": true,
+        "spacing_padding_sections": 100,
+        "use_global_desktop_space_padding": true,
+        "spacing_padding_sections_mobile": 70,
+        "use_global_mobile_space_padding": true,
+        "background": false,
+        "title": "You may also like",
+        "subtitle": ""
+      }
+    },
+    "product-recommendations": {
+      "type": "product-recommendations",
+      "disabled": true,
+      "settings": {
+        "section_width": "global",
+        "container_max_width": 1178,
+        "spacing_sections": 100,
+        "use_global_desktop_space": true,
+        "spacing_sections_mobile": 70,
+        "use_global_mobile_space": true,
+        "spacing_padding_sections": 100,
+        "use_global_desktop_space_padding": true,
+        "spacing_padding_sections_mobile": 70,
+        "use_global_mobile_space_padding": true,
+        "background": false,
+        "heading": "Customers also purchased",
+        "subtitle": ""
+      }
+    },
+    "calder-specialist": {
+      "type": "calder-specialist-cta",
+      "settings": {
+        "heading": "Talk to a Wheel Specialist",
+        "text": "Have questions about fitment, finishes, or lead times? Our team of wheel specialists is here to help you find the perfect setup.",
+        "button_text": "Get in Touch",
+        "button_link": "",
+        "phone": "(555) 123-4567",
+        "email": "hello@calderwheels.com",
+        "specialist_bg_image": "shopify://shop_images/Calder-Wheels-Close-up_5.png",
+        "section_animation": true,
+        "section_width": "global",
+        "container_max_width": 1178,
+        "spacing_sections": 100,
+        "use_global_desktop_space": true,
+        "spacing_sections_mobile": 70,
+        "use_global_mobile_space": true,
+        "spacing_padding_sections": 100,
+        "use_global_desktop_space_padding": true,
+        "spacing_padding_sections_mobile": 70,
+        "use_global_mobile_space_padding": true,
+        "background": false,
+        "background_preset": "none",
+        "background_behavior": "bg-cover",
+        "background_image_placeholder_type": "color_global_secondary_bg",
+        "background_image_placeholder": "",
+        "section_decoration_top": "none",
+        "section_decoration_top_color_type": "color_global_primary_bg",
+        "section_decoration_top_color": "",
+        "section_decoration_bottom": "none",
+        "section_decoration_bottom_color_type": "color_global_primary_bg",
+        "section_decoration_bottom_color": ""
+      }
+    },
+    "index_negative_space_kiKQgx": {
+      "type": "index-negative-space",
+      "name": "Negative space for footer",
+      "settings": {
+        "spacing_sections": 0,
+        "use_global_desktop_space": true,
+        "spacing_sections_mobile": 0,
+        "use_global_mobile_space": true
+      }
+    }
+  },
+  "order": [
+    "calder-pdp",
+    "index_icons_AafpRF",
+    "calder-specs",
+    "calder_specs_v2_68FE7K",
+    "calder-configurator",
+    "calder-fitment",
+    "calder-product-fitment-guide",
+    "calder-finishes",
+    "index_gallery_MycPPQ",
+    "calder-recommendations",
+    "product-related",
+    "product-recommendations",
+    "calder-specialist",
+    "index_negative_space_kiKQgx"
+  ]
+}

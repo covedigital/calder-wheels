@@ -1,8 +1,3 @@
-/**
- * Calder Wheels — Dealer Portal JavaScript
- * Tab navigation, Quick Order line management, SKU autocomplete, quote filters.
- * Wires into DealerBackend for order submission, MOQ, credit, production status.
- */
 (function() {
   'use strict';
 
@@ -11,167 +6,115 @@
   });
 
   function initDealerPortal() {
-    var portal = document.querySelector('.dp-root');
-    if (!portal) return;
-
-    initTabNavigation();
-    initQuoteSearch();
-    initLineItemTotals();
-    initCreditDisplay();
-    initProductionStatus();
-    initCartMOQCheck();
+    initMobileSidebar();
+    initUserMenu();
+    initNotifications();
   }
 
-  /* ── Tab Navigation (sidebar links switch content views) ── */
-  function initTabNavigation() {
-    var tabs = document.querySelectorAll('.dp-nav__link[data-dp-tab]');
-    var panels = document.querySelectorAll('.dp-root');
+  /* ── Mobile Sidebar Toggle ── */
+  function initMobileSidebar() {
+    var toggle = document.querySelector('[data-dealer-mobile-toggle]');
+    var sidebar = document.querySelector('[data-dealer-sidebar]');
+    var overlay = document.querySelector('.dp-sidebar-overlay');
 
-    if (tabs.length === 0 || panels.length <= 1) return;
+    if (!toggle || !sidebar) return;
 
-    tabs.forEach(function(tab) {
-      tab.addEventListener('click', function(e) {
-        var target = this.getAttribute('data-dp-tab');
-        if (target === 'catalog') return;
-
-        tabs.forEach(function(t) { t.classList.remove('active'); });
-        this.classList.add('active');
-      });
-    });
-  }
-
-  /* ── Quote Search/Filter ── */
-  function initQuoteSearch() {
-    var searchInput = document.querySelector('[data-quote-search]');
-    if (!searchInput) return;
-
-    searchInput.addEventListener('input', function() {
-      var query = this.value.toLowerCase();
-      var rows = document.querySelectorAll('[data-quote-row]');
-
-      rows.forEach(function(row) {
-        var text = row.textContent.toLowerCase();
-        row.style.display = text.indexOf(query) > -1 ? '' : 'none';
-      });
-    });
-  }
-
-  /* ── Credit Display Initialization ── */
-  function initCreditDisplay() {
-    var creditEl = document.querySelector('[id^="dealer-credit-data-"]');
-    if (!creditEl) return;
-
-    try {
-      var credit = JSON.parse(creditEl.textContent);
-      if (!credit.can_order) {
-        var submitBtns = document.querySelectorAll('[data-submit-order]');
-        submitBtns.forEach(function(btn) {
-          btn.disabled = true;
-          btn.title = credit.reason || 'Account not in good standing';
-          btn.style.opacity = '0.5';
-        });
-
-        var notices = document.querySelectorAll('.dp-order-summary');
-        notices.forEach(function(summary) {
-          var existing = summary.querySelector('.dp-credit-warning');
-          if (existing) return;
-          var warning = document.createElement('div');
-          warning.className = 'dp-credit-warning';
-          warning.style.cssText = 'color:#db6e5b;font-size:13px;padding:8px 12px;margin-top:8px;background:rgba(219,110,91,0.1);border-radius:6px;';
-          warning.textContent = credit.reason || 'Ordering is currently restricted';
-          summary.appendChild(warning);
-        });
-      }
-    } catch (e) {}
-  }
-
-  /* ── Production Status Polling ── */
-  function initProductionStatus() {
-    var statusEls = document.querySelectorAll('[data-production-status]');
-    if (statusEls.length === 0) return;
-
-    statusEls.forEach(function(el) {
-      var orderName = el.dataset.orderName;
-      if (!orderName) return;
-
-      if (window.DealerBackend && window.DealerBackend.refreshProductionStatus) {
-        window.DealerBackend.refreshProductionStatus(orderName, function(err, status) {
-          if (err || !status) return;
-          el.dataset.productionStatus = JSON.stringify(status);
-        });
-      }
-    });
-  }
-
-  /* ── Cart MOQ Check ── */
-  function initCartMOQCheck() {
-    var moqWarnings = document.getElementById('dealer-moq-warnings');
-    if (!moqWarnings) return;
-
-    if (window.DealerBackend && window.DealerBackend.checkCartMOQ) {
-      window.DealerBackend.checkCartMOQ(function(violations) {
-        if (violations.length === 0) return;
-
-        var checkoutBtn = document.querySelector('[name="checkout"], .checkout-btn, #checkout');
-        if (checkoutBtn) {
-          checkoutBtn.disabled = true;
-          checkoutBtn.style.opacity = '0.5';
-          checkoutBtn.title = 'Please resolve MOQ violations before checkout';
-
-          var moqNotice = document.createElement('div');
-          moqNotice.style.cssText = 'color:#db6e5b;font-size:14px;padding:12px;margin:8px 0;background:rgba(219,110,91,0.1);border-radius:6px;text-align:center;';
-          moqNotice.textContent = violations.length + ' item(s) do not meet minimum order quantities. Please update before checkout.';
-          checkoutBtn.parentNode.insertBefore(moqNotice, checkoutBtn);
-        }
-      });
+    if (!overlay) {
+      overlay = document.createElement('div');
+      overlay.className = 'dp-sidebar-overlay';
+      overlay.setAttribute('data-sidebar-overlay', '');
+      document.body.appendChild(overlay);
     }
+
+    function openSidebar() {
+      sidebar.classList.add('dp-sidebar--open');
+      overlay.classList.add('dp-sidebar-overlay--visible');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeSidebar() {
+      sidebar.classList.remove('dp-sidebar--open');
+      overlay.classList.remove('dp-sidebar-overlay--visible');
+      document.body.style.overflow = '';
+    }
+
+    toggle.addEventListener('click', function(e) {
+      e.stopPropagation();
+      if (sidebar.classList.contains('dp-sidebar--open')) {
+        closeSidebar();
+      } else {
+        openSidebar();
+      }
+    });
+
+    overlay.addEventListener('click', closeSidebar);
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && sidebar.classList.contains('dp-sidebar--open')) {
+        closeSidebar();
+      }
+    });
   }
 
-  /* ── Line Item Total Calculation (for quick order tables) ── */
-  function initLineItemTotals() {
-    var tables = document.querySelectorAll('[data-line-items-table]');
-    tables.forEach(function(table) {
-      table.addEventListener('change', function(e) {
-        var target = e.target;
-        if (target.matches('[data-qty-minus], [data-qty-plus]') ||
-            target.matches('[data-size-select], [data-finish-select]')) {
-          updateTableTotals(table.closest('.dp-root'));
+  /* ── User Menu Dropdown ── */
+  function initUserMenu() {
+    var userMenu = document.querySelector('[data-dealer-user-menu]');
+    if (!userMenu) return;
+
+    userMenu.addEventListener('click', function(e) {
+      var target = this.querySelector('.dp-topbar__user-dropdown');
+      if (!target) {
+        var dropdown = document.createElement('div');
+        dropdown.className = 'dp-topbar__user-dropdown';
+        dropdown.style.cssText = 'position:absolute;top:100%;right:0;background:var(--dp-white);border:1px solid var(--dp-border);border-radius:8px;box-shadow:0 4px 16px rgba(0,0,0,0.1);padding:8px 0;min-width:200px;z-index:200;';
+        dropdown.innerHTML =
+          '<a href="/account" style="display:block;padding:8px 16px;font-size:13px;color:var(--dp-text);text-decoration:none;">Account Settings</a>' +
+          '<a href="/account/addresses" style="display:block;padding:8px 16px;font-size:13px;color:var(--dp-text);text-decoration:none;">Addresses</a>' +
+          '<div style="border-top:1px solid var(--dp-border);margin:4px 12px;"></div>' +
+          '<a href="/account/logout" style="display:block;padding:8px 16px;font-size:13px;color:var(--dp-bad, #C94A4A);text-decoration:none;">Sign Out</a>';
+        this.style.position = 'relative';
+        this.appendChild(dropdown);
+      } else {
+        target.remove();
+      }
+    });
+
+    document.addEventListener('click', function(e) {
+      if (!userMenu.contains(e.target)) {
+        var dropdown = userMenu.querySelector('.dp-topbar__user-dropdown');
+        if (dropdown) dropdown.remove();
+      }
+    });
+  }
+
+  /* ── Notification Panel ── */
+  function initNotifications() {
+    var notifBtn = document.querySelector('[data-dealer-notif-toggle]');
+    if (!notifBtn) return;
+
+    notifBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      var existing = this.querySelector('.dp-topbar__notif-panel');
+      if (existing) {
+        existing.remove();
+        return;
+      }
+      var panel = document.createElement('div');
+      panel.className = 'dp-topbar__notif-panel';
+      panel.style.cssText = 'position:absolute;top:100%;right:0;width:320px;background:var(--dp-white);border:1px solid var(--dp-border);border-radius:8px;box-shadow:0 4px 16px rgba(0,0,0,0.1);z-index:200;';
+      panel.innerHTML =
+        '<div style="padding:14px 16px;border-bottom:1px solid var(--dp-border);font-size:14px;font-weight:600;">Notifications</div>' +
+        '<div style="padding:24px 16px;text-align:center;color:var(--dp-text-light);font-size:13px;">No new notifications.</div>';
+      this.style.position = 'relative';
+      this.appendChild(panel);
+
+      document.addEventListener('click', function docClick(ev) {
+        if (!notifBtn.contains(ev.target)) {
+          var p = notifBtn.querySelector('.dp-topbar__notif-panel');
+          if (p) p.remove();
+          document.removeEventListener('click', docClick);
         }
       });
     });
-  }
-
-  function updateTableTotals(container) {
-    if (!container) return;
-    var rows = container.querySelectorAll('[data-line-item]');
-    var totalItems = 0;
-    var grandTotal = 0;
-
-    rows.forEach(function(row, index) {
-      var qtyEl = row.querySelector('[data-qty-value]');
-      var qty = qtyEl ? parseInt(qtyEl.textContent, 10) || 0 : 0;
-      totalItems += qty;
-
-      var unitPriceEl = row.querySelector('[data-unit-price]');
-      var price = 0;
-      if (unitPriceEl && unitPriceEl.textContent !== '—') {
-        price = parseFloat(unitPriceEl.textContent.replace(/[^0-9.]/g, '')) || 0;
-      }
-      grandTotal += qty * price;
-    });
-
-    var orderSummary = container.querySelector('.dp-order-summary');
-    if (orderSummary) {
-      var lines = orderSummary.querySelectorAll('.dp-order-summary__line');
-      if (lines[0]) {
-        lines[0].querySelectorAll('span')[1].textContent = 'Items (' + totalItems + ')';
-      }
-      if (lines[1]) {
-        lines[1].querySelectorAll('span')[1].textContent = grandTotal > 0 ? '$' + grandTotal.toFixed(2) : '—';
-      }
-      if (lines[lines.length - 1]) {
-        lines[lines.length - 1].querySelectorAll('span')[1].textContent = grandTotal > 0 ? '$' + grandTotal.toFixed(2) : '—';
-      }
-    }
   }
 })();

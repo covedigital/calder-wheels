@@ -7,6 +7,16 @@
 -%}
 {%- unless hide_dealer_only -%}
 {%- liquid
+  assign card_layout = layout | default: settings.product_card_layout
+  assign calder_premium = false
+  assign card_modifier = ''
+  if card_layout == '4'
+    assign calder_premium = true
+    assign card_modifier = ' calder-card--light'
+  elsif card_layout == '5'
+    assign calder_premium = true
+    assign card_modifier = ' calder-card--dark'
+  endif
   assign section_id = section_id | default: 'calder-card'
   assign product_form_id = 'product-form-' | append: product_form_suffix | append: section_id | append: '-' | append: product.id
 
@@ -29,6 +39,13 @@
   if settings.product_card_url_within_collection
     assign product_url_collection = product.url | within: collection
   endif
+  capture calder_design_pdp_url
+    render 'calder-design-url', product: product, current_variant: current_variant
+  endcapture
+  assign calder_design_pdp_url = calder_design_pdp_url | strip
+  if calder_design_pdp_url != blank
+    assign product_url_collection = calder_design_pdp_url
+  endif
 
   assign picker_type = settings.product_card_picker_type
   assign use_pics = settings.product_card_use_pics
@@ -42,6 +59,9 @@
     assign hide_quantity = 0
   endif
 
+  if calder_premium
+    assign hide_quantity = 0
+  endif
   assign taxonomy_label = product.type | upcase
   if taxonomy_label == blank
     assign taxonomy_label = collection.title | upcase
@@ -55,9 +75,43 @@
   if feature_metafields_1 != blank or feature_metafields_2 != blank or feature_metafields_3 != blank
     assign has_features = true
   endif
+
+  if calder_premium
+    assign display_title = short_title | default: product.metafields.custom.design_code.value | default: product.title
+    assign construction_value = product.metafields.custom.construction.value
+    if construction_value == blank
+      assign type_lower = product.type | downcase
+      if type_lower contains 'forged'
+        assign construction_value = 'Forged'
+      elsif type_lower contains 'cast monoblock'
+        assign construction_value = 'Cast Monoblock'
+      endif
+    endif
+    assign construction_lower = construction_value | downcase
+    if construction_lower contains 'forged'
+      assign construction_label = '2-Piece Spun Forged'
+    elsif construction_value == 'Cast Monoblock'
+      assign construction_label = 'Cast Monoblock'
+    else
+      assign construction_label = construction_value
+    endif
+    assign center_finish_index = -1
+    for option in product.options
+      assign option_name_lower = option.name | downcase
+      if option_name_lower contains 'center finish'
+        assign center_finish_index = forloop.index0
+        break
+      endif
+    endfor
+    if center_finish_index >= 0
+      assign selected_finish = current_variant.options[center_finish_index] | default: ''
+    else
+      assign selected_finish = ''
+    endif
+  endif
 -%}
 
-<calder-product-card class="prd prd--hover-off lazyload" data-section-render data-available="{% if product.available %}true{% else %}false{% endif %}">
+<calder-product-card class="prd prd--hover-off lazyload{{ card_modifier }}" data-section-render data-available="{% if product.available %}true{% else %}false{% endif %}">
   <div class="calder-card">
     <div class="calder-card__media">
       {% render 'product-card-badges', render: true, section: section, product: product, product_form_id: product_form_id %}
@@ -79,6 +133,7 @@
     </div>
 
     <div class="calder-card__content">
+      {% unless calder_premium %}
       {% if taxonomy_label != blank %}
         <div class="calder-card__type">
           {% if collection != blank %}
@@ -88,22 +143,41 @@
           {% endif %}
         </div>
       {% endif %}
+      {% endunless %}
+      {% if calder_premium and construction_label != blank %}
+        <div class="calder-card__type">{{ construction_label | escape }}</div>
+      {% endif %}
 
       <h3 class="calder-card__title">
-        <a href="{{ product_url_collection }}">{{ product.title | escape }}</a>
+        <a href="{{ product_url_collection }}">{{ display_title | default: product.title | escape }}</a>
       </h3>
-      {% render 'calder-card-badges', product: product %}
+      {% unless calder_premium %}
+        {% render 'calder-card-badges', product: product %}
+      {% endunless %}
+      {% if calder_premium %}
+        {% for option in product.options_with_values %}
+          {% assign option_name = option.name | downcase %}
+          {% if option_name contains 'diameter' or option_name contains 'size' %}
+            <div class="calder-card__diameters">{{ option.values | join: ' · ' | escape }}</div>
+            {% break %}
+          {% endif %}
+        {% endfor %}
+      {% endif %}
 
-      {% if settings.product_card_rating %}
+      {% if settings.product_card_rating and calder_premium == false %}
         <div class="calder-card__rating">
           {% render 'rating', product: product %}
         </div>
       {% endif %}
 
+      {% capture card_price_markup %}
       <div class="calder-card__price">
         {% render 'price', product: product, use_variant: true, render: true, product_card_style_1: false, product_form_id: product_form_id, product_card: true %}
         {% render 'calder-card-dealer-price', product: product %}
       </div>
+
+      {% endcapture %}
+      {% unless calder_premium %}{{ card_price_markup }}{% endunless %}
 
       {% if settings.product_card_show_variants %}
         <div class="calder-card__swatches">
@@ -125,7 +199,14 @@
         </div>
       {% endif %}
 
-      {% if has_features %}
+      {% if calder_premium and settings.product_card_show_variants and selected_finish != blank %}
+        <div class="calder-card__selected-finish" aria-live="polite">{{ selected_finish | escape }}</div>
+        {{ card_price_markup }}
+      {% elsif calder_premium %}
+        {{ card_price_markup }}
+      {% endif %}
+
+      {% if has_features and calder_premium == false %}
         <div class="calder-card__features">
           {% if feature_metafields_1 != blank %}
             <div class="calder-card__feature">
@@ -154,6 +235,7 @@
         </div>
       {% endif %}
 
+      {% if calder_premium %}<div class="calder-card__purchase-row">{% endif %}
       <div class="calder-card__action">
         {% render 'product-card-action'
           product: product,
@@ -166,12 +248,20 @@
         %}
       </div>
 
+      {% if calder_premium %}</div>{% endif %}
       <div class="calder-card__details">
         <a href="{{ product_url_collection }}">
-          View Details
-          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M1 6H11M11 6L6 1M11 6L6 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
+          {% if calder_premium %}
+            Customize Your Wheel
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M3.5 8.5L8.5 3.5M8.5 3.5H4.5M8.5 3.5V7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          {% else %}
+            View Details
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 6H11M11 6L6 1M11 6L6 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          {% endif %}
         </a>
       </div>
     </div>

@@ -1,0 +1,27 @@
+Field,Source,Example,Shopify Destination,Filterable?,Variant?,Required?,Status,Notes
+Design Code,SUV Data Sheet → Design Code column,CLM01,Option Name / Handle prefix,YES,YES (Option1),YES,SOURCE_CONFIRMED,"5 unique design codes: CLM01, CLM02, CLM03, CLB06, CLB07 — client confirmed design code = wheel name"
+Design Number/Name,Derived from Design Code,201 (CLM01),Product Title component,YES,NO,YES,DERIVED,"Design 201-207, format: ""201 Calder"" — client confirmed design code is the wheel name"
+Part Number / SKU,SUV Data Sheet → Part Number,CLM0122106397825GB11,Shopify Variant SKU,NO,YES,YES,SOURCE_CONFIRMED,"756 unique SKUs (4 sheets × 189 rows) — encode finish + bolt pattern + center bore + offset"
+Diameter,SUV Data Sheet → Diameter,22,Option Value 2 / Metafield,YES,YES (Option2),YES,SOURCE_CONFIRMED,"Values: 22"", 24"", 26"""
+Width,SUV Data Sheet → Width,10,Metafield / Filter,YES,NO,YES,SOURCE_CONFIRMED,"All SKUs are 10"" width. 22x9 widths are future fitment per client."
+Bolt Pattern / PCD,SUV Data Sheet → Bolt Pattern,6X139,Product Metafield / Filter,YES,NO,YES,SOURCE_CONFIRMED,"Values: 6X139, 6X135, 5X130, 5X120. 5X112/5X108/5X127/5X114/5X150 are future fitment or excluded per client."
+Offset,SUV Data Sheet → Offset,+25MM,Variant Metafield,YES,NO,YES,SOURCE_CONFIRMED,"Values: +25MM, +30MM, +32MM"
+Center Bore,SUV Data Sheet → Center Bore,78.1,Variant Metafield,YES,NO,YES,SOURCE_CONFIRMED,"Values: 72.6, 78.1, 84.1, 87.1, 106.1, 95.1. Client confirmed: 95.1 for Lexus GX 2024+/LX 2022+, 77.8 for Armada/QX, 71.6 for Urus."
+Center Finish,SUV Data Sheet → Center Finish,Gloss Black,Option Value 3 / Filter,YES,YES (Option3),YES,SOURCE_CONFIRMED,"Values: Gloss Black, Black Tint, Titanium Tint"
+Lip Finish,SUV Data Sheet → Lip Finish,Polished,Metafield / Filter,YES,NO,YES,SOURCE_CONFIRMED,"Values: Polished, Gloss Black (determined by sheet)"
+Bolt Finish,SUV Data Sheet → Bolt Finish,Chrome,Metafield / Filter,YES,NO,YES,SOURCE_CONFIRMED,"Values: Chrome, Black (determined by sheet)"
+Description,SUV Data Sheet → Description,"CLM01 22X10 6X139 +25mm 78.1 Gloss Black Center Polish Lip Chrome Bolts",Product Description,NO,NO,YES,SOURCE_CONFIRMED,Technical description; needs marketing rewrite for final launch
+MSRP / Price,SUV Data Sheet → MSRP,"$1,000 (CLM01 22"")",Shopify Price,NO,NO,YES,CLIENT CONFIRMED,"Range $1,000–$1,500. Client confirmed: MSRP = selling price. Dealer discounts via login/profile."
+Finish Combination Name,Derived from Center+Lip+Bolt,"Gloss Black / Polished / Chrome",Option Value / Product Title,YES,NO (Grouping),RECOMMENDED,DERIVED,"e.g. ""Gloss Black / Polished / Chrome"""
+Overall Finish Label,Derived from sheet grouping,Black Lip Black Bolts,Product Type / Collection,YES,NO,RECOMMENDED,DERIVED,"4 finish families: Pol+Ch, Pol+Bk, BkLip+Ch, BkLip+Bk"
+Vehicle Make,Fitment Guide / Data Sheet headings,GM,Metafield / Filter,YES,NO,RECOMMENDED,DERIVED,"13 active makes: CADILLAC, CHEVROLET, GMC, FORD, MERCEDES-BENZ, LAND ROVER, LEXUS, NISSAN, INFINITI, BMW, AUDI, LAMBORGHINI, ROLLS-ROYCE"
+Vehicle Model,Fitment Guide / Data Sheet headings,Escalade,Metafield,YES,NO,RECOMMENDED,DERIVED,"23 active models. 6 excluded: Evoque, Velar, Durango, Grand Cherokee, X3, GLC, Q5 (20"" only)"
+Year Range,Fitment Guide,2021-2026,Metafield,YES,NO,RECOMMENDED,SOURCE_CONFIRMED (Fitment),Year ranges per vehicle from client Fitment Guide
+Recommended Tire Size,Fitment Guide → Tire,305/40/22,Metafield,NO,NO,ENRICHMENT,SOURCE_CONFIRMED (Fitment),"At 22"", 24"", 26"" diameter levels per vehicle"
+Front Fitment,Fitment Guide → Size/Offset,"22x10 +25mm",FITMENT ONLY,NO,NO,FITMENT,SOURCE_CONFIRMED (Fitment),Front wheel spec per vehicle
+Rear Fitment,Fitment Guide → Size/Offset,"24x10 +25mm",FITMENT ONLY,NO,NO,FITMENT,SOURCE_CONFIRMED (Fitment),Rear wheel spec per vehicle; may differ from front
+Exposed Lug Compatible,Fitment Guide → Exposed Lug,YES,FITMENT ONLY,NO,NO,FITMENT,SOURCE_CONFIRMED (Fitment),Some vehicles only support covered lugs
+Covered Lug Compatible,Fitment Guide → Covered Lug,YES,FITMENT ONLY,NO,NO,FITMENT,SOURCE_CONFIRMED (Fitment),Lug cover compatibility per vehicle
+Construction,Client confirmed,"Spun Forged (2pc series)",Metafield / Filter,YES,NO,YES,CLIENT CONFIRMED,"Client confirmed: ""Our current 2pc series is flow formed but we would like to use the term Spun Forged"""
+Weight,Client confirmed — pending sample arrival,"TBD once samples arrive",Metafield,NO,NO,P2,CLIENT PENDING,"Client: ""We will have weights for each size once samples arrive, if we need to guess I can try to calculate from the E5 wheels but they are smaller"""
+Load Rating,Client confirmed,"2,650 lbs (1,200 kg)",Metafield,NO,NO,YES,CLIENT CONFIRMED,"Client confirmed: load rating for our wheels is 2,650 lbs"

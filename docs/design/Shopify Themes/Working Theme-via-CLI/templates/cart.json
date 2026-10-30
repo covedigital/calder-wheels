@@ -14,13 +14,11 @@
       "blocks": {
         "subtotal": {
           "type": "subtotal",
-          "settings": {
-          }
+          "settings": {}
         },
         "buttons": {
           "type": "buttons",
-          "settings": {
-          }
+          "settings": {}
         }
       },
       "block_order": [
@@ -39,12 +37,31 @@
         "spacing_padding_sections_mobile": 70,
         "use_global_mobile_space_padding": true,
         "background": false,
-        "show_vendor": false
+        "show_vendor": false,
+        "show_trust_features": true
+      }
+    },
+    "calder-specialist": {
+      "type": "calder-cart-specialist",
+      "settings": {
+        "show_banner": true,
+        "background_image": "shopify://shop_images/Escalade-V-01_1.png",
+        "eyebrow": "QUESTIONS ABOUT YOUR SETUP?",
+        "heading": "CONTACT A WHEEL SPECIALIST",
+        "description": "Get expert advice on fitment, finishes, and configuration.",
+        "button_label": "GET IN TOUCH",
+        "button_link": ""
       }
     },
     "1645029375ffdfc4ec": {
       "type": "index-recently-viewed-items",
+      "disabled": true,
       "settings": {
+        "section_animation": true,
+        "limit": 8,
+        "heading_alignment": "center",
+        "heading": "Recently Viewed Products",
+        "subtitle": "",
         "section_width": "global",
         "container_max_width": 1178,
         "spacing_sections": 100,
@@ -56,15 +73,33 @@
         "spacing_padding_sections_mobile": 70,
         "use_global_mobile_space_padding": true,
         "background": false,
-        "limit": 8,
-        "heading_alignment": "center",
-        "heading": "Recently Viewed Products",
-        "subtitle": ""
+        "background_preset": "none",
+        "background_behavior": "bg-cover",
+        "background_image_placeholder_type": "color_global_secondary_bg",
+        "background_image_placeholder": "",
+        "section_decoration_top": "none",
+        "section_decoration_top_color_type": "color_global_primary_bg",
+        "section_decoration_top_color": "",
+        "section_decoration_bottom": "none",
+        "section_decoration_bottom_color_type": "color_global_primary_bg",
+        "section_decoration_bottom_color": ""
+      }
+    },
+    "index_negative_space_aaWJFh": {
+      "type": "index-negative-space",
+      "name": "Negative space for footer",
+      "settings": {
+        "spacing_sections": 0,
+        "use_global_desktop_space": true,
+        "spacing_sections_mobile": 0,
+        "use_global_mobile_space": true
       }
     }
   },
   "order": [
     "cart-items",
-    "1645029375ffdfc4ec"
+    "calder-specialist",
+    "1645029375ffdfc4ec",
+    "index_negative_space_aaWJFh"
   ]
 }

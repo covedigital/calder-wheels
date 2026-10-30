@@ -21,13 +21,11 @@ function moveQtyNode() {
 			desktopContainer = el.querySelector('[data-node-desktop]');
 		if (window.matchMedia('(max-width:575px)').matches) {
 			if(mobileContainer && !mobileContainer.innerHTML.trim().length) {
-				mobileContainer.insertAdjacentHTML('afterbegin', desktopContainer.innerHTML);
-				desktopContainer.innerHTML = ''
+				mobileContainer.append(...Array.from(desktopContainer.childNodes));
 			}
 		} else {
 			if(desktopContainer && !desktopContainer.innerHTML.trim().length){
-				desktopContainer.insertAdjacentHTML('afterbegin', mobileContainer.innerHTML);
-				mobileContainer.innerHTML = ''
+				desktopContainer.append(...Array.from(mobileContainer.childNodes));
 			}
 		}
 	})
@@ -54,3 +52,12 @@ window.addEventListener('resize', function(){
 	if (pageNoteCheckbox) replaceTitle(document.querySelector('.js-cart-page-note-checkbox'));
 	moveQtyNode()
 })
+/* Calder: preserve theme cart handlers; add pending-state feedback. */
+document.addEventListener('change', function(event) {
+  const row = event.target.closest('.calder-cart-item');
+  if (row && event.target.matches('input[name="updates[]"]')) row.classList.add('is-updating');
+});
+document.addEventListener('click', function(event) {
+  const control = event.target.closest('.calder-cart-item .prd-quantity-btn, .calder-cart-item .cart-table-prd-remove');
+  if (control) control.closest('.calder-cart-item')?.classList.add('is-updating');
+});

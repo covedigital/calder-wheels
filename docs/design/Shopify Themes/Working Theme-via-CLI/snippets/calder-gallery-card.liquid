@@ -1,0 +1,7 @@
+{% comment %}Card attributes are individually escaped. dataset_attrs is retained for backwards compatibility only.{% endcomment %}
+<a class="calder-gallery-grid__item" href="{{ url | default: '#' | escape }}" data-make="{{ make | escape }}" data-model="{{ model | escape }}" data-wheel="{{ wheel | escape }}" data-series="{{ series | escape }}" data-finish="{{ finish | escape }}" data-construction="{{ construction | escape }}" data-size="{{ size | escape }}" data-bolt="{{ bolt | escape }}" data-style="{{ style | escape }}" aria-label="View {{ heading | escape }}">
+  <div class="calder-gallery-grid__image-wrap">
+    {% if image != blank %}<img class="calder-gallery-grid__image" src="{{ image | image_url: width: 850 }}" srcset="{{ image | image_url: width: 400 }} 400w, {{ image | image_url: width: 850 }} 850w" sizes="(max-width: 749px) 50vw, 25vw" loading="lazy" alt="{{ heading | escape }}" width="850" height="850">{% else %}<div class="calder-gallery-grid__placeholder">CALDER</div>{% endif %}
+    <div class="calder-gallery-grid__info"><div class="calder-gallery-grid__title">{{ heading | escape }}</div><div class="calder-gallery-grid__sub">{{ series | escape }}{% if series != blank %} SERIES{% endif %}</div><div class="calder-gallery-grid__sub">{{ finish | escape }}</div><span class="calder-gallery-grid__arrow" aria-hidden="true">→</span></div>
+  </div>
+</a>

@@ -1,0 +1,636 @@
+/* ── CALDER GALLERY DETAIL ── */
+/* Vehicle Build detail page */
+
+/* ── Layout ── */
+.calder-gallery-detail {
+  max-width: 1178px;
+  margin: 0 auto;
+}
+
+/* ── Breadcrumbs ── */
+.calder-detail-breadcrumbs {
+  padding: 24px 0 0;
+}
+
+.calder-detail-breadcrumbs__link {
+  font-size: 0.78rem;
+  color: var(--custom-color, #c2a48a);
+  text-decoration: none;
+  letter-spacing: 0.3px;
+  transition: opacity 0.2s;
+}
+
+.calder-detail-breadcrumbs__link:hover {
+  opacity: 0.75;
+}
+
+/* ── Hero ── */
+.calder-detail-hero {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  margin: 32px 0 0;
+  border-radius: 6px;
+  overflow: hidden;
+  min-height: 480px;
+  background: var(--body-bg-secondary, #1a1a1a);
+}
+
+.calder-detail-hero__image-wrap {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 3 / 2;
+  min-height: 480px;
+}
+
+.calder-detail-hero__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.calder-detail-hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(0,0,0,0.55) 0%, transparent 50%, rgba(0,0,0,0.15) 100%);
+  pointer-events: none;
+}
+
+.calder-detail-hero__content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 40px 48px 32px;
+  background: linear-gradient(0deg, rgba(0,0,0,0.7) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.calder-detail-hero__eyebrow {
+  font-size: 0.65rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--custom-color, #c2a48a);
+  margin-bottom: 8px;
+  font-weight: 500;
+  opacity: 0.85;
+}
+
+.calder-detail-hero__vehicle {
+  font-family: var(--headings-font-family);
+  font-size: 2.2rem;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+  line-height: 1.08;
+  color: #fff;
+  margin-bottom: 4px;
+}
+
+.calder-detail-hero__trim {
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.7);
+  margin-bottom: 12px;
+  letter-spacing: 0.3px;
+}
+
+.calder-detail-hero__divider {
+  width: 48px;
+  height: 2px;
+  background: var(--custom-color, #c2a48a);
+  margin: 12px 0 16px;
+}
+
+.calder-detail-hero__wheel-model {
+  font-family: var(--headings-font-family);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: #fff;
+  letter-spacing: 0.5px;
+  margin-bottom: 2px;
+}
+
+.calder-detail-hero__wheel-series {
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.65);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  margin-bottom: 10px;
+}
+
+.calder-detail-hero__specs {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.calder-detail-hero__spec {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: rgba(255,255,255,0.8);
+  letter-spacing: 0.5px;
+}
+
+.calder-detail-hero__spec-sep {
+  font-size: 0.7rem;
+  color: var(--custom-color, #c2a48a);
+  opacity: 0.6;
+}
+
+@media (max-width: 768px) {
+  .calder-detail-hero__content {
+    padding: 24px 28px 20px;
+  }
+  .calder-detail-hero__vehicle {
+    font-size: 1.4rem;
+  }
+  .calder-detail-hero__wheel-model {
+    font-size: 0.95rem;
+  }
+  .calder-detail-hero__eyebrow {
+    font-size: 0.6rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .calder-detail-hero__overlay {
+    background: linear-gradient(0deg, rgba(0,0,0,0.8) 0%, transparent 60%);
+  }
+}
+
+@media (min-width: 1025px) {
+  .calder-detail-hero {
+    max-height: 640px;
+  }
+}
+
+/* ── Build Overview ── */
+.calder-detail-overview {
+  margin: 40px 0;
+  padding: 32px;
+  border: 1px solid var(--decor-border-color, rgba(255,255,255,0.08));
+  border-radius: 6px;
+  background: var(--body-bg-secondary, #1a1a1a);
+}
+
+.calder-detail-overview__heading {
+  font-family: var(--headings-font-family);
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--heading-color);
+  letter-spacing: 0.5px;
+  margin-bottom: 20px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--decor-border-color, rgba(255,255,255,0.08));
+}
+
+.calder-detail-overview__list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin: 0;
+}
+
+.calder-detail-overview__item {
+  display: flex;
+  flex-direction: column;
+}
+
+.calder-detail-overview__label {
+  font-size: 0.68rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text-color);
+  opacity: 0.6;
+  margin-bottom: 4px;
+}
+
+.calder-detail-overview__value {
+  font-family: var(--headings-font-family);
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--heading-color);
+}
+
+@media (max-width: 640px) {
+  .calder-detail-overview {
+    padding: 20px;
+  }
+  .calder-detail-overview__list {
+    grid-template-columns: 1fr;
+  }
+  .calder-detail-overview__heading {
+    font-size: 1.1rem;
+  }
+}
+
+/* ── Image Gallery ── */
+.calder-detail-gallery {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  margin: 0 0 40px;
+}
+
+.calder-detail-gallery--single {
+  margin: 0 0 24px;
+}
+
+.calder-detail-gallery__featured {
+  border-radius: 6px;
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+}
+
+.calder-detail-gallery__img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: opacity 0.3s;
+}
+
+.calder-detail-gallery__img--featured:hover {
+  opacity: 0.97;
+}
+
+.calder-detail-gallery__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.calder-detail-gallery__grid-item {
+  border-radius: 4px;
+  overflow: hidden;
+  cursor: pointer;
+  aspect-ratio: 3 / 2;
+}
+
+.calder-detail-gallery__grid-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.3s;
+}
+
+.calder-detail-gallery__grid-item img:hover {
+  opacity: 0.95;
+}
+
+@media (max-width: 768px) {
+  .calder-detail-gallery__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .calder-detail-gallery__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── Lightbox ── */
+.calder-detail-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background: rgba(0,0,0,0.92);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.calder-detail-lightbox--open {
+  display: flex;
+}
+
+.calder-detail-lightbox__close {
+  position: absolute;
+  top: 20px;
+  right: 24px;
+  width: 44px;
+  height: 44px;
+  background: transparent;
+  border: none;
+  font-size: 2rem;
+  color: #fff;
+  cursor: pointer;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s;
+}
+
+.calder-detail-lightbox__close:hover {
+  opacity: 0.7;
+}
+
+.calder-detail-lightbox__prev,
+.calder-detail-lightbox__next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 52px;
+  height: 52px;
+  background: transparent;
+  border: none;
+  font-size: 2.4rem;
+  color: #fff;
+  cursor: pointer;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s;
+}
+
+.calder-detail-lightbox__prev {
+  left: 16px;
+}
+
+.calder-detail-lightbox__next {
+  right: 16px;
+}
+
+.calder-detail-lightbox__prev:hover,
+.calder-detail-lightbox__next:hover {
+  opacity: 0.7;
+}
+
+.calder-detail-lightbox__image-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 60px 80px;
+}
+
+.calder-detail-lightbox__image {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  box-shadow: 0 4px 32px rgba(0,0,0,0.3);
+  border-radius: 2px;
+}
+
+.calder-detail-lightbox__counter {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.6);
+  letter-spacing: 0.5px;
+}
+
+.calder-detail-lightbox__nav--hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+@media (max-width: 768px) {
+  .calder-detail-lightbox__image-wrap {
+    padding: 50px 16px;
+  }
+  .calder-detail-lightbox__prev,
+  .calder-detail-lightbox__next {
+    width: 40px;
+    height: 40px;
+    font-size: 1.6rem;
+  }
+  .calder-detail-lightbox__close {
+    top: 12px;
+    right: 14px;
+  }
+}
+
+/* ── Specifications Shared ── */
+.calder-detail-specs {
+  margin: 0 0 32px;
+  padding: 28px 32px;
+  border: 1px solid var(--decor-border-color, rgba(255,255,255,0.08));
+  border-radius: 6px;
+  background: var(--body-bg-secondary, #1a1a1a);
+}
+
+.calder-detail-specs__heading {
+  font-family: var(--headings-font-family);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--heading-color);
+  letter-spacing: 0.5px;
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--decor-border-color, rgba(255,255,255,0.08));
+}
+
+.calder-detail-specs__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px 24px;
+}
+
+.calder-detail-specs__item {
+  display: flex;
+  flex-direction: column;
+}
+
+.calder-detail-specs__label {
+  font-size: 0.68rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text-color);
+  opacity: 0.55;
+  margin-bottom: 2px;
+}
+
+.calder-detail-specs__value {
+  font-family: var(--headings-font-family);
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--heading-color);
+}
+
+.calder-detail-specs__notes {
+  font-size: 0.9rem;
+  color: var(--text-color);
+  line-height: 1.5;
+  opacity: 0.75;
+}
+
+@media (max-width: 640px) {
+  .calder-detail-specs {
+    padding: 20px;
+  }
+  .calder-detail-specs__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── CTA Section ── */
+.calder-detail-cta {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin: 0 0 40px;
+  padding: 36px 0;
+  border-top: 1px solid var(--decor-border-color, rgba(255,255,255,0.08));
+  border-bottom: 1px solid var(--decor-border-color, rgba(255,255,255,0.08));
+}
+
+.calder-detail-cta__primary,
+.calder-detail-cta__secondary {
+  text-align: center;
+  padding: 28px 16px;
+  border-radius: 6px;
+  transition: background 0.2s;
+}
+
+.calder-detail-cta__primary {
+  background: rgba(194, 164, 138, 0.06);
+}
+
+.calder-detail-cta__secondary {
+  background: rgba(255,255,255,0.03);
+}
+
+.calder-detail-cta__btn {
+  display: inline-block;
+  padding: 14px 40px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border-radius: 4px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: opacity 0.2s, background 0.2s, color 0.2s;
+}
+
+.calder-detail-cta__btn--primary {
+  color: #181208;
+  background: var(--custom-color, #c2a48a);
+  border: none;
+}
+
+.calder-detail-cta__btn--primary:hover {
+  opacity: 0.85;
+}
+
+.calder-detail-cta__btn--secondary {
+  color: var(--heading-color);
+  background: transparent;
+  border: 1px solid var(--decor-border-color, rgba(255,255,255,0.2));
+}
+
+.calder-detail-cta__btn--secondary:hover {
+  border-color: var(--custom-color, #c2a48a);
+  color: var(--custom-color, #c2a48a);
+}
+
+.calder-detail-cta__label {
+  font-size: 0.72rem;
+  color: var(--text-color);
+  opacity: 0.6;
+  margin-top: 12px;
+  letter-spacing: 0.3px;
+}
+
+@media (max-width: 768px) {
+  .calder-detail-cta {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 24px 0;
+  }
+  .calder-detail-cta__btn {
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* ── Related Builds ── */
+.calder-detail-related {
+  margin: 0 0 40px;
+}
+
+.calder-detail-related__heading {
+  font-family: var(--headings-font-family);
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--heading-color);
+  margin-bottom: 24px;
+  letter-spacing: 0.5px;
+}
+
+/* ── Wheel Specialist CTA ── */
+.calder-detail-specialist {
+  text-align: center;
+  padding: 48px 20px;
+  margin: 0 0 40px;
+  border-radius: 6px;
+  background: var(--body-bg-secondary, #1a1a1a);
+}
+
+.calder-detail-specialist__inner {
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+.calder-detail-specialist__heading {
+  font-family: var(--headings-font-family);
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--heading-color);
+  margin-bottom: 12px;
+}
+
+.calder-detail-specialist__text {
+  font-size: 0.9rem;
+  color: var(--text-color);
+  opacity: 0.7;
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+.calder-detail-specialist__btn {
+  display: inline-block;
+  padding: 12px 36px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #181208;
+  background: var(--custom-color, #c2a48a);
+  border-radius: 4px;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.calder-detail-specialist__btn:hover {
+  opacity: 0.85;
+}
+
+/* ── Responsive hero adjustments ── */
+@media (max-width: 576px) {
+  .calder-detail-hero__image-wrap {
+    min-height: 320px;
+  }
+}
+
+@media (max-width: 390px) {
+  .calder-detail-hero__image-wrap {
+    min-height: 260px;
+  }
+  .calder-detail-hero__vehicle {
+    font-size: 1.15rem;
+  }
+  .calder-detail-hero__content {
+    padding: 16px 16px 14px;
+  }
+}

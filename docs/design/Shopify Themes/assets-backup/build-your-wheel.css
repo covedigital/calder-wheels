@@ -1,0 +1,1332 @@
+/* ============================================================
+   CALDER STANDALONE BUILDER — CW-109-020-V2
+   Scoped to .calder-builder-page namespace
+   ============================================================ */
+
+/* ── 01. Page Root ── */
+
+.calder-builder-page {
+  --cbp-container: 1178px;
+  --cbp-hero-min-height: 390px;
+  --cbp-card-overlap: 40px;
+  --cbp-card-radius: 10px;
+  --cbp-section-space: 75px;
+  --cbp-grid-gap: 22px;
+}
+
+/* ── 02. Hero ── */
+
+.cbp-hero {
+  position: relative;
+  min-height: var(--cbp-hero-min-height);
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background: var(--calder-dark-bg, #0A0A0A);
+}
+
+.cbp-hero__bg {
+  position: absolute;
+  inset: 0;
+  background-position: center;
+  background-size: cover;
+  z-index: 0;
+}
+
+.cbp-hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, var(--calder-dark-bg, #0A0A0A) 0%, var(--calder-dark-bg, #0A0A0A) 35%, transparent 100%);
+  z-index: 1;
+}
+
+.cbp-hero__body {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  padding: 60px 20px;
+}
+
+.cbp-hero__inner {
+  max-width: 580px;
+}
+
+.cbp-hero__eyebrow {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--calder-gold, #C2A48A);
+  margin-bottom: 12px;
+}
+
+.cbp-hero__heading {
+  font-family: var(--heading-font-family, serif);
+  font-size: 56px;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.05;
+  margin: 0 0 16px;
+}
+
+.cbp-hero__text {
+  font-size: 15px;
+  color: rgba(255,255,255,0.75);
+  max-width: 450px;
+  line-height: 1.6;
+  margin: 0 0 28px;
+}
+
+.cbp-hero__benefits {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cbp-hero__benefit {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+}
+
+.cbp-hero__benefit-icon {
+  color: var(--calder-gold, #C2A48A);
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.cbp-hero__benefit-label {
+  font-size: 12px;
+  color: rgba(255,255,255,0.8);
+  line-height: 1.3;
+}
+
+.cbp-hero__benefit-label strong {
+  display: block;
+  color: #fff;
+  font-weight: 700;
+}
+
+.cbp-hero__benefit-divider {
+  width: 1px;
+  height: 32px;
+  background: rgba(255,255,255,0.15);
+  flex-shrink: 0;
+}
+
+/* ── 03. Configurator Card ── */
+
+.cbp-config {
+  padding-bottom: 0;
+}
+
+.cbp-config__card {
+  position: relative;
+  margin-top: calc(var(--cbp-card-overlap) * -1);
+  z-index: 3;
+  background: var(--calder-cream, #F2EFE9);
+  border-radius: var(--cbp-card-radius);
+  box-shadow: 0 4px 30px rgba(0,0,0,0.08);
+  padding: 40px 36px 32px;
+  margin-bottom: var(--cbp-section-space);
+}
+
+.cbp-config__header {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.cbp-config__eyebrow {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--calder-gold, #C2A48A);
+  margin-bottom: 8px;
+}
+
+.cbp-config__heading {
+  font-family: var(--heading-font-family, serif);
+  font-size: 40px;
+  font-weight: 700;
+  color: var(--calder-navy, #0E2A3E);
+  line-height: 1.08;
+  margin: 0 0 10px;
+}
+
+.cbp-config__subtitle {
+  font-size: 14px;
+  color: var(--calder-muted, #727D87);
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+/* ── Wheel Design Selector ── */
+
+.cbp-config__designs {
+  margin-bottom: 24px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+
+.cbp-config__designs-label {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: var(--calder-navy, #0E2A3E);
+  margin-bottom: 10px;
+}
+
+.cbp-config__design-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.cbp-config__design-chip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px 6px 6px;
+  border: 1.5px solid rgba(0,0,0,0.08);
+  border-radius: 6px;
+  background: #fff;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--calder-navy, #0E2A3E);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.cbp-config__design-chip:hover {
+  border-color: var(--calder-gold, #C2A48A);
+}
+
+.cbp-config__design-chip img {
+  width: 36px;
+  height: 36px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.cbp-config__design-chip--selected {
+  border-color: var(--calder-gold, #C2A48A);
+  box-shadow: 0 0 0 1.5px var(--calder-gold, #C2A48A);
+}
+
+/* ── 04. Three-Column Layout ── */
+
+.cbp-config__layout {
+  display: grid;
+  grid-template-columns: 44fr 29fr 27fr;
+  gap: var(--cbp-grid-gap);
+  align-items: start;
+}
+
+.cbp-config__col {
+  min-width: 0;
+}
+
+.cbp-config__col--preview {
+
+}
+
+.cbp-config__col--preview .wheel-configurator__canvas {
+  aspect-ratio: 1;
+  max-height: 520px;
+  background: #e8e6e0;
+  border-radius: 8px;
+}
+
+.cbp-config__col--preview .wheel-configurator__preview-layers--zoomed {
+  transform: scale(1.8);
+  cursor: zoom-out;
+}
+
+.cbp-config__preview-actions {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 12px;
+}
+
+.cbp-config__preview-action {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 16px;
+  background: rgba(255,255,255,0.85);
+  border: 1px solid rgba(0,0,0,0.1);
+  border-radius: 5px;
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--calder-navy, #0E2A3E);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.cbp-config__preview-action:hover {
+  background: #fff;
+}
+
+.cbp-config__preview-action--active {
+  background: var(--calder-navy, #0E2A3E);
+  color: #fff;
+  border-color: var(--calder-navy, #0E2A3E);
+}
+
+/* ── 05. Finish Controls ── */
+
+.cbp-config__finish-group {
+  margin-bottom: 20px;
+  background: #fff;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.cbp-config__finish-heading {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.cbp-config__badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--calder-gold, #C2A48A);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.cbp-config__finish-titles {
+  flex: 1;
+  min-width: 0;
+}
+
+.cbp-config__finish-label {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--calder-navy, #0E2A3E);
+  margin: 0 0 2px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.cbp-config__finish-desc {
+  font-size: 11px;
+  color: var(--calder-muted, #727D87);
+  margin: 0;
+}
+
+.cbp-config .wheel-configurator__options {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+.cbp-config .wheel-configurator__option {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+  border-radius: 6px;
+  border: 1.5px solid rgba(0,0,0,0.08);
+  background: #f8f8f6;
+  cursor: pointer;
+  overflow: hidden;
+  transition: border-color 0.15s, transform 0.12s;
+}
+
+.cbp-config .wheel-configurator__option:hover {
+  transform: scale(1.06);
+  border-color: var(--calder-gold, #C2A48A);
+}
+
+.cbp-config .wheel-configurator__option--selected {
+  border-color: var(--calder-gold, #C2A48A);
+  box-shadow: 0 0 0 2px var(--calder-gold, #C2A48A);
+}
+
+.cbp-config .wheel-configurator__option--unavailable {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.cbp-config .wheel-configurator__option-label {
+  font-size: 9px;
+  padding: 2px;
+}
+
+/* ── 06. Configuration Summary ── */
+
+.cbp-config__col--summary {
+  min-width: 0;
+  position: sticky;
+  top: 100px;
+}
+
+.cbp-config__summary-panel {
+  background: #fff;
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.cbp-config__summary-panel[style*="display: flex"] {
+  display: block !important;
+}
+
+.cbp-config__summary-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.cbp-config__summary-title {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: var(--calder-gold, #C2A48A);
+}
+
+.cbp-config__reset-btn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: transparent;
+  border: none;
+  font-family: inherit;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--calder-muted, #727D87);
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 3px;
+  transition: color 0.2s;
+}
+
+.cbp-config__reset-btn:hover {
+  color: var(--calder-navy, #0E2A3E);
+}
+
+.cbp-config__summary-rows {
+  margin-bottom: 14px;
+}
+
+.cbp-config__summary-row {
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(0,0,0,0.04);
+}
+
+.cbp-config__summary-row:last-child {
+  border-bottom: none;
+}
+
+.cbp-config__summary-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.cbp-config__summary-name {
+  font-size: 12px;
+  color: var(--calder-muted, #727D87);
+}
+
+.cbp-config__summary-info strong {
+  font-size: 12px;
+  color: var(--calder-navy, #0E2A3E);
+}
+
+.cbp-config__summary-price {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-top: 2px solid var(--calder-navy, #0E2A3E);
+  margin-bottom: 16px;
+}
+
+.cbp-config__price-label {
+  font-size: 12px;
+  color: var(--calder-muted, #727D87);
+}
+
+.cbp-config__summary-price strong {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--calder-navy, #0E2A3E);
+}
+
+.cbp-config__add-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  height: 48px;
+  background: linear-gradient(135deg, #D5A35C, #E7BD7A);
+  border: none;
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--calder-ink, #231F20);
+  cursor: pointer;
+  transition: opacity 0.2s;
+  margin-bottom: 10px;
+}
+
+.cbp-config__add-btn:hover {
+  opacity: 0.9;
+}
+
+.cbp-config__add-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.cbp-config__save-share {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.cbp-config__save-btn,
+.cbp-config__share-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 40px;
+  background: rgba(255,255,255,0.8);
+  border: 1px solid var(--calder-navy, #0E2A3E);
+  border-radius: 4px;
+  color: var(--calder-navy, #0E2A3E);
+  font-family: inherit;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.cbp-config__save-btn:hover,
+.cbp-config__share-btn:hover {
+  background: var(--calder-navy, #0E2A3E);
+  color: #fff;
+}
+
+.cbp-config__or-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.cbp-config__or-line {
+  flex: 1;
+  height: 1px;
+  background: rgba(0,0,0,0.08);
+}
+
+.cbp-config__or-text {
+  font-size: 11px;
+  color: var(--calder-muted, #727D87);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.cbp-config__quote-btn {
+  width: 100%;
+  height: 44px;
+  background: transparent;
+  border: 1.5px solid var(--calder-gold, #C2A48A);
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--calder-gold, #C2A48A);
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  margin-bottom: 14px;
+}
+
+.cbp-config__quote-btn:hover {
+  background: var(--calder-gold, #C2A48A);
+  color: var(--calder-ink, #231F20);
+}
+
+.cbp-config__quote-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.cbp-config__bto-notice {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  background: rgba(85,184,106,0.08);
+  border: 1px solid rgba(85,184,106,0.15);
+  border-radius: 6px;
+  color: #3a8a4d;
+}
+
+.cbp-config__bto-notice svg {
+  flex-shrink: 0;
+}
+
+.cbp-config__bto-notice strong {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--calder-navy, #0E2A3E);
+  line-height: 1.3;
+}
+
+.cbp-config__bto-notice span {
+  font-size: 11px;
+  color: var(--calder-muted, #727D87);
+}
+
+.cbp-config__empty {
+  text-align: center;
+  padding: 80px 20px;
+  color: var(--calder-muted, #727D87);
+  font-size: 15px;
+}
+
+/* ── 07. Why Customize ── */
+
+.cbp-benefits {
+  padding: var(--cbp-section-space) 0;
+  background: var(--calder-cream, #F2EFE9);
+}
+
+.cbp-benefits__header {
+  text-align: center;
+  margin-bottom: 44px;
+}
+
+.cbp-benefits__eyebrow {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--calder-gold, #C2A48A);
+  margin-bottom: 10px;
+}
+
+.cbp-benefits__heading {
+  font-family: var(--heading-font-family, serif);
+  font-size: 34px;
+  font-weight: 700;
+  color: var(--calder-navy, #0E2A3E);
+  line-height: 1.1;
+  margin: 0 0 12px;
+}
+
+.cbp-benefits__text {
+  font-size: 14px;
+  color: var(--calder-muted, #727D87);
+  max-width: 540px;
+  margin: 0 auto;
+}
+
+.cbp-benefits__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+}
+
+.cbp-benefits__card {
+  text-align: center;
+  padding: 20px 8px;
+  position: relative;
+}
+
+.cbp-benefits__card + .cbp-benefits__card::before {
+  content: '';
+  position: absolute;
+  left: -16px;
+  top: 20px;
+  bottom: 20px;
+  width: 1px;
+  background: rgba(0,0,0,0.06);
+}
+
+.cbp-benefits__icon {
+  color: var(--calder-navy, #0E2A3E);
+  margin-bottom: 16px;
+  display: flex;
+  justify-content: center;
+}
+
+.cbp-benefits__card-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--calder-navy, #0E2A3E);
+  margin: 0 0 8px;
+}
+
+.cbp-benefits__card-text {
+  font-size: 13px;
+  color: var(--calder-muted, #727D87);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* ── 08. Fitment CTA ── */
+
+.cbp-fitment {
+  position: relative;
+  min-height: 280px;
+  display: flex;
+  align-items: center;
+  background: var(--calder-dark-bg, #0A0A0A);
+  background-position: center;
+  background-size: cover;
+  overflow: hidden;
+}
+
+.cbp-fitment__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, var(--calder-navy-dark, #02131E) 0%, var(--calder-navy-dark, #02131E) 40%, transparent 100%);
+  z-index: 1;
+}
+
+.cbp-fitment__body {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  padding: 50px 20px;
+}
+
+.cbp-fitment__content {
+  max-width: 520px;
+}
+
+.cbp-fitment__eyebrow {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--calder-gold, #C2A48A);
+  margin-bottom: 10px;
+}
+
+.cbp-fitment__heading {
+  font-family: var(--heading-font-family, serif);
+  font-size: 32px;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.1;
+  margin: 0 0 12px;
+}
+
+.cbp-fitment__text {
+  font-size: 14px;
+  color: rgba(255,255,255,0.7);
+  line-height: 1.6;
+  margin: 0 0 24px;
+}
+
+.cbp-fitment__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 28px;
+  background: linear-gradient(135deg, #D5A35C, #E7BD7A);
+  border: none;
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--calder-ink, #231F20);
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.cbp-fitment__btn:hover {
+  opacity: 0.9;
+}
+
+/* ── 09. Popular Configurations ── */
+
+.cbp-popular {
+  padding: var(--cbp-section-space) 0;
+  background: var(--calder-cream, #F2EFE9);
+}
+
+.cbp-popular__header {
+  text-align: center;
+  margin-bottom: 36px;
+}
+
+.cbp-popular__eyebrow {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--calder-gold, #C2A48A);
+  margin-bottom: 10px;
+}
+
+.cbp-popular__heading {
+  font-family: var(--heading-font-family, serif);
+  font-size: 34px;
+  font-weight: 700;
+  color: var(--calder-navy, #0E2A3E);
+  line-height: 1.1;
+  margin: 0 0 10px;
+}
+
+.cbp-popular__subtitle {
+  font-size: 14px;
+  color: var(--calder-muted, #727D87);
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.cbp-popular__carousel {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.cbp-popular__track {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  flex: 1;
+  overflow: hidden;
+}
+
+.cbp-popular__card {
+  background: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.cbp-popular__card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 24px rgba(0,0,0,0.08);
+}
+
+.cbp-popular__card-img {
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 6px;
+  overflow: hidden;
+  margin-bottom: 14px;
+  background: #f0efeb;
+}
+
+.cbp-popular__card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cbp-popular__card-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  color: rgba(0,0,0,0.12);
+}
+
+.cbp-popular__card-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--calder-navy, #0E2A3E);
+  margin: 0 0 8px;
+}
+
+.cbp-popular__card-specs {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-bottom: 14px;
+}
+
+.cbp-popular__card-specs span {
+  font-size: 11px;
+  color: var(--calder-muted, #727D87);
+}
+
+.cbp-popular__card-cta {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--calder-gold, #C2A48A);
+  text-decoration: none;
+  padding: 8px 16px;
+  border: 1.5px solid var(--calder-gold, #C2A48A);
+  border-radius: 5px;
+  transition: background 0.2s, color 0.2s;
+}
+
+.cbp-popular__card-cta:hover {
+  background: var(--calder-gold, #C2A48A);
+  color: var(--calder-ink, #231F20);
+}
+
+.cbp-popular__arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #fff;
+  border: 1px solid rgba(0,0,0,0.08);
+  color: var(--calder-navy, #0E2A3E);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+.cbp-popular__arrow:hover {
+  background: var(--calder-cream, #F2EFE9);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.cbp-popular__dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.cbp-popular__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.12);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.2s;
+}
+
+.cbp-popular__dot--active {
+  background: var(--calder-gold, #C2A48A);
+}
+
+.cbp-popular__empty {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 30px;
+  color: var(--calder-muted, #727D87);
+  font-size: 13px;
+}
+
+/* ── 10. Specialist CTA ── */
+
+.cbp-specialist {
+  position: relative;
+  min-height: 250px;
+  display: flex;
+  align-items: center;
+  background: var(--calder-dark-bg, #0A0A0A);
+  background-position: center;
+  background-size: cover;
+  overflow: hidden;
+}
+
+.cbp-specialist__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, var(--calder-navy-dark, #02131E) 0%, rgba(2,19,30,0.6) 100%);
+  z-index: 1;
+}
+
+.cbp-specialist__body {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  padding: 50px 20px;
+}
+
+.cbp-specialist__content {
+  text-align: center;
+  max-width: 620px;
+  margin: 0 auto;
+}
+
+.cbp-specialist__eyebrow {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--calder-gold, #C2A48A);
+  margin-bottom: 10px;
+}
+
+.cbp-specialist__heading {
+  font-family: var(--heading-font-family, serif);
+  font-size: 32px;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.1;
+  margin: 0 0 12px;
+}
+
+.cbp-specialist__text {
+  font-size: 14px;
+  color: rgba(255,255,255,0.7);
+  line-height: 1.6;
+  margin: 0 0 28px;
+}
+
+.cbp-specialist__actions {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+}
+
+.cbp-specialist__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 32px;
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: opacity 0.2s, background 0.2s;
+}
+
+.cbp-specialist__btn--primary {
+  background: linear-gradient(135deg, #D5A35C, #E7BD7A);
+  border: none;
+  color: var(--calder-ink, #231F20);
+}
+
+.cbp-specialist__btn--primary:hover {
+  opacity: 0.9;
+}
+
+.cbp-specialist__btn--outline {
+  background: transparent;
+  border: 1.5px solid rgba(255,255,255,0.4);
+  color: #fff;
+}
+
+.cbp-specialist__btn--outline:hover {
+  border-color: #fff;
+  background: rgba(255,255,255,0.05);
+}
+
+/* ── 11. Responsive: Laptop (1024–1439px) ── */
+
+@media (max-width: 1279px) {
+  .cbp-config__layout {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .cbp-config__col--summary {
+    grid-column: 1 / -1;
+    position: static;
+  }
+
+  .cbp-config__summary-panel {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .cbp-benefits__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+
+  .cbp-benefits__card:nth-child(2)::before {
+    display: none;
+  }
+
+  .cbp-benefits__card:nth-child(3)::before {
+    display: none;
+  }
+
+  .cbp-popular__track {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ── 12. Responsive: Tablet (768–1023px) ── */
+
+@media (max-width: 1023px) {
+  .cbp-hero {
+    min-height: 300px;
+  }
+
+  .cbp-hero__heading {
+    font-size: 38px;
+  }
+
+  .cbp-hero__benefits {
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+
+  .cbp-hero__benefit-divider {
+    display: none;
+  }
+
+  .cbp-hero__benefit {
+    padding: 4px 10px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 4px;
+  }
+
+  .cbp-config__card {
+    padding: 24px 20px 20px;
+  }
+
+  .cbp-config__heading {
+    font-size: 30px;
+  }
+
+  .cbp-config__layout {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .cbp-config__summary-panel {
+    grid-template-columns: 1fr;
+  }
+
+  .cbp-config .wheel-configurator__options {
+    grid-template-columns: repeat(auto-fill, minmax(56px, 1fr));
+  }
+
+  .cbp-benefits__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .cbp-benefits__card::before {
+    display: none;
+  }
+
+  .cbp-benefits__heading {
+    font-size: 26px;
+  }
+
+  .cbp-fitment {
+    min-height: 220px;
+  }
+
+  .cbp-fitment__heading {
+    font-size: 26px;
+  }
+
+  .cbp-popular__track {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+
+  .cbp-popular__heading {
+    font-size: 26px;
+  }
+
+  .cbp-specialist {
+    min-height: 200px;
+  }
+
+  .cbp-specialist__heading {
+    font-size: 26px;
+  }
+
+  .cbp-specialist__actions {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+/* ── 13. Responsive: Mobile (<768px) ── */
+
+@media (max-width: 767px) {
+  .cbp-hero {
+    min-height: 260px;
+  }
+
+  .cbp-hero__body {
+    padding: 40px 16px;
+  }
+
+  .cbp-hero__heading {
+    font-size: 30px;
+  }
+
+  .cbp-hero__text {
+    font-size: 13px;
+    margin-bottom: 20px;
+  }
+
+  .cbp-hero__benefits {
+    gap: 6px;
+  }
+
+  .cbp-hero__benefit {
+    padding: 4px 8px;
+  }
+
+  .cbp-hero__overlay {
+    background: linear-gradient(180deg, var(--calder-dark-bg, #0A0A0A) 0%, rgba(10,10,10,0.5) 100%);
+  }
+
+  .cbp-config__card {
+    margin-top: -20px;
+    padding: 20px 14px 16px;
+    border-radius: 0;
+  }
+
+  .cbp-config__heading {
+    font-size: 24px;
+  }
+
+  .cbp-config__subtitle {
+    font-size: 12px;
+  }
+
+  .cbp-config__design-row {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 4px;
+  }
+
+  .cbp-config__design-chip {
+    flex-shrink: 0;
+  }
+
+  .cbp-config__col--preview .wheel-configurator__canvas {
+    max-height: 340px;
+  }
+
+  .cbp-config .wheel-configurator__options {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+  }
+
+  .cbp-config__save-share {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .cbp-benefits {
+    padding: 50px 0;
+  }
+
+  .cbp-benefits__grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .cbp-benefits__heading {
+    font-size: 22px;
+  }
+
+  .cbp-fitment {
+    min-height: 180px;
+  }
+
+  .cbp-fitment__body {
+    padding: 30px 16px;
+  }
+
+  .cbp-fitment__heading {
+    font-size: 22px;
+  }
+
+  .cbp-popular {
+    padding: 50px 0;
+  }
+
+  .cbp-popular__track {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .cbp-popular__arrow {
+    display: none;
+  }
+
+  .cbp-popular__heading {
+    font-size: 22px;
+  }
+
+  .cbp-specialist {
+    min-height: 180px;
+  }
+
+  .cbp-specialist__body {
+    padding: 30px 16px;
+  }
+
+  .cbp-specialist__heading {
+    font-size: 22px;
+  }
+
+  .cbp-specialist__actions {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .cbp-specialist__btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* ── 14. Small Mobile (<390px) ── */
+
+@media (max-width: 389px) {
+  .cbp-hero__heading {
+    font-size: 26px;
+  }
+
+  .cbp-benefits__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cbp-popular__track {
+    grid-template-columns: 1fr;
+  }
+}

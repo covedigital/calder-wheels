@@ -538,3 +538,184 @@ EXECUTE
 ### [AGENT] Session Metadata
 - Agent: OpenCode
 - Model: DeepSeek V4 Flash
+
+---
+## [2026-10-29] — Universal PDP Add-to-Cart Fix: registry rebound to LIVE catalog + dashed design-code gates
+
+### [ACTIVITY] Session Mode
+BUILD
+
+### [STATE] Current Status
+Root cause of the non-functional Add to Cart on the universal PDP found and fixed in the repo (not yet deployed). All 6 node test files (57 tests) + configurator python suite (77 tests) pass.
+
+### [COMPLETED] What Was Done
+**Root cause (three stacked failures):**
+1. Registry legacy refs were built against `products_export_10-27-2026.csv` (retired generation: `calder-clb06-range-rover-l460-...` handles + `-BLK/-CHR` SKU suffixes). The LIVE store (client-confirmed this session) is `products_import_10-27-2026.csv`: 96 spec-handle products, 864 variants, SKU == part_number exactly. Every `/products/{handle}.js` fetch 404'd → resolver state ERROR → CTA could never enable.
+2. Live design_code metafield is DASHED (`CLB-06`), but `calder-product.liquid` / `calder-specs.liquid` gates compare against undashed `CLB06` → `is_universal_design=false` → universal experience never rendered on live legacy products.
+3. `calder-universal-controls.liquid` computed the registry filename from the dashed code → `calder-design-registry-clb-06.js` (404; real asset is `...clb06.js`) → resolver never booted → CTA inert.
+
+**Fixes:**
+- `docs/architecture/build_design_registry.py`: cross-reference switched to `products_import_10-27-2026.csv`; exact PN match + row verification (diameter option, center option, handle lip/bolt fragment, design slug); refs now `canonical_source='verified'`; live-import integrity validation is fatal.
+- Regenerated: `calder_design_registry.json`, `calder_part_catalog_912.csv`, 7 theme registry assets. Coverage: **864/912 mapped** (was 756), 48 no_legacy (CLM-01/CLM-05 6x139-03mm-78.1 22"/24" not in live store), 24 no_catalog (26" gap in +03 group), 0 ambiguous.
+- Liquid: `calder-product.liquid`, `calder-specs.liquid` gates normalize via `| remove: '-'`; `calder-universal-controls.liquid` registry filename uses undashed key; `calder-design-url.liquid` accepts dashed codes and deep-links to the product's own LIVE URL + config params (canonical `/products/calder-clb-06` products are NOT in the live store — noted as client dependency).
+- Tests updated to live-catalog truth; new live-store integrity test asserts every mapped cell binds to a real products_import SKU/handle.
+
+### [DECISION] Decisions Made
+- Live-store cross-reference source = products_import_10-27-2026.csv (client-confirmed).
+- Card deep links target the live legacy product URL with config params (not the nonexistent canonical design URL) until universal products are imported.
+- The 48 +03-group parts stay no_legacy → resolver shows NO_SELLABLE_RECORD ("Request Custom Configuration") — matches part catalog `legacy_mapped=False`.
+
+### [IN-PROGRESS] What's Partially Done
+- Theme changes are **not pushed to Shopify** (needs client approval — deploy step pending).
+- Hardcoded placeholder support phone "(305) 555-1234" in `calder-universal-cta.js` NO_STOCK message violates the "never invent contact details" guardrail — left as-is (possibly client-requested copy); needs client confirmation before launch.
+
+### [BLOCKED] What's Waiting
+- Client decision: import universal products (restores 6-canonical-URL model + `-wheel` handles) vs keep legacy URLs.
+- Client decision: 6x139-03mm-78.1 group (CLM-01/CLM-05 22"/24") — import those SKUs or keep "Request Custom Configuration".
+- QuickBooks inventory sync (n8n) still a demo dataset (`calder-demo-inventory.js`).
+
+### [FILES] Files Modified This Session
+- `docs/architecture/build_design_registry.py`
+- `docs/architecture/calder_design_registry.json` + `calder_part_catalog_912.csv` (regenerated)
+- `docs/design/Shopify Themes/Working Theme-via-CLI/assets/calder-design-registry*.js` (7 files, regenerated)
+- `docs/design/Shopify Themes/Working Theme-via-CLI/sections/calder-product.liquid`
+- `docs/design/Shopify Themes/Working Theme-via-CLI/sections/calder-specs.liquid`
+- `docs/design/Shopify Themes/Working Theme-via-CLI/snippets/calder-universal-controls.liquid`
+- `docs/design/Shopify Themes/Working Theme-via-CLI/snippets/calder-design-url.liquid`
+- `docs/architecture/tests/calder-config-resolver.test.mjs`, `calder-universal-cta.test.mjs`, `calder-card-links.test.mjs` (rewritten)
+- `docs/llm-continuity.md` (this entry)
+
+### [BRANCH] Git Context
+- Branch: presentation-polish
+- Uncommitted: this session's changes + prior session's uncommitted work
+
+### [AGENT] Session Metadata
+- Agent: OpenCode (build)
+- Model: DeepSeek V4 Pro
+
+---
+## [2026-10-29 #2] — SKU-first purchase lookup + universal calder-*-wheel import prep
+
+### [ACTIVITY] Session Mode
+BUILD
+
+### [STATE] Current Status
+Purchase resolution is now SKU-first (mismatch-proof): the part_number variant SKU is the single purchase identifier, resolved via the Storefront API with the handle+SKU fetch demoted to fallback. Universal `calder-*-wheel` import file regenerated with the fixes it needed. All 63 node tests + 77 python tests pass. Awaiting client's manual theme push + product import.
+
+### [COMPLETED] What Was Done
+**Identifier strategy (client question: "how to simplify handles / which unique identifier?"):**
+- The part_number variant SKU IS the identifier — already unique and shared with QuickBooks (864/864 verified). Do NOT rename SKUs. Handles are now OUT of the purchase path entirely.
+- Legacy handle renames/reimports can never break Add to Cart again: the resolver looks variants up by SKU alone via Storefront GraphQL `productVariants(query:"sku:<PN>")` when a token is configured; falls back to `/products/{handle}.js` + SKU match otherwise (or on GraphQL failure — never fail-open).
+- Live legacy handles: left as-is (internal sellable records once universal products are live; renaming = 96 redirects for zero customer value).
+
+**Code changes:**
+- `calder-config-resolver.js`: `storefrontSkuProvider` (exported, deps-injectable), `create({storefrontToken})` chains SKU-first → handle fallback. **Fixed latent UMD bug found by the new provider tests:** the factory body never had `root` in scope (browser default provider would have thrown a swallowed ReferenceError on every resolve — a 4th Add-to-Cart blocker). UMD now passes `root` into the factory.
+- `calder-universal-pdp.js` passes `data-storefront-token` into the resolver; `calder-universal-controls.liquid` renders it from new theme setting `calder_storefront_access_token` (added to settings_schema "Calder Wheels — API" group).
+- `calder-universal-cta.js`: placeholder phone "(305) 555-1234" removed from NO_STOCK message (client-confirmed placeholder).
+- `build_design_registry.py`: `canonical_handle` = `calder-{design}-wheel` (matches import); resolution_rule documents SKU-first; regenerated registry + 7 theme assets.
+- `build_universal_products_import.py`: Template suffix `calder` (was missing — universal PDPs would not have rendered), dashed design codes ('CLM-01'), design_nickname=number, `-wheel` handles, output `calder_universal_products_import_10-29-2026.csv` (216 rows verified).
+- `calder-design-url.liquid`: card deep links restored to the six canonical design PDPs (`/products/calder-clb-06-wheel?...`).
+
+### [DECISION] Decisions Made
+- SKU = part_number is the single purchase identifier; handles are fallback-only.
+- Canonical design PDPs are the six `calder-*-wheel` products (client will import).
+- Placeholder phone removed per client confirmation.
+- Client pushes theme and imports products manually (no deploy from agent).
+
+### [BLOCKED] What's Waiting (client actions)
+1. Push theme (assets: 7× calder-design-registry*.js, calder-config-resolver.js, calder-universal-pdp.js, calder-universal-cta.js; snippets: calder-universal-controls.liquid, calder-design-url.liquid; sections: calder-product.liquid, calder-specs.liquid; config: settings_schema.json).
+2. Import `docs/design/mockups/product imports/calder_universal_products_import_10-29-2026.csv`.
+3. Optional but recommended: create a public/headless Storefront access token and paste into Theme settings → Calder Wheels — API → "Storefront access token" (SKU-first mode). Without it, the handle+SKU fallback still works.
+4. Review collection membership/SEO of the 6 universal products after import (they will appear in collections/search; consider whether they should be in customer-facing collections alongside the 96 legacy products).
+
+### [FILES] Files Modified This Session
+- `assets/calder-config-resolver.js`, `assets/calder-universal-pdp.js`, `assets/calder-universal-cta.js`
+- `assets/calder-design-registry*.js` (7, regenerated)
+- `snippets/calder-universal-controls.liquid`, `snippets/calder-design-url.liquid`
+- `sections/calder-product.liquid`, `sections/calder-specs.liquid` (gates — from session #1; unchanged this session)
+- `config/settings_schema.json` (new token setting)
+- `docs/architecture/build_design_registry.py`, `calder_design_registry.json`, `calder_part_catalog_912.csv` (regenerated)
+- `docs/design/mockups/product imports/build_universal_products_import.py` + generated `calder_universal_products_import_10-29-2026.csv`
+- `docs/architecture/tests/calder-config-resolver.test.mjs` (+3 SKU-provider tests), `calder-universal-cta.test.mjs`, `calder-card-links.test.mjs`, `calder-pdp-e2e.test.mjs`
+- `docs/llm-continuity.md` (this entry)
+
+### [AGENT] Session Metadata
+- Agent: OpenCode (build)
+- Model: DeepSeek V4 Pro
+
+---
+## [2026-10-29 #3] — Live ERROR diagnosed: Shopify handle normalization (dots -> hyphens)
+
+### [ACTIVITY] Session Mode
+BUILD / DEBUG
+
+### [STATE] Current Status
+Client pushed the theme + imported the 6 universal products (live: calder-*-wheel). Dev panel on CLB-07 showed CTA state ERROR, variant ID missing. Diagnosed against the live store (wvpnpr-t7.myshopify.com): registry carried CSV handles with DOTS (`...-p32-72.6mm-...`) but Shopify normalizes handles at import — the live handle is `...-p32-72-6mm-...`. The resolver's handle fallback fetched the dotted handle → 404 → availability unknown → ERROR (Storefront token not configured yet, so the handle fallback was the active path).
+
+### [COMPLETED] What Was Done
+- Verified live store via products.json: 107 products, all 5 bore/offset fragments dot-hyphenated (`72-6mm`, `84-1mm`, `87-1mm`, `106-1mm`, `78-1mm`), SKUs intact.
+- `build_design_registry.py`: added `shopify_handleize()` (lowercase; non-alnum runs -> single hyphen; trim) applied at CSV ingestion; registry metadata documents `legacy_handle_rule`.
+- Regenerated registry + 7 theme assets.
+- **Verified ALL 864 mapped registry refs against the live store SKU map: 864/864 exact matches, 0 missing, 0 mismatches.**
+- `calder-pdp-state.js`: fixed `setOption` to accept the documented `{source}` object (dev panel showed "[object Object]" as source).
+- Tests updated with the same handleize rule; all 61 node + 77 python tests pass.
+
+### [DECISION] Decisions Made
+- Registry handles are Shopify-normalized at build time (rule verified against the live store 2026-10-29).
+- Storefront token remains optional-but-recommended; with it, handles exit the purchase path entirely.
+
+### [FILES] Files Modified This Session
+- `docs/architecture/build_design_registry.py`, `calder_design_registry.json`, `calder_part_catalog_912.csv` (regenerated)
+- `assets/calder-design-registry*.js` (7, regenerated), `assets/calder-pdp-state.js`
+- `docs/architecture/tests/calder-config-resolver.test.mjs`, `calder-card-links.test.mjs`
+- `docs/llm-continuity.md` (this entry)
+
+### [NEXT] Client must re-push
+- `assets/calder-design-registry.js`, `assets/calder-design-registry-{clm01,clm02,clm03,clm05,clb06,clb07}.js`, `assets/calder-pdp-state.js`
+- After push: CLB-07 22"/gloss-black/gloss-black/black should resolve AVAILABLE with variant ID 67971197075765 on the default group.
+- Note: 5 non-Calder legacy products (apex-201, vertex-202, striker-203, turbine-205, vortex-207) are still live in the store — cleanup candidate for the client.
+
+### [AGENT] Session Metadata
+- Agent: OpenCode (build)
+- Model: DeepSeek V4 Pro
+
+---
+## [2026-10-29 #4] — PN-derived legacy handle scheme (handle = f(part_number))
+
+### [ACTIVITY] Session Mode
+BUILD
+
+### [STATE] Current Status
+Target handle scheme implemented: legacy product handles become a pure function of the part_number, so handle and SKU can never drift. Builder emits expected_handle per ref + calder_handle_migration.csv (96 pending renames). Rename script delivered (Admin API; CSV renames would duplicate products). No re-push required for the current fix to work (refs still bind live handles); the rename is a one-time, client-run cleanup.
+
+### [DECISION] The scheme
+`{design-lower}-{pcd}-cb{bore*10}-et{offset:02d}-{lip gb|pl}-{bolt ch|bk}`
+- e.g. CLB0722105207232GB22 -> clb07-5x120-cb726-et32-gb-ch
+- Charset [a-z0-9-] only — Shopify stores verbatim (no dot/underscore rewrites possible)
+- Decimals encoded as integers (72.6mm -> cb726; 106.1mm -> cb1061)
+- ET = industry-standard offset notation, zero-padded (+03mm -> et03)
+- Derived 1:1 from the part_number at build time; unique per product grain by construction; max 29 chars (was 73)
+- Universal calder-*-wheel handles unchanged (customer-facing; never rename)
+- Registry refs keep binding the LIVE store handle (truth); expected_handle is the build-time drift guard — after a rename, re-export, point LIVE_IMPORT at the new CSV, regenerate (migration count must be 0).
+
+### [COMPLETED] What Was Done
+- `build_design_registry.py`: `pn_handle()` derivation; `expected_handle` on every legacy_ref; `calder_handle_migration.csv` output (96 rows); metadata `handle_scheme` documents the format; summary prints pending migration count.
+- `docs/design/mockups/product imports/rename_legacy_handles.py`: dry-run-by-default Admin API rename script (SHOPIFY_SHOP + SHOPIFY_ACCESS_TOKEN env, --apply to execute, idempotent — skips already-renamed).
+- Resolver test recomputes the PN derivation independently for all 864 mapped refs + charset assertion. All 61 node + 77 python tests pass.
+- Verified: 96/96 unique targets, all [a-z0-9-], max 29 chars.
+
+### [NEXT] Client steps (optional but recommended cleanup)
+1. `python3 rename_legacy_handles.py` (dry run) → review → `--apply` with Admin token
+2. Re-export store products → replace LIVE_IMPORT CSV → `python3 build_design_registry.py && python3 build_theme_registry_asset.py` (expect "handle migrations pending: 0") → re-push registry assets
+3. Storefront token setting still recommended (SKU-first lookup — handles exit purchase path entirely)
+
+### [FILES] Files Modified This Session
+- `docs/architecture/build_design_registry.py`, `calder_design_registry.json`, `calder_part_catalog_912.csv` (regenerated), `calder_handle_migration.csv` (new)
+- `assets/calder-design-registry*.js` (7, regenerated with expected_handle)
+- `docs/design/mockups/product imports/rename_legacy_handles.py` (new)
+- `docs/architecture/tests/calder-config-resolver.test.mjs`
+- `docs/llm-continuity.md` (this entry)
+
+### [AGENT] Session Metadata
+- Agent: OpenCode (build)
+- Model: DeepSeek V4 Pro

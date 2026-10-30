@@ -11,7 +11,7 @@
 .home-hero {
   position: relative;
   width: 100%;
-  min-height: 600px;
+  min-height: 750px;
   background: var(--calder-gradient-navy);
   overflow: hidden;
 }
@@ -63,24 +63,25 @@
 }
 
 .home-hero__content {
-  max-width: 50%;
-  padding: 8rem 0;
+  max-width: 75%;
+  padding: 20rem 0 0;
 }
 
 .home-hero__eyebrow {
   font-family: var(--calder-ui-font);
-  font-weight: 700;
-  font-size: 0.75rem;
+  font-weight: 300;
+  font-size: 14px;
   letter-spacing: 2.5px;
   text-transform: uppercase;
-  color: var(--calder-gold);
+  color: var(--calder-champagne);
   margin-bottom: 8px;
+  margin-left: 3px;
 }
 
 .home-hero__heading {
   font-family: var(--calder-heading-font);
   font-weight: 700;
-  font-size: clamp(38px, 5vw, 4rem);
+  font-size: clamp(38px, 5vw, 3rem);
   line-height: 0.95;
   text-transform: uppercase;
   color: var(--calder-white);
@@ -124,7 +125,7 @@
   letter-spacing: 0.02em;
   text-transform: uppercase;
   border: 1px solid transparent;
-  border-radius: 2px;
+  border-radius: 4px;
   cursor: pointer;
   text-decoration: none;
   box-shadow: var(--calder-shadow-gold);
@@ -156,7 +157,7 @@
   letter-spacing: 0.02em;
   text-transform: uppercase;
   border: 1px solid rgba(255, 255, 255, 0.42);
-  border-radius: 2px;
+  border-radius: 4px;
   cursor: pointer;
   text-decoration: none;
   backdrop-filter: blur(4px);
@@ -187,16 +188,16 @@
   align-items: center;
   gap: 5px;
   font-family: var(--calder-ui-font);
-  font-weight: 500;
+  font-weight: 400;
   font-size: .6rem;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.4px;
   text-transform: uppercase;
   color: #fff;
 }
 
 .home-hero__proof-icon {
-  width: 14px;
-  height: 14px;
+  width: 25px;
+  height: 25px;
   color: var(--calder-champagne);
   flex-shrink: 0;
 }
@@ -213,11 +214,12 @@
   //border: 1px solid rgba(255, 255, 255, 0.18);
   //border-radius: 6px;
   max-width: 35%;
+  display: none;
 }
 
 .home-hero__caption-title {
   font-family: var(--calder-ui-font);
-  font-weight: 500;
+  font-weight: 400;
   font-size: 1.2rem;
   letter-spacing: 0;
   text-transform: uppercase;
@@ -311,7 +313,7 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 1rem 1.3rem!important;
+  padding: 1rem 2rem 1rem 1.3rem !important;
   font-family: var(--calder-ui-font);
   font-weight: 400;
   font-size: 0.7rem;
@@ -339,9 +341,10 @@
 
 .hf-fitment__tab:last-child {
   padding-right: 65px;
+  padding-left: 40px !important;
   -webkit-clip-path: polygon(30px 0, 100% 0, 100% 100%, 0 100%);
   clip-path: polygon(30px 0, 100% 0, 100% 100%, 0 100%);
-  margin-left: -30px;
+  margin-left: -38px;
 }
 
 .hf-fitment__tab:hover {
@@ -428,17 +431,19 @@
 
 .hf-fitment__layout {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto 300px;
+  //grid-template-columns: minmax(0, 1fr) auto 300px;
+  grid-template-columns: minmax(0, 1fr) auto auto;
   position: relative;
   z-index: 1;
   min-height: 250px;
 }
 
-
-
 .hf-fitment__finder {
-  min-width: 0;
-  padding: 0 0 24px 0;
+  //min-width: 0;
+  //padding: 0 0 24px 0;
+  //background: url('https://cdn.shopify.com/s/files/1/1017/6325/2533/files/calder-fitment-car-500px.webp?v=1792628292') no-repeat;
+  //background-position: top right;
+  //background-size: 170px;
 }
 
 /* ── Vertical divider ── */
@@ -461,6 +466,8 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+
+  display: none;
 }
 
 .hf-fitment__vehicle[hidden] {
@@ -473,8 +480,8 @@
 
 .hf-fitment__vehicle-eyebrow {
   font-family: var(--calder-ui-font);
-  font-weight: 700;
-  font-size: 0.6rem;
+  font-weight: 500;
+  font-size: 14px;
   letter-spacing: 0.1em;
   color: var(--hf-secondary, #AEB6BC);
   text-transform: uppercase;
@@ -641,7 +648,7 @@
 .hf-fitment__label {
   display: block;
   font-family: var(--calder-ui-font);
-  font-weight: 700;
+  font-weight: 500;
   font-size: 0.7rem;
   letter-spacing: 0.05em;
   color: var(--hf-secondary, #AEB6BC);
@@ -759,7 +766,7 @@
 
 .hf-fitment__results {
   margin-top: 0;
-  padding: 16px 52px 4px;
+  padding: 0 2rem 2rem;
   position: relative;
   z-index: 2;
 }
@@ -767,14 +774,14 @@
 .hf-fitment .fitment-finder__results-count {
   color: var(--hf-secondary, #AEB6BC);
   font-family: var(--calder-ui-font);
-  font-weight: 700;
+  font-weight: 600;
   font-size: 0.75rem;
   text-align: left;
 }
 
 .hf-fitment .fitment-finder__results-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 12px;
   margin-top: 12px;
 }
@@ -889,7 +896,7 @@
 .home-fitment .fitment-finder__results-count {
   color: var(--calder-gray-300);
   font-family: var(--calder-ui-font);
-  font-weight: 700;
+  font-weight: 600;
   font-size: 0.7rem;
   text-align: left;
 }
@@ -1024,7 +1031,7 @@
 .hf-fitment--light .hf-fitment__panel {
   background: #FFFFFF;
   //background: #F7F5F0;
-  border: 1px solid #E2DED6;
+  border: 1px solid #E7E7E7;
 
   box-shadow:
     0 18px 45px rgba(35, 31, 32, 0.10),
@@ -1059,9 +1066,10 @@
 
 .hf-fitment--light .hf-fitment__tab--active,
 .hf-fitment--light .hf-fitment__tab[aria-selected="true"] {
-  background: #f6f6f6;
-  //background: #F7F5F0;
-  color: #171A1C;
+  //background: #f6f6f6;
+  background: #0e2a3e;
+  //color: #171A1C;
+  color: #FFF;
   border-color: #DDD8CF;
   border-bottom-color: #F7F5F0;
 
@@ -1202,6 +1210,7 @@
 
 .hf-fitment--light .hf-fitment__divider {
   background: #DDD8CF;
+  display: none;
 }
 
 /* ──────────────────────────────────────────────────────────
@@ -1385,11 +1394,15 @@ smart-row {
 #shopify-section-template--28039467499829__index_brands_carousel_LcDYLF
 .brands-grid {
     display: grid !important;
-    grid-template-columns: repeat(6, minmax(0, 1fr));
+    grid-template-columns: repeat(5, minmax(0, 1fr));
     align-items: center;
     gap: 28px;
     margin: 0 !important;
     width: 100%;
+}
+
+.cw-brand-title {
+    margin-top: -1rem;
 }
 
 /* Bootstrap .col normally interferes here */
@@ -1468,9 +1481,9 @@ smart-row {
     }
 }
 
-body.template-index .image-container.ic--bg {
-  background-color: transparent;
-  display: none;
+section[id*="index_product_carousel"] .image-container.ic--bg {
+  background-color: transparent !important;
+  display: none !important;
 }
 
 /* =========================================================
@@ -1500,10 +1513,10 @@ body.template-index .image-container.ic--bg {
 .bnr .bnr-text1 {
     margin: 0 0 18px !important;
 
-    font-family: "Garet", "Poppins", Arial, sans-serif !important;
+    font-family: "Inter", "Garet", "Poppins", sans-serif;
     font-size: 14px !important;
     line-height: 1.2 !important;
-    font-weight: 700 !important;
+    font-weight: 500 !important;
 
     letter-spacing: 0.18em !important;
     text-transform: uppercase;
@@ -1566,7 +1579,7 @@ body.template-index .image-container.ic--bg {
     display: block;
     max-width: 420px;
     margin-top: 24px;
-    font-family: "Garet", "Poppins", Arial, sans-serif !important;
+    font-family: "Inter", "Garet", "Poppins", sans-serif !important;
     font-size: 15px !important;
     line-height: 1.5 !important;
     font-weight: 400 !important;
@@ -1610,7 +1623,7 @@ body.template-index .image-container.ic--bg {
 
     color: #231F20 !important;
 
-    font-family: "Garet", "Poppins", Arial, sans-serif !important;
+    font-family: "Inter", "Garet", "Poppins", sans-serif !important;
 
     font-size: 13px !important;
     line-height: 1 !important;
@@ -1772,6 +1785,28 @@ body.template-index .image-container.ic--bg {
    SIGNATURE WHEELS
    ========================================================== */
 
+/* Calder — Flip Silverado Background Horizontally */
+
+.holder[data-bgset*="Silverado-Red.png"] {
+    position: relative;
+    isolation: isolate;
+    background-image: none !important;
+}
+
+.holder[data-bgset*="Silverado-Red.png"]::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+
+    background-image: url("https://wvpnpr-t7.myshopify.com/cdn/shop/files/Silverado-Red.png?v=1792632710&width=2560");
+    background-size: 130%;
+    background-position: left;
+    background-repeat: no-repeat;
+
+    transform: scaleX(-1);
+}
+
 .home-signature {
   padding: 40px 0 60px;
   background: var(--calder-gradient-light);
@@ -1793,10 +1828,10 @@ body.template-index .image-container.ic--bg {
 .home-signature__eyebrow {
   font-family: var(--calder-ui-font);
   font-weight: 700;
-  font-size: 0.65rem;
+  font-size: 14px;
   letter-spacing: 2.5px;
   text-transform: uppercase;
-  color: var(--calder-gold);
+  color: var(--calder-champagne);
   margin-bottom: 2px;
 }
 
@@ -1828,7 +1863,7 @@ body.template-index .image-container.ic--bg {
 }
 
 .home-signature__view-all:hover {
-  color: var(--calder-gold);
+  color: var(--calder-champagne);
   gap: 8px;
 }
 
@@ -1869,7 +1904,7 @@ body.template-index .image-container.ic--bg {
   font-size: 9px;
   letter-spacing: 1.5px;
   text-transform: uppercase;
-  color: var(--calder-gold);
+  color: var(--calder-champagne);
   margin-bottom: 2px;
 }
 
@@ -1929,7 +1964,8 @@ body.template-index .image-container.ic--bg {
 .home-customize {
   position: relative;
   display: flex;
-  min-height: 220px;
+  margin-top: 3rem;
+  min-height: 320px;
   overflow: hidden;
 
   background-image:
@@ -1939,7 +1975,7 @@ body.template-index .image-container.ic--bg {
       rgba(2, 19, 30, 0.58) 42%,
       rgba(2, 19, 30, 0.94) 100%
     ),
-    url('https://cdn.shopify.com/s/files/1/1017/6325/2533/files/mid-hero-mock-placeholder-1.png?v=1790034817');
+    url('https://cdn.shopify.com/s/files/1/1017/6325/2533/files/Tahoe-M-2-Wheel-Closeup.png?v=1792632709');
 
   background-size: cover;
   background-position: center;
@@ -1960,7 +1996,7 @@ body.template-index .image-container.ic--bg {
 
 .home-customize__copy {
   flex: 1;
-  padding: 4rem 0 3.5rem 4rem;
+  padding: 6rem 0 5.5rem 8rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -1968,11 +2004,11 @@ body.template-index .image-container.ic--bg {
 
 .home-customize__eyebrow {
   font-family: var(--calder-ui-font);
-  font-weight: 700;
-  font-size: 0.65rem;
+  font-weight: 500;
+  font-size: 14px;
   letter-spacing: 2.5px;
   text-transform: uppercase;
-  color: var(--calder-gold);
+  color: var(--calder-champagne);
   margin-bottom: 6px;
 }
 
@@ -2066,11 +2102,11 @@ body.template-index .image-container.ic--bg {
 
 .home-engineering__eyebrow {
   font-family: var(--calder-ui-font);
-  font-weight: 700;
-  font-size: 0.65rem;
+  font-weight: 500;
+  font-size: 14px;
   letter-spacing: 2.5px;
   text-transform: uppercase;
-  color: var(--calder-gold);
+  color: var(--calder-champagne);
   margin-bottom: 4px;
 }
 
@@ -2143,10 +2179,10 @@ body.template-index .image-container.ic--bg {
 }
 
 .home-engineering__point-icon {
-  width: 18px;
-  height: 18px;
+  width: 30px;
+  height: 30px;
   flex-shrink: 0;
-  color: var(--calder-gold);
+  color: var(--calder-champagne);
   margin-top: 1px;
 }
 
@@ -2191,11 +2227,11 @@ body.template-index .image-container.ic--bg {
 
 .home-process__eyebrow {
   font-family: var(--calder-ui-font);
-  font-weight: 700;
-  font-size: 0.65rem;
+  font-weight: 500;
+  font-size: 14px;
   letter-spacing: 2.5px;
   text-transform: uppercase;
-  color: var(--calder-gold);
+  color: var(--calder-champagne);
   margin-bottom: 2px;
 }
 
@@ -2265,11 +2301,11 @@ body.template-index .image-container.ic--bg {
 
 .home-gallery__eyebrow {
   font-family: var(--calder-ui-font);
-  font-weight: 700;
-  font-size: 0.65rem;
+  font-weight: 500;
+  font-size: 14px;
   letter-spacing: 2.5px;
   text-transform: uppercase;
-  color: var(--calder-gold);
+  color: var(--calder-champagne);
   margin-bottom: 2px;
 }
 
@@ -2285,7 +2321,7 @@ body.template-index .image-container.ic--bg {
 
 .home-gallery__view-all {
   font-family: var(--calder-ui-font);
-  font-weight: 700;
+  font-weight: 500;
   font-size: 0.65rem;
   letter-spacing: 1.2px;
   text-transform: uppercase;
@@ -2318,7 +2354,7 @@ body.template-index .image-container.ic--bg {
       rgba(244, 241, 234, 0.25) 72%,
       rgba(244, 241, 234, 0) 100%
     ),
-    url('https://cdn.shopify.com/s/files/1/1017/6325/2533/files/disassembly-mock-placeholder-1.png?v=1790034814');
+    url('https://cdn.shopify.com/s/files/1/1017/6325/2533/files/Calder_Wheels__Engineered_Without_Compromise.png?v=1792975052');
 
   background-size: cover, contain;
   background-repeat: no-repeat;
@@ -2327,11 +2363,11 @@ body.template-index .image-container.ic--bg {
 
 .home-gallery__cta-eyebrow {
   font-family: var(--calder-ui-font);
-  font-weight: 700;
-  font-size: 9px;
+  font-weight: 500;
+  font-size: 14px;
   letter-spacing: 1.5px;
   text-transform: uppercase;
-  color: var(--calder-gold);
+  color: var(--calder-champagne);
   margin-bottom: 4px;
 }
 
@@ -2478,7 +2514,7 @@ body.template-index .image-container.ic--bg {
 }
 
 .home-newsletter__input:focus {
-  border-color: var(--calder-gold);
+  border-color: var(--calder-champagne);
   outline: none;
   box-shadow: 0 0 0 3px rgba(213, 163, 92, 0.15);
 }
@@ -2591,6 +2627,7 @@ body.template-index .image-container.ic--bg {
     padding: 20px;
     border-top: 1px solid #52616A;
     margin: 0 20px;
+    display: none;
   }
 
   .hf-fitment__vehicle-inner {

@@ -122,12 +122,16 @@
     if (vehicle) {
       var nameEl = statusEl.querySelector('[data-fitment-vehicle-name]');
       if (nameEl) {
-        var parts = [];
-        if (vehicle.year) parts.push(vehicle.year);
-        if (vehicle.make) parts.push(vehicle.make);
-        if (vehicle.model) parts.push(vehicle.model);
-        if (vehicle.trim) parts.push(vehicle.trim);
-        nameEl.textContent = parts.join(' ') || vehicle.display_name || 'Vehicle selected';
+        if (vehicle.display_name) {
+          nameEl.textContent = vehicle.display_name;
+        } else {
+          var parts = [];
+          if (vehicle.year) parts.push(vehicle.year);
+          if (vehicle.make) parts.push(vehicle.make);
+          if (vehicle.model) parts.push(vehicle.model);
+          if (vehicle.trim && vehicle.trim !== vehicle.display_name) parts.push(vehicle.trim);
+          nameEl.textContent = parts.join(' ') || 'Vehicle selected';
+        }
       }
       statusEl.removeAttribute('hidden');
       statusEl.style.display = '';
@@ -162,9 +166,11 @@
             if (key === target) {
               panels[key].classList.add('hf-fitment__panel--active');
               panels[key].removeAttribute('hidden');
+              panels[key].style.setProperty('display', 'block', 'important');
             } else {
               panels[key].classList.remove('hf-fitment__panel--active');
               panels[key].setAttribute('hidden', '');
+              panels[key].style.setProperty('display', 'none', 'important');
             }
           }
         });
@@ -188,47 +194,86 @@
 
   function initStyleTab(sectionId) {
     var diameter = document.getElementById('hf-diameter-' + sectionId);
-    var width = document.getElementById('hf-width-' + sectionId);
     var bolt = document.getElementById('hf-bolt-' + sectionId);
     var finish = document.getElementById('hf-finish-' + sectionId);
-
-    if (diameter) {
-      var dias = ['All Diameters','18"','19"','20"','21"','22"','23"','24"'];
-      diameter.innerHTML = dias.map(function(v) { return '<option value="' + (v === dias[0] ? '' : v.replace('"','')) + '">' + v + '</option>'; }).join('');
+    function populate(select, placeholder, options) {
+      if (!select) return;
+      select.replaceChildren(new Option(placeholder, ''));
+      options.forEach(function (option) {
+        select.add(new Option(option[0], option[1]));
+      });
     }
-    if (width) {
-      var wids = ['All Widths','8.5"','9"','9.5"','10"','10.5"','11"','11.5"','12"','12.5"','13"','14"'];
-      width.innerHTML = wids.map(function(v) { return '<option value="' + (v === wids[0] ? '' : v.replace('"','')) + '">' + v + '</option>'; }).join('');
-    }
-    if (bolt) {
-      var bolts = ['All Bolt Patterns','5x100','5x112','5x114.3','5x120','5x120.7','5x127','5x130','5x135','5x139.7','5x150','6x135','6x139.7'];
-      bolt.innerHTML = bolts.map(function(v) { return '<option value="' + (v === bolts[0] ? '' : v) + '">' + v + '</option>'; }).join('');
-    }
-    if (finish) {
-      var fins = ['All Finishes','Gloss Black','Satin Black','Matte Black','Brushed Silver','Polished Silver','Gloss Silver','Brushed Bronze','Matte Bronze','Gloss Bronze','Brushed Titanium','Satin Titanium','Gloss White','Brushed Clear','Chrome','Gold'];
-      finish.innerHTML = fins.map(function(v) { return '<option value="' + (v === fins[0] ? '' : v.toLowerCase().replace(/ /g,'-')) + '">' + v + '</option>'; }).join('');
-    }
+    // Derive diameter, finish, and bolt pattern options from the actual
+    // product catalog so the filters reflect published products.
+    // Option values are emitted with their RAW store labels (e.g. 22"), so
+    // the collection-facing filter value matches the option value exactly.
+    var catalog = window.__fitmentCatalog || [];
+    var diameterSet = {};
+    var finishSet = {};
+    var boltSet = {};
+    catalog.forEach(function (p) {
+      var labels = p.diameter_labels && p.diameter_labels.length ? p.diameter_labels : (p.diameters || []).map(function (d) { return d + '"'; });
+      labels.forEach(function (raw) {
+        var n = parseInt(raw);
+        if (n > 0) diameterSet[raw] = true;
+      });
+      (p.finishes || []).forEach(function (f) { if (f) finishSet[f] = true; });
+      var bolts = p.bolt_patterns && p.bolt_patterns.length ? p.bolt_patterns : (p.bolt_pattern ? [p.bolt_pattern] : []);
+      bolts.forEach(function (b) { if (b) boltSet[b] = true; });
+    });
+    var dOpts = Object.keys(diameterSet).sort(function (a, b) { return parseFloat(a) - parseFloat(b); });
+    if (dOpts.length === 0) { dOpts = ['22"', '24"', '26"']; }
+    populate(diameter, 'All Diameters', dOpts.map(function (d) { return [d, d]; }));
+    var fOpts = Object.keys(finishSet).sort();
+    if (fOpts.length === 0) { fOpts = ['Gloss Black', 'Black Tint', 'Titanium Tint']; }
+    populate(finish, 'All Finishes', fOpts.map(function (f) { return [f, f]; }));
+    var bOpts = Object.keys(boltSet).sort();
+    if (bOpts.length === 0) { bOpts = ['5x112', '5x114.3', '5x120', '5x127', '5x130', '5x135', '5x139.7', '6x135', '6x139.7']; }
+    populate(bolt, 'All Bolt Patterns', bOpts.map(function (b) { return [b, b]; }));
   }
 
   /* ── By Wheel Style Submit ── */
-
   function initStyleSubmit(sectionId) {
-    var btn = document.getElementById('hf-style-submit-' + sectionId);
     var btn = document.getElementById('hf-style-submit-' + sectionId);
     if (!btn) return;
     btn.addEventListener('click', function () {
+      var model = document.getElementById('hf-wheel-model-' + sectionId);
       var diameter = document.getElementById('hf-diameter-' + sectionId);
-      var width = document.getElementById('hf-width-' + sectionId);
-      var bolt = document.getElementById('hf-bolt-' + sectionId);
       var finish = document.getElementById('hf-finish-' + sectionId);
-      var params = [];
-      if (diameter && diameter.value) params.push('filter.v.option.diameter=' + encodeURIComponent(diameter.value));
-      if (width && width.value) params.push('filter.v.option.width=' + encodeURIComponent(width.value));
-      if (bolt && bolt.value) params.push('filter.p.m.custom.bolt_pattern=' + encodeURIComponent(bolt.value));
-      if (finish && finish.value) params.push('filter.p.m.custom.finish=' + encodeURIComponent(finish.value));
-      var url = '/collections/all';
-      if (params.length) url += '?' + params.join('&');
-      window.location.href = url;
+      var bolt = document.getElementById('hf-bolt-' + sectionId);
+
+      // On a collection page (theme product grid present), the selected
+      // Diameter and Bolt Pattern update the listing's facet filters in
+      // place instead of navigating away. The fitment guide glue listens
+      // for this event and reverts the vehicle-driven presentation state
+      // (page title, hidden Bolt Pattern facet block).
+      var hasGrid = document.getElementById('product-grid') &&
+        document.getElementById('ProductGridContainer');
+      var hasStyleFilters = (diameter && diameter.value) || (bolt && bolt.value);
+
+      if (hasGrid && hasStyleFilters && !(model && model.value)) {
+        var inlineParams = new URLSearchParams();
+        if (diameter && diameter.value) inlineParams.set('filter.v.option.diameter', diameter.value);
+        if (bolt && bolt.value) inlineParams.set('filter.p.m.custom.bolt_pattern', bolt.value);
+        var sortBy = new URLSearchParams(window.location.search).get('sort_by');
+        if (sortBy) inlineParams.set('sort_by', sortBy);
+        document.dispatchEvent(new CustomEvent('calder:style-filters-applied', {
+          detail: { searchParams: inlineParams.toString() }
+        }));
+        return;
+      }
+
+      var params = new URLSearchParams();
+      // Collection option filters must use the store's EXACT option value
+      // (e.g. 22") — appending "in" or stripping the inch mark would match
+      // no facet and return zero results.
+      if (model && model.value) params.set('q', model.value);
+      if (diameter && diameter.value) params.set('filter.v.option.diameter', diameter.value);
+      if (finish && finish.value) params.set('filter.v.option.center-finish', finish.value);
+      if (bolt && bolt.value) params.set('filter.p.m.custom.bolt_pattern', bolt.value);
+      var base = model && model.value ? '/search' : '/collections/all-calder-wheels';
+      if (model && model.value) params.set('type', 'product');
+      window.location.href = base + (params.toString() ? '?' + params.toString() : '');
     });
   }
 
@@ -495,22 +540,51 @@
       if (trimParts[0] && trimParts[0] !== make) displayName += ' ' + trimParts[0];
       if (trimParts[1]) displayName += ' ' + trimParts[1];
 
+      var trimLabel = '';
+      if (trimSelect.selectedIndex >= 0) {
+        trimLabel = trimSelect.options[trimSelect.selectedIndex].textContent || '';
+      }
+      if (!trimLabel) trimLabel = '';
+
       saveVehicle({
         year: year,
         make: make,
         model: model,
-        trim: displayName,
+        trim: trimLabel,
+        display_name: displayName,
         generation: trimParts[0],
         bolt_pattern: selectedVehicle.bolt_pattern
       });
 
-      updateStatusPanel(sectionId, { year: year, make: make, model: model, trim: displayName });
+      updateStatusPanel(sectionId, { year: year, make: make, model: model, trim: trimLabel, display_name: displayName });
 
-      var filterUrl = '/collections/all?filter.p.m.custom.bolt_pattern=' + encodeURIComponent(selectedVehicle.bolt_pattern);
-      if (selectedVehicle.min_diameter) filterUrl += '&filter.v.option.diameter=' + selectedVehicle.min_diameter;
-      if (selectedVehicle.min_offset) filterUrl += '&filter.v.option.offset=' + selectedVehicle.min_offset;
+      var filterBp = (selectedVehicle.bolt_pattern || '').replace(/\.\d+$/, '');
+      var filterUrl = '/collections/all?filter.p.m.custom.bolt_pattern=' + encodeURIComponent(filterBp);
 
+      // Build diameter filter from the matched products so it matches what
+      // actually exists in the store (raw option values, e.g. 22").
       getCompatibleProducts(selectedVehicle, sectionId, function (result) {
+        var matchedDiameters = {};
+        if (result.products) {
+          result.products.forEach(function (p) {
+            var labels = p.diameter_labels && p.diameter_labels.length
+              ? p.diameter_labels
+              : (p.diameters || []).map(function (d) { return d + '"'; });
+            labels.forEach(function (label) {
+              if (parseFloat(label) >= parseFloat(selectedVehicle.min_diameter || 0) &&
+                  parseFloat(label) <= parseFloat(selectedVehicle.max_diameter || 999)) {
+                matchedDiameters[String(parseFloat(label))] = label;
+              }
+            });
+          });
+        }
+        if (Object.keys(matchedDiameters).length > 0) {
+          Object.keys(matchedDiameters).sort(function (a, b) { return parseFloat(a) - parseFloat(b); }).forEach(function (k) {
+            filterUrl += '&filter.v.option.diameter=' + encodeURIComponent(matchedDiameters[k]);
+          });
+        } else if (selectedVehicle.min_diameter) {
+          filterUrl += '&filter.v.option.diameter=' + encodeURIComponent(Math.ceil(parseFloat(selectedVehicle.min_diameter)) + '"');
+        }
         var html = '';
         if (result.products && result.products.length > 0) {
           html += '<div class="fitment-finder__results-count">' + result.products.length + ' compatible wheels found for ' + displayName + '</div>';
@@ -541,18 +615,16 @@
   }
 
   function getCompatibleProducts(vehicle, sectionId, callback) {
-    var params = 'section_id=async-fitment-results';
-    if (vehicle) {
-      if (vehicle.bolt_pattern) params += '&bolt_pattern=' + encodeURIComponent(vehicle.bolt_pattern);
-      if (vehicle.min_diameter) params += '&min_diameter=' + encodeURIComponent(vehicle.min_diameter);
-      if (vehicle.max_diameter) params += '&max_diameter=' + encodeURIComponent(vehicle.max_diameter);
-      if (vehicle.min_width) params += '&min_width=' + encodeURIComponent(vehicle.min_width);
-      if (vehicle.max_width) params += '&max_width=' + encodeURIComponent(vehicle.max_width);
-      if (vehicle.min_offset !== null && vehicle.min_offset !== undefined) params += '&min_offset=' + encodeURIComponent(vehicle.min_offset);
-      if (vehicle.max_offset !== null && vehicle.max_offset !== undefined) params += '&max_offset=' + encodeURIComponent(vehicle.max_offset);
-      if (vehicle.hub_bore) params += '&hub_bore=' + encodeURIComponent(vehicle.hub_bore);
-      if (vehicle.load_rating_min) params += '&load_rating_min=' + encodeURIComponent(vehicle.load_rating_min);
+    // Primary: inline catalog embedded in the section markup (no network round-trip)
+    if (window.__fitmentCatalog && window.__fitmentCatalog.length > 0) {
+      var matched = filterByVehicle(window.__fitmentCatalog, vehicle);
+      callback({ products: matched });
+      return;
     }
+
+    // Fallback: load catalog from the async section endpoint
+    var params = 'section_id=async-fitment-results';
+
     var xhr = new XMLHttpRequest();
     xhr.open('GET', window.Shopify.routes.root + '?' + params, true);
     xhr.onload = function () {
@@ -562,62 +634,72 @@
           var doc = parser.parseFromString(xhr.responseText, 'text/html');
           var scriptEl = doc.querySelector('#hf-results-json');
           if (scriptEl) {
-            var data = JSON.parse(scriptEl.textContent);
-            if (data && data.length > 0) {
-              callback({ products: data });
+            var allProducts = JSON.parse(scriptEl.textContent);
+            var matched = filterByVehicle(allProducts, vehicle);
+            if (matched.length > 0) {
+              callback({ products: matched });
               return;
             }
           }
         } catch (e) {}
       }
-      var fallback = new XMLHttpRequest();
-      fallback.open('GET', window.Shopify.routes.root + 'products.json?limit=50', true);
-      fallback.onload = function () {
-        if (fallback.status === 200) {
-          try {
-            var all = JSON.parse(fallback.responseText);
-            var prods = (all.products || []).map(function (p) {
-              return {
-                url: p.url,
-                title: p.title,
-                price: p.variants && p.variants[0] ? (p.variants[0].price / 100).toFixed(2) : '',
-                featured_image: p.images && p.images[0] ? p.images[0].src : ''
-              };
-            });
-            callback({ products: prods, fallback: true });
-            return;
-          } catch (e) {}
-        }
-        callback({ products: [] });
-      };
-      fallback.onerror = function () { callback({ products: [] }); };
-      fallback.send();
+      callback({ products: [] });
     };
-    xhr.onerror = function () {
-      var fallback = new XMLHttpRequest();
-      fallback.open('GET', window.Shopify.routes.root + 'products.json?limit=50', true);
-      fallback.onload = function () {
-        if (fallback.status === 200) {
-          try {
-            var all = JSON.parse(fallback.responseText);
-            var prods = (all.products || []).map(function (p) {
-              return {
-                url: p.url,
-                title: p.title,
-                price: p.variants && p.variants[0] ? (p.variants[0].price / 100).toFixed(2) : '',
-                featured_image: p.images && p.images[0] ? p.images[0].src : ''
-              };
-            });
-            callback({ products: prods, fallback: true });
-            return;
-          } catch (e) {}
-        }
-        callback({ products: [] });
-      };
-      fallback.onerror = function () { callback({ products: [] }); };
-      fallback.send();
-    };
+    xhr.onerror = function () { callback({ products: [] }); };
     xhr.send();
+  }
+
+  function filterByVehicle(products, vehicle) {
+    if (!products || !vehicle) return [];
+
+    var bp = (vehicle.bolt_pattern || '').replace(/\s+/g, '').replace(/\.\d+$/, '');
+    var minDia = parseFloat(vehicle.min_diameter) || 0;
+    var maxDia = parseFloat(vehicle.max_diameter) || 999;
+    var loadMin = parseFloat(vehicle.load_rating_min) || 0;
+
+    var normBp = function (s) { return String(s || '').replace(/\s+/g, '').replace(/\.\d+$/, ''); };
+
+    function matchesBoltPattern(p) {
+      var list = [];
+      if (p.bolt_patterns && p.bolt_patterns.length) list = p.bolt_patterns;
+      else if (p.bolt_pattern) list = [p.bolt_pattern];
+      for (var i = 0; i < list.length; i++) {
+        if (normBp(list[i]) === bp) return true;
+      }
+      return false;
+    }
+
+    return products.filter(function (p) {
+      if (!matchesBoltPattern(p)) return false;
+
+      // Match diameter range
+      var hasDiameterInRange = false;
+      if (p.diameters && p.diameters.length > 0) {
+        for (var d = 0; d < p.diameters.length; d++) {
+          var dia = parseFloat(p.diameters[d]);
+          if (dia >= minDia && dia <= maxDia) {
+            hasDiameterInRange = true;
+            break;
+          }
+        }
+      }
+      if (!hasDiameterInRange) return false;
+
+      // Match load rating
+      if (loadMin > 0 && p.load_rating && p.load_rating < loadMin) return false;
+
+      return true;
+    }).map(function (p) {
+      var price = (typeof p.price === 'number' && !isNaN(p.price)) ? p.price.toFixed(2) : '';
+      return {
+        url: p.url,
+        title: p.title,
+        price: price,
+        featured_image: p.featured_image || '',
+        diameters: p.diameters || [],
+        diameter_labels: p.diameter_labels || []
+      };
+    });
   }
 
   /* ── Section Initialization ── */
@@ -632,8 +714,6 @@
     var trimSelect = document.getElementById('hf-trim-' + id);
     var submitBtn = document.getElementById('hf-submit-' + id);
 
-    if (!yearSelect) return;
-
     initTabs(id);
     initStyleTab(id);
     initStyleSubmit(id);
@@ -643,6 +723,11 @@
     if (savedVehicle) {
       updateStatusPanel(id, savedVehicle);
     }
+
+    // The vehicle form may be replaced by the fitment guide card
+    // (.cw-fitment-guide) — tabs, style filters, and status actions above
+    // must still initialize; skip only the vehicle-form wiring below.
+    if (!yearSelect || !makeSelect || !modelSelect || !trimSelect || !submitBtn) return;
 
     loadYears(id);
 

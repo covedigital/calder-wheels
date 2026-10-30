@@ -1,0 +1,65 @@
+{%- liquid
+  assign local_dealer_name = seed_dealer_name | default: customer.name | default: 'Your Dealership'
+  assign local_contact_name = seed_contact_name | default: customer.first_name | default: 'Dealer'
+  assign local_tier = seed_tier | default: dealer_tier | default: 1
+  assign local_terms = seed_payment_terms | default: 'Standard'
+  assign local_status = seed_account_status | default: account_status | default: 'Active'
+  assign has_net_30 = false
+  if local_terms == 'NET-30' or dealer_net_terms
+    assign has_net_30 = true
+  endif
+-%}
+
+<div class="dp-topbar">
+  <div class="dp-topbar__left">
+    <button class="dp-topbar__mobile-toggle" data-dealer-mobile-toggle aria-label="Toggle dealer navigation">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="dp-topbar__identity">
+      <span class="dp-topbar__dealer-name">{{ local_dealer_name }}</span>
+      <span class="dp-topbar__separator"></span>
+      <div class="dp-topbar__badges">
+        <span class="dp-badge dp-badge--tier">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor"><polygon points="6,0 12,4 12,12 6,8 0,12 0,4" stroke="currentColor" stroke-width="0.6" fill="none"/></svg>
+          Tier {{ local_tier }} Dealer
+        </span>
+        {% if has_net_30 %}
+        <span class="dp-badge dp-badge--terms">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor"><rect x="2" y="2" width="8" height="8" rx="1" fill="none" stroke="currentColor" stroke-width="0.6"/><text x="6" y="8" font-size="5" text-anchor="middle" fill="currentColor">N</text></svg>
+          {{ local_terms }}
+        </span>
+        {% endif %}
+        <span class="dp-badge dp-badge--status">
+          <span class="dp-badge__dot"></span>
+          {{ local_status }}
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="dp-topbar__right">
+    <button class="dp-topbar__notif" aria-label="Notifications" data-dealer-notif-toggle>
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1">
+        <circle cx="9" cy="8" r="6" stroke="currentColor" fill="none"/>
+        <circle cx="14" cy="2" r="2" fill="#C9A96E"/>
+      </svg>
+      <span class="dp-topbar__notif-count">3</span>
+    </button>
+
+    <div class="dp-topbar__user" data-dealer-user-menu>
+      <div class="dp-topbar__user-avatar">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="currentColor">
+          <circle cx="16" cy="16" r="15" fill="#1A2A44"/>
+          <text x="16" y="21" font-size="14" text-anchor="middle" fill="#C9A96E" font-weight="600">{{ local_contact_name | slice: 0, 1 | upcase }}</text>
+        </svg>
+      </div>
+      <div class="dp-topbar__user-info">
+        <span class="dp-topbar__user-name">{{ local_contact_name }}</span>
+        <span class="dp-topbar__user-org">{{ local_dealer_name }}</span>
+      </div>
+      <svg class="dp-topbar__user-chevron" width="10" height="6" viewBox="0 0 10 6" fill="currentColor">
+        <path d="M1 1 L5 5 L9 1" stroke="currentColor" stroke-width="1.2" fill="none"/>
+      </svg>
+    </div>
+  </div>
+</div>

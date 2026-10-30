@@ -1,0 +1,11 @@
+Handle,Command,Title,Body HTML,Sort Order,Template Suffix,Published,Source: Command,Source: Type,Inclusion: Type,Inclusion: Match,Condition: Command,Condition: Field,Condition: Relation,Condition: Value,Condition: Match,Sort: Position,Sort: Product Handle
+polished-lip-chrome,MERGE,Polished Lip - Chrome Bolts,"Polished lip, chrome hardware.",Manual,,TRUE,MERGE,Products,,,MERGE,Type,Equals,SUV Wheel - Spun Forged - Polished Lip / Chrome Bolts,any
+polished-lip-black,MERGE,Polished Lip - Black Bolts,"Polished lip, black hardware.",Manual,,TRUE,MERGE,Products,,,MERGE,Type,Equals,SUV Wheel - Spun Forged - Polished Lip / Black Bolts,any
+gloss-black-lip-chrome,MERGE,Gloss Black Lip - Chrome Bolts,"Gloss black lip, chrome hardware.",Manual,,TRUE,MERGE,Products,,,MERGE,Type,Equals,SUV Wheel - Spun Forged - Gloss Black Lip / Chrome Bolts,any
+gloss-black-lip-black,MERGE,Gloss Black Lip - Black Bolts,"Gloss black lip, black hardware.",Manual,,TRUE,MERGE,Products,,,MERGE,Type,Equals,SUV Wheel - Spun Forged - Gloss Black Lip / Black Bolts,any
+for-tahoe-yukon-escalade,MERGE,For Tahoe / Yukon / Escalade,GM SUV platforms.,Manual,,TRUE,MERGE,Products,,,MERGE,Tag,Includes,Tahoe,any
+for-expedition-f150,MERGE,For Expedition / F150,Ford SUV platforms.,Manual,,TRUE,MERGE,Products,,,MERGE,Tag,Includes,Expedition,any
+for-g-wagon,MERGE,For G-Wagon,Mercedes-Benz G-Class.,Manual,,TRUE,MERGE,Products,,,MERGE,Tag,Includes,G-Wagon,any
+for-range-rover,MERGE,For Range Rover,Land Rover / Range Rover.,Manual,,TRUE,MERGE,Products,,,MERGE,Tag,Includes,Range Rover,any
+for-lexus-infiniti,MERGE,For Lexus / Infiniti,Lexus GX and Infiniti QX.,Manual,,TRUE,MERGE,Products,,,MERGE,Tag,Includes,Lexus GX,any
+22-inch-wheels,MERGE,"22"" Wheels",22-inch diameter.,Price,,TRUE,MERGE,Products,,,MERGE,Price,Less than,1099,any

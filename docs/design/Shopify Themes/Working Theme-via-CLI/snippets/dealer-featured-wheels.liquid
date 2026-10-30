@@ -1,0 +1,129 @@
+{%- liquid
+  assign local_products = featured_products | default: false
+
+  if local_products == false or local_products.size == 0
+    assign local_collection = collections[featured_collection]
+    if local_collection and local_collection.products.size > 0
+      assign local_products = local_collection.products
+    endif
+  endif
+
+  if local_products == false or local_products.size == 0
+    assign fallback = collections['all']
+    if fallback and fallback.products.size > 0
+      assign local_products = fallback.products | slice: 0, 3
+    endif
+  endif
+
+  assign show_seed = false
+  if local_products == false or local_products.size == 0
+    assign show_seed = true
+  endif
+-%}
+
+<div class="dp-featured">
+  <div class="dp-card__head">
+    <h3 class="dp-card__title">FEATURED WHEELS</h3>
+    <a href="/collections/all" class="dp-card__link">Browse Catalog &rarr;</a>
+  </div>
+
+  <div class="dp-featured__grid">
+    {% if local_products and local_products.size > 0 %}
+      {% for product in local_products limit: 3 %}
+        {%- liquid
+          assign prod_title = product.title
+          assign prod_image = product.featured_image | default: product.images.first
+          assign prod_url = product.url
+          assign prod_type = product.type | default: 'Wheel'
+          assign prod_price = product.price
+          assign prod_compare = product.compare_at_price
+
+          if is_dealer and dealer_tier > 0
+            assign dealer_field = 'dealer_tier_' | append: dealer_tier | append: '_price'
+            assign dealer_price = product.metafields.custom[dealer_field].value
+            if dealer_price and dealer_price > 0
+              assign prod_price = dealer_price
+            endif
+          endif
+        -%}
+        <div class="dp-featured__card">
+          <a href="{{ prod_url }}" class="dp-featured__card-image-link">
+            <div class="dp-featured__card-image">
+              {% if prod_image %}
+                <img src="{{ prod_image | img_url: '240x240', crop: 'center' }}" alt="{{ prod_title | escape }}" loading="lazy">
+              {% else %}
+                <svg width="120" height="120" viewBox="0 0 120 120" fill="none">
+                  <circle cx="60" cy="60" r="50" stroke="#C2A48A" stroke-width="2" fill="#081D2D"/>
+                  <circle cx="60" cy="60" r="35" stroke="#C2A48A" stroke-width="1" fill="none"/>
+                  <text x="60" y="64" font-size="10" text-anchor="middle" fill="#C2A48A">CW</text>
+                </svg>
+              {% endif %}
+            </div>
+          </a>
+          <div class="dp-featured__card-body">
+            <a href="{{ prod_url }}" class="dp-featured__card-name">{{ prod_title | truncate: 28 }}</a>
+            <span class="dp-featured__card-type">{{ prod_type }}</span>
+            <div class="dp-featured__card-pricing">
+              <span class="dp-featured__card-price">{% if is_dealer %}From {% endif %}{{ prod_price | money }}</span>
+              {% if prod_compare and prod_compare > prod_price %}
+                <span class="dp-featured__card-msrp">MSRP {{ prod_compare | money }}</span>
+              {% endif %}
+            </div>
+            <div class="dp-featured__card-actions">
+              <a href="{{ prod_url }}" class="dp-featured__card-btn">View Details</a>
+              <a href="/pages/build-your-wheel?product={{ product.handle }}" class="dp-featured__card-btn dp-featured__card-btn--config">Configure</a>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    {% elsif show_seed %}
+      {%- liquid
+        assign seed_items = 'C1|Forged Monoblock|87500|125000|Bronze/gold multi-spoke wheel|#C2A48A|C2|Forged Monoblock|91000|130000|Black multi-spoke wheel|#0E2A3E|C3|Forged 3-Piece|142000|195000|Silver multi-spoke wheel|#8B4D29' | split: '|'
+      -%}
+      {% for i in (0..2) %}
+        {%- assign idx = i | times: 7 -%}
+        {%- assign name_idx = idx -%}
+        {%- assign type_idx = idx | plus: 1 -%}
+        {%- assign price_idx = idx | plus: 2 -%}
+        {%- assign msrp_idx = idx | plus: 3 -%}
+        {%- assign color_idx = idx | plus: 5 -%}
+        {%- assign s_name = seed_items[name_idx] -%}
+        {%- assign s_type = seed_items[type_idx] -%}
+        {%- assign s_price = seed_items[price_idx] | plus: 0 -%}
+        {%- assign s_msrp = seed_items[msrp_idx] | plus: 0 -%}
+        {%- assign s_color = seed_items[color_idx] -%}
+        <div class="dp-featured__card">
+          <a href="/collections/all" class="dp-featured__card-image-link">
+            <div class="dp-featured__card-image">
+              <svg width="120" height="120" viewBox="0 0 120 120" fill="none">
+                <circle cx="60" cy="60" r="50" stroke="{{ s_color }}" stroke-width="2" fill="#081D2D"/>
+                <circle cx="60" cy="60" r="35" stroke="{{ s_color }}" stroke-width="1" fill="none"/>
+                <circle cx="60" cy="60" r="20" stroke="{{ s_color }}" stroke-width="0.6" fill="none"/>
+                <line x1="20" y1="20" x2="100" y2="100" stroke="{{ s_color }}" stroke-width="0.4" opacity="0.3"/>
+                <line x1="100" y1="20" x2="20" y2="100" stroke="{{ s_color }}" stroke-width="0.4" opacity="0.3"/>
+              </svg>
+            </div>
+          </a>
+          <div class="dp-featured__card-body">
+            <a href="/collections/all" class="dp-featured__card-name">{{ s_name }}</a>
+            <span class="dp-featured__card-type">{{ s_type }}</span>
+            <div class="dp-featured__card-pricing">
+              <span class="dp-featured__card-price">{{ s_price | money }}</span>
+              <span class="dp-featured__card-msrp">MSRP {{ s_msrp | money }}</span>
+            </div>
+            <div class="dp-featured__card-actions">
+              <a href="/collections/all" class="dp-featured__card-btn">View Details</a>
+              <a href="/collections/all" class="dp-featured__card-btn dp-featured__card-btn--config">Configure</a>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    {% else %}
+      <div class="dp-empty-state">
+        <p>No featured wheels available.</p>
+        <p class="dp-empty-state__sub">Check back soon or browse the catalog.</p>
+        <a href="/collections/all" class="dp-btn dp-btn--primary" style="margin-top:12px">Browse Catalog</a>
+      </div>
+    {% endif %}
+  </div>
+</div>

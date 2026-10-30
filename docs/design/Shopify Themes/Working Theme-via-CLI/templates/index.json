@@ -14,19 +14,22 @@
       "settings": {
         "hero_image": "shopify://shop_images/hero-placeholder.png",
         "eyebrow": "Luxury Performance",
-        "heading": "MADE WITH<br><span>PRECISION</span>",
-        "body_text": "Forged from the finest materials. Engineered for those who demand performance. Every Calder wheel is a masterwork of automotive design.",
+        "heading": "MADE WITH <br><span>PRECISION</span>",
+        "body_text": "Forged from the finest materials. Engineered for those who demand performance.",
         "primary_cta_text": "Explore Wheels",
-        "primary_cta_url": "",
+        "primary_cta_url": "shopify://collections/all-calder-wheels",
         "secondary_cta_text": "Build Yours",
-        "secondary_cta_url": "",
+        "secondary_cta_url": "shopify://pages/build-your-wheel",
         "proof_1": "Premium Materials",
         "proof_2": "Custom Engineered",
         "proof_3": "Proven Performance",
+        "proof_icon_1": "shopify://shop_images/diamond-outline-white.svg",
+        "proof_icon_2": "shopify://shop_images/cog-outline-white.svg",
+        "proof_icon_3": "shopify://shop_images/speedometer-outline-white.svg",
         "hero_media_type": "video",
         "hero_video_type": "youtube",
         "hero_video_url": "https://www.youtube.com/watch?v=GN2x2b0OM1Q",
-        "caption_title": "DRIVEN <br>BY A HIGHER <br>STANDARD",
+        "caption_title": "DRIVEN BY A HIGHER STANDARD",
         "caption_subtitle": "",
         "section_animation": true,
         "section_width": "global",
@@ -54,6 +57,7 @@
     },
     "home-fitment": {
       "type": "home-fitment",
+      "disabled": true,
       "settings": {
         "tab_1_label": "Shop by Vehicle",
         "tab_2_label": "Shop by Wheel Style",
@@ -102,8 +106,8 @@
         "brand_eGARd9": {
           "type": "brand",
           "settings": {
-            "title": "Title",
-            "image": "shopify://shop_images/Ford-Motor-Company-Logo.png",
+            "title": "SUV",
+            "image": "shopify://shop_images/luxury_suv_white.png",
             "color_placeholder": "",
             "url": ""
           }
@@ -111,8 +115,8 @@
         "brand_8YEexy": {
           "type": "brand",
           "settings": {
-            "title": "Title",
-            "image": "shopify://shop_images/GMC-Logo.png",
+            "title": "Full-Sized Truck",
+            "image": "shopify://shop_images/full_size_truck_blue.png",
             "color_placeholder": "",
             "url": ""
           }
@@ -120,8 +124,8 @@
         "brand_pjdWFz": {
           "type": "brand",
           "settings": {
-            "title": "Title",
-            "image": "shopify://shop_images/cadillac_PNG42.png",
+            "title": "Performance",
+            "image": "shopify://shop_images/performance_red.png",
             "color_placeholder": "",
             "url": ""
           }
@@ -129,8 +133,8 @@
         "brand_iqbGbh": {
           "type": "brand",
           "settings": {
-            "title": "Title",
-            "image": "shopify://shop_images/16-land-rover-car-logo-png-brand-image.png",
+            "title": "Off-Road",
+            "image": "shopify://shop_images/off_road_olive.png",
             "color_placeholder": "",
             "url": ""
           }
@@ -138,17 +142,8 @@
         "brand_hEHQna": {
           "type": "brand",
           "settings": {
-            "title": "Title",
-            "image": "shopify://shop_images/mercedes_logos_PNG27.png",
-            "color_placeholder": "",
-            "url": ""
-          }
-        },
-        "brand_LKeQ3D": {
-          "type": "brand",
-          "settings": {
-            "title": "Title",
-            "image": "shopify://shop_images/land_rover_PNG79.png",
+            "title": "Custom Builds",
+            "image": "shopify://shop_images/custom_builds_bronze.png",
             "color_placeholder": "",
             "url": ""
           }
@@ -159,8 +154,7 @@
         "brand_8YEexy",
         "brand_pjdWFz",
         "brand_iqbGbh",
-        "brand_hEHQna",
-        "brand_LKeQ3D"
+        "brand_hEHQna"
       ],
       "name": "Brands / preset 6 (Ticker)",
       "settings": {
@@ -174,22 +168,28 @@
         "brands_auto_limit": 100,
         "bg": "bg-none",
         "border": "none",
-        "slides_per_view": "4",
+        "slides_per_view": "5",
         "slides_per_column": "1",
         "slides_per_view_mobile": "2",
         "slides_per_column_mobile": 2,
         "heading_alignment": "center",
-        "heading": "Luxury Vehicles",
-        "subtitle": "Trusted By World-Class Brands",
+        "heading": "VEHICLE STYLES",
+        "subtitle": "Designed For Your Drive",
+        "show_brand_title": true,
+        "brand_title_position": "below",
+        "brand_title_alignment": "center",
+        "brand_title_color": "#aaaaaa",
+        "brand_title_font_size": 14,
+        "brand_title_font_weight": "400",
         "button": false,
         "button_bottom_on_mobile": false,
         "button_text": "View all",
         "button_url": "",
         "section_width": "global",
         "container_max_width": 1978,
-        "spacing_sections": 30,
+        "spacing_sections": 0,
         "use_global_desktop_space": false,
-        "spacing_sections_mobile": 30,
+        "spacing_sections_mobile": 0,
         "use_global_mobile_space": false,
         "spacing_padding_sections": 100,
         "use_global_desktop_space_padding": true,
@@ -208,61 +208,230 @@
         "section_decoration_bottom_color": ""
       }
     },
-    "index_product_carousel_7mf37j": {
-      "type": "index-product-carousel",
-      "name": "Products carousel / preset 3 Wide banner",
+    "calder-feature-spun-forged": {
+      "type": "calder-feature-showcase",
+      "blocks": {
+        "feature_strength": {
+          "type": "feature",
+          "settings": {
+            "icon": "strength",
+            "icon_custom_svg": "",
+            "icon_custom_image": "shopify://shop_images/shield-checkmark-outline.svg",
+            "title": "Lightweight Strength",
+            "description": "",
+            "show_description": false
+          }
+        },
+        "feature_customization": {
+          "type": "feature",
+          "settings": {
+            "icon": "customization",
+            "icon_custom_svg": "",
+            "icon_custom_image": "shopify://shop_images/options-outline.svg",
+            "title": "Fully Customizable",
+            "description": "",
+            "show_description": false
+          }
+        }
+      },
+      "block_order": [
+        "feature_strength",
+        "feature_customization"
+      ],
+      "name": "Spun Forged Showcase",
       "settings": {
-        "section_animation": true,
-        "limit": 6,
-        "slides_per_view": "3",
-        "compact": false,
-        "reverse": false,
-        "countdown": "none",
-        "heading_alignment": "center",
-        "heading": "",
-        "subtitle": "",
-        "collection": "frontpage",
-        "banner": true,
-        "banner_position": "flex-row",
-        "layout": "wide",
-        "color_placeholder": "",
-        "banner_title": "Signature Wheels",
-        "banner_subtitle": "Our Collection",
-        "invert_color": true,
-        "banner_text_decor": false,
-        "button": true,
-        "button_bottom_on_mobile": true,
-        "button_text": "View all",
-        "button_url": "",
-        "button_color": "btn--invert",
-        "image_bg_preset": "none",
-        "pagination_invert_color": false,
-        "background_inner_type": "custom",
-        "background_inner_color": "",
-        "placeholder": true,
-        "hide_on_mobile": false,
+        "show_section": true,
+        "color_scheme": "cream",
+        "image_position": "left",
+        "column_ratio": "50_50",
+        "content_alignment": "left",
+        "vertical_alignment": "center",
+        "mobile_order": "image_first",
         "section_width": "global",
-        "container_max_width": 1178,
-        "spacing_sections": 30,
+        "image": "shopify://shop_images/Calder_Alloy_Wheel_in_Dramatic_Studio_Light.png",
+        "image_alt": "",
+        "show_eyebrow": true,
+        "eyebrow": "SUPERIOR CONSTRUCTION",
+        "heading": "TRUE 2-PIECE SPUN FORGED WHEELS",
+        "description": "<p>A true 2-piece spun forged design combines strength, precision, and fully customizable styling. Each wheel is engineered for performance while giving you the freedom to create a look that's uniquely yours.</p>",
+        "show_cta": true,
+        "cta_label": "LEARN MORE",
+        "cta_url": "",
+        "show_arrow": true,
+        "feature_icon_color": "#0e2a3e",
+        "show_features": true,
+        "feature_alignment": "left",
+        "feature_spacing": "normal",
+        "top_spacing": 48,
+        "bottom_spacing": 48,
+        "column_gap": "32",
+        "section_animation": true,
+        "spacing_sections": 50,
         "use_global_desktop_space": false,
-        "spacing_sections_mobile": 30,
-        "use_global_mobile_space": false,
-        "spacing_padding_sections": 0,
-        "use_global_desktop_space_padding": false,
-        "spacing_padding_sections_mobile": 0,
-        "use_global_mobile_space_padding": false,
-        "background": true,
-        "background_preset": "none",
-        "background_image": "shopify://shop_images/signature-wheels-bg.png",
+        "spacing_sections_mobile": 70,
+        "use_global_mobile_space": true,
+        "spacing_padding_sections": 100,
+        "use_global_desktop_space_padding": true,
+        "spacing_padding_sections_mobile": 70,
+        "use_global_mobile_space_padding": true,
+        "background": false,
         "background_behavior": "bg-cover",
-        "background_image_placeholder_type": "custom",
-        "background_image_placeholder": "",
-        "section_decoration_top": "none",
-        "section_decoration_top_color_type": "color_global_primary_bg",
-        "section_decoration_top_color": "",
-        "section_decoration_bottom": "none",
-        "section_decoration_bottom_color_type": "color_global_primary_bg",
-        "section_decoration_bottom_color": ""
+        "background_image_placeholder_type": "color_global_secondary_bg",
+        "background_image_placeholder": ""
+      }
+    },
+    "calder_feature_showcase_xg9gqm": {
+      "type": "calder-feature-showcase",
+      "blocks": {
+        "feature_83AUh8": {
+          "type": "feature",
+          "settings": {
+            "icon": "customization",
+            "icon_custom_svg": "",
+            "icon_custom_image": "shopify://shop_images/speedometer-outline.svg",
+            "title": "Fast Turnaround",
+            "description": "",
+            "show_description": false
+          }
+        },
+        "feature_D8GrH3": {
+          "type": "feature",
+          "settings": {
+            "icon": "strength",
+            "icon_custom_svg": "",
+            "icon_custom_image": "shopify://shop_images/stopwatch-outline.svg",
+            "title": "24-Hour Assembly",
+            "description": "",
+            "show_description": false
+          }
+        }
+      },
+      "block_order": [
+        "feature_83AUh8",
+        "feature_D8GrH3"
+      ],
+      "name": "24-Hour Assembly",
+      "settings": {
+        "show_section": true,
+        "color_scheme": "cream",
+        "image_position": "right",
+        "column_ratio": "50_50",
+        "content_alignment": "left",
+        "vertical_alignment": "center",
+        "mobile_order": "image_first",
+        "section_width": "global",
+        "image": "shopify://shop_images/Precision_Wheel_Assembly_Workshop.png",
+        "image_alt": "",
+        "show_eyebrow": true,
+        "eyebrow": "FAST. PRECISE. RELIABLE.",
+        "heading": "ASSEMBLED WITHIN 24 HOURS",
+        "description": "<p>Premium wheels without the long wait. Our streamlined assembly process delivers exceptional craftsmanship with most wheel configurations assembled within 24 hours, getting you one step closer to the road.</p>",
+        "show_cta": true,
+        "cta_label": "LEARN MORE",
+        "cta_url": "",
+        "show_arrow": true,
+        "feature_icon_color": "#0E2A3E",
+        "show_features": true,
+        "feature_alignment": "left",
+        "feature_spacing": "normal",
+        "top_spacing": 48,
+        "bottom_spacing": 48,
+        "column_gap": "32",
+        "section_animation": true,
+        "spacing_sections": 0,
+        "use_global_desktop_space": false,
+        "spacing_sections_mobile": 70,
+        "use_global_mobile_space": true,
+        "spacing_padding_sections": 100,
+        "use_global_desktop_space_padding": true,
+        "spacing_padding_sections_mobile": 70,
+        "use_global_mobile_space_padding": true,
+        "background": false,
+        "background_behavior": "bg-cover",
+        "background_image_placeholder_type": "color_global_secondary_bg",
+        "background_image_placeholder": ""
+      }
+    },
+    "calder-feature-24hr": {
+      "type": "calder-feature-showcase",
+      "blocks": {
+        "feature_clock": {
+          "type": "feature",
+          "settings": {
+            "icon": "clock",
+            "icon_custom_svg": "",
+            "title": "Vehicle-Specific Fitment",
+            "description": "",
+            "show_description": false
+          }
+        },
+        "feature_shield": {
+          "type": "feature",
+          "settings": {
+            "icon": "shield",
+            "icon_custom_svg": "",
+            "title": "Personalized Finishes",
+            "description": "",
+            "show_description": false
+          }
+        },
+        "feature_package": {
+          "type": "feature",
+          "settings": {
+            "icon": "package",
+            "icon_custom_svg": "",
+            "title": "Precision Fit",
+            "description": "",
+            "show_description": false
+          }
+        }
+      },
+      "block_order": [
+        "feature_clock",
+        "feature_shield",
+        "feature_package"
+      ],
+      "disabled": true,
+      "name": "Built For Your Vehicle",
+      "settings": {
+        "show_section": true,
+        "color_scheme": "navy",
+        "image_position": "left",
+        "column_ratio": "50_50",
+        "content_alignment": "left",
+        "vertical_alignment": "center",
+        "mobile_order": "image_first",
+        "section_width": "global",
+        "image": "shopify://shop_images/Calder-Wheels-Close-up_2.png",
+        "image_alt": "",
+        "show_eyebrow": true,
+        "eyebrow": "PERFECT FIT. DISTINCTIVE STYLE.",
+        "heading": "BUILT FOR YOUR <span class=\"cw-feature-showcase__highlight\">VEHICLE</span>",
+        "description": "<p>Your vehicle deserves more than a one-size-fits-all solution. Every Calder wheel is configured to complement your vehicle's specifications, delivering precise fitment, personalized styling, and a commanding presence.</p>",
+        "show_cta": true,
+        "cta_label": "OUR PROCESS",
+        "cta_url": "",
+        "show_arrow": true,
+        "feature_icon_color": "#0e2a3e",
+        "show_features": true,
+        "feature_alignment": "left",
+        "feature_spacing": "normal",
+        "top_spacing": 48,
+        "bottom_spacing": 48,
+        "column_gap": "32",
+        "section_animation": true,
+        "spacing_sections": 100,
+        "use_global_desktop_space": true,
+        "spacing_sections_mobile": 70,
+        "use_global_mobile_space": true,
+        "spacing_padding_sections": 100,
+        "use_global_desktop_space_padding": true,
+        "spacing_padding_sections_mobile": 70,
+        "use_global_mobile_space_padding": true,
+        "background": false,
+        "background_behavior": "bg-cover",
+        "background_image_placeholder_type": "color_global_secondary_bg",
+        "background_image_placeholder": ""
       }
     },
     "home-customize-band": {
@@ -272,7 +441,7 @@
         "heading": "Customize<br>Without Limits",
         "body_text": "Every Calder wheel is built to your specifications. Choose your center finish, barrel finish, and hardware for a truly unique creation that reflects your personal style.",
         "cta_text": "Build Yours",
-        "cta_url": "/pages/configurator",
+        "cta_url": "shopify://pages/build-your-wheel",
         "step_1": "Select Design",
         "step_2": "Choose Finish",
         "step_3": "Review Specs",
@@ -281,7 +450,7 @@
         "section_width": "global",
         "container_max_width": 1178,
         "spacing_sections": 100,
-        "use_global_desktop_space": true,
+        "use_global_desktop_space": false,
         "spacing_sections_mobile": 70,
         "use_global_mobile_space": true,
         "spacing_padding_sections": 100,
@@ -301,6 +470,68 @@
         "section_decoration_bottom_color": ""
       }
     },
+    "index_product_carousel_7mf37j": {
+      "type": "index-product-carousel",
+      "custom_css": [
+        "body.template-index .image-container.ic--bg {display: none !important;}",
+        ".image-container:not(.ic--ignore-global-round) {border-radius: 8px !important;}"
+      ],
+      "name": "Products carousel / preset 3 Wide banner",
+      "settings": {
+        "section_animation": true,
+        "product_card_layout": "default",
+        "limit": 6,
+        "slides_per_view": "2",
+        "compact": false,
+        "reverse": false,
+        "countdown": "none",
+        "heading_alignment": "center",
+        "heading": "",
+        "subtitle": "",
+        "collection": "frontpage",
+        "banner": true,
+        "banner_position": "flex-row",
+        "layout": "wide",
+        "color_placeholder": "",
+        "banner_title": "Signature Wheels",
+        "banner_subtitle": "Our Collection",
+        "invert_color": true,
+        "banner_text_decor": false,
+        "button": true,
+        "button_bottom_on_mobile": true,
+        "button_text": "View all",
+        "button_url": "shopify://collections/all-calder-wheels",
+        "button_color": "btn--invert",
+        "image_bg_preset": "none",
+        "pagination_invert_color": false,
+        "background_inner_type": "custom",
+        "background_inner_color": "",
+        "placeholder": true,
+        "hide_on_mobile": false,
+        "section_width": "global",
+        "container_max_width": 1178,
+        "spacing_sections": 0,
+        "use_global_desktop_space": false,
+        "spacing_sections_mobile": 0,
+        "use_global_mobile_space": false,
+        "spacing_padding_sections": 0,
+        "use_global_desktop_space_padding": false,
+        "spacing_padding_sections_mobile": 0,
+        "use_global_mobile_space_padding": false,
+        "background": true,
+        "background_preset": "none",
+        "background_image": "shopify://shop_images/Silverado-Red.png",
+        "background_behavior": "bg-cover",
+        "background_image_placeholder_type": "custom",
+        "background_image_placeholder": "",
+        "section_decoration_top": "none",
+        "section_decoration_top_color_type": "color_global_primary_bg",
+        "section_decoration_top_color": "",
+        "section_decoration_bottom": "none",
+        "section_decoration_bottom_color_type": "color_global_primary_bg",
+        "section_decoration_bottom_color": ""
+      }
+    },
     "home-engineering": {
       "type": "home-engineering",
       "settings": {
@@ -308,8 +539,8 @@
         "heading": "Engineered<br>To Perform",
         "body_text": "Every Calder wheel undergoes rigorous engineering and testing to ensure the highest standards of strength, weight, and durability.",
         "cta_text": "Learn More",
-        "cta_url": "/pages/engineering",
-        "image": "shopify://shop_images/engineering-mock-placeholder-1.png",
+        "cta_url": "shopify://pages/build-your-wheel",
+        "image": "shopify://shop_images/Calder_Wheel_CNC_Machining_Splash.png",
         "point_1": "Forged Aluminum",
         "point_2": "CNC Machined",
         "point_3": "Strength Tested",
@@ -344,40 +575,40 @@
         "image_yQrJMG": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/luxury-cars-mock-placeholder-4_c0d53d8a-06e7-44c1-9555-7c35de15254a.png",
+            "image": "shopify://shop_images/Escalade-M-07_1.png",
             "color_placeholder": "",
-            "title": "#image1",
-            "description": "Lorem ipsum dolor sit adipiscing elit, sed",
+            "title": "Escalade M-07",
+            "description": "",
             "link": ""
           }
         },
         "image_xkGwYc": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/luxury-cars-mock-placeholder-5_d307c70b-9ee2-4c65-9955-471abdb7f279.png",
+            "image": "shopify://shop_images/Silverado-Black_1.png",
             "color_placeholder": "",
-            "title": "#image1",
-            "description": "Lorem ipsum dolor sit adipiscing elit, sed",
+            "title": "Silverado",
+            "description": "",
             "link": ""
           }
         },
         "image_8iE46f": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/scenic-mock-placeholder-1.png",
+            "image": "shopify://shop_images/Range-Rover-M-07_1.png",
             "color_placeholder": "",
-            "title": "#image1",
-            "description": "Lorem ipsum dolor sit adipiscing elit, sed",
+            "title": "Range Rover M-07",
+            "description": "",
             "link": ""
           }
         },
         "image_48atPj": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/luxury-cars-placeholder-02.jpg",
+            "image": "shopify://shop_images/F150-Raptor_1.png",
             "color_placeholder": "",
-            "title": "#image1",
-            "description": "Lorem ipsum dolor sit adipiscing elit, sed",
+            "title": "F150 Raptor",
+            "description": "",
             "link": ""
           }
         }
@@ -393,7 +624,7 @@
         "section_animation": true,
         "columns": "4",
         "images_auto_height": true,
-        "images_auto_height_padding": 100,
+        "images_auto_height_padding": 60,
         "ticker_mode": false,
         "ticker_mode_size": "md",
         "heading_alignment": "center",
@@ -401,7 +632,7 @@
         "subtitle": "Our Process",
         "section_width": "global",
         "container_max_width": 1178,
-        "spacing_sections": 70,
+        "spacing_sections": 30,
         "use_global_desktop_space": false,
         "spacing_sections_mobile": 40,
         "use_global_mobile_space": false,
@@ -428,13 +659,13 @@
         "eyebrow": "Fitted Gallery",
         "heading": "Real Builds. Real Drivers.",
         "view_all_text": "View Gallery",
-        "view_all_url": "",
+        "view_all_url": "shopify://pages/wheel-gallery",
         "cta_eyebrow": "Your Vehicle",
         "cta_heading": "Built For Your Vehicle",
         "cta_body": "Every Calder wheel is precision engineered to fit your specific make and model. Explore fitment for your vehicle and start your build today.",
         "cta_text": "Start Your Build",
-        "cta_url": "/pages/fitment",
-        "image": "shopify://shop_images/scenic-cars-placeholder-01.jpg",
+        "cta_url": "shopify://pages/build-your-wheel",
+        "image": "shopify://shop_images/Black_Silverado_on_a_Desert_Highway.png",
         "section_animation": true,
         "section_width": "global",
         "container_max_width": 1178,
@@ -540,8 +771,11 @@
     "home-hero",
     "home-fitment",
     "index_brands_carousel_LcDYLF",
-    "index_product_carousel_7mf37j",
+    "calder-feature-spun-forged",
+    "calder_feature_showcase_xg9gqm",
+    "calder-feature-24hr",
     "home-customize-band",
+    "index_product_carousel_7mf37j",
     "home-engineering",
     "index_gallery_xqtAnR",
     "home-gallery",

@@ -1,0 +1,74 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "dealer-dashboard": {
+      "type": "dealer-dashboard",
+      "settings": {
+        "dealer_demo_mode": true,
+        "dealer_logo": "shopify://shop_images/calder-text-cream.svg",
+        "dealer_logo_width": 160,
+        "dealer_portal_subtitle": "DEALER PORTAL",
+        "sidebar_tagline": "A HIGHER STANDARD TOGETHER.",
+        "dealer_hero_image": "shopify://shop_images/scenic-cars-placeholder-01_18ac6d11-72a5-4ae1-b89d-1f5bd3a0c9c7.jpg",
+        "featured_heading": "FEATURED WHEELS",
+        "featured_collection": "frontpage",
+        "featured_products": [],
+        "featured_show_msrp": true,
+        "featured_show_type": true,
+        "featured_show_configure": true,
+        "show_kpi": true,
+        "show_quick_actions": true,
+        "show_recent_orders": true,
+        "show_production_tracker": true,
+        "show_recent_activity": true,
+        "show_featured_wheels": true,
+        "badge_in_production_bg": "#b8d9ff",
+        "badge_in_production_text": "#0b3d78",
+        "badge_finishing_bg": "#f5deb3",
+        "badge_finishing_text": "#67400e",
+        "badge_quality_bg": "#dce3f0",
+        "badge_quality_text": "#243a5a",
+        "badge_preparing_bg": "#dec5ff",
+        "badge_preparing_text": "#48238a",
+        "badge_shipped_bg": "#bfe8d6",
+        "badge_shipped_text": "#145c44",
+        "sidebar_bg_color": "#081d2d",
+        "sidebar_nav_text": "#ffffff",
+        "sidebar_active_accent": "#c2a48a",
+        "sidebar_divider": "#1a2a44",
+        "dashboard_bg": "#f6f8fa",
+        "panel_bg": "#ffffff",
+        "panel_border": "#e0e6ed",
+        "accent_gold": "#c2a48a",
+        "accent_copper": "#8b4d29",
+        "text_primary": "#071936",
+        "text_secondary": "#52617a",
+        "panel_radius": 5,
+        "card_spacing": 8,
+        "section_heading_size": 13,
+        "body_text_size": 13,
+        "small_label_size": 11,
+        "sidebar_bg_image": "shopify://shop_images/scenic-placeholder-01.jpg",
+        "sidebar_bg_position": "bottom",
+        "sidebar_bg_size": "cover",
+        "sidebar_overlay_color": "#081d2d",
+        "sidebar_overlay_opacity": 90,
+        "kpi_icon_size": 28,
+        "kpi_icon_bg_color": "#f0f2f5",
+        "qa_icon_size": 22,
+        "qa_icon_bg": "#f0f2f5"
+      }
+    }
+  },
+  "order": [
+    "dealer-dashboard"
+  ]
+}

@@ -1,0 +1,46 @@
+{%- liquid
+  assign local_activity = seed_activity | default: ''
+  assign events = null
+  if local_activity != ''
+    assign events = local_activity | parse_json
+  endif
+-%}
+
+<div class="dp-activity">
+  <div class="dp-card__head">
+    <h3 class="dp-card__title">Recent Activity</h3>
+  </div>
+
+  <div class="dp-activity__list">
+    {% if events and events.size > 0 %}
+      {% for event in events limit: 5 %}
+        {% assign ev_type = event.type | default: 'default' %}
+        {% assign ev_icon = '&#9679;' %}
+        {% if ev_type == 'status' %}
+          {% assign ev_icon = '&#8631;' %}
+        {% elsif ev_type == 'quote' %}
+          {% assign ev_icon = '&#36;' %}
+        {% elsif ev_type == 'shipped' %}
+          {% assign ev_icon = '&#9654;' %}
+        {% elsif ev_type == 'tracking' %}
+          {% assign ev_icon = '&#9672;' %}
+        {% elsif ev_type == 'invoice' %}
+          {% assign ev_icon = '&#9635;' %}
+        {% endif %}
+
+        <div class="dp-activity__item">
+          <div class="dp-activity__item-icon">{{ ev_icon }}</div>
+          <div class="dp-activity__item-body">
+            <span class="dp-activity__item-msg">{{ event.message | default: '' }}</span>
+            <span class="dp-activity__item-time">{{ event.timestamp | default: '' }}</span>
+          </div>
+        </div>
+      {% endfor %}
+    {% else %}
+      <div class="dp-empty-state">
+        <p>No recent activity.</p>
+        <p class="dp-empty-state__sub">New dealer account activity will appear here.</p>
+      </div>
+    {% endif %}
+  </div>
+</div>

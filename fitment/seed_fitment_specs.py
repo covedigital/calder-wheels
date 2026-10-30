@@ -71,8 +71,10 @@ BOLT_PATTERN_ALIASES = {
     "5x5.5": "5x139.7",
     "5x5.5in": "5x139.7",
     "5x5.9": "5x150",
+    "6x135": "6x135",
     "6x5.5": "6x139.7",
     "6x5.5in": "6x139.7",
+    "6x139": "6x139.7",
     "8x6.5": "8x165.1",
     "8x6.5in": "8x165.1",
     "8x6.69": "8x170",
@@ -277,6 +279,7 @@ class FitmentSpecSeeder:
         hub = safe_float(row.get("hub_bore", ""), 64.1)
         load = safe_int(row.get("load_rating_min", ""), 600)
         source = row.get("source", "curated").strip()
+        is_active = int(row.get("is_active", "1").strip()) if row.get("is_active", "").strip() else 1
 
         for my in model_year_matches:
             my_id = my["id"]
@@ -296,9 +299,9 @@ class FitmentSpecSeeder:
                     INSERT OR REPLACE INTO fitment_specs
                     (model_year_id, bolt_pattern_id, diameter_min, diameter_max,
                      width_min, width_max, offset_min, offset_max, hub_bore,
-                     load_rating_min, source)
-                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-                """, (my_id, bp_id, dmn, dmx, wmn, wmx, omn, omx, hub, load, source))
+                     load_rating_min, source, is_active)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                """, (my_id, bp_id, dmn, dmx, wmn, wmx, omn, omx, hub, load, source, is_active))
                 self.stats["inserted"] += 1
                 self.stats["matched"] += 1
             except sqlite3.IntegrityError as e:

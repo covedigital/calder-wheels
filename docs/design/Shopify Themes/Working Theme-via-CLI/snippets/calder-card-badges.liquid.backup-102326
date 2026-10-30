@@ -1,0 +1,21 @@
+{% comment %}
+  Calder Wheels — Card Badges (series badge + dealer-only badge)
+  Shows series badge and dealer-only indicator on product cards.
+  Usage: {% render 'calder-card-badges', product: product %}
+{% endcomment %}
+
+{%- liquid
+  assign design_code = product.metafields.custom.design_code.value
+  assign series = product.metafields.custom.series.value
+  assign is_dealer_only = product.metafields.custom.dealer_only.value
+-%}
+
+{% if series %}
+  <span class="prd-series-badge">{{ series | capitalize }}{% if design_code %} &middot; {{ design_code }}{% endif %}</span>
+{% elsif design_code %}
+  <span class="prd-series-badge">{{ design_code }}</span>
+{% endif %}
+
+{% if is_dealer_only %}
+  <span class="prd-series-badge" style="background:var(--dp-bad,#d26262);color:#fff">Dealer Only</span>
+{% endif %}

@@ -1,0 +1,27 @@
+year,make_model,bolt_pattern,diameter_min,diameter_max,width_min,width_max,offset_min,offset_max,hub_bore,load_rating_min,source,is_active
+2021-2026,CADILLAC Escalade,6x139.7,22,26,10,10,25,25,78.1,1200,verified,1
+2021-2026,CHEVROLET Tahoe,6x139.7,22,26,10,10,25,25,78.1,1200,verified,1
+2021-2026,GMC Yukon,6x139.7,22,26,10,10,25,25,78.1,1200,verified,1
+2018-2026,FORD Expedition,6x135,22,26,10,10,30,30,87.1,1200,verified,1
+2018-2026,FORD F-150,6x135,22,26,10,10,30,30,87.1,1200,verified,1
+2019-2026,MERCEDES-BENZ G-Class,5x130,22,26,10,10,25,25,84.1,1200,verified,1
+2022-2026,LAND ROVER Range Rover Sport,5x120,22,22,10,10,32,32,72.6,1200,verified,1
+2022-2026,LAND ROVER New Range Rover,5x120,22,26,10,10,32,32,72.6,1200,verified,1
+2010-2023,LEXUS GX,6x139.7,22,26,10,10,30,30,106.1,1200,verified,1
+2016-2022,LEXUS RX,5x114.3,22,24,10,10,30,30,60.1,1200,pending_confirmation,1
+2023-2026,LEXUS RX,5x114.3,22,24,10,10,30,30,60.1,1200,pending_confirmation,1
+2024-2026,LEXUS TX,5x120,22,24,10,10,35,35,60.1,1200,pending_confirmation,1
+2024-2026,LEXUS GX,6x139.7,22,26,10,10,30,30,95.1,1200,pending_confirmation,1
+2008-2021,LEXUS LX,5x150,22,24,10,10,30,30,110.1,1200,pending_confirmation,1
+2022-2026,LEXUS LX,6x139.7,22,26,10,10,30,30,95.1,1200,pending_confirmation,1
+2004-2013,NISSAN Armada,6x139.7,22,24,10,10,30,30,77.8,1200,pending_confirmation,1
+2014-2026,NISSAN Armada,6x139.7,22,26,10,10,30,30,77.8,1200,pending_confirmation,1
+2014-2026,INFINITI QX80,6x139.7,22,26,10,10,30,30,77.8,1200,pending_confirmation,1
+2019-2026,BMW X5,5x112,22,22,9,12,32,40,66.6,1200,pending_confirmation,1
+2019-2026,BMW X7,5x112,22,22,9.5,10.5,32,43,66.6,1200,pending_confirmation,1
+2020-2026,MERCEDES-BENZ GLE-Class,5x112,22,22,9,10,32,35,66.6,1200,pending_confirmation,1
+2020-2026,MERCEDES-BENZ GLS-Class,5x112,22,22,10,12,56,53,66.6,1200,pending_confirmation,1
+2018-2026,LAMBORGHINI URUS,5x130,22,24,10,12,25,18,71.6,1200,pending_confirmation,1
+2015-2026,AUDI Q7,5x112,22,22,10,10,25,25,66.6,1200,pending_confirmation,1
+2019-2026,AUDI Q8,5x112,22,22,10,10,25,25,66.6,1200,pending_confirmation,1
+2019-2026,ROLLS ROYCE Cullinan,5x112,22,26,10,10,25,25,66.6,1200,pending_confirmation,1

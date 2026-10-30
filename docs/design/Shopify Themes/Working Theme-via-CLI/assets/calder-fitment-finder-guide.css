@@ -1,0 +1,45 @@
+/* ============================================================
+   CALDER — FITMENT FINDER GUIDE CARD CONTEXT
+   The "By Vehicle" tab renders the approved PDP fitment guide
+   card (.cw-fitment-guide__card + calder-product-fitment-guide.css).
+   Those styles are written for the PDP section root; this file
+   scopes/neutralizes the section-level chrome so the card sits
+   cleanly inside the finder panel. Card-level styles are NOT
+   overridden — they remain identical to the approved PDP guide.
+   ============================================================ */
+
+/* Neutralize the PDP section shell (dark gradient, padding, margin)
+   when the guide card is embedded in the finder panel. */
+.hf-fitment .cw-fitment-guide {
+  background: transparent;
+  padding: 0 2rem 24px;
+  margin: 0;
+  position: relative;
+}
+
+.hf-fitment .cw-fitment-guide::before {
+  content: none;
+}
+
+/* The card keeps its approved PDP look; only drop the outer shadow
+   so it does not double up against the panel's own shadow. */
+.hf-fitment .cw-fitment-guide__card {
+  box-shadow: none;
+}
+
+/* Align the card's controls/results with the finder's rhythm. */
+.hf-fitment .cw-fitment-guide__controls {
+  margin-bottom: 0;
+}
+
+/* ── Responsive (matches the finder's mobile breakpoint) ── */
+
+@media (max-width: 768px) {
+  .hf-fitment .cw-fitment-guide {
+    padding: 0 20px 20px;
+  }
+
+  .hf-fitment .cw-fitment-guide__card {
+    padding: 16px;
+  }
+}

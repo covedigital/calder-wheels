@@ -1,0 +1,935 @@
+{{ 'fitment-finder.css' | asset_url | stylesheet_tag }}
+{{ 'home.css' | asset_url | stylesheet_tag }}
+{{ 'calder-product-fitment-guide.css' | asset_url | stylesheet_tag }}
+{{ 'calder-fitment-finder-guide.css' | asset_url | stylesheet_tag }}
+{% render 'fitment-data' %}
+{% render 'fitment-catalog' %}
+{% render 'calder-fitment-guide-data' %}
+
+{% comment %}
+  Calder Wheels — Fitment Finder Guide
+  Mirrors home-fitment.liquid: the By Vehicle tab renders the approved PDP
+  fitment guide card (.cw-fitment-guide__card, powered by
+  calder-product-fitment-guide.js and the calder-fitment-data.json dataset).
+  The By Wheel Style tab and the shared results/status machinery from
+  fitment-finder.js are unchanged (OpenCode Prompt 14, 2026-10-28).
+{% endcomment %}
+
+<section class="hf-fitment hf-fitment--light" id="calder-fitment-finder-{{ section.id }}" data-section-id="{{ section.id }}">
+  <!-- Background fills behind the shell -->
+  <div class="hf-fitment__bg-hero" aria-hidden="true"></div>
+  <div class="hf-fitment__bg-light" aria-hidden="true"></div>
+
+  <div class="hf-fitment__shell">
+    <!-- Tabs -->
+    <div class="hf-fitment__tabs" role="tablist" aria-label="Fitment search method">
+      <button class="hf-fitment__tab hf-fitment__tab--active hf-fitment__tab--vehicle" role="tab" aria-selected="true" data-tab="vehicle" id="hf-tab-vehicle-{{ section.id }}">
+        <svg class="hf-fitment__tab-icon" width="18" height="18" viewBox="0 0 512 512" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+          <path d="M469.71 234.6c-7.33-9.73-34.56-16.43-46.08-33.94s-20.95-55.43-50.27-70S288 112 256 112s-88 4-117.36 18.63-38.75 52.52-50.27 70-38.75 24.24-46.08 33.97S29.8 305.84 32.94 336s9 48 9 48h86c14.08 0 18.66-5.29 47.46-8 31.6-3 62.6-4 80.6-4s50 1 81.58 4c28.8 2.73 33.53 8 47.46 8h85s5.86-17.84 9-48-2.04-91.67-9.33-101.4M400 384h56v16h-56zM56 384h56v16H56z"
+            stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"/>
+
+          <path d="M364.47 309.16c-5.91-6.83-25.17-12.53-50.67-16.35S279 288 256.2 288s-33.17 1.64-57.61 4.81-42.79 8.81-50.66 16.35C136.12 320.6 153.42 333.44 167 335c13.16 1.5 39.47.95 89.31.95s76.15.55 89.31-.95c13.56-1.65 29.62-13.6 18.85-25.84M431.57 243.05a3.23 3.23 0 0 0-3.1-3c-11.81-.42-23.8.42-45.07 6.69a93.9 93.9 0 0 0-30.08 15.06c-2.28 1.78-1.47 6.59 1.39 7.1a455 455 0 0 0 52.82 3.1c10.59 0 21.52-3 23.55-12.44a52.4 52.4 0 0 0 .49-16.51M80.43 243.05a3.23 3.23 0 0 1 3.1-3c11.81-.42 23.8.42 45.07 6.69a93.9 93.9 0 0 1 30.08 15.06c2.28 1.78 1.47 6.59-1.39 7.1a455 455 0 0 1-52.82 3.1c-10.59 0-21.52-3-23.55-12.44a52.4 52.4 0 0 1-.49-16.51"
+            fill="currentColor" stroke="none"/>
+
+          <path d="M432 192h16M64 192h16M78 211s46.35-12 178-12 178 12 178 12"
+            stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"/>
+        </svg>
+
+        <span>{{ section.settings.tab_1_label | default: 'By Vehicle' }}</span>
+      </button>
+      <button class="hf-fitment__tab hf-fitment__tab--style" role="tab" aria-selected="false" data-tab="style" id="hf-tab-style-{{ section.id }}">  
+        <svg class="hf-fitment__tab-icon" width="18" height="18" viewBox="0 0 512 512" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+          <path d="M448 256c0-106-86-192-192-192S64 150 64 256s86 192 192 192 192-86 192-192Z"
+            stroke="currentColor" stroke-miterlimit="10" stroke-width="32"/>
+
+          <path d="M360 94.59V296M443.13 212.87 296 360M417.41 360H216M299.13 443.13l-144-144M152 416V216M68.87 299.13l144-144M94.59 152H288M212.87 68.87 360 216"
+            stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"/>
+        </svg>
+
+        <span>{{ section.settings.tab_2_label | default: 'By Wheel Style' }}</span>
+      </button>
+    </div>
+
+    <!-- Main panel -->
+    <div class="hf-fitment__panel" role="tabpanel">
+      <!-- Technical artwork (absolutely positioned, shared across tabs) -->
+      <div class="hf-fitment__art" aria-hidden="true">
+        {%- assign art_svg = 'technical-wheel-bg.svg' | asset_url -%}
+        <img src="{{ art_svg }}" alt="" class="hf-fitment__art-img" loading="lazy">
+      </div>
+
+      <!-- Inner layout: finder + vehicle divider + vehicle status -->
+      <div class="hf-fitment__layout">
+        <div class="hf-fitment__finder">
+          <!-- Heading -->
+          <div class="hf-fitment__heading-group">
+            <h2 class="hf-fitment__heading">FIND YOUR <span class="hf-fitment__heading-fit">FIT</span></h2>
+            <p class="hf-fitment__description" data-description-vehicle>Select your vehicle to see compatible wheels, real builds, and fitment details.</p>
+            <p class="hf-fitment__description" data-description-style hidden>Browse Calder wheels by size, bolt pattern, and finish.</p>
+          </div>
+
+          <!-- BY VEHICLE — approved PDP fitment guide card -->
+          <div id="hf-panel-vehicle-{{ section.id }}" class="hf-fitment__form-panel hf-fitment__form-panel--active cw-fitment-guide">
+            <div class="cw-fitment-guide__card">
+              <div class="cw-fitment-guide__controls">
+                <div class="cw-fitment-guide__field cw-fitment-guide__field--year">
+                  <label class="cw-fitment-guide__label" for="cw-guide-year-{{ section.id }}">Select Year</label>
+                  <div class="cw-fitment-guide__select-wrapper">
+                    <select
+                      id="cw-guide-year-{{ section.id }}"
+                      class="cw-fitment-guide__select"
+                      data-guide-year
+                      data-placeholder="{{ section.settings.placeholder_year | default: 'Select Year' }}"
+                      disabled
+                    >
+                      <option value="">{{ section.settings.placeholder_year | default: 'Select Year' }}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="cw-fitment-guide__field cw-fitment-guide__field--make">
+                  <label class="cw-fitment-guide__label" for="cw-guide-make-{{ section.id }}">Select Make</label>
+                  <div class="cw-fitment-guide__select-wrapper">
+                    <select
+                      id="cw-guide-make-{{ section.id }}"
+                      class="cw-fitment-guide__select"
+                      data-guide-make
+                      data-placeholder="{{ section.settings.placeholder_make | default: 'Select Make' }}"
+                      disabled
+                    >
+                      <option value="">{{ section.settings.placeholder_make | default: 'Select Make' }}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="cw-fitment-guide__field cw-fitment-guide__field--model">
+                  <label class="cw-fitment-guide__label" for="cw-guide-model-{{ section.id }}">Select Model</label>
+                  <div class="cw-fitment-guide__select-wrapper">
+                    <select
+                      id="cw-guide-model-{{ section.id }}"
+                      class="cw-fitment-guide__select"
+                      data-guide-model
+                      data-placeholder="{{ section.settings.placeholder_model | default: 'Select Model' }}"
+                      disabled
+                    >
+                      <option value="">{{ section.settings.placeholder_model | default: 'Select Model' }}</option>
+                    </select>
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  class="cw-fitment-guide__submit"
+                  data-guide-submit
+                  disabled
+                >
+                  {{ section.settings.guide_button_text | default: 'SEE FITMENT' }}
+                </button>
+              </div>
+
+              <div class="cw-fitment-guide__divider"></div>
+
+              <div class="cw-fitment-guide__results" data-guide-results style="display:none;"></div>
+            </div>
+          </div>
+
+          <!-- BY WHEEL STYLE form -->
+          <div id="hf-panel-style-{{ section.id }}" class="hf-fitment__form-panel" hidden>
+            <div class="hf-fitment__controls">
+              <div class="hf-fitment__control">
+                <label class="hf-fitment__label" for="hf-diameter-{{ section.id }}">DIAMETER</label>
+                <select id="hf-diameter-{{ section.id }}" class="hf-fitment__select" data-fitment="diameter">
+                  <option value="">{{ section.settings.placeholder_diameter | default: 'All Diameters' }}</option>
+                </select>
+              </div>
+              <div class="hf-fitment__control">
+                <label class="hf-fitment__label" for="hf-width-{{ section.id }}">WIDTH</label>
+                <select id="hf-width-{{ section.id }}" class="hf-fitment__select" data-fitment="width">
+                  <option value="">{{ section.settings.placeholder_width | default: 'All Widths' }}</option>
+                </select>
+              </div>
+              <div class="hf-fitment__control">
+                <label class="hf-fitment__label" for="hf-bolt-{{ section.id }}">BOLT PATTERN</label>
+                <select id="hf-bolt-{{ section.id }}" class="hf-fitment__select" data-fitment="bolt">
+                  <option value="">{{ section.settings.placeholder_bolt | default: 'All Bolt Patterns' }}</option>
+                </select>
+              </div>
+              <div class="hf-fitment__control">
+                <label class="hf-fitment__label" for="hf-finish-{{ section.id }}">FINISH</label>
+                <select id="hf-finish-{{ section.id }}" class="hf-fitment__select" data-fitment="finish">
+                  <option value="">{{ section.settings.placeholder_finish | default: 'All Finishes' }}</option>
+                </select>
+              </div>
+              <div class="hf-fitment__action">
+                <button id="hf-style-submit-{{ section.id }}" class="hf-fitment__cta">
+                  <span class="hf-fitment__cta-text">{{ section.settings.button_text | default: 'Find Wheels' }}</span>
+                  <svg class="hf-fitment__cta-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                    <path d="M4 8h8M8 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Vertical divider -->
+        <div class="hf-fitment__divider" aria-hidden="true"></div>
+
+        <!-- Empty vehicle state -->
+        <div class="hf-fitment__vehicle-empty" data-fitment-empty-state>
+          <div class="hf-fitment__vehicle-empty-icon" aria-hidden="true">
+            <svg
+              class="hf-fitment__empty-icon"
+              width="30"
+              height="30"
+              viewBox="0 0 512 512"
+              fill="none"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M469.71 234.6c-7.33-9.73-34.56-16.43-46.08-33.94s-20.95-55.43-50.27-70S288 112 256 112s-88 4-117.36 18.63-38.75 52.52-50.27 70-38.75 24.24-46.08 33.97S29.8 305.84 32.94 336s9 48 9 48h86c14.08 0 18.66-5.29 47.46-8 31.6-3 62.6-4 80.6-4s50 1 81.58 4c28.8 2.73 33.53 8 47.46 8h85s5.86-17.84 9-48-2.04-91.67-9.33-101.4M400 384h56v16h-56zM56 384h56v16H56z"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="32"
+              />
+
+              <path
+                d="M364.47 309.16c-5.91-6.83-25.17-12.53-50.67-16.35S279 288 256.2 288s-33.17 1.64-57.61 4.81-42.79 8.81-50.66 16.35C136.12 320.6 153.42 333.44 167 335c13.16 1.5 39.47.95 89.31.95s76.15.55 89.31-.95c13.56-1.65 29.62-13.6 18.85-25.84M431.57 243.05a3.23 3.23 0 0 0-3.1-3c-11.81-.42-23.8.42-45.07 6.69a93.9 93.9 0 0 0-30.08 15.06c-2.28 1.78-1.47 6.59 1.39 7.1a455 455 0 0 0 52.82 3.1c10.59 0 21.52-3 23.55-12.44a52.4 52.4 0 0 0 .49-16.51M80.43 243.05a3.23 3.23 0 0 1 3.1-3c11.81-.42 23.8.42 45.07 6.69a93.9 93.9 0 0 1 30.08 15.06c2.28 1.78 1.47 6.59-1.39 7.1a455 455 0 0 1-52.82 3.1c-10.59 0-21.52-3-23.55-12.44a52.4 52.4 0 0 1 .49-16.51"
+                fill="currentColor"
+                stroke="none"
+              />
+
+              <path
+                d="M432 192h16M64 192h16M78 211s46.35-12 178-12 178 12 178 12"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="32"
+              />
+            </svg>
+          </div>
+          <div class="hf-fitment__vehicle-empty-title">YOUR VEHICLE</div>
+          <div class="hf-fitment__vehicle-empty-name">No vehicle selected</div>
+          <p class="hf-fitment__vehicle-empty-description">Select your year, make, and model to see fitment specs and wheels that fit.</p>
+          <div class="hf-fitment__vehicle-empty-status"><span class="hf-fitment__vehicle-empty-indicator" aria-hidden="true"></span>Awaiting vehicle selection</div>
+        </div>
+
+        <!-- Selected vehicle region -->
+        <div class="hf-fitment__vehicle" data-fitment-status hidden>
+          <div class="hf-fitment__vehicle-inner">
+            <div class="hf-fitment__vehicle-eyebrow">YOUR VEHICLE</div>
+            <div class="hf-fitment__vehicle-name" data-fitment-vehicle-name></div>
+            <div class="hf-fitment__vehicle-status">
+              <svg class="hf-fitment__vehicle-check" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.2" fill="none"/>
+                <path d="M5 8.5l2 2 4-5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span data-fitment-status-text>Fitment enabled across the site</span>
+            </div>
+            <div class="hf-fitment__vehicle-hdivider" aria-hidden="true"></div>
+            <div class="hf-fitment__vehicle-actions">
+              <button class="hf-fitment__vehicle-change" data-fitment-change>
+                <svg width="13" height="13" viewBox="0 0 13 13" fill="none" aria-hidden="true">
+                  <path d="M1.5 6.5a5 5 0 019.3-2.9M11.5 6.5a5 5 0 01-9.3 2.9" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+                  <path d="M9.5 1.5L11 3.5 9 4M3.5 11.5L2 9.5l2-.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                Change Vehicle
+              </button>
+              <div class="hf-fitment__vehicle-action-divider" aria-hidden="true"></div>
+              <button class="hf-fitment__vehicle-reset" data-fitment-reset>
+                <svg width="13" height="13" viewBox="0 0 13 13" fill="none" aria-hidden="true">
+                  <path d="M2.5 2.5l8 8M10.5 2.5l-8 8" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+                </svg>
+                Reset
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="hf-results-{{ section.id }}" class="hf-fitment__results" style="display:none;"></div>
+    </div>
+  </div>
+</section>
+
+<style>
+  #calder-fitment-finder-{{ section.id }} .hf-fitment__vehicle-empty {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    flex: 1; min-width: 0; padding: 24px 18px; text-align: center; color: #0E2A3E;
+  }
+  #calder-fitment-finder-{{ section.id }} .hf-fitment__vehicle-empty[hidden] { display: none !important; }
+  #calder-fitment-finder-{{ section.id }} .hf-fitment__vehicle-empty-icon {
+    display: grid; place-items: center; width: 60px; height: 60px;
+    margin-bottom: 14px; border-radius: 50%; background: #F2EFE9; color: #747A80;
+  }
+  #calder-fitment-finder-{{ section.id }} .hf-fitment__vehicle-empty-title { font-size: 14px; font-weight: 700; line-height: 1.3; }
+  #calder-fitment-finder-{{ section.id }} .hf-fitment__vehicle-empty-name { margin-top: 8px; font-size: 13px; color: #343B42; }
+  #calder-fitment-finder-{{ section.id }} .hf-fitment__vehicle-empty-description { max-width: 260px; margin: 8px 0 14px; font-size: 12px; line-height: 1.5; color: #747A80; }
+  #calder-fitment-finder-{{ section.id }} .hf-fitment__vehicle-empty-status { display: flex; align-items: center; gap: 9px; font-size: 12px; color: #747A80; }
+  #calder-fitment-finder-{{ section.id }} .hf-fitment__vehicle-empty-indicator { width: 15px; height: 15px; border: 1.5px dashed currentColor; border-radius: 50%; }
+</style>
+<script>
+  (() => {
+    const root = document.getElementById('calder-fitment-finder-{{ section.id }}');
+    if (!root) return;
+    const selected = root.querySelector('[data-fitment-status]');
+    const empty = root.querySelector('[data-fitment-empty-state]');
+    if (!selected || !empty) return;
+    const sync = () => { empty.hidden = !selected.hidden; };
+    sync();
+    new MutationObserver(sync).observe(selected, { attributes: true, attributeFilter: ['hidden'] });
+  })();
+</script>
+
+<script src="{{ 'fitment-finder.js' | asset_url }}" defer></script>
+<script src="{{ 'calder-product-fitment-guide.js' | asset_url }}" defer></script>
+<script src="{{ 'calder-fitment-finder-guide.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "Fitment Finder Guide",
+  "tag": "section",
+  "class": "section--hf-fitment",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Tabs"
+    },
+    {
+      "type": "text",
+      "id": "tab_1_label",
+      "label": "Tab 1 label",
+      "default": "By Vehicle"
+    },
+    {
+      "type": "text",
+      "id": "tab_2_label",
+      "label": "Tab 2 label",
+      "default": "By Wheel Style"
+    },
+    {
+      "type": "header",
+      "content": "Heading"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Find Your FIT"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Select your vehicle to see compatible wheels, real builds, and fitment details."
+    },
+    {
+      "type": "header",
+      "content": "Fitment Form — By Vehicle"
+    },
+    {
+      "type": "text",
+      "id": "label_year",
+      "label": "Year label",
+      "default": "YEAR"
+    },
+    {
+      "type": "text",
+      "id": "placeholder_year",
+      "label": "Year placeholder",
+      "default": "Year"
+    },
+    {
+      "type": "text",
+      "id": "label_make",
+      "label": "Make label",
+      "default": "MAKE"
+    },
+    {
+      "type": "text",
+      "id": "placeholder_make",
+      "label": "Make placeholder",
+      "default": "Make"
+    },
+    {
+      "type": "text",
+      "id": "label_model",
+      "label": "Model label",
+      "default": "MODEL"
+    },
+    {
+      "type": "text",
+      "id": "placeholder_model",
+      "label": "Model placeholder",
+      "default": "Model"
+    },
+    {
+      "type": "text",
+      "id": "label_trim",
+      "label": "Trim label",
+      "default": "TRIM"
+    },
+    {
+      "type": "text",
+      "id": "placeholder_trim",
+      "label": "Trim placeholder",
+      "default": "Trim"
+    },
+    {
+      "type": "header",
+      "content": "Fitment Form — By Wheel Style"
+    },
+    {
+      "type": "text",
+      "id": "placeholder_diameter",
+      "label": "Diameter placeholder",
+      "default": "All Diameters"
+    },
+    {
+      "type": "text",
+      "id": "placeholder_width",
+      "label": "Width placeholder",
+      "default": "All Widths"
+    },
+    {
+      "type": "text",
+      "id": "placeholder_bolt",
+      "label": "Bolt Pattern placeholder",
+      "default": "All Bolt Patterns"
+    },
+    {
+      "type": "text",
+      "id": "placeholder_finish",
+      "label": "Finish placeholder",
+      "default": "All Finishes"
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "Find Wheels"
+    },
+    {
+      "type": "header",
+      "content": "Fitment Guide"
+    },
+    {
+      "type": "text",
+      "id": "guide_button_text",
+      "label": "By Vehicle card button text",
+      "default": "SEE FITMENT"
+    },
+    {
+      "type": "header",
+      "content": "SECTION GENERAL"
+    },
+    {
+      "type": "checkbox",
+      "id": "section_animation",
+      "label": "Enable soft appearing of section",
+      "default": true,
+      "info": "Global sections animation disabling in Theme Settings / General / Sections. AUTODISABLED if section has top or bottom separator."
+    },
+    {
+      "type": "header",
+      "content": "SECTION WIDTH"
+    },
+    {
+      "type": "select",
+      "id": "section_width",
+      "label": "Select width source",
+      "options": [
+        {
+          "value": "global",
+          "label": "Use store width"
+        },
+        {
+          "value": "custom",
+          "label": "Custom width"
+        }
+      ],
+      "default": "global",
+      "info": "Store width you can set in Theme Settings / General"
+    },
+    {
+      "type": "range",
+      "id": "container_max_width",
+      "min": 1178,
+      "max": 1978,
+      "step": 8,
+      "unit": "px",
+      "label": "Custom width",
+      "default": 1178,
+      "info": "The specified width may differ from the actual width of the section because this section uses a smart grid for the most successful arrangement of columns in rows and for best view. Columns are not scaled, but added when the section width is increased."
+    },
+    {
+      "type": "header",
+      "content": "SECTION MARGIN"
+    },
+    {
+      "type": "range",
+      "id": "spacing_sections",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Vertical space above the section on Desktop",
+      "default": 100
+    },
+    {
+      "type": "checkbox",
+      "id": "use_global_desktop_space",
+      "label": "Use global space on desktop",
+      "default": true,
+      "info": "from Theme Settings / General / Layout"
+    },
+    {
+      "type": "range",
+      "id": "spacing_sections_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Vertical space above the section on Mobile",
+      "default": 70
+    },
+    {
+      "type": "checkbox",
+      "id": "use_global_mobile_space",
+      "label": "Use global space on mobile",
+      "default": true,
+      "info": "from Theme Settings / General / Layout"
+    },
+    {
+      "type": "header",
+      "content": "SECTION PADDING",
+      "info": "Only if SECTION BACKGROUND or SECTION SEPARATOR was enabled"
+    },
+    {
+      "type": "range",
+      "id": "spacing_padding_sections",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Vertical inner padding on Desktop",
+      "default": 100
+    },
+    {
+      "type": "checkbox",
+      "id": "use_global_desktop_space_padding",
+      "label": "Use global inner padding on desktop",
+      "default": true,
+      "info": "from Theme Settings / General / Layout"
+    },
+    {
+      "type": "range",
+      "id": "spacing_padding_sections_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Vertical inner padding on Mobile",
+      "default": 70
+    },
+    {
+      "type": "checkbox",
+      "id": "use_global_mobile_space_padding",
+      "label": "Use global inner padding on Mobile",
+      "default": true,
+      "info": "from Theme Settings / General / Layout"
+    },
+    {
+      "type": "header",
+      "content": "SECTION BACKGROUND"
+    },
+    {
+      "type": "checkbox",
+      "id": "background",
+      "label": "Enable background",
+      "default": false,
+      "info": "by default inherits Secondary background color from Theme Settings / Colors - General Secondary"
+    },
+    {
+      "type": "select",
+      "id": "background_preset",
+      "label": "Background image - preset",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "product-cosmetics-bg.png",
+          "label": "Leaves 1"
+        },
+        {
+          "value": "bottom-cosmetics-bg.png",
+          "label": "Leaves 2"
+        },
+        {
+          "value": "bg-makeup1.png,bg-makeup1-m.png",
+          "label": "Pink and Waves 1"
+        },
+        {
+          "value": "bg-makeup2.png,bg-makeup2-m.png",
+          "label": "Pink and Waves 2"
+        },
+        {
+          "value": "bg-makeup4.png,bg-makeup4-m.png",
+          "label": "Pink and Waves 3"
+        },
+        {
+          "value": "bg-makeup3.png,bg-makeup3-m.png",
+          "label": "Purple Splash"
+        },
+        {
+          "value": "bg-sweets1.png",
+          "label": "Blue Sun Rays"
+        }
+      ],
+      "default": "none",
+      "info": "default from theme"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background image - custom on Desktop"
+    },
+    {
+      "type": "select",
+      "id": "background_behavior",
+      "label": "Background image behavior",
+      "options": [
+        {
+          "value": "bg-cover",
+          "label": "Cover"
+        },
+        {
+          "value": "bg-contain",
+          "label": "Contain"
+        },
+        {
+          "value": "bg-repeat",
+          "label": "Repeat"
+        }
+      ],
+      "default": "bg-cover"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image_mobile",
+      "label": "Background image - custom on Mobile",
+      "info": "only if Background image - custom on Desktop selected"
+    },
+    {
+      "type": "select",
+      "id": "background_image_placeholder_type",
+      "label": "Placeholder background color",
+      "options": [
+        {
+          "value": "color_global_primary_bg",
+          "label": "Primary background color"
+        },
+        {
+          "value": "color_global_secondary_bg",
+          "label": "Secondary background color"
+        },
+        {
+          "value": "custom",
+          "label": "Custom color"
+        }
+      ],
+      "default": "color_global_secondary_bg"
+    },
+    {
+      "type": "color",
+      "id": "background_image_placeholder",
+      "label": "Custom - Placeholder background color"
+    },
+    {
+      "type": "header",
+      "content": "SECTION SEPARATOR"
+    },
+    {
+      "type": "header",
+      "content": "Top separator"
+    },
+    {
+      "type": "select",
+      "id": "section_decoration_top",
+      "label": "Shape",
+      "options": [
+        {
+          "value": "global",
+          "label": "Use global separator"
+        },
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "grunge1",
+          "label": "Grunge 1"
+        },
+        {
+          "value": "grunge2",
+          "label": "Grunge 2"
+        },
+        {
+          "value": "grunge3",
+          "label": "Grunge 3"
+        },
+        {
+          "value": "paper",
+          "label": "Paper"
+        },
+        {
+          "value": "mountains",
+          "label": "Mountains"
+        },
+        {
+          "value": "ellipse1",
+          "label": "Ellipse 1"
+        },
+        {
+          "value": "ellipse2",
+          "label": "Ellipse 2"
+        },
+        {
+          "value": "wave1",
+          "label": "Wave 1"
+        },
+        {
+          "value": "wave2",
+          "label": "Wave 2"
+        },
+        {
+          "value": "wave3",
+          "label": "Wave 3"
+        },
+        {
+          "value": "wave4",
+          "label": "Wave 4"
+        },
+        {
+          "value": "wave5",
+          "label": "Wave 5"
+        },
+        {
+          "value": "triangle1",
+          "label": "Triangle 1"
+        },
+        {
+          "value": "triangle2",
+          "label": "Triangle 2"
+        },
+        {
+          "value": "triangle_assymetrical1",
+          "label": "Triangle assymetrical 1"
+        },
+        {
+          "value": "triangle_assymetrical1_flip",
+          "label": "Triangle assymetrical 1 flip"
+        },
+        {
+          "value": "triangle_assymetrical2",
+          "label": "Triangle assymetrical 2"
+        },
+        {
+          "value": "triangle_assymetrical2_flip",
+          "label": "Triangle assymetrical 2 flip"
+        },
+        {
+          "value": "tilt",
+          "label": "Tilt"
+        },
+        {
+          "value": "tilt_flip",
+          "label": "Tilt flip"
+        },
+        {
+          "value": "glaze",
+          "label": "Glaze"
+        }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "select",
+      "id": "section_decoration_top_color_type",
+      "label": "Color",
+      "options": [
+        {
+          "value": "color_global_primary_bg",
+          "label": "Primary background color"
+        },
+        {
+          "value": "color_global_secondary_bg",
+          "label": "Secondary background color"
+        },
+        {
+          "value": "color_header_main_bg",
+          "label": "Header - Middle(main) part color"
+        },
+        {
+          "value": "custom",
+          "label": "Custom color"
+        }
+      ],
+      "default": "color_global_primary_bg"
+    },
+    {
+      "type": "color",
+      "id": "section_decoration_top_color",
+      "label": "Custom - top separator color"
+    },
+    {
+      "type": "header",
+      "content": "Bottom separator"
+    },
+    {
+      "type": "select",
+      "id": "section_decoration_bottom",
+      "label": "Shape",
+      "options": [
+        {
+          "value": "global",
+          "label": "Use global separator"
+        },
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "grunge1",
+          "label": "Grunge 1"
+        },
+        {
+          "value": "grunge2",
+          "label": "Grunge 2"
+        },
+        {
+          "value": "grunge3",
+          "label": "Grunge 3"
+        },
+        {
+          "value": "paper",
+          "label": "Paper"
+        },
+        {
+          "value": "mountains",
+          "label": "Mountains"
+        },
+        {
+          "value": "ellipse1",
+          "label": "Ellipse 1"
+        },
+        {
+          "value": "ellipse2",
+          "label": "Ellipse 2"
+        },
+        {
+          "value": "wave1",
+          "label": "Wave 1"
+        },
+        {
+          "value": "wave2",
+          "label": "Wave 2"
+        },
+        {
+          "value": "wave3",
+          "label": "Wave 3"
+        },
+        {
+          "value": "wave4",
+          "label": "Wave 4"
+        },
+        {
+          "value": "wave5",
+          "label": "Wave 5"
+        },
+        {
+          "value": "triangle1",
+          "label": "Triangle 1"
+        },
+        {
+          "value": "triangle2",
+          "label": "Triangle 2"
+        },
+        {
+          "value": "triangle_assymetrical1",
+          "label": "Triangle assymetrical 1"
+        },
+        {
+          "value": "triangle_assymetrical1_flip",
+          "label": "Triangle assymetrical 1 flip"
+        },
+        {
+          "value": "triangle_assymetrical2",
+          "label": "Triangle assymetrical 2"
+        },
+        {
+          "value": "triangle_assymetrical2_flip",
+          "label": "Triangle assymetrical 2 flip"
+        },
+        {
+          "value": "tilt",
+          "label": "Tilt"
+        },
+        {
+          "value": "tilt_flip",
+          "label": "Tilt flip"
+        },
+        {
+          "value": "glaze",
+          "label": "Glaze"
+        }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "paragraph",
+      "content": "'Global separator' is set in Theme Settings / Separators / Global separator style"
+    },
+    {
+      "type": "select",
+      "id": "section_decoration_bottom_color_type",
+      "label": "Color",
+      "options": [
+        {
+          "value": "color_global_primary_bg",
+          "label": "Primary background color"
+        },
+        {
+          "value": "color_global_secondary_bg",
+          "label": "Secondary background color"
+        },
+        {
+          "value": "color_footer_top_bg",
+          "label": "Footer - Top part color"
+        },
+        {
+          "value": "custom",
+          "label": "Custom color"
+        }
+      ],
+      "default": "color_global_primary_bg"
+    },
+    {
+      "type": "color",
+      "id": "section_decoration_bottom_color",
+      "label": "Custom - bottom separator color"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Fitment Finder Guide",
+      "category": "Custom"
+    }
+  ]
+}
+  {% endschema %}

@@ -1,23 +1,6 @@
+{{ 'build-your-wheel.css' | asset_url | stylesheet_tag }}
 {{ 'wheel-configurator.css' | asset_url | stylesheet_tag }}
 
-{%- liquid
-  assign is_configurable = product.metafields.custom.is_configurable.value | default: false
-
-  unless is_configurable
-    for tag in product.tags
-      if tag == 'configurable'
-        assign is_configurable = true
-        break
-      endif
-    endfor
-  endunless
-
-  if is_configurable == false
-    echo '<!-- Product is not configurable — configurator hidden -->'
-  endif
--%}
-
-{% if is_configurable %}
 {%- liquid
   assign bom_json = product.metafields.custom.bom.value
   assign configurator_title = section.settings.title | default: 'Build Your Wheel'
@@ -27,151 +10,546 @@
   render 'configurator-data', product: product, section_id: section.id
 -%}
 
-<div
-  class="wheel-configurator"
-  id="wheel-configurator-{{ section.id }}"
-  data-product-id="{{ product.id }}"
-  data-section-id="{{ section.id }}"
->
-  <div class="wheel-configurator__header">
-    <h3 class="wheel-configurator__title">{{ configurator_title }}</h3>
-    {% if configurator_subtitle %}
-      <p class="wheel-configurator__subtitle">{{ configurator_subtitle }}</p>
+{%- liquid
+  assign configurator_bg = section.settings.background_image
+  assign configurator_bg_mobile = section.settings.background_image_mobile
+-%}
+
+<style>
+  #wheel-configurator-{{ section.id }} {
+    {% if configurator_bg != blank %}
+      --configurator-bg-image: url('{{ configurator_bg | image_url: width: 2400 }}');
+    {% else %}
+      --configurator-bg-image: none;
     {% endif %}
-  </div>
 
-  <div class="wheel-configurator__layout">
-    <div class="wheel-configurator__preview">
-      <div
-        class="wheel-configurator__canvas"
-        id="configurator-canvas-{{ section.id }}"
-        data-bom='{{ bom_json | json | escape }}'
-      >
-        <div class="wheel-configurator__preview-loading">
-          <div class="loading-overlay__spinner" style="display:block;width:48px;height:48px;margin:0 auto;">
-            <div data-load="loading"></div>
+    {% if configurator_bg_mobile != blank %}
+      --configurator-bg-image-mobile: url('{{ configurator_bg_mobile | image_url: width: 1200 }}');
+    {% elsif configurator_bg != blank %}
+      --configurator-bg-image-mobile: url('{{ configurator_bg | image_url: width: 1200 }}');
+    {% else %}
+      --configurator-bg-image-mobile: none;
+    {% endif %}
+  }
+</style>
+
+<div
+  class="calder-configurator"
+  id="calder-configurator-{{ section.id }}"
+>
+  <div
+    class="wheel-configurator wheel-configurator--calder"
+    id="wheel-configurator-{{ section.id }}"
+    data-product-id="{{ product.id }}"
+    data-product-handle="{{ product.handle }}"
+    data-section-id="{{ section.id }}"
+  >
+
+    <div class="wheel-configurator__inner">
+
+      <!-- =====================================================
+           CENTERED SECTION HEADER
+           ===================================================== -->
+
+      <div class="wheel-configurator__header">
+
+        <div class="wheel-configurator__eyebrow">
+          Customize Your Look
+        </div>
+
+        <h3 class="wheel-configurator__title">
+          {{ configurator_title }}
+        </h3>
+
+        {% if configurator_subtitle %}
+          <p class="wheel-configurator__subtitle">
+            {{ configurator_subtitle }}
+          </p>
+        {% endif %}
+
+      </div>
+
+
+      <!-- =====================================================
+           MAIN 3-COLUMN ROW
+
+           PREVIEW | CONTROLS | PURCHASE
+           ===================================================== -->
+
+      <div class="wheel-configurator__visual cbp-config cbp-config__layout">
+
+        <div class="cbp-config__col cbp-config__col--preview">
+
+          <div class="wheel-configurator__preview">
+
+            <div class="wheel-configurator__canvas" id="configurator-canvas-{{ section.id }}" data-bom='{{ bom_json | json | escape }}'>
+
+              <div class="wheel-configurator__preview-loading">
+                <div class="loading-overlay__spinner" style="display:block;width:48px;height:48px;margin:0 auto;"><div data-load="loading"></div></div>
+                <p>Loading preview...</p>
+              </div>
+
+              <div class="wheel-configurator__preview-layers" style="display:none;">
+                <img class="wheel-configurator__layer wheel-configurator__layer--barrel" src="" alt="" data-layer="barrel">
+                <img class="wheel-configurator__layer wheel-configurator__layer--center" src="" alt="" data-layer="center">
+                <img class="wheel-configurator__layer wheel-configurator__layer--hardware" src="" alt="" data-layer="hardware">
+              </div>
+
+              {% if show_3d and product.metafields.custom.model_with_variants.value == true %}
+              <div class="wheel-configurator__3d-viewer" style="display:none;">
+                <product-model data-section="{{ section.id }}">
+                  {% for media in product.media %}
+                    {% if media.media_type == 'model' %}
+                      {{ media | model_viewer_tag: reveal: 'interaction' }}
+                    {% endif %}
+                  {% endfor %}
+                </product-model>
+              </div>
+              {% endif %}
+
+            </div>
+
+            <div class="cbp-config__preview-actions">
+              <button type="button" class="cbp-config__preview-action" id="configurator-zoom-{{ section.id }}">
+                <svg viewBox="0 0 20 20" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="9" cy="9" r="5.5"/><path d="M16 16l-3.5-3.5M7 9h4M9 7v4"/></svg>
+                <span>Zoom</span>
+              </button>
+            </div>
+
+            <div class="wheel-configurator__actions" style="display:none;"></div>
+
           </div>
-          <p>Loading preview...</p>
-        </div>
 
-        <div class="wheel-configurator__preview-layers" style="display:none;">
-          <img class="wheel-configurator__layer wheel-configurator__layer--barrel" src="" alt="" data-layer="barrel">
-          <img class="wheel-configurator__layer wheel-configurator__layer--center" src="" alt="" data-layer="center">
-          <img class="wheel-configurator__layer wheel-configurator__layer--hardware" src="" alt="" data-layer="hardware">
         </div>
+        <!-- /cbp-config__col--preview -->
 
-        {% if show_3d and product.metafields.custom.model_with_variants.value == true %}
-          <div class="wheel-configurator__3d-viewer" style="display:none;">
-            <product-model data-section="{{ section.id }}">
-              {% for media in product.media %}
-                {% if media.media_type == 'model' %}
-                  {{ media | model_viewer_tag: reveal: 'interaction' }}
-                {% endif %}
+        <div class="cbp-config__col cbp-config__col--controls">
+
+          <div class="cbp-config__finish-group">
+            <div class="cbp-config__finish-heading">
+              <span class="cbp-config__badge">1</span>
+              <div class="cbp-config__finish-titles">
+                <h4 class="cbp-config__finish-label">Diameter</h4>
+                <p class="cbp-config__finish-desc">Choose a wheel diameter.</p>
+              </div>
+            </div>
+            <select
+              class="wheel-configurator__diameter-select"
+              id="configurator-diameters-{{ section.id }}"
+              data-component="diameter"
+              aria-label="Diameter"
+            >
+              <option value="">Select Diameter</option>
+            </select>
+            <span class="wheel-configurator__stock-badge wheel-configurator__stock-badge--diameter" id="configurator-diameter-stock-{{ section.id }}" data-diameter-stock hidden></span>
+          </div>
+
+          <div class="cbp-config__finish-group">
+            <div class="cbp-config__finish-heading">
+              <span class="cbp-config__badge">2</span>
+              <div class="cbp-config__finish-titles">
+                <h4 class="cbp-config__finish-label">Center Finish</h4>
+                <p class="cbp-config__finish-desc">Choose a finish for the center.</p>
+              </div>
+            </div>
+            <div class="wheel-configurator__options" id="configurator-centers-{{ section.id }}" data-component="center" data-loaded="false">
+              <div class="wheel-configurator__loading-options"><div data-load="loading"></div></div>
+            </div>
+          </div>
+
+          <div class="cbp-config__finish-group">
+            <div class="cbp-config__finish-heading">
+              <span class="cbp-config__badge">3</span>
+              <div class="cbp-config__finish-titles">
+                <h4 class="cbp-config__finish-label">Barrel &amp; Lip Finish</h4>
+                <p class="cbp-config__finish-desc">Choose a finish for the barrel and lip.</p>
+              </div>
+            </div>
+            <div class="wheel-configurator__options" id="configurator-barrels-{{ section.id }}" data-component="barrel" data-loaded="false">
+              <div class="wheel-configurator__loading-options"><div data-load="loading"></div></div>
+            </div>
+          </div>
+
+          <div class="cbp-config__finish-group">
+            <div class="cbp-config__finish-heading">
+              <span class="cbp-config__badge">4</span>
+              <div class="cbp-config__finish-titles">
+                <h4 class="cbp-config__finish-label">Hardware &amp; Rivet Finish</h4>
+                <p class="cbp-config__finish-desc">Choose a finish for the hardware and rivets.</p>
+              </div>
+            </div>
+            <div class="wheel-configurator__options" id="configurator-hardwares-{{ section.id }}" data-component="hardware" data-loaded="false">
+              <div class="wheel-configurator__loading-options"><div data-load="loading"></div></div>
+            </div>
+          </div>
+
+          <div class="wheel-configurator__availability" id="configurator-availability-{{ section.id }}" style="display:none;"></div>
+
+        </div>
+        <!-- /cbp-config__col--controls -->
+
+        <div class="cbp-config__col cbp-config__col--summary">
+
+          <div class="cbp-config__summary-panel" id="configurator-summary-{{ section.id }}">
+
+            <div class="cbp-config__summary-header">
+              <span class="cbp-config__summary-title">YOUR CONFIGURATION</span>
+              <button type="button" class="cbp-config__reset-btn" id="configurator-reset-{{ section.id }}">
+                <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3v5h5M14 13V8H9"/><path d="M13.5 7.5A7 7 0 0 0 3.5 4L2 5M2.5 8.5A7 7 0 0 0 12.5 12l1.5-1"/></svg>
+                <span>Reset</span>
+              </button>
+            </div>
+
+            <div class="cbp-config__summary-rows">
+              {% assign items = 'Diameter,Center Finish,Barrel &amp; Lip,Hardware &amp; Rivet Finish' | split: ',' %}
+              {% assign keys = 'diameter,center,barrel,hardware' | split: ',' %}
+              {% for item in keys %}
+              <div class="cbp-config__summary-row">
+                {% unless keys[forloop.index0] == 'diameter' %}
+                <img src="" alt="" data-summary-thumb="{{ item }}" style="display:none;">
+                {% endunless %}
+                <div class="cbp-config__summary-info">
+                  <span class="cbp-config__summary-name">{{ items[forloop.index0] }}</span>
+                  <strong id="configurator-summary-{{ item }}">&mdash;</strong>
+                </div>
+              </div>
               {% endfor %}
-            </product-model>
+            </div>
+
+            <div class="cbp-config__summary-price">
+              <span class="cbp-config__price-label">Price per wheel</span>
+              <strong id="configurator-summary-price">&mdash;</strong>
+            </div>
+
+            <button type="button" id="configurator-add-{{ section.id }}" class="cbp-config__add-btn" disabled>
+              <svg viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="7" cy="18" r="1.2"/><circle cx="15" cy="18" r="1.2"/><path d="M2 3h2l2 10h8l2-8H4"/></svg>
+              <span>Add to Cart</span>
+            </button>
+
+            <div class="cbp-config__save-share">
+              <button type="button" class="cbp-config__save-btn" id="configurator-save-{{ section.id }}" data-action="save">
+                <svg viewBox="0 0 20 20" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M15 17H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v7a2 2 0 0 1-2 2zM13 17v-4H7v4M7 1v4"/></svg>
+                <span>Save Build</span>
+              </button>
+              <button type="button" class="cbp-config__share-btn" id="configurator-share-{{ section.id }}" data-action="share">
+                <svg viewBox="0 0 20 20" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6" cy="10" r="2.5"/><circle cx="14" cy="4" r="2.5"/><circle cx="14" cy="16" r="2.5"/><path d="M8.5 11.5l5 2M8.5 8.5l5-2"/></svg>
+                <span>Share Build</span>
+              </button>
+            </div>
+
+            <div class="cbp-config__bto-notice">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+              <div>
+                <strong>Built to Order</strong>
+                <span>{{ section.settings.lead_time | default: 'Ships in 5\u201310 business days' }}</span>
+              </div>
+            </div>
+
           </div>
-        {% endif %}
+
+        </div>
+        <!-- /cbp-config__col--summary -->
+
+
+      </div>
+      <!-- /wheel-configurator__visual -->
+
+
+      <!-- BENEFITS STRIP -->
+
+      <div class="wheel-configurator__benefits">
+
+        <div class="wheel-configurator__benefit">
+          <div class="wheel-configurator__benefit-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15v-3M12 8.5v.5M7.8 21L12 18l4.2 3V3.5a1 1 0 0 0-.5-.9L12.7 1.2a1 1 0 0 0-1.4 0L7.3 2.6a1 1 0 0 0-.5.9V21z"></path></svg>
+          </div>
+          <strong class="wheel-configurator__benefit-title">Premium Craftsmanship</strong>
+          <span class="wheel-configurator__benefit-text">Engineered for performance and style</span>
+        </div>
+
+        <div class="wheel-configurator__benefit">
+          <div class="wheel-configurator__benefit-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+          </div>
+          <strong class="wheel-configurator__benefit-title">Fully Customizable</strong>
+          <span class="wheel-configurator__benefit-text">Tailored to your vehicle and taste</span>
+        </div>
+
+        <div class="wheel-configurator__benefit">
+          <div class="wheel-configurator__benefit-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>
+          </div>
+          <strong class="wheel-configurator__benefit-title">Made to Order</strong>
+          <span class="wheel-configurator__benefit-text">Built with precision</span>
+        </div>
+
+        <div class="wheel-configurator__benefit">
+          <div class="wheel-configurator__benefit-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M1 18h22M5 10h14M5 6h14M3 18V6a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v12"></path></svg>
+          </div>
+          <strong class="wheel-configurator__benefit-title">Fast Shipping</strong>
+          <span class="wheel-configurator__benefit-text">{{ section.settings.lead_time | default: 'Ships in 5\u201310 business days' }}</span>
+        </div>
+
       </div>
 
-      <div class="wheel-configurator__toggle-3d" style="display:none;">
-        <button type="button" class="btn btn--sm btn--grey configurator-toggle-btn" data-view="layers">
-          <span class="configurator-toggle-layers">2D Preview</span>
-          <span class="configurator-toggle-3d">3D View</span>
-        </button>
-      </div>
+
     </div>
+    <!-- /wheel-configurator__inner -->
 
-    <div class="wheel-configurator__controls">
-      <div class="wheel-configurator__section">
-        <h4 class="wheel-configurator__label">Center Finish</h4>
-        <div
-          class="wheel-configurator__options"
-          id="configurator-centers-{{ section.id }}"
-          data-component="center"
-          data-loaded="false"
-        >
-          <div class="wheel-configurator__loading-options">
-            <div data-load="loading"></div>
-          </div>
-        </div>
-      </div>
 
-      <div class="wheel-configurator__section">
-        <h4 class="wheel-configurator__label">Barrel / Lip Finish</h4>
-        <div
-          class="wheel-configurator__options"
-          id="configurator-barrels-{{ section.id }}"
-          data-component="barrel"
-          data-loaded="false"
-        >
-          <div class="wheel-configurator__loading-options">
-            <div data-load="loading"></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="wheel-configurator__section">
-        <h4 class="wheel-configurator__label">Hardware / Rivet Finish</h4>
-        <div
-          class="wheel-configurator__options"
-          id="configurator-hardwares-{{ section.id }}"
-          data-component="hardware"
-          data-loaded="false"
-        >
-          <div class="wheel-configurator__loading-options">
-            <div data-load="loading"></div>
-          </div>
-        </div>
-      </div>
-
-      <div
-        class="wheel-configurator__availability"
-        id="configurator-availability-{{ section.id }}"
-        style="display:none;"
-      >
-      </div>
-
-      <div class="wheel-configurator__actions" style="display:none;">
-        <button
-          type="button"
-          id="configurator-add-{{ section.id }}"
-          class="btn btn--primary w-100 wheel-configurator__add-btn"
-          disabled
-        >
-          Add Configured Wheel to Cart
-        </button>
-        {% if section.settings.show_quote %}
-          <button
-            type="button"
-            id="configurator-quote-{{ section.id }}"
-            class="btn btn--secondary w-100 wheel-configurator__quote-btn"
-            disabled
-          >
-            Request Quote
-          </button>
-        {% endif %}
-      </div>
-    </div>
   </div>
+  <!-- /wheel-configurator -->
 
-  <div class="wheel-configurator__summary" id="configurator-summary-{{ section.id }}" style="display:none;">
-    <span class="wheel-configurator__summary-item">
-      <strong>Center:</strong> <span id="configurator-summary-center">—</span>
-    </span>
-    <span class="wheel-configurator__summary-item">
-      <strong>Barrel:</strong> <span id="configurator-summary-barrel">—</span>
-    </span>
-    <span class="wheel-configurator__summary-item">
-      <strong>Hardware:</strong> <span id="configurator-summary-hardware">—</span>
-    </span>
-    <span class="wheel-configurator__summary-item">
-      <strong>Price:</strong> <span id="configurator-summary-price">—</span>
-    </span>
-  </div>
+
 </div>
+<!-- /calder-configurator -->
 
-{% endif %}
 
+{%- comment -%}
+  ============================================================
+  REQUEST A QUOTE — CONTACT INQUIRY MODAL
+  Standalone contact-form inquiry — NOT a configurator CTA.
+  Opened from the Build Your Wheel page specialist section.
+  ============================================================
+{%- endcomment -%}
+
+{% render 'calder-quote-modal', section_id: section.id, product: product %}
+
+
+<script>
+( function() {
+  'use strict';
+  var sectionId = '{{ section.id }}';
+  var root      = document.getElementById( 'wheel-configurator-' + sectionId );
+  if ( !root ) return;
+  /* Per-root guard: the Theme Editor replaces the root element on section
+     reloads, so re-binding must be allowed — a global flag would leave the
+     fresh DOM without listeners. */
+  if ( root.dataset.calderUiInit === 'true' ) return;
+  root.dataset.calderUiInit = 'true';
+  var productId = root.dataset.productId;
+
+  var types = ['center', 'barrel', 'hardware'];
+  var finishTypes = ['center', 'barrel', 'hardware'];
+
+  /* ── helpers ── */
+  function container( type ) {
+    var suffix = type + 's';
+    return document.getElementById( 'configurator-' + suffix + '-' + sectionId );
+  }
+  function diameterSelect() {
+    return container( 'diameter' );
+  }
+  function selectedDiameter() {
+    var d = diameterSelect();
+    return d && d.value ? { id: (d.selectedOptions[0] && d.selectedOptions[0].dataset.id) || d.value, label: d.value } : null;
+  }
+  function selected( type ) {
+    if ( type === 'diameter' ) return selectedDiameter();
+    var c = container( type );
+    return c ? c.querySelector( '.wheel-configurator__option--selected' ) : null;
+  }
+  function selectedImg( type ) {
+    if ( type === 'diameter' ) return null;
+    var s = selected( type );
+    return s ? s.querySelector( 'img' ) : null;
+  }
+
+  /* ── RESET: click first available option per group (and first diameter) ── */
+  var resetBtn = document.getElementById( 'configurator-reset-' + sectionId );
+  if ( resetBtn ) {
+    resetBtn.addEventListener( 'click', function () {
+      finishTypes.forEach( function ( t ) {
+        var c = container( t );
+        if ( !c ) return;
+        var first = c.querySelector( '.wheel-configurator__option:not(.wheel-configurator__option--unavailable)' );
+        if ( first ) first.click();
+      } );
+      var d = diameterSelect();
+      if ( d && d.options.length > 1 ) {
+        d.selectedIndex = 1;
+        d.dispatchEvent( new Event( 'change', { bubbles: true } ) );
+      }
+    } );
+  }
+
+  /* ── ZOOM toggle on preview ── */
+  var zoomBtn = document.getElementById( 'configurator-zoom-' + sectionId );
+  var canvas  = document.getElementById( 'configurator-canvas-' + sectionId );
+  if ( zoomBtn && canvas ) {
+    zoomBtn.addEventListener( 'click', function () {
+      var layers = canvas.querySelector( '.wheel-configurator__preview-layers' );
+      if ( !layers ) return;
+      layers.classList.toggle( 'wheel-configurator__preview-layers--zoomed' );
+      zoomBtn.classList.toggle( 'wheel-configurator__preview-action--active' );
+    } );
+  }
+
+  /* ── sync summary thumbnails from selected options ── */
+  function syncSummaryThumbs() {
+    types.forEach( function ( t ) {
+      var img = selectedImg( t );
+      var thumb = document.querySelector( '[data-summary-thumb="' + t + '"]' );
+      if ( img && thumb ) thumb.src = img.src;
+    } );
+  }
+
+  /* ── populate thumbnail rail from real layer images ── */
+  function populateThumbRail() {
+    var rail = document.getElementById( 'configurator-thumbs-' + sectionId );
+    if ( !rail ) return;
+
+    var canvasEl = document.getElementById( 'configurator-canvas-' + sectionId );
+    if ( !canvasEl ) return;
+
+    var layerKeys = [ 'barrel', 'center', 'hardware' ];
+    var html = '';
+
+    layerKeys.forEach( function ( key ) {
+      var layerImg = canvasEl.querySelector( '.wheel-configurator__layer--' + key );
+      if ( !layerImg || !layerImg.src ) return;
+
+      html += '<button type="button" class="wheel-configurator__thumb" data-thumb-layer="' + key + '">' +
+        '<img src="' + layerImg.src + '" alt="">' +
+        '</button>';
+    } );
+
+    if ( html ) {
+      rail.innerHTML = html;
+      rail.style.display = 'flex';
+    }
+  }
+
+  /* ── lightweight WheelConfigurator view for shared utils ── */
+  function configuratorView() {
+    var sels = {};
+    types.forEach( function ( t ) {
+      var s = selected( t );
+      if ( s ) sels[ t ] = { id: s.dataset.componentId, label: (s.querySelector('img')||{}).alt || '' };
+    } );
+    var seld = selectedDiameter();
+    if ( seld ) sels.diameter = seld;
+    return {
+      productId: productId,
+      selected: sels,
+      priceEl: document.getElementById( 'configurator-summary-price' ),
+      availabilityEl: document.getElementById( 'configurator-availability-' + sectionId ),
+      layerImgs: {
+        center: canvas ? canvas.querySelector( '.wheel-configurator__layer--center' ) : null,
+        barrel: canvas ? canvas.querySelector( '.wheel-configurator__layer--barrel' ) : null,
+        hardware: canvas ? canvas.querySelector( '.wheel-configurator__layer--hardware' ) : null
+      }
+    };
+  }
+
+  /* ── SAVE BUILD → PDF (browser Save as PDF) ── */
+  var saveBtn = document.getElementById( 'configurator-save-' + sectionId );
+  if ( saveBtn ) {
+    saveBtn.addEventListener( 'click', function () {
+      if ( typeof window.CalderConfigurator !== 'undefined' ) {
+        window.CalderConfigurator.saveBuild( configuratorView() );
+        window.CalderConfigurator.buildPdf( configuratorView() );
+        saveBtn.innerHTML = '<svg viewBox="0 0 20 20" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"></path></svg><span>Print / Save PDF</span>';
+        setTimeout( function () {
+          saveBtn.innerHTML = '<svg viewBox="0 0 20 20" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M15 17H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v7a2 2 0 0 1-2 2zM13 17v-4H7v4M7 1v4"></path></svg><span>Save Build</span>';
+        }, 2500 );
+      }
+    } );
+  }
+
+  /* ── SHARE BUILD (native share / clipboard / prompt) ── */
+  var shareBtn = document.getElementById( 'configurator-share-' + sectionId );
+  if ( shareBtn ) {
+    shareBtn.addEventListener( 'click', function () {
+      if ( typeof window.CalderConfigurator !== 'undefined' ) {
+        window.CalderConfigurator.shareBuild( configuratorView() );
+      }
+    } );
+  }
+
+  /* ── RESTORE saved / shared config ── */
+  function restoreFromHash() {
+    var match = window.location.hash.match( /#cfg=([^&]+)/ );
+    if ( !match ) return false;
+    var raw;
+    try { raw = atob( match[ 1 ] ); } catch ( e ) { return false; }
+    var data;
+    try { data = JSON.parse( raw ); } catch ( e ) { return false; }
+    if ( data && data.c && (data.c.center || data.c.barrel) ) return data.c;
+    return data;
+  }
+
+  function restoreOptions( data ) {
+    finishTypes.forEach( function ( t ) {
+      var id = data[ t ];
+      if ( !id ) return;
+      var c = container( t );
+      if ( !c ) return;
+      var opt = c.querySelector( '[data-component-id="' + id + '"]:not(.wheel-configurator__option--unavailable)' );
+      if ( opt ) opt.click();
+    } );
+
+    /* Restore diameter (component id or label) */
+    var dLabel = data.diameter;
+    if ( dLabel ) {
+      var d = container( 'diameter' );
+      if ( d ) {
+        var target = null;
+        for ( var i = 0; i < d.options.length; i++ ) {
+          var o = d.options[ i ];
+          if ( o.value === dLabel || (o.dataset && o.dataset.id === dLabel) ) { target = o; break; }
+        }
+        if ( target ) {
+          d.value = target.value;
+          d.dispatchEvent( new Event( 'change', { bubbles: true } ) );
+        }
+      }
+    }
+  }
+
+  /* ── MUTATION OBSERVER for async option rendering ── */
+  var observer = new MutationObserver( function () {
+    syncSummaryThumbs();
+    populateThumbRail();
+  } );
+
+  types.forEach( function ( t ) {
+    var c = container( t );
+    if ( t === 'diameter' ) return; /* skip dropdown in mutation observer */
+    if ( c ) observer.observe( c, { childList: true, subtree: true, attributes: false } );
+  } );
+
+  /* ── deferred restore after components load ── */
+  var sharedCfg = restoreFromHash();
+  if ( !sharedCfg ) {
+    try {
+      var saved = JSON.parse( localStorage.getItem( 'calder-config-' + productId ) || '{}' );
+      if ( saved.selections ) sharedCfg = saved.selections;
+    } catch ( e ) {}
+  }
+
+  if ( sharedCfg ) {
+    var restoreTimer = setInterval( function () {
+      var ready = types.every( function ( t ) { return selected( t ); } );
+      if ( ready || document.querySelectorAll( '.wheel-configurator__option' ).length > 0 ) {
+        clearInterval( restoreTimer );
+        setTimeout( function () { restoreOptions( sharedCfg ); }, 200 );
+      }
+    }, 300 );
+    setTimeout( function () { clearInterval( restoreTimer ); }, 15000 );
+  }
+
+  /* ── initial sync after app.js finishes ── */
+  setTimeout( function () {
+    syncSummaryThumbs();
+    populateThumbRail();
+  }, 800 );
+
+} )();
+</script>
+
+<script src="{{ 'calder-demo-inventory.js' | asset_url }}" defer></script>
 <script src="{{ 'configurator-api.js' | asset_url }}" defer></script>
 <script src="{{ 'configurator-app.js' | asset_url }}" defer></script>
 
@@ -229,6 +607,515 @@
       "id": "show_quote",
       "label": "Show 'Request Quote' button",
       "default": true
+    },
+    {
+      "type": "text",
+      "id": "lead_time",
+      "label": "Built to Order lead time",
+      "default": "Ships in 5-10 business days",
+      "info": "Shown in the Built to Order notice and Fast Shipping benefit. Editable merchant copy."
+    },
+    {
+      "type": "header",
+      "content": "SECTION GENERAL"
+    },
+    {
+      "type": "checkbox",
+      "id": "section_animation",
+      "label": "Enable soft appearing of section",
+      "default": true,
+      "info": "Global sections animation disabling in Theme Settings / General / Sections. AUTODISABLED if section has top or bottom separator."
+    },
+    {
+      "type": "header",
+      "content": "SECTION WIDTH"
+    },
+    {
+      "type": "select",
+      "id": "section_width",
+      "label": "Select width source",
+      "options": [
+        {
+          "value": "global",
+          "label": "Use store width"
+        },
+        {
+          "value": "custom",
+          "label": "Custom width"
+        }
+      ],
+      "default": "global",
+      "info": "Store width you can set in Theme Settings / General"
+    },
+    {
+      "type": "range",
+      "id": "container_max_width",
+      "min": 1178,
+      "max": 1978,
+      "step": 8,
+      "unit": "px",
+      "label": "Custom width",
+      "default": 1178,
+      "info": "The specified width may differ from the actual width of the section because this section uses a smart grid for the most successful arrangement of columns in rows and for best view. Columns are not scaled, but added when the section width is increased."
+    },
+    {
+      "type": "header",
+      "content": "SECTION MARGIN"
+    },
+    {
+      "type": "range",
+      "id": "spacing_sections",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Vertical space above the section on Desktop",
+      "default": 100
+    },
+    {
+      "type": "checkbox",
+      "id": "use_global_desktop_space",
+      "label": "Use global space on desktop",
+      "default": true,
+      "info": "from Theme Settings / General / Layout"
+    },
+    {
+      "type": "range",
+      "id": "spacing_sections_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Vertical space above the section on Mobile",
+      "default": 70
+    },
+    {
+      "type": "checkbox",
+      "id": "use_global_mobile_space",
+      "label": "Use global space on mobile",
+      "default": true,
+      "info": "from Theme Settings / General / Layout"
+    },
+    {
+      "type": "header",
+      "content": "SECTION PADDING",
+      "info": "Only if SECTION BACKGROUND or SECTION SEPARATOR was enabled"
+    },
+    {
+      "type": "range",
+      "id": "spacing_padding_sections",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Vertical inner padding on Desktop",
+      "default": 100
+    },
+    {
+      "type": "checkbox",
+      "id": "use_global_desktop_space_padding",
+      "label": "Use global inner padding on desktop",
+      "default": true,
+      "info": "from Theme Settings / General / Layout"
+    },
+    {
+      "type": "range",
+      "id": "spacing_padding_sections_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Vertical inner padding on Mobile",
+      "default": 70
+    },
+    {
+      "type": "checkbox",
+      "id": "use_global_mobile_space_padding",
+      "label": "Use global inner padding on Mobile",
+      "default": true,
+      "info": "from Theme Settings / General / Layout"
+    },
+    {
+      "type": "header",
+      "content": "SECTION BACKGROUND"
+    },
+    {
+      "type": "checkbox",
+      "id": "background",
+      "label": "Enable background",
+      "default": false,
+      "info": "by default inherits Secondary background color from Theme Settings / Colors - General Secondary"
+    },
+    {
+      "type": "select",
+      "id": "background_preset",
+      "label": "Background image - preset",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "product-cosmetics-bg.png",
+          "label": "Leaves 1"
+        },
+        {
+          "value": "bottom-cosmetics-bg.png",
+          "label": "Leaves 2"
+        },
+        {
+          "value": "bg-makeup1.png,bg-makeup1-m.png",
+          "label": "Pink and Waves 1"
+        },
+        {
+          "value": "bg-makeup2.png,bg-makeup2-m.png",
+          "label": "Pink and Waves 2"
+        },
+        {
+          "value": "bg-makeup4.png,bg-makeup4-m.png",
+          "label": "Pink and Waves 3"
+        },
+        {
+          "value": "bg-makeup3.png,bg-makeup3-m.png",
+          "label": "Purple Splash"
+        },
+        {
+          "value": "bg-sweets1.png",
+          "label": "Blue Sun Rays"
+        }
+      ],
+      "default": "none",
+      "info": "default from theme"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background image - custom on Desktop"
+    },
+    {
+      "type": "select",
+      "id": "background_behavior",
+      "label": "Background image behavior",
+      "options": [
+        {
+          "value": "bg-cover",
+          "label": "Cover"
+        },
+        {
+          "value": "bg-contain",
+          "label": "Contain"
+        },
+        {
+          "value": "bg-repeat",
+          "label": "Repeat"
+        }
+      ],
+      "default": "bg-cover"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image_mobile",
+      "label": "Background image - custom on Mobile",
+      "info": "only if Background image - custom on Desktop selected"
+    },
+    {
+      "type": "select",
+      "id": "background_image_placeholder_type",
+      "label": "Placeholder background color",
+      "options": [
+        {
+          "value": "color_global_primary_bg",
+          "label": "Primary background color"
+        },
+        {
+          "value": "color_global_secondary_bg",
+          "label": "Secondary background color"
+        },
+        {
+          "value": "custom",
+          "label": "Custom color"
+        }
+      ],
+      "default": "color_global_secondary_bg"
+    },
+    {
+      "type": "color",
+      "id": "background_image_placeholder",
+      "label": "Custom - Placeholder background color"
+    },
+    {
+      "type": "header",
+      "content": "SECTION SEPARATOR"
+    },
+    {
+      "type": "header",
+      "content": "Top separator"
+    },
+    {
+      "type": "select",
+      "id": "section_decoration_top",
+      "label": "Shape",
+      "options": [
+        {
+          "value": "global",
+          "label": "Use global separator"
+        },
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "grunge1",
+          "label": "Grunge 1"
+        },
+        {
+          "value": "grunge2",
+          "label": "Grunge 2"
+        },
+        {
+          "value": "grunge3",
+          "label": "Grunge 3"
+        },
+        {
+          "value": "paper",
+          "label": "Paper"
+        },
+        {
+          "value": "mountains",
+          "label": "Mountains"
+        },
+        {
+          "value": "ellipse1",
+          "label": "Ellipse 1"
+        },
+        {
+          "value": "ellipse2",
+          "label": "Ellipse 2"
+        },
+        {
+          "value": "wave1",
+          "label": "Wave 1"
+        },
+        {
+          "value": "wave2",
+          "label": "Wave 2"
+        },
+        {
+          "value": "wave3",
+          "label": "Wave 3"
+        },
+        {
+          "value": "wave4",
+          "label": "Wave 4"
+        },
+        {
+          "value": "wave5",
+          "label": "Wave 5"
+        },
+        {
+          "value": "triangle1",
+          "label": "Triangle 1"
+        },
+        {
+          "value": "triangle2",
+          "label": "Triangle 2"
+        },
+        {
+          "value": "triangle_assymetrical1",
+          "label": "Triangle assymetrical 1"
+        },
+        {
+          "value": "triangle_assymetrical1_flip",
+          "label": "Triangle assymetrical 1 flip"
+        },
+        {
+          "value": "triangle_assymetrical2",
+          "label": "Triangle assymetrical 2"
+        },
+        {
+          "value": "triangle_assymetrical2_flip",
+          "label": "Triangle assymetrical 2 flip"
+        },
+        {
+          "value": "tilt",
+          "label": "Tilt"
+        },
+        {
+          "value": "tilt_flip",
+          "label": "Tilt flip"
+        },
+        {
+          "value": "glaze",
+          "label": "Glaze"
+        }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "select",
+      "id": "section_decoration_top_color_type",
+      "label": "Color",
+      "options": [
+        {
+          "value": "color_global_primary_bg",
+          "label": "Primary background color"
+        },
+        {
+          "value": "color_global_secondary_bg",
+          "label": "Secondary background color"
+        },
+        {
+          "value": "color_header_main_bg",
+          "label": "Header - Middle(main) part color"
+        },
+        {
+          "value": "custom",
+          "label": "Custom color"
+        }
+      ],
+      "default": "color_global_primary_bg"
+    },
+    {
+      "type": "color",
+      "id": "section_decoration_top_color",
+      "label": "Custom - top separator color"
+    },
+    {
+      "type": "header",
+      "content": "Bottom separator"
+    },
+    {
+      "type": "select",
+      "id": "section_decoration_bottom",
+      "label": "Shape",
+      "options": [
+        {
+          "value": "global",
+          "label": "Use global separator"
+        },
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "grunge1",
+          "label": "Grunge 1"
+        },
+        {
+          "value": "grunge2",
+          "label": "Grunge 2"
+        },
+        {
+          "value": "grunge3",
+          "label": "Grunge 3"
+        },
+        {
+          "value": "paper",
+          "label": "Paper"
+        },
+        {
+          "value": "mountains",
+          "label": "Mountains"
+        },
+        {
+          "value": "ellipse1",
+          "label": "Ellipse 1"
+        },
+        {
+          "value": "ellipse2",
+          "label": "Ellipse 2"
+        },
+        {
+          "value": "wave1",
+          "label": "Wave 1"
+        },
+        {
+          "value": "wave2",
+          "label": "Wave 2"
+        },
+        {
+          "value": "wave3",
+          "label": "Wave 3"
+        },
+        {
+          "value": "wave4",
+          "label": "Wave 4"
+        },
+        {
+          "value": "wave5",
+          "label": "Wave 5"
+        },
+        {
+          "value": "triangle1",
+          "label": "Triangle 1"
+        },
+        {
+          "value": "triangle2",
+          "label": "Triangle 2"
+        },
+        {
+          "value": "triangle_assymetrical1",
+          "label": "Triangle assymetrical 1"
+        },
+        {
+          "value": "triangle_assymetrical1_flip",
+          "label": "Triangle assymetrical 1 flip"
+        },
+        {
+          "value": "triangle_assymetrical2",
+          "label": "Triangle assymetrical 2"
+        },
+        {
+          "value": "triangle_assymetrical2_flip",
+          "label": "Triangle assymetrical 2 flip"
+        },
+        {
+          "value": "tilt",
+          "label": "Tilt"
+        },
+        {
+          "value": "tilt_flip",
+          "label": "Tilt flip"
+        },
+        {
+          "value": "glaze",
+          "label": "Glaze"
+        }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "paragraph",
+      "content": "'Global separator' is set in Theme Settings / Separators / Global separator style"
+    },
+    {
+      "type": "select",
+      "id": "section_decoration_bottom_color_type",
+      "label": "Color",
+      "options": [
+        {
+          "value": "color_global_primary_bg",
+          "label": "Primary background color"
+        },
+        {
+          "value": "color_global_secondary_bg",
+          "label": "Secondary background color"
+        },
+        {
+          "value": "color_footer_top_bg",
+          "label": "Footer - Top part color"
+        },
+        {
+          "value": "custom",
+          "label": "Custom color"
+        }
+      ],
+      "default": "color_global_primary_bg"
+    },
+    {
+      "type": "color",
+      "id": "section_decoration_bottom_color",
+      "label": "Custom - bottom separator color"
     }
   ],
   "presets": [

@@ -1,0 +1,12 @@
+<div class="dp-empty-state">
+  {% if icon %}
+    <div class="dp-empty-state__icon">{{ icon }}</div>
+  {% endif %}
+  <p class="dp-empty-state__title">{{ title | default: 'Nothing here yet.' }}</p>
+  {% if sub != blank %}
+    <p class="dp-empty-state__sub">{{ sub }}</p>
+  {% endif %}
+  {% if link_url != blank and link_label != blank %}
+    <a href="{{ link_url }}" class="dp-btn dp-btn--primary dp-btn--sm" style="margin-top:16px">{{ link_label }}</a>
+  {% endif %}
+</div>

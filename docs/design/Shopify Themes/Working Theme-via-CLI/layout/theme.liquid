@@ -4,6 +4,17 @@
     assign rtl = '-rtl'
     assign rtl_mode = true
   endif
+
+  assign card_layout = settings.product_card_layout
+  if card_layout == '4' or card_layout == '5'
+    assign card_layout = '1'
+  endif
+  assign is_dealer_route = false
+  if customer and customer.tags contains 'dealer-approved'
+    assign is_dealer_route = true
+  elsif template.suffix == 'dealer-dashboard' or template.suffix == 'dealer-quick-order' or template.suffix == 'dealer-orders' or template.suffix == 'dealer-quotes' or template.suffix == 'dealer-invoices' or template.suffix == 'dealer-returns' or template.suffix == 'dealer-marketing' or template.suffix == 'dealer-account' or template.suffix == 'dealer-users' or template.suffix == 'dealer-notifications' or template.suffix == 'dealer-support'
+    assign is_dealer_route = true
+  endif
 -%}
 <!doctype html>
 <html
@@ -17,7 +28,7 @@
     {{ content_for_header }}
   </head>
   <body
-    class="shopify-theme template-{{ request.page_type | handle }} localization-{{ localization.language.iso_code | handle }} {% if rtl_mode %}rtl-mode{% endif %} page-{{ template.suffix }} first-section-off-animate {% if settings.use_ajax_scroll and template == 'index' %}has-ajax-scroll{% endif %} {% unless settings.rounded_disable == "1" %} has-rounded{% endunless %} {% unless settings.rounded_buttons_disable == "1" %} has-button-rounded{% endunless %} initial-hide{% if customer and customer.accepts_marketing %}subscribed{% endif %} {% if settings.animation_sections %}has-animate-scroll{% endif %} full-load-hide{% if settings.catalog_mode %}catalog-mode{% endif %} has-product-style{{ settings.product_card_layout }} filter-layout-{{ settings.filter_layout }} {% if settings.demo %}is-demo{% endif %} {% unless localization.language.iso_code == 'en' %}has-btn-wrap{% endunless %} {% if settings.header_sticky_always_visible %}has-hdr_sticky has-hdr_sticky_not_hiding{% endif %} wishlist-{% if settings.wishlist %}on{% else %}off{% endif %} {% if settings.shipping_calculator_static %}shipping-calculator-static{% endif %} {% if settings.font_headings_style == '2' %}has-headings-style2{% elsif settings.font_headings_style == '3' %}has-headings-style3{% endif %} {% if settings.header_cart_show %}header-cart-dropdown{% endif %} {% if settings.fbt_source == 'app' %}fbt-app{% endif %} {% if settings.product_swatches_rounded %}has-rounded-options{% endif %} {% if settings.fixed_footer %}has-fixed-footer{% endif %} calder-site"
+    class="shopify-theme template-{{ request.page_type | handle }} localization-{{ localization.language.iso_code | handle }} {% if rtl_mode %}rtl-mode{% endif %} page-{{ template.suffix }} first-section-off-animate {% if settings.use_ajax_scroll and template == 'index' %}has-ajax-scroll{% endif %} {% unless settings.rounded_disable == "1" %} has-rounded{% endunless %} {% unless settings.rounded_buttons_disable == "1" %} has-button-rounded{% endunless %} initial-hide{% if customer and customer.accepts_marketing %}subscribed{% endif %} {% if settings.animation_sections %}has-animate-scroll{% endif %} full-load-hide{% if settings.catalog_mode %}catalog-mode{% endif %} has-product-style{{ card_layout }} filter-layout-{{ settings.filter_layout }} {% if settings.demo %}is-demo{% endif %} {% unless localization.language.iso_code == 'en' %}has-btn-wrap{% endunless %} {% if settings.header_sticky_always_visible %}has-hdr_sticky has-hdr_sticky_not_hiding{% endif %} wishlist-{% if settings.wishlist %}on{% else %}off{% endif %} {% if settings.shipping_calculator_static %}shipping-calculator-static{% endif %} {% if settings.font_headings_style == '2' %}has-headings-style2{% elsif settings.font_headings_style == '3' %}has-headings-style3{% endif %} {% if settings.header_cart_show %}header-cart-dropdown{% endif %} {% if settings.fbt_source == 'app' %}fbt-app{% endif %} {% if settings.product_swatches_rounded %}has-rounded-options{% endif %} {% if settings.fixed_footer %}has-fixed-footer{% endif %} calder-site"
     data-tooltip-color="dark"
     data-tooltip-animation="shift-toward"
     data-tooltip-delay="100"
@@ -30,12 +41,14 @@
           render 'placeholder-image'
       -%}
     </div>
+    {%- unless is_dealer_route -%}
     {%- liquid
       section 'announcement-bar'
       section 'header'
       render 'navigation-sub'
       render 'header-navigation-mobile-bottom'
     -%}
+    {%- endunless -%}
 
     {%- if request.page_type == 'collection' or request.page_type == 'search' -%}
       {%- liquid
@@ -64,13 +77,26 @@
       -%}
       {%- if load_configurator -%}
         {{ 'wheel-configurator.css' | asset_url | stylesheet_tag }}
+        {{ 'calder-demo-inventory.js' | asset_url | script_tag }}
       {%- endif -%}
       {%- if template.suffix == 'calder' -%}
         {{ 'calder-product.css' | asset_url | stylesheet_tag }}
       {%- endif -%}
     {%- endif -%}
 
-    {%- if customer and customer.tags contains 'dealer-approved' -%}
+    {%- if request.page_type == 'page' -%}
+      {%- assign _gallery_suffixes = 'vehicle-gallery,wheel-gallery,gallery-build' | split: ',' -%}
+      {%- if _gallery_suffixes contains template.suffix -%}
+        {{ 'calder-gallery.css' | asset_url | stylesheet_tag }}
+      {%- endif -%}
+    {%- endif -%}
+
+    {%- if request.page_type == 'metaobject' and template.suffix == 'gallery_build' -%}
+      {{ 'calder-gallery.css' | asset_url | stylesheet_tag }}
+      {{ 'calder-gallery-detail.css' | asset_url | stylesheet_tag }}
+    {%- endif -%}
+
+    {%- if is_dealer_route -%}
       {{ 'dealer-portal.css' | asset_url | stylesheet_tag }}
       {{ 'dealer-backend.js' | asset_url | script_tag }}
       {{ 'dealer-portal.js' | asset_url | script_tag }}
@@ -82,7 +108,7 @@
       class="page-content"
       id="pageContent"
       role="main">
-      {% render 'breadcrumbs' %}
+      {% unless is_dealer_route %}{% render 'breadcrumbs' %}{% endunless %}
 
       {%- if settings.use_ajax_scroll and template == 'index' and request.design_mode == false -%}
         {% capture content_for_layout %}
@@ -147,6 +173,7 @@
       -%}
     </div>
 
+    {% unless is_dealer_route %}
     {% section 'footer' %}
 
     {%- form 'customer'
@@ -196,6 +223,7 @@
         </script>
       {%- endif -%}
     {%- endform -%}
+    {% endunless %}
 
     <ul hidden>
       <li id="a11y-refresh-page-message">{{ 'accessibility.refresh_page' | t }}</li>

@@ -34,6 +34,25 @@
   endif
 
   assign product_card_price_currency_info = settings.product_card_price_currency_info
+
+  assign show_from = false
+  assign from_text = ''
+  if product_card and settings.product_card_price_from
+    assign min_price = product.variants[0].price
+    assign max_price = product.variants[0].price
+    for variant in product.variants
+      if variant.price < min_price
+        assign min_price = variant.price
+      endif
+      if variant.price > max_price
+        assign max_price = variant.price
+      endif
+    endfor
+    if min_price != max_price
+      assign show_from = true
+      assign from_text = min_price | money_without_trailing_zeros
+    endif
+  endif
 -%}
 
 
@@ -94,56 +113,21 @@
 
       endif
 
-      echo money_price
+      if show_from
+        echo '<span class="label-from">From </span>' | append: from_text
+      else
+        echo money_price
+      endif
     -%}
+    {%- if compare_at_price > price -%}
+      {% capture size %}{{ compare_at_price }}{% endcapture %}
+      <span class="prd-price-old {% unless show_price_old %}hidden{% endunless %}">
+        {{ compare_at_price | money_without_trailing_zeros }}
+      </span>
+    {%- endif -%}
+    <span class="label-per-wheel"> / wheel</span>
   </div>
 
-  {%- if compare_at_price > price -%}
-    {% capture size %}{{ compare_at_price }}{% endcapture %}
-    <div class="prd-price-old {% unless show_price_old %}hidden{% endunless %}">
-      {% comment %} {%- if product_card_style_1 == true -%}
-        {%- if settings.product_card_vendor == false or size.size < 6 -%}
-          {{ compare_at_price | money_without_trailing_zeros }}
-        {%- elsif product_card_style_1 == true and size.size > 5 -%}
-
-        {%- else -%}
-          {{ compare_at_price | money }}
-        {%- endif -%}
-      {%- else -%}
-        {{ compare_at_price | money }}
-      {%- endif -%} {% endcomment %}
-      {{ compare_at_price | money_without_trailing_zeros }}
-    </div>
-  {%- endif -%}
-
-
-  {%- liquid
-    assign price = target.price | default: 1999
-    assign money_price = price | money_without_trailing_zeros
-
-    if product_card and settings.product_card_price_from
-      assign min_price = product.variants[0].price
-      assign same_price = true
-
-      for variant in product.variants
-        if variant.price < min_price
-          assign min_price = variant.price
-        endif
-        if variant.price != min_price
-          assign same_price = false
-        endif
-      endfor
-
-      assign money_price_min = min_price | money_without_trailing_zeros
-
-      if same_price != true
-        if money_price_min == money_price
-        else
-          echo '<span class="other_from">other from ' | append: money_price_min | append: '</span>'
-        endif
-      endif
-    endif
-  -%}
 
   {%- if target.unit_price_measurement and product_card_style_1 != true -%}
     <span class="flex-break"></span>

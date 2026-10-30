@@ -7,12 +7,13 @@
 /* --- Card Container --- */
 calder-product-card {
   display: block;
-  background: var(--calder-white);
+  background: var(--calder-card-bg, var(--calder-white));
+  color: var(--calder-card-text, var(--calder-ink));
   border-radius: var(--calder-card-radius);
   box-shadow: var(--calder-card-shadow);
   overflow: hidden;
   transition: box-shadow 0.25s ease;
-  //padding: 15px;
+
   font-family: var(--calder-ui-font);
 }
 
@@ -32,7 +33,7 @@ calder-product-card:hover {
   position: relative;
   border-radius: 7px;
   overflow: hidden;
-  background: var(--calder-warm-white);
+  background: var(--calder-card-media-bg, var(--calder-warm-white));
   margin-bottom: 0;
   aspect-ratio: 1 / 1;
   display: flex;
@@ -57,7 +58,7 @@ calder-product-card:hover {
   justify-content: center !important;
   width: 100% !important;
   height: 100% !important;
-  //padding: 12px !important;
+
 }
 
 .calder-card__media .prd-image-wrap > a img,
@@ -65,8 +66,8 @@ calder-product-card:hover {
   object-fit: contain !important;
   width: 100% !important;
   height: 100% !important;
-  //max-width: 90% !important;
-  //max-height: 90% !important;
+
+
 }
 
 .calder-card__media .ic--bg,
@@ -177,7 +178,7 @@ calder-product-card:hover {
   font-weight: 650 !important;
   letter-spacing: 0.16em !important;
   text-transform: uppercase !important;
-  color: var(--calder-muted) !important;
+  color: var(--calder-card-secondary, var(--calder-muted)) !important;
   margin-top: 10px !important;
   margin-bottom: 3px !important;
   line-height: 1.2 !important;
@@ -185,7 +186,7 @@ calder-product-card:hover {
 
 .calder-card__type a,
 .calder-card__type span {
-  color: var(--calder-muted) !important;
+  color: var(--calder-card-secondary, var(--calder-muted)) !important;
   text-decoration: none !important;
 }
 
@@ -194,7 +195,7 @@ calder-product-card:hover {
   font-family: var(--calder-ui-font);
   font-weight: 700;
   font-size: 18px;
-  color: var(--calder-ink);
+  color: var(--calder-card-text, var(--calder-ink));
   margin-bottom: 2px;
   text-transform: uppercase;
   line-height: 1.05 !important;
@@ -269,14 +270,14 @@ calder-product-card:hover {
 .calder-card__price .prd-price-regular {
   font-size: var(--calder-card-price-size) !important;
   font-weight: 750 !important;
-  color: var(--calder-ink) !important;
+  color: var(--calder-card-price-color, var(--calder-ink)) !important;
   line-height: 1 !important;
 }
 
 .calder-card__price .prd-price-old {
   font-size: 16px !important;
   font-weight: 400 !important;
-  color: var(--calder-muted) !important;
+  color: var(--calder-card-secondary, var(--calder-muted)) !important;
   text-decoration: line-through !important;
 }
 
@@ -350,7 +351,7 @@ calder-product-card:hover {
 .calder-card__swatches .swatch-more {
   font-size: 12px !important;
   font-weight: 600 !important;
-  color: var(--calder-muted) !important;
+  color: var(--calder-card-secondary, var(--calder-muted)) !important;
   margin-left: 6px !important;
   white-space: nowrap !important;
 }
@@ -395,7 +396,7 @@ calder-product-card:hover {
   display: block !important;
   font-size: 10px !important;
   font-weight: 550 !important;
-  color: var(--calder-muted) !important;
+  color: var(--calder-card-secondary, var(--calder-muted)) !important;
   line-height: 1.2 !important;
   max-width: 100% !important;
 }
@@ -407,6 +408,7 @@ calder-product-card:hover {
 
 .calder-card__action .prd-action {
   margin: 0 !important;
+  padding: 0;
 }
 
 .calder-card__action .product-form {
@@ -417,8 +419,8 @@ calder-product-card:hover {
   width: 100% !important;
   height: 42px !important;
   border-radius: 6px !important;
-  background: var(--calder-surface) !important;
-  color: var(--calder-white) !important;
+  background: var(--calder-card-button-bg, var(--calder-surface)) !important;
+  color: var(--calder-card-button-text, var(--calder-white)) !important;
   font-size: 12px !important;
   font-weight: 650 !important;
   letter-spacing: 0.14em !important;
@@ -435,7 +437,7 @@ calder-product-card:hover {
 }
 
 .calder-card__action .btn:hover {
-  background: var(--calder-ink) !important;
+  background: var(--calder-card-button-hover, var(--calder-ink)) !important;
 }
 
 .calder-card__action .btn:disabled,
@@ -477,7 +479,7 @@ calder-product-card:hover {
 .calder-card__details button {
   font-size: 12px !important;
   font-weight: 650 !important;
-  color: var(--calder-muted) !important;
+  color: var(--calder-card-secondary, var(--calder-muted)) !important;
   text-decoration: none !important;
   background: none !important;
   border: none !important;
@@ -493,7 +495,7 @@ calder-product-card:hover {
 
 .calder-card__details a:hover,
 .calder-card__details button:hover {
-  color: var(--calder-ink) !important;
+  color: var(--calder-card-price-color, var(--calder-ink)) !important;
 }
 
 .calder-card__details svg {
@@ -548,4 +550,231 @@ calder-product-card .hide-on-hover {
   .calder-card__thumbs {
     display: none;
   }
+}
+
+/* ============================================================
+   Calder premium layouts 4 / 5 — scoped; legacy cards unchanged
+   ============================================================ */
+calder-product-card.calder-card--light,
+calder-product-card.calder-card--dark {
+  --calder-card-accent: #e79a45;
+  --calder-card-border: rgba(14, 42, 62, .18);
+  --calder-card-button-bg: linear-gradient(120deg, #f4c58d, #d99a5c);
+  --calder-card-button-text: #0e2a3e;
+  --calder-card-button-hover: #efb777;
+  border-radius: 8px;
+  border: 1px solid var(--calder-card-border);
+  box-shadow: 0 12px 12px rgba(0,0,0,.05);
+}
+calder-product-card.calder-card--light {
+  --calder-card-bg: #fff;
+  --calder-card-text: #0e2a3e;
+  --calder-card-secondary: #667085;
+  --calder-card-media-bg: #fff;
+  --calder-card-price-color: #0e2a3e;
+}
+calder-product-card.calder-card--dark {
+  --calder-card-bg: #041923;
+  --calder-card-text: #fff;
+  --calder-card-secondary: #d8dfe5;
+  --calder-card-media-bg: radial-gradient(circle at 50% 40%, #214559, #041923 75%);
+  --calder-card-price-color: #fff;
+  --calder-card-border: rgba(255,255,255,.22);
+  --calder-card-accent: #f0af60;
+}
+calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__media {
+  border-radius: 0;
+  aspect-ratio: 1 / 1;
+}
+calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__content {
+  padding: 4px 14px 0;
+}
+calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__type,
+calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__type a,
+calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__type span {
+  color: var(--calder-card-accent) !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0 !important;
+  margin-top: 12px !important;
+}
+calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__title {
+  font-size: 22px !important;
+  line-height: 1.05 !important;
+  margin: 5px 0 10px;
+}
+calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__construction {
+  color: var(--calder-card-secondary);
+  font-size: 15px;
+  line-height: 1.4;
+  font-weight: 300;
+}
+calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__diameters {
+  color: var(--calder-card-secondary);
+  font-size: 14px;
+  margin: 5px 0 14px;
+  font-weight: 400;
+}
+calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__swatches {
+  min-height: 32px;
+  margin-bottom: 3px !important;
+  display: block;
+  display: none;
+}
+calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__swatches .color-swatch,
+calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__swatches .tr_d .td_d {
+  width: 30px !important;
+  height: 30px !important;
+}
+calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__swatches .color-swatch:is(.active,.selected) {
+  box-shadow: 0 0 0 2px var(--calder-card-accent) !important;
+}
+calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__selected-finish {
+  color: var(--calder-card-secondary);
+  font-size: 12px;
+  margin-bottom: 12px;
+  display: block;
+}
+calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__price {
+  margin-bottom: 12px !important;
+  color: var(--calder-card-text);
+}
+calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__price .prd-price-regular {
+  font-size: clamp(18px,2.5vw,26px) !important;
+  color: var(--calder-card-price-color) !important;
+  font-weight: 700 !important;
+}
+calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__price-unit {
+  color: var(--calder-card-secondary) !important;
+}
+calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__action {
+  flex: 1;
+  min-width: 0;
+  margin-top: 0 !important;
+}
+calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__action .btn {
+  background: linear-gradient( 135deg, #E9C88F 0%, #D5A35C 48%, #B8793F 100% ) !important;
+  color: var(--calder-card-button-text) !important;
+  border-radius: 4px !important;
+  height: 40px !important;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+  font-size: 13px !important;
+  margin-top: 0;
+  font-weight: 600 !important;
+}
+calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__action .btn:hover {
+  background: var(--calder-card-button-hover) !important;
+}
+calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__details {
+  border-top: 1px solid var(--calder-card-border);
+  padding-top: 16px;
+  margin-top: 14px !important;
+  text-align: left !important;
+}
+calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__details a {
+  color: var(--calder-card-text) !important;
+  font-size: 13px !important;
+  font-weight: normal !important;
+  gap: 14px !important;
+}
+calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__details svg {
+  color: var(--calder-card-accent);
+  width: 24px !important;
+  height: 24px !important;
+  border: 1px solid #e79a45;
+  border-radius: 100%;
+  padding: 5px;
+}
+calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__media .prd-icons {
+  top: 16px !important;
+  right: 16px !important;
+}
+calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__media .prd-icons .prd-icon {
+  border: 1.5px solid var(--calder-card-accent) !important;
+  background: transparent !important;
+  color: var(--calder-card-text) !important;
+  width: 42px !important;
+  height: 42px !important;
+}
+@media (max-width: 575px) {
+  calder-product-card:is(.calder-card--light,.calder-card--dark) {
+    padding: 0;
+  }
+  calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__content {
+    padding: 4px 12px 14px;
+  }
+  calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__title {
+    font-size: 18px !important;
+  }
+}
+
+/* Calder premium: responsive quantity + purchase action.
+   Existing quantity snippet controls availability and semantics. */
+calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__purchase-row {
+  display: block;
+  width: 100%;
+  margin-top: auto;
+}
+calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__action .form.js-product-form {
+  display: flex;
+  flex-direction: inherit;
+  flex-wrap: wrap;
+  align-items: stretch;
+  width: inherit;
+  gap: 8px;
+  margin-top: 0.5rem;
+}
+
+calder-product-card:is(.calder-card--light,.calder-card--dark) .prd-quantity {
+  margin: 0;
+  width: auto;
+}
+
+calder-product-card:is(.calder-card--light,.calder-card--dark) .prd-quantity-nav {
+  border: 1px solid #f2c189;
+  border-radius: 4px;
+}
+
+calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__action .form.js-product-form > input[type=hidden] {
+  display: none;
+}
+calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__action .form.js-product-form > .quantity,
+calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__action .form.js-product-form > .quantity-input,
+calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__action .form.js-product-form > quantity-input,
+calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__action .form.js-product-form > .prd-quantity {
+  flex: 1 1 calc(50% - 4px);
+  min-width: 0;
+  margin: 0 !important;
+}
+calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__action .form.js-product-form > .btn,
+calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__action .form.js-product-form > quickview-popup {
+  flex: 1 1 calc(50% - 4px);
+  width: auto !important;
+  min-width: 0;
+  margin: 0 !important;
+}
+calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__action .form.js-product-form > quickview-popup > .btn {
+  width: 100% !important;
+}
+@media(max-width: 900px) {
+  calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__title {
+    font-size: 18px !important;
+  }
+  calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__diameters {
+    font-size: 13px;
+  }
+}
+
+calder-product-card:is(.calder-card--light,.calder-card--dark) .label-from {
+  font-size: 0.8rem;
+  font-weight: normal;
+  color: var(--calder-card-secondary, #667085);
+  margin-right: 0.4rem;
+}
+
+calder-product-card:is(.calder-card--light,.calder-card--dark) .label-per-wheel {
+  font-size: 0.8rem;
+  font-weight: normal;
+  color: var(--calder-card-secondary, #667085);
 }

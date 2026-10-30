@@ -1,0 +1,120 @@
+{%- liquid
+  assign local_production_data = seed_production | default: ''
+  assign prod = null
+  if local_production_data != ''
+    assign prod = local_production_data | parse_json
+  endif
+
+  assign order_num = ''
+  assign po_num = ''
+  assign wheel = ''
+  assign wheel_type = ''
+  assign wheel_size = ''
+  assign wheel_finish = ''
+  assign vehicle = ''
+  assign qty = 0
+  assign price = 0
+  assign stages = false
+
+  if prod != null
+    assign order_num = prod.order_number | default: ''
+    assign po_num = prod.po_number | default: ''
+    assign wheel = prod.wheel | default: ''
+    assign wheel_type = prod.type | default: ''
+    assign wheel_size = prod.size | default: ''
+    assign wheel_finish = prod.finish | default: ''
+    assign vehicle = prod.vehicle | default: ''
+    assign qty = prod.quantity | default: 0
+    assign price = prod.price | default: 0
+    assign stages = prod.stages | default: false
+  endif
+
+  assign show_tracker = false
+  if stages and stages.size > 0
+    assign show_tracker = true
+  endif
+-%}
+
+{% if show_tracker %}
+<div class="dp-production">
+  <div class="dp-card__head">
+    <h3 class="dp-card__title">Production Tracker</h3>
+  </div>
+
+  <div class="dp-production__meta">
+    <div class="dp-production__meta-row">
+      <span class="dp-production__meta-label">Order</span>
+      <span class="dp-production__meta-value">{{ order_num }}</span>
+    </div>
+    <div class="dp-production__meta-row">
+      <span class="dp-production__meta-label">PO#</span>
+      <span class="dp-production__meta-value">{{ po_num }}</span>
+    </div>
+    <div class="dp-production__meta-row">
+      <span class="dp-production__meta-label">Status</span>
+      <span class="dp-production__meta-value">{% render 'dealer-status-badge', status: prod.status %}</span>
+    </div>
+  </div>
+
+  <div class="dp-production__timeline">
+    {% for stage in stages %}
+      {% assign stage_status = stage.status | default: 'upcoming' %}
+      {% assign stage_label = stage.label | default: '' %}
+      {% assign stage_date = stage.date | default: '' %}
+      {% assign stage_class = '' %}
+      {% assign stage_dot = '&#9675;' %}
+
+      {% if stage_status == 'completed' %}
+        {% assign stage_class = 'dp-production__stage--completed' %}
+        {% assign stage_dot = '&#9679;' %}
+      {% elsif stage_status == 'current' %}
+        {% assign stage_class = 'dp-production__stage--current' %}
+        {% assign stage_dot = '&#9654;' %}
+      {% else %}
+        {% assign stage_class = 'dp-production__stage--upcoming' %}
+        {% assign stage_dot = '&#9675;' %}
+      {% endif %}
+
+      <div class="dp-production__stage {{ stage_class }}">
+        <div class="dp-production__stage-connector">
+          {% unless forloop.first %}
+            <div class="dp-production__stage-line"></div>
+          {% endunless %}
+          <div class="dp-production__stage-dot">{{ stage_dot }}</div>
+          {% unless forloop.last %}
+            <div class="dp-production__stage-line"></div>
+          {% endunless %}
+        </div>
+        <div class="dp-production__stage-text">
+          <span class="dp-production__stage-label">{{ stage_label }}</span>
+          {% if stage_date != '' %}
+            <span class="dp-production__stage-date">{{ stage_date }}</span>
+          {% endif %}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+
+  <div class="dp-production__product">
+    <div class="dp-production__product-image">
+      <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+        <circle cx="24" cy="24" r="22" stroke="#C9A96E" stroke-width="1.5" fill="#0F1F35"/>
+        <circle cx="24" cy="24" r="16" stroke="#C9A96E" stroke-width="0.8" fill="none"/>
+        <circle cx="24" cy="24" r="10" stroke="#C9A96E" stroke-width="0.5" fill="none"/>
+        <line x1="24" y1="2" x2="24" y2="46" stroke="#C9A96E" stroke-width="0.3" opacity="0.5"/>
+        <line x1="2" y1="24" x2="46" y2="24" stroke="#C9A96E" stroke-width="0.3" opacity="0.5"/>
+      </svg>
+    </div>
+    <div class="dp-production__product-info">
+      <div class="dp-production__product-name">{{ wheel }} &mdash; {{ wheel_type }}</div>
+      <div class="dp-production__product-detail">{{ wheel_size }} / {{ wheel_finish }}</div>
+      <div class="dp-production__product-detail">{{ vehicle }}</div>
+    </div>
+    <div class="dp-production__product-pricing">
+      <div class="dp-production__product-qty">Qty: {{ qty }}</div>
+      <div class="dp-production__product-price">{{ price | times: qty | money }}</div>
+      <div class="dp-production__product-each">{{ price | money_without_currency }} ea</div>
+    </div>
+  </div>
+</div>
+{% endif %}

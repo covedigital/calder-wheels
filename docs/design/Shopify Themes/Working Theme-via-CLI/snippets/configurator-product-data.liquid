@@ -1,0 +1,241 @@
+{%- comment -%}
+  Calder Wheels — Canonical Configurator Product Data (single source)
+
+  Emits a JS object literal describing ONE product for the configurator.
+  Used by:
+    - snippets/configurator-data.liquid   (sets window._calderProductData[<id>])
+    - sections/build-your-wheel-page.liquid (sets window._bywProductData[<id>])
+
+  Canonical option values are derived from NATIVE Shopify variants
+  (option1=diameter, option2=center, option3=barrel). Hardware comes from
+  the product.metafields.custom.hardware_rivet_finish_options metafield
+  (falling back to BOM hardware component names). BOM components provide
+  the preview layer images only; finish labels that matter for variant
+  resolution are the native option values, not BOM names.
+
+  Note: emitted arrays intentionally use trailing commas, which are valid
+  in JavaScript object/array literals (this body is not JSON).
+
+  Usage:
+    {% render 'configurator-product-data', product: product %}
+{%- endcomment -%}
+
+{%- liquid
+  assign _bom = product.metafields.custom.bom.value
+  assign _comps = _bom.components | default: _bom
+
+  assign _code = product.metafields.custom.design_code.value
+  if _code == blank
+    assign _hp = product.handle | split: '-'
+    assign _code = _hp[1]
+  endif
+
+  comment
+    Authoritative JB design-number resolution for design-scoped center
+    artwork (assets are named design-<number>-center-<suffix>.png).
+    Order: custom.design_number metafield, then the Calder-approved
+    design_code mapping below, then a legacy numeric design_nickname.
+    Design numbers are never inferred from product titles.
+  endcomment
+  assign _design_num = ''
+  assign _dn_meta = product.metafields.custom.design_number.value
+  if _dn_meta == blank
+    assign _dn_meta = product.metafields.custom.design_number
+  endif
+  if _dn_meta != blank
+    assign _design_num = _dn_meta | append: '' | strip
+  endif
+  if _design_num == blank
+    assign _dcode_key = _code | downcase | strip
+    case _dcode_key
+      when 'clm-01'
+        assign _design_num = '201'
+      when 'clm-02'
+        assign _design_num = '202'
+      when 'clm-03'
+        assign _design_num = '203'
+      when 'clm-05'
+        assign _design_num = '204'
+      when 'clb-06'
+        assign _design_num = '206'
+      when 'clb-07'
+        assign _design_num = '207'
+    endcase
+  endif
+  if _design_num == blank
+    assign _dn_legacy = product.metafields.custom.design_nickname.value
+    if _dn_legacy == blank
+      assign _dn_legacy = product.metafields.custom.design_nickname
+    endif
+    assign _dn_legacy = _dn_legacy | append: '' | strip
+    if _dn_legacy != blank and _dn_legacy.size <= 4 and _dn_legacy contains '20'
+      assign _design_num = _dn_legacy
+    endif
+  endif
+
+  assign _lead = product.metafields.custom.lead_time_days.value | default: 10
+
+  assign _hw_meta = product.metafields.custom.hardware_rivet_finish_options.value
+  if _hw_meta == blank
+    assign _hw_meta = product.metafields.custom.hardware_rivet_finish_options
+  endif
+
+  assign _hw_raw_list = _hw_meta | split: ','
+  assign _default_hw = ''
+  if _hw_meta != blank
+    for _hw in _hw_raw_list
+      assign _hw_v = _hw | strip
+      if _hw_v != blank
+        assign _default_hw = _hw_v
+        break
+      endif
+    endfor
+  endif
+
+  comment
+    BOM image lookup maps. Stored as "label|assetUrl," entries keyed by type.
+    Only used to attach a preview layer image to a canonical option label.
+  endcomment
+  assign _cimg = ''
+  assign _bimg = ''
+  assign _himg = ''
+
+  for c in _comps
+    assign _ct = c.type
+    assign _cname = c.name | strip
+    if _cname == blank
+      continue
+    endif
+    capture _ciname
+      render 'configurator-image', comp: c, design_code: _code, design_number: _design_num
+    endcapture
+    assign _ciname = _ciname | strip
+    assign _cimgurl = _ciname | asset_url
+    if _ct == 'center'
+      assign _cimg = _cimg | append: _cname | append: '|' | append: _cimgurl | append: ','
+    elsif _ct == 'barrel'
+      assign _bimg = _bimg | append: _cname | append: '|' | append: _cimgurl | append: ','
+    elsif _ct == 'hardware'
+      assign _himg = _himg | append: _cname | append: '|' | append: _cimgurl | append: ','
+    endif
+  endfor
+
+  assign _cimg_pairs = _cimg | split: ','
+  assign _bimg_pairs = _bimg | split: ','
+  assign _himg_pairs = _himg | split: ','
+
+  comment
+    Barrel placeholder: until real Chrome barrel art exists, any canonical
+    barrel label without a BOM match (e.g. "Chrome") reuses the polished
+    barrel layer image. Exact BOM-name matches always win.
+  endcomment
+  assign _bimg_fallback = ''
+  for _p in _bimg_pairs
+    assign _parts = _p | split: '|'
+    if _parts.size > 1 and _parts[0] contains 'olished'
+      assign _bimg_fallback = _parts[1]
+      break
+    endif
+  endfor
+  if _bimg_fallback == blank
+    assign _chrome_barrel_img = 'finish-barrel-polish.png' | asset_url
+  else
+    assign _chrome_barrel_img = _bimg_fallback
+  endif
+-%}
+{
+  product_id: {{ product.id }},
+  product_handle: {{ product.handle | json }},
+  base_price: {{ product.price }},
+  lead_time_days: {{ _lead }},
+  design_code: {{ _code | json }},
+  design_number: {{ _design_num | json }},
+  hardware_options: [
+{%- if _hw_meta != blank -%}
+  {%- for _hw in _hw_raw_list -%}
+    {%- assign _hw_v = _hw | strip -%}
+    {%- if _hw_v != blank -%}
+    {{ _hw_v | json }},
+    {%- endif -%}
+  {%- endfor -%}
+{%- else -%}
+  {%- for c in _comps -%}
+    {%- if c.type == 'hardware' and c.name != blank -%}
+      {{ c.name | strip | json }},
+    {%- endif -%}
+  {%- endfor -%}
+{%- endif -%}
+  ],
+  default_hardware: {{ _default_hw | json }},
+  variants: {{ product.variants | json }},
+  components: {
+    diameter: [
+{%- assign _seen_diam = '' -%}
+{%- for v in product.variants -%}
+  {%- assign _raw1 = v.option1 | strip -%}
+  {%- if _raw1 != blank -%}
+    {%- assign _d_list = _raw1 | split: ' ; ' -%}
+    {%- for _d in _d_list -%}
+      {%- assign _d_opt = _d | strip -%}
+      {%- assign _seen_diam_arr = _seen_diam | split: ',' -%}
+      {%- unless _seen_diam_arr contains _d_opt -%}
+        {%- assign _seen_diam = _seen_diam | append: _d_opt | append: ',' -%}
+      {id:{{ _d_opt | downcase | replace: ' ', '-' | json }},label:{{ _d_opt | json }},type:'diameter',available:true},
+      {%- endunless -%}
+    {%- endfor -%}
+  {%- endif -%}
+{%- endfor -%}
+    ],
+    center: [
+{%- assign _seen_c = '' -%}
+{%- for v in product.variants -%}
+  {%- assign _raw2 = v.option2 | strip -%}
+  {%- if _raw2 != blank -%}
+    {%- assign _c_list = _raw2 | split: ' ; ' -%}
+    {%- for _c in _c_list -%}
+      {%- assign _c_opt = _c | strip -%}
+      {%- assign _seen_c_arr = _seen_c | split: ',' -%}
+      {%- unless _seen_c_arr contains _c_opt -%}
+        {%- assign _seen_c = _seen_c | append: _c_opt | append: ',' -%}
+        {%- assign _fimg = '' -%}
+         {%- comment -%}Use actual design-specific center artwork, not legacy BOM filenames.
+            _design_num is resolved once at the top of this snippet from
+            custom.design_number / custom.design_code — never nicknames.{%- endcomment -%}
+         {%- assign _finish_slug = _c_opt | handleize -%}
+         {%- assign _center_suffix = '' -%}
+         {%- comment -%}The finish code mapping must be verified with Calder artwork before production.{%- endcomment -%}
+         {%- case _finish_slug -%}
+           {%- when 'black-tint' -%}{%- assign _center_suffix = 'bk' -%}
+           {%- when 'gloss-black' -%}{%- assign _center_suffix = 'bkuti' -%}
+           {%- when 'titanium-tint' -%}{%- assign _center_suffix = 'su' -%}
+         {%- endcase -%}
+         {%- comment -%}Verified center-art allowlist. Append 204/206 only when Calder
+            supplies design-204/design-206 center art. Never remap 204 to 205.{%- endcomment -%}
+         {%- assign _known_designs = '201,202,203,205,207' | split: ',' -%}
+         {%- if _known_designs contains _design_num and _center_suffix != blank -%}
+           {%- assign _center_filename = 'design-' | append: _design_num | append: '-center-' | append: _center_suffix | append: '.png' -%}
+           {%- assign _fimg = _center_filename | asset_url -%}
+         {%- else -%}
+        {%- for _p in _cimg_pairs -%}
+          {%- assign _parts = _p | split: '|' -%}
+          {%- if _parts.size > 1 and _parts[0] == _c_opt -%}
+            {%- assign _fimg = _parts[1] -%}
+          {%- endif -%}
+                {%- endfor -%}
+        {%- endif -%}
+      {id:{{ _c_opt | downcase | replace: ' ', '-' | json }},label:{{ _c_opt | json }},type:'center',image:{{ _fimg | json }},available:true},
+      {%- endunless -%}
+    {%- endfor -%}
+  {%- endif -%}
+{%- endfor -%}
+    ],
+    barrel: [
+      {id:'black',label:'Black',type:'barrel',image:{{ 'finish-barrel-bk.png' | asset_url | json }},swatch_image:{{ 'finish-barrel-bk.png' | asset_url | json }},available:true},
+      {id:'chrome',label:'Chrome',type:'barrel',image:{{ _chrome_barrel_img | json }},swatch_image:{{ 'finish-barrel-polish.png' | asset_url | json }},available:true},
+    ],
+    hardware: [
+      {id:'black',label:'Black',type:'hardware',image:{{ 'finish-bolt-bk.png' | asset_url | json }},swatch_image:{{ 'finish-bolt-bk.png' | asset_url | json }},available:true},
+      {id:'chrome',label:'Chrome',type:'hardware',image:{{ 'finish-bolt-chrome.png' | asset_url | json }},swatch_image:{{ 'finish-bolt-chrome.png' | asset_url | json }},available:true},
+    ]
+  }
+}

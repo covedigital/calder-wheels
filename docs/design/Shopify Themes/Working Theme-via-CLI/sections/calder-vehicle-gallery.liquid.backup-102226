@@ -1,0 +1,283 @@
+{% comment %}theme-check-disable UnusedAssign{% endcomment %}
+{%- liquid
+  assign layout = 'calder-vehicle-gallery'
+  assign store_width = settings.container_max_width
+  if section.settings.section_width == 'custom'
+    assign store_width = section.settings.container_max_width
+  endif
+  assign per_page = section.settings.per_page | default: 12
+  assign perf_page_int = per_page | plus: 0
+-%}
+{{ 'calder-gallery.css' | asset_url | stylesheet_tag }}
+{% render 'section-wrapper', placement: 'top' %}
+<div class="holder" {% render 'section-style' %}>
+  <div class="container">
+    <div class="calder-gallery-hero">
+      <div class="calder-gallery-hero__eyebrow">Calder Wheels</div>
+      <h1 class="calder-gallery-hero__title">{{ section.settings.hero_title | default: 'Vehicle Gallery' }}</h1>
+      {%- assign subtitle = section.settings.hero_subtitle | default: 'Explore real-world vehicle builds featuring Calder Wheels. Discover the perfect fitment and configuration for your drive.' -%}
+      {%- if subtitle != blank -%}
+        <div class="calder-gallery-hero__subtitle">{{ subtitle }}</div>
+      {%- endif -%}
+    </div>
+    <nav class="calder-gallery-nav" aria-label="Gallery type">
+      <ul class="calder-gallery-nav__list">
+        <li class="calder-gallery-nav__item"><a href="/pages/vehicle-gallery" class="calder-gallery-nav__link calder-gallery-nav__link--active">Vehicle Gallery</a></li>
+        <li class="calder-gallery-nav__item"><a href="/pages/wheel-gallery" class="calder-gallery-nav__link">Wheel Gallery</a></li>
+      </ul>
+    </nav>
+    {%- liquid
+      assign all_builds = shop.metaobjects.gallery_build.values
+      assign use_metaobjects = false
+      if all_builds.size > 0
+        assign use_metaobjects = true
+      endif
+    -%}
+    {%- if use_metaobjects -%}
+      {%- liquid
+        assign vehicle_builds = '' | split: ''
+        assign all_makes = '' | split: ''
+        assign all_models = '' | split: ''
+        assign all_wheels = '' | split: ''
+        assign all_series = '' | split: ''
+        for build in all_builds
+          assign gtype = build.gallery_type | default: 'vehicle'
+          if gtype == 'vehicle' or gtype == blank
+            assign vehicle_builds = vehicle_builds | push: build
+            assign make = build.vehicle_make | default: '' | strip
+            assign model = build.vehicle_model | default: '' | strip
+            assign wheel = build.wheel_model | default: '' | strip
+            assign series = build.wheel_series | default: '' | strip
+            if make != '' and all_makes contains make
+            else
+              assign all_makes = all_makes | push: make
+            endif
+            if model != '' and all_models contains model
+            else
+              assign all_models = all_models | push: model
+            endif
+            if wheel != '' and all_wheels contains wheel
+            else
+              assign all_wheels = all_wheels | push: wheel
+            endif
+            if series != '' and all_series contains series
+            else
+              assign all_series = all_series | push: series
+            endif
+          endif
+        endfor
+        assign all_makes = all_makes | uniq | sort
+        assign all_models = all_models | uniq | sort
+        assign all_wheels = all_wheels | uniq | sort
+        assign all_series = all_series | uniq | sort
+      -%}
+      {%- assign filter_opts = all_makes | join: ',' | append: '|' | append: all_models | join: ',' | append: '|' | append: all_wheels | join: ',' | append: '|' | append: all_series | join: ',' -%}
+      {%- render 'calder-gallery-filters', filter_keys: 'make,model,wheel,series', filter_labels: 'Make,Model,Wheel,Series', filter_options: filter_opts -%}
+      <div class="calder-gallery-grid" data-calder-gallery data-items-per-page="{{ per_page }}">
+        {%- for build in vehicle_builds -%}
+          {%- liquid
+            assign heading = ''
+            if build.vehicle_year != blank
+              assign heading = build.vehicle_year | append: ' '
+            endif
+            assign heading = heading | append: build.vehicle_make | append: ' ' | append: build.vehicle_model
+            assign wheel_line = build.wheel_model | default: ''
+            if build.wheel_series != blank
+              assign wheel_line = wheel_line | append: ' · ' | append: build.wheel_series
+            endif
+            assign meta_lines = '' | split: ''
+            if wheel_line != ''
+              assign meta_lines = meta_lines | push: wheel_line
+            endif
+            if build.front_wheel_size != blank
+              assign size_str = build.front_wheel_size
+              if build.rear_wheel_size != blank and build.rear_wheel_size != build.front_wheel_size
+                assign size_str = size_str | append: '/' | append: build.rear_wheel_size
+              endif
+              assign meta_lines = meta_lines | push: size_str
+            endif
+            if build.overall_finish != blank
+              assign meta_lines = meta_lines | push: build.overall_finish
+            endif
+            assign badges = '' | split: ''
+            if build.wheel_series != blank
+              assign badges = badges | push: build.wheel_series
+            endif
+            assign detail_url = '/pages/gallery-build?build=' | append: build.system.handle
+            assign dataset = ''
+            if build.vehicle_make != blank
+              assign dataset = dataset | append: ' data-make="' | append: build.vehicle_make | append: '"'
+            endif
+            if build.vehicle_model != blank
+              assign dataset = dataset | append: ' data-model="' | append: build.vehicle_model | append: '"'
+            endif
+            if build.wheel_model != blank
+              assign dataset = dataset | append: ' data-wheel="' | append: build.wheel_model | append: '"'
+            endif
+            if build.wheel_series != blank
+              assign dataset = dataset | append: ' data-series="' | append: build.wheel_series | append: '"'
+            endif
+            assign featured_image = build.featured_image
+            if featured_image == blank
+              assign featured_image = build.gallery_images.value.first
+            endif
+          -%}
+          {%- render 'calder-gallery-card', image: featured_image, heading: heading, meta_lines: meta_lines, badges: badges, url: detail_url, type: 'vehicle', dataset_attrs: dataset -%}
+        {%- endfor -%}
+      </div>
+      {%- if vehicle_builds.size > perf_page_int -%}
+        <div class="calder-gallery-loadmore"><button type="button" class="calder-gallery-loadmore__btn">Load More</button></div>
+      {%- endif -%}
+      <div class="calder-gallery-empty" style="display:none;">
+        <div class="calder-gallery-empty__title">No Matching Builds Found</div>
+        <div class="calder-gallery-empty__text">Try adjusting your filters or explore all Calder builds.</div>
+        <button type="button" class="calder-gallery-empty__reset">Reset Filters</button>
+      </div>
+    {%- else -%}
+      {%- assign block_builds = section.blocks | where: 'type', 'build' -%}
+      {%- if block_builds.size > 0 -%}
+        {%- liquid
+          assign all_makes = '' | split: ''
+          assign all_models = '' | split: ''
+          assign all_wheels = '' | split: ''
+          assign all_series = '' | split: ''
+          for block in block_builds
+            assign make = block.settings.vehicle_make | strip
+            assign model = block.settings.vehicle_model | strip
+            assign wheel = block.settings.wheel_model | strip
+            assign series = block.settings.wheel_series | strip
+            if make != '' and all_makes contains make
+            else
+              assign all_makes = all_makes | push: make
+            endif
+            if model != '' and all_models contains model
+            else
+              assign all_models = all_models | push: model
+            endif
+            if wheel != '' and all_wheels contains wheel
+            else
+              assign all_wheels = all_wheels | push: wheel
+            endif
+            if series != '' and all_series contains series
+            else
+              assign all_series = all_series | push: series
+            endif
+          endfor
+          assign all_makes = all_makes | uniq | sort
+          assign all_models = all_models | uniq | sort
+          assign all_wheels = all_wheels | uniq | sort
+          assign all_series = all_series | uniq | sort
+        -%}
+        {%- assign filter_opts = all_makes | join: ',' | append: '|' | append: all_models | join: ',' | append: '|' | append: all_wheels | join: ',' | append: '|' | append: all_series | join: ',' -%}
+        {%- render 'calder-gallery-filters', filter_keys: 'make,model,wheel,series', filter_labels: 'Make,Model,Wheel,Series', filter_options: filter_opts -%}
+        <div class="calder-gallery-grid" data-calder-gallery data-items-per-page="{{ per_page }}">
+          {%- for block in block_builds -%}
+            {%- liquid
+              assign heading = ''
+              if block.settings.vehicle_year != blank
+                assign heading = block.settings.vehicle_year | append: ' '
+              endif
+              assign heading = heading | append: block.settings.vehicle_make | append: ' ' | append: block.settings.vehicle_model
+              assign wheel_line = block.settings.wheel_model | default: ''
+              if block.settings.wheel_series != blank
+                assign wheel_line = wheel_line | append: ' · ' | append: block.settings.wheel_series
+              endif
+              assign meta_lines = '' | split: ''
+              if wheel_line != ''
+                assign meta_lines = meta_lines | push: wheel_line
+              endif
+              if block.settings.wheel_size != blank
+                assign meta_lines = meta_lines | push: block.settings.wheel_size
+              endif
+              if block.settings.overall_finish != blank
+                assign meta_lines = meta_lines | push: block.settings.overall_finish
+              endif
+              assign badges = '' | split: ''
+              if block.settings.wheel_series != blank
+                assign badges = badges | push: block.settings.wheel_series
+              endif
+              assign detail_url = block.settings.detail_url | default: '#'
+              assign dataset = ''
+              if block.settings.vehicle_make != blank
+                assign dataset = dataset | append: ' data-make="' | append: block.settings.vehicle_make | append: '"'
+              endif
+              if block.settings.vehicle_model != blank
+                assign dataset = dataset | append: ' data-model="' | append: block.settings.vehicle_model | append: '"'
+              endif
+              if block.settings.wheel_model != blank
+                assign dataset = dataset | append: ' data-wheel="' | append: block.settings.wheel_model | append: '"'
+              endif
+              if block.settings.wheel_series != blank
+                assign dataset = dataset | append: ' data-series="' | append: block.settings.wheel_series | append: '"'
+              endif
+            -%}
+            {%- render 'calder-gallery-card', image: block.settings.image, heading: heading, meta_lines: meta_lines, badges: badges, url: detail_url, type: 'vehicle', dataset_attrs: dataset -%}
+          {%- endfor -%}
+        </div>
+        {%- if block_builds.size > perf_page_int -%}
+          <div class="calder-gallery-loadmore"><button type="button" class="calder-gallery-loadmore__btn">Load More</button></div>
+        {%- endif -%}
+        <div class="calder-gallery-empty" style="display:none;">
+          <div class="calder-gallery-empty__title">No Matching Builds Found</div>
+          <div class="calder-gallery-empty__text">Try adjusting your filters or explore all Calder builds.</div>
+          <button type="button" class="calder-gallery-empty__reset">Reset Filters</button>
+        </div>
+      {%- else -%}
+        <div class="calder-gallery-empty">
+          <div class="calder-gallery-empty__title">Vehicle Gallery</div>
+          <div class="calder-gallery-empty__text">Gallery builds will appear here once added. Use the theme editor to add builds, or create Gallery Build metaobjects in Shopify Admin.</div>
+        </div>
+      {%- endif -%}
+    {%- endif -%}
+    {%- if section.settings.show_cta -%}
+      <div class="calder-gallery-cta">
+        <div class="calder-gallery-cta__inner">
+          <div class="calder-gallery-cta__heading">{{ section.settings.cta_heading | default: 'Find Your Perfect Fitment' }}</div>
+          <div class="calder-gallery-cta__text">{{ section.settings.cta_text | default: 'Not sure what fits your vehicle? Use our fitment finder to discover compatible Calder wheel configurations.' }}</div>
+          <a href="{{ section.settings.cta_url | default: '/pages/fitment-finder' }}" class="calder-gallery-cta__btn">{{ section.settings.cta_label | default: 'Find Your Fit' }}</a>
+        </div>
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+{% render 'section-wrapper' %}
+<script src="{{ 'calder-gallery.js' | asset_url }}" defer></script>
+{% schema %}
+{
+  "name": "Calder Vehicle Gallery",
+  "tag": "section",
+  "settings": [
+    { "type": "header", "content": "Hero" },
+    { "type": "text", "id": "hero_title", "label": "Hero title", "default": "Vehicle Gallery" },
+    { "type": "textarea", "id": "hero_subtitle", "label": "Hero subtitle" },
+    { "type": "header", "content": "Layout" },
+    { "type": "range", "id": "per_page", "min": 6, "max": 48, "step": 3, "label": "Items per page", "default": 12 },
+    { "type": "header", "content": "CTA" },
+    { "type": "checkbox", "id": "show_cta", "label": "Show CTA", "default": true },
+    { "type": "text", "id": "cta_heading", "label": "CTA heading", "default": "Find Your Perfect Fitment" },
+    { "type": "textarea", "id": "cta_text", "label": "CTA text" },
+    { "type": "url", "id": "cta_url", "label": "CTA link" },
+    { "type": "text", "id": "cta_label", "label": "CTA button label", "default": "Find Your Fit" },
+    { "type": "header", "content": "Section Width" },
+    { "type": "select", "id": "section_width", "label": "Width source", "options": [{ "value": "global", "label": "Use store width" }, { "value": "custom", "label": "Custom width" }], "default": "global" },
+    { "type": "range", "id": "container_max_width", "min": 1178, "max": 1978, "step": 8, "unit": "px", "label": "Custom width", "default": 1178 }
+  ],
+  "blocks": [
+    {
+      "type": "build", "name": "Gallery Build",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Featured image" },
+        { "type": "text", "id": "vehicle_year", "label": "Vehicle year" },
+        { "type": "text", "id": "vehicle_make", "label": "Vehicle make" },
+        { "type": "text", "id": "vehicle_model", "label": "Vehicle model" },
+        { "type": "text", "id": "wheel_model", "label": "Wheel model" },
+        { "type": "text", "id": "wheel_series", "label": "Wheel series" },
+        { "type": "text", "id": "wheel_size", "label": "Wheel size" },
+        { "type": "text", "id": "overall_finish", "label": "Finish" },
+        { "type": "url", "id": "detail_url", "label": "Detail page URL" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Calder Vehicle Gallery", "settings": { "hero_title": "Vehicle Gallery", "per_page": 12 } }]
+}
+{% endschema %}

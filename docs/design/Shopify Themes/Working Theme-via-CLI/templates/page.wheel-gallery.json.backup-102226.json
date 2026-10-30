@@ -1,0 +1,47 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "wheel-gallery": {
+      "type": "calder-wheel-gallery",
+      "blocks": {
+        "wheel_build_DL76hM": {
+          "type": "wheel_build",
+          "settings": {
+            "image": "shopify://shop_images/Calder-Wheels-Close-up_2.png",
+            "wheel_model": "Design 201",
+            "wheel_series": "X5 12",
+            "finish": "Black",
+            "detail_url": "shopify://products/apex-201"
+          }
+        }
+      },
+      "block_order": [
+        "wheel_build_DL76hM"
+      ],
+      "settings": {
+        "hero_title": "Wheel Gallery",
+        "hero_subtitle": "Explore Calder wheel designs, finishes, and configurations. Browse by design — discover every finish combination.",
+        "per_page": 12,
+        "builder_url": "",
+        "show_cta": true,
+        "cta_heading": "Build Your Wheel",
+        "cta_text": "Configure your perfect Calder wheel. Choose your design, finishes, and see your build come to life.",
+        "cta_url": "",
+        "cta_label": "Build Your Wheel",
+        "section_width": "global",
+        "container_max_width": 1178
+      }
+    }
+  },
+  "order": [
+    "wheel-gallery"
+  ]
+}

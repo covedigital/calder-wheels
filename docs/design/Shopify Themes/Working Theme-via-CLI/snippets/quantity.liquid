@@ -43,7 +43,7 @@
   {%- endif -%}
   <div data-render="qty-{{ product_form_id }}">
     <quantity-input
-      class="prd-quantity {% if hide_quantity == 1 %}hidden{% endif %} {% unless current_variant.available %}prd-quantity--disabled{% endunless %}"
+      class="prd-quantity {% if hide_quantity == 1 and in_cart != true %}hidden{% endif %} {% unless current_variant.available %}prd-quantity--disabled{% endunless %}"
       data-inventory-status="{{ settings.product_swatches_inventory_status }}"
       data-inventory-many-in-stock-from="{{ settings.product_swatches_inventory_many_in_stock_from }}"
       data-inventory-low-in-stock-less-than="{{ settings.product_swatches_inventory_low_in_stock_less_than }}"
@@ -73,12 +73,12 @@
           <div class="quantity-status"></div>
 
         <div class="prd-quantity-nav">
-          <button class="prd-quantity-btn prd-quantity-up" name="plus">
+          <button class="prd-quantity-btn prd-quantity-up" name="plus" type="button">
             <span class="visually-hidden">{{ 'products.product.quantity.increase' | t: product: product_title | escape }}</span>
             {% render 'icon-plus' %}
           </button>
-          <button class="prd-quantity-btn prd-quantity-down" name="minus">
-            <span class="visually-hidden">{{ 'products.product.quantity.increase' | t: product: product_title | escape }}</span>
+          <button class="prd-quantity-btn prd-quantity-down" name="minus" type="button">
+            <span class="visually-hidden">{{ 'products.product.quantity.decrease' | t: product: product_title | escape }}</span>
             {% render 'icon-minus' %}
           </button>
         </div>

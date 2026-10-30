@@ -223,8 +223,9 @@ def get_vehicles():
         FROM model_years my
         JOIN models md ON md.model_id = my.model_id
         JOIN makes mk ON mk.make_id = md.make_id
-        LEFT JOIN fitment_specs fs ON fs.model_year_id = my.id
-        LEFT JOIN bolt_patterns bp ON bp.id = fs.bolt_pattern_id
+        JOIN fitment_specs fs ON fs.model_year_id = my.id
+        JOIN bolt_patterns bp ON bp.id = fs.bolt_pattern_id
+        WHERE fs.is_active = 1
         ORDER BY my.year DESC, mk.name, md.name
     """)
 

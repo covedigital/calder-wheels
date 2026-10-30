@@ -71,6 +71,7 @@
 -%}
 <div class="swiper-container prd-block-gallery-main js-product-main-carousel swiper-init quick-view" id="prdMainImage{{ suffix }}">
   <div class="swiper-wrapper">
+    {{ prepend_main_slide }}
     {%- for media in product.media limit: 60 -%}
       <div
           {% if media.media_type == 'image' %}

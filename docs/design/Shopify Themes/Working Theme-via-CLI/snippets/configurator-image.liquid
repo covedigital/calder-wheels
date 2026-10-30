@@ -1,0 +1,53 @@
+{%- comment -%}
+  Calder Wheels — Resolve a component's configurator finish image filename.
+
+  Priority:
+    1. Component's own flat `image` field from the BOM metafield, namespaced
+       with `wheel-component-` (e.g. image "center-spun-gloss-black.png" ->
+       "wheel-component-center-spun-gloss-black.png").
+    2. Generated convention. Center is design-scoped; barrel and hardware are
+       GLOBAL shared finish images (identical pixels across every design).
+
+  Skipped legacy values that don't resolve to flat theme assets (e.g. paths
+  containing "/" such as "composites/design-201/bk_center.png").
+
+  Usage:
+    {% capture comp_image %}
+      {% render 'configurator-image', comp: c, design_code: design_code %}
+    {% endcapture %}
+    {{- comp_image | asset_url -}}
+{%- endcomment -%}
+
+{%- liquid
+  assign _cw_img = comp.image
+  if _cw_img == blank or _cw_img contains '/'
+    if comp.type == 'center'
+      assign _cw_design = design_code
+      if design_number != blank
+        assign _cw_design = design_number
+      endif
+      assign _cw_img = 'design-' | append: _cw_design | append: '-center-' | append: comp.client_code | append: '.png'
+    elsif comp.type == 'barrel'
+      assign _cw_img = 'finish-barrel-' | append: comp.client_code | append: '.png'
+    elsif comp.type == 'hardware'
+      assign _cw_img = 'finish-bolt-' | append: comp.client_code | append: '.png'
+    else
+      assign _cw_img = ''
+    endif
+  else
+    if _cw_img contains 'design-'
+      if _cw_img contains 'barrel-'
+        assign _cw_tail = _cw_img | split: 'barrel-' | last
+        assign _cw_img = 'finish-barrel-' | append: _cw_tail
+      elsif _cw_img contains 'bolt-'
+        assign _cw_tail = _cw_img | split: 'bolt-' | last
+        assign _cw_img = 'finish-bolt-' | append: _cw_tail
+      endif
+    elsif _cw_img contains 'finish-' or _cw_img contains 'wheel-component-'
+      assign _cw_img = _cw_img
+    else
+      assign _cw_img = 'wheel-component-' | append: _cw_img
+    endif
+  endif
+-%}
+{{ _cw_img | strip -}}

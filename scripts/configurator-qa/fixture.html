@@ -1,0 +1,294 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Calder Configurator QA Fixture</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; }
+    .wheel-configurator__preview-layers, .wheel-configurator__preview-loading { display: none; }
+    .wheel-configurator__availability--available { color: #0a7; }
+    .wheel-configurator__availability--unavailable { color: #c00; }
+    .wheel-configurator__availability--partial { color: #a80; }
+    .wheel-configurator__option--selected { outline: 2px solid gold; }
+  </style>
+</head>
+<body>
+
+  <!-- ============ CONFIGURATOR (mirrors sections/wheel-configurator.liquid) ============ -->
+  <div class="calder-configurator">
+    <div class="wheel-configurator wheel-configurator--calder"
+         id="wheel-configurator-qa1"
+         data-product-id="777001"
+         data-product-handle="apex-201"
+         data-section-id="qa1">
+      <div class="wheel-configurator__inner">
+
+        <div class="wheel-configurator__preview">
+          <div class="wheel-configurator__canvas" id="configurator-canvas-qa1">
+            <div class="wheel-configurator__preview-loading"><p>loading</p></div>
+            <div class="wheel-configurator__preview-layers" style="display:none;">
+              <img class="wheel-configurator__layer wheel-configurator__layer--barrel" data-layer="barrel" alt="">
+              <img class="wheel-configurator__layer wheel-configurator__layer--center" data-layer="center" alt="">
+              <img class="wheel-configurator__layer wheel-configurator__layer--hardware" data-layer="hardware" alt="">
+            </div>
+          </div>
+          <div class="wheel-configurator__actions" style="display:none;"></div>
+        </div>
+
+        <div class="wheel-configurator__controls">
+          <div class="cbp-config__finish-group">
+            <select class="wheel-configurator__diameter-select"
+                    id="configurator-diameters-qa1"
+                    data-component="diameter"
+                    aria-label="Diameter">
+              <option value="">Select Diameter</option>
+            </select>
+          </div>
+          <div class="wheel-configurator__options" id="configurator-centers-qa1" data-component="center" data-loaded="false"></div>
+          <div class="wheel-configurator__options" id="configurator-barrels-qa1" data-component="barrel" data-loaded="false"></div>
+          <div class="wheel-configurator__options" id="configurator-hardwares-qa1" data-component="hardware" data-loaded="false"></div>
+          <div class="wheel-configurator__availability" id="configurator-availability-qa1" style="display:none;"></div>
+        </div>
+
+        <div class="wheel-configurator__summary" id="configurator-summary-qa1">
+          <strong id="configurator-summary-diameter">—</strong>
+          <strong id="configurator-summary-center">—</strong>
+          <strong id="configurator-summary-barrel">—</strong>
+          <strong id="configurator-summary-hardware">—</strong>
+          <span id="configurator-summary-price">—</span>
+          <button type="button" id="configurator-add-qa1" class="cbp-config__add-btn" disabled>Add to Cart</button>
+          <button type="button" id="configurator-quote-qa1" class="cbp-config__quote-btn" disabled>Request a Quote</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ PDP fixture (mirrors sections/calder-product.liquid pieces) ============ -->
+  <div class="calder-pdp" id="qa-pdp">
+    <variant-selects
+      class="no-js-hidden"
+      data-init-variant="5171100000001"
+      data-section="pdp"
+      data-section-id="pdp"
+      data-url="/products/apex-201"
+      data-section-layout="product"
+      data-has-color-option="false">
+
+      <div class="form-group">
+        <label class="form-label">Diameter</label>
+        <select name="options[Diameter]" class="form-select form-control form-control--rounded option-first">
+          <option value="22&quot;">22"</option>
+          <option value="24&quot;">24"</option>
+          <option value="26&quot;">26"</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Center Finish</label>
+        <select name="options[Center Finish]" class="form-select form-control form-control--rounded">
+          <option value="Gloss Black">Gloss Black</option>
+          <option value="Black Tint">Black Tint</option>
+          <option value="Titanium Tint">Titanium Tint</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Barrel &amp; Lip Finish</label>
+        <select name="options[Barrel & Lip Finish]" class="form-select form-control form-control--rounded">
+          <option value="Black">Black</option>
+          <option value="Chrome">Chrome</option>
+        </select>
+      </div>
+
+      <script type="application/json">
+        []
+      </script>
+    </variant-selects>
+
+    <select id="CalderHardwareRivet-pdp" class="calder-pdp__config-select" data-calder-hardware-rivet>
+      <option value="">Select Hardware</option>
+      <option value="Black Bolts" selected>Black Bolts</option>
+      <option value="Chrome Bolts">Chrome Bolts</option>
+    </select>
+
+    <input type="hidden" name="properties[Hardware &amp; Rivet Finish]" value="Black Bolts" data-calder-hw-rivet-property>
+    <input type="hidden" name="id" value="5171100000001" data-calder-id>
+    <input class="calder-pdp__qty-input" type="number" data-calder-qty-input value="1" min="1">
+
+    <div class="calder-pdp__price"><span class="price" data-pdp-price>$0.00</span></div>
+  </div>
+
+  <!-- Lumia cart components (stubbed for QA) -->
+  <cart-items></cart-items>
+  <mini-cart-popup></mini-cart-popup>
+
+  <!-- Fixture data + minimal Lumia-style stub wiring -->
+  <script>
+    (function () {
+      window.CALDER_API_BASE = '';
+      window.CALDER_ASSET_BASE = '';
+      window._calderDesignCode = '201';
+      window.themeMoneyFormat = '${{amount}}';
+      window.Shopify = {
+        formatMoney: function (cents, format) {
+          return (format || '${{amount}}').replace('{{amount}}', (Number(cents) / 100).toFixed(2));
+        }
+      };
+
+      /* Lumia cart-items stub: records the native render pipeline calls */
+      window.__cartItemsCalls = [];
+      window.__miniOpened = 0;
+      class QaCartItems extends HTMLElement {
+        getSectionsToRender() { return []; }
+        renderContents() { window.__cartItemsCalls.push('renderContents'); }
+        toggleEmptyClass() { window.__cartItemsCalls.push('toggleEmptyClass'); }
+        setCartJs() { window.__cartItemsCalls.push('setCartJs'); }
+        setStatus(s, id, size, cartToggle) { window.__cartItemsCalls.push('setStatus:' + s + ':' + (cartToggle === true)); }
+      }
+      if (!customElements.get('cart-items')) customElements.define('cart-items', QaCartItems);
+      class QaMiniCart extends HTMLElement {
+        open() { window.__miniOpened += 1; }
+      }
+      if (!customElements.get('mini-cart-popup')) customElements.define('mini-cart-popup', QaMiniCart);
+
+      /* ---- Build 18 native variants for apex-201 (QA only, not shipped) ---- */
+      var DIAMS = ['22"', '24"', '26"'];
+      var CENTERS = ['Gloss Black', 'Black Tint', 'Titanium Tint'];
+      var BARRELS = ['Black', 'Chrome'];
+      var variants = [];
+      var id = 5171100000000;
+      var priceTable = { '22"': 320000, '24"': 340000, '26"': 360000 };
+      for (var d = 0; d < DIAMS.length; d++) {
+        for (var c = 0; c < CENTERS.length; c++) {
+          for (var b = 0; b < BARRELS.length; b++) {
+            id += 1;
+            var available = true;
+            if (DIAMS[d] === '24"' && CENTERS[c] === 'Black Tint' && BARRELS[b] === 'Chrome') available = false;
+            variants.push({
+              id: id,
+              title: DIAMS[d] + ' / ' + CENTERS[c] + ' / ' + BARRELS[b],
+              option1: DIAMS[d],
+              option2: CENTERS[c],
+              option3: BARRELS[b],
+              price: priceTable[DIAMS[d]] + (b === 1 ? 20000 : 0) + (c === 1 ? 10000 : 0),
+              options: [DIAMS[d], CENTERS[c], BARRELS[b]],
+              available: available,
+              inventory_quantity: available ? 10 : 0,
+              featured_media: null
+            });
+          }
+        }
+      }
+      window.__QA_VARIANTS = variants;
+
+      /* Component data mirrors snippets/configurator-product-data.liquid output */
+      window._calderProductData = { '777001': {
+        product_id: 777001,
+        product_handle: 'apex-201',
+        base_price: 320000,
+        lead_time_days: 10,
+        design_code: '201',
+        hardware_options: ['Black Bolts', 'Chrome Bolts'],
+        default_hardware: 'Black Bolts',
+        variants: variants,
+        components: {
+          diameter: DIAMS.map(function (l, i) { return { id: l.replace(/"/g, ''), label: l, type: 'diameter', available: true }; }),
+          center: CENTERS.map(function (l) { return { id: 'center-' + l.replace(/[^a-z0-9]+/gi, '-').toLowerCase(), label: l, type: 'center', image: '', available: true }; }),
+          barrel: BARRELS.map(function (l) { return { id: 'barrel-' + l.toLowerCase(), label: l, type: 'barrel', image: '', available: true }; }),
+          hardware: ['Black Bolts', 'Chrome Bolts'].map(function (l) { return { id: l.replace(/[^a-z0-9]+/gi, '-').toLowerCase(), label: l, type: 'hardware', image: '', available: true }; })
+        }
+      }};
+      window._calderProductComponents = window._calderProductData['777001'];
+
+      /* Per-product data set for the builder design-switch test */
+      window.__QA_SECOND_PRODUCT = {
+        product_id: 777002,
+        product_handle: 'vertex-202',
+        base_price: 330000,
+        lead_time_days: 12,
+        design_code: '202',
+        hardware_options: ['Black Bolts', 'Chrome Bolts'],
+        default_hardware: 'Chrome Bolts',
+        variants: variants.map(function (v) {
+          return {
+            id: v.id + 100000,
+            title: v.title,
+            option1: v.option1, option2: v.option2, option3: v.option3,
+            price: v.price + 50000,
+            available: v.available,
+            inventory_quantity: v.inventory_quantity,
+            featured_media: null
+          };
+        }),
+        components: {
+          diameter: DIAMS.map(function (l, i) { return { id: l.replace(/"/g, ''), label: l, type: 'diameter', available: true }; }),
+          center: CENTERS.map(function (l) { return { id: 'center-' + l.replace(/[^a-z0-9]+/gi, '-').toLowerCase(), label: l, type: 'center', image: '', available: true }; }),
+          barrel: BARRELS.map(function (l) { return { id: 'barrel-' + l.toLowerCase(), label: l, type: 'barrel', image: '', available: true }; }),
+          hardware: ['Black Bolts', 'Chrome Bolts'].map(function (l) { return { id: l.replace(/[^a-z0-9]+/gi, '-').toLowerCase(), label: l, type: 'hardware', image: '', available: true }; })
+        }
+      };
+      window._bywProductData = { '777001': window._calderProductData['777001'], '777002': window.__QA_SECOND_PRODUCT };
+
+      /* ---- Minimal Lumia-style picker stub (QA only) ----
+         Mirrors global.js VariantSelects.renderSection() output that the
+         configurator relies on: resync hidden id input + spot price. */
+      var pdp = document.getElementById('qa-pdp');
+      var picker = pdp.querySelector('variant-selects');
+      var idInput = pdp.querySelector('input[name="id"]');
+      var priceEl = pdp.querySelector('[data-pdp-price]');
+      var hwSelect = pdp.querySelector('[data-calder-hardware-rivet]');
+
+      var pdpVariants = window.__QA_VARIANTS;
+
+      function pdpSync() {
+        var selects = picker.querySelectorAll('select');
+        var opts = Array.prototype.map.call(selects, function (s) { return s.value; });
+        var match = null;
+        for (var i = 0; i < pdpVariants.length; i++) {
+          var v = pdpVariants[i];
+          if (v.option1 === opts[0] && v.option2 === opts[1] && v.option3 === opts[2]) { match = v; break; }
+        }
+        if (!match) { idInput.value = ''; return; }
+        idInput.value = String(match.id);
+        if (priceEl) priceEl.textContent = '$' + (match.price / 100).toFixed(2);
+      }
+
+      picker.addEventListener('change', function () { pdpSync(); });
+
+      /* calder-product.liquid style observer: id input mutation -> pdp-variant-change */
+      var lastId = idInput.value;
+      new MutationObserver(function () {
+        if (idInput.value !== lastId) {
+          lastId = idInput.value;
+          var sels = { diameter: '', center: '', barrel: '', hardware: hwSelect.value };
+          var ss = picker.querySelectorAll('select');
+          if (ss.length >= 3) { sels.diameter = ss[0].value; sels.center = ss[1].value; sels.barrel = ss[2].value; }
+          pdp.dispatchEvent(new CustomEvent('calder:pdp-variant-change', { bubbles: true, detail: sels }));
+        }
+      }).observe(idInput, { attributes: true, attributeFilter: ['value'] });
+
+      /* hardware select -> hidden property (calder-product.liquid behavior) */
+      hwSelect.addEventListener('change', function () {
+        var prop = pdp.querySelector('[data-calder-hw-rivet-property]');
+        if (prop) prop.value = hwSelect.value || '';
+        pdp.dispatchEvent(new CustomEvent('calder:pdp-variant-change', { bubbles: true, detail: {
+          diameter: picker.querySelectorAll('select')[0].value,
+          center: picker.querySelectorAll('select')[1].value,
+          barrel: picker.querySelectorAll('select')[2].value,
+          hardware: hwSelect.value
+        }}));
+      });
+
+      window.__QA_pdp = pdp;
+      window.__QA_picker = picker;
+      window.__QA_idInput = idInput;
+      window.__QA_priceEl = priceEl;
+      window.__QA_hwSelect = hwSelect;
+    })();
+  </script>
+
+  <!-- Real theme assets under test (loaded in order) -->
+  <script src="__API_JS__"></script>
+  <script src="__DEMO_JS__"></script>
+  <script src="__APP_JS__"></script>
+</body>
+</html>

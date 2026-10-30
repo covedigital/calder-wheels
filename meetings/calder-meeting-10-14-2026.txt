@@ -1,0 +1,3 @@
+Product Details - Specifications - should be based on the specific selection of variants not all specs that are available
+Offset - each product should have a specified offset
+give the options for other designs sections in the Related Products / Wheels

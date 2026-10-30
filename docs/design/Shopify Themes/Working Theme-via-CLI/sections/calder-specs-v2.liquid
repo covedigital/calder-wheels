@@ -1,0 +1,753 @@
+{%- liquid
+  assign spec_series = product.metafields.custom.series.value | default: 'Calder Series'
+  assign spec_construction = product.metafields.custom.construction.value
+  assign spec_bolt = product.metafields.custom.bolt_pattern.value
+  assign spec_load = product.metafields.custom.load_rating.value
+  assign spec_finish = product.metafields.custom.finish.value
+  assign spec_title = product.metafields.custom.design_code.value | default: product.title
+  assign spec_photo = section.settings.specs_feature_image | default: product.featured_image
+
+  assign bom_data = product.metafields.custom.bom.value
+  assign bom_components = bom_data.components | default: bom_data
+  assign center_finishes = ''
+  assign barrel_finishes = ''
+  assign hardware_finishes = ''
+  if bom_components != blank
+    for c in bom_components
+      if c.type == 'center'
+        assign center_finishes = center_finishes | append: c.name | append: ', '
+      elsif c.type == 'barrel'
+        assign barrel_finishes = barrel_finishes | append: c.name | append: ', '
+      elsif c.type == 'hardware'
+        assign hardware_finishes = hardware_finishes | append: c.name | append: ', '
+      endif
+    endfor
+  endif
+  assign center_finishes = center_finishes | remove_last: ', '
+  assign barrel_finishes = barrel_finishes | remove_last: ', '
+  assign hardware_finishes = hardware_finishes | remove_last: ', '
+
+  assign spec_sizes = ''
+  assign seen_diameters = '|'
+  for v in product.variants
+    assign diameter = v.option1 | default: v.title | strip
+    if diameter contains 'in' or diameter contains '"'
+      assign diameter_token = '|' | append: diameter | append: '|'
+      unless seen_diameters contains diameter_token
+        if spec_sizes != blank
+          assign spec_sizes = spec_sizes | append: ', '
+        endif
+        assign spec_sizes = spec_sizes | append: diameter
+        assign seen_diameters = seen_diameters | append: diameter | append: '|'
+      endunless
+    endif
+  endfor
+-%}
+<section class="cw-spec-feature-v2 cw-spec-feature-v2--{{ section.settings.panel_order | default: 'visual_left' }}" aria-labelledby="cw-spec-title-{{ section.id }}">
+  <div class="cw-spec-feature-v2__container">
+
+    <div class="cw-spec-feature-v2__visual">
+      {%- if section.settings.engineering_image != blank -%}
+        {{ section.settings.engineering_image | image_url: width: 1600 | image_tag: class: 'cw-spec-feature-v2__engineering-image', alt: product.title, loading: 'lazy', widths: '600,900,1200,1600', sizes: '(max-width: 900px) 100vw, 50vw' }}
+      {%- elsif spec_photo != blank -%}
+        {{ spec_photo | image_url: width: 1600 | image_tag: class: 'cw-spec-feature-v2__engineering-image', alt: product.title, loading: 'lazy', widths: '600,900,1200,1600', sizes: '(max-width: 900px) 100vw, 50vw' }}
+      {%- endif -%}
+      <div class="cw-spec-feature-v2__engineering-overlay" aria-hidden="true"></div>
+            <div class="cw-spec-feature-v2__engineering-body calder-engineering__body">
+
+              <div class="cw-spec-feature-v2__engineering-intro calder-engineering__intro">
+
+                <h3 class="cw-spec-feature-v2__engineering-title">
+                  {{ section.settings.engineering_heading | default: 'Engineered to Perform' }}
+                </h3>
+
+                <p class="cw-spec-feature-v2__engineering-description">
+                  {{ section.settings.engineering_text | default: 'Every Calder wheel is precision-engineered from aerospace-grade materials, assembled to order by master craftsmen, and validated through rigorous testing before delivery.' }}
+                </p>
+
+              </div>
+
+
+              {%- comment -%}
+                ======================================================
+                ENGINEERING CAPABILITIES
+                ======================================================
+              {%- endcomment -%}
+
+              <div class="cw-spec-feature-v2__engineering-capabilities calder-engineering__capabilities">
+
+
+                {%- comment -%} Forged Aluminum {%- endcomment -%}
+
+                <div class="cw-spec-feature-v2__engineering-cap">
+
+                  <div class="cw-spec-feature-v2__engineering-cap-icon" aria-hidden="true">
+                    <svg class="cw-spec-feature-v2__engineering-icon" width="32" height="32" viewBox="0 0 512 512" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+                      <path d="m434.8 137.65-149.36-68.1c-16.19-7.4-42.69-7.4-58.88 0L77.3 137.65c-17.6 8-17.6 21.09 0 29.09l148 67.5c16.89 7.7 44.69 7.7 61.58 0l148-67.5c17.52-8 17.52-21.1-.08-29.09M160 308.52l-82.7 37.11c-17.6 8-17.6 21.1 0 29.1l148 67.5c16.89 7.69 44.69 7.69 61.58 0l148-67.5c17.6-8 17.6-21.1 0-29.1l-79.94-38.47" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"/>
+                      <path d="m160 204.48-82.8 37.16c-17.6 8-17.6 21.1 0 29.1l148 67.49c16.89 7.7 44.69 7.7 61.58 0l148-67.49c17.7-8 17.7-21.1.1-29.1L352 204.48" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"/>
+                    </svg>
+                  </div>
+
+                  <div class="cw-spec-feature-v2__engineering-cap-text">
+                    <strong>Forged Aluminum</strong>
+                    <span>Aerospace-grade 6061-T6</span>
+                  </div>
+
+                </div>
+
+
+                {%- comment -%} CNC Machined {%- endcomment -%}
+
+                <div class="cw-spec-feature-v2__engineering-cap">
+
+                  <div class="cw-spec-feature-v2__engineering-cap-icon" aria-hidden="true">
+                    <svg class="cw-spec-feature-v2__engineering-icon" width="32" height="32" viewBox="0 0 512 512" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+                      <path d="m456.7 242.27-26.08-4.2a8 8 0 0 1-6.6-6.82c-.5-3.2-1-6.41-1.7-9.51a8.08 8.08 0 0 1 3.9-8.62l23.09-12.82a8.05 8.05 0 0 0 3.9-9.92l-4-11a7.94 7.94 0 0 0-9.4-5l-25.89 5a8 8 0 0 1-8.59-4.11q-2.25-4.2-4.8-8.41a8.16 8.16 0 0 1 .7-9.52l17.29-19.94a8 8 0 0 0 .3-10.62l-7.49-9a7.88 7.88 0 0 0-10.5-1.51l-22.69 13.63a8 8 0 0 1-9.39-.9c-2.4-2.11-4.9-4.21-7.4-6.22a8 8 0 0 1-2.5-9.11l9.4-24.75A8 8 0 0 0 365 78.77l-10.2-5.91a8 8 0 0 0-10.39 2.21l-16.64 20.84a7.15 7.15 0 0 1-8.5 2.5s-5.6-2.3-9.8-3.71A8 8 0 0 1 304 87l.4-26.45a8.07 8.07 0 0 0-6.6-8.42l-11.59-2a8.07 8.07 0 0 0-9.1 5.61l-8.6 25.05a8 8 0 0 1-7.79 5.41h-9.8a8.07 8.07 0 0 1-7.79-5.41l-8.6-25.05a8.07 8.07 0 0 0-9.1-5.61l-11.59 2a8.07 8.07 0 0 0-6.6 8.42l.4 26.45a8 8 0 0 1-5.49 7.71c-2.3.9-7.3 2.81-9.7 3.71-2.8 1-6.1.2-8.8-2.91l-16.51-20.34A8 8 0 0 0 156.75 73l-10.2 5.91a7.94 7.94 0 0 0-3.3 10.09l9.4 24.75a8.06 8.06 0 0 1-2.5 9.11c-2.5 2-5 4.11-7.4 6.22a8 8 0 0 1-9.39.9L111 116.14a8 8 0 0 0-10.5 1.51l-7.49 9a8 8 0 0 0 .3 10.62l17.29 19.94a8 8 0 0 1 .7 9.52q-2.55 4-4.8 8.41a8.11 8.11 0 0 1-8.59 4.11l-25.89-5a8 8 0 0 0-9.4 5l-4 11a8.05 8.05 0 0 0 3.9 9.92L85.58 213a7.94 7.94 0 0 1 3.9 8.62c-.6 3.2-1.2 6.31-1.7 9.51a8.08 8.08 0 0 1-6.6 6.82l-26.08 4.2a8.09 8.09 0 0 0-7.1 7.92v11.72a7.86 7.86 0 0 0 7.1 7.92l26.08 4.2a8 8 0 0 1 6.6 6.82c.5 3.2 1 6.41 1.7 9.51a8.08 8.08 0 0 1-3.9 8.62L62.49 311.7a8.05 8.05 0 0 0-3.9 9.92l4 11a7.94 7.94 0 0 0 9.4 5l25.89-5a8 8 0 0 1 8.59 4.11q2.25 4.2 4.8 8.41a8.16 8.16 0 0 1-.7 9.52l-17.29 19.96a8 8 0 0 0-.3 10.62l7.49 9a7.88 7.88 0 0 0 10.5 1.51l22.69-13.63a8 8 0 0 1 9.39.9c2.4 2.11 4.9 4.21 7.4 6.22a8 8 0 0 1 2.5 9.11l-9.4 24.75a8 8 0 0 0 3.3 10.12l10.2 5.91a8 8 0 0 0 10.39-2.21l16.79-20.64c2.1-2.6 5.5-3.7 8.2-2.6 3.4 1.4 5.7 2.2 9.9 3.61a8 8 0 0 1 5.49 7.71l-.4 26.45a8.07 8.07 0 0 0 6.6 8.42l11.59 2a8.07 8.07 0 0 0 9.1-5.61l8.6-25a8 8 0 0 1 7.79-5.41h9.8a8.07 8.07 0 0 1 7.79 5.41l8.6 25a8.07 8.07 0 0 0 9.1 5.61l11.59-2a8.07 8.07 0 0 0 6.6-8.42l-.4-26.45a8 8 0 0 1 5.49-7.71c4.2-1.41 7-2.51 9.6-3.51s5.8-1 8.3 2.1l17 20.94A8 8 0 0 0 355 439l10.2-5.91a7.93 7.93 0 0 0 3.3-10.12l-9.4-24.75a8.08 8.08 0 0 1 2.5-9.12c2.5-2 5-4.1 7.4-6.21a8 8 0 0 1 9.39-.9L401 395.66a8 8 0 0 0 10.5-1.51l7.49-9a8 8 0 0 0-.3-10.62l-17.29-19.94a8 8 0 0 1-.7-9.52q2.55-4.05 4.8-8.41a8.11 8.11 0 0 1 8.59-4.11l25.89 5a8 8 0 0 0 9.4-5l4-11a8.05 8.05 0 0 0-3.9-9.92l-23.09-12.82a7.94 7.94 0 0 1-3.9-8.62c.6-3.2 1.2-6.31 1.7-9.51a8.08 8.08 0 0 1 6.6-6.82l26.08-4.2a8.09 8.09 0 0 0 7.1-7.92V250a8.25 8.25 0 0 0-7.27-7.73M256 112a143.82 143.82 0 0 1 139.38 108.12A16 16 0 0 1 379.85 240H274.61a16 16 0 0 1-13.91-8.09l-52.1-91.71a16 16 0 0 1 9.85-23.39A147 147 0 0 1 256 112M112 256a144 144 0 0 1 43.65-103.41 16 16 0 0 1 25.17 3.47L233.06 248a16 16 0 0 1 0 15.87l-52.67 91.7a16 16 0 0 1-25.18 3.36A143.94 143.94 0 0 1 112 256m144 144a147 147 0 0 1-38.19-4.95 16 16 0 0 1-9.76-23.44l52.58-91.55a16 16 0 0 1 13.88-8H379.9a16 16 0 0 1 15.52 19.88A143.84 143.84 0 0 1 256 400" fill="currentColor"/>
+                    </svg>
+                  </div>
+
+                  <div class="cw-spec-feature-v2__engineering-cap-text">
+                    <strong>CNC Machined</strong>
+                    <span>Precision to ±0.005mm</span>
+                  </div>
+
+                </div>
+
+
+                {%- comment -%} Strength Tested {%- endcomment -%}
+
+                <div class="cw-spec-feature-v2__engineering-cap">
+
+                  <div class="cw-spec-feature-v2__engineering-cap-icon" aria-hidden="true">
+                    <svg class="cw-spec-feature-v2__engineering-icon" width="32" height="32" viewBox="0 0 512 512" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M336 176 225.2 304 176 255.8" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"/>
+                      <path d="M463.1 112.37C373.68 96.33 336.71 84.45 256 48c-80.71 36.45-117.68 48.33-207.1 64.37C32.7 369.13 240.58 457.79 256 464c15.42-6.21 223.3-94.87 207.1-351.63" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"/>
+                    </svg>
+                  </div>
+
+                  <div class="cw-spec-feature-v2__engineering-cap-text">
+                    <strong>Strength Tested</strong>
+                    <span>Exceeds SAE J2530</span>
+                  </div>
+
+                </div>
+
+
+                {%- comment -%} Real World Proven {%- endcomment -%}
+
+                <div class="cw-spec-feature-v2__engineering-cap">
+
+                  <div class="cw-spec-feature-v2__engineering-cap-icon" aria-hidden="true">
+                    <svg class="cw-spec-feature-v2__engineering-icon" width="32" height="32" viewBox="0 0 512 512" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+                      <path fill="currentColor" d="m326.1 231.9-47.5 75.5a31 31 0 0 1-7 7 30.11 30.11 0 0 1-35-49l75.5-47.5a10.23 10.23 0 0 1 11.7 0 10.06 10.06 0 0 1 2.3 14"/>
+                      <path d="M256 64C132.3 64 32 164.2 32 287.9a223.18 223.18 0 0 0 56.3 148.5c1.1 1.2 2.1 2.4 3.2 3.5a25.19 25.19 0 0 0 37.1-.1 173.13 173.13 0 0 1 254.8 0 25.19 25.19 0 0 0 37.1.1l3.2-3.5A223.18 223.18 0 0 0 480 287.9C480 164.2 379.7 64 256 64" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"/>
+                      <path d="M256 128v32M416 288h-32M128 288H96M165.49 197.49l-22.63-22.63M346.51 197.49l22.63-22.63" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="32"/>
+                    </svg>
+                  </div>
+
+                  <div class="cw-spec-feature-v2__engineering-cap-text">
+                    <strong>Real World Proven</strong>
+                    <span>Track and street validated</span>
+                  </div>
+
+                </div>
+
+              </div>
+            </div>
+    </div>
+    <div class="cw-spec-feature-v2__content">
+      <div class="cw-spec-feature-v2__intro">
+        <p class="cw-spec-feature-v2__eyebrow">{{ spec_series | escape }}</p>
+        <h2 id="cw-spec-title-{{ section.id }}" class="cw-spec-feature-v2__title">{{ spec_title | escape }}</h2>
+        <p class="cw-spec-feature-v2__subtitle">{{ section.settings.specs_heading | default: 'Wheel Specifications' | escape }}</p>
+      </div>
+      <div class="cw-spec-feature-v2__columns">
+        <div class="cw-spec-feature-v2__column">
+          <div class="cw-spec-feature-v2__item"><span class="cw-spec-feature-v2__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 9 5-9 5-9-5 9-5Z"/><path d="m3 12 9 5 9-5M3 17l9 5 9-5"/></svg></span><div><span class="cw-spec-feature-v2__label">Series</span><span class="cw-spec-feature-v2__value">{{ spec_series | escape }}</span></div></div>
+          <div class="cw-spec-feature-v2__item"><span class="cw-spec-feature-v2__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8Z"/><path d="M10 2h4l.6 2.4 2 1.1 2.3-.8 2 3.4-1.8 1.7v2.4l1.8 1.7-2 3.4-2.3-.8-2 1.1L14 22h-4l-.6-2.4-2-1.1-2.3.8-2-3.4 1.8-1.7v-2.4L3.1 10l2-3.4 2.3.8 2-1.1L10 2Z"/></svg></span><div><span class="cw-spec-feature-v2__label">Construction</span><span class="cw-spec-feature-v2__value">{{ spec_construction | default: 'Contact for details' | escape }}</span></div></div>
+          <div class="cw-spec-feature-v2__item"><span class="cw-spec-feature-v2__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m14 5 5 5M4 20l5-1 11-11a3.5 3.5 0 0 0-5-5L4 14l-1 6 1 0ZM11 8l5 5"/></svg></span><div><span class="cw-spec-feature-v2__label">Finish Shown</span><span class="cw-spec-feature-v2__value">{{ spec_finish | default: center_finishes | default: 'Available by configuration' | escape }}</span></div></div>
+          <div class="cw-spec-feature-v2__item"><span class="cw-spec-feature-v2__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><path d="M12 3v3M21 12h-3M12 21v-3M3 12h3"/></svg></span><div><span class="cw-spec-feature-v2__label">Available Finishes</span><span class="cw-spec-feature-v2__value">{{ center_finishes | default: barrel_finishes | default: hardware_finishes | default: 'See available finishes' | escape }}</span></div></div>
+        </div>
+        <div class="cw-spec-feature-v2__column cw-spec-feature-v2__column--right">
+          <div class="cw-spec-feature-v2__item"><span class="cw-spec-feature-v2__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M7 17 17 7M10 7h7v7"/></svg></span><div><span class="cw-spec-feature-v2__label">Sizes</span><span class="cw-spec-feature-v2__value">{{ spec_sizes | default: 'Contact for sizes' | escape }}</span></div></div>
+          <div class="cw-spec-feature-v2__item"><span class="cw-spec-feature-v2__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 6 18 2l4 4-4 4M15 9 5 19a2.1 2.1 0 0 1-3-3L12 6M12 6l6 6"/></svg></span><div><span class="cw-spec-feature-v2__label">Bolt Patterns</span><span class="cw-spec-feature-v2__value">{{ spec_bolt | default: 'Custom fitment available' | escape }}</span></div></div>
+          <div class="cw-spec-feature-v2__item"><span class="cw-spec-feature-v2__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><path d="M12 3v3M21 12h-3M12 21v-3M3 12h3"/></svg></span><div><span class="cw-spec-feature-v2__label">Center Cap</span><span class="cw-spec-feature-v2__value">Calder Branded</span></div></div>
+          <div class="cw-spec-feature-v2__item"><span class="cw-spec-feature-v2__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 8V6a4 4 0 0 1 8 0v2H8ZM6 8h12l3 13H3L6 8Z"/><text x="12" y="17" text-anchor="middle" font-size="7" fill="currentColor" stroke="none">B</text></svg></span><div><span class="cw-spec-feature-v2__label">Weight</span><span class="cw-spec-feature-v2__value">{{ product.metafields.custom.weight.value | default: 'Contact for weight' | escape }}</span></div></div>
+          <div class="cw-spec-feature-v2__item"><span class="cw-spec-feature-v2__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 20 6v6c0 5-3 8-8 10-5-2-8-5-8-10V6l8-4Z"/><path d="m8 12 3 3 5-6"/></svg></span><div><span class="cw-spec-feature-v2__label">Load Rating</span><span class="cw-spec-feature-v2__value">{{ spec_load | default: 'Contact for rating' | escape }}</span></div></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+{% schema %}
+{
+  "name": "Calder Specs V2",
+  "tag": "section",
+  "class": "calder-specs-v2-wrap",
+  "settings": [
+    {
+      "type": "select",
+      "id": "panel_order",
+      "label": "Panel arrangement",
+      "options": [
+        {
+          "value": "visual_left",
+          "label": "Engineering left / Specifications right"
+        },
+        {
+          "value": "visual_right",
+          "label": "Specifications left / Engineering right"
+        }
+      ],
+      "default": "visual_left"
+    },
+    {
+      "type": "image_picker",
+      "id": "specs_feature_image",
+      "label": "Specifications close-up image"
+    },
+    {
+      "type": "header",
+      "content": "Specifications"
+    },
+    {
+      "type": "text",
+      "id": "specs_heading",
+      "label": "Heading",
+      "default": "Wheel Specifications"
+    },
+    {
+      "type": "header",
+      "content": "Engineering"
+    },
+    {
+      "type": "text",
+      "id": "engineering_heading",
+      "label": "Heading",
+      "default": "Engineered to Perform"
+    },
+    {
+      "type": "textarea",
+      "id": "engineering_text",
+      "label": "Description",
+      "default": "Every Calder wheel is precision-engineered from aerospace-grade materials, assembled to order by master craftsmen, and validated through rigorous testing before delivery."
+    },
+    {
+      "type": "image_picker",
+      "id": "engineering_image",
+      "label": "Engineering background image"
+    },
+    {
+      "type": "header",
+      "content": "SECTION GENERAL"
+    },
+    {
+      "type": "checkbox",
+      "id": "section_animation",
+      "label": "Enable soft appearing of section",
+      "default": true,
+      "info": "Global sections animation disabling in Theme Settings / General / Sections. AUTODISABLED if section has top or bottom separator."
+    },
+    {
+      "type": "header",
+      "content": "SECTION WIDTH"
+    },
+    {
+      "type": "select",
+      "id": "section_width",
+      "label": "Select width source",
+      "options": [
+        {
+          "value": "global",
+          "label": "Use store width"
+        },
+        {
+          "value": "custom",
+          "label": "Custom width"
+        }
+      ],
+      "default": "global",
+      "info": "Store width you can set in Theme Settings / General"
+    },
+    {
+      "type": "range",
+      "id": "container_max_width",
+      "min": 1178,
+      "max": 1978,
+      "step": 8,
+      "unit": "px",
+      "label": "Custom width",
+      "default": 1178,
+      "info": "The specified width may differ from the actual width of the section because this section uses a smart grid for the most successful arrangement of columns in rows and for best view. Columns are not scaled, but added when the section width is increased."
+    },
+    {
+      "type": "header",
+      "content": "SECTION MARGIN"
+    },
+    {
+      "type": "range",
+      "id": "spacing_sections",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Vertical space above the section on Desktop",
+      "default": 100
+    },
+    {
+      "type": "checkbox",
+      "id": "use_global_desktop_space",
+      "label": "Use global space on desktop",
+      "default": true,
+      "info": "from Theme Settings / General / Layout"
+    },
+    {
+      "type": "range",
+      "id": "spacing_sections_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Vertical space above the section on Mobile",
+      "default": 70
+    },
+    {
+      "type": "checkbox",
+      "id": "use_global_mobile_space",
+      "label": "Use global space on mobile",
+      "default": true,
+      "info": "from Theme Settings / General / Layout"
+    },
+    {
+      "type": "header",
+      "content": "SECTION PADDING",
+      "info": "Only if SECTION BACKGROUND or SECTION SEPARATOR was enabled"
+    },
+    {
+      "type": "range",
+      "id": "spacing_padding_sections",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Vertical inner padding on Desktop",
+      "default": 100
+    },
+    {
+      "type": "checkbox",
+      "id": "use_global_desktop_space_padding",
+      "label": "Use global inner padding on desktop",
+      "default": true,
+      "info": "from Theme Settings / General / Layout"
+    },
+    {
+      "type": "range",
+      "id": "spacing_padding_sections_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Vertical inner padding on Mobile",
+      "default": 70
+    },
+    {
+      "type": "checkbox",
+      "id": "use_global_mobile_space_padding",
+      "label": "Use global inner padding on Mobile",
+      "default": true,
+      "info": "from Theme Settings / General / Layout"
+    },
+    {
+      "type": "header",
+      "content": "SECTION BACKGROUND"
+    },
+    {
+      "type": "checkbox",
+      "id": "background",
+      "label": "Enable background",
+      "default": false,
+      "info": "by default inherits Secondary background color from Theme Settings / Colors - General Secondary"
+    },
+    {
+      "type": "select",
+      "id": "background_preset",
+      "label": "Background image - preset",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "product-cosmetics-bg.png",
+          "label": "Leaves 1"
+        },
+        {
+          "value": "bottom-cosmetics-bg.png",
+          "label": "Leaves 2"
+        },
+        {
+          "value": "bg-makeup1.png,bg-makeup1-m.png",
+          "label": "Pink and Waves 1"
+        },
+        {
+          "value": "bg-makeup2.png,bg-makeup2-m.png",
+          "label": "Pink and Waves 2"
+        },
+        {
+          "value": "bg-makeup4.png,bg-makeup4-m.png",
+          "label": "Pink and Waves 3"
+        },
+        {
+          "value": "bg-makeup3.png,bg-makeup3-m.png",
+          "label": "Purple Splash"
+        },
+        {
+          "value": "bg-sweets1.png",
+          "label": "Blue Sun Rays"
+        }
+      ],
+      "default": "none",
+      "info": "default from theme"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background image - custom on Desktop"
+    },
+    {
+      "type": "select",
+      "id": "background_behavior",
+      "label": "Background image behavior",
+      "options": [
+        {
+          "value": "bg-cover",
+          "label": "Cover"
+        },
+        {
+          "value": "bg-contain",
+          "label": "Contain"
+        },
+        {
+          "value": "bg-repeat",
+          "label": "Repeat"
+        }
+      ],
+      "default": "bg-cover"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image_mobile",
+      "label": "Background image - custom on Mobile",
+      "info": "only if Background image - custom on Desktop selected"
+    },
+    {
+      "type": "select",
+      "id": "background_image_placeholder_type",
+      "label": "Placeholder background color",
+      "options": [
+        {
+          "value": "color_global_primary_bg",
+          "label": "Primary background color"
+        },
+        {
+          "value": "color_global_secondary_bg",
+          "label": "Secondary background color"
+        },
+        {
+          "value": "custom",
+          "label": "Custom color"
+        }
+      ],
+      "default": "color_global_secondary_bg"
+    },
+    {
+      "type": "color",
+      "id": "background_image_placeholder",
+      "label": "Custom - Placeholder background color"
+    },
+    {
+      "type": "header",
+      "content": "SECTION SEPARATOR"
+    },
+    {
+      "type": "header",
+      "content": "Top separator"
+    },
+    {
+      "type": "select",
+      "id": "section_decoration_top",
+      "label": "Shape",
+      "options": [
+        {
+          "value": "global",
+          "label": "Use global separator"
+        },
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "grunge1",
+          "label": "Grunge 1"
+        },
+        {
+          "value": "grunge2",
+          "label": "Grunge 2"
+        },
+        {
+          "value": "grunge3",
+          "label": "Grunge 3"
+        },
+        {
+          "value": "paper",
+          "label": "Paper"
+        },
+        {
+          "value": "mountains",
+          "label": "Mountains"
+        },
+        {
+          "value": "ellipse1",
+          "label": "Ellipse 1"
+        },
+        {
+          "value": "ellipse2",
+          "label": "Ellipse 2"
+        },
+        {
+          "value": "wave1",
+          "label": "Wave 1"
+        },
+        {
+          "value": "wave2",
+          "label": "Wave 2"
+        },
+        {
+          "value": "wave3",
+          "label": "Wave 3"
+        },
+        {
+          "value": "wave4",
+          "label": "Wave 4"
+        },
+        {
+          "value": "wave5",
+          "label": "Wave 5"
+        },
+        {
+          "value": "triangle1",
+          "label": "Triangle 1"
+        },
+        {
+          "value": "triangle2",
+          "label": "Triangle 2"
+        },
+        {
+          "value": "triangle_assymetrical1",
+          "label": "Triangle assymetrical 1"
+        },
+        {
+          "value": "triangle_assymetrical1_flip",
+          "label": "Triangle assymetrical 1 flip"
+        },
+        {
+          "value": "triangle_assymetrical2",
+          "label": "Triangle assymetrical 2"
+        },
+        {
+          "value": "triangle_assymetrical2_flip",
+          "label": "Triangle assymetrical 2 flip"
+        },
+        {
+          "value": "tilt",
+          "label": "Tilt"
+        },
+        {
+          "value": "tilt_flip",
+          "label": "Tilt flip"
+        },
+        {
+          "value": "glaze",
+          "label": "Glaze"
+        }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "select",
+      "id": "section_decoration_top_color_type",
+      "label": "Color",
+      "options": [
+        {
+          "value": "color_global_primary_bg",
+          "label": "Primary background color"
+        },
+        {
+          "value": "color_global_secondary_bg",
+          "label": "Secondary background color"
+        },
+        {
+          "value": "color_header_main_bg",
+          "label": "Header - Middle(main) part color"
+        },
+        {
+          "value": "custom",
+          "label": "Custom color"
+        }
+      ],
+      "default": "color_global_primary_bg"
+    },
+    {
+      "type": "color",
+      "id": "section_decoration_top_color",
+      "label": "Custom - top separator color"
+    },
+    {
+      "type": "header",
+      "content": "Bottom separator"
+    },
+    {
+      "type": "select",
+      "id": "section_decoration_bottom",
+      "label": "Shape",
+      "options": [
+        {
+          "value": "global",
+          "label": "Use global separator"
+        },
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "grunge1",
+          "label": "Grunge 1"
+        },
+        {
+          "value": "grunge2",
+          "label": "Grunge 2"
+        },
+        {
+          "value": "grunge3",
+          "label": "Grunge 3"
+        },
+        {
+          "value": "paper",
+          "label": "Paper"
+        },
+        {
+          "value": "mountains",
+          "label": "Mountains"
+        },
+        {
+          "value": "ellipse1",
+          "label": "Ellipse 1"
+        },
+        {
+          "value": "ellipse2",
+          "label": "Ellipse 2"
+        },
+        {
+          "value": "wave1",
+          "label": "Wave 1"
+        },
+        {
+          "value": "wave2",
+          "label": "Wave 2"
+        },
+        {
+          "value": "wave3",
+          "label": "Wave 3"
+        },
+        {
+          "value": "wave4",
+          "label": "Wave 4"
+        },
+        {
+          "value": "wave5",
+          "label": "Wave 5"
+        },
+        {
+          "value": "triangle1",
+          "label": "Triangle 1"
+        },
+        {
+          "value": "triangle2",
+          "label": "Triangle 2"
+        },
+        {
+          "value": "triangle_assymetrical1",
+          "label": "Triangle assymetrical 1"
+        },
+        {
+          "value": "triangle_assymetrical1_flip",
+          "label": "Triangle assymetrical 1 flip"
+        },
+        {
+          "value": "triangle_assymetrical2",
+          "label": "Triangle assymetrical 2"
+        },
+        {
+          "value": "triangle_assymetrical2_flip",
+          "label": "Triangle assymetrical 2 flip"
+        },
+        {
+          "value": "tilt",
+          "label": "Tilt"
+        },
+        {
+          "value": "tilt_flip",
+          "label": "Tilt flip"
+        },
+        {
+          "value": "glaze",
+          "label": "Glaze"
+        }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "paragraph",
+      "content": "'Global separator' is set in Theme Settings / Separators / Global separator style"
+    },
+    {
+      "type": "select",
+      "id": "section_decoration_bottom_color_type",
+      "label": "Color",
+      "options": [
+        {
+          "value": "color_global_primary_bg",
+          "label": "Primary background color"
+        },
+        {
+          "value": "color_global_secondary_bg",
+          "label": "Secondary background color"
+        },
+        {
+          "value": "color_footer_top_bg",
+          "label": "Footer - Top part color"
+        },
+        {
+          "value": "custom",
+          "label": "Custom color"
+        }
+      ],
+      "default": "color_global_primary_bg"
+    },
+    {
+      "type": "color",
+      "id": "section_decoration_bottom_color",
+      "label": "Custom - bottom separator color"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Calder Specs V2",
+      "category": "Calder"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,28 @@
+{
+  "sections": {
+    "vehicle-gallery": {
+      "type": "calder-vehicle-gallery",
+      "settings": {
+        "hero_title": "Vehicle Gallery",
+        "hero_subtitle": "Explore real-world vehicle builds featuring Calder Wheels. Browse by vehicle \u2014 see how our wheels look on your car.",
+        "per_page": 12,
+        "show_cta": true,
+        "cta_heading": "Find Your Perfect Fitment",
+        "cta_text": "Not sure what fits your vehicle? Use our fitment finder to discover compatible Calder wheel configurations.",
+        "cta_label": "Find Your Fit",
+        "section_width": "global",
+        "hero_eyebrow": "CALDER WHEELS",
+        "hero_overlay": 55,
+        "columns_desktop": 4,
+        "columns_mobile": "2",
+        "show_search": true,
+        "show_sort": true,
+        "show_filters": true,
+        "hero_height": 300
+      }
+    }
+  },
+  "order": [
+    "vehicle-gallery"
+  ]
+}

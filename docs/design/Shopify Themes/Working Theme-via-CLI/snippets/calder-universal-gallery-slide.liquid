@@ -1,0 +1,32 @@
+{%- comment -%}
+  Calder universal gallery slides.
+  part='main'  -> the layered preview slide (slide 1; selection-synced).
+  part='thumb' -> its matching thumbnail.
+  Component detail renders are deliberately NOT gallery content.
+{%- endcomment -%}
+{%- if part == 'main' -%}
+<div class="calder-uc__gallery-slide" data-media-id="calder-preview-{{ section.id }}" data-media-type="image">
+  <div class="image-container ic--bg calder-uc__preview-canvas">
+    <div class="calder-uc__preview calder-uc__preview--gallery" data-calder-uc-preview>
+      <div class="calder-uc__preview-stack" data-calder-uc-stack>
+        <img class="calder-uc__layer calder-uc__layer--barrel" data-calder-uc-layer="barrel" src="{{ 'wheel-component-barrel-spun-gloss-black.png' | asset_url }}" alt="Gloss Black barrel and lip" width="480" height="480" loading="eager" decoding="async">
+        <img class="calder-uc__layer calder-uc__layer--center" data-calder-uc-layer="center" src="{{ 'wheel-component-center-spun-gloss-black.png' | asset_url }}" alt="Gloss Black center" width="480" height="480" loading="eager" decoding="async">
+        <img class="calder-uc__layer calder-uc__layer--hardware" data-calder-uc-layer="hardware" src="{{ 'wheel-component-hardware-chrome-bolts.png' | asset_url }}" alt="Chrome bolts hardware" width="480" height="480" loading="eager" decoding="async">
+      </div>
+      <p class="calder-uc__preview-fallback" data-calder-uc-fallback hidden>
+        Preview unavailable for this finish — selected finish is shown in the options below.
+      </p>
+    </div>
+  </div>
+</div>
+{%- else -%}
+<div class="calder-uc-gal__thumb calder-uc__thumb-slide" data-media-id="calder-preview-{{ section.id }}" data-media-type="image">
+  <div class="image-container calder-uc__thumb-canvas">
+    <div class="calder-uc__thumb-stack" data-calder-uc-thumb-stack aria-hidden="true">
+      <img class="calder-uc__layer" data-calder-uc-layer="barrel" data-calder-uc-thumb-layer="true" src="{{ 'wheel-component-barrel-spun-gloss-black.png' | asset_url }}" alt="" width="110" height="110" loading="lazy" decoding="async">
+      <img class="calder-uc__layer" data-calder-uc-layer="center" data-calder-uc-thumb-layer="true" src="{{ 'wheel-component-center-spun-gloss-black.png' | asset_url }}" alt="" width="110" height="110" loading="lazy" decoding="async">
+      <img class="calder-uc__layer" data-calder-uc-layer="hardware" data-calder-uc-thumb-layer="true" src="{{ 'wheel-component-hardware-chrome-bolts.png' | asset_url }}" alt="" width="110" height="110" loading="lazy" decoding="async">
+    </div>
+  </div>
+</div>
+{%- endif -%}

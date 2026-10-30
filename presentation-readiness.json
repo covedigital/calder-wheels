@@ -1,0 +1,50 @@
+{
+  "deadline": "2026-10-01",
+  "pages": {
+    "home": {
+      "status": "PRESENTATION_LOCKED",
+      "p0": 0,
+      "p1": 0
+    },
+    "collection": {
+      "status": "PRESENTATION_LOCKED",
+      "p0": 0,
+      "p1": 0
+    },
+    "product": {
+      "status": "IN_PROGRESS",
+      "p0": 3,
+      "p1": 7
+    },
+    "cart": {
+      "status": "IN_PROGRESS",
+      "p0": 2,
+      "p1": 5
+    },
+    "checkout": {
+      "status": "IN_PROGRESS",
+      "p0": 2,
+      "p1": 5
+    },
+    "fitment": {
+      "status": "IN_PROGRESS",
+      "p0": 1,
+      "p1": 3
+    },
+    "configurator": {
+      "status": "IN_PROGRESS",
+      "p0": 1,
+      "p1": 4
+    },
+    "dealer-dashboard": {
+      "status": "NOT_AUDITED",
+      "p0": null,
+      "p1": null
+    },
+    "crm": {
+      "status": "NOT_AUDITED",
+      "p0": null,
+      "p1": null
+    }
+  }
+}

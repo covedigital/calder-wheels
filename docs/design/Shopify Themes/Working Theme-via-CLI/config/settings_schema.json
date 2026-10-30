@@ -1986,6 +1986,14 @@
           {
             "value": "3",
             "label": "Combined"
+          },
+          {
+            "value": "4",
+            "label": "Calder Product Card Light"
+          },
+          {
+            "value": "5",
+            "label": "Calder Product Card Dark"
           }
         ],
         "default": "1"
@@ -7452,6 +7460,12 @@
         "default": "https://calder-dev.covedigitalworks.com",
         "placeholder": "http://localhost:8080",
         "info": "The Configurator API server URL. Set to your middleware server address. Leave empty to use Shopify AJAX fallback."
+      },
+      {
+        "type": "text",
+        "id": "calder_storefront_access_token",
+        "label": "Storefront access token (SKU-first purchase lookup)",
+        "info": "Public headless storefront token. When set, the universal PDP resolves the exact sellable variant by SKU alone (Storefront API), so product-handle changes can never break Add to Cart. Leave empty to use the handle+SKU fallback."
       }
     ]
   }

@@ -1,0 +1,37 @@
+{%- liquid
+  assign status_classes = ''
+  assign status_icon = ''
+
+  assign s = status | downcase | strip
+
+  if s == 'in production' or s == 'processing'
+    assign status_classes = 'dp-status-badge--production'
+    assign status_icon = '&#9881;'
+  elsif s == 'finishing'
+    assign status_classes = 'dp-status-badge--finishing'
+    assign status_icon = '&#9830;'
+  elsif s == 'quality check' or s == 'quality'
+    assign status_classes = 'dp-status-badge--quality'
+    assign status_icon = '&#10003;'
+  elsif s == 'preparing to ship' or s == 'preparing'
+    assign status_classes = 'dp-status-badge--preparing'
+    assign status_icon = '&#9773;'
+  elsif s == 'shipped'
+    assign status_classes = 'dp-status-badge--shipped'
+    assign status_icon = '&#9654;'
+  elsif s == 'delivered'
+    assign status_classes = 'dp-status-badge--delivered'
+    assign status_icon = '&#10004;'
+  elsif s == 'cancelled' or s == 'canceled'
+    assign status_classes = 'dp-status-badge--cancelled'
+    assign status_icon = '&#10008;'
+  else
+    assign status_classes = 'dp-status-badge--default'
+    assign status_icon = '&#8226;'
+  endif
+-%}
+
+<span class="dp-status-badge {{ status_classes }}" aria-label="Status: {{ status }}">
+  <span class="dp-status-badge__icon" aria-hidden="true">{{ status_icon }}</span>
+  <span class="dp-status-badge__text">{{ status | default: 'Unknown' }}</span>
+</span>

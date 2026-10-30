@@ -1,0 +1,62 @@
+{%- comment -%}
+  Calder Developer Output — debug panel for the universal PDP.
+  Enabled/disabled by the product template editor option
+  "Show developer output" (section.settings.show_developer_output).
+  Populated by calder-universal-cta.js on every resolver outcome.
+{%- endcomment -%}
+<div class="calder-dev" data-calder-dev>
+  <div class="calder-dev__head">
+    <span class="calder-dev__title">Calder Developer Output</span>
+    <span class="calder-dev__badge" data-calder-dev-state-badge>—</span>
+    <button type="button" class="calder-dev__btn" data-calder-dev-refresh>Re-run resolver</button>
+  </div>
+  <div class="calder-dev__grid">
+    <table class="calder-dev__table">
+      <caption>Selection</caption>
+      <tbody>
+        <tr><th>Design code</th><td data-calder-dev="designCode">—</td></tr>
+        <tr><th>Design number</th><td data-calder-dev="designNumber">—</td></tr>
+        <tr><th>Canonic</th><td data-calder-dev="handle">—</td></tr>
+        <tr><th>Tokens</th><td data-calder-dev="tokens">—</td></tr>
+        <tr><th>CFG SKU</th><td data-calder-dev="cfgSku">—</td></tr>
+        <tr><th>State seq / source</th><td data-calder-dev="seq">—</td></tr>
+        <tr><th>Fitment groups</th><td data-calder-dev="designPatterns">—</td></tr>
+        <tr><th>Default group</th><td data-calder-dev="defaultGroup">—</td></tr>
+        <tr><th>Group used</th><td data-calder-dev="group">—</td></tr>
+      </tbody>
+    </table>
+    <table class="calder-dev__table">
+      <caption>Vehicle</caption>
+      <tbody>
+        <tr><th>Raw JSON</th><td data-calder-dev="vehicleRaw">null</td></tr>
+        <tr><th>Vehicle patterns</th><td data-calder-dev="vehiclePatterns">—</td></tr>
+        <tr><th>Bolt-pattern match</th><td data-calder-dev="match">—</td></tr>
+        <tr><th>Mini-form year</th><td data-calder-dev="ffvYear">—</td></tr>
+      </tbody>
+    </table>
+    <table class="calder-dev__table">
+      <caption>Resolved outcome</caption>
+      <tbody>
+        <tr><th>CTA state</th><td data-calder-dev="ctaState">—</td></tr>
+        <tr><th>Part number</th><td data-calder-dev="partNumber">—</td></tr>
+        <tr><th>Cart product handle</th><td data-calder-dev="legacyHandle">—</td></tr>
+        <tr><th>Cart SKU (part number)</th><td data-calder-dev="legacySku">—</td></tr>
+        <tr><th>Cart variant ID</th><td data-calder-dev="variantId">—</td></tr>
+        <tr><th>Qty / min-qty</th><td data-calder-dev="qty">—</td></tr>
+      </tbody>
+    </table>
+    <table class="calder-dev__table">
+      <caption>QuickBooks components</caption>
+      <thead>
+        <tr><th>Type</th><th>Part number</th><th>On hand</th><th>Needed</th><th>OK</th></tr>
+      </thead>
+      <tbody data-calder-dev="qb"></tbody>
+    </table>
+    <table class="calder-dev__table">
+      <caption>Cart payload (what Add to Cart would post)</caption>
+      <tbody>
+        <tr><th>Payload</th><td data-calder-dev="cartPayload">—</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>

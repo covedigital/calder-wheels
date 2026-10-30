@@ -1,6 +1,10 @@
 {% comment %}theme-check-disable NestedSnippet, DeprecateBgsizes, UnusedAssign, TemplateLength, UnclosedHTMLElement, UndefinedObject{% endcomment %}
 {%- liquid
   assign layout = 'product-carousel'
+  assign carousel_card_layout = section.settings.product_card_layout | default: 'default'
+  if carousel_card_layout == 'default'
+    assign carousel_card_layout = settings.product_card_layout
+  endif
   assign section_id = section.id | default: 'product-card'
   assign product_form_suffix = ''
 
@@ -511,7 +515,7 @@
               <div class="swiper-container swiper-container-prd-carousel swiper-container-center">
                 <div class="swiper-wrapper">
                   {%- for product in collections[section.settings.collection].products limit: section.settings.limit -%}
-                    <div class="swiper-slide">{% render 'calder-product-card', product: product, collection: section.settings.collection %}</div>
+                    <div class="swiper-slide">{% render 'calder-product-card', product: product, collection: section.settings.collection, layout: carousel_card_layout %}</div>
                   {%- else -%}
                     {%- for i in (1..section.settings.limit) -%}
                       {% render 'product-placeholder' %}
@@ -646,6 +650,20 @@
     {
       "type": "header",
       "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "product_card_layout",
+      "label": "Product card layout",
+      "options": [
+        { "value": "default", "label": "Use theme setting" },
+        { "value": "1", "label": "Modern" },
+        { "value": "2", "label": "Classic" },
+        { "value": "3", "label": "Combined" },
+        { "value": "4", "label": "Calder Product Card Light" },
+        { "value": "5", "label": "Calder Product Card Dark" }
+      ],
+      "default": "default"
     },
     {
       "type": "range",

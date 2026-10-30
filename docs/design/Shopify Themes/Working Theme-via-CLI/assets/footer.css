@@ -559,7 +559,8 @@ body:not(.has-button-rounded) .subscribe-footer-input-group .btn {
 }
 .footer-logo img {
   transition: .2s;
-  width: 100%
+  width: 100%;
+  margin-left: -1rem;
 }
 .footer-logo .image-container {
   display: table-cell;

@@ -1,0 +1,69 @@
+## Calder Updates
+10-28-2026
+=========
+
+# Global
+- Update company logo (Ray will send)
+- Make sure the bottom newsletter section works
+
+
+# Home
+- Hero video
+- Update image for 2-Piece forge section
+- Update image for 24hr section
+- ^ Change CTA for Customize Without Limits section to "Explore Wheels"
+- Change the place of the product card wishlist icon, more in the corner
+- Disable the quick view option for the product card
+- Update the Fitted Gallery background image (Order: Bolts, Center Cap, Barrel, Bolts)
+
+# Category
+- ^ Change "all-calder-wheels" url handle to "wheels" for generality
+- ^ Make fitment active tabs standout more
+- ^ Replace the "By Vehicle" tab options with the product page "Fitment Guide" option/function (excluding the fitment guide wheel results)
+- ^ The "By Vehicle" tab results should function similar to the "By Wheel Style" where it shows instant filter options instead of producing another set of internal results within the fitment tool
+- ^ If a search "By Vehicle" is performed then the category title should dynamically update to show the name of the selected vehicle (Example: 2024 BMW X5 Wheels)
+- ^ If a search "By Vehicle" is performed then the filter options should dynamically remove the "Bolt Pattern" filter-block from the facet-filters-form, as the bolt pattern will already be implied based on the vehicle selected
+- X If a search "By Wheel Style" is performed then the category title should dynamically update to show the name of the selected vehicle (Example: 22" 5x120 Black Gloss Wheels)
+
+Calder wheels essentially has 6 wheel designs which each have 4 variant options (Diameter, Center Finish, Barrel & Lip Finish, Hardware & Rivet Finish)
+
+
+# Product
+
+# Gallery
+
+Gallery Page filters:
+
+Design
+Center Finish
+Lip Finish
+
+Vehicle Gallery Page filters:
+
+Make
+Model
+Wheel Design (instead of Wheel Model)
+Center Finish
+Lip Finish
+
+
+
+
+
+- the .calder-pdp__sku should also include the part_number (from calder_part_catalog_912.csv or whichever data source the theme is using) + put it under the existing sku data (Example - SKU: CFG-CLB07-22-GB-GBL-CH | Universal Part#: CLM0122106358730BT22)
+- the component part numbers will be read from a source (local/theme data source [updated frequently via cron jocs], QuickBooks inventory, etc) + the component part numbers are in the columns center_pn, barrel_pn, bolt_pn, cap_pn (from calder_part_catalog_912.csv or whichever data source the theme is using)
+- the .calder-pdp__fitment-form just extend the .calder-pdp__fitment not popup outside of the .calder-pdp__fitment container
+- the .calder-pdp__add-btn calder-upc__cta is dependent on the tracking the quantity availability of the center_pn, barrel_pn, bolt_pn, cap_pn + why is the .calder-pdp__add-btn calder-upc__cta disabled
+- the PDP buy section shows "Select your vehicle to confirm fitment and availability for the exact wheel." when a vehicle is actually selected.
+- the .calder-pdp__fitment-icon should indicate the correct status. green check mark circle for vehicle options that match the current product Bolt Pattern options, warning symbol for vehicle options that dont match the current product Bolt Pattern options
+- why does the .calder-pdp__fitment always say "Verification Required" even when a vehicle is selected
+- the vehicle compatibility should depend whether the select vehicle's Bolt Pattern, .calder-uc selected options, matchs the available Bolt Pattern options in the wheel specs table (.calder-specs__table table -> Example: Bolt Pattern 	5x120, 5x130, 6x135, 6x139)
+- review / throughly inspect the discontinued wheel configurator to see how the compile product availability (dependent on the quantity levels of the components that make up the product).... Example: This exact combination isn’t in stock - please speak to a support rep (305) 555-1234. OR available
+- use the "Minimum component quantity warning" value set in the product template editor to show a low-availability warning on universal PDPs when the selected configuration's stock is at or below this quantity.
+sections/wheel-configurator.liquid
+assets/configurator-api.js
+assets/configurator-app.js
+
+- keep the functioning product gallery the same, dont change anything about it
+- dont change any of the css changes that I made to the calder-universal-controls.css or the calder-product.css
+- keep the calder product page template sections as they are, do not revert and add sections that were there before

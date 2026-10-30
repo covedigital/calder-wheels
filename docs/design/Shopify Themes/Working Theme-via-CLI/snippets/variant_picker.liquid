@@ -222,6 +222,24 @@
                         endif
                       endif
 
+                      assign calder_finish_asset = blank
+                      if calder_pdp_labels
+                        assign calder_option_key = option.name | handleize
+                        if calder_option_key contains 'finish' or calder_option_key contains 'color' or calder_option_key contains 'colour'
+                          assign calder_finish_key = value | handleize
+                          case calder_finish_key
+                            when 'black-tint'
+                              assign calder_finish_asset = 'finish-black-tint.jpg'
+                            when 'chrome'
+                              assign calder_finish_asset = 'finish-chrome.jpg'
+                            when 'gloss-black'
+                              assign calder_finish_asset = 'finish-gloss-black.jpg'
+                            when 'titanium-tint'
+                              assign calder_finish_asset = 'finish-titanium-tint.jpg'
+                          endcase
+                        endif
+                      endif
+
                       assign label_option_color = false
 
                       if absent != true and is_color_option and image != false or use_pics
@@ -268,7 +286,10 @@
                           assign show_only_values = true
                         endif
                       -%}
-                      {%- if show_only_values -%}
+                      {%- if calder_finish_asset != blank -%}
+                        <span class="calder-pdp__swatch-material" aria-hidden="true"><img src="{{ calder_finish_asset | asset_url }}" alt="" width="30" height="30" loading="lazy"></span>
+                        <span class="calder-pdp__native-option-name">{{ value | escape }}</span>
+                      {%- elsif show_only_values -%}
                         {%- if layout == 'product-card' -%}
                           {{ value | truncate: 34 }}
                         {%- else -%}
@@ -301,6 +322,10 @@
                           {% comment %}theme-check-enable RemoteAsset{% endcomment %}
                           </span>
                         {%- endif -%}
+                      {%- endif -%}
+
+                      {%- if calder_pdp_labels and show_only_values == false and calder_finish_asset == blank -%}
+                        <span class="calder-pdp__native-option-name">{{ value | escape }}</span>
                       {%- endif -%}
 
                       {%- unless quick_options -%}

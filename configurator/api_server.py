@@ -270,6 +270,7 @@ def check_availability(req: AvailabilityRequest):
         "finished_sku": result.finished_sku,
         "is_orderable": result.is_orderable,
         "available_to_build": 999 if result.is_orderable else 0,
+        "total_retail": float(result.total_retail) if result.is_orderable else None,
         "lead_time_days": 10,
         "lead_time": "5-10 business days",
     }

@@ -1,0 +1,24 @@
+<div class="dp-stat-card">
+  <div class="dp-stat-card__icon">
+    {% if icon %}
+      {{ icon }}
+    {% else %}
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor"><circle cx="10" cy="10" r="8" fill="none" stroke="currentColor" stroke-width="1.2"/></svg>
+    {% endif %}
+  </div>
+  <div class="dp-stat-card__body">
+    <span class="dp-stat-card__label">{{ label | default: 'Stat' }}</span>
+    <span class="dp-stat-card__value">{{ value | default: '—' }}</span>
+    {% if sub_value != blank %}
+      <span class="dp-stat-card__sub">{{ sub_value }}</span>
+    {% endif %}
+    {% if progress != blank %}
+      <div class="dp-stat-card__progress">
+        <div class="dp-stat-card__progress-bar" style="width:{{ progress }}%"></div>
+      </div>
+    {% endif %}
+  </div>
+</div>
+{% if link != blank %}
+  <a href="{{ link }}" class="dp-stat-card__link" aria-label="{{ label | escape }}"></a>
+{% endif %}

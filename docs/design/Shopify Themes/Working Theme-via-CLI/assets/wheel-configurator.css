@@ -2,6 +2,12 @@
   padding: 30px 0;
 }
 
+/* Mirrors .calder-builder-page on standalone product pages so the shared
+   build-your-wheel configurator layout (3-column grid/gap) renders identically. */
+.calder-configurator {
+  --cbp-grid-gap: 22px;
+}
+
 .wheel-configurator__header {
   margin-bottom: 24px;
 }
@@ -28,7 +34,7 @@
 
 .wheel-configurator__preview {
   position: sticky;
-  top: 120px;
+  top: 0;
 }
 
 .wheel-configurator__canvas {
@@ -104,8 +110,89 @@
   gap: 10px;
 }
 
-.wheel-configurator__loading-options {
-  padding: 20px;
+.wheel-configurator__diameter-select {
+  width: 100%;
+  height: 44px;
+  padding: 0 32px 0 14px;
+  border: 1.5px solid var(--decor-border-color, rgba(255,255,255,0.2));
+  border-radius: 6px;
+  background: var(--body-bg, #111);
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--heading-color, #fff);
+  cursor: pointer;
+  appearance: auto;
+  -webkit-appearance: auto;
+}
+
+.wheel-configurator__diameter-select option {
+  background: var(--body-bg, #111);
+  color: var(--heading-color, #fff);
+}
+
+.cbp-config .wheel-configurator__diameter-select {
+  width: 100%;
+  height: 44px;
+  padding: 0 32px 0 14px;
+  border: 1.5px solid rgba(0,0,0,0.1);
+  border-radius: 6px;
+  background: #fff;
+  color: var(--calder-navy, #0E2A3E);
+}
+
+/* Legacy chip-based diameter — kept for backward compat */
+.wheel-configurator__diameter-wrap {
+  /* Legacy wrapper: current revisions render a diameter <select> instead. */
+}
+
+.wheel-configurator__option--diameter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  min-width: 64px;
+  height: 44px;
+  padding: 0 14px;
+  border-radius: 6px;
+  border: 1.5px solid var(--decor-border-color, rgba(255,255,255,0.15));
+  cursor: pointer;
+  background: var(--body-bg, #111);
+  transition: border-color 0.2s, transform 0.15s, background 0.2s;
+}
+
+.wheel-configurator__option--diameter:hover {
+  transform: scale(1.05);
+  border-color: var(--text-color, rgba(255,255,255,0.4));
+}
+
+.wheel-configurator__option--diameter.wheel-configurator__option--selected {
+  border-color: var(--custom-color, #c9a96e);
+  box-shadow: 0 0 0 2px var(--custom-color, #c9a96e);
+  background: var(--custom-color, #c9a96e);
+  color: #181208;
+}
+
+.wheel-configurator__option--diameter .wheel-configurator__option-label {
+  position: static;
+  background: transparent;
+  color: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0;
+}
+
+/* ── PDP configurator override for diameter chips ── */
+.cbp-config .wheel-configurator__diameter-wrap {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(72px, 1fr));
+  gap: 8px;
+}
+
+.cbp-config .wheel-configurator__option--diameter {
+  width: 100%;
+  height: 44px;
+  font-size: 0.85rem;
 }
 
 .wheel-configurator__option {
@@ -212,6 +299,54 @@
   background: rgba(234,179,8,0.1);
   color: #eab308;
   border: 1px solid rgba(234,179,8,0.2);
+}
+
+/* ── QuickBooks component stock badges ── */
+.wheel-configurator__stock-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  line-height: 1.5;
+  white-space: nowrap;
+}
+
+.wheel-configurator__stock-badge[hidden] {
+  display: none;
+}
+
+.wheel-configurator__stock-badge--in {
+  background: rgba(34, 197, 94, 0.12);
+  color: #15803d;
+  border: 1px solid rgba(34, 197, 94, 0.35);
+}
+
+.wheel-configurator__stock-badge--out {
+  background: rgba(239, 68, 68, 0.12);
+  color: #b91c1c;
+  border: 1px solid rgba(239, 68, 68, 0.35);
+}
+
+.wheel-configurator__stock-badge--diameter {
+  margin-left: 10px;
+  vertical-align: middle;
+}
+
+.wheel-configurator__option .wheel-configurator__stock-badge {
+  position: absolute;
+  top: 3px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  padding: 1px 4px;
+  font-size: 0.5rem;
+  max-width: 94%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  pointer-events: none;
 }
 
 .wheel-configurator__actions {
@@ -322,4 +457,25 @@
   opacity: 0.6;
   font-weight: 400;
   font-size: 0.68rem;
+}
+/* All full-size component images share the same preview coordinate system:
+   a registered 1920x1564 canvas. The layer box matches that canvas aspect
+   ratio at full tile height so the composite fills the preview instead of
+   being re-letterboxed (a square 90% box shrinks the wheel to ~60% of the
+   tile). Every layer keeps the identical box, so cross-layer registration
+   is preserved. */
+.wheel-configurator__preview-layers > .wheel-configurator__layer {
+  position: absolute;
+  top: 100% !important;
+  right: 0;
+  bottom: 0;
+  left: 50% !important;
+  inset: 0;
+  height: 100%;
+  width: auto;
+  aspect-ratio: 1920 / 1564;
+  max-width: none;
+  max-height: none;
+  margin: auto;
+  object-fit: contain;
 }

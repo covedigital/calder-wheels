@@ -1,0 +1,6 @@
+Handle,Command,Title,Body HTML,Sort Order,Template Suffix,Published,Source: Command,Source: Type,Inclusion: Type,Inclusion: Match,Condition: Command,Condition: Field,Condition: Relation,Condition: Value,Condition: Match,Sort: Position,Sort: Product Handle
+22-inch-wheels,,,,,,,,,,,MERGE,Price,Greater than,900,
+24-inch-wheels,MERGE,"24"" Wheels",24-inch diameter.,Price,,TRUE,MERGE,Products,,,MERGE,Price,Greater than,1099,any
+24-inch-wheels,,,,,,,,,,,MERGE,Price,Less than,1400,
+26-inch-wheels,MERGE,"26"" Wheels",26-inch diameter.,Price,,TRUE,MERGE,Products,,,MERGE,Price,Greater than,1399,any
+26-inch-wheels,,,,,,,,,,,MERGE,Price,Less than,2000,

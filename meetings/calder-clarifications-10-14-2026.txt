@@ -1,0 +1,180 @@
+Hi,
+
+Before we finalize the Product Page and Build Your Wheel configurator, I'd like to confirm that the following functionality matches how you envision customers shopping for and customizing Calder Wheels.
+
+The goal is to offer customers **preconfigured wheel designs that are ready to shop**, while also allowing them to customize those designs before adding them to their cart.
+
+### 1. Product Listings — Preconfigured Wheel Designs
+
+Customers will browse a catalog of preconfigured Calder wheel designs.
+
+Each listing will feature a specific wheel design with predetermined finishes and hardware, including:
+
+- Wheel design/model (e.g., CLB07)
+- Diameter (22", 24", or 26")
+- Center Finish (Gloss Black, Black Tint, or Titanium Tint)
+- Barrel & Lip Finish (Black or Chrome)
+- Hardware & Rivet Finish (Black Bolts or Chrome Bolts)
+
+Each preconfigured design will have its own product listing, images, specifications, and starting configuration.
+
+**Expected behavior:** Customers can purchase the displayed configuration or customize it further.
+
+
+
+### 2. Product Page — Standard Wheel Selection
+
+When customers open a product page, they will see the selected wheel design, images, specifications, pricing, fitment information, and purchase options.
+
+Customers can adjust the following options directly on the Product Page:
+
+| Option | Available selections |
+|---|---|
+| Diameter | 22", 24", 26" |
+| Center Finish | Gloss Black, Black Tint, Titanium Tint |
+| Barrel & Lip Finish | Black, Chrome |
+| Hardware & Rivet Finish | Black Bolts, Chrome Bolts |
+
+As customers change their selections:
+
+- The selected configuration updates.
+- The product price updates when applicable.
+- The product's availability is checked.
+- Product images update where matching imagery is available.
+- The selected options remain consistent with the Build Your Wheel configurator.
+
+**Expected behavior:** Customers can customize the product directly on the Product Page without necessarily using the full configurator.
+
+
+===
+
+
+### 3. Build Your Wheel — Visual Wheel Customization
+
+The Product Page will include a dedicated **Build Your Wheel** section for customers who want a more interactive customization experience.
+
+Customers will be able to:
+
+1. Select the wheel diameter.
+2. Choose the center finish.
+3. Choose the barrel and lip finish.
+4. Choose the hardware and rivet finish.
+5. View the wheel preview as finishes change.
+6. Review their selected configuration, price, and availability.
+7. Add the customized wheel to their cart.
+
+The configurator will use the wheel design from the current product as its starting point.
+
+**Expected behavior:** Customers can customize the appearance of the wheel without having to find another preconfigured product listing.
+
+====
+
+### 4. Product Page & Configurator Synchronization
+
+The standard Product Page options and Build Your Wheel configurator will remain synchronized.
+
+For example:
+
+If a customer changes the diameter from 22" to 24" on the Product Page, the configurator will also reflect the 24" selection.
+
+Likewise, if a customer changes the Center Finish to Titanium Tint in the configurator, the Product Page will reflect that selection.
+
+**Expected behavior:** Both interfaces always represent the same current wheel configuration, regardless of where the customer makes a change.
+
+====
+
+### 5. Pricing & Availability
+
+Pricing will be based on the customer's selected wheel configuration.
+
+- Diameter and finish selections may affect pricing based on the configured product prices.
+- Black Bolts and Chrome Bolts will have the same price.
+- The displayed price will reflect the selected configuration.
+- Unavailable or unsupported combinations cannot be added to the cart.
+- Made-to-order availability and estimated production lead times will be communicated where applicable.
+
+**Expected behavior:** Customers see the correct price and purchasing availability before adding their wheel to the cart.
+
+### 6. Add to Cart — Standard or Customized Wheel
+
+Customers will have two ways to add a wheel to their cart:
+
+**Option A — Product Page Add to Cart**
+
+Adds the configuration currently selected on the Product Page.
+
+**Option B — Build Your Wheel Add to Cart**
+
+Adds the configuration currently selected in the configurator.
+
+Both buttons will use the customer's latest selections, including hardware finish.
+
+For example, a customer opens a product originally configured as:
+
+- Diameter: 22"
+- Center Finish: Gloss Black
+- Barrel & Lip Finish: Black
+- Hardware: Black Bolts
+
+The customer then changes the configuration to:
+
+- Diameter: 26"
+- Center Finish: Titanium Tint
+- Barrel & Lip Finish: Chrome
+- Hardware: Chrome Bolts
+
+When they click Add to Cart, **the cart should contain the customized 26" Titanium Tint / Chrome / Chrome Bolts configuration**, not the original preconfigured wheel.
+
+### 7. Shopping Cart & Order Details
+
+The cart and order should preserve the customer's complete wheel configuration.
+
+Each wheel should include:
+
+- Wheel design/model
+- Diameter
+- Center Finish
+- Barrel & Lip Finish
+- Hardware & Rivet Finish
+- Quantity
+- Final price
+
+These details should remain available for order processing and manufacturing.
+
+### 8. Standalone Build Your Wheel Page
+
+In addition to the configurator on individual Product Pages, Calder will have a standalone Build Your Wheel page.
+
+Customers will be able to:
+
+- Choose a Calder wheel design.
+- Customize all four options.
+- View the resulting configuration.
+- Review price and availability.
+- Add their customized wheel to the cart.
+
+The standalone builder will follow the same configuration, pricing, and purchasing rules as the Product Page configurator.
+
+---
+
+### Final Confirmation Questions
+
+Please confirm the following so we can finalize the implementation:
+
+1. **Preconfigured products:** Should every catalog listing open with its advertised wheel finishes and hardware already selected?
+
+2. **Visual preview:** Should the wheel preview update immediately when a customer changes a finish, including the hardware bolts?
+
+3. **Pricing:** Should the price change based on diameter and finishes, or only diameter? We currently understand that hardware finishes do not affect price.
+
+4. **Made-to-order availability:** Should customers be allowed to purchase a wheel configuration when components are not currently in stock but can be manufactured, or should they be directed to Request a Quote? No
+
+5. **Wheel quantity:** Should customers add wheels individually, with quantity adjustable, or should the default purchase be a complete set of four? 
+
+6. **Vehicle fitment:** Should customers be required to confirm vehicle compatibility before adding wheels to the cart, or should fitment verification remain optional?
+
+7. **Cart and manufacturing:** Should the cart and order display all four selected options so Calder's team can identify the exact wheel configuration to manufacture?
+
+Once these details are confirmed, we can finalize the configurator's behavior and complete the remaining implementation and testing.
+
+Thank you!

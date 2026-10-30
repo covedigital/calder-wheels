@@ -1,0 +1,5278 @@
+Ivan Osorio
+be a highlight reel of us building the wheel, the whole wheel. We can do that video. 
+
+You
+We can do that too. That was the point that I was making. Yeah. 
+
+Ivan Osorio
+No, no, no. I agree. I'm saying, you're right. People didn't know what the fuck they're looking at. I mean, what makes us different from from from our direct competitor. Okay, exactly. Why we're different? It's actually just a title should be why we're different. Right, exactly. What's the that's the part? Yep. Yeah, 
+
+You
+So 
+
+Ivan Osorio
+I think 
+
+You
+I, 
+
+Ivan Osorio
+agree. 
+
+You
+that was my 1st impression. My 1st impression is that all of this should be in the video. It's not to say you can choose either, you don't have to choose either or it can be an end. You have this, this hero. It'll show the car in in action. It'll show, um, like a slideshow of the different will designs, and gives them a call to action, whatever we want them to do, explore the wheels or build. Most people may not even click that. So when they get past that, that video, we can reintroduce those selling points, which is the 2 piece front forge, and uh, assembled in 24 hours. 
+
+Ivan Osorio
+Hmm. So are we looking at what, a 52nd before it loops again? 
+
+You
+Uh, you mean the 
+
+Ivan Osorio
+52nd 
+
+You
+video here? 
+
+Ivan Osorio
+like 
+
+You
+I'm 
+
+Ivan Osorio
+intro? Yeah. 
+
+You
+thinking between 8 to 15 seconds. I'm still gonna... 
+
+Ivan Osorio
+I mean, 
+
+You
+I'll still... 
+
+Ivan Osorio
+Well, let's create it. Yeah, let's make the video. Yeah, let's make the video wherever it ends up, it ends up, you know? 
+
+You
+Yeah, 
+
+Ivan Osorio
+Yeah, 
+
+You
+I'm 
+
+Ivan Osorio
+exactly. 
+
+You
+still creating 
+
+Ivan Osorio
+If it ends up 
+
+You
+a 
+
+Ivan Osorio
+being 
+
+You
+video for 
+
+Ivan Osorio
+too 
+
+You
+it. 
+
+Ivan Osorio
+much. If it ends up being too much, it slows the website down, you know, then we cut it back. 
+
+You
+Yeah, 
+
+Ivan Osorio
+highlight video. 
+
+You
+I don't want. 
+
+Ivan Osorio
+Yes. 
+
+You
+I don't want it to be too long 
+
+Ivan Osorio
+I 
+
+You
+because 
+
+Ivan Osorio
+mean, it's going to 
+
+You
+they're 
+
+Ivan Osorio
+continue. Yeah, 
+
+You
+definitely. 
+
+Ivan Osorio
+yeah. Don't get a fucking 32nd video. fine. Okay, it's fine. 
+
+You
+Yeah, 
+
+Ivan Osorio
+Moving on. 
+
+You
+so we'll put that video in whenever we get it, but. 
+
+Ivan Osorio
+video first. 
+
+You
+So after that, after the, the 2 key selling points, then they're, I changed the order of this, this was actually beneath the signature wheels, but I mean, I moved it up. We can reorder that however we want. But this is gonna go to the the builder page. Which I'll get to after the product page, but that's the idea. And then they can actually see the products that they want. So I. 
+
+Ivan Osorio
+What are those round, round 
+
+You
+Say 
+
+Ivan Osorio
+gold things? 
+
+You
+that again. 
+
+Ivan Osorio
+Those 
+
+You
+Oh, 
+
+Ivan Osorio
+circles. 
+
+You
+here? Yeah. 
+
+Ivan Osorio
+Uh-huh, what is 
+
+You
+This 
+
+Ivan Osorio
+that? 
+
+You
+is the wish list and a quick view. I gonna remove it. 
+
+Ivan Osorio
+Oh, that's a 
+
+You
+Yeah. 
+
+Ivan Osorio
+little hard. Okay, okay, okay, okay. 
+
+You
+So 
+
+Ivan Osorio
+Favorite. Okay, okay, I couldn't see 
+
+You
+I'm 
+
+Ivan Osorio
+it. 
+
+You
+gonna move in. 
+
+Ivan Osorio
+Okay, can you remove it from top of the wheel 
+
+You
+Yeah, 
+
+Ivan Osorio
+to the corner 
+
+You
+I'll 
+
+Ivan Osorio
+and 
+
+You
+do that. Got 
+
+Ivan Osorio
+exactly what he announces? 
+
+You
+it. I'll do that. 
+
+Ivan Osorio
+Okay. 
+
+You
+Um, and then. These are from the last version that we already saw before, so nothing's changed from there. Then we go to the wheels page. The wills page still has the fitment, the fitment tool. Sergio. And now we were talking on the phone earlier and he was getting more into the details. 
+
+Ivan Osorio
+I was struggling to find the reset. 
+
+You
+You mean here? 
+
+Ivan Osorio
+Could you make that more pronounced, and take it, put it, where trim is? Right, uh, uh, uh, in that line. 
+
+You
+Oh, you want to... 
+
+Ivan Osorio
+Maybe at the end of that line, maybe at the end of that line. Reset. Change vehicle and reset. Or, or you don't need to change vehicle, just put reset. 
+
+You
+Put reset here? 
+
+Ivan Osorio
+Yeah, yeah. Yeah, the last box. The last box should be reset, right next to the line there. Maybe add one more box because you still need fine wheels, but next to the fine wheels, it would be or right before the fine wheel would be 
+
+You
+It'll 
+
+Ivan Osorio
+reset. 
+
+You
+be too 
+
+Ivan Osorio
+Yeah. 
+
+You
+crowded to add another button. I think we should just add enough, a link here. Yeah. 
+
+Ivan Osorio
+Yes, the reset go up there. Yeah, okay. Oh, 
+
+You
+Yeah, 
+
+Ivan Osorio
+yeah. Put it on on top. 
+
+You
+just 
+
+Ivan Osorio
+Yes. 
+
+You
+to put it up on top. 
+
+===
+
+You
+So I'll add a reset button here above the fine wheels. 
+
+Ivan Osorio
+And I get rid of the chase vehicle. 
+
+You
+And get ready to change vehicles. All right, cool, no problem. So this, the way it's supposed to function, and I have like my whole quality check that I'll do after this, so some of the results may not be, what we expect them, but the functionality is just that. That it'll show the relevant wheels for that car, for that vehicle. And 
+
+Ivan Osorio
+Mm-hmm. 
+
+You
+then you want to remove it. 
+
+Ivan Osorio
+Do you remember, remember what I was saying before? You only have +30 millimeter offset on 6 on, on 6 on 
+
+You
+I'm 
+
+Ivan Osorio
+135, 
+
+You
+gonna be 
+
+Ivan Osorio
+but 
+
+You
+real with you. 
+
+Ivan Osorio
+it's. 
+
+You
+This is a valuable opportunity right here. I don't know what the hell that means. I'm a I'm a layman 
+
+Ivan Osorio
+What? 
+
+You
+person, so this is this is a 
+
+Ivan Osorio
+No, 
+
+You
+good 
+
+Ivan Osorio
+he 
+
+You
+opportunity. 
+
+Ivan Osorio
+doesn't understand what 
+
+You
+Yeah, 
+
+Ivan Osorio
+offset means. Okay, 
+
+You
+this 
+
+Ivan Osorio
+what? 
+
+You
+is a good opportunity for that. Like, what is, what do 
+
+Ivan Osorio
+I'm going 
+
+You
+you 
+
+Ivan Osorio
+to 
+
+You
+mean? 
+
+Ivan Osorio
+make it. I'm going to make it like in simple terms, offset is how far out the wheels stick, how far out or how far in they stick, like where they sit on the vehicle. You can have the same boat pattern and have them fit differently on the vehicle. Like one is made to fit properly and not stick out and the other one's made to fit. 
+
+You
+Is it like a concave 
+
+Ivan Osorio
+Where. 
+
+You
+or the depth of the 
+
+Ivan Osorio
+No, 
+
+You
+wheel? 
+
+Ivan Osorio
+no, it's just, it's just, it's, it's, it's a wheel placement in reference to the fender. Let's put it that 
+
+You
+Okay, 
+
+Ivan Osorio
+way. You 
+
+You
+okay. 
+
+Ivan Osorio
+know, when the wheel 
+
+You
+Okay, 
+
+Ivan Osorio
+sticks out too far. 
+
+You
+okay, 
+
+Ivan Osorio
+Your 
+
+You
+now, 
+
+Ivan Osorio
+wheel 
+
+You
+I. 
+
+Ivan Osorio
+doesn't you don't want to stick out too far or 
+
+You
+Okay. 
+
+Ivan Osorio
+stick in too far. That offset is what places it 
+
+You
+Okay, 
+
+Ivan Osorio
+where we want it, right? 
+
+You
+now, 
+
+Ivan Osorio
+Like if 
+
+You
+okay. 
+
+Ivan Osorio
+it's a, like if it's an offset 35, it'll stick out. And then if it's a 30, it'll sit more 
+
+You
+More 
+
+Ivan Osorio
+in. 
+
+You
+in, 
+
+Ivan Osorio
+But the bull 
+
+You
+I'm 
+
+Ivan Osorio
+pattern is still the same 
+
+You
+getting enough. 
+
+Ivan Osorio
+or 
+
+You
+All 
+
+Ivan Osorio
+the other 
+
+You
+right, 
+
+Ivan Osorio
+way. 
+
+You
+so Sergio, now what, what were you saying? What was your point about that? 
+
+Ivan Osorio
+That, that I said, like, like right now, you've got the, like, we, we've got a, you had, Well, I thought you had it right, but now this is picking up 6 on 139 and 6 on 135, but it's picking up 30 millimeter offset, which is the correct offset for the F 150. So... It's, it's, it's like the, we, we got to get, I guess, we got to get it to pick up the data 
+
+You
+Yeah, 
+
+Ivan Osorio
+from the right place. 
+
+You
+and that, I do want to say that, like, full disclosure. This, we're gonna need to work hand in hand to make sure that the data is correct, because I know we've sent like some, you guys have sent some updated 
+
+Ivan Osorio
+Okay, 
+
+You
+data sheet. 
+
+Ivan Osorio
+maybe what happens, uh, you need to come and spend the day here with 
+
+You
+With 
+
+Ivan Osorio
+Sergio. 
+
+You
+Sergio, that could work. Yeah. I do 
+
+Ivan Osorio
+Yes. 
+
+You
+something like that too. 
+
+Ivan Osorio
+I think, uh, Yeah, yeah, yeah. The day that you're going to start over the phone. Yeah, yeah. The day that you're going to start doing that, I'll have my computer right next and I can show you and then you can fix it yourself. As long as you remember the last folder I sent you had a bunch of 
+
+You
+Yeah, 
+
+Ivan Osorio
+columns, right? 
+
+You
+yeah. 
+
+Ivan Osorio
+As long as you're able to tell it. With, you know, what value's supposed to be in that column, I can make it. can help you fix it. 
+
+You
+Okay, we could work together on that, just so we get accurate 
+
+Ivan Osorio
+It just, it 
+
+You
+results. 
+
+Ivan Osorio
+needs to look at, it needs to look at the, uh, each application needs to look at every column and then we'll figure it out. You'll see how it, it, it's, it's actually going to be simple. As long as you can fine tune it and tell it, hey, +25 goes to this vehicle, +30 goes to this, you know, we'll get 
+
+You
+We'll 
+
+Ivan Osorio
+it right and 
+
+You
+get, 
+
+Ivan Osorio
+it'll be 
+
+You
+yeah. 
+
+Ivan Osorio
+fast. 
+
+You
+I'm sure we will. I'm sure we will, but when we do get that information right, that's, this is how it would function. Which 
+
+Ivan Osorio
+Right. 
+
+You
+we've already seen, like, it's no different. So, 
+
+Ivan Osorio
+Yeah, yeah, exactly. 
+
+You
+all right. 
+
+Ivan Osorio
+Okay. Now, okay, so now scroll down a little bit and you'll, you'll scroll, scroll 
+
+You
+Yeah. 
+
+Ivan Osorio
+downward, and you'll, and you'll see what I mean. Okay, so then. Yeah, it's it's working though, right? See that on it, this is what I was trying to sell you before. When once you decide you're going to pick by, um, vehicle, 
+
+You
+Yeah. 
+
+Ivan Osorio
+right? If you've got a vehicle set in there, the bolt pattern one needs to go away. It can't be an option anymore. 
+
+You
+Oh, 
+
+Ivan Osorio
+It's not like 
+
+You
+because the 
+
+Ivan Osorio
+this. 
+
+You
+vehicle already... 
+
+Ivan Osorio
+Exactly. There you go. You got it. Now you understand. Once you pick a vehicle, that bolt pattern tab should, should go away. I should be able to pick diameter. I should be able to pick other things, but not bull pattern. 
+
+You
+makes sense. Makes 
+
+Ivan Osorio
+On the center, 
+
+You
+sense. 
+
+Ivan Osorio
+uh, 
+
+You
+Makes 
+
+Ivan Osorio
+finishes, okay, to pick. 
+
+You
+sense. I'll see. 
+
+Ivan Osorio
+That's the part that I was saying gets a little too confusing. Like, you get what 
+
+You
+I 
+
+Ivan Osorio
+I'm saying? 
+
+You
+get with you. 
+
+Ivan Osorio
+That, that's. So, so if you scroll back upward a little bit. Oh, the book part, it should look. Okay, right there, right there in this section, we should have the size, the finish options. That should be maybe, I don't know, can it be under what you're, where you're there or on the side or something? What do you mean? I'm sorry. Once you're in here shopping by vehicle, right? Okay, when you go shop by wheel, you should get rid of... Shop by wheel could have everything. Yes, right, yeah. how this house is like this? Uh-huh. Hold on. Let me get the phone. take the phone there with you because you cannot hear you. hold on. When you're shopping by a wheel? Yeah, talk to him. Okay, so here's what we're talking about. Now, when we're shopping by wheel, I need the other. I need the, uh, you know, now you, you, It's okay to have all this stuff, the bow pattern, this, and then, but when you toggle over and you're shopping by vehicle, You, you limit what I still want. Okay. 6 on 139. Right, exactly. Do you understand what's going on? That vehicle's already 60135. Now I just need to finish. I need the size and the finish at the same time there. talking about automatic filtering, Gary. 
+
+You
+So you want another filtering option for the size and the finish? 
+
+Ivan Osorio
+Yeah, it's down. You have to scroll down when you get to all wheels, it's there. It's in a different place. Why don't we move that up? 
+
+You
+So you want it here? 
+
+Ivan Osorio
+Yeah, because no, no, no, exactly where it's out, the same way. On the side, just. 
+
+You
+Move this 
+
+Ivan Osorio
+Just 
+
+You
+up. 
+
+Ivan Osorio
+up. 
+
+You
+Oh, 
+
+Ivan Osorio
+Put it on the side. No, 
+
+You
+I get 
+
+Ivan Osorio
+no, put 
+
+You
+it. 
+
+Ivan Osorio
+it, put 
+
+You
+I 
+
+Ivan Osorio
+it. 
+
+You
+get it. 
+
+Ivan Osorio
+The way it looks on the bottom, just the same way. 
+
+You
+So 
+
+Ivan Osorio
+Right, like that. 
+
+You
+what I'm 
+
+Ivan Osorio
+Just. 
+
+You
+thinking is this, just to shift this, to about here. It might change the results, but, For this section to line up with these results here so that you can have the filter. 
+
+Ivan Osorio
+I... Right. Right, you don't need all if it's exactly. That's that's the part that gets redundant. All wheels should only, this, this, you should only be looking at the all wheel screen thing there, when you're not shopping by vehicle, when you're shopping by wheel, it should, you should have all the options. When you're shopping by vehicle, then, yeah, you've already filtered. You, you, you filled it out the bolt pattern, you filled it out the other stuff. 
+
+You
+I think I know what you're talking about. Okay, so. This is a a development. Question on mine, and it's not for you guys to answer. I'm just thinking how the best way to go about doing it. 
+
+Ivan Osorio
+Ask us so we can tell you how to develop it. 
+
+You
+So give me a 2nd. So you're saying when shopping by vehicle, you don't want all wheels. 
+
+Ivan Osorio
+Here, do me a favor. I'm going to show you what, I'm going to, because today I happened to be talking to a customer and and I ended up on a website for, go, go to, uh, you got an open tab there, go to Weld Wheels, W-E-L-D Weld. 
+
+You
+W-E-L-D. Uh-huh. 
+
+Ivan Osorio
+LB Wheels. Uh-huh. Well, Wheels, click on that versus World Wheels. Huh? All right, click on wheels. I was just doing this. That's why I know. Street and where's the street and strip click on that? Go to rotary formed. I used. going where I went because I know where it is. Okay, so click on click on the one that says drag. All right, so click on yeah, click on that one, huh? Uh, click on the on the right. Click on the click on any of them on one of the wheels. Click on one of the wheels. Okay, you see how his see how their right side works? 
+
+You
+Yeah. 
+
+Ivan Osorio
+Very, very simple. Pick a size. When you click the size, they're gonna, they're only gonna show you what they have available. All right, now click a bowl pattern. They're going to show you the only thing that they have available. Click a back space. They're only going to show you what they have available. And then they offset autofills because it has to do with the one. That it. You looking at the wheel. Now this this, this, this doesn't apply to shop by vehicle. This only applies to shop by wheel. You get what I'm saying? 
+
+You
+Mm-hmm. Yeah. 
+
+Ivan Osorio
+Does that seem 
+
+You
+That's 
+
+Ivan Osorio
+simple, Ray? Or no? 
+
+You
+correct. 
+
+Ivan Osorio
+This is for this is for a shop. This, when you're shopping by wheel, it's, it's like, you got an, obviously, you have to know your bull pattern, but you, you know, it, This, this configuration, the configure wheel part, I fell in love with it because it's so simple. Like for somebody that knows what they're looking for, obviously, because if you're shopping by wheel, you're a guy that knows what you're looking for. If not, you'd be shopping by vehicle because you don't know what fits your vehicle. This is for a dealer. This is for a dealer to go in here and see what we offer. Like he already knows what that guy's looking, what his customer's looking for. He knows what size. He knows what bull pattern. You know? We don't work with backspace. So backspace is is sent, it's useless. You don't have to show that. But we do work, we do have offset. So, you know? 
+
+You
+So this option, on. 
+
+Ivan Osorio
+Back, back, back out. I'm going to make it a little more simpler so it matches to what we what we do, right? So you go back to wheels and. Okay, go back one. See where the wheels are. All right, Laguna 6, because uh, uh, Where, where were you? It said Laguna 
+
+You
+Have 
+
+Ivan Osorio
+6. 
+
+You
+you been in six? 
+
+Ivan Osorio
+Yeah, click on the 
+
+You
+The 
+
+Ivan Osorio
+Laguna 6. 
+
+You
+product itself? 
+
+Ivan Osorio
+Yeah, click on that because that's the bowl patterns are similar. You're going to recognize the bull patterns. I'm just trying to give you something that you recognize, right? Alright. So now. Remember the boat patterns? Please select the size. Okay, so see what they got. Well, no, wait, right. Select the size first. There you go. Uh, Recognizable pattern, 60135. 
+
+You
+Mm-hmm. 
+
+Ivan Osorio
+Or 60139? You click on that? 
+
+You
+That's right. 
+
+Ivan Osorio
+They've got 2 options of backspacing. We're not going to use that. We would have the offset option, and then, you know, the colors. It's very, very simple. Like in our case, we would have 60139 has a 30 millimeter offset and +30 and +25. So we would just, boom, boom, boom, when you get to the offset, you get a choice, you get 2 choices. 
+
+You
+Is that the direction we want to go in with the product page? 
+
+Ivan Osorio
+Can you, okay, this is only shop by wheel. Is is this a possibility as far as narrowing it down the fitment or or... This is exactly what we have, but the other one is on the other side. It just filters it differently. Because yours, uh, yours has this one has open tabs. He has boxes. Yes, yeah. Yeah, it's the same thing. I mean, if you come here, I mean, again, it's a different kind of filtering. The ball pattern, right here, ball pattern. Okay, open the bull pattern. I'm sorry. Open the bull pattern. you pick your ball pattern. Diameter, you pick your size. 
+
+You
+And remember, all of these products are going to be, um, these are pre-configured. 
+
+Ivan Osorio
+It's 
+
+You
+Yeah. 
+
+Ivan Osorio
+the same thing. 
+
+You
+So it shows, 
+
+Ivan Osorio
+The only thing 
+
+You
+oh. 
+
+Ivan Osorio
+that's, it's just, that one is formated. That way, this is formated this way. They're using the different titles, the different wording. No, it's not, it's not that. just we have it. We have it where on some of it, it's, it's, it's, it's both together. I understand. But the thing is, I like this more. Okay, okay, because over there, you picked a wheel and your custom built that wheel. Correct. Here, we're custom, we are filtering by your taste. Correct. So I prefer this. Because it gives them, hey, listen, and also here we can control what we have in stock. To push that as the result. All we stock comes 1st versus he picks up that wheel and we don't have that bull pattern and that size and oops, shit out of lock. Yeah. So, um, 
+
+You
+Yeah. 
+
+Ivan Osorio
+yeah. Ah This, this, I think, you're onto something, where, where I do agree with Sergio, is when you pick a vehicle, your bull pattern has to lock up. Yeah, the rest of the options. When you, once you pick a vehicle, the, it's the options that are no longer, uh, you know, choosable, because it's already pre-chosen, 
+
+You
+is 
+
+Ivan Osorio
+that, that needs to lock up and, 
+
+You
+Is the bow pattern? When we're choosing by vehicle. The bow pattern should not be an option because it's already. 
+
+Ivan Osorio
+Correct. Correct. You got it. You got it. Exactly. Just like there may be vehicles where we're not going to offer a 26 inch wheel, 
+
+You
+Yeah. 
+
+Ivan Osorio
+right? So when you choose by vehicle, the 26 inch wheel should go away. If we don't, if we don't, have it as an option for your 
+
+You
+Yeah. 
+
+Ivan Osorio
+vehicle, you know, just because, 
+
+You
+Because 
+
+Ivan Osorio
+just because it doesn't fit. 
+
+You
+it doesn't fit, yeah. And I 
+
+Ivan Osorio
+And 
+
+You
+think that's 
+
+Ivan Osorio
+sergeant 
+
+You
+part of what we'll 
+
+Ivan Osorio
+North? 
+
+You
+work on together with the results. This is 
+
+Ivan Osorio
+Yes. 
+
+You
+great information by the way. Um. 
+
+Ivan Osorio
+I just, I, it's not that you have to fix it now. I'm just saying, think about where we're headed to fine tune this so that you can make it where once we fine tune the ability to do certain things, you don't have to go back and 
+
+You
+Yeah, 
+
+Ivan Osorio
+redesign something. 
+
+You
+I 
+
+Ivan Osorio
+I just remember when we talked about it, I go, listen, I'm going to throw a bunch of things at you. 
+
+You
+agree. 
+
+Ivan Osorio
+You, you tell me how you 
+
+You
+Yeah. 
+
+Ivan Osorio
+can make it work and then I'll, I can help you adapt to what we want to do. It's just, 
+
+You
+Of course. 
+
+Ivan Osorio
+I don't want you to have to go back and rebuild something because we didn't talk about 
+
+You
+Fair 
+
+Ivan Osorio
+it. You know what I mean? 
+
+You
+enough, man. Yeah, I agree. 
+
+Ivan Osorio
+But yeah, yeah, this is, this is, this is it. So, I just, I feel like it doesn't need to be as as long. Like, you don't, build, build a wheel. I think it you have the 2 tabs. You pick which way the customer, let the customer pick which way he wants to. One thing. I'm sorry. Once you pick, uh, once you pick. My right now you're in the my vehicle, right? 
+
+You
+Yeah. 
+
+Ivan Osorio
+Okay, stop, stop. Okay, stop it. I want that have to have the same color because I I couldn't tell 
+
+You
+Yeah, that 
+
+Ivan Osorio
+which 
+
+You
+is, 
+
+Ivan Osorio
+time 
+
+You
+that's 
+
+Ivan Osorio
+I'm on. 
+
+You
+a design issue on my end. Yeah. You're real. 
+
+Ivan Osorio
+Yeah, everything has to become that color. So, I couldn't tell. Okay. All 
+
+You
+So 
+
+Ivan Osorio
+right. 
+
+You
+when you said the same color, what color would you like it to be, the select color? 
+
+Ivan Osorio
+Well, I don't care about color, but I just need to know. I mean, I mean, this is just like it just shades, you know? 
+
+You
+Ah, okay. So make it more distinct. Make it stand out. Okay. 
+
+Ivan Osorio
+Yeah. 
+
+You
+Good 
+
+Ivan Osorio
+Yeah, yeah. 
+
+You
+point. Good, got you. 
+
+Ivan Osorio
+And so, so just for clarification, the wheel style is mostly for our stores, mostly. Yes. But my real style, yes. I think, I mean, you're gonna have, you're gonna have people that are just gonna look at, like, like Dante said, you have people that just look at wheels. So they're going to be in there not knowing what the fuck they're doing, but they're going to be clicking a bunch of shit and just looking at everything that we have. But a guy that's serious, he's going to enter his, he's going to put his vehicle in because he wants to know exactly what fits his wheel. The guy's just looking at wheels. let me see what these guys make. You know, he's just going to be fucking off. But the guy, the real deal guy, he's going to want to build my vehicle. Okay. That, listen. So, this one here we already figured out. But when we go to the vehicle, go back to the, uh, uh, pick my bagel there. 
+
+You
+Yeah. 
+
+Ivan Osorio
+Okay, just do it, do your thing. So it's scroll down. So it's gonna scroll down more. So it's gonna look like this. Then you're gonna have the filters there on top. 
+
+You
+Okay, so you want these filters up here? 
+
+Ivan Osorio
+Yeah, exactly. But the diameter and the bullpen is already picked. 
+
+You
+So we, we're gonna exclude the bowl pattern, but have. 
+
+Ivan Osorio
+Exactly 
+
+You
+Okay. 
+
+Ivan Osorio
+in this one. But but everything else is picked. So that way they can, if they want a black wheel or black lip or blah, blah, blah, whatever, or 22 or 24. 
+
+You
+I see what you guys are talking about now. It makes sense. 
+
+Ivan Osorio
+Okay. Okay, but then all wheels does not exist because he already picked his car. We, uh, you know, he already picked his gun and he's just filtering down, so we don't want to give him more choices. You want to give them less 
+
+You
+Last. 
+
+Ivan Osorio
+choices so they can make a 
+
+You
+Okay. 
+
+Ivan Osorio
+decision. 
+
+You
+I get what you're saying. So this becomes redundant, this section here. 
+
+Ivan Osorio
+Yes, that part, that part, it's just irrelevant. Yes, that's it doesn't matter. 
+
+You
+It doesn't matter. 
+
+Ivan Osorio
+Yes, completely. Yeah, yeah, that's it. That's what made it, it gave me a crowded feeling and I couldn't figure out why it was where it was coming from. Yeah. Okay. 
+
+You
+Makes sense, makes sense? Okay. We could definitely refine. 
+
+Ivan Osorio
+Did you get the, uh, the, the, the Excel I sent with all the designs? 
+
+You
+You did, now the question that I had, is that updated or was that similar to or the same as what Sergio sent? Because he sent me something on the 21st. Is that the updated version? 
+
+Ivan Osorio
+Did you send fitments? No, I didn't send. I send a list of the 6 wheels that we have. Oh, it was part of what I said. I think you got a text or something here. I don't know It was making a noise. It's horrible icing. I just, I dumped it down because I thought he needed a list for the images. So I basically dumbed down what I sent you to the bear necessities. Which designs, which, 
+
+You
+I mean, 
+
+Ivan Osorio
+and 
+
+You
+still 
+
+Ivan Osorio
+and people 
+
+You
+helpful, but yeah, 
+
+Ivan Osorio
+fitness. 
+
+You
+I had that information. I had. 
+
+Ivan Osorio
+I mean, it just, it's the same information. I just eliminated the, the, the repeated fitments, you know, like I, I just gave him this design, this size, this bull pattern. So when people pick a vehicle. They should be able. To see every configuration of our wheel that's available. 
+
+You
+Yeah. 
+
+Ivan Osorio
+And then they can filter it black lip only. Black center only. 
+
+You
+Here. 
+
+Ivan Osorio
+I think it's awesome. No, I'm just saying, so this way, they get exactly what they want. I didn't even think about that. Okay. So you're filtering out. Black, it's already there. Black sun or black water? No, I mean, like right. He's he's already done that. It's just you're, you're saying like, yeah, I mean, it, like, yeah, he's already there. I didn't see that. So it's already there. Which is, I need to add the list. Right. It's just, that's working correctly. It just needs to also be incorporated into the shot by vehicle part. 
+
+You
+How 
+
+Ivan Osorio
+It's already 
+
+You
+about? 
+
+Ivan Osorio
+there, but it's not. It's not. No, no, no, it's not. It's not. That's not. You're right. Because once they ship, if they get a whole laundry list, they're not able to filter it. Right. You have to go down to all wheels and then you start filtering there. So it's kind of a, uh, uh, uh, A merger of these 2 things. 
+
+You
+I see what you're saying. I see what you guys are saying. You want these. 
+
+Ivan Osorio
+The only difference is if you shop by vehicle. It pre-selects the boat pattern for you. and hides it. 
+
+You
+So let me, let me show you something right quick. Let me show you. 
+
+Ivan Osorio
+Bro, bull 
+
+You
+So 
+
+Ivan Osorio
+pattern and sizes. Because 
+
+You
+just, 
+
+Ivan Osorio
+it's going to be 
+
+You
+just 
+
+Ivan Osorio
+one 
+
+You
+imagine. 
+
+Ivan Osorio
+of the 2nd 
+
+You
+Just 
+
+Ivan Osorio
+point. Oh. 
+
+You
+imagine. 
+
+Ivan Osorio
+Okay, listen, FYI. There is vehicles that certain sizes will not fit. 
+
+You
+Okay. 
+
+Ivan Osorio
+Like you, you can't, you can't put 26 is on Alexis. 
+
+You
+That 
+
+Ivan Osorio
+They don't fit. 
+
+You
+won't work. Let me see something. I just wanted to show you visually what you guys would want. 
+
+Ivan Osorio
+And some people will debate that you can't put 26 on a jig wagon, but I'm going to do it. The black people are going to want it. Yeah, the urban market's going to want to put a 26. Like on black on black. No, no, no. put one and put 26 is on a G-wagon or 26 is on a, I, I, 28. Yeah, 26 and 
+
+You
+And 
+
+Ivan Osorio
+they're going to say, yeah, it's 
+
+You
+they 
+
+Ivan Osorio
+not big 
+
+You
+will, 
+
+Ivan Osorio
+enough. 
+
+You
+and they will put 
+
+Ivan Osorio
+Huh? 
+
+You
+it, and they will put it on a G wagon. 
+
+Ivan Osorio
+Yeah, they will. They'll trim a little bit and 
+
+You
+And 
+
+Ivan Osorio
+they'll make it work. 
+
+You
+then. 
+
+Ivan Osorio
+That's a different, that's a different market, you know? Anything can be, I saws off. Yeah, age. I made it work for a long time. It's a cutting pool. He took it to brand new cars on because that's got it. I've done that. in there, done that. And I have a t-shirt. to go with it. We got this far, didn't 
+
+You
+So 
+
+Ivan Osorio
+we? 
+
+You
+check this out. So 
+
+Ivan Osorio
+Okay, what 
+
+You
+it's 
+
+Ivan Osorio
+do we do? 
+
+You
+along the lines of what you guys would want. When someone chooses a vehicle by your make model and a term, determines a little generic, but whatever. When they say find wheels. You would like it to be more like this. Would would 
+
+Ivan Osorio
+Yes? 
+
+You
+this be good enough? 
+
+Ivan Osorio
+Yeah, it's perfect. Except 
+
+You
+Acceptable. 
+
+Ivan Osorio
+the wall pattern is already 
+
+You
+Remove 
+
+Ivan Osorio
+pre-selected. 
+
+You
+the bowl pattern. So imagine this is not here. I mean, let me delete it 
+
+Ivan Osorio
+Yeah. 
+
+You
+so we could actually see what it would look like. 
+
+Ivan Osorio
+Now we're getting this shit fixed on the spot. And that's what I'm saying. You should come here and you guys build it together. Yeah, all of this shit. There we go. 
+
+You
+Happy? 
+
+Ivan Osorio
+Perfect. You see you 
+
+You
+Happy? 
+
+Ivan Osorio
+got it. Just, yeah, it just takes a little chatting and then you figure it out. He took us all to a brand new vehicle. Yeah, exactly. He took a saw to a brand new website and just chopped 
+
+You
+Just 
+
+Ivan Osorio
+off what we didn't 
+
+You
+like 
+
+Ivan Osorio
+need. 
+
+You
+that, just so 
+
+Ivan Osorio
+So we just need to add 
+
+You
+we're talking 
+
+Ivan Osorio
+lift. 
+
+You
+apples and apples here. All right. So when they choose a vehicle. The results that they get would be would correlate with that vehicle, whatever's compatible with it, and these should be the only options that they have available to see. 
+
+Ivan Osorio
+And the lip, you got the 
+
+You
+Lip 
+
+Ivan Osorio
+lip options too. 
+
+You
+options? All right, we can add that. 
+
+Ivan Osorio
+Lip, lip, lip and bolt, lip and bolt color. No, do you want to do that? I mean... Okay, well, as well, do it. Okay, fine. I mean, you want people to, if they're there. I mean, I know it sucks, but you might not have the image. Oh, yeah. You're gonna have to have them. Well, it's going to be tricky because you're not going to have the image pre-made. Your system 
+
+You
+No, 
+
+Ivan Osorio
+on the 
+
+You
+I 
+
+Ivan Osorio
+wheel builder. 
+
+You
+will have it pre-made. What I was saying earlier, 
+
+Ivan Osorio
+Every configuration 
+
+You
+it'll, 
+
+Ivan Osorio
+has to be pre-built. All right. 
+
+You
+it'll be both. So I'm gonna use an automation system to create all of those images. So 
+
+Ivan Osorio
+Right. 
+
+You
+there'll be, there'll be two. There'll be the preset images that are created with that combination, so they'll be able to see it here. And on 
+
+Ivan Osorio
+That's 
+
+You
+the 
+
+Ivan Osorio
+not. 
+
+You
+product page, which we're about to look at in a few minutes. They'll be able to use the builder to switch out, you know, 
+
+Ivan Osorio
+. 
+
+You
+the parts and everything. 
+
+Ivan Osorio
+So this thing will just kind of steal the image from the builder. 
+
+You
+Um, you can look at it that way. Yeah. 
+
+Ivan Osorio
+Like, the combination. it'll, it'll, it'll, it, because it has to get the combination from somewhere to know. exactly what we need. Well, let's not worry about the image at this moment. This is exactly what 
+
+You
+Exactly. 
+
+Ivan Osorio
+we need. 
+
+You
+All right, got it. I'm glad we, we. 
+
+Ivan Osorio
+So now they can, whatever, whatever look they want, they want in 24, they can start filtering from here. Yeah. And also, This has to be, in a way that, um, the results. The, uh, I know it says bestselling, and in our case, it'll be in what's available in stock. So because we, uh, ultimately we don't want to show them. Um. Yeah, that would be available. Uh, um, 
+
+You
+I 
+
+Ivan Osorio
+uh, most inventory in stock. 
+
+You
+can add another option, based on 
+
+Ivan Osorio
+Yeah, 
+
+You
+availability. 
+
+Ivan Osorio
+um. 
+
+You
+Whether it's 
+
+Ivan Osorio
+Yeah. 
+
+You
+in stock. 
+
+Ivan Osorio
+I honestly don't, I honestly don't even like the fact that price is an option there in the, in the dropdown. Oh, is it filter? Yeah, I fuck them. They can't afford to be on the website, they don't, they need to go somewhere else. 
+
+You
+Yeah. Yeah, this is, 
+
+Ivan Osorio
+We don't have fit that's cheap. 
+
+You
+we can remove that. The price doesn't need. 
+
+Ivan Osorio
+Yeah, yeah. I was just gonna be funny. That's something. The date, all that stuff, like date old to new now, none of that shit. Yeah, uh, uh, sort by 
+
+You
+Default. 
+
+Ivan Osorio
+price, too expensive for you. Yeah, dude, if you need to sort my fries from low to high, that shouldn't even be an option. I had a low, maybe. Just put that there. If you need to soda by low to high. Go somewhere. Go somewhere else. You should put that. Put on a little thing that clicks and sends you to the Wheelpros website. They got something for you. 
+
+You
+All right, cool, so we 
+
+Ivan Osorio
+Can 
+
+You
+agree. 
+
+Ivan Osorio
+you actually get the store more too high? Hey, a banner comes. You don't belong here. You got the wrong website. Goodbye. Goodbye. Go so we recommend you find another website. You don't have a bunch of links. We should do that. Yeah, just the recipe. That would be so fun. I just only if you pick that one, only if you pick load high. Oh, sorry, error. You're on the wrong website. 
+
+You
+I can make it. 
+
+Ivan Osorio
+But yeah, 
+
+You
+Say 
+
+Ivan Osorio
+you this is, 
+
+You
+word. 
+
+Ivan Osorio
+this is, we, we got the right, we're going 
+
+You
+Alright, 
+
+Ivan Osorio
+the right way here. 
+
+You
+cool. I'm glad we, we figured out, we 
+
+Ivan Osorio
+Okay, 
+
+You
+got some 
+
+Ivan Osorio
+so, 
+
+You
+clarity. 
+
+Ivan Osorio
+okay, the real is not. there's nothing else that we need to do here. Okay, let's move on. Oh, we got to add the, he's got to add the other things for the finish. Oh, yeah, yeah. barrel. Yeah, 
+
+You
+Yeah. 
+
+Ivan Osorio
+okay. But I love the fact that we hid, once you, once you pick a vehicle, you hide the, so, so this would be if you basically, if you don't hit shot by, if you shot by wheel style, is basically, you know, 
+
+You
+It's the same. 
+
+Ivan Osorio
+shopping without a vehicle. It's the same the same page. It's just a 
+
+You
+Yeah, 
+
+Ivan Osorio
+blank vehicle, right? 
+
+You
+it's the same thing. 
+
+Ivan Osorio
+I like that. I like that better. 
+
+You
+It's 
+
+Ivan Osorio
+Yeah. 
+
+You
+the same thing. 
+
+Ivan Osorio
+What's it blanket? What you say? Well, if you don't add a vehicle. Right. If you reset and you don't add a vehicle, you're shopping by wheel. Oh, yes, and then you, uh, but you don't have both pattern. Yeah, you're going to have bull patterns. The bow pattern will go away if you click the shot by vehicle. If you don't click the shot by vehicle, boat pattern is there. So, you could actually do it in like a, like, um, If you wouldn't have to have 2 tabs, it would just be a selector. Like an additional filter, like Shop my vehicles, a filter. Huh? No, I'm saying like you would always be shopping by wheel by wheel style unless you add your vehicle. Right? No? Would that make it any more complicated or would it make it simple? In that case, in this case, I'd rather make shot by wheel as the standard feature. Right. And the vehicle becomes the secondary. Yes. That's what I was saying. So this the tab, that becomes the 1st tab. Right. When you click on wheels, this is what you get. Exactly. You want it by vehicle, you can click on that shit. You can click on that shit and then enter your vehicle and it cuts everything else off. Yes. Are we, are we, does that make sense, 
+
+You
+Yeah, 
+
+Ivan Osorio
+scary? 
+
+You
+it made sense to me. I was letting you guys figure, figure it out, like, to discuss. 
+
+Ivan Osorio
+Let them fight amongst themselves and I'll talk to 
+
+You
+Let 
+
+Ivan Osorio
+whoever's left standing. 
+
+You
+the winner decide. 
+
+Ivan Osorio
+Okay. Okay, fine. Let's go to gallery. Oh, I don't think 
+
+You
+Yeah, 
+
+Ivan Osorio
+you wanted to go there. 
+
+You
+gallery isn't 
+
+Ivan Osorio
+Oh. 
+
+You
+developed yet, but we can go there. I can tell you that. This is in the works. This is where I left off. I know you want to see it because you saw this image here before we started to meet. That's 
+
+Ivan Osorio
+I like that. 
+
+You
+why. But 
+
+Ivan Osorio
+Oh 
+
+You
+this is how it would work. Um, I 
+
+Ivan Osorio
+Okay. 
+
+You
+have to add the will. I have to add each design here. And it's pretty, it's the, the concept of it is similar to the category page where we were just at, where it'll have a filtering system, but I have to add these in. And when I... 
+
+Ivan Osorio
+Okay, do we want to see wheels by diameter? 
+
+You
+They probably wouldn't. Yeah. 
+
+Ivan Osorio
+I don't think so. By bull pattern? No. I think, um, honestly speaking, I think by wheel design, and by finish. 
+
+You
+Will design. 
+
+Ivan Osorio
+The stores are not going to really be on this page. This is just for people to click around and look at them. Right, right. Listen, I, I, the thing is that if you give somebody the idea, the, the, the ability to to shop by diameter, they might turn themselves off because they don't like the way a 22 inch wheel looks on a Cadillac Escalade, and then they just don't bother to click 24. I'd rather than just look at the wheel, and if they look at what it looks like in 24 or 26 inch on escalate and they fall in love with it, and they're like, I don't want to change my tires, that's your fault. If your shit doesn't look like the picture, that's your fault because you were cheap and you didn't want to change your tires, but I still sold you wheels. What's it called? I know, but, uh, so this this is just a real design. So if nothing is selected, it'll just show everything. 
+
+You
+Everything, yeah. 
+
+Ivan Osorio
+Okay, yeah, and then you can just filter it out by design. And it'll show everything by the latest, I guess. Or a feature or feature, whatever 
+
+You
+Yeah, 
+
+Ivan Osorio
+the fuck it is. 
+
+You
+we don't need to keep all of this. Like, all of this is just here, just. 
+
+Ivan Osorio
+So everything is gone. Diameter is gone, finish is gone. I mean, Finish, finish, maybe. I finished it. I finished this. Like, you know, Gary, part of the reason why we don't want diameter. I mean, I'm sorry, bolt pattern here is because you may see a wheel in a 6 on 135 
+
+You
+Mm-hmm. 
+
+Ivan Osorio
+because, you know, without it, they look the same. You can't tell the difference in a bowl pattern between a 6 on 135 and a 6 on 139. They look the 
+
+You
+Okay. 
+
+Ivan Osorio
+same. It, it, you'd almost be duplicating the images for no reason. You know what I mean? So bow pattern doesn't have to be there. Um, you know. Series, I, I, you know, we're, if we're going to increase, let's say, for example, the, uh, the, the center, the, the, you know how we have, there's 2 designs that have the covered 
+
+You
+Mm-hmm. 
+
+Ivan Osorio
+lugs. So, I would like to have the series there, even though maybe for now we have it hidden. Because eventually we might separate the 2 series or we might add another series or something like that, like race thinking 
+
+You
+Yeah, 
+
+Ivan Osorio
+about something with 
+
+You
+options 
+
+Ivan Osorio
+a lip instead of a. 
+
+You
+can always be there. I can turn them on and off whenever y'all need them. So, it's 
+
+Ivan Osorio
+Yeah, that's yeah, yeah. Yeah, 
+
+You
+better. 
+
+Ivan Osorio
+yeah, 
+
+You
+It's 
+
+Ivan Osorio
+exactly. 
+
+You
+better to have it and not need. 
+
+Ivan Osorio
+So it's sorry, by style and finished. That's it. style and finish. But okay, but the finish in our case, it might be center and lip. I think center finish. So the intention of this page was really just to show off the lines, right? 
+
+You
+Yeah. 
+
+Ivan Osorio
+I think it's less for a purchasing page. It's more for for visuals. No, I think you should be able to see 
+
+You
+It's 
+
+Ivan Osorio
+both. 
+
+You
+just for visuals, 
+
+Ivan Osorio
+I think we 
+
+You
+yeah. 
+
+Ivan Osorio
+should only 
+
+You
+Show 
+
+Ivan Osorio
+be able 
+
+You
+it off. 
+
+Ivan Osorio
+to... Black live centers. Okay. We should be able to filter it like that. Okay. Yeah. I mean, it's, it's like, since we already have that same filter system, I think wheel design, Finish, center finish, let's finish. 
+
+You
+Give me a second, let me take 
+
+Ivan Osorio
+And that's 
+
+You
+some. 
+
+Ivan Osorio
+it. Yeah, yeah, yeah, yeah. the other stuff we can take out. Construction, none 
+
+You
+One 
+
+Ivan Osorio
+of that stuff. 
+
+You
+second, one second. 
+
+Ivan Osorio
+Short by feature, no. 
+
+You
+All page filters. 
+
+Ivan Osorio
+I mean we could. The only thing you could sort by is maybe, uh, 
+
+You
+You said, 
+
+Ivan Osorio
+Oh, 
+
+You
+again, 
+
+Ivan Osorio
+no. 
+
+You
+the design. What else? 
+
+Ivan Osorio
+Design? The center finish, lip finish. 
+
+You
+Center finish, let's finish. All right. 
+
+Ivan Osorio
+Okay. Um, okay, uh, what about vehicle, uh, vehicle gallery? 
+
+You
+vehicle gallery. 
+
+Ivan Osorio
+Let's go 
+
+You
+This 
+
+Ivan Osorio
+there. 
+
+You
+one I haven't touched yet, but the... 
+
+Ivan Osorio
+Okay, so it's got, well, the thing is, it's going to have make model, that's it. Okay, it's gonna make model. It probably needs a year, right? No? Yeah, year make model. No, no, it doesn't make because we're not going to have a 22 and two. So you're going to have a make model, huh? Yeah. Cadillac Escalade. All of them. Fuck me. And then the wheel model. Yeah, we don't need diameter. No, we don't need 
+
+You
+So 
+
+Ivan Osorio
+diameter. 
+
+You
+what we were saying, May? 
+
+Ivan Osorio
+We don't need bull pattern, series. Wheel style, all of that sort by, none of that. Because you're gonna, you're gonna click on. Unless you want to give them color. Of the vehicle? No, of the wheel. Yeah, finish. Finish. Okay, so finish. Yeah, yeah, yeah. So the series, bull pattern, anything to the right, eliminates you, we're in, we're gonna kill the diameter. We're going to kill the vote pattern series, wheel style, sort by all that's going 
+
+You
+Okay. 
+
+Ivan Osorio
+to go away. Just make, model, wheel, design, I would call it design instead of wheel design, instead of wheel model. We design. So this is basically the visualizer 
+
+You
+Egg 
+
+Ivan Osorio
+and finish. 
+
+You
+model, well design. 
+
+Ivan Osorio
+And finish. 
+
+You
+Yeah, basically, 
+
+Ivan Osorio
+Well, this is not 
+
+You
+Ivan. 
+
+Ivan Osorio
+visualized. This is a gallery of images that we already have of vehicles that have already been done. That's it. Okay. Yeah, it's not a visualized. 
+
+You
+Instead of... little model. All right, cool, I got it. I'm writing these notes down. Meg model, wheel design, and finish. Is it center finish? 
+
+Ivan Osorio
+Send it, send it, 
+
+You
+Center 
+
+Ivan Osorio
+finish. 
+
+You
+finish. 
+
+Ivan Osorio
+Oh, you want to do both, center finish, finish. Okay, okay. 
+
+You
+Santa Finnish, slip fans. 
+
+Ivan Osorio
+And obviously each one of those, if you leave it blank. It gives you all 
+
+You
+All 
+
+Ivan Osorio
+options, right? 
+
+You
+of the options, yeah. 
+
+Ivan Osorio
+Or maybe call it if you're forced to click on it, click on all. Yeah, oh, yeah, it's always all. Unless, unless you filter. Yeah. Oh, let your 
+
+You
+Unless 
+
+Ivan Osorio
+filter. 
+
+You
+you filter it. Okay. 
+
+Ivan Osorio
+Yeah, because even if you click on a vehicle gallery and you don't click anything, you'll have all the 
+
+You
+Yeah, 
+
+Ivan Osorio
+everything, yeah, everything. You get all the 
+
+You
+I 
+
+Ivan Osorio
+gravities, 
+
+You
+need 
+
+Ivan Osorio
+as 
+
+You
+to 
+
+Ivan Osorio
+you 
+
+You
+add 
+
+Ivan Osorio
+feel 
+
+You
+those. 
+
+Ivan Osorio
+to them. 
+
+You
+And basically, what I'll be adding, just so, you know, ready, these are the images that I, that I organized. So it'll be 
+
+Ivan Osorio
+Uh. 
+
+You
+all of these in vehicles for now, and then we'll add on, as, 
+
+Ivan Osorio
+Okay. 
+
+You
+as we get more. So, there'll be 12. 12 vehicles. 
+
+Ivan Osorio
+Yeah, it's okay. I mean, for now, at least we have something brought to see. Yeah, yeah. once you put some images in there, we can we can start getting a feel for how it clicks, you know, how the how the 
+
+You
+Exactly. 
+
+Ivan Osorio
+clicks work. And then we'll just add, I mean, again, most of that's going to be AI generator, right? 
+
+You
+Or, 
+
+Ivan Osorio
+In the beginning. 
+
+You
+yeah. Well, 
+
+Ivan Osorio
+I'd like to, yeah. 
+
+You
+all of them will. 
+
+Ivan Osorio
+Yeah, I'd like to have like maybe 3 color vehicles and and then whatever amount of wheels. I guess once they, once they, they, they start doing the AI thing. It just like switching the color or the finish of the wheel or whatever makes it kind of easy, right? Hopefully. The thing is, it gets out of whack. Yeah. It just goes, like, look at the fucking design of the wind. Oh, the 
+
+You
+I 
+
+Ivan Osorio
+glitch? 
+
+You
+thought real 
+
+Ivan Osorio
+Look at the drive 
+
+You
+thing. 
+
+Ivan Osorio
+that. I thought you just told it to do something and it didn't. 
+
+You
+I 
+
+Ivan Osorio
+It 
+
+You
+thought 
+
+Ivan Osorio
+actually 
+
+You
+it... 
+
+Ivan Osorio
+made a nice weird. Yeah, I 
+
+You
+This 
+
+Ivan Osorio
+think we should duplicate that wheel. 
+
+You
+shit looks nice. 
+
+Ivan Osorio
+I don't know. I was fucking badass. Yeah, that 3 that tries for... It looks like a mother on your gogo. Yeah. But it's very popular right now. That look is very popular. We have one that's like, this is the, the bastard child of the model 2 and five. Correct. The one with the, the X folk that's lower. That's the five. And then... I think it's a one. Because in the sport... But yes. I think it's a Seabring with a Model 5. a one and a 5 together. But this is this thing right here, which it didn't know what the fuck to do with it here. what it did here, but this tri-spoke look design is very popular right now. The nice thing about it is one of them sits in, the other one sits out. So when you machine it, you have the black and you get one of the spokes machine. Yeah, I don't know. I think you need to get that one and send it and get somebody working on it. Okay, send me that picture. So we accidentally created a new Yeah, yeah, it happens sometimes. One day, dude, one day when 
+
+You
+. 
+
+Ivan Osorio
+we had the machine shop, somebody tried to fix a wheel that was fucked up and made a new design and it looked good. It's Yeah, Shelly... No, the evil when he tried to cut the edges off and it ended up being... no, yes, you're right. The jade. Yeah, it was going this way. They put on the machine to put their program going the wrong way. like, whoa, that looks nice. Yeah. No, he also did one where they cut the edges, they put like a 45 degree transfer, and we made a whole new design. The evil became the tracks and the tracks became up twice as good of a seller. So it happens. Now AI does it for us. We don't have to actually ruin the wheel. All right, 
+
+You
+Yeah, 
+
+Ivan Osorio
+good, anything else, Gary? 
+
+You
+the product page. Give me a second. Let me get to that. 
+
+Ivan Osorio
+Product pay. Yeah, the wheels of the actual of the. 
+
+You
+So I made some. 
+
+Ivan Osorio
+Oh, the, 
+
+You
+Why 
+
+Ivan Osorio
+oh, what? Oh, once we click on the wheel. 
+
+You
+don't you click on the wheel? yeah. 
+
+Ivan Osorio
+Okay, good. Okay, I extend. So, See, we added, scroll that, and we added the scroll the other way, Carrie, the other way? the other way. Scroll, oh, oh. Yeah. Okay, so we added 2 piece button forged to everything. Okay, good. And then the description here, Calder, Spun Forge available to them. Uh, I I think that available needs to go on the next line over. 
+
+You
+Available. 
+
+Ivan Osorio
+Yeah, I just, like, where, if it says, uh, spun forged wheel, and then where it says available, like, you said, be wrong, it needs to come over, like, I just said it lined 
+
+You
+Okay. 
+
+Ivan Osorio
+out. Okay, I'm there too. I'm down there on the point. What, the size is the right below. Oh yeah, you're right. So, yeah, that's really available. I didn't realize inside that we're gonna end up when they. Yeah, I need available, available in multiple center options or whatever, uh, multiple finish options available or something like that. 
+
+You
+And when this is selected when I have the actual images, these are going to change. So, 
+
+Ivan Osorio
+Yeah, 
+
+You
+and 
+
+Ivan Osorio
+of course, yes. 
+
+You
+then, 
+
+Ivan Osorio
+Okay. 
+
+You
+I redesigned this section here. Okay, so this is a good, a good update to it. So every product. Input into the system is preset, With, um, with either a center finish, a lip, or, or the bolt. Now, if the product page that the customer is on, Does not match the, the variants of that product, it'll give them the option to customize it. Where they'll go here. I'm gonna get back. 
+
+Ivan Osorio
+I 
+
+You
+I'm 
+
+Ivan Osorio
+don't understand. 
+
+You
+going to get back to this point. But by default, this one, I think this one is chrome, chrome polished. Yeah, this is the Chrome. So this is one, this is what the, the variants are. 
+
+Ivan Osorio
+Oh, I'm sorry, we don't have 
+
+You
+This 
+
+Ivan Osorio
+chrome. We have polish. 
+
+You
+father, okay? Okay 
+
+Ivan Osorio
+No, the bolts, the bolts, bolts, bolts. 
+
+You
+Oh, 
+
+Ivan Osorio
+Okay, okay, okay. 
+
+You
+boats are polished, not chrome? 
+
+Ivan Osorio
+No, 
+
+You
+Volta 
+
+Ivan Osorio
+bolts are chrome. Bolts are 
+
+You
+Chrome? 
+
+Ivan Osorio
+chrome. 
+
+You
+okay 
+
+Ivan Osorio
+Well, they're actually rust. 
+
+You
+So by default, they'll 
+
+Ivan Osorio
+Temporary. 
+
+You
+be able to add this product to to the car. If they want to play around, with it, it'll give them the option to customize. 
+
+Ivan Osorio
+Okay, so what you're telling me here, what I'm gonna hear is you cannot change the color of the wheel 
+
+You
+You 
+
+Ivan Osorio
+here. 
+
+You
+can change the color of the wheel here. You can. It'll show. 
+
+Ivan Osorio
+I think what you're trying to say is when they see an image, On the all wheels, if they're looking at a black wheel with a with a polished lip and chrome bolts, they click on the image. That image is a black centered wheel with polished lip and chrome bolts. And then, He can customize the image that he's already looking at. Okay, by by clicking on something and it makes it into a different image. But that's not the one he originally looked 
+
+You
+It... 
+
+Ivan Osorio
+at. So no matter what image he clicks on, he can always change that image. I know, but then he says, yeah, they have to click here. 
+
+You
+They'll click here only because of this. Essentially, you're creating the inventory is of different combinations of the wheels. So the center finishes different. We're creating different combinations of that. So because I had to import the products. You still need to give them the option to customize it. 
+
+Ivan Osorio
+I got you. So, let me try to explain it in a different way. Maybe it works better. If, so, so if I see an image of a black faced wheel with a polished lid and black 
+
+You
+That's 
+
+Ivan Osorio
+bolts. 
+
+You
+the problem. 
+
+Ivan Osorio
+I go 
+
+You
+Okay, 
+
+Ivan Osorio
+there. 
+
+You
+let's 
+
+Ivan Osorio
+I 
+
+You
+start there. 
+
+Ivan Osorio
+decide it 
+
+You
+It's 
+
+Ivan Osorio
+already, everything is pre, 
+
+You
+a pre-. 
+
+Ivan Osorio
+like it is right 
+
+You
+Yeah, 
+
+Ivan Osorio
+now. pre-clicked. 
+
+You
+this is at 
+
+Ivan Osorio
+Once I 
+
+You
+car. 
+
+Ivan Osorio
+click. Once I click something, this changes. 
+
+You
+Because it's. 
+
+Ivan Osorio
+To, it says, customize your wheel. Maybe just the wording should be, uh, update your order or something like that. Instead of customizing, you already customize it. It just, that should say update your order. Update 
+
+You
+Because 
+
+Ivan Osorio
+your selection. 
+
+You
+this is 
+
+Ivan Osorio
+Okay. 
+
+You
+what, and this is what we need to hash out here. This combination is this product here. We 
+
+Ivan Osorio
+Grandma. 
+
+You
+don't need to change this product because it's already preset to it. They 
+
+Ivan Osorio
+Correct. 
+
+You
+choose a different component. It's technically another product in the inventory. But they're not 
+
+Ivan Osorio
+Correct. 
+
+You
+on that page. Okay. So, whatever the wording is for this, we can change that around so it's more, you know, relevant or appropriate for what they're doing, but essentially what it's going to do is take them to the builder anyways. 
+
+Ivan Osorio
+But it's going to be, it's going to take them. So, what, why, why? The step before where it just got to, that is the builder. 
+
+You
+So we just want to keep this. 
+
+Ivan Osorio
+Like that's right there, that's the builder. So is there a way that once you're here, 
+
+You
+Yeah. 
+
+Ivan Osorio
+all right? Once you're here, is there a way is there a way that I can hit update your order or update your selection and have it change the part number to the inventory, check inventory and everything from this tab without it 
+
+You
+From 
+
+Ivan Osorio
+making you 
+
+You
+the 
+
+Ivan Osorio
+do it 
+
+You
+tabby, 
+
+Ivan Osorio
+again? 
+
+You
+I can do that. Dante, you're saying this should be the builder. 
+
+Ivan Osorio
+That, that, where it says, customize, your wheel should be out 
+
+You
+As 
+
+Ivan Osorio
+to Carter. 
+
+You
+part. 
+
+Ivan Osorio
+Correct. But wait, if he clicks on here, and it updates, because the problem is right now, in the background, this has already checked the inventory for a blackface, polished lip, chrome books. You need to hit something to make the computer. It doesn't do it automatically. I guess 
+
+You
+Yeah, 
+
+Ivan Osorio
+not. You need to click 
+
+You
+it has 
+
+Ivan Osorio
+something, 
+
+You
+to 
+
+Ivan Osorio
+doesn't 
+
+You
+do 
+
+Ivan Osorio
+make 
+
+You
+it 
+
+Ivan Osorio
+the 
+
+You
+automatically. 
+
+Ivan Osorio
+computer update itself. Okay, so how... I want to hear what he said. What did you say? 
+
+You
+No, I'm saying it doesn't do it automatically. 
+
+Ivan Osorio
+Okay. So if, can you make it so that once you say update, uh, update your selection, it automatically updates like if it would, like if you would have built a new wheel and checked the inventory and everything, and then you could just hit that to card and it, 
+
+You
+And 
+
+Ivan Osorio
+and it'll go. 
+
+You
+this is where, this is where that section comes in. And I'm glad we're all on, you know, discussing 
+
+Ivan Osorio
+Okay, I 
+
+You
+this 
+
+Ivan Osorio
+have 
+
+You
+right 
+
+Ivan Osorio
+a 
+
+You
+now. 
+
+Ivan Osorio
+question. 
+
+You
+Because, 
+
+Ivan Osorio
+I have a question. 
+
+You
+go ahead. 
+
+Ivan Osorio
+What if? When you click on the wheel page? It takes you to the builder. And the real detail page. Right here. So instead of having to go there and you change something that brings you here, what if you just directly came here? 
+
+You
+Directly here. 
+
+Ivan Osorio
+Yeah, he's talking about if you're looking at an image immediately, when you click on the image, it takes you to the wheelbuilder with the with the coordinated pieces already 
+
+You
+Already 
+
+Ivan Osorio
+selected. 
+
+You
+selected. So it, okay, I see what you said. 
+
+Ivan Osorio
+So if I want to make I mean, if I'm going to change it there, I might as well change it here. No, I know what 
+
+You
+I 
+
+Ivan Osorio
+you're saying. It 
+
+You
+see 
+
+Ivan Osorio
+saves 
+
+You
+what you're saying. 
+
+Ivan Osorio
+us. 
+
+You
+I see what you say. 
+
+Ivan Osorio
+Why make changes and force me back here if for that, take me here from the get? With a predetermined selection of the image that I originally looked at, and then, If I make a change, We're in a, we're in the same place. where I can make changes where it doesn't matter. And they can add the car. 
+
+You
+Got it. Okay. Let me do something right quick. 
+
+Ivan Osorio
+Less clicks and a simpler path to 
+
+You
+Yeah, 
+
+Ivan Osorio
+purchase, basically. 
+
+You
+yeah. 
+
+Ivan Osorio
+But yeah, if you just take your, and somebody select what I had looked at. Now, you know, that was going to make changes without it, you know, I think it's less work for Gary 
+
+You
+Yeah, 
+
+Ivan Osorio
+also, because 
+
+You
+it is less work. 
+
+Ivan Osorio
+this state already does that. 
+
+You
+I 
+
+Ivan Osorio
+Huh? 
+
+You
+see. Yeah, it is. It is less work. So let me see. 
+
+Ivan Osorio
+Yeah, because I was trying to make you do something on the other page where if you just bring me to this page, it's already doing exactly what I wanted it to do. 
+
+You
+But then we have the, the concern about the center finish because. 
+
+Ivan Osorio
+No, because you, you would have to find, if, for it to work 
+
+You
+Yeah. 
+
+Ivan Osorio
+properly, you would have to find a way that when somebody clicks an image, the image, inside, on the background, the image knows by the part number, it knows the, it predetermines the selection. So when you come here, based on this STSKU number, which the image would have, it would know what to what to preload as a choice. 
+
+You
+So what this is becoming is a universal product. There are no individual products. 
+
+Ivan Osorio
+What do you mean? Well, there is, there's, it's not an individual product. There's predetermined choices that are popular, like what you 
+
+You
+Yeah, 
+
+Ivan Osorio
+were saying, like most 
+
+You
+no, preset, 
+
+Ivan Osorio
+popular. 
+
+You
+yeah, preset options or. 
+
+Ivan Osorio
+It's, it's, it's, it's like most popular options, but they're not truthfully, they're not predetermined unless we want to make it that way 
+
+You
+So 
+
+Ivan Osorio
+later. 
+
+You
+this 07 right here, right? Um, in own 
+
+Ivan Osorio
+Uh-huh. 
+
+You
+design, which is this. Fuck. Hold on. So if somebody wants an 03. If they want a different design here, do we want to give them that option up here? 
+
+Ivan Osorio
+No, I, I, I don't think, I mean, you already predetermined that you want the 0 seven. If you want to change that, you would have to go back a step and go pick a different 
+
+You
+Okay, 
+
+Ivan Osorio
+design. 
+
+You
+so we're gonna keep, that's good. that's good. I'm glad we're fine. 
+
+Ivan Osorio
+Right? No? If a guy picks a B 07 as the design that he wants, we follow through with the B 07, if he wants to pick a B 05 afterwards, he's got to go back out and pick up B 
+
+You
+So, 
+
+Ivan Osorio
+05. 
+
+You
+essentially, there's 
+
+Ivan Osorio
+No? 
+
+You
+going to be... 
+
+Ivan Osorio
+Yeah, because if we start giving them that, then they'll get confused. Right. Pick the wheel. But they guys customize that to some extent. Right, exactly. If not, you want to pick a different wheel, just back out, go back to the wheel gallery, pick a different wheel, and then go back in again and 
+
+You
+Okay. Can 
+
+Ivan Osorio
+molest it afterwards. 
+
+You
+we agree to make this the primary builder? Like Dante is saying? 
+
+Ivan Osorio
+I think so, right? I mean I think it's the best way. To make the primary builder, that, 
+
+You
+This, 
+
+Ivan Osorio
+that, that, 
+
+You
+this 
+
+Ivan Osorio
+that 
+
+You
+section 
+
+Ivan Osorio
+tab. 
+
+You
+right here. I'll get rid of this. I'll still add the 
+
+Ivan Osorio
+Yeah, 
+
+You
+build, save 
+
+Ivan Osorio
+because... 
+
+You
+the build and everything else, all of the specs. These same features will still be there, but it'll primarily be here. 
+
+Ivan Osorio
+I think it should all be there. Yeah, I think. Not just that. I think you get lost. I think when you start bouncing around too much, you forget where how you got 
+
+You
+Okay, 
+
+Ivan Osorio
+there. 
+
+You
+all right. Yeah, I'm down for it. I'm down for it. That's cool. Um, I. 
+
+Ivan Osorio
+Sorry, I mean, it sounds like you may have already built some of this stuff, but I mean, maybe you go to, instead of build your wheel, select your wheel, and then it takes you to the gallery, to the, to the wherever the gallery or wherever we want to go, and then from 
+
+You
+Personally, 
+
+Ivan Osorio
+there it takes you here, no matter what, 
+
+You
+I 
+
+Ivan Osorio
+it 
+
+You
+like 
+
+Ivan Osorio
+always 
+
+You
+this 
+
+Ivan Osorio
+brings 
+
+You
+better. 
+
+Ivan Osorio
+you back to the 
+
+You
+Personally, 
+
+Ivan Osorio
+same. Huh? 
+
+You
+I like this better, but we originally talked about a builder. So I think we were, Now that we're, like, clarifying what we want. Um, we're back to this, but originally it was a builder. 
+
+Ivan Osorio
+It, I mean, it still is, but you're just picking, you're picking the design before you before you go to 
+
+You
+Before. 
+
+Ivan Osorio
+the builder. 
+
+You
+Okay. All right, cool. I can just, like, yeah, I can deactivate that. I do like this better though. It is a lot cleaner and everything. So, back to your point about when they, when they select it from the category page. You're saying that it should carry over those selections here. 
+
+Ivan Osorio
+I mean, if we're going from an image, Right? If you're if you're looking at the wheels, go go back to the wheel gallery. Okay, so I guess it doesn't matter because there's no images. Um, but but if you're in the wheel gallery and you've already picked this, this, when you click on this CLB 07, right? Yeah, this COB 07 is a certain color. that we can't see, but it's a certain color, 
+
+You
+Yeah. 
+
+Ivan Osorio
+right? If you click on it, I think the right thing for the customer is the minute I already saw something that I liked, I would like it to carry over to the initial start of 
+
+You
+Okay, 
+
+Ivan Osorio
+this. 
+
+You
+so, this is how I, This is how I'm thinking is gonna work in my head. I need to really flush this out. But for the sake of the customers seeing the different options, we give them all the combinations here. The 07s, the 06 and the different. 
+
+Ivan Osorio
+Right, right, 
+
+You
+But 
+
+Ivan Osorio
+right. In different colors and 
+
+You
+but 
+
+Ivan Osorio
+all that. 
+
+You
+there's a base universal product for this. You see how these are just like repeated? There's a universal 
+
+Ivan Osorio
+Right. 
+
+You
+base, CLB 07. So 
+
+Ivan Osorio
+Right. 
+
+You
+this is just a, these are just presets, but this is a, this will be a universal, COB 07. And anytime they click one of these options, these different options. It should carry over. Based on what they chose. Is that, 
+
+Ivan Osorio
+Yeah, I 
+
+You
+is 
+
+Ivan Osorio
+think so. Yeah, I think 
+
+You
+that 
+
+Ivan Osorio
+so. 
+
+You
+what you're saying? 
+
+Ivan Osorio
+Yeah. I, I think, I mean, I, I don't, I, I hope I understand it the way that you're explaining it, but it sounds like, yes, it sounds like that's exactly right. And, I mean, again, maybe, maybe when we go to the gallery, um, or or or wheels or whatever, I mean, we're on there, uh, you've got all the designs, like, do we have a way of, of, of, uh, do we have a listing of all the different designs? Yeah, you have the design code 
+
+You
+I 
+
+Ivan Osorio
+thing. So 
+
+You
+do, yeah. 
+
+Ivan Osorio
+you have a way of, so if I'm looking at all the designs, you have a way of clicking that, so I have a way of starting off with the design that I like. 
+
+You
+Exactly. Hey, Dante, you there? 
+
+Ivan Osorio
+Uh, hold on, he's on the phone. I mean, I, I'm just, I'm thinking, 
+
+You
+I want his input on this, too. 
+
+Ivan Osorio
+I'm thinking, like, he knows a little bit more about how modern day, Because he's got his website and he, you know, you saw how 
+
+You
+Yeah. 
+
+Ivan Osorio
+it works. He's got his designs, but he doesn't have as many options as we have. So he's got the designs and how do I, how do I show the 6 designs real simple? And then once some, to help people select whether they want a mesh, whether they want a spoke or whatever. And once they click on that, then we go to this page. Is there a way to do that or, or, or, you know, whatever. Once, if we show them all in order, like all the 07s, all the 01s, 02s, 03s, 04, you know, we sort them like that, and let people click on whatever they want, and again, once you, the whole idea is because we're so custom, once you, once you pick a design, You should always have access to customizing the colors of that design. 
+
+You
+Right. 
+
+Ivan Osorio
+Does that 
+
+You
+yeah 
+
+Ivan Osorio
+make sense, you know what I'm 
+
+You
+it 
+
+Ivan Osorio
+saying, right? 
+
+You
+makes sense. I get where you're coming from, and I, I agree with 
+
+Ivan Osorio
+Just 
+
+You
+you. 
+
+Ivan Osorio
+from the, just from being in the wheel business, honestly, Gary, I mean, it, it, I feel like people have a style of spoke that they like or, or, or design, whether it's a, whether it's a 5 spoke, 10 spoke, 20 spoke mesh. They they've got a look, right? And as soon as they see your your options, there's one that's going to stand out because of their 
+
+You
+Yeah 
+
+Ivan Osorio
+taste. 
+
+You
+of course. 
+
+Ivan Osorio
+And then that's that's the part we can't customize. I don't want to confuse you guys, but this gun tire. Actually, categorizes wheels. Mesh, 5 spoke. Yeah, that's 7 spoke. So we're on the something. Yeah, so we're on. That's how they categorize them. Yeah, so so you see, we're on to something. Like, like, they've already kind of done the research for us and agree with the fact that people have, like, a predetermined style of wheel that they like. We're just going to show them all to them. We're not going to narrow it down because they have a problem where they've got a bunch of different manufacturers. They've got 1000s of designs, all, you know, when, when you, when you start looking at it that way. But, You get what I'm saying? It's like, So we, we're just, we got 6 designs. you know, I mean, it's it's quick to look at. I've even thought about, like, how do we show them, like, so that they know that the, the, the designs are, that the wheel is custom built? Uh, how do we show them? Is it a, is it, would it be offensive to show the design without really like the finish? Just show the face. You know? The pieces. I think that video should. Yeah. And then that way, whatever. I mean, at the end of the day, once somebody picks a design, we should always be going back to the fact that it's, you know, hey, I get to choose how my wheel's gonna look, 
+
+You
+Always 
+
+Ivan Osorio
+not. 
+
+You
+get back to this page. So 
+
+Ivan Osorio
+Yeah, exactly. 
+
+You
+each, 
+
+Ivan Osorio
+But, 
+
+You
+each, there's 6 designs. Each design is going to have a universal product here where they can come in and choose, choose the 
+
+Ivan Osorio
+Right. 
+
+You
+combination of, of components 
+
+Ivan Osorio
+Right. 
+
+You
+that they want. Okay. 
+
+Ivan Osorio
+Right, right. Eventually, and I know that this is, I'm getting ahead of myself, but eventually, just so you, again, like I always say, I tell you things that are not relevant right now, but just so you, to try to help you in the 
+
+You
+Right. 
+
+Ivan Osorio
+future, eventually, we are going to have pre-built, like I, right now, I've got wheels that are coming that are pre-assembled, all black. You know? Huh? They have to be just something. No, I know, but like I saying, available right now, you know, no? Let's change the vote. Oh. Oh, yeah. Oh, wow. You're one of the... Oh wow. That's where you paint in the ass. Okay, so we're good here. 
+
+You
+Almost. Added 
+
+Ivan Osorio
+What else? 
+
+You
+to fitment God. So, this was an idea based on the spreadsheet. I thought it was a good idea to have. Where they would choose, and it would show them the, um, the specs based on the vehicle. I don't know if we want to keep it or remove it, but. 
+
+Ivan Osorio
+I like it. I like it too. 
+
+You
+And then it... 
+
+Ivan Osorio
+So, so, so this, this, this is, uh, where are we now in the gallery? 
+
+You
+No, this is the product page. Originally, 
+
+Ivan Osorio
+Oh. 
+
+You
+Ray said that he wanted that you should be able to find a product from anywhere. From, from the, the gallery page, from the cat. 
+
+Ivan Osorio
+How did 
+
+You
+We 
+
+Ivan Osorio
+you get there? 
+
+You
+got it. Okay. 
+
+Ivan Osorio
+Can 
+
+You
+Oh, 
+
+Ivan Osorio
+you slow down? 
+
+You
+you just do a scroll down. on the product page itself. That's what I, 
+
+Ivan Osorio
+Where is 
+
+You
+that's what I added. 
+
+Ivan Osorio
+it? You mean, you mean 
+
+You
+No, 
+
+Ivan Osorio
+the wheel page? 
+
+You
+it's on the the product page. 
+
+Ivan Osorio
+All right, so back up and just click your way there so that Ray can see how you got there. Oh, well, so we can see because I don't know. No, okay, if you okay, if you got this far, if you got that far, actually, I'd like what what you created, but not there. Uh, uh, if you got this far. I think, um, You should not be seeing that, uh, uh, uh, more. I mean, I want you to shop at the stage. I don't want to give you any other options to lose 
+
+You
+Okay. 
+
+Ivan Osorio
+you, you know? The only other place from here he can go is gallery. 
+
+You
+Calgary. Okay, so. 
+
+Ivan Osorio
+It could be, uh, but but I do like what you built and I want to use it somewhere else. 
+
+You
+Let me see. 
+
+Ivan Osorio
+Hey, I do like, let me, let I like this. I'm going to mess you up, but I really like the image of the of the vehicle. So where we were before, where it was shot by 
+
+You
+Yeah. 
+
+Ivan Osorio
+vehicle. Yeah, I want the little vehicle to pop up 
+
+You
+Of 
+
+Ivan Osorio
+there. 
+
+You
+here, yeah, I thought the same thing. Yeah. 
+
+Ivan Osorio
+But it should have our wheels on it. Yeah, I should have our 
+
+You
+Yeah, 
+
+Ivan Osorio
+wheels on it, of 
+
+You
+this 
+
+Ivan Osorio
+course. 
+
+You
+is just a placeholder, but that's a good idea. I like it. So do you think that this fitment guy should be on its dedicated page? 
+
+Ivan Osorio
+I like it. I like the treatment guy. So, um, I think the Fitman guy, what do you think about the Fitman guy being part of the guy, the vehicle gallery? 
+
+You
+Yeah. 
+
+Ivan Osorio
+Yeah. 
+
+You
+I think so. 
+
+Ivan Osorio
+I like that, I like that format for the vehicle gallery. 
+
+You
+So, let's go. 
+
+Ivan Osorio
+But anyway, don't mess with it until we figure out what we're going to stick it. But for now, I like it. But again, I get where Ray's coming from. Remember how I felt about the, about the, the, the, the guide page or whatever the page that I was on that was too long and it had more stuff on the bottom that should be 
+
+You
+Mm-hmm. 
+
+Ivan Osorio
+there. And it, it starts to become that if, if you, you know, just like, I don't even know if anybody's gonna go that far down. So like to put it to put such a nice tool in in a place where maybe people don't even get to it. 
+
+You
+Got it, I got you. It's cool. We can place it anywhere, but it's, it's there now, so we can repurpose it and put it on the gallery page or wherever, or on its, because right now, there's a dedicated fitment tool page. So maybe that could replace it or. It doesn't only have to live one place. It can be kind of like an assistant. Where it helps. Like it could add it here somewhere, but, It doesn't need to be on a product. 
+
+Ivan Osorio
+I mean, we could, exactly, because I like the fact that, I mean, we're giving other people information, but I like the fact that we are, it shows us as very knowledgeable for you to be able to click your vehicle and have all the information. The way you've got it there, like that shit is badass. I mean, because you're telling people, hey, motherfucker, I know what tire fits on your truck. I know everything you know, whatever. You know, I know what to do. Obviously, they can use the information to go buy somebody else's shit, but that's wrong, by the way, 511, it's not 51150. I dont know where he's getting the information from, but it's not 
+
+You
+Well, 
+
+Ivan Osorio
+515. Which 
+
+You
+we'll 
+
+Ivan Osorio
+one? 
+
+You
+figure it out. 
+
+Ivan Osorio
+The Range Rover. It's not it's 50120. Where'd you get the data from? 
+
+You
+From the spreadsheet and you know, this is AI spending all of this too, so I'm gonna need to review it all. This is demo 
+
+Ivan Osorio
+Yeah. 
+
+You
+data. This is demo data. 
+
+Ivan Osorio
+I'm gonna have to. I'm going to have to, you're I'm going to be your AI. You know? 
+
+You
+All right, and create 30,000 
+
+Ivan Osorio
+We're going to have to 
+
+You
+combinations. 
+
+Ivan Osorio
+learn how to not use AI 
+
+You
+Got 
+
+Ivan Osorio
+for that spreadsheet. 
+
+You
+you. You're gonna create 30,000 
+
+Ivan Osorio
+What is 
+
+You
+combinations. 
+
+Ivan Osorio
+5150? Um, 5 on 150 is a Toyota. Tundra. 
+
+You
+So what would the Lexus be? 
+
+Ivan Osorio
+The wagon is 5130 and the and the Range Rovers 5120. Yeah. 
+
+You
+Okay, yeah, we're going to have fun working on this. 
+
+Ivan Osorio
+Yeah, I don't, I didn't even, I don't even think I had 5 O and 58. That shit pulled that information out of somewhere else. No, it's not for months. pulled it from the web. Oh, right, right, right. Exactly. This should be 6 on 130. Okay, it's correct. Alright. 
+
+You
+And this is the demo data anyway, so we'll, we'll. 
+
+Ivan Osorio
+I know, but but but see, we're going in the right direction with this. The reason why I like it is just, it's very, um, and maybe what we should do, is, this should be part of once you start, uh, select by vehicle, build by vehicle, maybe we add this to it, where you're giving people, you're letting people know, hey, motherfucker, you pick this, now I'm telling you what I say fits on your vehicle properly. You know, you want to do some other shit, you can go ahead and do it yourself, but, you know? See how it doesn't have the 26 in there already? That's gotta be, that, that had to have been some of some of the spreadsheet that I originally said, because there's no 26 on it. So it knows already that there's no 26 that fits. But you get any idea, 
+
+You
+I'm 
+
+Ivan Osorio
+right, Gary? 
+
+You
+getting it, man. getting it. 
+
+Ivan Osorio
+Like, like this is this, I like this. I think this, we should incorporate this part of it. As, um, The, the build, uh, ship by, uh, shot by vehicle. Find your fit, you know what I mean? It's like shot by vehicle. We should give them the information like that, they should be looking at that. They should know that we know what we're doing. You know what I mean? 
+
+You
+Mm, I see what you mean. 
+
+Ivan Osorio
+It takes it a step further. It says, hey guys, we know what we're doing. This is the fitment. 
+
+You
+So this fit, so this information here, let me try to just. All right, whatever. So they choose a, they choose a vehicle. It's gonna show them the results here, but you also want this information. 
+
+Ivan Osorio
+Correct. As soon as they choose the wheel. Okay, so scroll up just a little bit. So when they choose a vehicle right there. When they choose by vehicle on the other tab, it should look like this. It should look exactly like that. Up to that and then continue, right, exactly, and then continue what you got going on down 
+
+You
+Ah, 
+
+Ivan Osorio
+here. 
+
+You
+boom, we got it. We got, 
+
+Ivan Osorio
+Right? 
+
+You
+yeah. 
+
+Ivan Osorio
+Not at this moment, in the future, that Range Rover will have our wheels. If they think one of those wheels should go on it. 
+
+You
+Yeah. 
+
+Ivan Osorio
+I'm going to be smiling like, yeah, well, I have a lot of workout. 
+
+You
+Placeholders for now, but definitely. We can do that Why not? 
+
+Ivan Osorio
+Think about how badass is going to look like you're telling people, hey, look, I know what size tire you use. I know everything. I know what you need. 
+
+You
+So... 
+
+Ivan Osorio
+It's not, it says Nissan Armada, there's a picture of Rage Rover. Right. We got to fix that. I mean, Unless that was an incent, I'm not. No, that no, that's a Range Rover. At least they copy each other so much. so difficult. No, I just, I'm saying that it, that's probably AI going buck wild again. 
+
+You
+Wow. 
+
+Ivan Osorio
+Cross the 
+
+You
+Like 
+
+Ivan Osorio
+crossing the 
+
+You
+Wild, 
+
+Ivan Osorio
+spokes. 
+
+You
+Wild West. 
+
+Ivan Osorio
+Yep. 
+
+You
+Give me a sec. 
+
+Ivan Osorio
+Well, I was talking to somebody the other day about AI and and he was explaining that, like, you have to know what to tell it to do. 
+
+You
+Yeah. 
+
+Ivan Osorio
+And you're not a wheel guy. You're not, you know, 
+
+You
+Yeah. 
+
+Ivan Osorio
+So you're you're struggling with how to explain something to AI so that it knows boat pattern and center board and da 
+
+You
+Yeah. 
+
+Ivan Osorio
+da da da da. So you don't know what to tell it. You tell it as much as you think you tell, you need to tell it, and it needs to know more. 
+
+You
+So this is this is what I do. I record, I record the meetings and then I transcribe it. And then I feed that back into AI. To, so, because these are your words, you know, you guys know the language of terminology and everything. So that's the reason why I'm able to get this far without it. But without, I mean, without knowing, um, the full will industry, but you are absolutely right. When it gets down to the nitty gritty, it's always best to know the ins and outs of the industry. 
+
+Ivan Osorio
+You're going to have to, you're going to have to be here for a day or 2 and I'm going to, and I'll, and I'll school you on the wheel industry and when you leave here, you won't need AI anymore. 
+
+You
+We'll always need AI. 
+
+Ivan Osorio
+I promise you. 
+
+You
+We'll always need. 
+
+Ivan Osorio
+Nah, not for this. 
+
+You
+Oh, 
+
+Ivan Osorio
+You might need it for something 
+
+You
+for 
+
+Ivan Osorio
+else, 
+
+You
+this. 
+
+Ivan Osorio
+but you're not going to need it 
+
+You
+For 
+
+Ivan Osorio
+for wheels. 
+
+You
+this part. Yep, I agree. I agree, man. We can schedule a time. So, I'll remove. I'll remove 
+
+Ivan Osorio
+Wait, 
+
+You
+those other sections. So Ray. It'll 
+
+Ivan Osorio
+just... 
+
+You
+just be this main product section here. This specifications and a gallery, is that what we're going with? And um, some related products, related wheels. Is that what we want on the product page? 
+
+Ivan Osorio
+I think so. Um. The, remember what we talked about too, we were talking about the, the specifications, they, they need to go back to the, the specs need to come out of, the details of the product that the customer actually 
+
+You
+Yeah, 
+
+Ivan Osorio
+pay. 
+
+You
+Ray did say that. So if they chose this 24, it should show 24 here, the width wall. 
+
+Ivan Osorio
+The, the, the correct offset, the correct width. Remember, that's why I did that spreadsheet for you, the last one that I sent where I broke it down, like diameter with, I, I, I, I went an extra step. So, because I I figured you'd be pulling from different columns. 
+
+You
+Yeah. 
+
+Ivan Osorio
+to get those 
+
+You
+This 
+
+Ivan Osorio
+specifications. 
+
+You
+is, yeah, this is another item we're gonna work on together. But this is how it would look, but you're absolutely right. The actual specs. 
+
+Ivan Osorio
+Like you're, you're missing, you're missing center bore there. We got to add centerboard. 
+
+You
+Okay. 
+
+Ivan Osorio
+Right below offset, or boat pattern. I'm sorry, between boat pattern and offset, there should be 
+
+You
+Okay. 
+
+Ivan Osorio
+centerboard. That's all details that, that, uh, the dealers are going to want to look at. They want to know what they're dealing with. 
+
+You
+Okay, Dante back yet? Dante, 
+
+Ivan Osorio
+Yeah. 
+
+You
+what's up, man? I know you were on the phone maybe like 20, 30 minutes ago. But we were kind of clarifying how the the product page should work. Um, I'm in agreement with removing the builder. To making this domain builder. But what I was saying is that I wanted to get your idea on this. So, These will be preset options that should carry over to a universal product. So the idea that Sergio had was if somebody were to choose and these have no images now, but let's just say this one was titanium. Once they click on this, it'll go to. This product here with titanium already selected. You 
+
+Ivan Osorio
+Yeah. 
+
+You
+get it. So if it was titanium will polish. When they click on it, it'll, it'll be titanium will pop already. 
+
+Ivan Osorio
+Yeah, but they should still be able to 
+
+You
+Check 
+
+Ivan Osorio
+change it. 
+
+You
+Exactly. This option was 
+
+Ivan Osorio
+Yeah, but 
+
+You
+be 
+
+Ivan Osorio
+yeah. 
+
+You
+there for them to change it. But it will come preset with what they already selected from. 
+
+Ivan Osorio
+Yeah, that makes sense. Right. And then if they don't want to do anything other than, hey, I like it, I want to buy it, then they just click on, add 
+
+You
+At the 
+
+Ivan Osorio
+Jacquart. 
+
+You
+guard, so change. 
+
+Ivan Osorio
+So if you don't make any, when once you, once I click on the other on the other thing, it brings me to this thing, with preset options, already the diameter that I had or whatever, it, it, add the cart automatically lights up. If I make a change, the minute I click one thing there, even if I click back. Where it says customize your wheel, it should be update your choice or update your your selection. And then that once again now updates everything in the background, including the finished part number, which is not there. Oh yeah, there it is. up there. So, why, why, why would I have to update it? It should update automatically. Yeah, that's what I'm trying to say, but he said that it can't. 
+
+You
+No, no, what I'm. 
+
+Ivan Osorio
+Dude, you said that. 
+
+You
+No, this was before 
+
+Ivan Osorio
+Okay. 
+
+You
+we clarified that. If we're going this route, 
+
+Ivan Osorio
+Oh, okay, 
+
+You
+it can. 
+
+Ivan Osorio
+so... Okay, so if I make chambers in on this page, if I make any changes, it updates automatically. 
+
+You
+It'll 
+
+Ivan Osorio
+Yeah, yeah, yeah. Like if you 
+
+You
+update 
+
+Ivan Osorio
+click 
+
+You
+automatically. 
+
+Ivan Osorio
+right now. On the bottom, I should never have to see customize your wheel. It should always be 
+
+You
+Add 
+
+Ivan Osorio
+at the car. 
+
+You
+to car, yeah. 
+
+Ivan Osorio
+Yeah. 
+
+You
+This 
+
+Ivan Osorio
+The 
+
+You
+is 
+
+Ivan Osorio
+2nd 
+
+You
+because 
+
+Ivan Osorio
+you 
+
+You
+the 
+
+Ivan Osorio
+put the 
+
+You
+direction is, 
+
+Ivan Osorio
+gloss black. 
+
+You
+this was before we decided on this direction, it was going to go down to the 
+
+Ivan Osorio
+Yeah. 
+
+You
+build your will, but this is going to become a universal product. So all of these options are going to be here where no matter what they choose, it'll be add to card. 
+
+Ivan Osorio
+And he's going to update the part number. Yeah, like if you do plus block, it'll be the part number will 
+
+You
+It'll 
+
+Ivan Osorio
+change. And 
+
+You
+change. 
+
+Ivan Osorio
+then from there, right. From there, once I click that, It will know, like on the background, this can check the 
+
+You
+Yeah, 
+
+Ivan Osorio
+inventory for 
+
+You
+it'll 
+
+Ivan Osorio
+the 
+
+You
+change. 
+
+Ivan Osorio
+component. Yeah, because the part number is updating as you're clicking. I see you saying. Yeah, yeah, yeah, yeah, exactly. Yeah. Yeah, correct. 
+
+You
+Okay. All 
+
+Ivan Osorio
+Yep, doing 
+
+You
+right. 
+
+Ivan Osorio
+it. 
+
+You
+We're on the same page. 
+
+Ivan Osorio
+Yeah, this is going to 
+
+You
+I 
+
+Ivan Osorio
+work. This is going to be a lot smoother. 
+
+You
+like it. 
+
+Ivan Osorio
+Again, we were talking about less clicks. This is this is less clicks. That's where I 
+
+You
+So, 
+
+Ivan Osorio
+was. 
+
+You
+yeah, boom. Boom. 
+
+Ivan Osorio
+like it. Now, did we decide if in the event that somebody clicked something that we're out of? 
+
+You
+Yeah. So 
+
+Ivan Osorio
+Um, 
+
+You
+here we go here. 
+
+Ivan Osorio
+Sorry, but now we're, I'm going, my 
+
+You
+No, 
+
+Ivan Osorio
+mind already moved on because 
+
+You
+as it, 
+
+Ivan Osorio
+this, I 
+
+You
+as it should. 
+
+Ivan Osorio
+like, I like the way, 
+
+You
+Yeah, 
+
+Ivan Osorio
+I like the way this is now. 
+
+You
+as it should, because this was part of the build your will, but I'm going to add that feature to this main section here, and I'm going to show you what I'm talking about now. All 
+
+Ivan Osorio
+Sorry. 
+
+You
+right. So build 
+
+Ivan Osorio
+That's 
+
+You
+your 
+
+Ivan Osorio
+actually, 
+
+You
+wheel 
+
+Ivan Osorio
+like, 
+
+You
+right now. 
+
+Ivan Osorio
+how... You could do that package. 
+
+You
+It has this, 
+
+Ivan Osorio
+Okay. 
+
+You
+and I was still flushing this out so it's still, 
+
+Ivan Osorio
+You? 
+
+You
+you know, a work in progress, but this is the idea. So it shows that all of these components are in stock. We don't necessarily need to show the shopper this. This is just so I can visualize it while I'm, while I'm developing it, but when they choose an option that doesn't exist. We can have a message for them or whatever. Like if, um, If this polish is, there's a 0 quantity for it or it's back ordered or whatever. We can choose. 
+
+Ivan Osorio
+I love 
+
+You
+We 
+
+Ivan Osorio
+it. 
+
+You
+can choose whichever 
+
+Ivan Osorio
+I love 
+
+You
+option. 
+
+Ivan Osorio
+it. 
+
+You
+We don't necessarily need to say, hey, 
+
+Ivan Osorio
+What? 
+
+You
+there's a 
+
+Ivan Osorio
+I 
+
+You
+100 
+
+Ivan Osorio
+love it. 
+
+You
+of the black lips, there's a 1000 of the center. That 
+
+Ivan Osorio
+Yeah, yeah, I don't 
+
+You
+could. 
+
+Ivan Osorio
+want people to know how much 
+
+You
+Yeah, 
+
+Ivan Osorio
+we have. 
+
+You
+that could confuse them. For me, I just added it here so I can show, I can illustrate that in the back end, it'll keep track of what's in stock. But 
+
+Ivan Osorio
+I love it. 
+
+You
+if, 
+
+Ivan Osorio
+I love it. 
+
+You
+if it chose a, a component or variant that isn't in stock, using the QuickBooks as the inventory source, it'll say this here. This combination isn't 
+
+Ivan Osorio
+That's 
+
+You
+in stock. 
+
+Ivan Osorio
+that's beautiful. That's beautiful. Well, I probably don't like I don't like where it is. One thing. Um If it's less than a certain number that we have to pick, Call to verify, it's available. Inventory low, please call to verify availability. Yeah, if it's under, we have to come up with a number for it. If it's under 10, under 12, whatever the fuck, 
+
+You
+Yeah, 
+
+Ivan Osorio
+you know? 
+
+You
+you don't want to let it get down to 0 or one. 
+
+Ivan Osorio
+Okay, now I'm gonna, I'm gonna throw a cur- a slide. The last. It's probably something is wrong with them. Right. Um, can that alert? Pop up where it says add the cart instead of hidden away down there. 
+
+You
+Yeah, no, that's what I was saying. I was just saying that this dysfunctionality is going to be up here. We 
+
+Ivan Osorio
+Right, 
+
+You
+can add it 
+
+Ivan Osorio
+exactly. 
+
+You
+wherever we want is what I... 
+
+Ivan Osorio
+That's no, that I think, right? Put it instead of add the cart, that that's what it should be. This combination, whatever, you know, and then you go change another combination and and add the cart lights up. So you're good, you know? Beautiful. 
+
+You
+What's 
+
+Ivan Osorio
+Gary. 
+
+You
+up? 
+
+Ivan Osorio
+You know, I, I, I think I, I think we spoke about this already. I can't remember if you're doing it or you did it or 
+
+You
+Okay. 
+
+Ivan Osorio
+whatever, but you know when you go to the gallery? 
+
+You
+Yeah. 
+
+Ivan Osorio
+Um... Do you go to the gallery? 
+
+You
+Yeah. 
+
+Ivan Osorio
+tuning the shit. Like if you actually click, well, you don't have a vehicle gallery, right? Do 
+
+You
+I 
+
+Ivan Osorio
+you? I don't remember. 
+
+You
+have a vehicle gallery, but no vehicles yet. But what do you want it? 
+
+Ivan Osorio
+So if you go on to, like if you go on my go to E5 Wheels website, I don't know if you want this search, but go to my gallery. 
+
+You
+Yeah. 
+
+Ivan Osorio
+Oh, we talked about this. Yes, yes, yes, yes. When you, you, you see something, it takes, you go to the vehicle gallery, vehicle vehicle. No, vehicle gallery. 
+
+You
+Isn't 
+
+Ivan Osorio
+Oh, vehicles. 
+
+You
+it? Oh, I thought I did click it. Okay. Right? 
+
+Ivan Osorio
+Scroll down. You click, like, go to the, like, any, click, click. I mean, don't click on that one. I don't know. Actually, I don't know if it has it, to be honest, because, 
+
+You
+Which one? 
+
+Ivan Osorio
+Go to like the 
+
+You
+This 
+
+Ivan Osorio
+one on the left. 
+
+You
+one? 
+
+Ivan Osorio
+What Yeah, that white one, huh? 
+
+You
+Okay. 
+
+Ivan Osorio
+So this is, it's a whole gallery of that photo shoot. Cool, cool, cool. And then you scroll down. It's a title. Obviously, we're going to have the title, but it shows the exact specs that's on that car, and you can do shop fit in it because they might want that exact setup that's on that vehicle. So shop in it. 
+
+You
+Shop or click shop for me? Okay. 
+
+Ivan Osorio
+Yeah, we want that I honestly don't know how many people buy my wheels with this feature? I wish I 
+
+You
+Are 
+
+Ivan Osorio
+knew, 
+
+You
+you 
+
+Ivan Osorio
+but 
+
+You
+tracking? 
+
+Ivan Osorio
+I, I don't, I, I don't know if you guys think this is a good... I love it. Because people, like, look at a car and they will, oh, that's my car. I want my shit to look just like that. That's the way to do it. I was just gonna say that my my brother-in-law is like that. He sees something he likes and he doesn't give a shit to be different. And you can exactly that. So I love that. I love that you click that and it takes you, you know, part number, everything. As long as we put the part number, whenever we, whenever we post, uh, the gallery, you have to link it up. Yeah, and it can link by the part number and start, again, taking back to the wheel builder. and preload that combination. And these... So when you end up there, like, look, you can still, look, at that, I don't know, at that page, you can add the car, that exact setup, because that exact car, if you look at selected 
+
+You
+Yeah. 
+
+Ivan Osorio
+vehicle, it's still the skate theory, but you can, you can still change vehicle. 
+
+You
+Yeah. 
+
+Ivan Osorio
+And you can, you can still change the finish. 
+
+You
+Yep. 
+
+Ivan Osorio
+Yeah. Well, in our case, it'll take you to the wheel builder and then it'll allow you to do that. The same thing up page. Right. Yeah, but that page on us is the it's the other page that the images take you to. You see how that... You can't. Yeah, exactly. You can't buy it for that size because I don't have, it's not available. But like, if you filter it to another one or whatever, you could change the color. I like it. So, so, yeah, once you build, when you build the, the, the vehicle gallery, I guess, what would it take? It would just take putting the correct part number on the on the on the picture? 
+
+You
+On the picture, you mean. 
+
+Ivan Osorio
+On the image of the vehicle. 
+
+You
+On the vehicle. Yeah, they would need to be mapped 
+
+Ivan Osorio
+That's 
+
+You
+out. 
+
+Ivan Osorio
+a good patient. 
+
+You
+But at 
+
+Ivan Osorio
+It's a 
+
+You
+this 
+
+Ivan Osorio
+good page 
+
+You
+point, 
+
+Ivan Osorio
+for 
+
+You
+it's 
+
+Ivan Osorio
+us. 
+
+You
+possible, 
+
+Ivan Osorio
+We could 
+
+You
+I can 
+
+Ivan Osorio
+run 
+
+You
+do that. 
+
+Ivan Osorio
+that as the landing page so that I mean, you haven't done the... You haven't done the vehicle gallery yet, so there's just something to think about. However, we go back to the image. that takes you back to the builder that starts off with the pre-selected 
+
+You
+Yeah. 
+
+Ivan Osorio
+choices. There, we want to do the same thing from the vehicle image. 
+
+You
+From the vehicle image. 
+
+Ivan Osorio
+And if that means the gallery. Right from the gallery. So I think the simplest way, I don't know how you're doing it there, but I think the simplest way is buying the part number, because then all we have to do when we load a vehicle onto the gallery is preload the finished part number of that configuration, and then you can make it go to there and buy the by the SQ number. I actually think. What, um, The way. We upload the vehicle to the gallery. We have drop downs. We pick Cadillac. Escalate, color, laugh. The same thing, we should have dropdowns for the wheel that we're picking the M2, color of the center, black lip. Oh, you're saying when you load the vehicle into the galaxy. Correct. Yeah. You'll have all those selections, how you, because the website doesn't know it's a Cadillac Escalade. telling it as a cat because we're going to system. It doesn't know what we live. We go and select this wheel. The finish. Okay, so what Ray is saying basically is the reverse hidden, hidden in the image that when we load the image, we're going to configure the wheel that's on that image so that you know how you on the backside know how to put it back to the builder. Does that make sense? 
+
+You
+To bring it back here, so it's preset with data already that I use as an identifier to bring it back to this product page to preset options. 
+
+Ivan Osorio
+Yes. Right, exactly. So, like, instead of, it'll be, instead of the image with the, basically, I'm gonna build. I'm going to configure the vehicle, hidden away. Like when I go to load the image onto the website, I'm going to configure the wheels that are on the vehicle. That way, when you go to, if somebody clicks, it's a link that goes back to the thing by the configurator, basically same way as 
+
+You
+Yeah, 
+
+Ivan Osorio
+I would have configured it. 
+
+You
+I get what you're saying. So what 
+
+Ivan Osorio
+It 
+
+You
+we're 
+
+Ivan Osorio
+just, it 
+
+You
+saying? 
+
+Ivan Osorio
+takes, but it has to be. There's no other way. It's not, you don't know what wheels on the 
+
+You
+So 
+
+Ivan Osorio
+car. 
+
+You
+this, 
+
+Ivan Osorio
+And I 
+
+You
+this image 
+
+Ivan Osorio
+think, no, 
+
+You
+here? 
+
+Ivan Osorio
+it's easier than me trying to figure out the part number. going to have to configure the part number any way to load it to type it in. I'd rather just let the thing configure it. Yeah, but it has to because how are you going to tell it? Because the same way you tell it, Cadillac, escalate, black. We you have to pick all the... Right. No, no, yeah, it makes sense. It makes sense. So when we go to whatever, whatever you make for us to load up, to upload images, it's just when I go to upload that image, it, the 1st thing I have to do is configure the vehicle and then upload the images. And then from that hidden configurator, you're going to be able to take, if somebody clicks shot fitment, it'll take you right back to the wheel building. 
+
+You
+I got it. 
+
+Ivan Osorio
+The way it did on Dante's site. I love it. Good idea, don't they? He has an idea. He has them all the time. It's just, it's, it's, you got to catch him on that spot and grab the idea. Steal it from. Normally, I, it's easy for me because I just listen to these conversations and then I just steal his ideas. 
+
+You
+Explore. 
+
+Ivan Osorio
+I have an idea. And then 
+
+You
+. 
+
+Ivan Osorio
+Sergio's... Same way I steal a sales. He's like, oh, I just talked to this guy. Oh, I know that guy. 
+
+You
+What's the difference with this one? I clicked. Uh... This Explorer C brain. Are these different wheels for that same car? 
+
+Ivan Osorio
+No, it's just, it takes you back to the configurate. That way it's, it takes you back to the, to that. I think when you click the shop 
+
+You
+Fit me. 
+
+Ivan Osorio
+fitment, 
+
+You
+Yeah. 
+
+Ivan Osorio
+it is when it takes you 
+
+You
+Great. 
+
+Ivan Osorio
+straight to the actual 
+
+You
+Yeah. 
+
+Ivan Osorio
+fitment. Right, when you click the shot fitment. The other way just takes you to the series of the wheel. 
+
+You
+Okay, so shop fitment should function. Like this. 
+
+Ivan Osorio
+It should 
+
+You
+Like 
+
+Ivan Osorio
+take you right there. 
+
+You
+this. 
+
+Ivan Osorio
+When you. 
+
+You
+But on this website. 
+
+Ivan Osorio
+There. 
+
+You
+Yeah. 
+
+Ivan Osorio
+Exactly. 
+
+You
+Okay, I got it. I got you. So I'll uh. 
+
+Ivan Osorio
+And then once again, you're back to the same place where if you say, I love the way that car looks, but I wish my lip was polished instead of black, you just change the lip and and and add the cart. 
+
+You
+And add to car. Boom. All right, all right. We're getting there. So we cut some stuff out. That's good. This page is, you satisfied with it, Ray? You satisfied with it now? 
+
+Ivan Osorio
+Yeah, yeah, yeah. I love this added feature. It was a great idea we came up 
+
+You
+And 
+
+Ivan Osorio
+with. 
+
+You
+what else did we say? 
+
+Ivan Osorio
+You know me? Came up with that idea, would 
+
+You
+About 
+
+Ivan Osorio
+you? Okay, it goes. 
+
+You
+the 
+
+Ivan Osorio
+Was 
+
+You
+fitment 
+
+Ivan Osorio
+all me? 
+
+You
+guy. 
+
+Ivan Osorio
+I don't know which what it was, but I like it. Ray said it was a great idea he came up with. I love that. It works is good. I love that Nissan. I love that Nissan. Oh, yeah. An insult to the Range Rover guys. 
+
+You
+So this, 
+
+Ivan Osorio
+Calling 
+
+You
+so 
+
+Ivan Osorio
+my 
+
+You
+this feature, 
+
+Ivan Osorio
+shit, Anisa? 
+
+You
+so this feature right here, will now live right here. 
+
+Ivan Osorio
+Here, exactly. Instead of that little image of the vehicle, you're gonna have the 
+
+You
+Yeah, 
+
+Ivan Osorio
+other image coming across it. 
+
+You
+yeah. 
+
+Ivan Osorio
+So you can shrink that a little bit and make it just look like the other thing. That whole little thing will be the 
+
+You
+It's 
+
+Ivan Osorio
+other thing instead. 
+
+You
+pretty, yeah, 
+
+Ivan Osorio
+It'll 
+
+You
+it's 
+
+Ivan Osorio
+look 
+
+You
+pretty much, 
+
+Ivan Osorio
+like, 
+
+You
+it's just swapping 
+
+Ivan Osorio
+wow. 
+
+You
+it out, really. Good, 
+
+Ivan Osorio
+Right. 
+
+You
+go 
+
+Ivan Osorio
+I have a question. 
+
+You
+ahead. 
+
+Ivan Osorio
+Um, this is more to Sergio than you. When you scrolling down, make model, blush, blah, blah, blah. It's only going to be filtered to what's available, 
+
+You
+Yeah. 
+
+Ivan Osorio
+right? To 
+
+You
+So 
+
+Ivan Osorio
+what we offer. 
+
+You
+only what 
+
+Ivan Osorio
+Yeah, so 
+
+You
+you offer. 
+
+Ivan Osorio
+what we offer is a company. Okay, that's what I don't want to go through Alfa Romeo. No, no, yeah, exactly. He, he, right, Gary, we had agreed you're going to hide 
+
+You
+I I hit 
+
+Ivan Osorio
+the 
+
+You
+everything else. 
+
+Ivan Osorio
+applications that, 
+
+You
+Everything else 
+
+Ivan Osorio
+right. 
+
+You
+is hidden. 
+
+Ivan Osorio
+They're going to be hidden. So later on in the future, we adding a vehicle. He just unhides it. It turns on. Right. Okay. Yes, sir. Can we go back to the gallery game? 
+
+You
+Your gallery? 
+
+Ivan Osorio
+Um, yeah, 
+
+You
+Yeah. 
+
+Ivan Osorio
+go back. Yeah, mine. Okay, so when you, okay, my, my website sucks. So I don't know if it's doing it. it does it on some setups, if you scroll down, Okay, yeah, it doesn't do it on that one, go, okay, go back. Go, um, gallery. Yeah, okay, wait. No, yeah, go back to the galleries. Scroll down. I don't know which one it has, young. Okay, maybe go to, oh, you see that that middle one right there, the red blow? Yeah, that one? Okay, so the same thing. You could throw down, you could pick the same exact wheel, but in mine, keep going down, keep going down. I have a okay, go up, go up. Now, the filter, I mean, this isn't like a priority, but I think it's a nice thing to add. So this year, since this person has a C7 Corvette. He, if you scroll down, I filtered the galleries to a bunch of different C7s that have wheels on C7s. So if that person is looking for if they have a Cadillac. If it keeps scrolling down, maybe we can filter only Cadillac galleries. So we could show all different wheels and finishes on their exact car. Yeah, 
+
+You
+Hmm. 
+
+Ivan Osorio
+makes sense. Well, if, if, okay, more of the same. So, okay, so if we, if we are using options, if we're using the builder the way Ray said where, where we're configuring each image, it makes it easy because all he has to do is the related images. We don't, I'm just, we don't need... We don't need this to launch the website like immediately, but we can add it. It's not a priority. We need the other stuff first. But I think this is a nice feature if you guys agree. I agree. 
+
+You
+Yeah, I think 
+
+Ivan Osorio
+And 
+
+You
+it's 
+
+Ivan Osorio
+I 
+
+You
+a great feature. 
+
+Ivan Osorio
+think, Gary, it should, if we're, if we're using, it kind of keeps going on like a circle. Right. If we're using a configurator to load the image, then you should be able to kind of backtrack it where on the bottom, every image of that particular wheel design on that vehicle should come up as an additional option on the bottom the way it does on Dante's? 
+
+You
+Uh, you mean here? 
+
+Ivan Osorio
+Like, scroll 
+
+You
+Right 
+
+Ivan Osorio
+down? 
+
+You
+here? 
+
+Ivan Osorio
+Oh, there. Well, I went too far. 
+
+You
+Or 
+
+Ivan Osorio
+there's a 
+
+You
+here? 
+
+Ivan Osorio
+there's a delay. There, there, there, right there. So look, okay, go. I don't know if this is like driving me crazy, but if you go back to the gallery, you can filter to what generation they are. And if you go to the Boston website, they do the same thing. So every time we add a new gallery, I'll tell you, like, that's what I was talking about, that's how you upload a picture. Yeah, yeah, yeah. Okay. Exactly. We just got to go a step further. We have to configure it for each picture because of the combination so that it knows how to take you back to the builder because it's going to take you the exact build on the image. But I like what Dante's because, I mean, maybe the guy would just click on one thing, but when you scroll down one more, Now there's 5 different options of the same wheel and maybe 2 or 3 different colors and maybe the guy decides to change. Not offensive. like, you see that? Oh, fuck. I like that one better Yeah, exactly. That's how I look. That's why I want it. Yeah. Or unless it's kind of like driving them away from the ad to cart page. Remember we used to talk? No, because at the end of the day, listen, at the end of the day, it's going to start, like, keep looking. But this is more. I think our our job is more full sale in this website, it's going to be more wholesale use and those guys are not going to let the fucking walk. I, listen, once you get to that point, once you get to that point where, once, yeah, once you get to that point where you're, where you're staring at the, the, the image, You know, go, go, you know, add to, add to card or, or, uh, whatever, once you click that, you go away from that. The guy that keeps scrolling past ad de carte is because he's still trying to decide and then you're giving him more options. That's great. I don't think that's bad. I think as long as you have the whatever drives you to the configurator page, as long as you can get back there. Yeah, add to cart should take you to the configurator page. to the wheel builder. And if you like it the way it is, you just click out the card again and that's it. Not at the card at that stage. Call it what? What do you want to call it? Um... You, you wheel, view, view, view wheel details, right? So once you do that, it takes you away to that. Now it just kind of did away with the selection of other images. Now, if you keep scrolling past that, it means you're not 100% decided yet. Which is not offensive to have more options, you know, maybe, you know, this page, where you were. Um, because Corvette has smaller wheels in the front and bigger wheels in the back. You see, the front is 19 by 10, the back is 20 by 12. So there's 2 and two. But again, that's just letting you know why it's 
+
+You
+Yeah, 
+
+Ivan Osorio
+all... 
+
+You
+I remember you pointed that out. That makes sense. 
+
+Ivan Osorio
+Which is something that we have to keep in mind because in the future, we're going to have that. The BMW X5 that you were clicking on a little while ago, that BMW X5 is a staggered fitment similar to Corvette. 
+
+You
+So, let's, I think I, already. 
+
+Ivan Osorio
+2024 BMW X5, whatever, yeah. 
+
+You
+It 
+
+Ivan Osorio
+There you 
+
+You
+says 
+
+Ivan Osorio
+go. 
+
+You
+it here. 
+
+Ivan Osorio
+See, normally, that would have a 22 by 9 front and a 22 by 10 rear. 
+
+You
+Okay. 
+
+Ivan Osorio
+And we're going to have to think about that. That was some of those lit up and red in that, in that, in that initial, uh, application guy that I had sent you because we don't have staggered fitments yet, but we will have them in the future and it was just something to think about. 
+
+You
+Okay. 
+
+Ivan Osorio
+But that will just deal with it in pairs. It's just going to have to be, you know, like it's a fixed front fitment. It's a fixed rear fitment. You know, the image is the same. We'll use the same image and everything. It'll just be 2 and 2 like Ray was saying. It's the same image. is just 2 and two. 
+
+You
+Oh. 
+
+Ivan Osorio
+It's just, there's going to be more information there. You're going to have a 2nd line that says 22 by 10, you know, and and whatever. 
+
+You
+A 2nd line here, yeah. Got 
+
+Ivan Osorio
+Correct. 
+
+You
+it. Makes sense, makes sense. So this is gonna live here. Under the vehicle. Actually, I'm just replacing. Replacing this. Replacing this with this. 
+
+Ivan Osorio
+I like the way it's decided. I think it's, I think we, I mean, hopefully it doesn't delay us a little bit too much, but I don't think so. I think it's cleaning up. I think, I think he may have wasted too much time getting here and we're just, you know, he's going to hide 
+
+You
+Yeah, 
+
+Ivan Osorio
+a bunch of shit and then, 
+
+You
+not 
+
+Ivan Osorio
+and, 
+
+You
+wasting, but because we're still using it. But yeah, there was time, you know, allocated for that, for building those 
+
+Ivan Osorio
+Yeah. 
+
+You
+features. So, it's not really wasting, it's just repurposing it. Um. 
+
+Ivan Osorio
+Right, right, right, exactly. But for the fine tuning. I think you definitely have to be in the building 
+
+You
+Yeah, I 
+
+Ivan Osorio
+for 
+
+You
+plan to. I 
+
+Ivan Osorio
+Sergio. 
+
+You
+plan to. 
+
+Ivan Osorio
+Yeah, I'm just sit there next to you and spend a whole day together and just fit wrap it up, you 
+
+You
+Yeah, 
+
+Ivan Osorio
+know? 
+
+You
+so I think next week, I'll set some time and. 
+
+Ivan Osorio
+Uh, do what you got to do next week because we're going to be in SEMA. So the week after that. next week? Yeah, next 
+
+You
+Oh 
+
+Ivan Osorio
+week, just name 
+
+You
+shit. 
+
+Ivan Osorio
+everything. 
+
+You
+Okay. 
+
+Ivan Osorio
+The week after that, we'll, we'll be back here and then we can, we can dedicate whatever time you want, whatever day you want, it won't matter. 
+
+You
+All right. All right. 
+
+Ivan Osorio
+Unless 
+
+You
+Hey, 
+
+Ivan Osorio
+you want to do it Friday. 
+
+You
+Dante, if you don't mind, um, I think I'm gonna talk with you separately about the gallery page, because you have a good feel. Fill just 
+
+Ivan Osorio
+Yeah. 
+
+You
+so I can add it onto the call to website. Yeah, 
+
+Ivan Osorio
+Yeah. 
+
+You
+it 
+
+Ivan Osorio
+No 
+
+You
+could be 
+
+Ivan Osorio
+problem. 
+
+You
+after hours or whatever. I just want to get. 
+
+Ivan Osorio
+It's better after. Sometimes. 
+
+You
+Is after what time? 
+
+Ivan Osorio
+Like, just a little later because, yeah, like after, like, after 5, 
+
+You
+All right. 
+
+Ivan Osorio
+like, 
+
+You
+Yeah, 
+
+Ivan Osorio
+536, just call me. 
+
+You
+I can let you know. Let you know what time. 
+
+Ivan Osorio
+But I like, I definitely incorporating that, I think it's going to be a beneficial long term as we, as, initially won't. Okay, once we know how the people, I mean, you have to install all the pixels. All the builds and whistles to track people's actions, we'll see which how they're using the website. where are they coming in? Yeah, I like I like where we're headed with that. 
+
+You
+I 
+
+Ivan Osorio
+But, but 
+
+You
+like 
+
+Ivan Osorio
+yes, 
+
+You
+it 
+
+Ivan Osorio
+right, 
+
+You
+too. 
+
+Ivan Osorio
+that, we can, we can get, so I guess we can get, we can keep going where we're at, and then add that on afterwards. 
+
+You
+Add what on afterwards? What are you talking about? 
+
+Ivan Osorio
+Well, expand on the, on the, on the link from the image, back to the wheel builder, the, the, does that? Are we going to do that as part of the 
+
+You
+Yeah. 
+
+Ivan Osorio
+initial launch or are we going to add this on afterwards as a backfill? But if he has time, I don't know what, I mean, 
+
+You
+I work with Dante 
+
+Ivan Osorio
+I don't want to 
+
+You
+now, 
+
+Ivan Osorio
+delay it too much 
+
+You
+but I do 
+
+Ivan Osorio
+because 
+
+You
+want 
+
+Ivan Osorio
+we 
+
+You
+to add 
+
+Ivan Osorio
+don't 
+
+You
+it. 
+
+Ivan Osorio
+have that many images right now, you know? I think it's it's beneficial in the future. what's involved. I can't tell you, uh, 
+
+You
+Let 
+
+Ivan Osorio
+uh, 
+
+You
+me talk with Dante, and then I will decide on what, you know, what's feasible right now versus even if we stage it out to have something there still, but we build it out over time. I'll talk with and 
+
+Ivan Osorio
+Yeah. 
+
+You
+figure out, you know, what? 
+
+Ivan Osorio
+I just don't I, it's, it's an awesome feature and I want it. If it's something that you can incorporate and it's not gonna, you know, it's not gonna, it's something we can do as we go and it's not going to kill 
+
+You
+No, 
+
+Ivan Osorio
+time, then 
+
+You
+I 
+
+Ivan Osorio
+great. But 
+
+You
+don't think it 
+
+Ivan Osorio
+I, 
+
+You
+will. 
+
+Ivan Osorio
+but I definitely want to get that far. I want to get to the launch, the website part without with the minimal amount of 
+
+You
+Of 
+
+Ivan Osorio
+delays. 
+
+You
+course, I agree with you. I agree with you. 
+
+Ivan Osorio
+It's just we don't have enough images right now for it to honestly, for it to matter a lot. You know what I mean? Like we would have to create more images to put there to make it where, you know, 
+
+You
+To put it into good use is not enough. 
+
+Ivan Osorio
+Right, exactly. Exactly. For it to be useful, we need to have 100s of images, 1000s of images or whatever for it to start, you 
+
+You
+Yeah. 
+
+Ivan Osorio
+know? 
+
+You
+I think so too. Alright, cool. Anything else for me? 
+
+Ivan Osorio
+Oh, man. Scroll, just in that page, where the multi-piece wheel was showing, there was some, I, I just saw an 
+
+You
+Yeah, 
+
+Ivan Osorio
+image of 
+
+You
+yeah, we could go 
+
+Ivan Osorio
+the. 
+
+You
+down there. 
+
+Ivan Osorio
+I just saw it. 
+
+You
+12nd right here. 
+
+Ivan Osorio
+Okay, again, those that's that's 
+
+You
+Yeah. 
+
+Ivan Osorio
+incorrect. In our case, we have a full barrel. So the secondary piece, the chrome one is connected together. 
+
+You
+It's connected 
+
+Ivan Osorio
+The 
+
+You
+to this? 
+
+Ivan Osorio
+face. Yeah, yeah, that's all one piece. Those 2 pieces become one 
+
+You
+One 
+
+Ivan Osorio
+piece. 
+
+You
+piece. 
+
+Ivan Osorio
+On the very right, on the very right will be the belt, 
+
+You
+Both. 
+
+Ivan Osorio
+bolts first. 
+
+You
+Both. 
+
+Ivan Osorio
+That is the center. 
+
+You
+Both. Yeah. 
+
+Ivan Osorio
+Maybe the center cap, and then the barrel, and then the nuts that go in the back. 
+
+You
+So the order needs to be, okay, so the boats first, center. The barrel, and the nuts going to back. 
+
+Ivan Osorio
+A complete 
+
+You
+Yeah, 
+
+Ivan Osorio
+barrel, yes. 
+
+You
+that sounded 
+
+Ivan Osorio
+So 
+
+You
+a little. 
+
+Ivan Osorio
+if we have any kind of video, I think it would be something like this, all of it coming together. 
+
+You
+Ah. 
+
+Ivan Osorio
+And 
+
+You
+Yeah, 
+
+Ivan Osorio
+So 
+
+You
+that's a 
+
+Ivan Osorio
+all of 
+
+You
+good idea. 
+
+Ivan Osorio
+that coming together. And then, uh, so people, uh, tell me, uh, you know, Oh, um. Well, well, we have the ability, some of this stuff, like in these little sections here, is there the ability to add small short videos or is that mess up the way the website works? 
+
+You
+It doesn't mess it up. I mean, we can pretty much do what we want with it. Um, I just think it should be in places that are appropriate. So if there's, if we can 
+
+Ivan Osorio
+Right, 
+
+You
+add a 
+
+Ivan Osorio
+right. 
+
+You
+video here. 
+
+Ivan Osorio
+I'm just saying like 
+
+You
+Yeah. 
+
+Ivan Osorio
+wherever that appropriate place is, we can get some AI to somebody with AI to make a video of the wheel coming together. 
+
+You
+Yeah. You can do that. Yep. 
+
+Ivan Osorio
+I think that would be cool. I think people need to understand who we are. Yeah, initially. I mean, eventually they'll figure it out, but right now they have no clue. They go to college, they're like, what the 
+
+You
+So, 
+
+Ivan Osorio
+fuck? 
+
+You
+so 
+
+Ivan Osorio
+What's it about? 
+
+You
+Sergey, what you were saying, Sergio, sorry. Sergio, what you were saying earlier is, um, to have this dissected, this exploded will here. Like a version of it here. Okay. 
+
+Ivan Osorio
+Correct. 
+
+You
+Got 
+
+Ivan Osorio
+Exactly. 
+
+You
+it. 
+
+Ivan Osorio
+Exactly. Or or if that's the appropriate place to put the little automated, 
+
+You
+Oh, I get what you're saying, report it here. 
+
+Ivan Osorio
+animated video in there, 
+
+You
+Yeah. 
+
+Ivan Osorio
+you know? 
+
+You
+Okay. 
+
+Ivan Osorio
+I don't know. I don't know if that's the right place or not. I'm just saying like a running gift, Gary. 
+
+You
+A 
+
+Ivan Osorio
+Yeah. 
+
+You
+running gift? 
+
+Ivan Osorio
+Something 
+
+You
+I 
+
+Ivan Osorio
+like that, 
+
+You
+see 
+
+Ivan Osorio
+whatever 
+
+You
+what 
+
+Ivan Osorio
+that 
+
+You
+you mean. 
+
+Ivan Osorio
+is. Yeah, on the loop. Same as Spun Forge, if we can make an automated, like an animated video of Spun Forge, you know, so that just to add credibility, to add value to what, you know, to what we're talking about. Um, AI did a number on that thing. This one has a funky folk too. 
+
+You
+Yeah, I just noticed that. This is a 3 spoke, 3 spoke, then I don't know what this is. 3 spoke. 
+
+Ivan Osorio
+Yeah, 
+
+You
+And 
+
+Ivan Osorio
+AI, AI 
+
+You
+then. 
+
+Ivan Osorio
+did a number on that partner. After wheel 
+
+You
+Yeah. 
+
+Ivan Osorio
+looks nice. But anyway, that's yeah, exactly. That's I like that. It's just got to be an image of a real wheel, but it's the 
+
+You
+Hey, 
+
+Ivan Osorio
+ideas, right? You know? 
+
+You
+do do you guys have like actual photography for the wheels or from the 
+
+Ivan Osorio
+We 
+
+You
+manufacturers 
+
+Ivan Osorio
+will. We 
+
+You
+or anything? 
+
+Ivan Osorio
+will. They are sending it to us. Once we get actual wheels, we're not going to use AI. We're gonna make everything is gonna be 
+
+You
+Yeah, 
+
+Ivan Osorio
+real. 
+
+You
+exactly. 
+
+Ivan Osorio
+We just don't lose it. So when we launch, it's going to be AI, a month from then, it's going to take us a month to get enough content to take all that out, and then another, you know, once we get the new designs, we'll, it's going to constantly be 
+
+You
+Yeah. 
+
+Ivan Osorio
+updated. Every, every month, it's going to add content. Initial wheels get here in beginning of 
+
+You
+All 
+
+Ivan Osorio
+December. 
+
+You
+right. 
+
+Ivan Osorio
+I'm going to get 2 designs, they're one design. Well, but, I mean, it's hard to walk in and try to sell somebody something, you don't even have a website. You know what I mean? That's kind of like... Well, well, you guys are SEMA. I would like this thing to be up anyway. 
+
+You
+Yep. 
+
+Ivan Osorio
+Be nice. Next week. 
+
+You
+No, 
+
+Ivan Osorio
+You know? 
+
+You
+no pressure. But yeah, next week. 
+
+Ivan Osorio
+Not at all. 
+
+You
+Trust 
+
+Ivan Osorio
+Well, it starts 
+
+You
+me, 
+
+Ivan Osorio
+on 
+
+You
+I'm 
+
+Ivan Osorio
+two. 
+
+You
+working hard, Jesse. I'm working hard, so. 
+
+Ivan Osorio
+I'm just saying, like, it, it's, that we were, we were trying to, like, it's, it's time is starting to 
+
+You
+Yeah 
+
+Ivan Osorio
+tighten up, you 
+
+You
+I 
+
+Ivan Osorio
+know, and 
+
+You
+know. 
+
+Ivan Osorio
+and 
+
+You
+I know. 
+
+Ivan Osorio
+then, you know, then, the 2nd, 2nd load of wheels comes towards the end of December. So like December, we're getting 2 loads of wheels. We get the initial fill in with his and then a full load of ours. Of the new stuff. Well, I spoke to JB, I'm playing with 3 containers a month. So you can sell too. You can tell too, like. No, I'm saying, he has to sell too. You don't know yet, but I talked to the distributor today. I thought we were sales team, we're just one sales guy. You won here. You decided to go get your haircut. What do you say? You missed out on the action. Really? Which one? Or you can't tell me that, not tell me which one, but okay. Bro. I found, I found a competitor to the guys who distribute Boston. Yeah, everything is good. We may be seeing something. I don't know. 
+
+You
+Final notes on me, nah. I mean, I got everything I need. 
+
+Ivan Osorio
+At least I don't know people. Forget the kind of people I know, bro. That shit just fell in my lap. Sounds good. 
+
+You
+We 
+
+Ivan Osorio
+All right buddy. 
+
+You
+good? 
+
+Ivan Osorio
+Hey, next week we're at SEMA and uh, stop slacking. And the big boss man wants 
+
+You
+I 
+
+Ivan Osorio
+the wants the website 
+
+You
+know, 
+
+Ivan Osorio
+working, so 
+
+You
+I know, 
+
+Ivan Osorio
+good luck. 
+
+You
+what, what day is that? and what time exactly? 
+
+Ivan Osorio
+No 
+
+You
+and 
+
+Ivan Osorio
+pressure. 
+
+You
+the time zone? 
+
+Ivan Osorio
+Tuesday, Tuesday, eight, Tuesday through Friday. No, but it's specific time. You have extra 
+
+You
+All 
+
+Ivan Osorio
+3 hours. 
+
+You
+right. 
+
+Ivan Osorio
+Yeah, that's right. They're in different time zones. Tuesday, we're there Tuesday at 9. 
+
+You
+Which is 12 Extra 
+
+Ivan Osorio
+Uh, you know, it gives you an extra 3 hours, so 
+
+You
+3 
+
+Ivan Osorio
+it's really 
+
+You
+hours? 
+
+Ivan Osorio
+Tuesday. 
+
+You
+Hey, I need all the time I 
+
+Ivan Osorio
+Tuesday 
+
+You
+can get. 
+
+Ivan Osorio
+at 12th. High noon on Tuesday. You're on the 
+
+You
+I'm 
+
+Ivan Osorio
+clock, buddy. 
+
+You
+on it. I'm on it. 
+
+Ivan Osorio
+All right. All right, man. I like the way it's coming on, and I think that these changes, they might be a little painful for you, but I think it's gonna, I think in the long 
+
+You
+It's 
+
+Ivan Osorio
+run, 
+
+You
+necessary. 
+
+Ivan Osorio
+it's gonna... 
+
+You
+It 
+
+Ivan Osorio
+Yeah, it's 
+
+You
+builds character. 
+
+Ivan Osorio
+it's. Well, listen, if we want to, we, we are, we're swimming with the sharks. If we want to look like we deserve to be in the same pond as the sharks, all of this stuff's got to be on 
+
+You
+What 
+
+Ivan Osorio
+point. 
+
+You
+shark is in a pond? You mean the ocean? Yeah, 
+
+Ivan Osorio
+Ocean, 
+
+You
+there you go. 
+
+Ivan Osorio
+Bay, whatever. We need to do that card. 
+
+You
+Got 
+
+Ivan Osorio
+All the 
+
+You
+it, 
+
+Ivan Osorio
+chrome. 
+
+You
+got it. I'm on it though. 
+
+Ivan Osorio
+You can 
+
+You
+I 
+
+Ivan Osorio
+go there. 
+
+You
+really appreciate 
+
+Ivan Osorio
+If not, 
+
+You
+it. 
+
+Ivan Osorio
+it's just I'm just going to get swallowed up. All right, Sergio, we got work to do. 
+
+You
+All 
+
+Ivan Osorio
+All right, we're 
+
+You
+right. 
+
+Ivan Osorio
+going to fix that 
+
+You
+Thanks. 
+
+Ivan Osorio
+car. 
+
+You
+I appreciate 
+
+Ivan Osorio
+Gotta 
+
+You
+it. 
+
+Ivan Osorio
+go. All right, 
+
+You
+All 
+
+Ivan Osorio
+man. Talk to you later. Have 
+
+You
+right, 
+
+Ivan Osorio
+fun. 
+
+You
+later, I will. 
+
+Ivan Osorio
+fun. 
+
+You
+All right, bye. 

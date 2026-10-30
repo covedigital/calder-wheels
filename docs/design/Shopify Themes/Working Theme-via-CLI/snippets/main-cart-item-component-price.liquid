@@ -1,4 +1,4 @@
-<div class="prd-price">
+<div class="prd-price calder-cart-price">
   {%- if item.selling_plan_allocation.selling_plan.name != blank -%}
     <span class="prd-price-regular ">{{ item.selling_plan_allocation.price | money }}</span>
     {%- if item.selling_plan_allocation.per_delivery_price < item.variant.compare_at_price -%}

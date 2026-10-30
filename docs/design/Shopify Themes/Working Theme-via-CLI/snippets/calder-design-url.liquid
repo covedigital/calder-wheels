@@ -1,0 +1,70 @@
+{%- comment -%}
+  Design-PDP deep link for collection/gallery cards (Prompt 03).
+  Six canonical design URLs (/products/calder-clb-06-wheel?...) matching
+  calder_universal_products_import_10-29-2026.csv and the registry's
+  canonical_handle. The universal PDP state manager (calder-pdp-state.js)
+  parses the query params and preloads the exact clicked configuration.
+  Dashed design_code metafields ('CLB-06') are normalized to the
+  canonical handle via design_key.
+{%- endcomment -%}
+{%- liquid
+  assign design_code = product.metafields.custom.design_code.value | default: product.metafields.custom.design_code | default: '' | strip | upcase
+  assign design_key = design_code | remove: '-'
+  assign cv = current_variant | default: product.selected_or_first_available_variant
+  assign design_slug = ''
+  if design_key == 'CLM01' or design_key == 'CLM02' or design_key == 'CLM03' or design_key == 'CLM05' or design_key == 'CLB06' or design_key == 'CLB07'
+    assign design_slug = design_key | downcase | replace: 'clm', 'clm-' | replace: 'clb', 'clb-' | append: '-wheel'
+  endif
+  assign diameter_token = ''
+  assign center_token = ''
+  assign barrel_token = ''
+  assign hardware_token = ''
+  assign diameter_index = -1
+  assign center_index = -1
+  assign option_index = 0
+  for option in product.options
+    assign option_name_lower = option.name | downcase
+    if option_name_lower contains 'diameter'
+      assign diameter_index = option_index
+    elsif option_name_lower contains 'center finish'
+      assign center_index = option_index
+    endif
+    assign option_index = option_index | plus: 1
+  endfor
+  if cv != blank and diameter_index >= 0
+    assign diameter_token = cv.options[diameter_index] | replace: '"', '' | strip
+  endif
+  if cv != blank and center_index >= 0
+    assign center_raw = cv.options[center_index] | downcase | replace: ' ', '-'
+    if center_raw == 'black-tint'
+      assign center_token = 'black-titanium'
+    else
+      assign center_token = center_raw
+    endif
+  endif
+  assign sku_base = cv.sku | default: '' | split: '-' | first
+  assign lip_digit = sku_base | slice: -2, 1
+  assign bolt_digit = sku_base | slice: -1
+  if lip_digit == '2'
+    assign barrel_token = 'gloss-black'
+  elsif lip_digit == '1'
+    assign barrel_token = 'polished'
+  endif
+  if bolt_digit == '1'
+    assign hardware_token = 'chrome'
+  elsif bolt_digit == '2'
+    assign hardware_token = 'black'
+  endif
+  assign valid_center = false
+  if center_token == 'gloss-black' or center_token == 'black-titanium' or center_token == 'titanium-tint'
+    assign valid_center = true
+  endif
+  if design_slug != blank and diameter_token != blank and valid_center and barrel_token != blank and hardware_token != blank
+    assign design_url = '/products/calder-' | append: design_slug
+    assign design_url = design_url | append: '?diameter=' | append: diameter_token
+    assign design_url = design_url | append: '&center=' | append: center_token
+    assign design_url = design_url | append: '&barrel=' | append: barrel_token
+    assign design_url = design_url | append: '&hardware=' | append: hardware_token
+    echo design_url
+  endif
+-%}

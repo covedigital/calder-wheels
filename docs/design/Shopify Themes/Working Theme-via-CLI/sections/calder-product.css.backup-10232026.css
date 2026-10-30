@@ -1,0 +1,7286 @@
+/* ============================================================
+    Calder Wheels — Product Page v2 (Approved Light Visual System)
+    Page-specific composition. Relies on calder-base.css.liquid
+    for all design tokens.
+    ============================================================ */
+
+.page-calder {
+  background: var(--calder-white);
+  color: var(--calder-muted);
+  font-family: var(--calder-ui-font);
+  font-weight: 400;
+}
+
+/* ── Heading Font Enforcement ── */
+.page-calder h1,
+.page-calder h2,
+.page-calder .calder-pdp__title,
+.page-calder .calder-specs__heading,
+.page-calder .calder-engineering__heading,
+.page-calder .calder-engineering__body h3,
+.page-calder .calder-finishes__heading,
+.page-calder .calder-gallery-section__heading,
+.page-calder .calder-recommendations__heading,
+.page-calder .calder-specialist-cta__heading,
+.page-calder .wheel-configurator__title,
+.page-calder .fitment-finder__heading {
+  font-family: var(--calder-heading-font);
+  font-weight: 700;
+}
+
+/* ── Body/UI Font Enforcement ── */
+.page-calder .calder-pdp__tagline,
+.page-calder .calder-pdp__construction,
+.page-calder .calder-pdp__meta,
+.page-calder .calder-pdp__fitment-text,
+.page-calder .calder-pdp__config-label,
+.page-calder .calder-pdp__config-select,
+.page-calder .calder-pdp__price,
+.page-calder .calder-add-btn,
+.page-calder .calder-pdp__action-btn,
+.page-calder .wheel-configurator__subtitle,
+.page-calder .wheel-configurator__label,
+.page-calder .fitment-finder__subheading,
+.page-calder .fitment-finder__select,
+.page-calder .fitment-finder__submit,
+.page-calder .calder-eyebrow,
+.page-calder .calder-specs__table,
+.page-calder .calder-engineering__cap-text,
+.page-calder .calder-finishes__card-label,
+.page-calder .calder-recommendations .calder-card__type,
+.page-calder .calder-recommendations .calder-card__title,
+.page-calder .calder-recommendations .calder-card__price,
+.page-calder .calder-specialist-cta__text,
+.page-calder .calder-specialist-cta__action,
+.page-calder .calder-specialist-cta__method {
+  font-family: var(--calder-ui-font);
+}
+
+/* ── Container ── */
+.page-calder .container {
+  max-width: var(--calder-content-max-width);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--calder-gutter);
+  padding-right: var(--calder-gutter);
+}
+
+/* ── Breadcrumbs ── */
+.page-calder .breadcrumbs {
+  padding: 24px 0 12px;
+  font-size: 12px;
+  letter-spacing: 0.4px;
+  color: var(--calder-muted);
+  font-family: var(--calder-ui-font);
+}
+
+.page-calder .breadcrumbs a {
+  color: var(--calder-muted);
+  text-decoration: none;
+}
+
+.page-calder .breadcrumbs a:hover {
+  color: var(--calder-champagne);
+}
+
+.page-calder .breadcrumbs span {
+  color: var(--calder-muted);
+}
+
+/* ==========================================================================
+   CALDER PRODUCT — MAIN PDP
+   --------------------------------------------------------------------------
+   Tuned for:
+   - sections/calder-product.liquid
+   - Lumia native product gallery / variant / price / buy-button components
+   - Approved Calder C1 PDP reference
+
+   DESIGN TARGET
+   Desktop:
+   - 57% gallery / 43% information
+   - Large square-ish lifestyle/product hero
+   - Horizontal five-thumbnail strip
+   - Oversized C1 / product heading
+   - Made-to-order badge top right
+   - Compact product information
+   - Light configuration panel
+   - Gold full-width Add to Cart
+   - Equal Save / Share controls
+   - Three-column trust row
+
+   IMPORTANT:
+   Everything is scoped to .calder-pdp to avoid altering native Lumia
+   product components elsewhere in the theme.
+   ========================================================================== */
+
+
+/* ==========================================================================
+   1. TOKENS
+   ========================================================================== */
+
+.calder-pdp {
+  --calder-navy: #0e2a3e;
+  --calder-blue: #1e4c68;
+  --calder-champagne-light: #F3D6A2;
+  --calder-champagne: #E7BD7A;
+  --calder-gold: #c2a48a;
+  --calder-gold-dark: #a98667;
+  --calder-gold-light: #d5c0aa;
+
+  --calder-slate: #876e5a;
+  --calder-cream: #f2efe9;
+  --calder-warm-white: #faf9f7;
+  --calder-white: #ffffff;
+
+  --calder-black: #231f20;
+  --calder-text: #263a4a;
+  --calder-muted: #6d7882;
+
+  --calder-border: #dce2e6;
+  --calder-border-dark: #aebbc4;
+
+  --calder-panel: #f4f7f8;
+  --calder-panel-alt: #eef3f5;
+
+  --calder-success: #3f9959;
+
+  --calder-heading-font: "Inter", "Facundo", "Poppins", Arial, sans-serif;
+  --calder-ui-font: "Inter", "Garet", "Poppins", Arial, sans-serif;
+
+  --calder-radius: 0px;
+  --calder-control-height: 48px;
+  --calder-button-height: 60px;
+
+  position: relative;
+  width: 100%;
+  background: var(--calder-white);
+  color: var(--calder-text);
+  font-family: var(--calder-ui-font);
+  box-sizing: border-box;
+  margin-top: 1rem;
+}
+
+.calder-pdp *,
+.calder-pdp *::before,
+.calder-pdp *::after {
+  box-sizing: border-box;
+}
+
+
+/* ==========================================================================
+   2. CONTAINER
+   ========================================================================== */
+
+.calder-pdp > .container {
+  width: min(
+    calc(100% - 48px),
+    var(--container-max-width, 1418px)
+  );
+  max-width: var(--container-max-width, 1418px);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+
+/* ==========================================================================
+   3. BREADCRUMBS
+   ========================================================================== */
+
+.calder-pdp__breadcrumbs {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+
+  padding-top: 18px;
+  padding-bottom: 18px;
+
+  font-size: 12px;
+  line-height: 1.4;
+  letter-spacing: 0.02em;
+  color: var(--calder-muted);
+}
+
+.calder-pdp__breadcrumbs a {
+  color: var(--calder-muted);
+  text-decoration: none;
+  transition:
+    color 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.calder-pdp__breadcrumbs a:hover {
+  color: var(--calder-navy);
+}
+
+.calder-pdp__breadcrumbs [aria-current="page"] {
+  color: var(--calder-navy);
+  font-weight: 600;
+}
+
+
+/* ==========================================================================
+   4. HERO — 57 / 43
+   ========================================================================== */
+
+.calder-pdp__hero {
+  display: grid;
+  grid-template-columns:
+    minmax(0, 57fr)
+    minmax(420px, 43fr);
+
+  align-items: start;
+
+  gap: clamp(34px, 3.2vw, 58px);
+
+  padding-top: 24px;
+  padding-bottom: 64px;
+}
+
+
+/* ==========================================================================
+   5. GALLERY COLUMN
+   ========================================================================== */
+
+.calder-pdp__gallery {
+  position: relative;
+  min-width: 0;
+  width: 100%;
+}
+
+.calder-pdp__native-gallery {
+  display: flex !important;
+  flex-direction: column !important;
+
+  width: 100% !important;
+  max-width: none !important;
+
+  gap: 18px;
+}
+
+
+/* ==========================================================================
+   6. MAIN MEDIA
+   ========================================================================== */
+
+.calder-pdp__main-image {
+  position: relative;
+
+  width: 100%;
+
+  /* Approved mockup is slightly wider than tall. */
+  aspect-ratio: 1.26 / 1;
+
+  overflow: hidden;
+
+  background: #f2f3f3;
+  border: 1px solid #e1e5e7;
+}
+
+
+/*
+  Lumia may insert its own media wrappers with intrinsic sizing.
+  Inside Calder we force them to occupy the approved media canvas.
+*/
+
+.calder-pdp__main-image > * {
+  width: 100%;
+}
+
+.calder-pdp__main-image .prd-block-gallery-main,
+.calder-pdp__main-image .prd-block-gallery-main-wrap,
+.calder-pdp__main-image .swiper,
+.calder-pdp__main-image .swiper-wrapper,
+.calder-pdp__main-image .swiper-slide,
+.calder-pdp__main-image .product-media,
+.calder-pdp__main-image .product-media-container,
+.calder-pdp__main-image .product-media-main,
+.calder-pdp__main-image .prd-block-gallery-main-item {
+  height: 100%;
+  min-height: 100%;
+}
+
+.calder-pdp__main-image img {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+  object-position: center;
+
+  margin: 0;
+}
+
+
+/*
+  Preserve video/model behavior while maintaining the approved canvas.
+*/
+
+.calder-pdp__main-image video,
+.calder-pdp__main-image iframe,
+.calder-pdp__main-image model-viewer {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+
+/* Placeholder */
+
+.calder-pdp__main-image .placeholder-svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+/* ==========================================================================
+   7. LUMIA GALLERY CLEANUP
+   ========================================================================== */
+
+.calder-pdp__gallery .prd-block-gallery-container-hor {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.calder-pdp__gallery .prd-block-gallery-main {
+  width: 100%;
+  max-width: 100%;
+  flex: 0 0 auto;
+}
+
+.calder-pdp__gallery .prd-block-gallery-main-wrap {
+  width: 100%;
+}
+
+
+/*
+  Keep Lumia's zoom/media buttons but make them visually closer
+  to the approved screenshot.
+*/
+
+.calder-pdp__gallery
+  button[class*="zoom"],
+.calder-pdp__gallery
+  [class*="zoom"] button {
+  border-radius: 50%;
+}
+
+.calder-pdp__gallery
+  .prd-block-gallery-main
+  button {
+  color: var(--calder-white);
+}
+
+
+/* ==========================================================================
+   8. THUMBNAIL STRIP
+   ========================================================================== */
+
+.calder-pdp__thumbs-wrap {
+  position: relative;
+
+  width: 100%;
+  min-width: 0;
+
+  margin-top: 0;
+}
+
+
+/*
+  Approved reference:
+  5 visible thumbnails across.
+*/
+
+.calder-pdp__thumbs-wrap .prd-block-gallery-thumbs,
+.calder-pdp__thumbs-wrap .prd-block-gallery-thumbs-wrap,
+.calder-pdp__thumbs-wrap .swiper {
+  width: 100%;
+  max-width: 100%;
+}
+
+.calder-pdp__thumbs-wrap .swiper-wrapper {
+  align-items: stretch;
+}
+
+
+/*
+  Lumia's exact slide width can be generated inline by JS.
+  This gives the intended five-across baseline while allowing
+  the slider to retain control when necessary.
+*/
+
+.calder-pdp__thumbs-wrap .swiper-slide {
+  height: auto;
+}
+
+.calder-pdp__thumbs-wrap
+  .prd-block-gallery-thumbs-item,
+.calder-pdp__thumbs-wrap
+  [class*="gallery-thumbs"] .swiper-slide > * {
+  position: relative;
+
+  aspect-ratio: 1 / 1;
+
+  overflow: hidden;
+
+  background: #f3f3f3;
+  border: 2px solid transparent;
+
+  transition:
+    border-color 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.calder-pdp__thumbs-wrap img {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+  object-position: center;
+}
+
+
+/* Active thumbnail */
+
+.calder-pdp__thumbs-wrap
+  .swiper-slide-thumb-active
+  .prd-block-gallery-thumbs-item,
+.calder-pdp__thumbs-wrap
+  .swiper-slide-active
+  .prd-block-gallery-thumbs-item,
+.calder-pdp__thumbs-wrap
+  .active
+  .prd-block-gallery-thumbs-item,
+.calder-pdp__thumbs-wrap
+  .is-active {
+  border-color: var(--calder-champagne);
+}
+
+
+/*
+  Five-item fallback grid if Lumia outputs a normal list instead
+  of a Swiper track.
+*/
+
+.calder-pdp__thumbs-wrap > ul,
+.calder-pdp__thumbs-wrap > .row {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 14px;
+
+  width: 100%;
+}
+
+
+/* ==========================================================================
+   9. PRODUCT INFO COLUMN
+   ========================================================================== */
+
+.calder-pdp__info {
+  position: relative;
+
+  min-width: 0;
+  width: 100%;
+
+  padding-top: 0;
+
+  color: var(--calder-text);
+}
+
+
+/* ==========================================================================
+   10. HEADING
+   ========================================================================== */
+
+.calder-pdp__heading {
+  position: relative;
+
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  gap: 24px;
+
+  width: 100%;
+
+  margin-bottom: 8px;
+}
+
+.calder-pdp__heading-main {
+  min-width: 100%;
+  flex: 1 1 auto;
+}
+
+
+/*
+  C1 / design code:
+  deliberately very large, condensed visually, and close to title.
+*/
+
+.calder-pdp__design-code {
+  margin: 0;
+
+  color: var(--calder-navy);
+
+  font-family: var(--calder-heading-font);
+  font-size: clamp(64px, 5vw, 92px);
+  font-weight: 700;
+  line-height: 0.82;
+
+  letter-spacing: -0.055em;
+  text-transform: uppercase;
+}
+
+
+/*
+  Product title sits immediately below the C1 code.
+*/
+
+.calder-pdp__title {
+  display: none;
+  margin: 8px 0 0;
+
+  color: var(--calder-navy);
+
+  font-family: var(--calder-heading-font);
+  font-size: clamp(24px, 2vw, 34px);
+  font-weight: 700;
+  line-height: 1.05;
+
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+
+
+/*
+  If the product title itself is "C1", avoid it visually competing
+  with design_code. This still allows stores that use a longer
+  descriptive product title.
+*/
+
+.calder-pdp__design-code + .calder-pdp__title {
+  font-size: clamp(22px, 1.7vw, 30px);
+}
+
+
+/* Construction */
+
+.calder-pdp__construction {
+  margin-top: 8px;
+
+  color: var(--calder-navy);
+
+  font-family: var(--calder-heading-font);
+  font-size: clamp(19px, 1.45vw, 25px);
+  font-weight: 400;
+  line-height: 1.1;
+
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+
+/* ==========================================================================
+   11. MADE TO ORDER BADGE
+   ========================================================================== */
+
+.calder-pdp__badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  flex: 0 0 auto;
+
+  min-height: 34px;
+
+  padding: 8px 15px 7px;
+
+  margin-top: 0;
+
+  border: 1px solid var(--calder-champagne);
+  background: transparent;
+
+  color: var(--calder-slate);
+
+  font-family: var(--calder-ui-font);
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1;
+
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  white-space: nowrap;
+
+  display: none;
+}
+
+
+/* ==========================================================================
+   12. TAGLINE
+   ========================================================================== */
+
+.calder-pdp__tagline {
+  margin-top: 10px;
+
+  color: #34475a;
+
+  font-family: var(--calder-heading-font);
+  font-size: clamp(18px, 1.35vw, 23px);
+  font-weight: 500;
+  line-height: 1.25;
+
+  letter-spacing: -0.015em;
+
+  display: none;
+}
+
+
+/* ==========================================================================
+   13. DESCRIPTION
+   ========================================================================== */
+
+.calder-pdp__description {
+  max-width: 680px;
+
+  margin-top: 14px;
+
+  color: #536371;
+
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.65;
+}
+
+.calder-pdp__description p {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.calder-pdp__description p:last-child {
+  margin-bottom: 0;
+}
+
+
+/* ==========================================================================
+   14. META — RATING / SKU
+   ========================================================================== */
+
+.calder-pdp__meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 24px;
+
+  margin-top: 18px;
+  margin-bottom: 18px;
+}
+
+.calder-pdp__rating {
+  display: flex;
+  align-items: center;
+
+  gap: 9px;
+
+  min-width: 0;
+}
+
+.calder-pdp__rating-stars {
+  display: inline-flex;
+  align-items: center;
+
+  color: #c8a45d;
+}
+
+
+/*
+  Normalize common Lumia rating output.
+*/
+
+.calder-pdp__rating-stars svg {
+  width: 17px;
+  height: 17px;
+}
+
+.calder-pdp__rating-stars
+  [class*="rating"] {
+  margin: 0;
+}
+
+.calder-pdp__rating-value {
+  color: var(--calder-navy);
+
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.calder-pdp__rating-count {
+  color: #657582;
+
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.calder-pdp__sku {
+  margin-left: auto;
+
+  color: #77828b;
+
+  font-size: 11px;
+  line-height: 1.3;
+
+  white-space: nowrap;
+}
+
+
+/* ==========================================================================
+   15. FITMENT PANEL
+   ========================================================================== */
+
+.calder-pdp__fitment {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 20px;
+
+  width: 100%;
+
+  min-height: 82px;
+
+  padding: 16px 18px;
+
+  background: var(--calder-panel-alt);
+  border: 1px solid #e3e9ec;
+}
+
+.calder-pdp__fitment-status {
+  display: flex;
+  align-items: center;
+
+  gap: 14px;
+
+  min-width: 0;
+}
+
+.calder-pdp__fitment-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  flex: 0 0 42px;
+
+  width: 42px;
+  height: 42px;
+
+  color: var(--calder-success);
+}
+
+.calder-pdp__fitment-icon svg {
+  display: block;
+
+  width: 42px;
+  height: 42px;
+}
+
+.calder-pdp__fitment-copy {
+  min-width: 0;
+}
+
+.calder-pdp__fitment-label {
+  display: block;
+
+  margin-bottom: 3px;
+
+  color: var(--calder-success);
+
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.25;
+
+  letter-spacing: 0.035em;
+  text-transform: uppercase;
+}
+
+.calder-pdp__fitment-text {
+  color: #455868;
+
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+.calder-pdp__fitment-vehicle {
+  display: inline;
+}
+
+
+/* Unset */
+
+.calder-pdp__fitment--unset
+  .calder-pdp__fitment-icon {
+  color: var(--calder-navy);
+}
+
+.calder-pdp__fitment--unset
+  .calder-pdp__fitment-label {
+  color: var(--calder-navy);
+}
+
+
+/* Fitment action */
+
+.calder-pdp__fitment-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  flex: 0 0 auto;
+
+  min-width: 156px;
+  min-height: 42px;
+
+  padding: 10px 18px;
+
+  border: 1px solid var(--calder-navy);
+  border-radius: 4px;
+
+  background: transparent;
+
+  color: var(--calder-navy);
+
+  font-family: var(--calder-ui-font);
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1;
+
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.calder-pdp__fitment-action:hover {
+  background: var(--calder-navy);
+  color: var(--calder-white);
+}
+
+
+/* ==========================================================================
+   16. CONFIGURATION PANEL
+   ========================================================================== */
+
+.calder-pdp__config {
+  display: flex;
+  flex-direction: column;
+
+  gap: 17px;
+
+  width: 100%;
+
+  padding: 20px 18px 18px;
+
+  background: var(--calder-panel);
+  border-left: 1px solid #e3e9ec;
+  border-right: 1px solid #e3e9ec;
+  border-bottom: 1px solid #e3e9ec;
+}
+
+.calder-pdp__config-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  gap: 18px;
+}
+
+.calder-pdp__config-group {
+  min-width: 0;
+}
+
+.calder-pdp__config-label {
+  display: block;
+
+  margin-bottom: 8px;
+
+  color: var(--calder-navy);
+
+  font-family: var(--calder-ui-font);
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+
+/* ==========================================================================
+   17. CUSTOM SELECTS
+   ========================================================================== */
+
+.calder-pdp__config-select {
+  display: block;
+
+  width: 100%;
+  height: var(--calder-control-height);
+
+  padding: 0 42px 0 14px;
+
+  border: 1px solid #d8e0e5;
+  border-radius: 0;
+
+  background-color: var(--calder-white);
+
+  color: #5d6b77;
+
+  font-family: var(--calder-ui-font);
+  font-size: 12px;
+  font-weight: 400;
+
+  appearance: auto;
+  -webkit-appearance: auto;
+
+  outline: none;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.calder-pdp__config-select:hover {
+  border-color: #b7c3ca;
+}
+
+.calder-pdp__config-select:focus {
+  border-color: var(--calder-navy);
+  box-shadow: 0 0 0 1px var(--calder-navy);
+}
+
+
+/* ==========================================================================
+   18. FINISH CHIPS
+   ========================================================================== */
+
+.calder-pdp__finish-group {
+  width: 100%;
+}
+
+.calder-pdp__finishes {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+
+  gap: 11px;
+}
+
+.calder-pdp__finish-chip {
+  position: relative;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  flex: 0 0 auto;
+
+  width: 38px;
+  height: 38px;
+
+  padding: 2px;
+
+  overflow: hidden;
+
+  border: 2px solid transparent;
+  border-radius: 50%;
+
+  background: transparent;
+
+  color: var(--calder-navy);
+
+  font-family: var(--calder-ui-font);
+  font-size: 9px;
+
+  cursor: pointer;
+
+  transition:
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.calder-pdp__finish-chip:hover {
+  transform: translateY(-1px);
+}
+
+.calder-pdp__finish-chip.is-selected {
+  border-color: var(--calder-champagne);
+}
+
+.calder-pdp__finish-chip img {
+  display: block;
+
+  width: 30px;
+  height: 30px;
+
+  object-fit: cover;
+
+  border-radius: 50%;
+}
+
+.calder-pdp__finish-chip > span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 30px;
+  height: 30px;
+
+  overflow: hidden;
+
+  border-radius: 50%;
+
+  background: #d6d6d6;
+
+  font-size: 0;
+}
+
+.calder-pdp__finish-chip:nth-child(2) > span {
+  background: #a87c51;
+}
+
+.calder-pdp__finish-chip:nth-child(3) > span {
+  background: #aeb4b8;
+}
+
+.calder-pdp__finish-chip:nth-child(4) > span {
+  background: #d6d7d5;
+}
+
+.calder-pdp__finish-chip:nth-child(5) > span {
+  background: #222;
+}
+
+
+/* ==========================================================================
+   19. LUMIA NATIVE VARIANT PICKER — CALDER SKIN
+   ========================================================================== */
+
+.calder-pdp__native-variants {
+  width: 100%;
+}
+
+.calder-pdp__native-variants .mt-product-global {
+  margin-top: 0 !important;
+}
+
+.calder-pdp__native-variants
+  variant-selects,
+.calder-pdp__native-variants
+  variant-radios {
+  display: block;
+
+  width: 100%;
+}
+
+
+/* Common fieldsets */
+
+.calder-pdp__native-variants fieldset {
+  min-width: 0;
+
+  margin: 0 0 17px;
+  padding: 0;
+
+  border: 0;
+}
+
+.calder-pdp__native-variants fieldset:last-child {
+  margin-bottom: 0;
+}
+
+.calder-pdp__native-variants legend,
+.calder-pdp__native-variants
+  .form__label,
+.calder-pdp__native-variants
+  label[class*="label"] {
+  margin-bottom: 8px;
+
+  color: var(--calder-navy);
+
+  font-family: var(--calder-ui-font);
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+
+/* Dropdowns */
+
+.calder-pdp__native-variants select {
+  width: 100%;
+  min-height: var(--calder-control-height);
+
+  padding: 0 40px 0 14px;
+
+  border: 1px solid #d8e0e5;
+  border-radius: 0;
+
+  background-color: var(--calder-white);
+
+  color: #536371;
+
+  font-family: var(--calder-ui-font);
+  font-size: 12px;
+}
+
+
+/* Variant buttons */
+
+.calder-pdp__native-variants
+  input[type="radio"] + label {
+  min-height: 40px;
+
+  padding: 10px 14px;
+
+  border: 1px solid #d4dce1;
+  border-radius: 0;
+
+  background: var(--calder-white);
+
+  color: var(--calder-navy);
+
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.calder-pdp__native-variants
+  input[type="radio"]:checked + label {
+  border-color: var(--calder-champagne);
+  box-shadow: inset 0 0 0 1px var(--calder-champagne);
+}
+
+/* ============================================================
+   PRODUCT OPTIONS — Side-by-side attributes
+   ============================================================ */
+
+.calder-pdp .prd-options {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  width: 100%;
+}
+
+/* Each option occupies one column */
+.calder-pdp .prd-options > .form-group {
+  width: 100% !important;
+  min-width: 0;
+  margin: 0 !important;
+}
+
+/* Keep label above its dropdown */
+.calder-pdp .prd-options .form-label {
+  display: block;
+  width: 100%;
+  margin-bottom: 8px;
+}
+
+/* Make select wrapper fill its grid column */
+.calder-pdp .prd-options .form-control-wrap {
+  width: 100%;
+}
+
+/* Make dropdown itself fill the column */
+.calder-pdp .prd-options .form-select,
+.calder-pdp .prd-options select {
+  width: 100%;
+  max-width: none;
+}
+
+
+/* ============================================================
+   MOBILE — Stack attributes
+   ============================================================ */
+
+@media (max-width: 767px) {
+  .calder-pdp .prd-options {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}
+
+
+/* ==========================================================================
+   20. PURCHASE AREA
+   ========================================================================== */
+
+.calder-pdp__purchase {
+  width: 100%;
+
+  padding: 18px;
+
+  background: var(--calder-panel);
+  border-left: 1px solid #e3e9ec;
+  border-right: 1px solid #e3e9ec;
+  border-bottom: 1px solid #e3e9ec;
+}
+
+.calder-pdp__purchase-top {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+
+  gap: 30px;
+
+  margin-bottom: 18px;
+}
+
+.calder-pdp__purchase-label {
+  display: block;
+
+  margin-bottom: 8px;
+
+  color: var(--calder-navy);
+
+  font-size: 13px;
+  font-weight: 700;
+}
+
+
+/* ==========================================================================
+   21. QUANTITY
+   ========================================================================== */
+
+.calder-pdp__quantity-column {
+  flex: 0 0 auto;
+}
+
+.calder-pdp__qty {
+  display: grid;
+  grid-template-columns: 40px 74px 40px;
+
+  height: 44px;
+
+  border: 1px solid #d6dee3;
+
+  background: var(--calder-white);
+}
+
+.calder-pdp__qty-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 40px;
+  height: 42px;
+
+  padding: 0;
+
+  border: 0;
+
+  background: #f5f7f8;
+
+  color: var(--calder-navy);
+
+  font-family: Arial, sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+
+  cursor: pointer;
+}
+
+.calder-pdp__qty-input {
+  width: 74px;
+  height: 42px;
+
+  padding: 0 4px;
+
+  border: 0;
+  border-left: 1px solid #d6dee3;
+  border-right: 1px solid #d6dee3;
+
+  background: var(--calder-white);
+
+  color: var(--calder-navy);
+
+  font-family: var(--calder-ui-font);
+  font-size: 14px;
+  font-weight: 700;
+  text-align: center;
+
+  appearance: textfield;
+  -moz-appearance: textfield;
+
+  outline: none;
+}
+
+.calder-pdp__qty-input::-webkit-inner-spin-button,
+.calder-pdp__qty-input::-webkit-outer-spin-button {
+  margin: 0;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+
+/* ==========================================================================
+   22. PRICE
+   ========================================================================== */
+
+.calder-pdp__price-column {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+
+  margin-left: auto;
+
+  text-align: right;
+}
+
+.calder-pdp__price-prefix {
+  margin-bottom: 3px;
+
+  color: #536371;
+
+  font-size: 11px;
+  line-height: 1;
+}
+
+.calder-pdp__price {
+  color: var(--calder-navy);
+}
+
+.calder-pdp__price .price,
+.calder-pdp__price .price-item,
+.calder-pdp__price .price__regular,
+.calder-pdp__price .price__sale {
+  color: var(--calder-navy);
+}
+
+.calder-pdp__price
+  .price-item--regular,
+.calder-pdp__price
+  .price-item--sale {
+  font-family: var(--calder-heading-font);
+  font-size: clamp(25px, 2vw, 32px);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.025em;
+}
+
+.calder-pdp__price
+  .price-item--regular {
+  margin: 0;
+}
+
+.calder-pdp__price-suffix {
+  margin-top: 2px;
+
+  color: var(--calder-navy);
+
+  font-size: 14px;
+  font-weight: 600;
+}
+
+
+/* ==========================================================================
+   23. BUY AREA
+   ========================================================================== */
+
+.calder-pdp__buy {
+  width: 100%;
+}
+
+
+/*
+  Remove native spacing so the Lumia snippet behaves like a component
+  inside the Calder purchase panel.
+*/
+
+.calder-pdp__buy .mt-product-global {
+  margin-top: 0 !important;
+}
+
+.calder-pdp__buy
+  .product-form,
+.calder-pdp__buy
+  form {
+  width: 100%;
+}
+
+
+/* ==========================================================================
+   24. GOLD ADD TO CART
+   ========================================================================== */
+
+/*
+  Supports both:
+  - fallback .calder-pdp__add-btn
+  - Lumia's native product-buy-buttons output
+*/
+
+.calder-pdp__add-btn,
+.calder-pdp__buy
+  button[name="add"],
+.calder-pdp__buy
+  .product-form__submit,
+.calder-pdp__buy
+  [class*="add-to-cart"],
+.calder-pdp__buy
+  [class*="addtocart"] {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  
+  gap: 8px;
+  
+  width: 100% !important;
+  min-width: 100% !important;
+  height: var(--calder-button-height);
+  min-height: var(--calder-button-height);
+  
+  margin: 0 !important;
+  padding: 0 24px !important;
+  
+  border: 1px solid var(--calder-champagne) !important;
+  border-radius: 4px !important;
+  
+  background: var(--calder-gradient-button) !important;
+  
+  color: #000 !important;
+  
+  font-family: var(--calder-ui-font) !important;
+  font-size: 0.65rem !important;
+  font-weight: 700 !important;
+  line-height: 1 !important;
+  
+  letter-spacing: .07em !important;
+  text-transform: uppercase !important;
+  
+  box-shadow: none !important;
+  
+  cursor: pointer;
+  
+  transition: 
+    background-color .2s ease,
+    border-color .2s ease,
+    transform .2s ease !important;
+}
+
+.calder-pdp__add-btn:hover,
+.calder-pdp__buy
+  button[name="add"]:hover,
+.calder-pdp__buy
+  .product-form__submit:hover,
+.calder-pdp__buy
+  [class*="add-to-cart"]:hover,
+.calder-pdp__buy
+  [class*="addtocart"]:hover {
+  background: var(--calder-gold-dark) !important;
+  border-color: var(--calder-gold-dark) !important;
+}
+
+.calder-pdp__add-btn:active,
+.calder-pdp__buy
+  button[name="add"]:active,
+.calder-pdp__buy
+  .product-form__submit:active {
+  transform: translateY(1px);
+}
+
+.calder-pdp__add-btn:disabled,
+.calder-pdp__buy
+  button[name="add"]:disabled,
+.calder-pdp__buy
+  .product-form__submit:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+
+/* Preserve white icons */
+
+.calder-pdp__buy button[name="add"] svg,
+.calder-pdp__buy .product-form__submit svg,
+.calder-pdp__add-btn svg {
+  color: currentColor;
+  fill: none;
+}
+
+
+/* ==========================================================================
+   25. DYNAMIC CHECKOUT
+   ========================================================================== */
+
+.calder-pdp__buy
+  .shopify-payment-button {
+  width: 100%;
+
+  margin-top: 10px;
+}
+
+.calder-pdp__buy
+  .shopify-payment-button__button {
+  min-height: 52px;
+
+  border-radius: 0 !important;
+
+  font-family: var(--calder-ui-font);
+}
+
+
+/* ==========================================================================
+   26. SAVE / SHARE
+   ========================================================================== */
+
+.calder-pdp__actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  gap: 12px;
+
+  width: 100%;
+
+  margin-top: 14px;
+}
+
+.calder-pdp__action,
+.calder-pdp__action-btn {
+  min-width: 0;
+  width: 100%;
+}
+
+
+/* Share */
+
+.calder-pdp__action-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 10px;
+
+  min-height: 52px;
+
+  padding: 0 18px;
+
+  border: 1px solid var(--calder-navy);
+
+  background: transparent;
+
+  color: var(--calder-navy);
+
+  font-family: var(--calder-ui-font);
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1;
+
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.calder-pdp__action-btn:hover {
+  background: var(--calder-navy);
+  color: var(--calder-white);
+}
+
+
+/* ==========================================================================
+   27. NATIVE LUMIA WISHLIST AS SAVE BUTTON
+   ========================================================================== */
+
+.calder-pdp__action--wishlist {
+  display: flex;
+}
+
+.calder-pdp__action--wishlist > * {
+  width: 100%;
+}
+
+.calder-pdp__action--wishlist button,
+.calder-pdp__action--wishlist a {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+
+  gap: 10px;
+
+  width: 100% !important;
+  min-height: 52px !important;
+
+  margin: 0 !important;
+  padding: 0 18px !important;
+
+  border: 1px solid var(--calder-navy) !important;
+  border-radius: 0 !important;
+
+  background: transparent !important;
+
+  color: var(--calder-navy) !important;
+
+  font-family: var(--calder-ui-font) !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+
+  box-shadow: none !important;
+
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease !important;
+}
+
+.calder-pdp__action--wishlist button:hover,
+.calder-pdp__action--wishlist a:hover {
+  background: var(--calder-navy) !important;
+  color: var(--calder-white) !important;
+}
+
+
+/*
+  If Lumia outputs "Add to wishlist", keep the control visually compact.
+*/
+
+.calder-pdp__action--wishlist svg {
+  width: 18px;
+  height: 18px;
+}
+
+
+/* ==========================================================================
+   28. TRUST ROW
+   ========================================================================== */
+
+.calder-pdp__trust {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+
+  gap: 10px;
+
+  width: 100%;
+
+  margin-top: 30px;
+  padding-top: 25px;
+
+  border-top: 1px solid #e1e6e9;
+}
+
+.calder-pdp__trust-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  min-width: 0;
+
+  color: var(--calder-navy);
+
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.25;
+
+  text-align: center;
+}
+
+.calder-pdp__trust-item svg {
+  flex: 0 0 auto;
+
+  width: 20px;
+  height: 20px;
+}
+
+
+/* ==========================================================================
+   29. APP BLOCKS
+   ========================================================================== */
+
+.calder-pdp__app-block {
+  width: 100%;
+
+  margin-top: 18px;
+}
+
+
+/* ==========================================================================
+   30. FOCUS STATES
+   ========================================================================== */
+
+.calder-pdp button:focus-visible,
+.calder-pdp a:focus-visible,
+.calder-pdp select:focus-visible,
+.calder-pdp input:focus-visible {
+  outline: 2px solid var(--calder-blue);
+  outline-offset: 2px;
+}
+
+
+/* ==========================================================================
+   31. LARGE DESKTOP — 1440+
+   ========================================================================== */
+
+@media (min-width: 1440px) {
+
+  .calder-pdp__hero {
+    grid-template-columns:
+      minmax(0, 57fr)
+      minmax(470px, 43fr);
+
+    gap: 52px;
+  }
+
+  .calder-pdp__main-image {
+    aspect-ratio: 1.27 / 1;
+  }
+
+  .calder-pdp__design-code {
+    font-size: clamp(74px, 5.25vw, 94px);
+  }
+
+  .calder-pdp__description {
+    font-size: 14px;
+  }
+
+}
+
+
+/* ==========================================================================
+   32. EXTRA-WIDE DESKTOP — 1600+
+   ========================================================================== */
+
+@media (min-width: 1600px) {
+
+  .calder-pdp__hero {
+    gap: 60px;
+  }
+
+  .calder-pdp__design-code {
+    font-size: 96px;
+  }
+
+  .calder-pdp__title {
+    font-size: 32px;
+  }
+
+  .calder-pdp__construction {
+    font-size: 25px;
+  }
+
+}
+
+
+/* ==========================================================================
+   33. STANDARD LAPTOP / SMALL DESKTOP
+   ========================================================================== */
+
+@media (min-width: 1200px) and (max-width: 1439px) {
+
+  .calder-pdp__hero {
+    grid-template-columns:
+      minmax(0, 56fr)
+      minmax(410px, 44fr);
+
+    gap: 36px;
+  }
+
+  .calder-pdp__design-code {
+    font-size: 68px;
+  }
+
+  .calder-pdp__title {
+    font-size: 24px;
+  }
+
+  .calder-pdp__construction {
+    font-size: 19px;
+  }
+
+  .calder-pdp__tagline {
+    font-size: 18px;
+  }
+
+  .calder-pdp__description {
+    margin-top: 10px;
+
+    font-size: 12.5px;
+    line-height: 1.55;
+  }
+
+  .calder-pdp__meta {
+    margin-top: 14px;
+    margin-bottom: 14px;
+  }
+
+  .calder-pdp__fitment {
+    min-height: 74px;
+
+    padding: 13px 15px;
+  }
+
+  .calder-pdp__config {
+    gap: 14px;
+
+    padding: 16px;
+  }
+
+  .calder-pdp__purchase {
+    padding: 16px;
+  }
+
+}
+
+
+/* ==========================================================================
+   34. TABLET / NARROW DESKTOP
+   ========================================================================== */
+
+@media (min-width: 992px) and (max-width: 1199px) {
+
+  .calder-pdp > .container {
+    width: min(
+      calc(100% - 36px),
+      var(--container-max-width, 1418px)
+    );
+  }
+
+  .calder-pdp__hero {
+    grid-template-columns:
+      minmax(0, 53fr)
+      minmax(390px, 47fr);
+
+    gap: 28px;
+
+    padding-bottom: 50px;
+  }
+
+  .calder-pdp__main-image {
+    aspect-ratio: 1.05 / 1;
+  }
+
+  .calder-pdp__design-code {
+    font-size: 60px;
+  }
+
+  .calder-pdp__title {
+    font-size: 21px;
+  }
+
+  .calder-pdp__construction {
+    font-size: 17px;
+  }
+
+  .calder-pdp__badge {
+    min-height: 30px;
+
+    padding: 7px 10px;
+
+    font-size: 8px;
+
+  }
+
+  .calder-pdp__tagline {
+    font-size: 17px;
+  }
+
+  .calder-pdp__description {
+    font-size: 12px;
+  }
+
+  .calder-pdp__fitment {
+    align-items: stretch;
+    flex-direction: column;
+
+    gap: 12px;
+  }
+
+  .calder-pdp__fitment-action {
+    width: 100%;
+  }
+
+  .calder-pdp__config-row {
+    gap: 12px;
+  }
+
+  .calder-pdp__purchase-top {
+    gap: 18px;
+  }
+
+  .calder-pdp__trust {
+    gap: 5px;
+  }
+
+  .calder-pdp__trust-item {
+    gap: 5px;
+
+    font-size: 8.5px;
+  }
+
+}
+
+
+/* ==========================================================================
+   35. TABLET — STACK PDP
+   ========================================================================== */
+
+@media (max-width: 991px) {
+
+  .calder-pdp > .container {
+    width: min(
+      calc(100% - 36px),
+      var(--container-max-width, 1418px)
+    );
+  }
+
+  .calder-pdp__hero {
+    display: grid;
+    grid-template-columns: 1fr;
+
+    gap: 38px;
+
+    padding-top: 14px;
+    padding-bottom: 52px;
+  }
+
+  .calder-pdp__gallery,
+  .calder-pdp__info {
+    width: 100%;
+  }
+
+  .calder-pdp__main-image {
+    aspect-ratio: 1.28 / 1;
+  }
+
+  .calder-pdp__design-code {
+    font-size: clamp(62px, 11vw, 86px);
+  }
+
+  .calder-pdp__title {
+    font-size: clamp(23px, 4vw, 30px);
+  }
+
+  .calder-pdp__construction {
+    font-size: clamp(18px, 3vw, 23px);
+  }
+
+  .calder-pdp__tagline {
+    font-size: 20px;
+  }
+
+  .calder-pdp__description {
+    max-width: 760px;
+
+    font-size: 14px;
+  }
+
+}
+
+
+/* ==========================================================================
+   36. MOBILE — <= 767
+   ========================================================================== */
+
+@media (max-width: 767px) {
+
+  .calder-pdp {
+    --calder-control-height: 50px;
+    --calder-button-height: 56px;
+  }
+
+
+  /* Container */
+
+  .calder-pdp > .container {
+    width: calc(100% - 28px);
+  }
+
+
+  /* Breadcrumbs */
+
+  .calder-pdp__breadcrumbs {
+    padding-top: 12px;
+    padding-bottom: 12px;
+
+    font-size: 10px;
+  }
+
+
+  /* Hero */
+
+  .calder-pdp__hero {
+    gap: 30px;
+
+    padding-top: 8px;
+    padding-bottom: 42px;
+  }
+
+
+  /* Gallery */
+
+  .calder-pdp__native-gallery {
+    gap: 11px;
+  }
+
+  .calder-pdp__main-image {
+    aspect-ratio: 1 / 1;
+  }
+
+
+  /*
+    Mobile keeps approximately 4.5 thumbnails visible when Lumia's
+    slider controls widths. Fallback normal-list layout uses five.
+  */
+
+  .calder-pdp__thumbs-wrap > ul,
+  .calder-pdp__thumbs-wrap > .row {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+
+    gap: 7px;
+  }
+
+  .calder-pdp__thumbs-wrap
+    .prd-block-gallery-thumbs-item {
+    border-width: 1px;
+  }
+
+
+  /* Heading */
+
+  .calder-pdp__heading {
+    gap: 12px;
+
+    margin-bottom: 7px;
+  }
+
+  .calder-pdp__design-code {
+    font-size: clamp(54px, 17vw, 72px);
+    line-height: 0.84;
+  }
+
+  .calder-pdp__title {
+    margin-top: 7px;
+
+    font-size: clamp(19px, 5.7vw, 25px);
+    line-height: 1.08;
+
+    letter-spacing: 0.08em;
+  }
+
+  .calder-pdp__design-code + .calder-pdp__title {
+    font-size: clamp(18px, 5.4vw, 23px);
+  }
+
+  .calder-pdp__construction {
+    margin-top: 6px;
+
+    font-size: clamp(15px, 4.6vw, 20px);
+
+    letter-spacing: 0.11em;
+  }
+
+
+  /* Badge */
+
+  .calder-pdp__badge {
+    min-height: 28px;
+
+    padding: 6px 8px;
+
+    font-size: 7.5px;
+
+    letter-spacing: 0.12em;
+  }
+
+
+  /* Tagline */
+
+  .calder-pdp__tagline {
+    margin-top: 12px;
+
+    font-size: 18px;
+  }
+
+
+  /* Description */
+
+  .calder-pdp__description {
+    margin-top: 10px;
+
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+
+  /* Meta */
+
+  .calder-pdp__meta {
+    align-items: flex-start;
+
+    gap: 12px;
+
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+
+  .calder-pdp__rating {
+    gap: 6px;
+  }
+
+  .calder-pdp__rating-stars svg {
+    width: 15px;
+    height: 15px;
+  }
+
+  .calder-pdp__rating-value,
+  .calder-pdp__rating-count,
+  .calder-pdp__sku {
+    font-size: 10px;
+  }
+
+
+  /* Fitment */
+
+  .calder-pdp__fitment {
+    flex-direction: column;
+    align-items: stretch;
+
+    gap: 13px;
+
+    min-height: 0;
+
+    padding: 15px;
+  }
+
+  .calder-pdp__fitment-status {
+    gap: 11px;
+  }
+
+  .calder-pdp__fitment-icon {
+    flex-basis: 36px;
+
+    width: 36px;
+    height: 36px;
+  }
+
+  .calder-pdp__fitment-icon svg {
+    width: 36px;
+    height: 36px;
+  }
+
+  .calder-pdp__fitment-label {
+    font-size: 11px;
+  }
+
+  .calder-pdp__fitment-text {
+    font-size: 11px;
+  }
+
+  .calder-pdp__fitment-action {
+    width: 100%;
+    min-height: 44px;
+  }
+
+
+  /* Config */
+
+  .calder-pdp__config {
+    gap: 16px;
+
+    padding: 16px 14px;
+  }
+
+  .calder-pdp__config-row {
+    grid-template-columns: 1fr;
+
+    gap: 16px;
+  }
+
+  .calder-pdp__config-label {
+    margin-bottom: 7px;
+
+    font-size: 11px;
+  }
+
+
+  /* Finish */
+
+  .calder-pdp__finishes {
+    gap: 9px;
+  }
+
+  .calder-pdp__finish-chip {
+    width: 36px;
+    height: 36px;
+  }
+
+  .calder-pdp__finish-chip img,
+  .calder-pdp__finish-chip > span {
+    width: 28px;
+    height: 28px;
+  }
+
+
+  /* Purchase */
+
+  .calder-pdp__purchase {
+    padding: 16px 14px;
+  }
+
+  .calder-pdp__purchase-top {
+    align-items: flex-end;
+
+    gap: 15px;
+
+    margin-bottom: 16px;
+  }
+
+  .calder-pdp__qty {
+    grid-template-columns: 36px 54px 36px;
+
+    height: 42px;
+  }
+
+  .calder-pdp__qty-btn {
+    width: 36px;
+    height: 40px;
+  }
+
+  .calder-pdp__qty-input {
+    width: 54px;
+    height: 40px;
+  }
+
+  .calder-pdp__price
+    .price-item--regular,
+  .calder-pdp__price
+    .price-item--sale {
+    font-size: 25px;
+  }
+
+  .calder-pdp__price-suffix {
+    font-size: 12px;
+  }
+
+
+  /* Buttons */
+
+  .calder-pdp__add-btn,
+  .calder-pdp__buy
+    button[name="add"],
+  .calder-pdp__buy
+    .product-form__submit,
+  .calder-pdp__buy
+    [class*="add-to-cart"],
+  .calder-pdp__buy
+    [class*="addtocart"] {
+    min-height: 56px;
+
+    font-size: 11px !important;
+  }
+
+
+  /* Save/share */
+
+  .calder-pdp__actions {
+    gap: 9px;
+
+    margin-top: 10px;
+  }
+
+  .calder-pdp__action-btn,
+  .calder-pdp__action--wishlist button,
+  .calder-pdp__action--wishlist a {
+    min-height: 48px !important;
+
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+
+    font-size: 10px !important;
+  }
+
+
+  /* Trust */
+
+  .calder-pdp__trust {
+    gap: 8px;
+
+    margin-top: 20px;
+    padding-top: 16px;
+  }
+
+  .calder-pdp__trust-item {
+    flex-direction: column;
+
+    gap: 5px;
+
+    font-size: 8.5px;
+    line-height: 1.2;
+  }
+
+  .calder-pdp__trust-item svg {
+    width: 17px;
+    height: 17px;
+  }
+
+}
+
+
+/* ==========================================================================
+   37. SMALL MOBILE — <= 479
+   ========================================================================== */
+
+@media (max-width: 479px) {
+
+  .calder-pdp > .container {
+    width: calc(100% - 24px);
+  }
+
+
+  /* Heading/badge */
+
+  .calder-pdp__heading {
+    align-items: flex-start;
+  }
+
+  .calder-pdp__design-code {
+    font-size: clamp(50px, 16vw, 64px);
+  }
+
+  .calder-pdp__badge {
+    margin-top: 1px;
+
+    padding-left: 7px;
+    padding-right: 7px;
+
+    white-space: normal;
+    text-align: center;
+  }
+
+
+  /* Meta */
+
+  .calder-pdp__meta {
+    flex-wrap: wrap;
+  }
+
+  .calder-pdp__sku {
+    width: 100%;
+
+    margin-left: 0;
+  }
+
+
+  /* Purchase */
+
+  .calder-pdp__purchase-top {
+    display: grid;
+    grid-template-columns: auto 1fr;
+
+    width: 100%;
+  }
+
+  .calder-pdp__price-column {
+    min-width: 0;
+  }
+
+
+  /* Actions */
+
+  .calder-pdp__actions {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+
+  /* Trust */
+
+  .calder-pdp__trust {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+}
+
+
+/* ==========================================================================
+   38. VERY SMALL MOBILE — <= 374
+   ========================================================================== */
+
+@media (max-width: 374px) {
+
+  .calder-pdp__design-code {
+    font-size: 48px;
+  }
+
+  .calder-pdp__title {
+    font-size: 18px;
+  }
+
+  .calder-pdp__construction {
+    font-size: 14px;
+  }
+
+  .calder-pdp__badge {
+    font-size: 6.5px;
+  }
+
+  .calder-pdp__purchase-top {
+    grid-template-columns: 1fr;
+  }
+
+  .calder-pdp__price-column {
+    align-items: flex-start;
+
+    margin-left: 0;
+
+    text-align: left;
+  }
+
+  .calder-pdp__actions {
+    grid-template-columns: 1fr;
+  }
+
+  .calder-pdp__trust {
+    grid-template-columns: 1fr;
+
+    gap: 12px;
+  }
+
+  .calder-pdp__trust-item {
+    flex-direction: row;
+  }
+
+}
+
+
+/* ==========================================================================
+   39. REDUCED MOTION
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .calder-pdp *,
+  .calder-pdp *::before,
+  .calder-pdp *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+
+}
+
+
+/* ==========================================================================
+   40. PRINT
+   ========================================================================== */
+
+@media print {
+
+  .calder-pdp__fitment-action,
+  .calder-pdp__buy,
+  .calder-pdp__actions {
+    display: none !important;
+  }
+
+}
+
+
+/* ============================================================
+   CALDER PDP — APPROVED MOCKUP GALLERY RESTORATION
+   Direct Shopify media; no Lumia Swiper dependency.
+   ============================================================ */
+.page-calder .calder-pdp__hero,
+.calder-pdp .calder-pdp__hero {
+  align-items: start;
+}
+
+.page-calder .calder-pdp__gallery,
+.calder-pdp .calder-pdp__gallery {
+  position: relative;
+  top: auto;
+  min-width: 0;
+  width: 100%;
+}
+
+.page-calder .calder-pdp__main-image,
+.calder-pdp .calder-pdp__main-image {
+  position: relative;
+  width: 100%;
+  min-height: 0;
+  aspect-ratio: 1 / 1;
+  background: #f4f5f5;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.page-calder .calder-pdp__main-image img,
+.calder-pdp .calder-pdp__main-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  padding: clamp(20px, 2.6vw, 42px);
+}
+
+.page-calder .calder-pdp__thumb-rail,
+.calder-pdp .calder-pdp__thumb-rail {
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr) 34px;
+  align-items: center;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.page-calder .calder-pdp__thumbs,
+.calder-pdp .calder-pdp__thumbs {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  padding: 1px;
+}
+
+.page-calder .calder-pdp__thumb,
+.calder-pdp .calder-pdp__thumb {
+  flex: 0 0 calc((100% - 40px) / 5);
+  min-width: 72px;
+  aspect-ratio: 1 / 1;
+  border: 1px solid #dfe3e5;
+  border-radius: 0;
+  background: #f7f7f6;
+  padding: 5px;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.page-calder .calder-pdp__thumb.is-active,
+.calder-pdp .calder-pdp__thumb.is-active {
+  border: 2px solid var(--calder-champagne);
+  padding: 4px;
+}
+
+.page-calder .calder-pdp__thumb img,
+.calder-pdp .calder-pdp__thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 0;
+}
+
+.page-calder .calder-pdp__gallery-arrow,
+.calder-pdp .calder-pdp__gallery-arrow {
+  width: 34px;
+  height: 44px;
+  color: var(--calder-navy);
+  border: 0;
+  background: transparent;
+  padding: 0;
+}
+
+.page-calder .calder-pdp__zoom,
+.calder-pdp .calder-pdp__zoom {
+  right: 18px;
+  bottom: 18px;
+  width: 42px;
+  height: 42px;
+  background: #fff;
+  border: 1px solid #dfe3e5;
+  color: var(--calder-navy);
+}
+
+@media (max-width: 991px) {
+  .page-calder .calder-pdp__gallery,
+  .calder-pdp .calder-pdp__gallery {
+    position: relative;
+    top: auto;
+  }
+}
+
+@media (max-width: 575px) {
+  .page-calder .calder-pdp__thumb,
+  .calder-pdp .calder-pdp__thumb {
+    flex-basis: 72px;
+    min-width: 72px;
+  }
+}
+
+/* ============================================================
+   CALDER SPECS + ENGINEERING
+   Desktop: Specifications LEFT / Engineering RIGHT
+   ============================================================ */
+
+.calder-specs-section {
+  width: 100%;
+  margin-top: 3rem;
+}
+
+.calder-specs-section > .container {
+  width: 100%;
+  max-width: var(--container-max-width, 1178px);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   MAIN TWO-COLUMN LAYOUT
+   ───────────────────────────────────────────────────────────── */
+
+.calder-specs-grid {
+  display: grid !important;
+
+  /* Reference is approximately 47% specs / 53% engineering */
+  grid-template-columns:
+    minmax(0, 0.92fr)
+    minmax(0, 1.08fr) !important;
+
+  column-gap: clamp(40px, 5vw, 72px);
+  align-items: stretch;
+
+  width: 100%;
+}
+
+
+/* Critical:
+   prevent Lumia/bootstrap/theme rules from forcing either
+   child to 100% width or outside the grid.
+*/
+
+.calder-specs-grid > .calder-specs,
+.calder-specs-grid > .calder-engineering {
+  width: auto !important;
+  max-width: none !important;
+  min-width: 0;
+  margin: 0 !important;
+  float: none !important;
+}
+
+
+/* ============================================================
+   SPECIFICATIONS — LEFT COLUMN
+   ============================================================ */
+
+.calder-specs {
+  display: flex;
+  flex-direction: column;
+  align-self: stretch;
+  padding-top: 0;
+}
+
+.calder-eyebrow {
+  font-family: var(--calder-ui-font);
+  font-size: 11px;
+  line-height: 1.2;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--calder-champagne);
+  margin: 0 0 8px;
+}
+
+.calder-specs__heading {
+  font-family: var(--calder-heading-font);
+  font-size: clamp(28px, 2.25vw, 38px);
+  line-height: 1;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--calder-navy);
+  margin: 0 0 24px;
+}
+
+.calder-specs__table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  table-layout: fixed;
+}
+
+.calder-specs__table tbody {
+  width: 100%;
+}
+
+.calder-specs__table tr {
+  border: 0;
+}
+
+.calder-specs__table tr:nth-child(odd) {
+  background: #f4f5f6;
+}
+
+.calder-specs__table tr:nth-child(even) {
+  background: transparent;
+}
+
+.calder-specs__table td {
+  border: 0;
+  padding: 10px 14px;
+  font-family: var(--calder-ui-font);
+  font-size: 13px;
+  line-height: 1.35;
+  vertical-align: middle;
+}
+
+.calder-specs__table td:first-child {
+  width: 34%;
+  color: var(--calder-navy);
+  font-weight: 700;
+}
+
+.calder-specs__table td:last-child {
+  width: 66%;
+  color: #626d78;
+  font-weight: 400;
+}
+
+
+/* ============================================================
+   ENGINEERING — RIGHT COLUMN
+   ============================================================ */
+
+.calder-engineering {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  height: 100%;
+}
+
+
+/* Entire card */
+.calder-engineering__panel {
+  position: relative;
+
+  width: 100%;
+  height: 100%;
+
+  /* Gives us approximately the visual proportions of reference */
+  min-height: 390px;
+
+  background: var(--calder-navy);
+  border-radius: 0;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+
+/* ============================================================
+   ENGINEERING BACKGROUND IMAGE
+   ============================================================ */
+
+.calder-engineering__hero-img {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  /*
+   Reference image places machining/wheel subject predominantly
+   toward the upper/right portion of the panel.
+  */
+  object-position: center right;
+
+  display: block;
+
+  z-index: 0;
+
+  background: var(--calder-navy);
+}
+
+.calder-engineering__hero-img--placeholder {
+  background:
+    linear-gradient(
+      135deg,
+      #102b3d 0%,
+      #071722 100%
+    );
+}
+
+
+/* ============================================================
+   IMAGE OVERLAY
+
+   Darkens left side for copy while allowing machining image
+   to remain visible on right.
+
+   Additional lower gradient provides contrast behind icons.
+   ============================================================ */
+
+.calder-engineering__overlay {
+  position: absolute;
+  inset: 0;
+
+  z-index: 1;
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(6, 25, 38, 0.96) 0%,
+      rgba(6, 25, 38, 0.90) 24%,
+      rgba(6, 25, 38, 0.64) 47%,
+      rgba(6, 25, 38, 0.22) 72%,
+      rgba(6, 25, 38, 0.08) 100%
+    ),
+    linear-gradient(
+      0deg,
+      rgba(4, 20, 31, 0.92) 0%,
+      rgba(4, 20, 31, 0.64) 26%,
+      rgba(4, 20, 31, 0) 58%
+    );
+}
+
+
+/* ============================================================
+   ENGINEERING CONTENT
+   ============================================================ */
+
+.calder-engineering__body {
+  position: relative;
+  z-index: 2;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  width: 100%;
+  height: 100%;
+  min-height: 390px;
+
+  box-sizing: border-box;
+
+  padding:
+    clamp(32px, 4vw, 48px)
+    clamp(28px, 3.4vw, 44px)
+    clamp(24px, 3vw, 34px);
+}
+
+
+/* ── Intro ── */
+
+.calder-engineering__intro {
+  width: min(100%, 390px);
+}
+
+.calder-engineering__title {
+  font-family: var(--calder-heading-font);
+  font-size: clamp(28px, 2.6vw, 40px);
+  line-height: 0.98;
+
+  font-weight: 700;
+  text-transform: uppercase;
+
+  color: var(--calder-white);
+
+  margin: 0 0 18px;
+
+  max-width: 340px;
+}
+
+.calder-engineering__description {
+  font-family: var(--calder-ui-font);
+  font-size: 14px;
+  line-height: 1.55;
+
+  color: rgba(255, 255, 255, 0.76);
+
+  max-width: 360px;
+
+  margin: 0;
+}
+
+
+/* ============================================================
+   ENGINEERING CAPABILITIES
+   Reference: horizontal four-column strip
+   ============================================================ */
+
+.calder-engineering__capabilities {
+  display: grid;
+
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+
+  width: 100%;
+
+  margin-top: 44px;
+}
+
+
+/* Individual capability */
+.calder-engineering__cap {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  min-width: 0;
+
+  padding: 0 18px;
+
+  background: transparent;
+
+  border: 0;
+  border-radius: 0;
+}
+
+
+/* First item aligns with body */
+.calder-engineering__cap:first-child {
+  padding-left: 0;
+}
+
+
+/* Last item */
+.calder-engineering__cap:last-child {
+  padding-right: 0;
+}
+
+
+/* Vertical separators */
+.calder-engineering__cap:not(:first-child)::before {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+  top: 12px;
+
+  width: 1px;
+  height: 64px;
+
+  background: rgba(255, 255, 255, 0.18);
+}
+
+
+/* ============================================================
+   CAPABILITY ICON
+   ============================================================ */
+
+.calder-engineering__cap-icon {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  width: 38px;
+  height: 38px;
+
+  margin-bottom: 12px;
+
+  color: rgba(255, 255, 255, 0.95);
+
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+}
+
+.calder-engineering__cap-icon svg {
+  width: 36px;
+  height: 36px;
+
+  display: block;
+
+  stroke: currentColor;
+}
+
+
+/* ============================================================
+   CAPABILITY TEXT
+   ============================================================ */
+
+.calder-engineering__cap-text {
+  font-family: var(--calder-ui-font);
+
+  color: rgba(255, 255, 255, 0.68);
+
+  line-height: 1.3;
+
+  min-width: 0;
+}
+
+.calder-engineering__cap-text strong {
+  display: block;
+
+  font-family: var(--calder-ui-font);
+
+  color: var(--calder-white);
+
+  font-size: 11px;
+  line-height: 1.25;
+
+  font-weight: 500;
+
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+
+  margin: 0;
+}
+
+.calder-engineering__cap-text span {
+  /*
+   Reference design primarily displays the capability names.
+   Keep supporting data available in markup but visually subtle.
+  */
+
+  display: none;
+}
+
+
+/* ============================================================
+   TABLET
+   Maintain side-by-side composition while sufficient width exists.
+   ============================================================ */
+
+@media screen and (max-width: 1100px) {
+
+  .calder-specs-grid {
+    grid-template-columns:
+      minmax(0, 0.9fr)
+      minmax(0, 1.1fr) !important;
+
+    column-gap: 32px;
+  }
+
+  .calder-engineering__panel,
+  .calder-engineering__body {
+    min-height: 370px;
+  }
+
+  .calder-engineering__body {
+    padding: 30px 26px 24px;
+  }
+
+  .calder-engineering__intro {
+    width: 66%;
+  }
+
+  .calder-engineering__title {
+    font-size: 30px;
+  }
+
+  .calder-engineering__cap {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .calder-engineering__cap-text strong {
+    font-size: 10px;
+    letter-spacing: 0.08em;
+  }
+
+}
+
+
+/* ============================================================
+   MOBILE
+   Stack only at true mobile width.
+   ============================================================ */
+
+@media screen and (max-width: 767px) {
+
+  .calder-specs-grid {
+    display: grid !important;
+
+    grid-template-columns: minmax(0, 1fr) !important;
+
+    row-gap: 40px;
+  }
+
+  .calder-specs-grid > .calder-specs,
+  .calder-specs-grid > .calder-engineering {
+    grid-column: 1 / -1;
+    width: 100% !important;
+  }
+
+  .calder-specs__heading {
+    font-size: 30px;
+    margin-bottom: 20px;
+  }
+
+  .calder-specs__table td {
+    padding: 10px 12px;
+    font-size: 12px;
+  }
+
+
+  /* Engineering card */
+
+  .calder-engineering__panel {
+    min-height: 520px;
+  }
+
+  .calder-engineering__hero-img {
+    object-position: 60% center;
+  }
+
+  .calder-engineering__overlay {
+    background:
+      linear-gradient(
+        180deg,
+        rgba(6, 25, 38, 0.82) 0%,
+        rgba(6, 25, 38, 0.58) 35%,
+        rgba(6, 25, 38, 0.88) 67%,
+        rgba(6, 25, 38, 0.98) 100%
+      );
+  }
+
+  .calder-engineering__body {
+    min-height: 520px;
+
+    padding: 30px 22px 24px;
+  }
+
+  .calder-engineering__intro {
+    width: 88%;
+    max-width: 360px;
+  }
+
+  .calder-engineering__title {
+    font-size: 31px;
+    max-width: 280px;
+  }
+
+  .calder-engineering__description {
+    font-size: 13px;
+    max-width: 330px;
+  }
+
+  .calder-engineering__capabilities {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 22px 0;
+
+    margin-top: 50px;
+  }
+
+  .calder-engineering__cap {
+    padding: 0 14px;
+  }
+
+  .calder-engineering__cap:nth-child(odd) {
+    padding-left: 0;
+  }
+
+  .calder-engineering__cap:nth-child(3)::before {
+    display: none;
+  }
+
+  .calder-engineering__cap-icon {
+    width: 34px;
+    height: 34px;
+
+    margin-bottom: 9px;
+  }
+
+  .calder-engineering__cap-icon svg {
+    width: 32px;
+    height: 32px;
+  }
+
+}
+
+
+/* ============================================================
+   SMALL MOBILE
+   ============================================================ */
+
+@media screen and (max-width: 420px) {
+
+  .calder-engineering__panel,
+  .calder-engineering__body {
+    min-height: 500px;
+  }
+
+  .calder-engineering__title {
+    font-size: 28px;
+  }
+
+  .calder-engineering__body {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+}
+
+
+/* ============================================================
+   CALDER — PRODUCT SPECIFICATIONS V2 / IMAGE-LED FEATURE
+   Scoped: does not alter other product page components.
+   ============================================================ */
+
+.cw-spec-feature-v2 > .container {
+  width: 100%;
+  max-width: var(--container-max-width, 1178px);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.calder-specs-v2-wrap .cw-spec-feature-v2 {
+  display: grid;
+  grid-template-columns: minmax(0, 49%) minmax(0, 51%);
+  min-height: 730px;
+  background: #0b1014;
+  color: #f2efe9;
+  overflow: hidden;
+}
+
+.calder-specs-v2-wrap .cw-spec-feature-v2__visual {
+  position: relative;
+  min-height: 730px;
+  overflow: hidden;
+}
+
+.calder-specs-v2-wrap .cw-spec-feature-v2__visual::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent 65%, #0b1014 100%);
+  pointer-events: none;
+}
+
+.calder-specs-v2-wrap .cw-spec-feature-v2__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  position: absolute;
+  inset: 0;
+}
+
+.calder-specs-v2-wrap .cw-spec-feature-v2__content {
+  padding: clamp(45px, 5vw, 90px) clamp(30px, 5vw, 90px) 50px 28px;
+  align-self: center;
+}
+
+.calder-specs-v2-wrap .cw-spec-feature-v2__intro {
+  margin-bottom: 32px;
+}
+
+.calder-specs-v2-wrap .cw-spec-feature-v2__eyebrow {
+  margin: 0 0 8px;
+  color: #29a6e2;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.calder-specs-v2-wrap .cw-spec-feature-v2__title {
+  margin: 0;
+  color: #fff;
+  font-size: clamp(46px, 4.2vw, 86px);
+  line-height: 1;
+  font-weight: 750;
+  letter-spacing: -.035em;
+}
+
+.calder-specs-v2-wrap .cw-spec-feature-v2__subtitle {
+  margin: 14px 0 0;
+  color: #e9e9e9;
+  font-size: clamp(16px, 1.3vw, 24px);
+  letter-spacing: 0.19em;
+  text-transform: uppercase;
+}
+
+.calder-specs-v2-wrap .cw-spec-feature-v2__subtitle::before {
+  content: "";
+  display: block;
+  width: 40px;
+  height: 3px;
+  background: #c2a48a;
+  margin-bottom: 9px;
+}
+
+.calder-specs-v2-wrap .cw-spec-feature-v2__columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+}
+
+.calder-specs-v2-wrap .cw-spec-feature-v2__column {
+  display: grid;
+  align-content: start;
+  gap: 25px;
+}
+
+.calder-specs-v2-wrap .cw-spec-feature-v2__column--right {
+  border-left: 1px solid rgba(255,255,255,.45);
+  padding-left: 35px;
+}
+
+.calder-specs-v2-wrap .cw-spec-feature-v2__item {
+  display: grid;
+  grid-template-columns: 52px minmax(0,1fr);
+  align-items: start;
+  gap: 12px;
+}
+
+.calder-specs-v2-wrap .cw-spec-feature-v2__icon {
+  font-family: Arial,sans-serif;
+  font-size: 34px;
+  font-weight: 300;
+  line-height: 1.1;
+  color: #fff;
+}
+
+.calder-specs-v2-wrap .cw-spec-feature-v2__label {
+  display: block;
+  margin: 0 0 6px;
+  color: #9da1a5;
+  font-size: 12px;
+  font-weight: 650;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.calder-specs-v2-wrap .cw-spec-feature-v2__value {
+  display: block;
+  color: #e4e4e4;
+  font-size: clamp(14px,1.05vw,19px);
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+
+/* ============================================================
+   CALDER SPECS V2 — ENGINEERING VISUAL
+   Approved visual: heading/description top, four icon columns bottom.
+   Replace older V2 addon/repair rules with this complete V2 CSS.
+   ============================================================ */
+
+.calder-specs-v2-wrap .cw-spec-feature-v2__visual {
+  isolation: isolate;
+  background: #071b29;
+  color: #ffffff;
+}
+
+.calder-specs-v2-wrap .cw-spec-feature-v2__engineering-image {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.calder-specs-v2-wrap .cw-spec-feature-v2__visual::after {
+  z-index: 1;
+  background: linear-gradient(90deg, transparent 70%, #0b1014 100%);
+}
+
+.calder-specs-v2-wrap .cw-spec-feature-v2__engineering-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(90deg, rgba(3, 25, 40, 0.94), rgba(3, 25, 40, 0.40));
+}
+
+.calder-specs-v2-wrap .cw-spec-feature-v2__engineering-body {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 48px;
+  width: 100%;
+  min-height: 730px;
+  padding: clamp(32px, 4.1vw, 78px) clamp(24px, 4vw, 72px) 48px;
+}
+
+.calder-specs-v2-wrap .cw-spec-feature-v2__engineering-intro {
+  max-width: 640px;
+}
+
+.calder-specs-v2-wrap .cw-spec-feature-v2__engineering-title {
+  margin: 0 0 24px;
+  color: #ffffff;
+  font-size: clamp(28px,2.6vw,40px);
+  font-weight: 700;
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+  text-transform: uppercase;
+}
+
+.calder-specs-v2-wrap .cw-spec-feature-v2__engineering-description {
+  margin: 0;
+  color: #c9d0d5;
+  font-size: clamp(15px, 1.28vw, 14px);
+  font-weight: 400;
+  line-height: 1.65;
+}
+
+.calder-specs-v2-wrap .cw-spec-feature-v2__engineering-capabilities {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0;
+  width: 100%;
+}
+
+.calder-specs-v2-wrap .cw-spec-feature-v2__engineering-cap {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+  min-width: 0;
+  padding: 0 14px;
+}
+
+.calder-specs-v2-wrap .cw-spec-feature-v2__engineering-cap:first-child {
+  padding-left: 0;
+}
+
+.calder-specs-v2-wrap .cw-spec-feature-v2__engineering-cap:not(:first-child)::before {
+  content: "";
+  position: absolute;
+  top: 12px;
+  bottom: 0;
+  left: 0;
+  width: 1px;
+  background: rgba(255, 255, 255, 0.27);
+}
+
+.calder-specs-v2-wrap .cw-spec-feature-v2__engineering-cap-icon {
+  display: block;
+  flex: 0 0 auto;
+  color: #ffffff;
+}
+
+.calder-specs-v2-wrap .cw-spec-feature-v2__engineering-icon {
+  display: block;
+  width: clamp(32px, 3vw, 35px);
+  height: clamp(32px, 3vw, 35px);
+}
+
+.calder-specs-v2-wrap .cw-spec-feature-v2__engineering-cap-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.calder-specs-v2-wrap .cw-spec-feature-v2__engineering-cap-text strong {
+  color: #ffffff;
+  font-size: clamp(10px, 1vw, 11px);
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+}
+
+/* Retain capability detail in Liquid, but match the approved image. */
+.calder-specs-v2-wrap .cw-spec-feature-v2__engineering-cap-text span {
+  display: none;
+}
+
+/* ============================================================
+   PANEL ORDER — SWAP COMPLETE PANELS ONLY
+   ============================================================ */
+
+@media (min-width: 750px) {
+  .calder-specs-v2-wrap .cw-spec-feature-v2--visual_left .cw-spec-feature-v2__visual {
+    order: 0;
+  }
+
+  .calder-specs-v2-wrap .cw-spec-feature-v2--visual_left .cw-spec-feature-v2__content {
+    order: 1;
+  }
+
+  .calder-specs-v2-wrap .cw-spec-feature-v2--visual_right .cw-spec-feature-v2__visual {
+    order: 1;
+  }
+
+  .calder-specs-v2-wrap .cw-spec-feature-v2--visual_right .cw-spec-feature-v2__content {
+    order: 0;
+  }
+
+  .calder-specs-v2-wrap .cw-spec-feature-v2--visual_right .cw-spec-feature-v2__visual::after {
+    background: linear-gradient(270deg, transparent 70%, #0b1014 100%);
+  }
+}
+
+/* ============================================================
+   TABLET
+   ============================================================ */
+
+@media (max-width: 1100px) and (min-width: 750px) {
+  .calder-specs-v2-wrap .cw-spec-feature-v2 {
+    grid-template-columns: minmax(0, 42%) minmax(0, 58%);
+  }
+
+  .calder-specs-v2-wrap .cw-spec-feature-v2__content {
+    padding: 40px 24px;
+  }
+
+  .calder-specs-v2-wrap .cw-spec-feature-v2__columns {
+    gap: 14px;
+  }
+
+  .calder-specs-v2-wrap .cw-spec-feature-v2__column--right {
+    padding-left: 16px;
+  }
+
+  .calder-specs-v2-wrap .cw-spec-feature-v2__item {
+    grid-template-columns: 32px minmax(0, 1fr);
+    gap: 8px;
+  }
+
+  .calder-specs-v2-wrap .cw-spec-feature-v2__engineering-body {
+    padding: 36px 22px;
+  }
+
+  .calder-specs-v2-wrap .cw-spec-feature-v2__engineering-cap {
+    gap: 14px;
+    padding: 0 7px;
+  }
+}
+
+/* ============================================================
+   MOBILE
+   ============================================================ */
+
+@media (max-width: 749px) {
+  .calder-specs-v2-wrap .cw-spec-feature-v2 {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+
+  .calder-specs-v2-wrap .cw-spec-feature-v2__visual {
+    order: 0;
+    min-height: 620px;
+  }
+
+  .calder-specs-v2-wrap .cw-spec-feature-v2__engineering-body {
+    min-height: 620px;
+    padding: 36px 24px;
+  }
+
+  .calder-specs-v2-wrap .cw-spec-feature-v2__visual::after {
+    background: none;
+  }
+
+  .calder-specs-v2-wrap .cw-spec-feature-v2__content {
+    order: 1;
+    padding: 38px 22px 46px;
+  }
+
+  .calder-specs-v2-wrap .cw-spec-feature-v2__columns {
+    gap: 14px;
+  }
+
+  .calder-specs-v2-wrap .cw-spec-feature-v2__column--right {
+    padding-left: 14px;
+  }
+
+  .calder-specs-v2-wrap .cw-spec-feature-v2__item {
+    grid-template-columns: 1fr;
+    gap: 5px;
+  }
+
+  .calder-specs-v2-wrap .cw-spec-feature-v2__engineering-cap {
+    gap: 14px;
+    padding: 0 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .calder-specs-v2-wrap .cw-spec-feature-v2__engineering-body {
+    min-height: 580px;
+    padding: 30px 18px;
+  }
+
+  .calder-specs-v2-wrap .cw-spec-feature-v2__engineering-capabilities {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px 0;
+  }
+
+  .calder-specs-v2-wrap .cw-spec-feature-v2__engineering-cap:nth-child(3)::before {
+    display: none;
+  }
+
+  .calder-specs-v2-wrap .cw-spec-feature-v2__engineering-cap-text strong {
+    font-size: 12px;
+  }
+}
+
+
+/* ============================================================
+   CALDER — BUILD YOUR WHEEL
+   Product Page Wheel Configurator
+   ============================================================ */
+
+
+/* ============================================================
+   SECTION SHELL
+   ============================================================ */
+
+.calder-configurator {
+  position: relative;
+  width: 100%;
+  margin: 4rem 0 0;
+  padding: 0;
+
+  background: #f4f1eb;
+
+  //border-top: 1px solid rgba(14, 42, 62, 0.08);
+  //border-bottom: 1px solid rgba(14, 42, 62, 0.08);
+
+  overflow: hidden;
+}
+
+
+/* ============================================================
+   MAIN CONFIGURATOR
+   ============================================================ */
+
+.calder-configurator .wheel-configurator {
+  position: relative;
+  isolation: isolate;
+
+  width: 100%;
+  max-width: none;
+
+  margin: 0;
+
+  padding:
+    72px
+    max(
+      32px,
+      calc((100vw - var(--container-max-width, 1178px)) / 2)
+    )
+    76px;
+
+  background-color: #f4f1eb;
+
+  background-image:
+    linear-gradient(
+      90deg,
+      rgba(247, 244, 238, 0.12) 0%,
+      rgba(247, 244, 238, 0.16) 38%,
+      rgba(247, 244, 238, 0.42) 68%,
+      rgba(247, 244, 238, 0.72) 100%
+    ),
+    var(--configurator-bg-image);
+
+  background-repeat: no-repeat, no-repeat;
+  background-position: center, center;
+  background-size: cover, cover;
+}
+
+
+/* subtle overlay for readability */
+
+.calder-configurator .wheel-configurator::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  z-index: -1;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.04) 0%,
+      rgba(255, 255, 255, 0.02) 42%,
+      rgba(255, 255, 255, 0.10) 68%,
+      rgba(255, 255, 255, 0.30) 100%
+    );
+}
+
+
+/* ============================================================
+   INNER CONTAINER
+
+   IMPORTANT:
+   This is no longer the 3-column grid.
+   The header and visual row both live inside this container.
+   ============================================================ */
+
+.calder-configurator .wheel-configurator__inner {
+  position: relative;
+  z-index: 2;
+
+  display: block;
+
+  width: 100%;
+  max-width: var(--container-max-width, 1178px);
+
+  margin: 0 auto;
+}
+
+
+/* ============================================================
+   CENTERED HEADER
+   ============================================================ */
+
+.calder-configurator .wheel-configurator__header {
+  position: relative;
+  z-index: 5;
+
+  width: 100%;
+  max-width: 760px;
+
+  margin:
+    0
+    auto
+    clamp(38px, 4vw, 54px);
+
+  text-align: center;
+}
+
+
+/* eyebrow */
+
+.calder-configurator .wheel-configurator__eyebrow {
+  margin: 0 0 9px;
+
+  font-family: var(--calder-ui-font);
+  font-size: 12px;
+  line-height: 1.2;
+  font-weight: 700;
+
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+
+  color: var(--calder-champagne);
+}
+
+
+/* main title */
+
+.calder-configurator .wheel-configurator__title {
+  margin: 0 0 13px;
+
+  font-family: var(--calder-heading-font);
+  font-size: clamp(42px, 4vw, 60px);
+  line-height: 0.98;
+
+  font-weight: 600;
+
+  letter-spacing: -0.035em;
+
+  color: var(--calder-navy);
+}
+
+
+/* subtitle */
+
+.calder-configurator .wheel-configurator__subtitle {
+  width: 100%;
+  max-width: 560px;
+
+  margin: 0 auto;
+
+  font-family: var(--calder-ui-font);
+  font-size: 16px;
+  line-height: 1.55;
+  font-weight: 400;
+
+  color: #65717b;
+}
+
+
+/* ============================================================
+   MAIN CONFIGURATOR ROW
+
+   PREVIEW | CONTROLS | PURCHASE
+   ============================================================ */
+
+.calder-configurator .wheel-configurator__visual,
+.calder-configurator .cbp-config__layout {
+  display: grid;
+  grid-template-columns: 44fr 29fr 27fr;
+  gap: 22px;
+  align-items: start;
+}
+
+
+/* ============================================================
+   COLUMN 1 — WHEEL PREVIEW
+   ============================================================ */
+
+.calder-configurator .wheel-configurator__preview {
+  position: relative;
+
+  margin: 0;
+}
+
+
+.calder-configurator .cbp-config__col {
+  min-width: 0;
+}
+
+.calder-configurator .cbp-config__col--preview .wheel-configurator__canvas {
+  aspect-ratio: 1;
+  max-height: 520px;
+  background: #e8e6e0;
+  border-radius: 8px;
+}
+
+.calder-configurator .cbp-config__col--preview .wheel-configurator__preview-layers--zoomed {
+  transform: scale(1.8);
+  cursor: zoom-out;
+}
+
+
+.calder-configurator .cbp-config__preview-actions {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 12px;
+}
+
+.calder-configurator .cbp-config__preview-action {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 16px;
+  background: rgba(255,255,255,0.85);
+  border: 1px solid rgba(0,0,0,0.1);
+  border-radius: 5px;
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--calder-navy);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.calder-configurator .cbp-config__preview-action:hover {
+  background: #fff;
+}
+
+.calder-configurator .cbp-config__preview-action--active {
+  background: var(--calder-navy);
+  color: #fff;
+  border-color: var(--calder-navy);
+}
+
+
+/* finish groups */
+
+.calder-configurator .cbp-config__finish-group {
+  margin-bottom: 20px;
+  background: #fff;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.calder-configurator .cbp-config__finish-heading {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.calder-configurator .cbp-config__badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--calder-gold, #C2A48A);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.calder-configurator .cbp-config__finish-titles {
+  flex: 1;
+  min-width: 0;
+}
+
+.calder-configurator .cbp-config__finish-label {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--calder-navy);
+  margin: 0 0 2px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.calder-configurator .cbp-config__finish-desc {
+  font-size: 11px;
+  color: var(--calder-muted);
+  margin: 0;
+}
+
+
+/* summary panel */
+
+.calder-configurator .cbp-config__summary-panel {
+  background: #fff;
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.calder-configurator .cbp-config__summary-panel[style*="display: flex"] {
+  display: block !important;
+}
+
+.calder-configurator .cbp-config__summary-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.calder-configurator .cbp-config__summary-title {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: var(--calder-gold, #C2A48A);
+}
+
+.calder-configurator .cbp-config__reset-btn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: transparent;
+  border: none;
+  font-family: inherit;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--calder-muted);
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 3px;
+  transition: color 0.2s;
+}
+
+.calder-configurator .cbp-config__reset-btn:hover {
+  color: var(--calder-navy);
+}
+
+.calder-configurator .cbp-config__summary-rows {
+  margin-bottom: 14px;
+}
+
+.calder-configurator .cbp-config__summary-row {
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(0,0,0,0.04);
+}
+
+.calder-configurator .cbp-config__summary-row:last-child {
+  border-bottom: none;
+}
+
+.calder-configurator .cbp-config__summary-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.calder-configurator .cbp-config__summary-name {
+  font-size: 12px;
+  color: var(--calder-muted);
+}
+
+.calder-configurator .cbp-config__summary-info strong {
+  font-size: 12px;
+  color: var(--calder-navy);
+}
+
+.calder-configurator .cbp-config__summary-price {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-top: 2px solid var(--calder-navy);
+  margin-bottom: 16px;
+}
+
+.calder-configurator .cbp-config__price-label {
+  font-size: 12px;
+  color: var(--calder-muted);
+}
+
+.calder-configurator .cbp-config__summary-price strong {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--calder-navy);
+}
+
+
+.calder-configurator .cbp-config__add-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  height: 48px;
+  background: linear-gradient(135deg, #D5A35C, var(--calder-champagne, #C2A48A));
+  border: none;
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: #fff;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  margin-bottom: 10px;
+}
+
+.calder-configurator .cbp-config__add-btn:hover {
+  opacity: 0.9;
+}
+
+.calder-configurator .cbp-config__add-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+
+.calder-configurator .cbp-config__save-share {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.calder-configurator .cbp-config__save-btn,
+.calder-configurator .cbp-config__share-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 40px;
+  background: rgba(255,255,255,0.8);
+  border: 1px solid var(--calder-navy);
+  border-radius: 4px;
+  color: var(--calder-navy);
+  font-family: inherit;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.calder-configurator .cbp-config__save-btn:hover,
+.calder-configurator .cbp-config__share-btn:hover {
+  background: var(--calder-navy);
+  color: #fff;
+}
+
+
+.calder-configurator .cbp-config__or-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.calder-configurator .cbp-config__or-line {
+  flex: 1;
+  height: 1px;
+  background: rgba(0,0,0,0.08);
+}
+
+.calder-configurator .cbp-config__or-text {
+  font-size: 11px;
+  color: var(--calder-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+
+.calder-configurator .cbp-config__quote-btn {
+  width: 100%;
+  height: 44px;
+  background: transparent;
+  border: 1.5px solid var(--calder-champagne, #C2A48A);
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--calder-champagne, #C2A48A);
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  margin-bottom: 14px;
+}
+
+.calder-configurator .cbp-config__quote-btn:hover {
+  background: var(--calder-champagne, #C2A48A);
+  color: var(--calder-ink, #231F20);
+}
+
+.calder-configurator .cbp-config__quote-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+
+.calder-configurator .cbp-config__bto-notice {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  background: rgba(85,184,106,0.08);
+  border: 1px solid rgba(85,184,106,0.15);
+  border-radius: 6px;
+  color: #3a8a4d;
+}
+
+.calder-configurator .cbp-config__bto-notice svg {
+  flex-shrink: 0;
+}
+
+.calder-configurator .cbp-config__bto-notice strong {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--calder-navy);
+  line-height: 1.3;
+}
+
+.calder-configurator .cbp-config__bto-notice span {
+  font-size: 11px;
+  color: var(--calder-muted);
+}
+
+
+
+/* ------------------------------------------------------------
+   Preview Canvas
+   ------------------------------------------------------------ */
+
+.calder-configurator .wheel-configurator__canvas {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+
+  min-height: 430px;
+
+  margin: 0;
+  padding: 0;
+
+  overflow: visible;
+
+  background: transparent;
+
+  border: 0;
+  border-radius: 0;
+
+  box-shadow: none;
+}
+
+
+/* ------------------------------------------------------------
+   Preview Layers
+   ------------------------------------------------------------ */
+
+.calder-configurator .wheel-configurator__preview-layers,
+.calder-configurator .wheel-configurator__3d-viewer {
+  position: relative;
+
+  width: 100%;
+  height: 100%;
+
+  min-height: 430px;
+}
+
+
+/* individual wheel layers */
+
+.calder-configurator .wheel-configurator__layer {
+  position: absolute;
+
+  top: 50%;
+  left: 50%;
+
+  display: block;
+
+  width: min(100%, 500px);
+  height: min(100%, 500px);
+
+  max-width: 500px;
+  max-height: 500px;
+
+  object-fit: contain;
+
+  transform: translate(-50%, -50%);
+}
+
+
+/* ------------------------------------------------------------
+   Loading Preview
+   ------------------------------------------------------------ */
+
+.calder-configurator .wheel-configurator__preview-loading {
+  position: absolute;
+
+  inset: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 12px;
+
+  font-family: var(--calder-ui-font);
+  font-size: 12px;
+  line-height: 1.4;
+
+  color: var(--calder-muted);
+}
+
+
+/* ------------------------------------------------------------
+   3D Toggle
+   ------------------------------------------------------------ */
+
+.calder-configurator .wheel-configurator__toggle-3d {
+  width: 100%;
+
+  margin-top: 10px;
+
+  text-align: center;
+}
+
+
+/* ============================================================
+   COLUMN 2 — CONFIGURATION CONTROLS
+   ============================================================ */
+
+.calder-configurator .wheel-configurator__controls {
+  display: flex;
+  flex-direction: column;
+
+  gap: 28px;
+}
+
+
+/* ------------------------------------------------------------
+   Individual Control Section
+   ------------------------------------------------------------ */
+
+.calder-configurator .wheel-configurator__section {
+  width: 100%;
+
+  margin: 0;
+  padding: 0;
+}
+
+
+/* ------------------------------------------------------------
+   Control Label
+   ------------------------------------------------------------ */
+
+.calder-configurator .wheel-configurator__label {
+  margin: 0 0 12px;
+
+  font-family: var(--calder-ui-font);
+
+  font-size: 13px;
+  line-height: 1.2;
+
+  font-weight: 800;
+
+  letter-spacing: 0.075em;
+
+  text-transform: uppercase;
+
+  color: var(--calder-navy);
+}
+
+
+/* ============================================================
+   OPTIONS
+   ============================================================ */
+
+.calder-configurator .wheel-configurator__options {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+
+  width: 100%;
+}
+
+
+.calder-configurator .wheel-configurator__option {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+
+  width: 100%;
+  min-height: 70px;
+
+  margin: 0;
+  padding: 3px;
+
+  overflow: hidden;
+
+  background: rgba(255, 255, 255, 0.72);
+
+  border: 1px solid rgba(14, 42, 62, 0.14);
+
+  border-radius: 4px;
+
+  box-shadow:
+    0 2px 8px rgba(14, 42, 62, 0.035);
+
+  cursor: pointer;
+
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+
+
+.calder-configurator
+.wheel-configurator__option img {
+  display: block;
+
+  width: 100%;
+  min-height: 60px;
+
+  object-fit: contain;
+
+  border-radius: 2px;
+
+  flex: 1 0 auto;
+}
+
+
+.calder-configurator
+.wheel-configurator__option-label {
+  display: block;
+
+  margin-top: 6px;
+  padding: 0;
+
+  font-family: var(--calder-ui-font);
+  font-size: 10px;
+  line-height: 1.2;
+  font-weight: 600;
+
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  color: var(--calder-navy);
+
+  background: transparent;
+position: static;
+  inset: auto;
+}
+
+
+.calder-configurator
+.wheel-configurator__option:hover:not(.wheel-configurator__option--unavailable) {
+  transform: translateY(-2px);
+
+  background: rgba(255, 255, 255, 0.94);
+
+  border-color: rgba(194, 164, 138, 0.85);
+
+  box-shadow:
+    0 5px 16px rgba(14, 42, 62, 0.08);
+}
+
+.calder-configurator
+.wheel-configurator__option--selected {
+  background: rgba(255, 255, 255, 0.96);
+
+  border-color: var(--calder-champagne);
+
+  box-shadow:
+    0 0 0 1.5px var(--calder-champagne),
+    0 5px 14px rgba(14, 42, 62, 0.08);
+}
+
+.calder-configurator
+.wheel-configurator__option--selected .wheel-configurator__option-label {
+  color: var(--calder-navy);
+  font-weight: 700;
+}
+
+
+
+/* ============================================================
+   OPTION LOADING
+   ============================================================ */
+
+.calder-configurator
+.wheel-configurator__loading-options {
+  display: flex;
+
+  align-items: center;
+  justify-content: flex-start;
+
+  min-height: 60px;
+}
+
+
+/* ============================================================
+   AVAILABILITY
+   ============================================================ */
+
+.calder-configurator
+.wheel-configurator__availability {
+  width: 100%;
+
+  margin-top: 2px;
+
+  font-family: var(--calder-ui-font);
+
+  font-size: 12px;
+  line-height: 1.5;
+
+  color: var(--calder-muted);
+}
+
+
+/* ============================================================
+   COLUMN 3 — PURCHASE
+   ============================================================ */
+
+.calder-configurator .wheel-configurator__purchase {
+  display: flex;
+  flex-direction: column;
+
+  gap: 14px;
+}
+
+
+/* ============================================================
+   CONFIGURATION SUMMARY
+   ============================================================ */
+
+.calder-configurator
+.wheel-configurator__summary {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+
+  margin: 0;
+
+  padding: 25px 26px;
+
+  background: rgba(255, 255, 255, 0.68);
+
+  border: 1px solid rgba(255, 255, 255, 0.82);
+
+  border-radius: 3px;
+
+  box-shadow:
+    0 10px 30px rgba(14, 42, 62, 0.055);
+
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+
+/* ------------------------------------------------------------
+   Summary Heading
+   ------------------------------------------------------------ */
+
+.calder-configurator
+.wheel-configurator__summary-title {
+  margin: 0 0 13px;
+
+  font-family: var(--calder-ui-font);
+
+  font-size: 11px;
+  line-height: 1.2;
+
+  font-weight: 800;
+
+  letter-spacing: 0.12em;
+
+  text-transform: uppercase;
+
+  color: var(--calder-champagne);
+}
+
+
+/* ------------------------------------------------------------
+   Summary Rows
+   ------------------------------------------------------------ */
+
+.calder-configurator
+.wheel-configurator__summary-row {
+  display: grid;
+
+  grid-template-columns:
+    minmax(52px, auto)
+    minmax(0, 1fr)
+    auto;
+
+  align-items: center;
+
+  gap: 12px;
+
+  min-height: 56px;
+
+  padding: 8px 0;
+
+  border-bottom:
+    1px solid rgba(14, 42, 62, 0.09);
+
+  font-family: var(--calder-ui-font);
+
+  font-size: 13px;
+  line-height: 1.35;
+}
+
+
+.calder-configurator
+.wheel-configurator__summary-row:last-child {
+  border-bottom: 0;
+}
+
+
+/* summary labels */
+
+.calder-configurator
+.wheel-configurator__summary-label,
+.calder-configurator
+.wheel-configurator__summary-row > span:not(.wheel-configurator__summary-thumb) {
+  color: #73808b;
+}
+
+
+/* summary values */
+
+.calder-configurator
+.wheel-configurator__summary-value {
+  min-width: 0;
+
+  font-weight: 700;
+
+  color: var(--calder-navy);
+
+  overflow-wrap: anywhere;
+
+  text-align: right;
+}
+
+
+/* summary thumbnails */
+
+.calder-configurator
+.wheel-configurator__summary-thumb {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 52px;
+  height: 52px;
+
+  overflow: hidden;
+
+  background: #f4f5f6;
+  border: 1px solid rgba(14, 42, 62, 0.1);
+  border-radius: 4px;
+}
+
+.calder-configurator
+.wheel-configurator__summary-thumb img {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: contain;
+}
+
+
+/* price row */
+
+.calder-configurator
+.wheel-configurator__summary-row--price {
+  margin-top: 4px;
+}
+
+.calder-configurator
+.wheel-configurator__summary-row--price
+.wheel-configurator__summary-value {
+  font-size: 16px;
+}
+
+
+/* ============================================================
+   ACTIONS
+   ============================================================ */
+
+.calder-configurator
+.wheel-configurator__actions {
+  width: 100%;
+
+  flex-direction: column;
+
+  gap: 10px;
+}
+
+
+/*
+   JS controls whether the action container is visible.
+   Do NOT force display:block/flex here.
+*/
+
+.calder-configurator
+.wheel-configurator__actions > * + * {
+  margin-top: 10px;
+}
+
+
+/* ============================================================
+   ADD TO CART BUTTON
+   ============================================================ */
+
+.calder-configurator
+.wheel-configurator__add-btn {
+  width: 100%;
+
+  min-height: 56px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 11px;
+
+  margin: 0;
+
+  padding: 12px 16px;
+
+  background: var(--calder-navy);
+
+  color: #fff;
+
+  border: 1px solid var(--calder-navy);
+
+  border-radius: 2px;
+
+  box-shadow:
+    0 5px 14px rgba(14, 42, 62, 0.12);
+
+  font-family: var(--calder-ui-font);
+
+  font-size: 11px;
+  line-height: 1.25;
+
+  font-weight: 800;
+
+  letter-spacing: 0.05em;
+
+  text-align: center;
+
+  text-transform: uppercase;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+
+.calder-configurator
+.wheel-configurator__add-btn:hover:not(:disabled) {
+  background: #12384f;
+
+  border-color: #12384f;
+
+  transform: translateY(-1px);
+}
+
+
+/* cart icon */
+
+.calder-configurator
+.wheel-configurator__cart-icon {
+  display: inline-flex;
+
+  flex: 0 0 auto;
+
+  align-items: center;
+  justify-content: center;
+
+  color: var(--calder-champagne);
+}
+
+
+/* ============================================================
+   REQUEST QUOTE BUTTON
+   ============================================================ */
+
+.calder-configurator
+.wheel-configurator__quote-btn {
+  width: 100%;
+
+  min-height: 54px;
+
+  margin: 0;
+
+  padding: 12px 16px;
+
+  background: rgba(255, 255, 255, 0.38);
+
+  color: var(--calder-navy);
+
+  border:
+    1px solid rgba(14, 42, 62, 0.55);
+
+  border-radius: 2px;
+
+  font-family: var(--calder-ui-font);
+
+  font-size: 11px;
+  line-height: 1.2;
+
+  font-weight: 800;
+
+  letter-spacing: 0.07em;
+
+  text-transform: uppercase;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+
+.calder-configurator
+.wheel-configurator__quote-btn:hover:not(:disabled) {
+  background: var(--calder-navy);
+
+  color: #fff;
+
+  border-color: var(--calder-navy);
+}
+
+
+/* ============================================================
+   DISABLED BUTTONS
+   ============================================================ */
+
+.calder-configurator
+.wheel-configurator__add-btn:disabled,
+
+.calder-configurator
+.wheel-configurator__quote-btn:disabled {
+  opacity: 0.55;
+
+  cursor: not-allowed;
+
+  transform: none;
+}
+
+
+/* ============================================================
+   SMALLER DESKTOP
+   ============================================================ */
+
+@media (max-width: 1199px) {
+
+  .calder-configurator .wheel-configurator {
+    padding:
+      64px
+      clamp(24px, 3vw, 40px)
+      68px;
+  }
+
+
+  .calder-configurator
+  .wheel-configurator__header {
+    margin-bottom: 42px;
+  }
+
+
+  .calder-configurator
+  .wheel-configurator__visual,
+  .calder-configurator
+  .cbp-config__layout {
+    grid-template-columns: 1.15fr 0.95fr 0.88fr;
+
+    gap: 18px;
+  }
+
+
+  .calder-configurator
+  .wheel-configurator__canvas {
+    min-height: 380px;
+  }
+
+
+  .calder-configurator
+  .wheel-configurator__preview-layers,
+
+  .calder-configurator
+  .wheel-configurator__3d-viewer {
+    min-height: 380px;
+  }
+
+
+  .calder-configurator
+  .wheel-configurator__layer {
+    width: min(100%, 430px);
+    height: min(100%, 430px);
+
+    max-width: 430px;
+    max-height: 430px;
+  }
+
+
+  .calder-configurator
+  .wheel-configurator__option {
+    min-height: 92px;
+  }
+
+}
+
+
+/* ============================================================
+   TABLET
+   ============================================================ */
+
+@media (max-width: 900px) {
+
+  .calder-configurator .wheel-configurator {
+    padding:
+      54px
+      28px
+      58px;
+
+    background-image:
+      linear-gradient(
+        rgba(247, 244, 238, 0.60),
+        rgba(247, 244, 238, 0.78)
+      ),
+      var(--configurator-bg-image);
+
+    background-position: center, center;
+    background-size: cover, cover;
+  }
+
+
+  .calder-configurator
+  .wheel-configurator__header {
+    max-width: 620px;
+
+    margin-bottom: 38px;
+  }
+
+
+  .calder-configurator
+  .wheel-configurator__title {
+    font-size: clamp(42px, 7vw, 56px);
+  }
+
+
+  /*
+     Tablet:
+     Preview left / Controls right.
+     Summary + purchase on a full-width second row.
+  */
+
+  .calder-configurator
+  .wheel-configurator__visual,
+  .calder-configurator
+  .cbp-config__layout {
+    grid-template-columns:
+      minmax(0, 1fr)
+      minmax(0, 1fr);
+
+    gap: 24px;
+
+    align-items: start;
+  }
+
+
+  .calder-configurator
+  .wheel-configurator__preview {
+    grid-column: 1;
+    grid-row: 1;
+
+    width: 100%;
+  }
+
+
+  .calder-configurator
+  .wheel-configurator__controls {
+    grid-column: 2;
+    grid-row: 1;
+
+    align-self: start;
+  }
+
+
+  .calder-configurator
+  .wheel-configurator__purchase {
+    grid-column: 1 / -1;
+    grid-row: 2;
+
+    align-self: start;
+
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 14px;
+  }
+
+
+  .calder-configurator
+  .wheel-configurator__canvas {
+    min-height: 400px;
+  }
+
+
+  .calder-configurator
+  .wheel-configurator__preview-layers,
+
+  .calder-configurator
+  .wheel-configurator__3d-viewer {
+    min-height: 400px;
+  }
+
+
+  .calder-configurator
+  .wheel-configurator__layer {
+    width: min(100%, 450px);
+    height: min(100%, 450px);
+
+    max-width: 450px;
+    max-height: 450px;
+  }
+
+
+  .calder-configurator
+  .wheel-configurator__options {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+
+/* ============================================================
+   MOBILE
+   ============================================================ */
+
+@media (max-width: 640px) {
+
+  .calder-configurator .wheel-configurator {
+    padding:
+      44px
+      20px
+      48px;
+
+    background-image:
+      linear-gradient(
+        rgba(247, 244, 238, 0.68),
+        rgba(247, 244, 238, 0.86)
+      ),
+      var(--configurator-bg-image-mobile);
+
+    background-position: center, center;
+    background-size: cover, cover;
+  }
+
+
+  /* ----------------------------------------------------------
+     Mobile Header
+     ---------------------------------------------------------- */
+
+  .calder-configurator
+  .wheel-configurator__header {
+    width: 100%;
+    max-width: 100%;
+
+    margin:
+      0
+      auto
+      32px;
+
+    text-align: center;
+  }
+
+
+  .calder-configurator
+  .wheel-configurator__eyebrow {
+    margin-bottom: 8px;
+
+    font-size: 10px;
+
+    letter-spacing: 0.14em;
+  }
+
+
+  .calder-configurator
+  .wheel-configurator__title {
+    margin-bottom: 12px;
+
+    font-size: clamp(38px, 12vw, 48px);
+
+    line-height: 1;
+  }
+
+
+  .calder-configurator
+  .wheel-configurator__subtitle {
+    max-width: 320px;
+
+    font-size: 14px;
+
+    line-height: 1.5;
+  }
+
+
+  /* ----------------------------------------------------------
+     Stack Main Columns
+     ---------------------------------------------------------- */
+
+  .calder-configurator
+  .wheel-configurator__visual,
+  .calder-configurator
+  .cbp-config__layout {
+    display: flex;
+
+    flex-direction: column;
+
+    width: 100%;
+
+    gap: 36px;
+  }
+
+
+  .calder-configurator
+  .wheel-configurator__preview,
+
+  .calder-configurator
+  .wheel-configurator__controls,
+
+  .calder-configurator
+  .wheel-configurator__purchase {
+    width: 100%;
+  }
+
+
+  /* ----------------------------------------------------------
+     Preview
+     ---------------------------------------------------------- */
+
+  .calder-configurator
+  .wheel-configurator__canvas {
+    min-height: 320px;
+  }
+
+
+  .calder-configurator
+  .wheel-configurator__preview-layers,
+
+  .calder-configurator
+  .wheel-configurator__3d-viewer {
+    min-height: 320px;
+  }
+
+
+  .calder-configurator
+  .wheel-configurator__layer {
+    width: min(100%, 350px);
+    height: min(100%, 350px);
+
+    max-width: 350px;
+    max-height: 350px;
+  }
+
+
+  /* ----------------------------------------------------------
+     Controls
+     ---------------------------------------------------------- */
+
+  .calder-configurator
+  .wheel-configurator__controls {
+    gap: 28px;
+  }
+
+
+  .calder-configurator
+  .wheel-configurator__label {
+    font-size: 12px;
+  }
+
+
+  .calder-configurator
+  .wheel-configurator__options {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 10px;
+  }
+
+
+  .calder-configurator
+  .wheel-configurator__option {
+    min-height: 104px;
+  }
+
+
+  /* ----------------------------------------------------------
+     Summary
+     ---------------------------------------------------------- */
+
+  .calder-configurator
+  .wheel-configurator__purchase {
+    gap: 14px;
+  }
+
+
+  .calder-configurator
+  .wheel-configurator__summary {
+    padding: 22px 20px;
+  }
+
+
+  .calder-configurator
+  .wheel-configurator__summary-row {
+    grid-template-columns:
+      minmax(44px, auto)
+      minmax(0, 1fr)
+      auto;
+
+    min-height: 48px;
+
+    font-size: 12px;
+  }
+
+
+  /* ----------------------------------------------------------
+     Buttons
+     ---------------------------------------------------------- */
+
+  .calder-configurator
+  .wheel-configurator__add-btn,
+
+  .calder-configurator
+  .wheel-configurator__quote-btn {
+    min-height: 52px;
+  }
+
+}
+
+/* ============================================================
+   PREVIEW RAIL + THUMBNAILS
+   ============================================================ */
+
+.calder-configurator .wheel-configurator__rail-wrap {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+
+  gap: 14px;
+}
+
+
+/* vertical thumbnail rail */
+
+.calder-configurator .wheel-configurator__thumbnails {
+  display: none;
+  flex-direction: column;
+
+  gap: 10px;
+
+  padding: 4px;
+}
+
+
+.calder-configurator .wheel-configurator__thumb {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 64px;
+  height: 64px;
+
+  margin: 0;
+  padding: 4px;
+
+  overflow: hidden;
+
+  background: rgba(255, 255, 255, 0.6);
+
+  border: 1px solid rgba(14, 42, 62, 0.18);
+  border-radius: 4px;
+
+  cursor: pointer;
+
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease;
+}
+
+.calder-configurator .wheel-configurator__thumb:hover {
+  background: rgba(255, 255, 255, 0.9);
+
+  border-color: rgba(194, 164, 138, 0.7);
+}
+
+.calder-configurator .wheel-configurator__thumb.is-active {
+  background: rgba(255, 255, 255, 0.95);
+
+  border-color: var(--calder-champagne);
+
+  box-shadow:
+    0 0 0 1px var(--calder-champagne),
+    0 4px 12px rgba(14, 42, 62, 0.08);
+}
+
+.calder-configurator .wheel-configurator__thumb img {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: contain;
+}
+
+
+/* preview actions — 360 / zoom */
+
+.calder-configurator .wheel-configurator__preview-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 10px;
+
+  margin-top: 12px;
+}
+
+.calder-configurator .wheel-configurator__preview-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  min-height: 44px;
+
+  margin: 0;
+  padding: 0 18px;
+
+  background: rgba(255, 255, 255, 0.72);
+
+  border: 1px solid rgba(14, 42, 62, 0.2);
+  border-radius: 4px;
+
+  color: var(--calder-navy);
+
+  font-family: var(--calder-ui-font);
+  font-size: 11px;
+  line-height: 1;
+  font-weight: 700;
+
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.calder-configurator .wheel-configurator__preview-action:hover {
+  background: rgba(255, 255, 255, 0.95);
+
+  border-color: rgba(194, 164, 138, 0.7);
+}
+
+.calder-configurator
+.wheel-configurator__preview-action--active {
+  background: var(--calder-champagne);
+
+  border-color: var(--calder-champagne);
+
+  color: #fff;
+}
+
+
+/* zoomed preview layers */
+
+.calder-configurator
+.wheel-configurator__preview-layers--zoomed
+.wheel-configurator__layer {
+  transform: translate(-50%, -50%) scale(1.35);
+}
+
+
+/* ============================================================
+   CONTROL GROUP HEADERS — STEP MARKERS + SUBTITLES
+   ============================================================ */
+
+.calder-configurator .wheel-configurator__section-head {
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+
+  width: 100%;
+
+  margin-bottom: 6px;
+}
+
+
+.calder-configurator .wheel-configurator__step {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  flex: 0 0 32px;
+
+  width: 32px;
+  height: 32px;
+
+  border-radius: 50%;
+
+  background: var(--calder-champagne);
+
+  color: #fff;
+
+  font-family: var(--calder-ui-font);
+  font-size: 14px;
+  font-weight: 700;
+
+  line-height: 1;
+}
+
+
+.calder-configurator
+.wheel-configurator__section-head
+.wheel-configurator__label {
+  margin: 0;
+
+  flex: 1 1 auto;
+}
+
+
+.calder-configurator .wheel-configurator__section-subtitle {
+  margin: 0 0 12px;
+  padding-left: 44px;
+
+  font-family: var(--calder-ui-font);
+  font-size: 12px;
+  line-height: 1.4;
+  font-weight: 400;
+
+  color: var(--calder-muted);
+}
+
+
+/* ============================================================
+   SUMMARY HEAD + RESET
+   ============================================================ */
+
+.calder-configurator .wheel-configurator__summary-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 12px;
+
+  margin-bottom: 6px;
+}
+
+
+.calder-configurator
+.wheel-configurator__summary-head
+.wheel-configurator__summary-title {
+  margin: 0;
+}
+
+
+.calder-configurator .wheel-configurator__reset {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 6px;
+
+  margin: 0;
+  padding: 4px 8px;
+
+  background: transparent;
+
+  border: 0;
+  border-radius: 3px;
+
+  color: var(--calder-muted);
+
+  font-family: var(--calder-ui-font);
+  font-size: 11px;
+  line-height: 1;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    color 0.2s ease;
+}
+
+.calder-configurator .wheel-configurator__reset:hover {
+  color: var(--calder-navy);
+}
+
+
+/* ============================================================
+   SAVE / SHARE BUTTONS
+   ============================================================ */
+
+.calder-configurator .wheel-configurator__save-share {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  gap: 10px;
+
+  width: 100%;
+}
+
+
+.calder-configurator
+.wheel-configurator__save-btn,
+
+.calder-configurator
+.wheel-configurator__share-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  min-height: 46px;
+
+  margin: 0;
+  padding: 0 12px;
+
+  background: rgba(255, 255, 255, 0.6);
+
+  border: 1px solid var(--calder-navy);
+  border-radius: 4px;
+
+  color: var(--calder-navy);
+
+  font-family: var(--calder-ui-font);
+  font-size: 11px;
+  line-height: 1;
+  font-weight: 700;
+
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.calder-configurator
+.wheel-configurator__save-btn:hover,
+
+.calder-configurator
+.wheel-configurator__share-btn:hover {
+  background: var(--calder-navy);
+
+  color: #fff;
+}
+
+
+/* ============================================================
+   OR SEPARATOR
+   ============================================================ */
+
+.calder-configurator .wheel-configurator__or {
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+
+  width: 100%;
+}
+
+.calder-configurator .wheel-configurator__or-line {
+  flex: 1 1 auto;
+
+  height: 1px;
+
+  background: rgba(14, 42, 62, 0.14);
+}
+
+.calder-configurator .wheel-configurator__or-text {
+  font-family: var(--calder-ui-font);
+  font-size: 11px;
+  line-height: 1;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+
+  color: var(--calder-muted);
+}
+
+
+/* ============================================================
+   BUILT TO ORDER NOTICE
+   ============================================================ */
+
+.calder-configurator .wheel-configurator__built-to-order {
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+
+  width: 100%;
+
+  padding: 14px 16px;
+
+  background: #f2f7f1;
+
+  border: 1px solid rgba(63, 153, 89, 0.22);
+  border-radius: 6px;
+}
+
+.calder-configurator .wheel-configurator__bto-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  flex: 0 0 40px;
+
+  width: 40px;
+  height: 40px;
+
+  color: var(--calder-success, #3f9959);
+
+  background: rgba(63, 153, 89, 0.12);
+
+  border-radius: 50%;
+}
+
+.calder-configurator .wheel-configurator__bto-copy {
+  min-width: 0;
+}
+
+.calder-configurator .wheel-configurator__bto-heading {
+  display: block;
+
+  font-family: var(--calder-ui-font);
+  font-size: 12px;
+  line-height: 1.25;
+  font-weight: 700;
+
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+
+  color: var(--calder-navy);
+
+  margin-bottom: 2px;
+}
+
+.calder-configurator .wheel-configurator__bto-text {
+  display: block;
+
+  font-family: var(--calder-ui-font);
+  font-size: 12px;
+  line-height: 1.4;
+
+  color: var(--calder-muted);
+}
+
+
+/* ============================================================
+   BENEFITS STRIP
+   ============================================================ */
+
+.calder-configurator .wheel-configurator__benefits {
+  //display: grid;
+  display: none;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+
+  gap: 0;
+
+  width: 100%;
+
+  margin-top: 64px;
+  padding: 22px 0;
+
+  border-top: 1px solid rgba(14, 42, 62, 0.1);
+  border-bottom: 1px solid rgba(14, 42, 62, 0.1);
+}
+
+
+.calder-configurator .wheel-configurator__benefit {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  text-align: center;
+
+  padding: 8px 20px;
+
+  min-width: 0;
+}
+
+
+.calder-configurator
+.wheel-configurator__benefit + .wheel-configurator__benefit::before {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+  top: 12px;
+
+  width: 1px;
+  height: 56px;
+
+  background: rgba(14, 42, 62, 0.12);
+}
+
+
+.calder-configurator .wheel-configurator__benefit-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 48px;
+  height: 48px;
+
+  margin-bottom: 12px;
+
+  color: var(--calder-navy);
+}
+
+.calder-configurator .wheel-configurator__benefit-icon svg {
+  display: block;
+
+  width: 28px;
+  height: 28px;
+
+  stroke: currentColor;
+}
+
+
+.calder-configurator .wheel-configurator__benefit-title {
+  display: block;
+
+  font-family: var(--calder-ui-font);
+  font-size: 12px;
+  line-height: 1.3;
+  font-weight: 800;
+
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+
+  color: var(--calder-navy);
+
+  margin-bottom: 6px;
+}
+
+.calder-configurator .wheel-configurator__benefit-text {
+  display: block;
+
+  font-family: var(--calder-ui-font);
+  font-size: 12.5px;
+  line-height: 1.45;
+
+  color: var(--calder-muted);
+}
+
+/* ============================================================
+   NEW ELEMENTS — RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 900px) {
+
+  .calder-configurator
+  .wheel-configurator__benefits {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    row-gap: 28px;
+  }
+
+  .calder-configurator
+  .wheel-configurator__benefit:nth-child(even)::before {
+    display: none;
+  }
+
+  .calder-configurator
+  .wheel-configurator__benefit:nth-child(3) {
+    border-top: 1px solid rgba(14, 42, 62, 0.1);
+
+    padding-top: 22px;
+  }
+
+  .calder-configurator
+  .wheel-configurator__benefit:nth-child(4) {
+    border-top: 1px solid rgba(14, 42, 62, 0.1);
+
+    padding-top: 22px;
+  }
+
+
+  .calder-configurator
+  .wheel-configurator__rail-wrap {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .calder-configurator
+  .wheel-configurator__thumbnails {
+    flex-direction: row;
+
+    justify-content: flex-start;
+
+    overflow-x: auto;
+  }
+
+  .calder-configurator
+  .wheel-configurator__thumb {
+    flex: 0 0 56px;
+
+    width: 56px;
+    height: 56px;
+  }
+
+}
+
+@media (max-width: 640px) {
+
+  .calder-configurator
+  .wheel-configurator__benefits {
+    grid-template-columns: minmax(0, 1fr);
+
+    row-gap: 24px;
+  }
+
+  .calder-configurator
+  .wheel-configurator__benefit + .wheel-configurator__benefit {
+    border-top: 1px solid rgba(14, 42, 62, 0.1);
+  }
+
+  .calder-configurator
+  .wheel-configurator__benefit::before {
+    display: none;
+  }
+
+  .calder-configurator
+  .wheel-configurator__benefit {
+    padding-top: 18px;
+    padding-bottom: 6px;
+  }
+
+}
+
+/* ============================================================
+   AVAILABLE FINISHES
+   ============================================================ */
+.calder-finishes {
+  padding: 60px 0;
+  background: var(--calder-warm-white);
+  border-top: 1px solid var(--calder-border-light);
+}
+
+.calder-finishes__heading {
+  font-family: var(--calder-heading-font);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--calder-navy);
+  margin: 0 0 24px;
+}
+
+.calder-finishes__carousel {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  padding: 4px 0;
+  scrollbar-width: none;
+}
+
+.calder-finishes__carousel::-webkit-scrollbar {
+  display: none;
+}
+
+.calder-finishes__card {
+  flex: 0 0 150px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.calder-finishes__card:hover {
+  transform: translateY(-2px);
+}
+
+.calder-finishes__card-media {
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 4px;
+  overflow: hidden;
+  background: var(--calder-white);
+  border: 2px solid var(--calder-border-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.2s;
+}
+
+.calder-finishes__card.is-selected .calder-finishes__card-media {
+  border-color: var(--calder-champagne);
+  box-shadow: 0 0 0 2px var(--calder-champagne);
+}
+
+.calder-finishes__card-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 12px;
+}
+
+.calder-finishes__card-label {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--calder-navy);
+  text-align: center;
+  font-family: var(--calder-ui-font);
+}
+
+.calder-finishes__card-meta {
+  font-size: 11px;
+  color: var(--calder-muted);
+  text-align: center;
+}
+
+/* ============================================================
+   CALDER — PRODUCT FITMENT FINDER
+   Reference-aligned dark photographic treatment
+
+   Existing functionality is preserved.
+   Background image comes from:
+   --fitment-bg
+   ============================================================ */
+
+
+/* ------------------------------------------------------------
+   SECTION
+   ------------------------------------------------------------ */
+
+.page-calder .fitment-finder {
+  position: relative;
+  isolation: isolate;
+
+  width: 100%;
+  min-height: 385px;
+
+  display: flex;
+  align-items: center;
+
+  padding: 68px 0 70px;
+
+  /* IMPORTANT:
+     This actually renders the image supplied by Liquid.
+  */
+  background-image: var(--fitment-bg);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  //border-top: 1px solid rgba(255, 255, 255, 0.12);
+  //border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+
+  overflow: hidden;
+}
+
+
+/* Dark overlay
+   Keeps text/controls readable without hiding the image.
+*/
+.page-calder .fitment-finder::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(5, 29, 43, 0.92) 0%,
+      rgba(5, 29, 43, 0.82) 30%,
+      rgba(5, 29, 43, 0.60) 58%,
+      rgba(5, 20, 31, 0.32) 78%,
+      rgba(5, 20, 31, 0.18) 100%
+    );
+}
+
+
+/* ------------------------------------------------------------
+   INNER CONTAINER
+   ------------------------------------------------------------ */
+
+.page-calder .fitment-finder__inner {
+  position: relative;
+  z-index: 2;
+
+  width: 100%;
+  max-width: var(--container-max-width, 1178px);
+
+  margin-left: auto;
+  margin-right: auto;
+
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+
+/* ------------------------------------------------------------
+   CONTENT / HEADING
+   ------------------------------------------------------------ */
+
+.page-calder .fitment-finder__content {
+  //max-width: 720px;
+  margin-bottom: 30px;
+}
+
+
+/* Gold eyebrow matching the reference.
+   Generated in CSS so the Liquid does not need to change.
+*/
+.page-calder .fitment-finder__content::before {
+  content: "VEHICLE COMPATIBILITY";
+
+  display: block;
+
+  margin-bottom: 12px;
+
+  color: var(--calder-champagne, #c2a48a);
+
+  font-family: var(--calder-ui-font, "Garet", "Poppins", sans-serif);
+  font-size: 13px;
+  line-height: 1.2;
+  font-weight: 500;
+
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+
+.page-calder .fitment-finder__heading {
+  margin: 0;
+
+  color: #ffffff;
+
+  font-family: var(--calder-heading-font, "Facundo", serif);
+  font-size: clamp(38px, 3.2vw, 52px);
+  line-height: 1.02;
+  font-weight: 600;
+
+  letter-spacing: -0.02em;
+
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.16);
+}
+
+
+.page-calder .fitment-finder__subheading {
+  margin: 14px 0 0;
+
+  color: rgba(255, 255, 255, 0.88);
+
+  font-family: var(--calder-ui-font, "Garet", "Poppins", sans-serif);
+  font-size: 17px;
+  line-height: 1.5;
+  font-weight: 400;
+
+  letter-spacing: 0;
+}
+
+
+/* ------------------------------------------------------------
+   FITMENT CONTROLS
+   ------------------------------------------------------------ */
+
+.page-calder .fitment-finder__selects {
+  display: grid;
+
+  /*
+     Four selectors + CTA in a single horizontal row.
+     The select-row itself owns the first 4 columns.
+  */
+  grid-template-columns: minmax(0, 1fr) 240px;
+
+  gap: 16px;
+  align-items: stretch;
+
+  width: 100%;
+}
+
+
+.page-calder .fitment-finder__select-row {
+  display: grid;
+
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+
+  gap: 14px;
+
+  min-width: 0;
+}
+
+
+.page-calder .fitment-finder__select-col {
+  min-width: 0;
+}
+
+
+/* ------------------------------------------------------------
+   SELECTS
+   ------------------------------------------------------------ */
+
+.page-calder .fitment-finder__select {
+  width: 100%;
+  height: 58px;
+
+  margin: 0;
+  padding: 0 48px 0 20px;
+
+  appearance: auto;
+
+  background-color: rgba(255, 255, 255, 0.97);
+
+  border: 1px solid rgba(14, 42, 62, 0.18);
+  border-radius: 4px;
+
+  color: var(--calder-navy, #0e2a3e);
+
+  font-family: var(--calder-ui-font, "Garet", "Poppins", sans-serif);
+  font-size: 14px;
+  line-height: 1;
+  font-weight: 600;
+
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.05),
+    0 4px 16px rgba(0, 0, 0, 0.06);
+
+  cursor: pointer;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease;
+}
+
+
+.page-calder .fitment-finder__select:hover:not(:disabled) {
+  border-color: var(--calder-champagne, #c2a48a);
+}
+
+
+.page-calder .fitment-finder__select:focus {
+  outline: none;
+
+  border-color: var(--calder-champagne, #c2a48a);
+
+  box-shadow:
+    0 0 0 2px rgba(194, 164, 138, 0.18),
+    0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+
+.page-calder .fitment-finder__select:disabled {
+  opacity: 0.88;
+  cursor: not-allowed;
+
+  color: #737d86;
+  background-color: rgba(255, 255, 255, 0.94);
+}
+
+
+/* ------------------------------------------------------------
+   CTA
+   ------------------------------------------------------------ */
+
+.page-calder .fitment-finder__action {
+  display: flex;
+  min-width: 0;
+}
+
+
+.page-calder .fitment-finder__submit {
+  position: relative;
+
+  width: 100%;
+  min-width: 0;
+  height: 58px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  margin: 0;
+  padding: 0 42px 0 28px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #c9a17d 0%,
+      var(--calder-champagne, #c2a48a) 50%,
+      #b88f6d 100%
+    );
+
+  color: #ffffff;
+
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 4px;
+
+  font-family: var(--calder-ui-font, "Garet", "Poppins", sans-serif);
+  font-size: 12px;
+  line-height: 1;
+  font-weight: 700;
+
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+
+  white-space: nowrap;
+
+  box-shadow:
+    0 4px 18px rgba(0, 0, 0, 0.16),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    opacity 0.2s ease;
+}
+
+
+/* Arrow */
+.page-calder .fitment-finder__submit::after {
+  content: "→";
+
+  position: absolute;
+  right: 20px;
+
+  top: 50%;
+  transform: translateY(-52%);
+
+  font-size: 20px;
+  line-height: 1;
+  font-weight: 400;
+
+  transition: transform 0.2s ease;
+}
+
+
+.page-calder .fitment-finder__submit:hover:not(:disabled) {
+  background:
+    linear-gradient(
+      135deg,
+      #d0aa86 0%,
+      #c39b78 50%,
+      #b58a67 100%
+    );
+
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 7px 22px rgba(0, 0, 0, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18);
+}
+
+
+.page-calder .fitment-finder__submit:hover:not(:disabled)::after {
+  transform: translate(3px, -52%);
+}
+
+
+/*
+   IMPORTANT:
+   Keep disabled buttons visually close to the reference.
+
+   Bootstrap/Lumia may otherwise dramatically fade the CTA.
+*/
+.page-calder .fitment-finder__submit:disabled {
+  opacity: 0.78;
+
+  background:
+    linear-gradient(
+      135deg,
+      #c19a77 0%,
+      #b9906d 100%
+    );
+
+  color: rgba(255, 255, 255, 0.9);
+
+  cursor: not-allowed;
+}
+
+
+/* ------------------------------------------------------------
+   RESULTS
+   ------------------------------------------------------------ */
+
+.page-calder .fitment-finder__results {
+  width: 100%;
+  margin-top: 30px;
+}
+
+
+.page-calder .fitment-finder__result-item {
+  background: rgba(255, 255, 255, 0.97);
+
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 4px;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+
+
+.page-calder .fitment-finder__result-item:hover {
+  border-color: var(--calder-champagne, #c2a48a);
+
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.14);
+
+  transform: translateY(-2px);
+}
+
+
+.page-calder .fitment-finder__result-title {
+  color: var(--calder-navy, #0e2a3e);
+}
+
+
+.page-calder .fitment-finder__result-price {
+  color: var(--calder-champagne, #c2a48a);
+}
+
+.page-calder .shopify-section[id*="index_gallery"] {
+    padding-bottom: 4rem;
+}
+
+/* ============================================================
+   LUMIA / THEME OVERRIDES
+   Prevent theme background utilities from covering our image.
+   ============================================================ */
+
+.page-calder .section--fitment-finder {
+  background: transparent !important;
+}
+
+
+.page-calder .section--fitment-finder .fitment-finder {
+  background-color: #0e2a3e;
+}
+
+
+/*
+   The color above is ONLY the fallback if no image is assigned.
+   When --fitment-bg exists, background-image renders above it.
+*/
+
+
+/* ============================================================
+   LARGE DESKTOP
+   ============================================================ */
+
+@media screen and (min-width: 1400px) {
+
+  .page-calder .fitment-finder {
+    min-height: 385px;
+  }
+
+  .page-calder .fitment-finder__inner {
+    max-width: var(--container-max-width, 1178px);
+  }
+
+}
+
+
+/* ============================================================
+   TABLET / SMALL DESKTOP
+   ============================================================ */
+
+@media screen and (max-width: 1100px) {
+
+  .page-calder .fitment-finder {
+    min-height: auto;
+    padding: 60px 0;
+  }
+
+  .page-calder .fitment-finder__selects {
+    grid-template-columns: 1fr;
+  }
+
+  .page-calder .fitment-finder__action {
+    width: 100%;
+  }
+
+  .page-calder .fitment-finder__submit {
+    width: 100%;
+  }
+
+}
+
+
+/* ============================================================
+   TABLET
+   ============================================================ */
+
+@media screen and (max-width: 900px) {
+
+  .page-calder .fitment-finder {
+    background-position: 62% center;
+  }
+
+  .page-calder .fitment-finder::before {
+    background:
+      linear-gradient(
+        90deg,
+        rgba(5, 29, 43, 0.94) 0%,
+        rgba(5, 29, 43, 0.85) 55%,
+        rgba(5, 29, 43, 0.60) 100%
+      );
+  }
+
+  .page-calder .fitment-finder__select-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+}
+
+
+/* ============================================================
+   MOBILE
+   ============================================================ */
+
+@media screen and (max-width: 600px) {
+
+  .page-calder .fitment-finder {
+    padding: 48px 0;
+
+    background-position: 65% center;
+  }
+
+  .page-calder .fitment-finder::before {
+    background: rgba(5, 29, 43, 0.86);
+  }
+
+  .page-calder .fitment-finder__inner {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .page-calder .fitment-finder__content {
+    margin-bottom: 26px;
+  }
+
+  .page-calder .fitment-finder__content::before {
+    margin-bottom: 10px;
+
+    font-size: 11px;
+    letter-spacing: 0.16em;
+  }
+
+  .page-calder .fitment-finder__heading {
+    font-size: clamp(34px, 10vw, 44px);
+  }
+
+  .page-calder .fitment-finder__subheading {
+    margin-top: 12px;
+
+    font-size: 15px;
+  }
+
+  .page-calder .fitment-finder__select-row {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .page-calder .fitment-finder__selects {
+    gap: 12px;
+  }
+
+  .page-calder .fitment-finder__select,
+  .page-calder .fitment-finder__submit {
+    height: 56px;
+  }
+
+}
+
+
+/* ============================================================
+   VERY SMALL MOBILE
+   ============================================================ */
+
+@media screen and (max-width: 380px) {
+
+  .page-calder .fitment-finder__inner {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .page-calder .fitment-finder__heading {
+    font-size: 32px;
+  }
+
+}
+
+/* ============================================================
+   REAL WORLD GALLERY
+   ============================================================ */
+.calder-gallery-section {
+  padding: 60px 0;
+  background: var(--calder-white);
+  border-top: 1px solid var(--calder-border-light);
+}
+
+.calder-gallery-section__header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.calder-gallery-section__heading {
+  font-family: var(--calder-heading-font);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--calder-navy);
+  margin: 0;
+}
+
+.calder-gallery-section__subheading {
+  font-size: 14px;
+  color: var(--calder-muted);
+  margin: 4px 0 0;
+}
+
+.calder-gallery-section__action {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--calder-champagne);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.calder-gallery-section__action:hover {
+  text-decoration: underline;
+}
+
+.calder-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.calder-gallery-grid__item {
+  width: 100%;
+  aspect-ratio: 4/3;
+  border-radius: 2px;
+  overflow: hidden;
+  background: var(--calder-warm-white);
+}
+
+.calder-gallery-grid__item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s;
+}
+
+.calder-gallery-grid__item:hover img {
+  transform: scale(1.03);
+}
+
+/* ============================================================
+   RECOMMENDATIONS — Light B1 Cards
+   ============================================================ */
+.calder-recommendations {
+  padding: 60px 0;
+  background: var(--calder-warm-white);
+  border-top: 1px solid var(--calder-border-light);
+}
+
+.calder-recommendations__heading {
+  font-family: var(--calder-heading-font);
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--calder-navy);
+  margin: 0 0 28px;
+  text-align: center;
+}
+
+.calder-recommendations__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.calder-recommendations calder-product-card {
+  background: var(--calder-white);
+  border: 1px solid var(--calder-border-light);
+  box-shadow: 0 1px 6px rgba(0,0,0,0.04);
+}
+
+.calder-recommendations calder-product-card:hover {
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+
+.calder-recommendations .calder-card__title,
+.calder-recommendations .calder-card__title a {
+  color: var(--calder-navy);
+}
+
+.calder-recommendations .calder-card__type,
+.calder-recommendations .calder-card__type a {
+  color: var(--calder-champagne);
+}
+
+.calder-recommendations .calder-card__price .prd-price-regular {
+  color: var(--calder-navy);
+}
+
+.calder-recommendations .calder-card__action .btn {
+  background: var(--calder-champagne);
+  color: var(--calder-white);
+}
+
+.calder-recommendations .calder-card__action .btn:hover {
+  background: #b89575;
+}
+
+.calder-recommendations .calder-card__details a {
+  color: var(--calder-muted);
+}
+
+.calder-recommendations .calder-card__features {
+  border-top-color: var(--calder-border-light);
+}
+
+.calder-recommendations .calder-card__feature {
+  border-right-color: var(--calder-border-light);
+}
+
+/* ============================================================
+   CALDER SPECIALIST CTA
+   Product Page — Reference-Aligned
+   ============================================================ */
+
+.page-calder .calder-specialist-cta {
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  min-height: 350px;
+  overflow: hidden;
+
+  display: flex;
+  align-items: center;
+
+  padding: 48px 0;
+
+  background-color: var(--calder-navy, #0E2A3E);
+  background-repeat: no-repeat;
+
+  color: var(--calder-white, #fff);
+}
+
+
+/* ============================================================
+   BACKGROUND IMAGE
+   ============================================================ */
+
+.page-calder .calder-specialist-cta.has-bg {
+  /*
+   * Reference treatment:
+   * image fills the entire shallow horizontal band.
+   */
+  background-size: cover;
+  background-position: center center;
+}
+
+
+/*
+ * Dark navy treatment over the image.
+ *
+ * IMPORTANT:
+ * Keep this translucent. The previous 0.85 overlay was
+ * suppressing too much of the wheel artwork.
+ */
+.page-calder .calder-specialist-cta.has-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(6, 26, 39, 0.90) 0%,
+      rgba(7, 28, 42, 0.76) 40%,
+      rgba(7, 28, 42, 0.68) 67%,
+      rgba(5, 23, 35, 0.82) 100%
+    );
+}
+
+
+/*
+ * Very subtle depth treatment.
+ * Helps text remain readable without hiding the background.
+ */
+.page-calder .calder-specialist-cta.has-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.06) 0%,
+      rgba(0, 0, 0, 0.15) 100%
+    );
+}
+
+
+/* ============================================================
+   INNER CONTAINER
+   ============================================================ */
+
+.page-calder .calder-specialist-cta__inner {
+  position: relative;
+  z-index: 2;
+
+  width: 100%;
+  max-width: var(--container-max-width, 1178px);
+  margin: 0 auto;
+
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(360px, 430px);
+  align-items: center;
+
+  gap: clamp(48px, 8vw, 120px);
+}
+
+
+/* ============================================================
+   LEFT CONTENT
+   ============================================================ */
+
+.page-calder .calder-specialist-cta__content {
+  min-width: 0;
+}
+
+
+/* Eyebrow */
+
+.page-calder .calder-specialist-cta .calder-eyebrow {
+  margin: 0 0 7px;
+
+  font-family: var(--calder-ui-font, "Garet", Arial, sans-serif);
+  font-size: 13px;
+  line-height: 1.2;
+  font-weight: 400;
+
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+
+  color: rgba(255, 255, 255, 0.92);
+}
+
+
+/* Main heading */
+
+.page-calder .calder-specialist-cta__heading {
+  margin: 0 0 7px;
+
+  font-family: var(--calder-heading-font, "Facundo", Arial, sans-serif);
+  font-size: clamp(28px, 2.2vw, 38px);
+  line-height: 1.04;
+  font-weight: 700;
+
+  letter-spacing: -0.015em;
+  text-transform: uppercase;
+
+  color: var(--calder-white, #fff);
+}
+
+
+/* Description */
+
+.page-calder .calder-specialist-cta__text {
+  max-width: 650px;
+  margin: 0;
+
+  font-family: var(--calder-ui-font, "Garet", Arial, sans-serif);
+  font-size: 14px;
+  line-height: 1.55;
+  font-weight: 400;
+
+  color: rgba(255, 255, 255, 0.72);
+}
+
+
+/* ============================================================
+   RIGHT ACTION COLUMN
+   ============================================================ */
+
+.page-calder .calder-specialist-cta__actions {
+  width: 100%;
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+
+/* ============================================================
+   PRIMARY CTA
+   ============================================================ */
+
+.page-calder .calder-specialist-cta__action {
+  width: 100%;
+  min-height: 60px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  position: relative;
+
+  padding: 16px 58px 16px 32px;
+
+  background: var(--calder-champagne, #C2A48A);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  border-radius: 0;
+
+  box-shadow:
+    0 6px 20px rgba(0, 0, 0, 0.12),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+
+  font-family: var(--calder-ui-font, "Garet", Arial, sans-serif);
+  font-size: 13px;
+  line-height: 1;
+  font-weight: 700;
+
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+
+  color: #fff;
+  text-decoration: none;
+
+  cursor: pointer;
+
+  transition:
+    background-color 180ms ease,
+    transform 180ms ease,
+    box-shadow 180ms ease;
+}
+
+
+.page-calder .calder-specialist-cta__action:hover {
+  background: #b89575;
+  color: #fff;
+
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.16),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+
+
+.page-calder .calder-specialist-cta__action:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+}
+
+
+/* Arrow */
+
+.page-calder .calder-specialist-cta__arrow {
+  position: absolute;
+  right: 28px;
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 20px;
+  line-height: 1;
+  font-weight: 400;
+
+  transition: transform 180ms ease;
+}
+
+
+.page-calder .calder-specialist-cta__action:hover
+.calder-specialist-cta__arrow {
+  transform: translate(4px, -50%);
+}
+
+
+/* ============================================================
+   CONTACT METHODS
+   ============================================================ */
+
+.page-calder .calder-specialist-cta__methods {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 0;
+
+  margin-top: 22px;
+}
+
+
+/* Individual method */
+
+.page-calder .calder-specialist-cta__method {
+  position: relative;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 9px;
+
+  min-width: 0;
+  padding: 0 18px;
+
+  font-family: var(--calder-ui-font, "Garet", Arial, sans-serif);
+  font-size: 12px;
+  line-height: 1.2;
+  font-weight: 500;
+
+  white-space: nowrap;
+
+  color: rgba(255, 255, 255, 0.78);
+  text-decoration: none;
+
+  transition:
+    color 180ms ease,
+    opacity 180ms ease;
+}
+
+
+/* separators */
+
+.page-calder .calder-specialist-cta__method + 
+.calder-specialist-cta__method::before {
+  content: "";
+
+  position: absolute;
+  left: 0;
+  top: 50%;
+
+  width: 1px;
+  height: 18px;
+
+  transform: translateY(-50%);
+
+  background: rgba(255, 255, 255, 0.22);
+}
+
+
+/* icons */
+
+.page-calder .calder-specialist-cta__method svg {
+  flex: 0 0 auto;
+
+  width: 21px;
+  height: 21px;
+
+  color: rgba(255, 255, 255, 0.88);
+  stroke: currentColor;
+}
+
+
+.page-calder .calder-specialist-cta__method:hover {
+  color: #fff;
+}
+
+
+/* ============================================================
+   LARGE DESKTOP
+   ============================================================ */
+
+@media (min-width: 1440px) {
+
+  .page-calder .calder-specialist-cta {
+    min-height: 350px;
+  }
+
+  .page-calder .calder-specialist-cta__inner {
+    grid-template-columns:
+      minmax(0, 1fr)
+      minmax(390px, 440px);
+  }
+
+}
+
+
+/* ============================================================
+   TABLET
+   ============================================================ */
+
+@media (max-width: 991px) {
+
+  .page-calder .calder-specialist-cta {
+    min-height: auto;
+    padding: 48px 0;
+  }
+
+  .page-calder .calder-specialist-cta__inner {
+    grid-template-columns: minmax(0, 1fr) 340px;
+    gap: 40px;
+  }
+
+  .page-calder .calder-specialist-cta__heading {
+    font-size: 28px;
+  }
+
+  .page-calder .calder-specialist-cta__method {
+    padding: 0 11px;
+    font-size: 11px;
+  }
+
+}
+
+
+/* ============================================================
+   MOBILE
+   ============================================================ */
+
+@media (max-width: 767px) {
+
+  .page-calder .calder-specialist-cta {
+    padding: 42px 0;
+  }
+
+
+  /*
+   * Reposition the artwork so it remains decorative rather
+   * than competing with the copy on small screens.
+   */
+  .page-calder .calder-specialist-cta.has-bg {
+    background-position: 58% center;
+  }
+
+
+  .page-calder .calder-specialist-cta.has-bg::before {
+    background:
+      linear-gradient(
+        180deg,
+        rgba(6, 26, 39, 0.90) 0%,
+        rgba(6, 26, 39, 0.80) 100%
+      );
+  }
+
+
+  .page-calder .calder-specialist-cta__inner {
+    display: flex;
+    flex-direction: column;
+
+    align-items: stretch;
+
+    gap: 28px;
+  }
+
+
+  .page-calder .calder-specialist-cta__content {
+    text-align: left;
+  }
+
+
+  .page-calder .calder-specialist-cta .calder-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.14em;
+  }
+
+
+  .page-calder .calder-specialist-cta__heading {
+    font-size: clamp(25px, 8vw, 32px);
+    line-height: 1.08;
+
+    margin-bottom: 10px;
+  }
+
+
+  .page-calder .calder-specialist-cta__text {
+    max-width: 520px;
+
+    font-size: 13px;
+    line-height: 1.55;
+  }
+
+
+  .page-calder .calder-specialist-cta__action {
+    min-height: 58px;
+  }
+
+
+  .page-calder .calder-specialist-cta__methods {
+    flex-wrap: wrap;
+
+    justify-content: flex-start;
+
+    row-gap: 18px;
+
+    margin-top: 20px;
+  }
+
+
+  .page-calder .calder-specialist-cta__method {
+    padding: 0 14px;
+  }
+
+
+  .page-calder .calder-specialist-cta__method:first-child {
+    padding-left: 0;
+  }
+
+}
+
+
+/* ============================================================
+   SMALL MOBILE
+   ============================================================ */
+
+@media (max-width: 480px) {
+
+  .page-calder .calder-specialist-cta {
+    padding: 38px 0;
+  }
+
+
+  .page-calder .calder-specialist-cta__heading {
+    font-size: 26px;
+  }
+
+
+  .page-calder .calder-specialist-cta__methods {
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+
+    justify-content: start;
+
+    gap: 0;
+  }
+
+
+  .page-calder .calder-specialist-cta__method {
+    padding: 0 10px;
+
+    font-size: 10px;
+  }
+
+
+  .page-calder .calder-specialist-cta__method:first-child {
+    padding-left: 0;
+  }
+
+
+  .page-calder .calder-specialist-cta__method svg {
+    width: 18px;
+    height: 18px;
+  }
+
+}
+
+/* ============================================================
+   RESPONSIVE — 768px Tablet
+   ============================================================ */
+@media (max-width: 991px) {
+  .calder-pdp__hero {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .calder-pdp__gallery {
+    position: static;
+    min-height: auto;
+  }
+
+  .calder-pdp__info {
+    max-width: 100%;
+  }
+
+  .calder-pdp__main-image {
+    aspect-ratio: 1;
+    max-height: 70vw;
+  }
+
+  .calder-specs-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .calder-finishes__carousel {
+    gap: 12px;
+  }
+
+  .calder-finishes__card {
+    flex: 0 0 180px;
+  }
+
+  .calder-gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .calder-recommendations__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .calder-configurator .wheel-configurator__layout {
+    grid-template-columns: 1fr;
+  }
+
+  .page-calder .fitment-finder__select-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .calder-specialist-cta__inner {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .calder-specialist-cta__text {
+    max-width: none;
+  }
+
+  .calder-specialist-cta__methods {
+    justify-content: center;
+  }
+
+  .calder-engineering__capabilities {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ============================================================
+   RESPONSIVE — 390px Mobile
+   ============================================================ */
+@media (max-width: 575px) {
+  .calder-pdp__title {
+    font-size: 34px;
+  }
+
+  .calder-pdp__config-row {
+    grid-template-columns: 1fr;
+  }
+
+  .calder-pdp__purchase {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .calder-pdp__price {
+    font-size: 22px;
+  }
+
+  .calder-pdp__add-btn {
+    min-width: auto;
+  }
+
+  .calder-specs__table td {
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+
+  .calder-specs__table td:first-child {
+    width: 90px;
+  }
+
+  .calder-finishes__card {
+    flex: 0 0 150px;
+  }
+
+  .calder-gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+
+  .calder-recommendations__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .calder-specs-grid {
+    gap: 24px;
+  }
+
+  .calder-specs-section,
+  .calder-configurator,
+  .calder-finishes,
+  .calder-gallery-section,
+  .calder-recommendations {
+    padding: 40px 0;
+  }
+
+  .calder-specialist-cta__methods {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .calder-pdp__thumb {
+    flex: 0 0 60px;
+    width: 60px;
+    height: 60px;
+  }
+
+  .calder-pdp__trust {
+    gap: 16px;
+  }
+}

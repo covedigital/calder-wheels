@@ -1,0 +1,279 @@
+{{ 'fitment-finder.css' | asset_url | stylesheet_tag }}
+{% render 'fitment-data' %}
+
+{%- liquid
+  assign store_width = settings.container_max_width
+  if section.settings.section_width == 'custom'
+    assign store_width = section.settings.container_max_width
+  endif
+  assign heading = section.settings.heading | default: 'Find Your Fit'
+  assign subheading = section.settings.subheading | default: 'Select your vehicle to see compatible wheels'
+  assign button_text = section.settings.button_text | default: 'View Compatible Wheels'
+  assign browse_text = section.settings.browse_text | default: 'Browse All Wheels'
+  assign placeholder_year = section.settings.placeholder_year | default: 'Year'
+  assign placeholder_make = section.settings.placeholder_make | default: 'Make'
+  assign placeholder_model = section.settings.placeholder_model | default: 'Model'
+  assign placeholder_trim = section.settings.placeholder_trim | default: 'Trim'
+-%}
+
+<section
+  class="hf-fitment fitment-page"
+  id="calder-fitment-finder-{{ section.id }}"
+  data-section-id="{{ section.id }}"
+  style="--container-max-width: {{ store_width }}px;"
+>
+  <div class="fitment-page__inner">
+    <div class="fitment-page__hero">
+      <h1 class="fitment-page__heading">{{ heading }}</h1>
+      {% if subheading != blank %}
+        <p class="fitment-page__subheading">{{ subheading }}</p>
+      {% endif %}
+    </div>
+
+    <div class="fitment-page__finder">
+      <div class="fitment-page__controls">
+        <div class="fitment-page__control">
+          <label class="fitment-page__label" for="hf-year-{{ section.id }}">YEAR</label>
+          <select id="hf-year-{{ section.id }}" class="fitment-page__select" data-fitment="year">
+            <option value="">{{ placeholder_year }}</option>
+          </select>
+        </div>
+        <div class="fitment-page__control">
+          <label class="fitment-page__label" for="hf-make-{{ section.id }}">MAKE</label>
+          <select id="hf-make-{{ section.id }}" class="fitment-page__select" data-fitment="make" disabled>
+            <option value="">{{ placeholder_make }}</option>
+          </select>
+        </div>
+        <div class="fitment-page__control">
+          <label class="fitment-page__label" for="hf-model-{{ section.id }}">MODEL</label>
+          <select id="hf-model-{{ section.id }}" class="fitment-page__select" data-fitment="model" disabled>
+            <option value="">{{ placeholder_model }}</option>
+          </select>
+        </div>
+        <div class="fitment-page__control">
+          <label class="fitment-page__label" for="hf-trim-{{ section.id }}">TRIM</label>
+          <select id="hf-trim-{{ section.id }}" class="fitment-page__select" data-fitment="trim" disabled>
+            <option value="">{{ placeholder_trim }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="fitment-page__action">
+        <button
+          id="hf-submit-{{ section.id }}"
+          class="btn btn--primary fitment-page__submit"
+          disabled
+        >
+          {{ button_text }}
+        </button>
+      </div>
+    </div>
+
+    <div id="hf-results-{{ section.id }}" class="fitment-page__results" style="display: none;"></div>
+
+    <div class="fitment-page__browse">
+      <a href="/collections/all" class="fitment-page__browse-link">{{ browse_text }}</a>
+    </div>
+  </div>
+</section>
+
+<script src="{{ 'fitment-finder.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "Fitment Page",
+  "tag": "section",
+  "class": "section--fitment-page",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "section_width",
+      "label": "Section width",
+      "options": [
+        { "value": "global", "label": "Global" },
+        { "value": "custom", "label": "Custom" }
+      ],
+      "default": "global"
+    },
+    {
+      "type": "range",
+      "id": "container_max_width",
+      "min": 400,
+      "max": 1920,
+      "step": 20,
+      "unit": "px",
+      "label": "Container max width",
+      "default": 1180
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Find Your Fit"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Select your vehicle to see compatible wheels"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "View Compatible Wheels"
+    },
+    {
+      "type": "text",
+      "id": "browse_text",
+      "label": "Browse link text",
+      "default": "Browse All Wheels"
+    },
+    {
+      "type": "header",
+      "content": "Placeholder Text"
+    },
+    {
+      "type": "text",
+      "id": "placeholder_year",
+      "label": "Year placeholder",
+      "default": "Year"
+    },
+    {
+      "type": "text",
+      "id": "placeholder_make",
+      "label": "Make placeholder",
+      "default": "Make"
+    },
+    {
+      "type": "text",
+      "id": "placeholder_model",
+      "label": "Model placeholder",
+      "default": "Model"
+    },
+    {
+      "type": "text",
+      "id": "placeholder_trim",
+      "label": "Trim placeholder",
+      "default": "Trim"
+    },
+    {
+      "type": "header",
+      "content": "SECTION GENERAL"
+    },
+    {
+      "type": "checkbox",
+      "id": "section_animation",
+      "label": "Enable soft appearing of section",
+      "default": true,
+      "info": "Global sections animation disabling in Theme Settings / General / Sections"
+    },
+    {
+      "type": "header",
+      "content": "SECTION MARGIN"
+    },
+    {
+      "type": "range",
+      "id": "spacing_sections",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Vertical space above the section on Desktop",
+      "default": 100
+    },
+    {
+      "type": "checkbox",
+      "id": "use_global_desktop_space",
+      "label": "Use global space on desktop",
+      "default": true,
+      "info": "from Theme Settings / General / Layout"
+    },
+    {
+      "type": "range",
+      "id": "spacing_sections_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Vertical space above the section on Mobile",
+      "default": 70
+    },
+    {
+      "type": "checkbox",
+      "id": "use_global_mobile_space",
+      "label": "Use global space on mobile",
+      "default": true,
+      "info": "from Theme Settings / General / Layout"
+    },
+    {
+      "type": "header",
+      "content": "SECTION PADDING"
+    },
+    {
+      "type": "range",
+      "id": "spacing_padding_sections",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Vertical inner padding on Desktop",
+      "default": 80
+    },
+    {
+      "type": "checkbox",
+      "id": "use_global_desktop_space_padding",
+      "label": "Use global inner padding on desktop",
+      "default": true,
+      "info": "from Theme Settings / General / Layout"
+    },
+    {
+      "type": "range",
+      "id": "spacing_padding_sections_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Vertical inner padding on Mobile",
+      "default": 50
+    },
+    {
+      "type": "checkbox",
+      "id": "use_global_mobile_space_padding",
+      "label": "Use global inner padding on Mobile",
+      "default": true,
+      "info": "from Theme Settings / General / Layout"
+    },
+    {
+      "type": "header",
+      "content": "SECTION BACKGROUND"
+    },
+    {
+      "type": "checkbox",
+      "id": "background",
+      "label": "Enable background",
+      "default": false,
+      "info": "by default inherits Secondary background color from Theme Settings"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Custom background color"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Fitment Page",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}

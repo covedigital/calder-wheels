@@ -1,0 +1,64 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "build-your-wheel": {
+      "type": "build-your-wheel-page",
+      "settings": {
+        "hero_bg": "shopify://shop_images/Tahoe-M-2_3.png",
+        "hero_overlay_opacity": 0.7,
+        "hero_eyebrow": "CUSTOMIZE YOUR LOOK",
+        "hero_heading": "Build Your Wheel",
+        "hero_text": "Design a wheel that's uniquely yours. Choose your finishes, preview in real time, and order a wheel built to your style.",
+        "hero_cta": "Start Building",
+        "collection": "frontpage",
+        "default_product": "",
+        "no_products_message": "No wheel designs are currently available for configuration.",
+        "config_eyebrow": "CUSTOMIZE YOUR LOOK",
+        "config_heading": "Build Your Wheel",
+        "config_subtitle": "Select finishes to preview and order a wheel built to your style.",
+        "show_quote": true,
+        "show_360": false,
+        "lead_time_text": "Ships in 5–10 business days",
+        "benefits_eyebrow": "WHY CUSTOMIZE",
+        "benefits_heading": "A Wheel Built Around You",
+        "benefits_text": "Complete control over finishes, fitment and style. No compromises.",
+        "fitment_bg": "shopify://shop_images/Range-Rover-M-07_1.png",
+        "fitment_eyebrow": "FIND YOUR FIT",
+        "fitment_heading": "Check Vehicle Fitment",
+        "fitment_text": "Make sure your custom configuration fits your vehicle before adding to cart.",
+        "fitment_btn": "SEARCH VEHICLE FITMENT",
+        "fitment_url": "",
+        "popular_heading": "Popular Configurations",
+        "popular_subtitle": "Explore some of the most popular finish combinations.",
+        "specialist_bg": "shopify://shop_images/Silverado-Red_1.png",
+        "specialist_eyebrow": "NEED HELP?",
+        "specialist_heading": "Talk to a Wheel Specialist",
+        "specialist_text": "Get expert advice on finishes, fitment, and custom options.",
+        "specialist_quote_text": "REQUEST A QUOTE",
+        "specialist_dealer_text": "FIND A DEALER",
+        "specialist_dealer_url": ""
+      }
+    },
+    "builder-footer-negative": {
+      "type": "index-negative-space",
+      "settings": {
+        "spacing_sections": 0,
+        "use_global_desktop_space": true,
+        "spacing_sections_mobile": 0,
+        "use_global_mobile_space": true
+      }
+    }
+  },
+  "order": [
+    "build-your-wheel",
+    "builder-footer-negative"
+  ]
+}

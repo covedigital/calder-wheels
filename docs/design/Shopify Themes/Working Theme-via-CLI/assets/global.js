@@ -319,6 +319,7 @@ class VariantSelects extends HTMLElement {
   }
 
   onVariantChange() {
+    if (window._calderSuspendVariantChange) return;
     this.renderSection();
     this.syncOptions();
   }
@@ -328,15 +329,16 @@ class VariantSelects extends HTMLElement {
     this.updateMasterId();
     this.disableUnavailable();
     this.updateQuantityStatus(this.currentVariant?.option1);
-    // this.toggleAddButton(true, '', false);
+    this.toggleAddButton(true, '', false);
     this.updatePickupAvailability();
     this.removeErrorMessage();
     if (!this.currentVariant) {
-      // this.toggleAddButton(true, '', true);
+      this.toggleAddButton(true, '', true);
     } else {
       this.updateMedia();
       this.updateURL();
       this.updateVariantInput();
+      this.toggleAddButton(!this.currentVariant.available, '', false);
       this.updateOptionTitles();
       this.renderProductInfo();
       this.updateShareUrl();
@@ -692,6 +694,7 @@ class VariantSelects extends HTMLElement {
 
     if (this.sectionLayout === 'product' || this.sectionLayout === 'quick-view') {
       const productContainer = this.closest('.prd-block');
+      if (!productContainer) return;
       const productGalleryElement = productContainer.querySelector('product-gallery');
       const scrollSync = productGalleryElement?.dataset.scrollSync || false;
       const isScrollSync = (scrollSync === 'true');
@@ -816,7 +819,7 @@ class VariantSelects extends HTMLElement {
   removeErrorMessage() {
     if (!this.section) return;
     const productForm = this.section.querySelector('[data-form]') || this.closest('product-form');
-    if (productForm && productForm.getAttribute('id') !== 'product-form-installment') productForm.handleErrorMessage();
+    if (productForm && productForm.getAttribute('id') !== 'product-form-installment' && typeof productForm.handleErrorMessage === 'function') productForm.handleErrorMessage();
   }
 
   renderProductInfo() {
@@ -856,7 +859,7 @@ class VariantSelects extends HTMLElement {
   }
 
   toggleAddButton(disable = true, text, modifyClass = true) {
-    const productForm = this.section.querySelector('[data-form]');
+    const productForm = this.section.querySelector('[data-form]') || this.section.querySelector('form[action*="/cart/add"]');
     if (!productForm) return;
     let addButton = productForm.querySelector('[name="add"]');
     let addButtonText = addButton?.querySelector('span');
@@ -872,7 +875,7 @@ class VariantSelects extends HTMLElement {
       const preOrderCondition = this.currentVariant.inventoryManagement && this.currentVariant.inventoryQuantity < 1;
       /*const preOrderCondition = this.currentVariant.inventoryManagement && this.currentVariant.inventoryQuantity < 1 || this.currentVariant.available && !this.currentVariant.inventoryQuantity;*/
 
-      preOrder.disabled = !preOrderCondition;
+      if (preOrder) preOrder.disabled = !preOrderCondition;
 
       if (this.currentVariant.requires_selling_plan) {
         addButtonText.textContent = window.variantStrings.addSubscriptionToCart;

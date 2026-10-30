@@ -1,0 +1,12 @@
+﻿Inventory Coverage Gap,Vehicles Affected,Current Finding / Recommended Resolution,Client Verification (Correct / Incorrect / Needs Review),Client Corrected Value / Resolution,Client Notes
+No 5x112 pattern,"BMW, Mercedes, Audi, Rolls Royce (16 vehicle records)",New inventory creation needed,,,
+No 5x108 pattern,Range Rover Evoque/Velar,New inventory creation needed,,,
+No 5x127 pattern,"Durango, Grand Cherokee",New inventory creation needed,,,
+No 5x114 pattern,Lexus RX,New inventory creation needed,,,
+No 5x150 pattern,Lexus LX,New inventory creation needed,,,
+"No 20"" diameter","X3, GLC, Q5",New inventory or exclude,,,
+Hub 95.1 missing,"Lexus GX 2024+, LX 2022+",Client confirmation needed,,,
+Hub 77.8 vs 78.1,Armada / QX,Verify tolerance,,,
+Hub 71.5 vs 84.1,Lamborghini Urus,Verify tolerance,,,
+"Rear width 12""","X5 M-Sport, GLS, Urus","Not in inventory (10"" only)",,,
+22x9 / 22x9.5 widths,"BMW, Mercedes, Range Rover","Not in inventory (10"" only)",,,

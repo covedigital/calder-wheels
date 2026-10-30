@@ -1,0 +1,586 @@
+/* Calder universal PDP controls — INITIAL design (.calder-uc__* system) */
+.calder-uc {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin: 1rem 0 2rem;
+}
+.calder-uc__group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.calder-uc__heading {
+  display: initial;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+.calder-uc__eyebrow {
+  font-family: var(--calder-ui-font, sans-serif);
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--calder-color-muted, #6b7280);
+  margin-right: 5px;
+}
+.calder-uc__label {
+  font-family: var(--calder-ui-font, sans-serif);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--calder-color-ink, #111827);
+}
+.calder-uc__label[data-calder-uc-pending="true"] {
+  font-weight: 400;
+  font-style: italic;
+  color: var(--calder-color-muted, #6b7280);
+}
+.calder-uc__values {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.calder-uc__option {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px 8px 8px;
+  background: var(--calder-color-surface, #ffffff);
+  border: 1px solid var(--calder-color-border, #d1d5db);
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: var(--calder-ui-font, sans-serif);
+  font-size: 14px;
+  color: var(--calder-color-ink, #111827);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.calder-uc__option:hover {
+  border-color: var(--calder-color-ink, #111827);
+}
+.calder-uc__option.is-selected {
+  border-color: var(--calder-color-accent, #111827);
+  border-width: 2px;
+  padding: 7px 13px 7px 7px;
+  box-shadow: 0 0 0 1px var(--calder-color-accent, #111827);
+}
+.calder-uc__option:focus-visible {
+  outline: 2px solid var(--calder-color-accent, #111827);
+  outline-offset: 2px;
+}
+.calder-uc__swatch {
+  display: inline-flex;
+  width: 35px;
+  height: 35px;
+  border-radius: 4px;
+  overflow: hidden;
+  background: var(--calder-color-surface-alt, #f3f4f6);
+  flex: none;
+}
+.calder-uc__swatch img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.calder-uc__option[data-dim="diameter"] {
+  padding: 10px 18px;
+}
+.calder-uc__noscript {
+  font-size: 13px;
+  color: var(--calder-color-muted, #6b7280);
+}
+@media (max-width: 749px) {
+  .calder-uc {
+    gap: 16px;
+  }
+  .calder-uc__option {
+    font-size: 13px;
+  }
+  .calder-uc__swatch {
+    width: 38px;
+    height: 38px;
+  }
+}
+
+/* ── Purchase block (initial design) ── */
+.calder-upc {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 12px 0 0;
+}
+.calder-upc__cta {
+  width: 100%;
+}
+.calder-upc__cta[disabled] {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+.calder-upc__message {
+  margin: 0;
+  font-family: var(--calder-ui-font, sans-serif);
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--calder-color-muted, #6b7280);
+  min-height: 1.2em;
+}
+.calder-upc__support-link {
+  font-family: var(--calder-ui-font, sans-serif);
+  font-size: 13px;
+  color: var(--calder-color-ink, #111827);
+  text-decoration: underline;
+}
+.calder-upc__noscript {
+  font-size: 13px;
+  color: var(--calder-color-muted, #6b7280);
+}
+
+/* ── Gallery-context preview (preview lives in the product gallery) ── */
+.calder-uc__gallery-slide .image-container {
+  position: relative;
+}
+.calder-uc__gallery-slide .calder-uc__preview,
+.calder-uc__gallery-slide .calder-uc__preview-stack {
+  position: absolute;
+  inset: 0;
+  max-width: none;
+  margin: 0;
+}
+.calder-uc__gallery-slide .calder-uc__preview-stack {
+  display: grid;
+  place-items: center;
+}
+/* Lumia hides imgs in non-active slides (.prd-block-gallery-main .swiper-slide img
+   { visibility: hidden }); the preview slide must always show its layers. */
+.prd-block-gallery-main .calder-uc__gallery-slide .calder-uc__layer {
+  visibility: visible;
+}
+.calder-uc__gallery-slide .calder-uc__layer {
+  position: relative;
+  grid-area: 1 / 1;
+  top: auto;
+  left: auto;
+  transform: none;
+  width: 100%;
+  height: auto;
+  max-height: 100%;
+  object-fit: contain;
+  opacity: 1;
+  visibility: visible;
+}
+.calder-uc__gallery-slide .calder-uc__layer--hardware {
+  width: 100%;
+}
+/* Single-slide gallery (zero product media): guarantee the preview slide is
+   active-visible regardless of Swiper state; stops applying once media exists. */
+.prd-block-gallery-main .calder-uc__gallery-slide:only-child {
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+}
+.prd-block-gallery-thumbs .calder-uc__thumb-slide:only-child {
+  opacity: 1 !important;
+  visibility: visible !important;
+  display: block !important;
+}
+.calder-uc__thumb-stack {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+}
+.calder-uc__thumb-stack .calder-uc__layer {
+  grid-area: 1 / 1;
+  position: relative;
+  top: auto;
+  left: auto;
+  transform: none;
+  width: 72%;
+  height: auto;
+  max-height: 100%;
+  object-fit: contain;
+}
+.calder-uc__preview-fallback {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 16px;
+  font-family: var(--calder-ui-font, sans-serif);
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--calder-color-muted, #6b7280);
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 8px;
+}
+
+/* ── Self-sizing preview canvases (work with or without Swiper inline widths) ── */
+.calder-uc__gallery-slide {
+  width: 100%;
+  height: 100%;
+}
+.calder-uc__gallery-slide .calder-uc__preview-canvas {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding-bottom: 0;
+}
+.calder-uc__gallery-slide .calder-uc__layer {
+  width: 100%;
+  max-height: 100%;
+}
+.calder-uc__thumb-slide .calder-uc__thumb-canvas {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  padding-bottom: 0;
+}
+
+/* Thumb layers must never inherit slide-hidden visibility */
+.prd-block-gallery-thumbs .calder-uc__thumb-slide .calder-uc__layer {
+  visibility: visible;
+}
+.calder-pdp__thumbs-wrap .calder-uc__thumb-slide .calder-uc__thumb-canvas {
+  aspect-ratio: 1 / 1;
+  min-height: 64px;
+}
+
+/* ── Outer thumbs strip (.calder-pdp__thumbs-wrap) ──
+   This strip sits OUTSIDE <product-gallery>, so Swiper/ProductGallery never
+   sizes it. The universal controller wires clicks + active state; the CSS
+   lays it out as the approved five-across grid. */
+.calder-pdp__thumbs-wrap .swiper-wrapper {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  align-items: stretch;
+}
+.calder-pdp__thumbs-wrap .swiper-slide {
+  width: auto;
+  height: auto;
+  cursor: pointer;
+}
+.calder-pdp__thumbs-wrap .swiper-slide .calder-uc__thumb-canvas,
+.calder-pdp__thumbs-wrap .swiper-slide .image-container {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  padding-bottom: 0;
+}
+.calder-pdp__thumbs-wrap .swiper-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.calder-pdp__thumbs-wrap .calder-uc__thumb-stack {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+}
+.calder-pdp__thumbs-wrap .calder-uc__layer {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.calder-pdp__thumbs-wrap .swiper-slide.swiper-slide-thumb-active .image-container,
+.calder-pdp__thumbs-wrap .swiper-slide.is-active .image-container {
+  border-color: var(--calder-champagne, #E9B054);
+}
+
+/* Component detail slide: centered single-component render */
+.calder-uc__gallery-slide .calder-uc__detail {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   Self-contained universal gallery (no Swiper / no ProductGallery).
+   All classes are calder-uc-gal__* — immune to Lumia gallery CSS.
+   ════════════════════════════════════════════════════════════════════ */
+.calder-uc-gallery {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.calder-uc-gal__main {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+}
+.calder-uc-gal__slides {
+  position: absolute;
+  inset: 0;
+}
+.calder-uc-gal__slides .calder-uc__gallery-slide {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  pointer-events: none;
+  z-index: 0;
+}
+.calder-uc-gal__slides .calder-uc__gallery-slide.calder-uc-gal__slide--active {
+  opacity: 1;
+  pointer-events: auto;
+  z-index: 1;
+}
+.calder-uc-gallery .swiper-arrows-carousel {
+  z-index: 6;
+}
+.calder-uc-gallery .swiper-button-disabled {
+  opacity: 0.35;
+  cursor: default;
+  pointer-events: none;
+}
+
+/* Thumbs strip */
+.calder-uc-gal__thumbs-strip {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  width: 100%;
+}
+.calder-uc-gal__thumbs-strip .calder-uc-gal__thumb {
+  cursor: pointer;
+  border: 2px solid transparent;
+  border-radius: 6px;
+  overflow: hidden;
+  transition: border-color 0.2s ease;
+}
+.calder-uc-gal__thumbs-strip .calder-uc-gal__thumb:hover {
+  border-color: var(--calder-color-ink, #111827);
+}
+.calder-uc-gal__thumbs-strip .calder-uc-gal__thumb.calder-uc-gal__thumb--active {
+  border-color: var(--calder-champagne, #E9B054);
+}
+.calder-uc-gal__thumbs-strip .image-container {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background: var(--calder-color-surface-alt, #f3f4f6);
+}
+.calder-uc-gal__thumbs-strip img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.calder-uc-gal__thumbs-strip .calder-uc__thumb-stack {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+}
+.calder-uc-gal__thumbs-strip .calder-uc__thumb-stack .calder-uc__layer {
+  grid-area: 1 / 1;
+  position: relative;
+  width: 74%;
+  height: auto;
+  transform: none;
+}
+
+/* ── Self-owned gallery navigation (no Swiper/Lumia dependency) ── */
+.calder-uc-gallery .calder-uc-gal__nav {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  pointer-events: none;
+}
+.calder-uc-gallery .calder-uc-gal__arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid var(--calder-color-border, #d1d5db);
+  border-radius: 50%;
+  color: var(--calder-color-ink, #111827);
+  cursor: pointer;
+  pointer-events: auto;
+  transition: background-color 0.15s ease, opacity 0.15s ease;
+}
+.calder-uc-gallery .calder-uc-gal__arrow:hover {
+  background: #ffffff;
+}
+.calder-uc-gallery .calder-uc-gal__arrow--prev { left: 12px; }
+.calder-uc-gallery .calder-uc-gal__arrow--next { right: 12px; }
+.calder-uc-gallery .calder-uc-gal__arrow--disabled {
+  opacity: 0.35;
+  cursor: default;
+  pointer-events: none;
+}
+.calder-uc-gallery .calder-uc-gal__arrow svg {
+  width: 20px;
+  height: 20px;
+  display: block;
+}
+
+/* Media slides fill the square */
+.calder-uc-gallery .calder-uc-gal__media-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.calder-uc-gallery .calder-uc__preview-canvas {
+  width: 100%;
+  height: 100%;
+  padding-bottom: 0;
+}
+
+/* Thumbs strip (preview thumb + media thumbs) */
+.calder-uc-gallery .calder-uc-gal__thumbs-strip {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  width: 100%;
+}
+.calder-uc-gallery .calder-uc-gal__thumb {
+  cursor: pointer;
+  border: 2px solid transparent;
+  border-radius: 6px;
+  overflow: hidden;
+  transition: border-color 0.2s ease;
+  background: var(--calder-color-surface-alt, #f3f4f6);
+}
+.calder-uc-gallery .calder-uc-gal__thumb:hover {
+  border-color: var(--calder-color-ink, #111827);
+}
+.calder-uc-gallery .calder-uc-gal__thumb.calder-uc-gal__thumb--active {
+  border-color: var(--calder-champagne, #E9B054);
+}
+.calder-uc-gallery .calder-uc-gal__thumb .image-container {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  padding-bottom: 80px;
+  border-radius: 2px;
+}
+.calder-uc-gallery .calder-uc-gal__thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.calder-uc-gallery .calder-uc-gal__thumb .calder-uc__thumb-stack {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+}
+.calder-uc-gallery .calder-uc-gal__thumb .calder-uc__thumb-stack .calder-uc__layer {
+  grid-area: 1 / 1;
+  position: relative;
+  width: 74%;
+  height: auto;
+  object-fit: contain;
+  transform: none;
+}
+
+/* Single-slide gallery: hide nav + strip (preview only, no media) */
+.calder-uc-gallery[data-calder-uc-gal-count="1"] .calder-uc-gal__nav,
+.calder-uc-gallery[data-calder-uc-gal-count="1"] .calder-pdp__thumbs-wrap,
+.calder-uc-gallery[data-calder-uc-gal-count="0"] .calder-uc-gal__nav,
+.calder-uc-gallery[data-calder-uc-gal-count="0"] .calder-pdp__thumbs-wrap {
+  display: none;
+}
+
+/* Neutralize Lumia's product-card image-swap inside the universal gallery.
+   (.image-container:hover img:first-child:not(:only-of-type) fades the barrel
+   layer up on hover — that effect is for product cards, not the preview stack.) */
+.calder-uc-gallery .image-container:hover img:first-child:not(:only-of-type),
+.calder-uc-gallery .image-container:hover img + img,
+.calder-uc-gallery .image-container img:first-child:not(:only-of-type),
+.calder-uc-gallery .image-container img + img {
+  opacity: revert;
+  transform: revert;
+}
+
+/* ── Calder Developer Output (template-option gated) ── */
+.calder-dev {
+  margin: 0 0 18px;
+  padding: 14px;
+  background: #f6f8fa;
+  border: 1px dashed #9aa7b5;
+  border-radius: 6px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 12px;
+  color: #1c2733;
+}
+.calder-dev__head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.calder-dev__title {
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.calder-dev__badge {
+  padding: 2px 8px;
+  border-radius: 4px;
+  background: var(--calder-navy, #0E2A3E);
+  color: #ffffff;
+  font-size: 11px;
+}
+.calder-dev__btn {
+  margin-left: auto;
+  padding: 6px 12px;
+  border: 1px solid var(--calder-navy, #0E2A3E);
+  border-radius: 4px;
+  background: #ffffff;
+  color: var(--calder-navy, #0E2A3E);
+  font: inherit;
+  cursor: pointer;
+}
+.calder-dev__btn:hover { background: var(--calder-navy, #0E2A3E); color: #ffffff; }
+.calder-dev__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 12px;
+}
+.calder-dev__table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #ffffff;
+  border: 1px solid #dce4ec;
+  border-radius: 6px;
+}
+.calder-dev__table caption {
+  text-align: left;
+  padding: 8px 10px;
+  font-weight: 700;
+  border-bottom: 1px solid #dce4ec;
+  background: #eef2f7;
+}
+.calder-dev__table th,
+.calder-dev__table td {
+  text-align: left;
+  padding: 6px 10px;
+  border-bottom: 1px solid #eef2f7;
+  vertical-align: top;
+  word-break: break-all;
+}
+.calder-dev__table th { 
+  width: auto; 
+  font-weight: 600; 
+  color: #455868; 
+}
+.calder-dev__table tr:last-child td { 
+  border-bottom: none; 
+}

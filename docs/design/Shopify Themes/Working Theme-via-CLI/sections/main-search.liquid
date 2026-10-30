@@ -24,6 +24,12 @@
     assign aspect_ratio = settings.product_height_ratio | times: 100 | divided_by: settings.product_width_ratio
   endif
 -%}
+{%- liquid
+  assign card_layout = settings.product_card_layout
+  if card_layout == '4' or card_layout == '5'
+    assign card_layout = '1'
+  endif
+-%}
 {{ 'category-page' | append: rtl | append: '.css' | asset_url | stylesheet_tag }}
 {{ 'price-slider.css' | asset_url | stylesheet_tag }}
 {{ 'faq' | append: rtl | append: '.css' | asset_url | stylesheet_tag }}
@@ -284,7 +290,7 @@
                 {%- else -%}
                   {% paginate search.results by settings.search_products_per_page %}
                     <div class="prd-grid-wrap">
-                      <div class="prd-grid list-options-in-row {% if closed_filter == true or settings.filter_layout == 'outer' %}justify-content-center{% endif %} row g-3 {% if settings.product_card_layout == '2' %}gy-4 gy-lg-5{% endif %}  {{ grid_class_on_prd_per_row_sm }} {{ grid_class_on_prd_per_row_md }} {{ grid_class_on_prd_per_row_xl }} {% if store_width > 1465 %}{{ grid_class_on_prd_per_row_xxl }}{% endif %} js-category-grid" data-product-grid>
+                      <div class="prd-grid list-options-in-row {% if closed_filter == true or settings.filter_layout == 'outer' %}justify-content-center{% endif %} row g-3 {% if card_layout == '2' %}gy-4 gy-lg-5{% endif %}  {{ grid_class_on_prd_per_row_sm }} {{ grid_class_on_prd_per_row_md }} {{ grid_class_on_prd_per_row_xl }} {% if store_width > 1465 %}{{ grid_class_on_prd_per_row_xxl }}{% endif %} js-category-grid" data-product-grid>
                         {%- liquid
                           case prd_per_row_xl
                             when '2'
@@ -355,7 +361,7 @@
                           {%- case item.object_type -%}
                             {%- when 'article' -%}
                               <div class="col">
-                                <product-card class="post-search-grid style{{ settings.product_card_layout }}">
+                                <product-card class="post-search-grid style{{ card_layout }}">
                                   <a href="{{ item.url }}" class="post-search-grid-image">
                                     {% capture style %}
                                       --aspect-ratio: {{ aspect_ratio }};
@@ -384,7 +390,7 @@
                               </div>
                             {%- when 'page' -%}
                               <div class="col">
-                                <product-card class="page-search-grid style{{ settings.product_card_layout }}">
+                                <product-card class="page-search-grid style{{ card_layout }}">
                                   <a href="{{ item.url }}" class="page-icon">
                                     <div class="image-container ic--bg" style="--aspect-ratio: {{ aspect_ratio }};">
                                       {% render 'icon-article' %}

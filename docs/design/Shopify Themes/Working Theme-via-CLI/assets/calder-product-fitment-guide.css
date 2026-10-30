@@ -1,0 +1,884 @@
+.cw-fitment-guide {
+  background-color: var(--calder-gray-100, #F7F8FA);
+  padding: 5rem 0;
+  margin-top: 5rem;
+  position: relative;
+}
+
+.cw-fitment-guide::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: linear-gradient( 
+    90deg, 
+    rgba(5, 29, 43, 0.92) 0%, 
+    rgba(5, 29, 43, 0.82) 30%, 
+    rgba(5, 29, 43, 0.60) 58%,
+    rgba(5, 20, 31, 0.32) 78%, 
+    rgba(5, 20, 31, 0.18) 100% 
+  );
+}
+
+.cw-fitment-guide__inner {
+  max-width: var(--container-max-width, 1178px);
+  margin: 0 auto;
+  padding: 0 15px;
+  position: relative;
+  z-index: 2;
+}
+
+.cw-fitment-guide__header {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  gap: 40px;
+  margin-bottom: 36px;
+  align-items: start;
+}
+
+.cw-fitment-guide__header-left {
+  min-width: 0;
+}
+
+.cw-fitment-guide__eyebrow {
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--calder-gold, #C2A48A);
+  margin: 0 0 10px;
+  line-height: 1.2;
+}
+
+.cw-fitment-guide__title {
+  font-size: 40px;
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 12px;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+
+.cw-fitment-guide__subtitle {
+  font-size: 16px;
+  color: #fff;
+  margin: 0;
+  line-height: 1.3;
+}
+
+.cw-fitment-guide__description {
+  font-size: 15px;
+  color: #fff;
+  line-height: 1.6;
+  margin: 0;
+  padding-top: 16px;
+}
+
+.cw-fitment-guide__card {
+  //background: #FFFFFF;
+  //border: 1px solid #E3E8ED;
+  //border-radius: 6px !important;
+  //padding: 2rem;
+  //box-shadow: 0 4px 12px rgba(2, 13, 20, 0.06);
+}
+
+.cw-fitment-guide__controls {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr auto;
+  gap: 14px;
+  align-items: end;
+  margin-bottom: 0;
+}
+
+.cw-fitment-guide__field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.cw-fitment-guide__label {
+  font-size: 13px;
+  font-weight: 500;
+  //text-transform: uppercase;
+  //letter-spacing: 0.06em;
+  color: var(--calder-navy, #102C40);
+}
+
+.cw-fitment-guide__select {
+  width: 100%;
+  height: 45px;
+  padding: 0 36px 0 14px;
+  border: 1px solid #E3E8ED;
+  border-radius: 4px;
+  background: #FFFFFF;
+  color: var(--calder-navy, #102C40);
+  font-size: 14px;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  transition: border-color 0.2s;
+}
+
+.cw-fitment-guide__select:focus {
+  border-color: #C2A48A;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(194, 164, 138, 0.2);
+}
+
+.cw-fitment-guide__select:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.cw-fitment-guide__select-wrapper {
+  position: relative;
+}
+
+.cw-fitment-guide__select-wrapper::before {
+  content: '';
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  opacity: 0.5;
+  pointer-events: none;
+  background: currentColor;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+}
+
+.cw-fitment-guide__field--make .cw-fitment-guide__select-wrapper::before {
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'%3E%3Crect x='3' y='3' width='18' height='18' rx='2'/%3E%3Ccircle cx='9' cy='9' r='2'/%3E%3Ccircle cx='15' cy='9' r='2'/%3E%3Cpath d='M3 16h18'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'%3E%3Crect x='3' y='3' width='18' height='18' rx='2'/%3E%3Ccircle cx='9' cy='9' r='2'/%3E%3Ccircle cx='15' cy='9' r='2'/%3E%3Cpath d='M3 16h18'/%3E%3C/svg%3E");
+}
+
+.cw-fitment-guide__field--model .cw-fitment-guide__select-wrapper::before {
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'%3E%3Cpath d='M12 2L2 7l10 5 10-5-10-5z'/%3E%3Cpath d='M2 17l10 5 10-5'/%3E%3Cpath d='M2 12l10 5 10-5'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'%3E%3Cpath d='M12 2L2 7l10 5 10-5-10-5z'/%3E%3Cpath d='M2 17l10 5 10-5'/%3E%3Cpath d='M2 12l10 5 10-5'/%3E%3C/svg%3E");
+}
+
+.cw-fitment-guide__field--year .cw-fitment-guide__select-wrapper::before {
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'%3E%3Crect x='3' y='4' width='18' height='18' rx='2'/%3E%3Cline x1='16' y1='2' x2='16' y2='6'/%3E%3Cline x1='8' y1='2' x2='8' y2='6'/%3E%3Cline x1='3' y1='10' x2='21' y2='10'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'%3E%3Crect x='3' y='4' width='18' height='18' rx='2'/%3E%3Cline x1='16' y1='2' x2='16' y2='6'/%3E%3Cline x1='8' y1='2' x2='8' y2='6'/%3E%3Cline x1='3' y1='10' x2='21' y2='10'/%3E%3C/svg%3E");
+}
+
+.cw-fitment-guide__select-wrapper .cw-fitment-guide__select {
+  padding-left: 38px;
+}
+
+.cw-fitment-guide__select-wrapper::after {
+  content: '';
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%) rotate(45deg);
+  width: 8px;
+  height: 8px;
+  border-right: 2px solid #AAB3B9;
+  border-bottom: 2px solid #AAB3B9;
+  pointer-events: none;
+}
+
+.cw-fitment-guide__submit {
+  height: 45px;
+  padding: 0 32px;
+  background: var(--calder-gradient-button, linear-gradient(135deg, #E9C88F 0%, #D5A35C 48%, #B8793F 100%));
+  color: var(--calder-navy, #102C40);
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: opacity 0.2s;
+}
+
+.cw-fitment-guide__submit:hover {
+  opacity: 0.9;
+}
+
+.cw-fitment-guide__submit:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.cw-fitment-guide__divider {
+  height: 1px;
+  background: #eaf0f6;
+  margin: 1rem 0;
+}
+
+.cw-fitment-guide__results {
+  display: grid;
+  grid-template-columns: 20% 78%;
+  gap: 24px;
+  min-height: 250px;
+}
+
+.cw-fitment-guide__image-container {
+  background: #F7F8FA;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 150px;
+  max-height: 150px;
+  overflow: hidden;
+}
+
+.cw-fitment-guide__image {
+  width: 100%;
+  max-width: 80%;
+  height: 100%;
+  max-height: 280px;
+  object-fit: contain;
+  object-position: center;
+  display: block;
+}
+
+.cw-fitment-guide__vehicle-info {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.cw-fitment-guide__vehicle-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.cw-fitment-guide__vehicle-name {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--calder-navy, #102C40);
+  margin: 0;
+  line-height: 1.2;
+}
+
+.cw-fitment-guide__status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.cw-fitment-guide__status-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.cw-fitment-guide__status-icon svg {
+  display: block;
+  width: 18px;
+  height: 18px;
+}
+
+.cw-fitment-guide__status-label {
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: 0.035em;
+  text-transform: uppercase;
+}
+
+.cw-fitment-guide__status--verified .cw-fitment-guide__status-label {
+  color: var(--calder-success, #55B86A);
+}
+
+.cw-fitment-guide__status--verified .cw-fitment-guide__status-icon {
+  color: var(--calder-success, #55B86A);
+}
+
+.cw-fitment-guide__status--data-available .cw-fitment-guide__status-label {
+  color: #526477;
+  font-weight: 500;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.cw-fitment-guide__status--data-available .cw-fitment-guide__status-icon {
+  color: #AAB3B9;
+}
+
+.cw-fitment-guide__status--verification-required .cw-fitment-guide__status-label {
+  color: var(--calder-navy, #102C40);
+  font-weight: 500;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.cw-fitment-guide__status--verification-required .cw-fitment-guide__status-icon {
+  color: #A67A2E;
+}
+
+.cw-fitment-guide__status--no-data .cw-fitment-guide__status-label {
+  color: #526477;
+  font-weight: 500;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.cw-fitment-guide__status--no-data .cw-fitment-guide__status-icon {
+  color: #C94C46;
+}
+
+.cw-fitment-guide__status-review-note {
+  font-size: 12px;
+  color: #A67A2E;
+  margin-top: 2px;
+  line-height: 1.4;
+}
+
+.cw-fitment-guide__specs {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  border: 1px solid #E3E8ED;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.cw-fitment-guide__spec-col {
+  padding: 14px 10px;
+  text-align: center;
+  border-right: 1px solid #E3E8ED;
+  background: #FFFFFF;
+}
+
+.cw-fitment-guide__spec-col:last-child {
+  border-right: none;
+}
+
+.cw-fitment-guide__spec-col:first-child {
+  border-left: none;
+}
+
+.cw-fitment-guide__spec-heading {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #727D87;
+  background: #F7F8FA;
+  margin: -14px -10px 8px;
+  padding: 8px 10px;
+  border-bottom: 1px solid #E3E8ED;
+}
+
+.cw-fitment-guide__spec-value {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--calder-navy, #102C40);
+}
+
+.cw-fitment-guide__configurations {
+  margin-top: 4px;
+}
+
+.cw-fitment-guide__config-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--calder-navy, #102C40);
+  margin-bottom: 8px;
+}
+
+.cw-fitment-guide__config-list {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.cw-fitment-guide__config-btn {
+  padding: 4px 12px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--calder-navy, #102C40);
+  background: #F7F8FA;
+  border: 1px solid #E3E8ED;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.cw-fitment-guide__config-btn:hover {
+  border-color: #C2A48A;
+}
+
+.cw-fitment-guide__config-btn.is-active {
+  background: #FFFFFF;
+  border-color: #e6a23e;
+  color: var(--calder-navy, #102C40);
+}
+
+.cw-fitment-guide__details-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--calder-navy, #102C40);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  margin-top: 12px;
+}
+
+.cw-fitment-guide__details-toggle:hover {
+  color: var(--calder-gold, #C2A48A);
+}
+
+.cw-fitment-guide__details-toggle svg:first-child {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.cw-fitment-guide__details-toggle .cw-fitment-guide__toggle-chevron {
+  width: 12px;
+  height: 12px;
+  transition: transform 0.2s;
+}
+
+.cw-fitment-guide__details-toggle.is-open .cw-fitment-guide__toggle-chevron {
+  transform: rotate(180deg);
+}
+
+.cw-fitment-guide__details-panel {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease, padding 0.35s ease;
+}
+
+.cw-fitment-guide__details-panel.is-open {
+  max-height: 800px;
+}
+
+.cw-fitment-guide__details-inner {
+  padding-top: 16px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  font-size: 14px;
+}
+
+.cw-fitment-guide__detail-item {
+  padding: 10px 14px;
+  background: #F7F8FA;
+  border-radius: 8px;
+}
+
+.cw-fitment-guide__detail-term {
+  font-size: 12px;
+  font-weight: 600;
+  //text-transform: uppercase;
+  //letter-spacing: 0.04em;
+  color: #000;
+  margin-bottom: 2px;
+}
+
+.cw-fitment-guide__detail-desc {
+  color: #526477;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.cw-fitment-guide__staggered-badge {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 2px 8px;
+  background: #E3F2FD;
+  color: #1E6FA8;
+  border-radius: 4px;
+  margin-left: 8px;
+}
+
+.cw-fitment-guide__no-data {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 40px 20px;
+  color: #526477;
+}
+
+.cw-fitment-guide__no-data-icon {
+  display: block;
+  margin: 0 auto 12px;
+  width: 40px;
+  height: 40px;
+  opacity: 0.4;
+}
+
+.cw-fitment-guide__no-data-text {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--calder-navy, #102C40);
+  margin-bottom: 4px;
+}
+
+.cw-fitment-guide__no-data-sub {
+  font-size: 14px;
+  color: #526477;
+  margin-bottom: 16px;
+}
+
+.cw-fitment-guide__assistance {
+  margin-top: 2rem;
+  padding: 24px 28px;
+  background: #DCE8F5;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.cw-fitment-guide__assistance-icon {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cw-fitment-guide__assistance-icon svg {
+  width: 44px;
+  height: 44px;
+  display: block;
+}
+
+.cw-fitment-guide__assistance-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.cw-fitment-guide__assistance-heading {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1E4C68;
+  margin: 0 0 4px;
+}
+
+.cw-fitment-guide__assistance-text {
+  font-size: 14px;
+  color: #526477;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.cw-fitment-guide__assistance-actions {
+  display: flex;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.cw-fitment-guide__assistance-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-radius: 4px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.cw-fitment-guide__assistance-btn--primary {
+  background: #FFFFFF;
+  color: var(--calder-navy, #102C40);
+  border: 1.5px solid var(--calder-navy, #102C40);
+}
+
+.cw-fitment-guide__assistance-btn--primary:hover {
+  background: var(--calder-navy, #102C40);
+  color: #FFFFFF;
+}
+
+.cw-fitment-guide__assistance-btn--secondary {
+  background: #FFFFFF;
+  color: var(--calder-navy, #102C40);
+  border: 1px solid #E3E8ED;
+}
+
+.cw-fitment-guide__assistance-btn--secondary:hover {
+  border-color: var(--calder-gold, #C2A48A);
+}
+
+.cw-fitment-guide__assistance-btn svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.cw-fitment-guide__faq-panel {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease;
+}
+
+.cw-fitment-guide__faq-panel.is-open {
+  max-height: 2000px;
+}
+
+.cw-fitment-guide__faq-item {
+  padding: 14px 20px;
+  border-bottom: 1px solid #E3E8ED;
+}
+
+.cw-fitment-guide__faq-item:last-child {
+  border-bottom: none;
+}
+
+.cw-fitment-guide__faq-question {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--calder-navy, #102C40);
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: none;
+  border: none;
+  padding: 0;
+  width: 100%;
+  text-align: left;
+}
+
+.cw-fitment-guide__faq-answer {
+  font-size: 13px;
+  color: #526477;
+  line-height: 1.5;
+  margin-top: 8px;
+  padding-right: 20px;
+}
+
+.cw-fitment-guide__faq-answer[hidden] {
+  display: none;
+}
+
+.cw-fitment-guide__disclaimer {
+  font-size: 12px;
+  color: #AAB3B9;
+  line-height: 1.5;
+  margin-top: 16px;
+  padding: 12px 16px;
+  background: #F7F8FA;
+  border-radius: 6px;
+  text-align: center;
+  display: none;
+}
+
+/* Staggered spec display */
+.cw-fitment-guide__spec-staggered {
+  display: flex;
+  gap: 16px;
+}
+
+.cw-fitment-guide__spec-axle {
+  flex: 1;
+  min-width: 0;
+}
+
+.cw-fitment-guide__spec-axle-label {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #AAB3B9;
+  margin-bottom: 4px;
+}
+
+/* ── Wheel Results ── */
+
+.cw-fitment-guide__wheels {
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid #E3E8ED;
+  display: none;
+}
+
+.cw-fitment-guide__wheels-count {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--calder-navy, #102C40);
+  margin-bottom: 12px;
+}
+
+.cw-fitment-guide__wheels-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.cw-fitment-guide__wheel-card {
+  display: block;
+  text-decoration: none;
+  background: #F7F8FA;
+  border: 1px solid #E3E8ED;
+  border-radius: 6px;
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+
+.cw-fitment-guide__wheel-card:hover {
+  border-color: #e6a23e;
+}
+
+.cw-fitment-guide__wheel-image {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  display: block;
+}
+
+.cw-fitment-guide__wheel-info {
+  padding: 8px 10px 10px;
+}
+
+.cw-fitment-guide__wheel-title {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--calder-navy, #102C40);
+  line-height: 1.25;
+}
+
+.cw-fitment-guide__wheel-subtitle {
+  display: block;
+  font-size: 11px;
+  font-weight: 400;
+  color: #727D87;
+  line-height: 1.3;
+  margin-top: 2px;
+
+  display: none;
+}
+
+.cw-fitment-guide__wheel-meta {
+  display: block;
+  font-size: 11px;
+  font-weight: 400;
+  color: #727d87;
+  line-height: 1.3;
+  margin-top: 4px;
+}
+
+.cw-fitment-guide__wheel-price {
+  display: block;
+  margin-top: 6px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--calder-navy, #102C40);
+}
+
+.cw-fitment-guide__wheels-action {
+  text-align: center;
+}
+
+.cw-fitment-guide__wheels-action .btn {
+  min-width: 200px;
+}
+
+.cw-fitment-guide__wheels-no-results {
+  font-size: 13px;
+  color: #526477;
+  text-align: center;
+  padding: 16px 0;
+  margin: 0;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .cw-fitment-guide__specs {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .cw-fitment-guide__spec-col:nth-child(4),
+  .cw-fitment-guide__spec-col:nth-child(5) {
+    border-top: 1px solid #E3E8ED;
+  }
+}
+
+@media (max-width: 768px) {
+  .cw-fitment-guide__header {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .cw-fitment-guide__card {
+    padding: 20px;
+  }
+  .cw-fitment-guide__controls {
+    grid-template-columns: 1fr;
+  }
+  .cw-fitment-guide__results {
+    grid-template-columns: 1fr;
+  }
+  .cw-fitment-guide__image-container {
+    min-height: 180px;
+    max-height: 220px;
+    order: -1;
+  }
+  .cw-fitment-guide__image {
+    max-height: 220px;
+  }
+  .cw-fitment-guide__specs {
+    grid-template-columns: repeat(2, 1fr);
+    font-size: 13px;
+  }
+  .cw-fitment-guide__spec-col {
+    border-bottom: 1px solid #E3E8ED;
+  }
+  .cw-fitment-guide__spec-col:nth-child(odd) {
+    border-right: 1px solid #E3E8ED;
+  }
+  .cw-fitment-guide__spec-col:nth-child(even) {
+    border-right: none;
+  }
+  .cw-fitment-guide__spec-col:nth-last-child(-n+2) {
+    border-bottom: none;
+  }
+  .cw-fitment-guide__assistance {
+    flex-direction: column;
+    text-align: center;
+    padding: 20px;
+  }
+  .cw-fitment-guide__assistance-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+  .cw-fitment-guide__assistance-btn {
+    justify-content: center;
+  }
+  .cw-fitment-guide__details-inner {
+    grid-template-columns: 1fr;
+  }
+  .cw-fitment-guide__vehicle-heading {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

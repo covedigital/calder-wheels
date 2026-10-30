@@ -1,5 +1,6 @@
 {{ 'fitment-finder.css' | asset_url | stylesheet_tag }}
 {% render 'fitment-data' %}
+{% render 'fitment-catalog' %}
 
 {%- liquid
   assign store_width = settings.container_max_width
@@ -18,7 +19,8 @@
 
 <div
   class="fitment-finder hf-fitment"
-  id="fitment-finder-{{ section.id }}"
+  id="calder-fitment-finder-{{ section.id }}"
+  data-section-id="{{ section.id }}"
   style="--container-max-width: {{ store_width }}px; {% if bg_image != blank %}--fitment-bg: url({{ bg_image | img_url: '1920x' }});{% endif %}"
 >
   <div class="fitment-finder__inner container">
@@ -31,25 +33,30 @@
       {% endif %}
     </div>
 
+    <div class="hf-fitment__tabs" role="tablist" aria-label="Browse wheels">
+      <button type="button" class="hf-fitment__tab hf-fitment__tab--active" data-tab="vehicle" role="tab" aria-selected="true" aria-controls="hf-panel-vehicle-{{ section.id }}">By Vehicle</button>
+      <button type="button" class="hf-fitment__tab" data-tab="style" role="tab" aria-selected="false" aria-controls="hf-panel-style-{{ section.id }}">By Wheel Style</button>
+    </div>
+    <div id="hf-panel-vehicle-{{ section.id }}" class="hf-fitment__panel hf-fitment__panel--active" role="tabpanel">
     <div class="fitment-finder__selects">
       <div class="fitment-finder__select-row">
         <div class="fitment-finder__select-col">
-          <select id="fitment-year-{{ section.id }}" class="form-control fitment-finder__select" data-fitment="year">
+          <select id="hf-year-{{ section.id }}" class="form-control fitment-finder__select" data-fitment="year">
             <option value="">{{ placeholder_year }}</option>
           </select>
         </div>
         <div class="fitment-finder__select-col">
-          <select id="fitment-make-{{ section.id }}" class="form-control fitment-finder__select" data-fitment="make" disabled>
+          <select id="hf-make-{{ section.id }}" class="form-control fitment-finder__select" data-fitment="make" disabled>
             <option value="">{{ placeholder_make }}</option>
           </select>
         </div>
         <div class="fitment-finder__select-col">
-          <select id="fitment-model-{{ section.id }}" class="form-control fitment-finder__select" data-fitment="model" disabled>
+          <select id="hf-model-{{ section.id }}" class="form-control fitment-finder__select" data-fitment="model" disabled>
             <option value="">{{ placeholder_model }}</option>
           </select>
         </div>
         <div class="fitment-finder__select-col">
-          <select id="fitment-generation-{{ section.id }}" class="form-control fitment-finder__select" data-fitment="generation" disabled>
+          <select id="hf-trim-{{ section.id }}" class="form-control fitment-finder__select" data-fitment="generation" disabled>
             <option value="">{{ placeholder_generation }}</option>
           </select>
         </div>
@@ -57,7 +64,7 @@
 
       <div class="fitment-finder__action">
         <button
-          id="fitment-submit-{{ section.id }}"
+          id="hf-submit-{{ section.id }}"
           class="btn btn--primary fitment-finder__submit"
           disabled
           data-section-id="{{ section.id }}"
@@ -67,7 +74,42 @@
       </div>
     </div>
 
-    <div id="fitment-results-{{ section.id }}" class="fitment-finder__results" style="display: none;"></div>
+    </div>
+    <div id="hf-panel-style-{{ section.id }}" class="hf-fitment__panel" role="tabpanel" hidden>
+      <div class="fitment-finder__selects">
+        <div class="fitment-finder__select-row">
+          <div class="fitment-finder__select-col">
+            <label class="hf-visually-hidden" for="hf-wheel-model-{{ section.id }}">Wheel model</label>
+            <select id="hf-wheel-model-{{ section.id }}" class="form-control fitment-finder__select" data-wheel-filter="model">
+              <option value="">All Wheel Models</option>
+              {%- assign calder_collection = collections['all-calder-wheels'] -%}
+              {%- if calder_collection != blank -%}
+                {%- for product in calder_collection.products limit: 50 -%}
+                  <option value="{{ product.title | escape }}">{{ product.title | escape }}</option>
+                {%- endfor -%}
+              {%- endif -%}
+            </select>
+          </div>
+          <div class="fitment-finder__select-col">
+            <label class="hf-visually-hidden" for="hf-diameter-{{ section.id }}">Diameter</label>
+            <select id="hf-diameter-{{ section.id }}" class="form-control fitment-finder__select"><option value="">All Diameters</option></select>
+          </div>
+          <div class="fitment-finder__select-col">
+            <label class="hf-visually-hidden" for="hf-finish-{{ section.id }}">Finish</label>
+            <select id="hf-finish-{{ section.id }}" class="form-control fitment-finder__select"><option value="">All Finishes</option></select>
+          </div>
+          <div class="fitment-finder__select-col">
+            <label class="hf-visually-hidden" for="hf-bolt-{{ section.id }}">Bolt pattern</label>
+            <select id="hf-bolt-{{ section.id }}" class="form-control fitment-finder__select"><option value="">All Bolt Patterns</option></select>
+          </div>
+        </div>
+        <div class="fitment-finder__action">
+          <button type="button" id="hf-style-submit-{{ section.id }}" class="btn btn--primary fitment-finder__submit">Find Wheels</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="hf-results-{{ section.id }}" class="fitment-finder__results" style="display: none;"></div>
   </div>
 </div>
 
@@ -157,6 +199,471 @@
       "id": "button_text",
       "label": "Button text",
       "default": "View Compatible Wheels"
+    },
+    {
+      "type": "header",
+      "content": "SECTION GENERAL"
+    },
+    {
+      "type": "checkbox",
+      "id": "section_animation",
+      "label": "Enable soft appearing of section",
+      "default": true,
+      "info": "Global sections animation disabling in Theme Settings / General / Sections. AUTODISABLED if section has top or bottom separator."
+    },
+    {
+      "type": "header",
+      "content": "SECTION MARGIN"
+    },
+    {
+      "type": "range",
+      "id": "spacing_sections",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Vertical space above the section on Desktop",
+      "default": 100
+    },
+    {
+      "type": "checkbox",
+      "id": "use_global_desktop_space",
+      "label": "Use global space on desktop",
+      "default": true,
+      "info": "from Theme Settings / General / Layout"
+    },
+    {
+      "type": "range",
+      "id": "spacing_sections_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Vertical space above the section on Mobile",
+      "default": 70
+    },
+    {
+      "type": "checkbox",
+      "id": "use_global_mobile_space",
+      "label": "Use global space on mobile",
+      "default": true,
+      "info": "from Theme Settings / General / Layout"
+    },
+    {
+      "type": "header",
+      "content": "SECTION PADDING",
+      "info": "Only if SECTION BACKGROUND or SECTION SEPARATOR was enabled"
+    },
+    {
+      "type": "range",
+      "id": "spacing_padding_sections",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Vertical inner padding on Desktop",
+      "default": 100
+    },
+    {
+      "type": "checkbox",
+      "id": "use_global_desktop_space_padding",
+      "label": "Use global inner padding on desktop",
+      "default": true,
+      "info": "from Theme Settings / General / Layout"
+    },
+    {
+      "type": "range",
+      "id": "spacing_padding_sections_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Vertical inner padding on Mobile",
+      "default": 70
+    },
+    {
+      "type": "checkbox",
+      "id": "use_global_mobile_space_padding",
+      "label": "Use global inner padding on Mobile",
+      "default": true,
+      "info": "from Theme Settings / General / Layout"
+    },
+    {
+      "type": "header",
+      "content": "SECTION BACKGROUND"
+    },
+    {
+      "type": "checkbox",
+      "id": "background",
+      "label": "Enable background",
+      "default": false,
+      "info": "by default inherits Secondary background color from Theme Settings / Colors - General Secondary"
+    },
+    {
+      "type": "select",
+      "id": "background_preset",
+      "label": "Background image - preset",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "product-cosmetics-bg.png",
+          "label": "Leaves 1"
+        },
+        {
+          "value": "bottom-cosmetics-bg.png",
+          "label": "Leaves 2"
+        },
+        {
+          "value": "bg-makeup1.png,bg-makeup1-m.png",
+          "label": "Pink and Waves 1"
+        },
+        {
+          "value": "bg-makeup2.png,bg-makeup2-m.png",
+          "label": "Pink and Waves 2"
+        },
+        {
+          "value": "bg-makeup4.png,bg-makeup4-m.png",
+          "label": "Pink and Waves 3"
+        },
+        {
+          "value": "bg-makeup3.png,bg-makeup3-m.png",
+          "label": "Purple Splash"
+        },
+        {
+          "value": "bg-sweets1.png",
+          "label": "Blue Sun Rays"
+        }
+      ],
+      "default": "none",
+      "info": "default from theme"
+    },
+    {
+      "type": "select",
+      "id": "background_behavior",
+      "label": "Background image behavior",
+      "options": [
+        {
+          "value": "bg-cover",
+          "label": "Cover"
+        },
+        {
+          "value": "bg-contain",
+          "label": "Contain"
+        },
+        {
+          "value": "bg-repeat",
+          "label": "Repeat"
+        }
+      ],
+      "default": "bg-cover"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image_mobile",
+      "label": "Background image - custom on Mobile",
+      "info": "only if Background image - custom on Desktop selected"
+    },
+    {
+      "type": "select",
+      "id": "background_image_placeholder_type",
+      "label": "Placeholder background color",
+      "options": [
+        {
+          "value": "color_global_primary_bg",
+          "label": "Primary background color"
+        },
+        {
+          "value": "color_global_secondary_bg",
+          "label": "Secondary background color"
+        },
+        {
+          "value": "custom",
+          "label": "Custom color"
+        }
+      ],
+      "default": "color_global_secondary_bg"
+    },
+    {
+      "type": "color",
+      "id": "background_image_placeholder",
+      "label": "Custom - Placeholder background color"
+    },
+    {
+      "type": "header",
+      "content": "SECTION SEPARATOR"
+    },
+    {
+      "type": "header",
+      "content": "Top separator"
+    },
+    {
+      "type": "select",
+      "id": "section_decoration_top",
+      "label": "Shape",
+      "options": [
+        {
+          "value": "global",
+          "label": "Use global separator"
+        },
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "grunge1",
+          "label": "Grunge 1"
+        },
+        {
+          "value": "grunge2",
+          "label": "Grunge 2"
+        },
+        {
+          "value": "grunge3",
+          "label": "Grunge 3"
+        },
+        {
+          "value": "paper",
+          "label": "Paper"
+        },
+        {
+          "value": "mountains",
+          "label": "Mountains"
+        },
+        {
+          "value": "ellipse1",
+          "label": "Ellipse 1"
+        },
+        {
+          "value": "ellipse2",
+          "label": "Ellipse 2"
+        },
+        {
+          "value": "wave1",
+          "label": "Wave 1"
+        },
+        {
+          "value": "wave2",
+          "label": "Wave 2"
+        },
+        {
+          "value": "wave3",
+          "label": "Wave 3"
+        },
+        {
+          "value": "wave4",
+          "label": "Wave 4"
+        },
+        {
+          "value": "wave5",
+          "label": "Wave 5"
+        },
+        {
+          "value": "triangle1",
+          "label": "Triangle 1"
+        },
+        {
+          "value": "triangle2",
+          "label": "Triangle 2"
+        },
+        {
+          "value": "triangle_assymetrical1",
+          "label": "Triangle assymetrical 1"
+        },
+        {
+          "value": "triangle_assymetrical1_flip",
+          "label": "Triangle assymetrical 1 flip"
+        },
+        {
+          "value": "triangle_assymetrical2",
+          "label": "Triangle assymetrical 2"
+        },
+        {
+          "value": "triangle_assymetrical2_flip",
+          "label": "Triangle assymetrical 2 flip"
+        },
+        {
+          "value": "tilt",
+          "label": "Tilt"
+        },
+        {
+          "value": "tilt_flip",
+          "label": "Tilt flip"
+        },
+        {
+          "value": "glaze",
+          "label": "Glaze"
+        }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "select",
+      "id": "section_decoration_top_color_type",
+      "label": "Color",
+      "options": [
+        {
+          "value": "color_global_primary_bg",
+          "label": "Primary background color"
+        },
+        {
+          "value": "color_global_secondary_bg",
+          "label": "Secondary background color"
+        },
+        {
+          "value": "color_header_main_bg",
+          "label": "Header - Middle(main) part color"
+        },
+        {
+          "value": "custom",
+          "label": "Custom color"
+        }
+      ],
+      "default": "color_global_primary_bg"
+    },
+    {
+      "type": "color",
+      "id": "section_decoration_top_color",
+      "label": "Custom - top separator color"
+    },
+    {
+      "type": "header",
+      "content": "Bottom separator"
+    },
+    {
+      "type": "select",
+      "id": "section_decoration_bottom",
+      "label": "Shape",
+      "options": [
+        {
+          "value": "global",
+          "label": "Use global separator"
+        },
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "grunge1",
+          "label": "Grunge 1"
+        },
+        {
+          "value": "grunge2",
+          "label": "Grunge 2"
+        },
+        {
+          "value": "grunge3",
+          "label": "Grunge 3"
+        },
+        {
+          "value": "paper",
+          "label": "Paper"
+        },
+        {
+          "value": "mountains",
+          "label": "Mountains"
+        },
+        {
+          "value": "ellipse1",
+          "label": "Ellipse 1"
+        },
+        {
+          "value": "ellipse2",
+          "label": "Ellipse 2"
+        },
+        {
+          "value": "wave1",
+          "label": "Wave 1"
+        },
+        {
+          "value": "wave2",
+          "label": "Wave 2"
+        },
+        {
+          "value": "wave3",
+          "label": "Wave 3"
+        },
+        {
+          "value": "wave4",
+          "label": "Wave 4"
+        },
+        {
+          "value": "wave5",
+          "label": "Wave 5"
+        },
+        {
+          "value": "triangle1",
+          "label": "Triangle 1"
+        },
+        {
+          "value": "triangle2",
+          "label": "Triangle 2"
+        },
+        {
+          "value": "triangle_assymetrical1",
+          "label": "Triangle assymetrical 1"
+        },
+        {
+          "value": "triangle_assymetrical1_flip",
+          "label": "Triangle assymetrical 1 flip"
+        },
+        {
+          "value": "triangle_assymetrical2",
+          "label": "Triangle assymetrical 2"
+        },
+        {
+          "value": "triangle_assymetrical2_flip",
+          "label": "Triangle assymetrical 2 flip"
+        },
+        {
+          "value": "tilt",
+          "label": "Tilt"
+        },
+        {
+          "value": "tilt_flip",
+          "label": "Tilt flip"
+        },
+        {
+          "value": "glaze",
+          "label": "Glaze"
+        }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "paragraph",
+      "content": "'Global separator' is set in Theme Settings / Separators / Global separator style"
+    },
+    {
+      "type": "select",
+      "id": "section_decoration_bottom_color_type",
+      "label": "Color",
+      "options": [
+        {
+          "value": "color_global_primary_bg",
+          "label": "Primary background color"
+        },
+        {
+          "value": "color_global_secondary_bg",
+          "label": "Secondary background color"
+        },
+        {
+          "value": "color_footer_top_bg",
+          "label": "Footer - Top part color"
+        },
+        {
+          "value": "custom",
+          "label": "Custom color"
+        }
+      ],
+      "default": "color_global_primary_bg"
+    },
+    {
+      "type": "color",
+      "id": "section_decoration_bottom_color",
+      "label": "Custom - bottom separator color"
     }
   ],
   "presets": [

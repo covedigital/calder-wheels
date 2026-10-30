@@ -4,7 +4,7 @@
   assign svg_logo = section.settings.svg_logo
   assign svg_logo_name = section.settings.svg_logo_name
 
-  if section.settings.header_transparent and request.page_type == 'index' or page.handle == 'intro'
+  if section.settings.header_transparent and request.page_type == 'index' or page.handle == 'intro' or request.page_type == 'collection'
     assign header_transparent = true
     assign logo_transparent = section.settings.logo_transparent | default: logo
     assign svg_logo_transparent = section.settings.svg_logo_transparent | default: svg_logo

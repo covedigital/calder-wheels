@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 500" fill="none">
+  <defs>
+    <linearGradient id="fadel" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="transparent"/>
+      <stop offset="8%" stop-color="rgba(177,139,92,0.20)"/>
+      <stop offset="90%" stop-color="rgba(177,139,92,0.25)"/>
+      <stop offset="100%" stop-color="transparent"/>
+    </linearGradient>
+    <clipPath id="cw"><rect x="-60" y="-40" width="780" height="580"/></clipPath>
+  </defs>
+
+  <!-- Contour lines — subordinate, left only -->
+  <g opacity="0.05" stroke="#B18B5C" fill="none">
+    <path d="M10 470 Q70 420 130 380 Q190 340 250 320" stroke-width="0.6"/>
+    <path d="M0 490 Q60 440 120 400 Q180 360 240 340" stroke-width="0.4"/>
+  </g>
+
+  <!-- Wheel = dense, filled, immediately reads as wheel -->
+  <g clip-path="url(#cw)" opacity="0.35">
+    <g stroke="#B18B5C" fill="none">
+
+      <!-- Tire — thick double ring suggesting sidewall -->
+      <circle cx="580" cy="260" r="210" stroke-width="14"/>
+      <circle cx="580" cy="260" r="200" stroke-width="2.5"/>
+      <circle cx="580" cy="260" r="190" stroke-width="1.5"/>
+
+      <!-- Rim lip — thick metal ring -->
+      <circle cx="580" cy="260" r="183" stroke-width="4"/>
+      <circle cx="580" cy="260" r="178" stroke-width="1"/>
+      <circle cx="580" cy="260" r="170" stroke-width="0.8"/>
+
+      <!-- Wheel barrel — filled face (makes it a wheel, not lines) -->
+      <circle cx="580" cy="260" r="160" stroke-width="1.2" fill="rgba(177,139,92,0.08)"/>
+      <circle cx="580" cy="260" r="150" stroke-width="0.6"/>
+
+      <!-- Brake disc — cross-drilled, unmistakably automotive -->
+      <circle cx="580" cy="260" r="135" stroke-width="0.4"/>
+      <circle cx="580" cy="260" r="85" stroke-width="0.3"/>
+      <!-- Cross-drilled holes — the clincher for "brake disc, not radar" -->
+      <circle cx="580" cy="190" r="3" fill="rgba(177,139,92,0.25)" stroke="none"/>
+      <circle cx="580" cy="330" r="3" fill="rgba(177,139,92,0.25)" stroke="none"/>
+      <circle cx="500" cy="260" r="3" fill="rgba(177,139,92,0.25)" stroke="none"/>
+      <circle cx="660" cy="260" r="3" fill="rgba(177,139,92,0.25)" stroke="none"/>
+      <circle cx="523" cy="203" r="3" fill="rgba(177,139,92,0.25)" stroke="none"/>
+      <circle cx="637" cy="317" r="3" fill="rgba(177,139,92,0.25)" stroke="none"/>
+      <circle cx="637" cy="203" r="3" fill="rgba(177,139,92,0.25)" stroke="none"/>
+      <circle cx="523" cy="317" r="3" fill="rgba(177,139,92,0.25)" stroke="none"/>
+      <circle cx="540" cy="175" r="3" fill="rgba(177,139,92,0.25)" stroke="none"/>
+      <circle cx="620" cy="345" r="3" fill="rgba(177,139,92,0.25)" stroke="none"/>
+      <circle cx="620" cy="175" r="3" fill="rgba(177,139,92,0.25)" stroke="none"/>
+      <circle cx="540" cy="345" r="3" fill="rgba(177,139,92,0.25)" stroke="none"/>
+      <circle cx="470" cy="225" r="3" fill="rgba(177,139,92,0.25)" stroke="none"/>
+      <circle cx="690" cy="295" r="3" fill="rgba(177,139,92,0.25)" stroke="none"/>
+      <circle cx="690" cy="225" r="3" fill="rgba(177,139,92,0.25)" stroke="none"/>
+      <circle cx="470" cy="295" r="3" fill="rgba(177,139,92,0.25)" stroke="none"/>
+
+      <!-- 5 Filled TAPERED spokes — wide at hub, narrow at rim -->
+      <!-- Spoke 1 — top -->
+      <path d="M565 250 L565 130 L595 130 L595 250 Z" fill="rgba(177,139,92,0.18)" stroke-width="1.8"/>
+      <!-- Spoke 2 — bottom-right -->
+      <path d="M580 265 L655 330 L675 315 L600 250 Z" fill="rgba(177,139,92,0.18)" stroke-width="1.8"/>
+      <!-- Spoke 3 — bottom-left -->
+      <path d="M565 270 L505 330 L485 315 L550 250 Z" fill="rgba(177,139,92,0.18)" stroke-width="1.8"/>
+      <!-- Spoke 4 — top-left -->
+      <path d="M550 250 L480 170 L500 155 L570 240 Z" fill="rgba(177,139,92,0.18)" stroke-width="1.8"/>
+      <!-- Spoke 5 — top-right -->
+      <path d="M595 240 L670 170 L650 155 L590 250 Z" fill="rgba(177,139,92,0.18)" stroke-width="1.8"/>
+
+      <!-- Hub — filled, solid, wheel-like -->
+      <circle cx="580" cy="260" r="52" fill="rgba(177,139,92,0.12)" stroke-width="2.5"/>
+      <circle cx="580" cy="260" r="45" stroke-width="0.6"/>
+      <circle cx="580" cy="260" r="36" fill="rgba(177,139,92,0.10)" stroke-width="1.5"/>
+      <circle cx="580" cy="260" r="28" stroke-width="0.4"/>
+
+      <!-- Center cap — solid filled -->
+      <circle cx="580" cy="260" r="18" fill="rgba(177,139,92,0.15)" stroke-width="1.2"/>
+      <circle cx="580" cy="260" r="12" fill="rgba(177,139,92,0.08)" stroke-width="0.6"/>
+      <!-- Calder C emblem suggestion -->
+      <path d="M575 255 Q580 252 585 255 Q587 260 585 265 Q580 268 575 265" stroke-width="1" stroke-linecap="round"/>
+
+      <!-- 5 Lug nuts — on filled hub face -->
+      <circle cx="580" cy="175" r="7" stroke-width="1.5" fill="rgba(177,139,92,0.10)"/>
+      <circle cx="580" cy="345" r="7" stroke-width="1.5" fill="rgba(177,139,92,0.10)"/>
+      <circle cx="506" cy="210" r="7" stroke-width="1.5" fill="rgba(177,139,92,0.10)"/>
+      <circle cx="654" cy="310" r="7" stroke-width="1.5" fill="rgba(177,139,92,0.10)"/>
+      <circle cx="654" cy="210" r="7" stroke-width="1.5" fill="rgba(177,139,92,0.10)"/>
+
+      <!-- Valve stem — small non-symmetric detail -->
+      <path d="M580 50 L580 28" stroke-width="1.5" stroke-linecap="round"/>
+      <circle cx="580" cy="25" r="3" fill="rgba(177,139,92,0.15)" stroke-width="0.8"/>
+
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,30 @@
+{%- liquid
+  assign dealer_demo_mode = section.settings.dealer_demo_mode | default: false
+
+  if dealer_demo_mode or request.design_mode
+    assign seed_dealer_name = 'Downtown Motorworks'
+    assign seed_contact_name = 'John Carter'
+    assign seed_tier = 2
+    assign seed_payment_terms = 'NET-30'
+    assign seed_account_status = 'In Good Standing'
+
+    assign seed_open_orders_count = 5
+    assign seed_open_orders_total = 18746
+    assign seed_in_production_count = 3
+    assign seed_pending_quotes_count = 3
+    assign seed_pending_quotes_total = 9350
+    assign seed_credit_available = 34250
+    assign seed_credit_limit = 75000
+    assign seed_credit_usage_pct = 46
+
+    assign seed_orders = '[{"order_number":"CW-1057","po_number":"DMX-5125","order_date":"Sep 12, 2026","vehicle_application":"2025 BMW M4 Competition","item_count":4,"total":8760,"status":"IN PRODUCTION"},{"order_number":"CW-1054","po_number":"DMX-5119","order_date":"Sep 10, 2026","vehicle_application":"Porsche 911","item_count":2,"total":4250,"status":"FINISHING"},{"order_number":"CW-1052","po_number":"DMX-5108","order_date":"Sep 08, 2026","vehicle_application":"Audi RS6","item_count":4,"total":7980,"status":"QUALITY CHECK"},{"order_number":"CW-1049","po_number":"DMX-5097","order_date":"Sep 05, 2026","vehicle_application":"Mercedes-AMG C63","item_count":2,"total":3920,"status":"PREPARING TO SHIP"},{"order_number":"CW-1045","po_number":"DMX-5081","order_date":"Sep 01, 2026","vehicle_application":"BMW X5","item_count":4,"total":6540,"status":"SHIPPED"}]'
+
+    assign seed_activity = '[{"type":"status","message":"Order CW-1057 moved to Finishing","timestamp":"Today at 10:24 AM","target":""},{"type":"quote","message":"Quote Q-0521 created","timestamp":"Yesterday at 3:18 PM","target":""},{"type":"shipped","message":"Order CW-1049 shipped","timestamp":"Sep 14, 2026","target":""},{"type":"tracking","message":"Tracking number available for CW-1049","timestamp":"Sep 14, 2026","target":""},{"type":"invoice","message":"Invoice INV-1423 posted","timestamp":"Sep 12, 2026","target":""}]'
+
+    assign seed_production = '{"order_number":"CW-1057","po_number":"DMX-5125","status":"IN PRODUCTION","wheel":"C1","type":"Forged Monoblock","size":"20\"","finish":"Satin Bronze","vehicle":"2025 BMW M4 Competition","quantity":4,"price":2190,"current_stage":1,"stages":[{"label":"ORDER RECEIVED","status":"completed"},{"label":"IN PRODUCTION","status":"current"},{"label":"FINISHING","status":"upcoming"},{"label":"QUALITY CHECK","status":"upcoming"},{"label":"PREPARING TO SHIP","status":"upcoming"},{"label":"SHIPPED","status":"upcoming"}]}'
+
+    assign seed_mode = true
+  else
+    assign seed_mode = false
+  endif
+-%}

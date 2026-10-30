@@ -13,9 +13,36 @@
                 <div class="col-auto ms-auto hide-mobile">
                   <div class="row align-items-center gx-5">
                     <div class="col-auto">
+
+                      {% comment %}
+                      10-25-2026: Dnri - Commentted out original sticky header settings
+
+                      Original code:
+
                       <div class="hdr-inline-link">
                         {% render 'header-settings-separated', section: section %}
                       </div>
+
+                      [below]
+                      {% endcomment %}
+
+                      <div class="hdr-inline-link">
+                        {%- liquid
+                          render 'header-settings', id1: 'languages', id2: 'currencies'
+                          render 'header-get-help'
+                          render 'header-search'
+                          render 'header-account'
+                          render 'header-wishlist'
+                          render 'header-cart'
+                        -%}
+                        <a href="{{ routes.root_url }}pages/fitment" class="fitment-cta">Find Your Fit</a>
+                      </div>
+
+                      {% comment %}
+                      [above]
+                      10-25-2026: Dnri - Commentted out original sticky header settings 
+                      {% endcomment %}
+
                     </div>
                   </div>
                 </div>
@@ -68,6 +95,7 @@
                   render 'header-wishlist-icon'
                   render 'header-cart-icon'
                 -%}
+                <a href="{{ routes.root_url }}pages/fitment" class="fitment-cta">Find Your Fit</a>
               </div>
             </div>
           </div>

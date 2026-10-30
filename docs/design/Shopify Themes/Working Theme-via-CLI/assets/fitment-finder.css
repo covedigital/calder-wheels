@@ -13,7 +13,8 @@
 }
 
 .fitment-finder__content {
-  text-align: center;
+  text-align: left;
+  //text-align: center;
   margin-bottom: 40px;
 }
 
@@ -30,7 +31,7 @@
 }
 
 .fitment-finder__selects {
-  max-width: 800px;
+  //max-width: 800px;
   margin: 0 auto;
 }
 
@@ -89,7 +90,7 @@
 
 .fitment-finder__results-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
   gap: 20px;
 }
 
@@ -171,3 +172,176 @@
     grid-template-columns: 1fr;
   }
 }
+
+.fitment-page {
+  padding: 60px 0;
+  background-color: var(--body-bg, #0d1117);
+}
+
+.fitment-page__inner {
+  max-width: var(--container-max-width, 1180px);
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.fitment-page__hero {
+  text-align: center;
+  padding: 60px 0 40px;
+}
+
+.fitment-page__heading {
+  font-family: var(--font-heading-family, inherit);
+  font-size: clamp(1.75rem, 4vw, 3rem);
+  font-weight: var(--heading-weight, 700);
+  color: var(--heading-color, #fff);
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.fitment-page__subheading {
+  font-size: 1.05rem;
+  color: var(--text-color, rgba(255,255,255,0.7));
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.5;
+}
+
+.fitment-page__finder {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.fitment-page__controls {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.fitment-page__control {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.fitment-page__label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-color, rgba(255,255,255,0.5));
+}
+
+.fitment-page__select {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid var(--decor-border-color, rgba(255,255,255,0.15));
+  border-radius: 4px;
+  background: var(--body-bg, #111);
+  color: var(--text-color, #fff);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: border-color 0.2s;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.fitment-page__select:focus {
+  border-color: var(--custom-color, #c9a96e);
+  outline: none;
+}
+
+.fitment-page__select:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.fitment-page__action {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.fitment-page__submit {
+  min-width: 240px;
+}
+
+.fitment-page__submit:disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.fitment-page__results {
+  margin-top: 32px;
+}
+
+.fitment-page__browse {
+  text-align: center;
+  margin-top: 40px;
+  padding-top: 24px;
+  border-top: 1px solid var(--decor-border-color, rgba(255,255,255,0.08));
+}
+
+.fitment-page__browse-link {
+  color: var(--text-color, rgba(255,255,255,0.6));
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.fitment-page__browse-link:hover {
+  color: var(--custom-color, #c9a96e);
+}
+
+@media (max-width: 767px) {
+  .fitment-page__controls {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .fitment-page {
+    padding: 40px 0;
+  }
+
+  .fitment-page__hero {
+    padding: 30px 0 24px;
+  }
+
+  .fitment-page__heading {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .fitment-page__controls {
+    grid-template-columns: 1fr;
+  }
+}
+/* ============================================================
+   CALDER FITMENT — BY VEHICLE / BY WHEEL STYLE TABS
+   ============================================================ */
+.hf-fitment .hf-fitment__tabs { display:flex; gap:8px; }
+.hf-fitment .hf-fitment__tab { padding:14px 24px; border:0; background:transparent; color:#62666a; font-size:14px; font-weight:600; cursor:pointer; }
+.hf-fitment .hf-fitment__tab:hover { color:#0e2a3e; }
+.hf-fitment .hf-fitment__tab--active { color:#0e2a3e; border-bottom-color:#c2a48a; }
+.hf-fitment .hf-fitment__tab:focus-visible { outline:2px solid #1e4c68; outline-offset:3px; }
+.hf-fitment .hf-fitment__panel[hidden] { display:none !important; }
+.hf-fitment .hf-fitment__panel { width:100%; min-width:0; }
+.hf-fitment .hf-visually-hidden { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+@media(max-width:767px) {
+  .hf-fitment .hf-fitment__tabs { gap:0; }
+  .hf-fitment .hf-fitment__tab { flex:1; padding:12px 8px; font-size:13px; }
+  .hf-fitment .fitment-finder__select-row { grid-template-columns:1fr; }
+}
+
+/* Wheel/Vehicle tab visibility — override legacy theme display rules */
+/*
+.hf-fitment .hf-fitment__panel.hf-fitment__panel--active:not([hidden]) {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+.hf-fitment .hf-fitment__panel:not(.hf-fitment__panel--active),
+.hf-fitment .hf-fitment__panel[hidden] {
+  display: none !important;
+}
+*/

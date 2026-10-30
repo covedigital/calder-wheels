@@ -1,0 +1,142 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "fitment-finder-page-hero": {
+      "type": "fitment-finder-page-hero",
+      "settings": {
+        "hero_image": "shopify://shop_images/Tahoe-M-2_1.png",
+        "eyebrow": "FIND YOUR FIT",
+        "heading": "PERFECT <span>FITMENT</span>",
+        "body_text": "Use our fitment finder to discover the perfect Calder wheels for your vehicle. Select your year, make, and model to see compatible options.",
+        "standards_heading": "DRIVEN BY HIGHER STANDARDS",
+        "standard_1": "OEM Quality",
+        "standard_2": "TUV Certified",
+        "standard_3": "Built to Order",
+        "section_animation": true,
+        "section_width": "global",
+        "container_max_width": 1178,
+        "spacing_sections": 100,
+        "use_global_desktop_space": true,
+        "spacing_sections_mobile": 70,
+        "use_global_mobile_space": true,
+        "spacing_padding_sections": 100,
+        "use_global_desktop_space_padding": true,
+        "spacing_padding_sections_mobile": 70,
+        "use_global_mobile_space_padding": true,
+        "background": false,
+        "background_preset": "none",
+        "background_behavior": "bg-cover",
+        "background_image_placeholder_type": "color_global_secondary_bg",
+        "background_image_placeholder": "",
+        "section_decoration_top": "none",
+        "section_decoration_top_color_type": "color_global_primary_bg",
+        "section_decoration_top_color": "",
+        "section_decoration_bottom": "none",
+        "section_decoration_bottom_color_type": "color_global_primary_bg",
+        "section_decoration_bottom_color": ""
+      }
+    },
+    "fitment-finder": {
+      "type": "fitment-finder-guide",
+      "settings": {
+        "tab_1_label": "By Vehicle",
+        "tab_2_label": "By Wheel Style",
+        "heading": "Find Your FIT",
+        "description": "Select your vehicle to see compatible wheels, real builds, and fitment details.",
+        "label_year": "YEAR",
+        "placeholder_year": "Year",
+        "label_make": "MAKE",
+        "placeholder_make": "Make",
+        "label_model": "MODEL",
+        "placeholder_model": "Model",
+        "label_trim": "TRIM",
+        "placeholder_trim": "Generation",
+        "placeholder_diameter": "All Diameters",
+        "placeholder_width": "All Widths",
+        "placeholder_bolt": "All Bolt Patterns",
+        "placeholder_finish": "All Finishes",
+        "button_text": "Find Wheels",
+        "section_animation": true,
+        "section_width": "global",
+        "container_max_width": 1178,
+        "spacing_sections": 100,
+        "use_global_desktop_space": true,
+        "spacing_sections_mobile": 70,
+        "use_global_mobile_space": true,
+        "spacing_padding_sections": 100,
+        "use_global_desktop_space_padding": true,
+        "spacing_padding_sections_mobile": 70,
+        "use_global_mobile_space_padding": true,
+        "background": false,
+        "background_preset": "none",
+        "background_behavior": "bg-cover",
+        "background_image_placeholder_type": "color_global_secondary_bg",
+        "background_image_placeholder": "",
+        "section_decoration_top": "none",
+        "section_decoration_top_color_type": "color_global_primary_bg",
+        "section_decoration_top_color": "",
+        "section_decoration_bottom": "none",
+        "section_decoration_bottom_color_type": "color_global_primary_bg",
+        "section_decoration_bottom_color": ""
+      }
+    },
+    "fitment-finder-page-help-cta": {
+      "type": "fitment-finder-page-help-cta",
+      "settings": {
+        "help_cta_bg_image": "shopify://shop_images/Silverado-Black_1.png",
+        "heading": "NEED HELP FINDING<br>THE RIGHT SETUP?",
+        "body_text": "Our wheel specialists can help you find the perfect fitment for your vehicle.",
+        "primary_cta_text": "Find Your Fit",
+        "primary_cta_url": "shopify://collections/all-calder-wheels",
+        "secondary_cta_text": "Contact a Wheel Specialist",
+        "secondary_cta_url": "shopify://pages/contact",
+        "section_animation": true,
+        "section_width": "global",
+        "container_max_width": 1178,
+        "spacing_sections": 100,
+        "use_global_desktop_space": true,
+        "spacing_sections_mobile": 70,
+        "use_global_mobile_space": true,
+        "spacing_padding_sections": 100,
+        "use_global_desktop_space_padding": true,
+        "spacing_padding_sections_mobile": 70,
+        "use_global_mobile_space_padding": true,
+        "background": false,
+        "background_preset": "none",
+        "background_image": "shopify://shop_images/scenic-cars-placeholder-01.jpg",
+        "background_behavior": "bg-cover",
+        "background_image_placeholder_type": "color_global_secondary_bg",
+        "background_image_placeholder": "",
+        "section_decoration_top": "none",
+        "section_decoration_top_color_type": "color_global_primary_bg",
+        "section_decoration_top_color": "",
+        "section_decoration_bottom": "none",
+        "section_decoration_bottom_color_type": "color_global_primary_bg",
+        "section_decoration_bottom_color": ""
+      }
+    },
+    "fitment-footer-negative": {
+      "type": "index-negative-space",
+      "settings": {
+        "spacing_sections": 0,
+        "use_global_desktop_space": true,
+        "spacing_sections_mobile": 0,
+        "use_global_mobile_space": true
+      }
+    }
+  },
+  "order": [
+    "fitment-finder-page-hero",
+    "fitment-finder",
+    "fitment-finder-page-help-cta",
+    "fitment-footer-negative"
+  ]
+}

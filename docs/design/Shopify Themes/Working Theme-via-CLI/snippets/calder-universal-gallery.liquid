@@ -1,0 +1,48 @@
+{%- comment -%}
+  Calder universal gallery — SELF-CONTAINED.
+  Slide 1 = the layered preview (selection-synced). Slides 2+ = the product's
+  own media images. Component detail renders are NOT gallery slides.
+  Arrows are owned by the controller (inline SVG, no Swiper dependency).
+{%- endcomment -%}
+<div class="calder-uc-gallery" data-calder-uc-gallery>
+  <div class="calder-pdp__main-image calder-uc-gal__main" data-calder-uc-gal-main>
+    <div class="calder-uc-gal__slides">
+      {%- render 'calder-universal-gallery-slide', part: 'main', product: product, section: section -%}
+      {%- for media in product.media -%}
+        <div class="calder-uc__gallery-slide" data-media-id="media-{{ media.id }}" data-media-type="{{ media.media_type }}">
+          <div class="image-container calder-uc__preview-canvas">
+            <img
+              class="calder-uc-gal__media-img"
+              src="{{ media.preview_image | image_url: width: 1200 }}"
+              srcset="{{ media.preview_image | image_url: width: 600 }} 600w, {{ media.preview_image | image_url: width: 900 }} 900w, {{ media.preview_image | image_url: width: 1200 }} 1200w"
+              sizes="(min-width: 1200px) 559px, calc(100vw - 30px)"
+              alt="{{ media.alt | escape }}"
+              width="1200" height="1200"
+              loading="lazy" decoding="async">
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+    <div class="calder-uc-gal__nav">
+      <button type="button" class="calder-uc-gal__arrow calder-uc-gal__arrow--prev" data-calder-uc-gal-prev aria-label="Previous slide">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <button type="button" class="calder-uc-gal__arrow calder-uc-gal__arrow--next" data-calder-uc-gal-next aria-label="Next slide">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <div class="calder-pdp__thumbs-wrap" data-calder-uc-gal-thumbs>
+    <div class="calder-uc-gal__thumbs-strip">
+      {%- render 'calder-universal-gallery-slide', part: 'thumb', product: product, section: section -%}
+      {%- for media in product.media -%}
+        <div class="calder-uc-gal__thumb" data-media-id="media-{{ media.id }}" data-media-type="{{ media.media_type }}">
+          <div class="image-container calder-uc__thumb-canvas">
+            <img src="{{ media.preview_image | image_url: width: 300 }}" alt="{{ media.alt | escape }}" width="300" height="300" loading="lazy" decoding="async">
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>

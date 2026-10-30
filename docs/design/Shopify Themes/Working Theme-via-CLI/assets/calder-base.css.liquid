@@ -28,7 +28,7 @@
 
   /* Gold / metallic scale */
   --calder-champagne-light: #F3D6A2;
-  --calder-champagne: #E7BD7A;
+  --calder-champagne: #E9B054;
   --calder-gold-light: #E9C88F;
   --calder-copper: #B8793F;
   --calder-bronze: #81502D;
@@ -53,7 +53,7 @@
     linear-gradient(
       135deg,
       #F3D6A2 0%,
-      #E7BD7A 28%,
+      #E9B054 28%,
       #D5A35C 55%,
       #B8793F 78%,
       #81502D 100%
@@ -71,7 +71,7 @@
     linear-gradient(
       135deg,
       #D5A35C 0%,
-      #E7BD7A 50%,
+      #E9B054 50%,
       #F3D6A2 100%
     );
 
@@ -198,7 +198,7 @@
   --calder-body-size: 16px;
   --calder-body-size-sm: 14px;
   --calder-body-line-height: 1.6;
-  --calder-eyebrow-size: 12px;
+  --calder-eyebrow-size: 14px;
   --calder-micro-size: 10px;
 
   /* ── Controls ── */
@@ -215,7 +215,7 @@
   --calder-card-radius: 5px;
   --calder-card-shadow: 0 2px 16px rgba(0, 0, 0, 0.07);
   --calder-card-shadow-hover: 0 4px 24px rgba(0, 0, 0, 0.10);
-  --calder-card-padding: 1rem 1.5rem;
+  --calder-card-padding: 1rem 1.1rem;
   --calder-card-title-size: 18px;
   --calder-card-price-size: 22px;
 }
@@ -329,8 +329,8 @@ button:hover .calder-icon--forward {
    ──────────────────────────────────────────────────────── */
 
 .calder-site {
-  --calder-heading-font: 'Facundo', 'Poppins', serif;
-  --calder-ui-font: 'Garet', 'Poppins', sans-serif;
+  --calder-heading-font: 'Inter', 'Facundo', 'Poppins', serif;
+  --calder-ui-font: 'Inter', 'Garet', 'Poppins', sans-serif;
 
   --body-font-family: var(--calder-ui-font);
   --heading-font-family: var(--calder-heading-font);
@@ -343,7 +343,7 @@ button:hover .calder-icon--forward {
 
 .calder-eyebrow {
   font-family: var(--calder-ui-font);
-  font-weight: 700;
+  font-weight: 500;
   font-size: var(--calder-eyebrow-size);
   letter-spacing: 1px;
   text-transform: uppercase;
@@ -832,10 +832,11 @@ button:hover .calder-icon--forward {
 
 .calder-site .hdr-wrap .hdr {
   //background: linear-gradient(180deg,rgba(2, 19, 30, 0.94) 0%, rgba(3, 26, 39, 0.82) 100%);
+  //background: #0E2A3E;
   border-bottom: 1px solid rgba(255, 255, 255, 0.07);
-  height: 70px;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  height: 64px;
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
 }
 
 .calder-site .hdr-wrap .hdr .hdr-content .container {
@@ -845,11 +846,12 @@ button:hover .calder-icon--forward {
 
 .calder-site .hdr-wrap .hdr .hdr-logo img,
 .calder-site .hdr-wrap .hdr .hdr-logo svg {
-  max-height: 50px;
+  max-height: 70px;
   width: auto;
 }
 
-.calder-site .hdr-wrap .hdr .mmenu {
+.calder-site .hdr-wrap .hdr .mmenu,
+.calder-site .hdr-wrap header-sticky .mmenu {
   font-family: var(--calder-ui-font);
   font-weight: 700;
   font-size: 0.65rem;
@@ -857,7 +859,8 @@ button:hover .calder-icon--forward {
   text-transform: uppercase;
 }
 
-.calder-site .hdr-wrap .hdr .mmenu a {
+.calder-site .hdr-wrap .hdr .mmenu a,
+.calder-site .hdr-wrap header-sticky .mmenu a {
   color: var(--calder-white);
   padding: 0 14px;
   opacity: 0.82;
@@ -866,13 +869,16 @@ button:hover .calder-icon--forward {
     color 0.2s ease;
 }
 
-.calder-site .hdr-wrap .hdr .mmenu a:hover {
+.calder-site .hdr-wrap .hdr .mmenu a:hover,
+.calder-site .hdr-wrap header-sticky .mmenu a:hover {
   opacity: 1;
   color: var(--calder-champagne);
 }
 
 .calder-site .hdr-wrap .hdr .hdr-inline-link > a,
-.calder-site .hdr-wrap .hdr .hdr-inline-link .dropdn-link {
+.calder-site .hdr-wrap header-sticky .hdr-inline-link > a,
+.calder-site .hdr-wrap .hdr .hdr-inline-link .dropdn-link, 
+.calder-site .hdr-wrap header-sticky .hdr-inline-link .dropdn-link {
   color: var(--calder-white);
   opacity: 0.85;
   transition:
@@ -880,18 +886,21 @@ button:hover .calder-icon--forward {
     color 0.2s ease;
 }
 
-.calder-site .hdr-wrap .hdr .hdr-inline-link > a:hover {
+.calder-site .hdr-wrap .hdr .hdr-inline-link > a:hover,
+.calder-site .hdr-wrap header-sticky .hdr-inline-link > a:hover {
   opacity: 1;
   color: var(--calder-champagne);
 }
 
-.calder-site .hdr-wrap .hdr .hdr-inline-link .icon-wrap svg {
+.calder-site .hdr-wrap .hdr .hdr-inline-link .icon-wrap svg,
+.calder-site .hdr-wrap header-sticky .hdr-inline-link .icon-wrap svg {
   fill: currentColor;
   width: 16px;
   height: 16px;
 }
 
-.calder-site .hdr-wrap .hdr .hdr-inline-link .header-cart__count {
+.calder-site .hdr-wrap .hdr .hdr-inline-link .header-cart__count,
+.calder-site .hdr-wrap header-sticky .hdr-inline-link .header-cart__count {
   background: var(--calder-gradient-button);
   color: var(--calder-navy-dark);
 }
@@ -904,14 +913,18 @@ button:hover .calder-icon--forward {
   border: 1px solid var(--calder-gold);
   color: var(--calder-champagne) !important;
   font-family: var(--calder-ui-font);
-  font-weight: 700;
+  font-weight: 600;
   font-size: 0.65rem;
-  letter-spacing: 1.5px;
+  //letter-spacing: 1px;
   text-transform: uppercase;
-  border-radius: 2px;
+  border-radius: 4px;
   text-decoration: none;
   opacity: 1 !important;
   margin-left: 3rem;
+  background: var(--calder-gradient-button);
+  border-color: transparent;
+  color: var(--calder-navy-dark) !important;
+  box-shadow: var(--calder-shadow-gold);
   transition:
     background 0.2s ease,
     color 0.2s ease,
@@ -920,9 +933,9 @@ button:hover .calder-icon--forward {
 }
 
 .calder-site .hdr-wrap .fitment-cta:hover {
-  background: var(--calder-gradient-button);
+  background: var(--calder-shadow-gold);
   border-color: transparent;
-  color: var(--calder-navy-dark) !important;
+  color: #FFF !important;
   box-shadow: var(--calder-shadow-gold);
 }
 
@@ -1126,11 +1139,11 @@ button:hover .calder-icon--forward {
 
 .calder-site .holder .title-wrap .h-sub {
   font-family: var(--calder-ui-font);
-  font-weight: 700;
+  font-weight: 500;
   font-size: .65rem;
   letter-spacing: 2.5px;
   text-transform: uppercase;
-  color: var(--calder-gold);
+  color: var(--calder-champagne);
   margin-bottom: 2px;
 }
 
@@ -1191,11 +1204,11 @@ button:hover .calder-icon--forward {
 
 .calder-site .collection-hero__eyebrow {
   font-family: var(--calder-ui-font);
-  font-weight: 700;
+  font-weight: 500;
   font-size: var(--calder-eyebrow-size);
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--calder-gold);
+  color: var(--calder-champagne);
 }
 
 

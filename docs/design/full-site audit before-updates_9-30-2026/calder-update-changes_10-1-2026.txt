@@ -3,8 +3,432 @@ Calder Update Changes
 =========
 
 # Home
-- add video to hero
+- add video to hero https://www.youtube.com/watch?v=GN2x2b0OM1Q
 - bolden hero title
 - fix fitment tab shape
 - add 4 process icons
 - fix gallery, not showing :|
+
+
+
+reference-product-specs-eng
+reference-product-build-your-wheel
+reference-product-fitment-finder
+reference-product-specialist-cta
+
+# Product Page
+
+
+# Calder Specs & Eng - Design to Code
+calder-specs.liquid
+
+review the attached reference screenshot and the attached liquid file and update the existing css for the Product page Calder Specs & Eng section so that it closely looks like the reference image or any recommended adjustments to the liquid file (if any):
+
+this section already has an option to set the background image (maybe its placement stack may need to be adjusted)
+
+Calder Specs & Eng - CSS:
+
+/* ── Engineering Panel ── */
+.calder-engineering {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.calder-engineering__heading {
+  font-family: var(--calder-heading-font);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--calder-navy);
+  margin: 0 0 20px;
+}
+
+.calder-engineering__panel {
+  background: var(--calder-navy);
+  border-radius: var(--calder-radius-md);
+  overflow: hidden;
+  border: none;
+}
+
+.calder-engineering__hero-img {
+  width: 100%;
+  aspect-ratio: 16/9;
+  object-fit: cover;
+  display: block;
+  background: var(--calder-navy);
+}
+
+.calder-engineering__body {
+  padding: 28px 24px;
+}
+
+.calder-engineering__body h3 {
+  font-family: var(--calder-heading-font);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--calder-white);
+  margin: 0 0 10px;
+}
+
+.calder-engineering__body p {
+  font-size: 14px;
+  line-height: 1.7;
+  color: rgba(255,255,255,0.7);
+  margin: 0 0 24px;
+}
+
+.calder-engineering__capabilities {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.calder-engineering__cap {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 4px;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.calder-engineering__cap-icon {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(194, 164, 138, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--calder-gold);
+}
+
+.calder-engineering__cap-icon svg {
+  width: 14px;
+  height: 14px;
+}
+
+.calder-engineering__cap-text {
+  font-size: 12px;
+  color: rgba(255,255,255,0.65);
+  line-height: 1.4;
+}
+
+.calder-engineering__cap-text strong {
+  display: block;
+  color: var(--calder-white);
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 3px;
+}
+
+---
+
+# Build Your Wheel - Design to Code
+wheel-configurator.liquid
+
+review the attached reference screenshot and the attached liquid file and update the existing css for the Product page Build Your Wheel section so that it closely looks like the reference image or any recommended adjustments to the liquid file (if any -- product the full liquid code if necessary):
+
+this section already has an option to set the background image (make sure the set background is visible)
+
+Build Your Wheel - CSS:
+
+/* ============================================================
+   WHEEL CONFIGURATOR — Light Theme Restyle
+   ============================================================ */
+.calder-configurator {
+  padding: 60px 0;
+  background: var(--calder-white);
+  border-top: 1px solid var(--calder-border-light);
+}
+
+.calder-configurator .wheel-configurator {
+  padding: 0;
+  background: none;
+}
+
+.calder-configurator .wheel-configurator__header {
+  margin-bottom: 32px;
+}
+
+.calder-configurator .wheel-configurator__title {
+  font-family: var(--calder-heading-font);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--calder-navy);
+  margin-bottom: 8px;
+}
+
+.calder-configurator .wheel-configurator__subtitle {
+  font-size: 14px;
+  color: var(--calder-muted);
+  font-family: var(--calder-ui-font);
+}
+
+.calder-configurator .wheel-configurator__layout {
+  gap: 40px;
+}
+
+.calder-configurator .wheel-configurator__canvas {
+  background: var(--calder-warm-white);
+  border-radius: var(--calder-radius-lg);
+  border: 1px solid var(--calder-border-light);
+}
+
+.calder-configurator .wheel-configurator__label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: var(--calder-navy);
+  font-family: var(--calder-ui-font);
+  margin-bottom: 12px;
+}
+
+.calder-configurator .wheel-configurator__option {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  border: 2px solid var(--calder-border-light);
+  background: var(--calder-white);
+}
+
+.calder-configurator .wheel-configurator__option:hover {
+  border-color: var(--calder-border-color);
+  transform: scale(1.08);
+}
+
+.calder-configurator .wheel-configurator__option--selected {
+  border-color: var(--calder-gold);
+  box-shadow: 0 0 0 2px var(--calder-gold);
+}
+
+.calder-configurator .wheel-configurator__add-btn {
+  height: 48px;
+  background: var(--calder-gold);
+  color: var(--calder-white);
+  font-family: var(--calder-ui-font);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border: none;
+  border-radius: var(--calder-radius-sm);
+  transition: background 0.2s;
+}
+
+.calder-configurator .wheel-configurator__add-btn:hover:not(:disabled) {
+  background: #b89575;
+}
+
+.calder-configurator .wheel-configurator__quote-btn {
+  background: transparent;
+  border: 1px solid var(--calder-gold);
+  color: var(--calder-gold);
+  font-family: var(--calder-ui-font);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border-radius: var(--calder-radius-sm);
+  transition: background 0.2s;
+}
+
+.calder-configurator .wheel-configurator__quote-btn:hover:not(:disabled) {
+  background: rgba(194, 164, 138, 0.08);
+}
+
+.calder-configurator .wheel-configurator__summary {
+  border-top-color: var(--calder-border-light);
+  color: var(--calder-muted);
+}
+
+.calder-configurator .wheel-configurator__summary-item strong {
+  color: var(--calder-gold);
+}
+
+---
+
+# Fitment Finder - Design to Code
+fitment-finder.liquid
+
+review the attached reference screenshot and the attached liquid file and update the existing css for the Product page Fitment Finder section so that it closely looks like the reference image or any recommended adjustments to the liquid file (if any -- product the full liquid code if necessary):
+
+this section already has an option to set the background image (there is a background-color or background blocking the background image)
+
+Fitment Finder - CSS:
+
+/* ============================================================
+   FITMENT FINDER — Light Restyle
+   ============================================================ */
+.page-calder .fitment-finder {
+  padding: 60px 0;
+  background: var(--calder-warm-white);
+  border-top: 1px solid var(--calder-border-light);
+  border-bottom: 1px solid var(--calder-border-light);
+}
+
+.page-calder .fitment-finder__heading {
+  color: var(--calder-navy);
+  font-family: var(--calder-heading-font);
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.page-calder .fitment-finder__subheading {
+  color: var(--calder-muted);
+  font-family: var(--calder-ui-font);
+}
+
+.page-calder .fitment-finder__select {
+  background: var(--calder-white);
+  border-color: var(--calder-border-color);
+  color: var(--calder-ink);
+  font-family: var(--calder-ui-font);
+}
+
+.page-calder .fitment-finder__select:focus {
+  border-color: var(--calder-gold);
+}
+
+.page-calder .fitment-finder__submit {
+  background: var(--calder-gold);
+  color: var(--calder-white);
+  font-family: var(--calder-ui-font);
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border: none;
+  border-radius: var(--calder-radius-sm);
+  height: 48px;
+}
+
+.page-calder .fitment-finder__submit:hover:not(:disabled) {
+  background: #b89575;
+}
+
+.page-calder .fitment-finder__result-item {
+  background: var(--calder-white);
+  border-color: var(--calder-border-light);
+}
+
+.page-calder .fitment-finder__result-item:hover {
+  border-color: var(--calder-gold);
+}
+
+.page-calder .fitment-finder__result-title {
+  color: var(--calder-navy);
+}
+
+.page-calder .fitment-finder__result-price {
+  color: var(--calder-gold);
+}
+
+---
+
+# Calder Specialist CTA - Design to Code
+calder-specialist-cta.liquid
+
+review the attached reference screenshot and the attached liquid file and update the existing css for the Product page Calder Specialist CTA section so that it closely looks like the reference image or any recommended adjustments to the liquid file (if any -- product the full liquid code if necessary):
+
+this section already has an option to set the background image (make sure its stream-lined similar to the attached reference)
+
+Calder Specialist CTA - CSS:
+
+/* ============================================================
+   SPECIALIST CTA — Navy Band
+   ============================================================ */
+.calder-specialist-cta {
+  background: var(--calder-navy);
+  color: var(--calder-white);
+  padding: 70px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.calder-specialist-cta.has-bg {
+  background-size: cover;
+  background-position: center;
+}
+
+.calder-specialist-cta.has-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(14,42,62,0.85);
+  z-index: 1;
+}
+
+.calder-specialist-cta__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  position: relative;
+  z-index: 2;
+}
+
+.calder-specialist-cta__content {
+  flex: 1;
+}
+
+.calder-specialist-cta__heading {
+  font-family: var(--calder-heading-font);
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--calder-white);
+  margin: 0 0 12px;
+}
+
+.calder-specialist-cta__text {
+  font-size: 14px;
+  line-height: 1.6;
+  color: rgba(255,255,255,0.75);
+  margin: 0 0 20px;
+  max-width: 480px;
+}
+
+.calder-specialist-cta__action {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 32px;
+  background: var(--calder-gold);
+  color: var(--calder-ink);
+  font-family: var(--calder-ui-font);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border: none;
+  border-radius: var(--calder-radius-sm);
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.calder-specialist-cta__action:hover {
+  background: #b89575;
+}
+
+.calder-specialist-cta__methods {
+  display: flex;
+  gap: 24px;
+  margin-top: 16px;
+}
+
+.calder-specialist-cta__method {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: rgba(255,255,255,0.7);
+}
+
+.calder-specialist-cta__method svg {
+  width: 18px;
+  height: 18px;
+  color: var(--calder-gold);
+}

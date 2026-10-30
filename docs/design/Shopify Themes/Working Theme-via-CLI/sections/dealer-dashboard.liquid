@@ -1,317 +1,994 @@
-{% comment %}
-  Calder Wheels — Dealer Dashboard
-  Matches dealer-portal-mockups-exact.html Dashboard screen.
-  Sidebar-based layout with stats, recent orders, quotes, and account summary.
-{% endcomment %}
-
 {%- liquid
-  render 'dealer-context'
-  unless is_dealer
-    echo '<!-- not a dealer — dashboard hidden -->'
-  endunless
+  assign is_dealer = false
+  assign dealer_tier = 0
+  assign dealer_approved = false
+  assign dealer_net_terms = false
+  assign dealer_tax_exempt = false
+  assign dealer_pending = false
+  assign dealer_moq = 1
+
+  if customer
+    if customer.tags contains 'dealer-applied'
+      assign dealer_pending = true
+    endif
+    if customer.tags contains 'dealer-approved'
+      assign dealer_approved = true
+      assign is_dealer = true
+    endif
+    if customer.tags contains 'dealer-tier-1'
+      assign dealer_tier = 1
+    elsif customer.tags contains 'dealer-tier-2'
+      assign dealer_tier = 2
+    elsif customer.tags contains 'dealer-tier-3'
+      assign dealer_tier = 3
+    endif
+    if customer.tags contains 'dealer-net-30'
+      assign dealer_net_terms = true
+    endif
+    if customer.tags contains 'dealer-tax-exempt'
+      assign dealer_tax_exempt = true
+    endif
+    assign dealer_moq = customer.metafields.custom.default_moq.value | default: 1 | plus: 0
+  endif
+
+  assign demo_mode = section.settings.dealer_demo_mode
+
+  if demo_mode
+    assign seed_dealer_name = 'Downtown Motorworks'
+    assign seed_contact_name = 'John Carter'
+    assign seed_tier = 2
+    assign seed_payment_terms = 'NET-30'
+    assign seed_account_status = 'In Good Standing'
+
+    assign seed_open_orders_count = 5
+    assign seed_open_orders_total = 1874600
+    assign seed_in_production_count = 3
+    assign seed_pending_quotes_count = 3
+    assign seed_pending_quotes_total = 935000
+    assign seed_credit_available = 3425000
+    assign seed_credit_limit = 7500000
+    assign seed_credit_usage_pct = 46
+
+    assign seed_orders_json = '[{"order_number":"CW-1057","po_number":"DMX-5125","order_date":"Sep 12, 2026","vehicle_application":"2025 BMW M4 Competition","item_count":4,"total":876000,"status":"IN PRODUCTION"},{"order_number":"CW-1054","po_number":"DMX-5119","order_date":"Sep 10, 2026","vehicle_application":"Porsche 911","item_count":2,"total":425000,"status":"FINISHING"},{"order_number":"CW-1052","po_number":"DMX-5108","order_date":"Sep 08, 2026","vehicle_application":"Audi RS6","item_count":4,"total":798000,"status":"QUALITY CHECK"},{"order_number":"CW-1049","po_number":"DMX-5097","order_date":"Sep 05, 2026","vehicle_application":"Mercedes-AMG C63","item_count":2,"total":392000,"status":"PREPARING TO SHIP"},{"order_number":"CW-1045","po_number":"DMX-5081","order_date":"Sep 01, 2026","vehicle_application":"BMW X5","item_count":4,"total":654000,"status":"SHIPPED"}]'
+
+    assign seed_activity_json = '[{"type":"status","message":"Order CW-1057 moved to Finishing","timestamp":"Today at 10:24 AM"},{"type":"quote","message":"Quote Q-0521 created","timestamp":"Yesterday at 3:18 PM"},{"type":"shipped","message":"Order CW-1049 shipped","timestamp":"Sep 14, 2026"},{"type":"tracking","message":"Tracking number available for CW-1049","timestamp":"Sep 14, 2026"},{"type":"invoice","message":"Invoice INV-1423 posted","timestamp":"Sep 12, 2026"}]'
+
+    assign seed_production_json = '{"order_number":"CW-1057","po_number":"DMX-5125","status":"IN PRODUCTION","wheel":"C1","type":"Forged Monoblock","size":"20\"","finish":"Satin Bronze","vehicle":"2025 BMW M4 Competition","quantity":4,"price":219000,"current_stage":2,"stages":[{"label":"ORDER RECEIVED","status":"completed","date":"Sep 12"},{"label":"IN PRODUCTION","status":"current","date":"Sep 14"},{"label":"FINISHING","status":"upcoming","date":""},{"label":"QUALITY CHECK","status":"upcoming","date":""},{"label":"PREPARING TO SHIP","status":"upcoming","date":""},{"label":"SHIPPED","status":"upcoming","date":""}]}'
+
+    assign seed_orders_data = true
+    assign seed_production_data = true
+    assign seed_activity_data = true
+
+    assign seed_mode = true
+  else
+    assign seed_mode = false
+    assign seed_orders_data = false
+    assign seed_production_data = false
+    assign seed_activity_data = false
+  endif
 -%}
 
-{% if is_dealer %}
 {%- liquid
-  render 'dealer-credit'
-
-  assign section_id = section.id
+  assign kpi_icon_oo = section.settings.kpi_icon_open_orders
+  assign kpi_icon_ip = section.settings.kpi_icon_in_production
+  assign kpi_icon_pq = section.settings.kpi_icon_pending_quotes
+  assign kpi_icon_ac = section.settings.kpi_icon_available_credit
+  assign qa_icon_qo = section.settings.qa_icon_quick_order
+  assign qa_icon_bc = section.settings.qa_icon_browse_catalog
+  assign qa_icon_cq = section.settings.qa_icon_create_quote
+  assign qa_icon_vo = section.settings.qa_icon_view_orders
 -%}
+<div class="dp-root" data-dealer-portal>
+  <div class="dp-root__body">
+    {% render 'dealer-topbar',
+      seed_dealer_name: seed_dealer_name,
+      seed_contact_name: seed_contact_name,
+      seed_tier: seed_tier,
+      seed_payment_terms: seed_payment_terms,
+      seed_account_status: seed_account_status,
+      seed_mode: seed_mode
+    %}
 
-<div class="dp-root dealer-portal" id="dealer-portal-{{ section_id }}">
-  {% render 'dealer-sidebar' %}
+    <div class="dp-root__layout">
+      {% render 'dealer-sidebar',
+        dealer_logo: section.settings.dealer_logo,
+        dealer_logo_width: section.settings.dealer_logo_width,
+        sidebar_bg_image: section.settings.sidebar_bg_image,
+        sidebar_bg_position: section.settings.sidebar_bg_position,
+        sidebar_bg_size: section.settings.sidebar_bg_size,
+        sidebar_overlay_color: section.settings.sidebar_overlay_color,
+        sidebar_overlay_opacity: section.settings.sidebar_overlay_opacity
+      %}
 
-  <section class="dealer-portal__main">
-    <div class="dp-top-row">
-      <div class="dp-hero-title">
-        <h2>Dealer Dashboard</h2>
-        <p>Welcome back, {{ customer.first_name | default: customer.name }}<br>Here's your account overview and activity.</p>
-      </div>
-      <div>
-        <div class="dp-pills" style="justify-content:flex-end;margin-bottom:10px">
-          <span class="dp-pill dp-pill--accent">Tier {{ dealer_tier | default: 1 }}</span>
-          {%- if dealer_net_terms -%}
-            <span class="dp-pill">NET-30</span>
-          {%- endif -%}
-        </div>
-        <div class="dp-summary">
-          <div class="dp-summary__item">
-            <div class="dp-summary__label">Credit Limit</div>
-            <div class="dp-summary__value">{{ credit_limit | money }}</div>
-          </div>
-          <div class="dp-summary__item">
-            <div class="dp-summary__label">Available Credit</div>
-            <div class="dp-summary__value dp-summary__value--accent">{{ available_credit | money }}</div>
-          </div>
-          <div class="dp-summary__item">
-            <div class="dp-summary__label">Account Status</div>
-            <div class="dp-summary__value">
-              {{ account_status | capitalize | replace: 'Active', 'In Good Standing' }}
-              <span class="dp-status-dot"></span>
+      <main class="dp-root__main" role="main">
+        {% render 'dealer-hero',
+          seed_dealer_name: seed_dealer_name,
+          hero_image: section.settings.dealer_hero_image
+        %}
+
+        <div class="dp-section">
+          <div class="dp-kpi-row" data-dealer-kpis>
+            <div class="dp-kpi-row__inner">
+              {%- liquid
+                assign kpi_open_val = '—'
+                assign kpi_open_sub = ''
+                if seed_mode
+                  assign kpi_open_val = seed_open_orders_count
+                  assign kpi_open_sub = seed_open_orders_total | money
+                elsif customer.orders.size > 0
+                  assign open_total = 0
+                  assign open_count = 0
+                  for order in customer.orders
+                    if order.financial_status == 'pending' or order.financial_status == 'authorized'
+                      assign open_count = open_count | plus: 1
+                      assign open_total = open_total | plus: order.total_price
+                    endif
+                  endfor
+                  if open_count > 0
+                    assign kpi_open_val = open_count
+                    assign kpi_open_sub = open_total | money
+                  endif
+                endif
+              -%}
+              {%- capture oo_icon_html -%}
+                {%- if kpi_icon_oo != blank -%}
+                  <img src="{{ kpi_icon_oo | img_url: '28x' }}" alt="" style="width:28px;height:28px;object-fit:contain">
+                {%- else -%}
+                  <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="#0E2A3E" stroke-width="1.8"><rect x="4" y="2" width="20" height="5" rx="1"/><rect x="4" y="9" width="20" height="5" rx="1"/><rect x="4" y="16" width="20" height="5" rx="1"/></svg>
+                {%- endif -%}
+              {%- endcapture -%}
+              {% render 'dealer-stat-card', icon: oo_icon_html, label: 'OPEN ORDERS', value: kpi_open_val, sub_value: kpi_open_sub, link: '/pages/dealer-orders' %}
+
+              {%- liquid
+                assign prod_val = '—'
+                if seed_mode
+                  assign prod_val = seed_in_production_count
+                endif
+              -%}
+              {%- capture ip_icon_html -%}
+                {%- if kpi_icon_ip != blank -%}
+                  <img src="{{ kpi_icon_ip | img_url: '28x' }}" alt="" style="width:28px;height:28px;object-fit:contain">
+                {%- else -%}
+                  <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="#0E2A3E" stroke-width="1.8"><circle cx="14" cy="14" r="10" fill="none"/><circle cx="10" cy="10" r="3.5" fill="#0E2A3E"/><circle cx="18" cy="10" r="3.5" fill="#0E2A3E"/><circle cx="10" cy="18" r="3" fill="#0E2A3E"/><circle cx="18" cy="18" r="3" fill="#0E2A3E"/><circle cx="14" cy="14" r="2.5" fill="#0E2A3E"/></svg>
+                {%- endif -%}
+              {%- endcapture -%}
+              {% render 'dealer-stat-card', icon: ip_icon_html, label: 'IN PRODUCTION', value: prod_val, sub_value: 'View Production &rarr;', link: '/pages/dealer-orders' %}
+
+              {%- liquid
+                assign quote_val = '—'
+                assign quote_sub = ''
+                if seed_mode
+                  assign quote_val = seed_pending_quotes_count
+                  assign quote_sub = seed_pending_quotes_total | money
+                elsif customer.metafields.custom.quotes.value
+                  assign pending_q = 0
+                  assign pending_t = 0
+                  for qt in customer.metafields.custom.quotes.value
+                    if qt.status == 'pending'
+                      assign pending_q = pending_q | plus: 1
+                      assign pending_t = pending_t | plus: qt.total
+                    endif
+                  endfor
+                  if pending_q > 0
+                    assign quote_val = pending_q
+                    assign quote_sub = pending_t | money
+                  endif
+                endif
+              -%}
+              {%- capture pq_icon_html -%}
+                {%- if kpi_icon_pq != blank -%}
+                  <img src="{{ kpi_icon_pq | img_url: '28x' }}" alt="" style="width:28px;height:28px;object-fit:contain">
+                {%- else -%}
+                  <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="#0E2A3E" stroke-width="1.8"><rect x="5" y="2" width="18" height="22" rx="2" fill="none"/><line x1="9" y1="8" x2="19" y2="8" stroke="#0E2A3E" stroke-width="1"/><line x1="9" y1="14" x2="19" y2="14" stroke="#0E2A3E" stroke-width="1"/><line x1="9" y1="20" x2="19" y2="20" stroke="#0E2A3E" stroke-width="1"/></svg>
+                {%- endif -%}
+              {%- endcapture -%}
+              {% render 'dealer-stat-card', icon: pq_icon_html, label: 'PENDING QUOTES', value: quote_val, sub_value: quote_sub, link: '/pages/dealer-quotes' %}
+
+              {%- liquid
+                assign credit_val = '—'
+                assign credit_sub = ''
+                assign credit_progress = ''
+                if seed_mode
+                  assign credit_val = seed_credit_available | money
+                  assign credit_sub = 'of ' | append: seed_credit_limit | money
+                  assign credit_progress = seed_credit_usage_pct
+                elsif available_credit
+                  assign credit_val = available_credit | money
+                  assign credit_sub = 'of ' | append: credit_limit | money
+                  assign credit_progress = credit_usage_pct
+                endif
+              -%}
+              {%- capture ac_icon_html -%}
+                {%- if kpi_icon_ac != blank -%}
+                  <img src="{{ kpi_icon_ac | img_url: '28x' }}" alt="" style="width:28px;height:28px;object-fit:contain">
+                {%- else -%}
+                  <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="#0E2A3E" stroke-width="1.8"><rect x="4" y="2" width="20" height="24" rx="2" fill="none"/><line x1="4" y1="14" x2="24" y2="14" stroke="#0E2A3E" stroke-width="0.8"/><circle cx="8" cy="8" r="2.5" fill="#0E2A3E"/><circle cx="14" cy="8" r="2.5" fill="#0E2A3E"/><circle cx="20" cy="8" r="2.5" fill="#0E2A3E"/><circle cx="8" cy="20" r="2" fill="#0E2A3E"/><circle cx="14" cy="20" r="2" fill="#0E2A3E"/><circle cx="20" cy="20" r="2" fill="#0E2A3E"/></svg>
+                {%- endif -%}
+              {%- endcapture -%}
+              {% render 'dealer-stat-card', icon: ac_icon_html, label: 'AVAILABLE CREDIT', value: credit_val, sub_value: credit_sub, progress: credit_progress, link: '/pages/dealer-invoices' %}
             </div>
           </div>
         </div>
-      </div>
-    </div>
 
-    <div class="dp-grid-4">
-      <div class="dp-card dp-stat">
-        <div class="dp-stat__icon" aria-hidden="true">&#9700;</div>
-        <div>
-          <div class="dp-stat__label">Open Orders</div>
-          <div class="dp-stat__value">{{ customer.orders | where: 'financial_status', 'pending' | size | plus: customer.orders | where: 'financial_status', 'authorized' | size }}</div>
-          <div class="dp-stat__sub">
-            {%- assign open_total = 0 -%}
-            {%- for order in customer.orders -%}
-              {%- if order.financial_status == 'pending' or order.financial_status == 'authorized' -%}
-                {%- assign open_total = open_total | plus: order.total_price -%}
-              {%- endif -%}
-            {%- endfor -%}
-            {{ open_total | money }}
+        <div class="dp-section">
+          <div class="dp-card__head" style="margin-bottom:12px">
+            <h2 class="dp-section__title">QUICK ACTIONS</h2>
+            <a href="/pages/dealer-portal" class="dp-card__link">Need Help? Contact Dealer Support &rarr;</a>
           </div>
-        </div>
-      </div>
-
-      <div class="dp-card dp-stat">
-        <div class="dp-stat__icon" aria-hidden="true">&#9635;</div>
-        <div>
-          <div class="dp-stat__label">Pending Quotes</div>
-          <div class="dp-stat__value">
-            {%- assign pending_quotes = 0 -%}
-            {%- assign pending_total = 0 -%}
-            {%- if customer.metafields.custom.quotes.value -%}
-              {%- for quote in customer.metafields.custom.quotes.value -%}
-                {%- if quote.status == 'pending' -%}
-                  {%- assign pending_quotes = pending_quotes | plus: 1 -%}
-                  {%- assign pending_total = pending_total | plus: quote.total -%}
+          <div class="dp-actions-row">
+            {%- capture qo_icon_html -%}
+                {%- if qa_icon_qo != blank -%}
+                  <img src="{{ qa_icon_qo | img_url: '22x' }}" alt="" style="width:22px;height:22px;object-fit:contain">
+                {%- else -%}
+                  <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="16" height="16" rx="3" fill="none"/><circle cx="11" cy="8" r="3.5" fill="currentColor"/><circle cx="7" cy="14" r="2.5" fill="currentColor"/><circle cx="15" cy="14" r="2.5" fill="currentColor"/></svg>
                 {%- endif -%}
-              {%- endfor -%}
-            {%- endif -%}
-            {{ pending_quotes }}
-          </div>
-          <div class="dp-stat__sub">
-            {%- if pending_total > 0 -%}{{ pending_total | money }}{%- else -%}$0.00{%- endif -%}
-          </div>
-        </div>
-      </div>
-
-      <div class="dp-card dp-stat">
-        <div class="dp-stat__icon" aria-hidden="true">&#9636;</div>
-        <div>
-          <div class="dp-stat__label">YTD Spend</div>
-          <div class="dp-stat__value">
-            {%- assign ytd_total = 0 -%}
-            {%- assign current_year = 'now' | date: '%Y' -%}
-            {%- for order in customer.orders -%}
-              {%- if order.financial_status == 'paid' -%}
-                {%- assign order_year = order.created_at | date: '%Y' -%}
-                {%- if order_year == current_year -%}
-                  {%- assign ytd_total = ytd_total | plus: order.total_price -%}
+              {%- endcapture -%}
+              {%- capture bc_icon_html -%}
+                {%- if qa_icon_bc != blank -%}
+                  <img src="{{ qa_icon_bc | img_url: '22x' }}" alt="" style="width:22px;height:22px;object-fit:contain">
+                {%- else -%}
+                  <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="9" fill="none"/><circle cx="11" cy="11" r="6" stroke="currentColor" stroke-width="1" fill="none"/><line x1="3" y1="3" x2="19" y2="19" stroke="currentColor" stroke-width="0.6" opacity="0.4"/><line x1="19" y1="3" x2="3" y2="19" stroke="currentColor" stroke-width="0.6" opacity="0.4"/></svg>
                 {%- endif -%}
-              {%- endif -%}
-            {%- endfor -%}
-            {{ ytd_total | money }}
-          </div>
-          <div class="dp-stat__sub">{{ current_year }} Total</div>
-        </div>
-      </div>
-
-      <div class="dp-card dp-stat">
-        <div class="dp-stat__icon dp-stat__icon--gold" aria-hidden="true">&#9672;</div>
-        <div>
-          <div class="dp-stat__label">Last Order</div>
-          {%- assign last_order = customer.orders | first -%}
-          <div class="dp-stat__value">
-            {%- if last_order -%}
-              {{ last_order.created_at | date: '%b %d, %Y' }}
-            {%- else -%}
-              —
-            {%- endif -%}
-          </div>
-          <div class="dp-stat__sub">
-            {%- if last_order.metafields.custom.po_number -%}
-              PO# {{ last_order.metafields.custom.po_number }}
-            {%- elsif last_order -%}
-              {{ last_order.name }}
-            {%- else -%}
-              No orders yet
-            {%- endif -%}
+              {%- endcapture -%}
+              {%- capture cq_icon_html -%}
+                {%- if qa_icon_cq != blank -%}
+                  <img src="{{ qa_icon_cq | img_url: '22x' }}" alt="" style="width:22px;height:22px;object-fit:contain">
+                {%- else -%}
+                  <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="2" width="14" height="18" rx="2" fill="none"/><line x1="7" y1="8" x2="15" y2="8" stroke="currentColor" stroke-width="0.8"/><line x1="7" y1="13" x2="15" y2="13" stroke="currentColor" stroke-width="0.8"/></svg>
+                {%- endif -%}
+              {%- endcapture -%}
+              {%- capture vo_icon_html -%}
+                {%- if qa_icon_vo != blank -%}
+                  <img src="{{ qa_icon_vo | img_url: '22x' }}" alt="" style="width:22px;height:22px;object-fit:contain">
+                {%- else -%}
+                  <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="2" width="14" height="4" rx="1"/><rect x="4" y="8" width="14" height="4" rx="1"/><rect x="4" y="14" width="14" height="4" rx="1"/></svg>
+                {%- endif -%}
+              {%- endcapture -%}
+              {% assign qo_url = '/pages/dealer-portal' | append: '#quick-order' %}
+            {% render 'dealer-action-card', icon: qo_icon_html, title: 'QUICK ORDER', desc: 'Add products by SKU or search', link: qo_url, primary: true %}
+            {% render 'dealer-action-card', icon: bc_icon_html, title: 'BROWSE CATALOG', desc: 'Find wheels for your customers', link: '/collections/all' %}
+            {% render 'dealer-action-card', icon: cq_icon_html, title: 'CREATE QUOTE', desc: 'Build and send a custom quote', link: '/pages/dealer-portal#quotes' %}
+            {% render 'dealer-action-card', icon: vo_icon_html, title: 'VIEW ORDERS', desc: 'Track and manage your orders', link: '/account' %}
           </div>
         </div>
-      </div>
-    </div>
 
-    <div class="dp-grid-2">
-      <div class="dp-card dp-table-wrap">
-        <div class="dp-card__head">
-          <h3>Recent Orders</h3>
-          <a href="{{ routes.account_url }}#orders" class="dp-card__link">View All Orders</a>
-        </div>
-        {%- if customer.orders.size > 0 -%}
-          <table class="dp-table">
-            <thead>
-              <tr>
-                <th>PO#</th>
-                <th>Order Date</th>
-                <th>Status</th>
-                <th>Items</th>
-                <th>Total</th>
-              </tr>
-            </thead>
-            <tbody>
-              {%- for order in customer.orders limit: 5 -%}
-                <tr>
-                  <td>
-                    {%- if order.metafields.custom.po_number -%}
-                      {{ order.metafields.custom.po_number }}
-                    {%- else -%}
-                      {{ order.name }}
-                    {%- endif -%}
-                  </td>
-                  <td>{{ order.created_at | date: '%b %d, %Y' }}</td>
-                  <td>
-                    {%- case order.fulfillment_status -%}
-                      {%- when 'fulfilled' -%}
-                        <span class="dp-pill dp-pill--good">Shipped</span>
-                      {%- when 'partial' -%}
-                        <span class="dp-pill dp-pill--info">Processing</span>
-                      {%- when 'unfulfilled' -%}
-                        <span class="dp-pill dp-pill--info">Processing</span>
-                      {%- when 'restocked' -%}
-                        <span class="dp-pill dp-pill--bad">Cancelled</span>
-                      {%- else -%}
-                        <span class="dp-pill">Delivered</span>
-                    {%- endcase -%}
-                  </td>
-                  <td>{{ order.line_items | size }}</td>
-                  <td>{{ order.total_price | money }}</td>
-                </tr>
-              {%- endfor -%}
-            </tbody>
-          </table>
-          <div class="dp-pagination">
-            <span>
-              {%- assign shown = customer.orders.size | at_most: 5 -%}
-              Showing 1 to {{ shown }} of {{ customer.orders.size }} orders
-            </span>
-            <a href="{{ routes.account_url }}#orders" class="dp-card__link">View All Orders</a>
-          </div>
-        {%- else -%}
-          <div style="padding:24px;text-align:center;color:var(--text-color-light)">
-            <p>No orders yet. Start by browsing the catalog.</p>
-            <a href="/collections/all" class="dp-btn dp-btn--primary" style="margin-top:12px">Browse Catalog</a>
-          </div>
-        {%- endif -%}
-      </div>
+        <div class="dp-section">
+          <div class="dp-columns dp-columns--65-35">
+            <div class="dp-columns__primary">
+              {%- liquid
+                assign orders_json = null
+                if seed_mode
+                  assign orders_json = seed_orders_json | parse_json
+                endif
+              -%}
 
-      <div style="display:grid;gap:16px">
-        <div class="dp-card dp-card--pad">
-          <div class="dp-card__head">
-            <h3>Pending Quotes</h3>
-            <a href="{{ routes.account_url }}#quotes" class="dp-card__link">View All</a>
-          </div>
-          <div class="dp-rows">
-            {%- if customer.metafields.custom.quotes.value -%}
-              {%- assign quote_found = false -%}
-              {%- for quote in customer.metafields.custom.quotes.value limit: 3 -%}
-                {%- if quote.status == 'pending' or quote.status == 'review' -%}
-                  {%- assign quote_found = true -%}
-                  <div class="dp-row">
-                    <div class="dp-row__left">{{ quote.id | truncate: 8, '' }}{% if quote.created_at %} &middot; {{ quote.created_at | date: '%b %d, %Y' }}{% endif %}</div>
-                    <div class="dp-row__right">
-                      {%- if quote.line_items_size -%}{{ quote.line_items_size }} Items{%- endif -%}
-                      {%- if quote.total -%} &middot; {{ quote.total | money }}{%- endif -%}
-                      <span class="dp-pill" style="margin-left:12px;padding:0 12px">{% if quote.status == 'review' %}Review{% else %}Sent{% endif %}</span>
-                    </div>
+              <div class="dp-card dp-card--table">
+                <div class="dp-card__head">
+                  <h3 class="dp-card__title">Recent Orders</h3>
+                  <a href="/account" class="dp-card__link">View All &rarr;</a>
+                </div>
+
+                {%- if seed_mode and seed_orders_data -%}
+                  <div class="dp-table-responsive">
+                    <table class="dp-table">
+                      <colgroup>
+                        <col style="width:10%">
+                        <col style="width:10%">
+                        <col style="width:12%">
+                        <col style="width:22%">
+                        <col style="width:7%">
+                        <col style="width:11%">
+                        <col style="width:18%">
+                        <col style="width:10%">
+                      </colgroup>
+                      <thead>
+                        <tr>
+                          <th>Order #</th>
+                          <th>PO #</th>
+                          <th>Order Date</th>
+                          <th>Vehicle / Application</th>
+                          <th>Items</th>
+                          <th>Total</th>
+                          <th>Status</th>
+                          <th></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td><a href="/account" class="dp-table__link">CW-1057</a></td>
+                          <td class="dp-table__muted">DMX-5125</td>
+                          <td>Sep 12, 2026</td>
+                          <td class="dp-table__muted">2025 BMW M4 Competition</td>
+                          <td class="dp-table__numeric">4</td>
+                          <td class="dp-table__numeric">{{ 876000 | money }}</td>
+                          <td>{% render 'dealer-status-badge', status: 'IN PRODUCTION' %}</td>
+                          <td><a href="/account" class="dp-table__action">View</a></td>
+                        </tr>
+                        <tr>
+                          <td><a href="/account" class="dp-table__link">CW-1054</a></td>
+                          <td class="dp-table__muted">DMX-5119</td>
+                          <td>Sep 10, 2026</td>
+                          <td class="dp-table__muted">Porsche 911</td>
+                          <td class="dp-table__numeric">2</td>
+                          <td class="dp-table__numeric">{{ 425000 | money }}</td>
+                          <td>{% render 'dealer-status-badge', status: 'FINISHING' %}</td>
+                          <td><a href="/account" class="dp-table__action">View</a></td>
+                        </tr>
+                        <tr>
+                          <td><a href="/account" class="dp-table__link">CW-1052</a></td>
+                          <td class="dp-table__muted">DMX-5108</td>
+                          <td>Sep 08, 2026</td>
+                          <td class="dp-table__muted">Audi RS6</td>
+                          <td class="dp-table__numeric">4</td>
+                          <td class="dp-table__numeric">{{ 798000 | money }}</td>
+                          <td>{% render 'dealer-status-badge', status: 'QUALITY CHECK' %}</td>
+                          <td><a href="/account" class="dp-table__action">View</a></td>
+                        </tr>
+                        <tr>
+                          <td><a href="/account" class="dp-table__link">CW-1049</a></td>
+                          <td class="dp-table__muted">DMX-5097</td>
+                          <td>Sep 05, 2026</td>
+                          <td class="dp-table__muted">Mercedes-AMG C63</td>
+                          <td class="dp-table__numeric">2</td>
+                          <td class="dp-table__numeric">{{ 392000 | money }}</td>
+                          <td>{% render 'dealer-status-badge', status: 'PREPARING TO SHIP' %}</td>
+                          <td><a href="/account" class="dp-table__action">View</a></td>
+                        </tr>
+                        <tr>
+                          <td><a href="/account" class="dp-table__link">CW-1045</a></td>
+                          <td class="dp-table__muted">DMX-5081</td>
+                          <td>Sep 01, 2026</td>
+                          <td class="dp-table__muted">BMW X5</td>
+                          <td class="dp-table__numeric">4</td>
+                          <td class="dp-table__numeric">{{ 654000 | money }}</td>
+                          <td>{% render 'dealer-status-badge', status: 'SHIPPED' %}</td>
+                          <td><a href="/account" class="dp-table__action">View</a></td>
+                        </tr>
+                      </tbody>
+                    </table>
                   </div>
-                {%- endif -%}
-              {%- endfor -%}
-              {%- unless quote_found -%}
-                <div class="dp-row" style="justify-items:center;text-align:center">
-                  <div style="grid-column:1/-1;color:var(--text-color-light)">No pending quotes. <a href="#" class="dp-card__link">Request a Quote</a></div>
-                </div>
-              {%- endunless -%}
-            {%- else -%}
-              <div class="dp-row" style="justify-items:center;text-align:center">
-                <div style="grid-column:1/-1;color:var(--text-color-light)">No quotes yet. When you configure a wheel and request a quote, it will appear here.</div>
-              </div>
-            {%- endif -%}
-          </div>
-        </div>
-
-        <div class="dp-card dp-card--pad dp-account-card">
-          <div class="dp-card__head">
-            <h3>Account Summary</h3>
-            <a href="{{ routes.account_addresses_url }}" class="dp-card__link">View Account</a>
-          </div>
-          <div class="dp-grid-2b" style="gap:0">
-            <div class="dp-rows" style="padding-right:16px;border-right:1px solid var(--dp-line)">
-              <div class="dp-row">
-                <div class="dp-row__left">Dealer Name</div>
-                <div class="dp-row__right">{{ customer.name | default: customer.first_name | append: ' ' | append: customer.last_name }}</div>
-              </div>
-              <div class="dp-row">
-                <div class="dp-row__left">Account Number</div>
-                <div class="dp-row__right">{{ customer.id | prepend: 'DWN-' }}</div>
-              </div>
-              <div class="dp-row">
-                <div class="dp-row__left">Payment Terms</div>
-                <div class="dp-row__right">{% if dealer_net_terms %}NET-30{% else %}Standard{% endif %}</div>
-              </div>
-              <div class="dp-row">
-                <div class="dp-row__left">Tier Level</div>
-                <div class="dp-row__right">Tier {{ dealer_tier | default: 1 }}</div>
+                {% elsif customer.orders.size > 0 %}
+                  <div class="dp-table-responsive">
+                    <table class="dp-table">
+                      <thead>
+                        <tr>
+                          <th>Order #</th>
+                          <th>Date</th>
+                          <th>Status</th>
+                          <th>Items</th>
+                          <th>Total</th>
+                          <th></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for order in customer.orders limit: 5 %}
+                          {%- assign ord_status = order.fulfillment_status | default: 'open' -%}
+                          <tr>
+                            <td><a href="{{ order.customer_url }}" class="dp-table__link">{{ order.name }}</a></td>
+                            <td>{{ order.created_at | date: '%b %d, %Y' }}</td>
+                            <td>{% render 'dealer-status-badge', status: ord_status %}</td>
+                            <td class="dp-table__numeric">{{ order.line_items | size }}</td>
+                            <td class="dp-table__numeric">{{ order.total_price | money }}</td>
+                            <td><a href="{{ order.customer_url }}" class="dp-table__action">View</a></td>
+                          </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                  </div>
+                {% else %}
+                  {% render 'dealer-empty-state', title: 'No orders yet.', sub: 'Start by browsing the catalog to find wheels for your customers.', link_url: '/collections/all', link_label: 'Browse Catalog' %}
+                {% endif %}
               </div>
             </div>
-            <div class="dp-rows" style="padding-left:16px">
-              <div class="dp-row">
-                <div class="dp-row__left">Credit Limit</div>
-                <div class="dp-row__right">{{ credit_limit | money }}</div>
-              </div>
-              <div class="dp-row">
-                <div class="dp-row__left">Available Credit</div>
-                <div class="dp-row__right">{{ available_credit | money }}</div>
-              </div>
-              <div class="dp-row">
-                <div class="dp-row__left">Past Due</div>
-                <div class="dp-row__right">{{ past_due | money }}</div>
-              </div>
-              <div class="dp-row">
-                <div class="dp-row__left">Account Status</div>
-                <div class="dp-row__right">
-                  {{ account_status | capitalize | replace: 'Active', 'In Good Standing' }}
-                  <span class="dp-status-dot"></span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div style="margin-top:12px;text-align:center">
-            <a href="/pages/dealer-order-guide?view=dealer-guide" target="_blank" class="dp-pill dp-pill--accent" style="text-decoration:none;display:inline-flex;align-items:center;gap:6px">
-              &#9776; Download Order Guide (PDF)
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
 
-    <div class="dp-footer">
-      <div>&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. All rights reserved.</div>
-      <div class="dp-footer__links">
-        <a href="{{ routes.account_url }}">Dealer Portal</a>
-        <a href="/policies/terms-of-service">Terms & Conditions</a>
-        <a href="/policies/privacy-policy">Privacy Policy</a>
+            <div class="dp-columns__secondary">
+              {% if seed_mode and seed_production_data %}
+<div class="dp-production">
+  <div class="dp-card__head">
+    <h3 class="dp-card__title">PRODUCTION TRACKER</h3>
+    <span class="dp-card__link">View Order &rarr;</span>
+  </div>
+  <div class="dp-production__meta">
+    <div class="dp-production__meta-row">
+      <span class="dp-production__meta-label">Order</span>
+      <span class="dp-production__meta-value">CW-1057</span>
+    </div>
+    <div class="dp-production__meta-row">
+      <span class="dp-production__meta-label">PO:</span>
+      <span class="dp-production__meta-value">DMX-5125</span>
+    </div>
+    <div class="dp-production__meta-row">
+      <span class="dp-production__meta-label">Status</span>
+      <span class="dp-production__meta-value">{% render 'dealer-status-badge', status: 'IN PRODUCTION' %}</span>
+    </div>
+  </div>
+  <div class="dp-production__timeline">
+    <div class="dp-production__stage dp-production__stage--completed">
+      <div class="dp-production__stage-dot">&#10003;</div>
+      <div class="dp-production__stage-text">
+        <span class="dp-production__stage-label">ORDER<br>RECEIVED</span>
+        <span class="dp-production__stage-date">Sep 12</span>
       </div>
     </div>
-  </section>
+    <div class="dp-production__stage dp-production__stage--completed">
+      <div class="dp-production__stage-dot">&#10003;</div>
+      <div class="dp-production__stage-text">
+        <span class="dp-production__stage-label">IN<br>PRODUCTION</span>
+        <span class="dp-production__stage-date">Sep 14</span>
+      </div>
+    </div>
+    <div class="dp-production__stage dp-production__stage--current">
+      <div class="dp-production__stage-dot">&#8226;</div>
+      <div class="dp-production__stage-text">
+        <span class="dp-production__stage-label">FINISHING</span>
+        <span class="dp-production__stage-date">Current</span>
+      </div>
+    </div>
+    <div class="dp-production__stage dp-production__stage--upcoming">
+      <div class="dp-production__stage-dot">&#9675;</div>
+      <div class="dp-production__stage-text">
+        <span class="dp-production__stage-label">QUALITY<br>CHECK</span>
+      </div>
+    </div>
+    <div class="dp-production__stage dp-production__stage--upcoming">
+      <div class="dp-production__stage-dot">&#9675;</div>
+      <div class="dp-production__stage-text">
+        <span class="dp-production__stage-label">PREPARING<br>TO SHIP</span>
+      </div>
+    </div>
+    <div class="dp-production__stage dp-production__stage--upcoming">
+      <div class="dp-production__stage-dot">&#9675;</div>
+      <div class="dp-production__stage-text">
+        <span class="dp-production__stage-label">SHIPPED</span>
+      </div>
+    </div>
+  </div>
+  <div class="dp-production__product">
+    <div class="dp-production__product-image">
+      <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
+        <circle cx="30" cy="30" r="26" stroke="#C2A48A" stroke-width="2" fill="#081D2D"/>
+        <circle cx="30" cy="30" r="18" stroke="#C2A48A" stroke-width="1" fill="none"/>
+        <line x1="10" y1="10" x2="50" y2="50" stroke="#C2A48A" stroke-width="0.5" opacity="0.3"/>
+        <line x1="50" y1="10" x2="10" y2="50" stroke="#C2A48A" stroke-width="0.5" opacity="0.3"/>
+      </svg>
+    </div>
+    <div class="dp-production__product-info">
+      <div class="dp-production__product-name">C1 &mdash; Forged Monoblock</div>
+      <div class="dp-production__product-detail">20" / Satin Bronze</div>
+      <div class="dp-production__product-detail">2025 BMW M4 Competition</div>
+    </div>
+    <div class="dp-production__product-pricing">
+      <div class="dp-production__product-qty">Qty: 4</div>
+      <div class="dp-production__product-price">{{ 876000 | money }}</div>
+      <div class="dp-production__product-each">{{ 219000 | money_without_currency }} ea</div>
+    </div>
+  </div>
 </div>
-
 {% endif %}
+            </div>
+          </div>
+        </div>
+
+        <div class="dp-section">
+          <div class="dp-columns dp-columns--45-55">
+            <div class="dp-columns__primary">
+              {% if seed_mode and seed_activity_data %}
+<div class="dp-activity">
+  <div class="dp-card__head">
+    <h3 class="dp-card__title">RECENT ACTIVITY</h3>
+    <a href="/account" class="dp-card__link">View All Activity &rarr;</a>
+  </div>
+  <div class="dp-activity__list">
+    <div class="dp-activity__item">
+      <div class="dp-activity__item-icon">&#8631;</div>
+      <span class="dp-activity__item-msg">Order CW-1057 moved to Finishing</span>
+      <span class="dp-activity__item-time">Today at 10:24 AM</span>
+      <span class="dp-activity__item-arrow">&#8594;</span>
+    </div>
+    <div class="dp-activity__item">
+      <div class="dp-activity__item-icon">&#36;</div>
+      <span class="dp-activity__item-msg">Quote Q-0521 created</span>
+      <span class="dp-activity__item-time">Yesterday at 3:18 PM</span>
+      <span class="dp-activity__item-arrow">&#8594;</span>
+    </div>
+    <div class="dp-activity__item">
+      <div class="dp-activity__item-icon">&#9654;</div>
+      <span class="dp-activity__item-msg">Order CW-1049 shipped</span>
+      <span class="dp-activity__item-time">Sep 14, 2026</span>
+      <span class="dp-activity__item-arrow">&#8594;</span>
+    </div>
+    <div class="dp-activity__item">
+      <div class="dp-activity__item-icon">&#9672;</div>
+      <span class="dp-activity__item-msg">Tracking number available for CW-1049</span>
+      <span class="dp-activity__item-time">Sep 14, 2026</span>
+      <span class="dp-activity__item-arrow">&#8594;</span>
+    </div>
+    <div class="dp-activity__item">
+      <div class="dp-activity__item-icon">&#9635;</div>
+      <span class="dp-activity__item-msg">Invoice INV-1423 posted</span>
+      <span class="dp-activity__item-time">Sep 12, 2026</span>
+      <span class="dp-activity__item-arrow">&#8594;</span>
+    </div>
+  </div>
+</div>
+{% else %}
+              {% render 'dealer-activity-list', seed_activity: '' %}
+{% endif %}
+            </div>
+            <div class="dp-columns__secondary">
+              {% render 'dealer-featured-wheels',
+                featured_products: section.settings.featured_products,
+                featured_collection: section.settings.featured_collection
+              %}
+            </div>
+          </div>
+        </div>
+
+        <div class="dp-footer">
+          <div>&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. All rights reserved.</div>
+          <div class="dp-footer__links">
+            <a href="/pages/dealer-dashboard">Dealer Portal</a>
+            <a href="/policies/terms-of-service">Terms &amp; Conditions</a>
+            <a href="/policies/privacy-policy">Privacy Policy</a>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+</div>
 
 {% schema %}
 {
   "name": "Dealer Dashboard",
   "tag": "section",
   "class": "section section--dealer-dashboard",
-  "settings": []
+  "settings": [
+    {
+      "type": "header",
+      "content": "Dealer Demo Mode"
+    },
+    {
+      "type": "checkbox",
+      "id": "dealer_demo_mode",
+      "label": "Enable demo mode",
+      "default": true,
+      "info": "Show presentation seed data for backend-dependent components"
+    },
+    {
+      "type": "header",
+      "content": "Branding"
+    },
+    {
+      "type": "image_picker",
+      "id": "dealer_logo",
+      "label": "Custom dealer portal logo"
+    },
+    {
+      "type": "range",
+      "id": "dealer_logo_width",
+      "label": "Logo width",
+      "min": 80,
+      "max": 180,
+      "default": 120,
+      "unit": "px"
+    },
+    {
+      "type": "text",
+      "id": "dealer_portal_subtitle",
+      "label": "Dealer Portal subtitle",
+      "default": "DEALER PORTAL"
+    },
+    {
+      "type": "text",
+      "id": "sidebar_tagline",
+      "label": "Sidebar bottom tagline",
+      "default": "A HIGHER STANDARD TOGETHER."
+    },
+    {
+      "type": "header",
+      "content": "Hero"
+    },
+    {
+      "type": "image_picker",
+      "id": "dealer_hero_image",
+      "label": "Hero background image",
+      "info": "Recommended: 1920x600px automotive/landscape"
+    },
+    {
+      "type": "header",
+      "content": "Featured Wheels"
+    },
+    {
+      "type": "text",
+      "id": "featured_heading",
+      "label": "Featured Wheels heading",
+      "default": "FEATURED WHEELS"
+    },
+    {
+      "type": "collection",
+      "id": "featured_collection",
+      "label": "Featured Wheels collection"
+    },
+    {
+      "type": "product_list",
+      "id": "featured_products",
+      "label": "Featured Wheels (overrides collection)",
+      "limit": 3
+    },
+    {
+      "type": "checkbox",
+      "id": "featured_show_msrp",
+      "label": "Show MSRP",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "featured_show_type",
+      "label": "Show product type",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "featured_show_configure",
+      "label": "Show Configure button",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Section Visibility"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_kpi",
+      "label": "Show KPI overview",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_quick_actions",
+      "label": "Show Quick Actions",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_recent_orders",
+      "label": "Show Recent Orders",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_production_tracker",
+      "label": "Show Production Tracker",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_recent_activity",
+      "label": "Show Recent Activity",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_featured_wheels",
+      "label": "Show Featured Wheels",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Status Badge Colors"
+    },
+    {
+      "type": "color",
+      "id": "badge_in_production_bg",
+      "label": "In Production background",
+      "default": "#B8D9FF"
+    },
+    {
+      "type": "color",
+      "id": "badge_in_production_text",
+      "label": "In Production text",
+      "default": "#0B3D78"
+    },
+    {
+      "type": "color",
+      "id": "badge_finishing_bg",
+      "label": "Finishing background",
+      "default": "#F5DEB3"
+    },
+    {
+      "type": "color",
+      "id": "badge_finishing_text",
+      "label": "Finishing text",
+      "default": "#67400E"
+    },
+    {
+      "type": "color",
+      "id": "badge_quality_bg",
+      "label": "Quality Check background",
+      "default": "#DCE3F0"
+    },
+    {
+      "type": "color",
+      "id": "badge_quality_text",
+      "label": "Quality Check text",
+      "default": "#243A5A"
+    },
+    {
+      "type": "color",
+      "id": "badge_preparing_bg",
+      "label": "Preparing to Ship background",
+      "default": "#DEC5FF"
+    },
+    {
+      "type": "color",
+      "id": "badge_preparing_text",
+      "label": "Preparing to Ship text",
+      "default": "#48238A"
+    },
+    {
+      "type": "color",
+      "id": "badge_shipped_bg",
+      "label": "Shipped background",
+      "default": "#BFE8D6"
+    },
+    {
+      "type": "color",
+      "id": "badge_shipped_text",
+      "label": "Shipped text",
+      "default": "#145C44"
+    },
+    {
+      "type": "header",
+      "content": "Sidebar Appearance"
+    },
+    {
+      "type": "color",
+      "id": "sidebar_bg_color",
+      "label": "Sidebar background",
+      "default": "#081D2D"
+    },
+    {
+      "type": "color",
+      "id": "sidebar_nav_text",
+      "label": "Navigation text color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "sidebar_active_accent",
+      "label": "Active accent color",
+      "default": "#C2A48A"
+    },
+    {
+      "type": "color",
+      "id": "sidebar_divider",
+      "label": "Divider color",
+      "default": "#1A2A44"
+    },
+    {
+      "type": "header",
+      "content": "Dashboard Colors"
+    },
+    {
+      "type": "color",
+      "id": "dashboard_bg",
+      "label": "Dashboard background",
+      "default": "#F6F8FA"
+    },
+    {
+      "type": "color",
+      "id": "panel_bg",
+      "label": "Panel background",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "panel_border",
+      "label": "Panel border",
+      "default": "#E0E6ED"
+    },
+    {
+      "type": "color",
+      "id": "accent_gold",
+      "label": "Accent gold",
+      "default": "#C2A48A"
+    },
+    {
+      "type": "color",
+      "id": "accent_copper",
+      "label": "Accent copper",
+      "default": "#8B4D29"
+    },
+    {
+      "type": "color",
+      "id": "text_primary",
+      "label": "Primary text",
+      "default": "#071936"
+    },
+    {
+      "type": "color",
+      "id": "text_secondary",
+      "label": "Secondary text",
+      "default": "#52617A"
+    },
+    {
+      "type": "header",
+      "content": "Card Styling"
+    },
+    {
+      "type": "range",
+      "id": "panel_radius",
+      "label": "Panel border radius",
+      "min": 0,
+      "max": 24,
+      "default": 8,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "card_spacing",
+      "label": "Card internal spacing",
+      "min": 8,
+      "max": 32,
+      "default": 18,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "section_heading_size",
+      "label": "Section heading size",
+      "min": 10,
+      "max": 18,
+      "default": 13,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "body_text_size",
+      "label": "Body text size",
+      "min": 11,
+      "max": 16,
+      "default": 13,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "small_label_size",
+      "label": "Small label size",
+      "min": 9,
+      "max": 14,
+      "default": 11,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Sidebar Background"
+    },
+    {
+      "type": "image_picker",
+      "id": "sidebar_bg_image",
+      "label": "Sidebar background image"
+    },
+    {
+      "type": "select",
+      "id": "sidebar_bg_position",
+      "label": "Background position",
+      "options": [
+        {"value": "center", "label": "Center"},
+        {"value": "top", "label": "Top"},
+        {"value": "bottom", "label": "Bottom"},
+        {"value": "left", "label": "Left"},
+        {"value": "right", "label": "Right"}
+      ],
+      "default": "center"
+    },
+    {
+      "type": "select",
+      "id": "sidebar_bg_size",
+      "label": "Background size",
+      "options": [
+        {"value": "cover", "label": "Cover"},
+        {"value": "contain", "label": "Contain"}
+      ],
+      "default": "cover"
+    },
+    {
+      "type": "color",
+      "id": "sidebar_overlay_color",
+      "label": "Overlay color",
+      "default": "#081D2D"
+    },
+    {
+      "type": "range",
+      "id": "sidebar_overlay_opacity",
+      "label": "Overlay opacity",
+      "min": 0,
+      "max": 100,
+      "default": 60,
+      "unit": "%"
+    },
+    {
+      "type": "header",
+      "content": "KPI Icons"
+    },
+    {
+      "type": "image_picker",
+      "id": "kpi_icon_open_orders",
+      "label": "Open Orders icon"
+    },
+    {
+      "type": "image_picker",
+      "id": "kpi_icon_in_production",
+      "label": "In Production icon"
+    },
+    {
+      "type": "image_picker",
+      "id": "kpi_icon_pending_quotes",
+      "label": "Pending Quotes icon"
+    },
+    {
+      "type": "image_picker",
+      "id": "kpi_icon_available_credit",
+      "label": "Available Credit icon"
+    },
+    {
+      "type": "range",
+      "id": "kpi_icon_size",
+      "label": "KPI icon size",
+      "min": 20,
+      "max": 40,
+      "default": 28,
+      "unit": "px"
+    },
+    {
+      "type": "color",
+      "id": "kpi_icon_bg_color",
+      "label": "KPI icon background color",
+      "default": "#F0F2F5"
+    },
+    {
+      "type": "header",
+      "content": "Quick Action Icons"
+    },
+    {
+      "type": "image_picker",
+      "id": "qa_icon_quick_order",
+      "label": "Quick Order icon"
+    },
+    {
+      "type": "image_picker",
+      "id": "qa_icon_browse_catalog",
+      "label": "Browse Catalog icon"
+    },
+    {
+      "type": "image_picker",
+      "id": "qa_icon_create_quote",
+      "label": "Create Quote icon"
+    },
+    {
+      "type": "image_picker",
+      "id": "qa_icon_view_orders",
+      "label": "View Orders icon"
+    },
+    {
+      "type": "range",
+      "id": "qa_icon_size",
+      "label": "Quick Action icon size",
+      "min": 20,
+      "max": 40,
+      "default": 22,
+      "unit": "px"
+    },
+    {
+      "type": "color",
+      "id": "qa_icon_bg",
+      "label": "Icon container background",
+      "default": "#F0F2F5"
+    }
+  ]
 }
 {% endschema %}

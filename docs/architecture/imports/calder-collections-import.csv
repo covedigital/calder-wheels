@@ -1,0 +1,25 @@
+Handle,Command,Title,Body HTML,Sort Order,Template Suffix,Published,Source: Command,Source: Type,Inclusion: Type,Inclusion: Match,Condition: Command,Condition: Field,Condition: Relation,Condition: Value,Condition: Match,Sort: Position,Sort: Product Handle
+all-calder-wheels,MERGE,All Calder Wheels,<p>Every Calder SUV wheel — Spun Forged, built to order.</p>,Best Selling,,TRUE,MERGE,Products,,,MERGE,Type,Equals,SUV Wheel - Spun Forged - Polished Lip / Chrome Bolts,any
+all-calder-wheels,,,,,,,,,,,,MERGE,Type,Equals,SUV Wheel - Spun Forged - Polished Lip / Black Bolts,
+all-calder-wheels,,,,,,,,,,,,MERGE,Type,Equals,SUV Wheel - Spun Forged - Gloss Black Lip / Chrome Bolts,
+all-calder-wheels,,,,,,,,,,,,MERGE,Type,Equals,SUV Wheel - Spun Forged - Gloss Black Lip / Black Bolts,
+design-201,MERGE,201 Calder,<p>Design 201 — 5-spoke Spun Forged wheel.</p>,Manual,,TRUE,MERGE,Products,,,MERGE,Tag,Includes,201,any
+design-202,MERGE,202 Calder,<p>Design 202 — 6-spoke Spun Forged wheel.</p>,Manual,,TRUE,MERGE,Products,,,MERGE,Tag,Includes,202,any
+design-203,MERGE,203 Calder,<p>Design 203 — 8-spoke Spun Forged wheel.</p>,Manual,,TRUE,MERGE,Products,,,MERGE,Tag,Includes,203,any
+design-206,MERGE,206 Calder,<p>Design 206 — 6-spoke bold Spun Forged wheel.</p>,Manual,,TRUE,MERGE,Products,,,MERGE,Tag,Includes,206,any
+design-207,MERGE,207 Calder,<p>Design 207 — 8-spoke bold Spun Forged wheel.</p>,Manual,,TRUE,MERGE,Products,,,MERGE,Tag,Includes,207,any
+spun-forged-wheels,MERGE,Spun Forged Wheels,<p>All Calder Spun Forged wheels — precision engineered for SUV applications.</p>,Best Selling,,TRUE,MERGE,Products,,,MERGE,Tag,Includes,Spun Forged,any
+polished-lip-chrome,MERGE,Polished Lip — Chrome Bolts,<p>Calder wheels with polished lip finish and chrome hardware.</p>,Manual,,TRUE,MERGE,Products,,,MERGE,Type,Equals,SUV Wheel - Spun Forged - Polished Lip / Chrome Bolts,any
+polished-lip-black,MERGE,Polished Lip — Black Bolts,<p>Calder wheels with polished lip finish and black hardware.</p>,Manual,,TRUE,MERGE,Products,,,MERGE,Type,Equals,SUV Wheel - Spun Forged - Polished Lip / Black Bolts,any
+gloss-black-lip-chrome,MERGE,Gloss Black Lip — Chrome Bolts,<p>Calder wheels with gloss black lip finish and chrome hardware.</p>,Manual,,TRUE,MERGE,Products,,,MERGE,Type,Equals,SUV Wheel - Spun Forged - Gloss Black Lip / Chrome Bolts,any
+gloss-black-lip-black,MERGE,Gloss Black Lip — Black Bolts,<p>Calder wheels with gloss black lip finish and black hardware.</p>,Manual,,TRUE,MERGE,Products,,,MERGE,Type,Equals,SUV Wheel - Spun Forged - Gloss Black Lip / Black Bolts,any
+for-tahoe-yukon-escalade,MERGE,For Tahoe / Yukon / Escalade,<p>Calder wheels compatible with GM SUV platforms.</p>,Manual,,TRUE,MERGE,Products,,,MERGE,Tag,Includes,Tahoe,any
+for-expedition-f150,MERGE,For Expedition / F150,<p>Calder wheels compatible with Ford SUV platforms.</p>,Manual,,TRUE,MERGE,Products,,,MERGE,Tag,Includes,Expedition,any
+for-g-wagon,MERGE,For G-Wagon,<p>Calder wheels compatible with Mercedes-Benz G-Class.</p>,Manual,,TRUE,MERGE,Products,,,MERGE,Tag,Includes,G-Wagon,any
+for-range-rover,MERGE,For Range Rover,<p>Calder wheels compatible with Land Rover / Range Rover platforms.</p>,Manual,,TRUE,MERGE,Products,,,MERGE,Tag,Includes,Range Rover,any
+for-lexus-infiniti,MERGE,For Lexus / Infiniti,<p>Calder wheels compatible with Lexus GX and Infiniti QX platforms.</p>,Manual,,TRUE,MERGE,Products,,,MERGE,Tag,Includes,Lexus GX,any
+22-inch-wheels,MERGE,22" Wheels,<p>Calder wheels in 22-inch diameter.</p>,Price Low to High,,TRUE,MERGE,Products,,,MERGE,Variant Price,Less than,1099,any
+22-inch-wheels,,,,,,,,,,,,MERGE,Variant Price,Greater than,900,
+24-inch-wheels,MERGE,24" Wheels,<p>Calder wheels in 24-inch diameter.</p>,Price Low to High,,TRUE,MERGE,Products,,,MERGE,Variant Price,Greater than,1099,any
+24-inch-wheels,,,,,,,,,,,,MERGE,Variant Price,Less than,1400,
+26-inch-wheels,MERGE,26" Wheels,<p>Calder wheels in 26-inch diameter.</p>,Price Low to High,,TRUE,MERGE,Products,,,MERGE,Variant Price,Greater than,1399,any

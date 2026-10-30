@@ -1,0 +1,10 @@
+<div class="calder-gallery-filters" data-gallery-filters>
+  <button type="button" class="calder-gallery-filters__mobile-toggle" aria-expanded="false">Filters <span aria-hidden="true">⌄</span></button>
+  <div class="calder-gallery-filters__inner">
+    {% assign keys = filter_keys | split: ',' %}{% assign labels = filter_labels | split: ',' %}
+    {% for key in keys %}{% assign index = forloop.index0 %}
+      <label class="calder-gallery-filters__group"><span class="visually-hidden">{{ labels[index] }}</span><select data-filter-key="{{ key }}"><option value="">{{ labels[index] }}</option></select></label>
+    {% endfor %}
+    <button type="button" class="calder-gallery-filters__reset">RESET</button>
+  </div>
+</div>

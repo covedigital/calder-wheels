@@ -1,0 +1,11 @@
+Handle,Command,Title,Body HTML,Sort Order,Template Suffix,Published,Source: Command,Source: Type,Inclusion: Type,Inclusion: Match,Condition: Command,Condition: Field,Condition: Relation,Condition: Value,Condition: Match,Sort: Position,Sort: Product Handle
+all-calder-wheels,MERGE,All Calder Wheels,All Calder SUV wheels.,Best Selling,,TRUE,MERGE,Products,,any,MERGE,Type,Equals,SUV Wheel - Spun Forged - Polished Lip / Chrome Bolts,
+all-calder-wheels,,,,,,,,,,,MERGE,Type,Equals,SUV Wheel - Spun Forged - Polished Lip / Black Bolts,
+all-calder-wheels,,,,,,,,,,,MERGE,Type,Equals,SUV Wheel - Spun Forged - Gloss Black Lip / Chrome Bolts,
+all-calder-wheels,,,,,,,,,,,MERGE,Type,Equals,SUV Wheel - Spun Forged - Gloss Black Lip / Black Bolts,
+design-201,MERGE,201 Calder,Design 201 - 5-spoke Spun Forged.,Manual,,TRUE,MERGE,Products,,,MERGE,Tag,Includes,201,any
+design-202,MERGE,202 Calder,Design 202 - 6-spoke Spun Forged.,Manual,,TRUE,MERGE,Products,,,MERGE,Tag,Includes,202,any
+design-203,MERGE,203 Calder,Design 203 - 8-spoke Spun Forged.,Manual,,TRUE,MERGE,Products,,,MERGE,Tag,Includes,203,any
+design-206,MERGE,206 Calder,Design 206 - 6-spoke bold Spun Forged.,Manual,,TRUE,MERGE,Products,,,MERGE,Tag,Includes,206,any
+design-207,MERGE,207 Calder,Design 207 - 8-spoke bold Spun Forged.,Manual,,TRUE,MERGE,Products,,,MERGE,Tag,Includes,207,any
+spun-forged-wheels,MERGE,Spun Forged Wheels,All Spun Forged wheels.,Best Selling,,TRUE,MERGE,Products,,,MERGE,Tag,Includes,Spun Forged,any

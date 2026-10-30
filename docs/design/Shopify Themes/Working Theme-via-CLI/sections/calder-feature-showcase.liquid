@@ -1,0 +1,688 @@
+{{ 'calder-feature-showcase.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign image_position = section.settings.image_position | default: 'left'
+  assign color_scheme = section.settings.color_scheme | default: 'cream'
+  assign content_alignment = section.settings.content_alignment | default: 'left'
+  assign vertical_alignment = section.settings.vertical_alignment | default: 'center'
+  assign mobile_order = section.settings.mobile_order | default: 'image_first'
+  assign column_ratio = section.settings.column_ratio | default: '50_50'
+  assign show_section = section.settings.show_section | default: true
+  assign show_eyebrow = section.settings.show_eyebrow | default: true
+  assign show_cta = section.settings.show_cta | default: true
+  assign show_features = section.settings.show_features | default: true
+  assign cta_url = section.settings.cta_url
+  assign show_arrow = section.settings.show_arrow | default: true
+  assign image_alt = section.settings.image_alt | default: section.settings.heading | strip_html
+
+  assign section_animation_enabled = section.settings.section_animation | default: true
+  if settings.animation_sections == false
+    assign section_animation_enabled = false
+  endif
+  if section.settings.section_decoration_top != 'none' or section.settings.section_decoration_bottom != 'none'
+    assign section_animation_enabled = false
+  endif
+
+  assign modifier_class = ''
+  if image_position == 'right'
+    assign modifier_class = modifier_class | append: ' cw-feature-showcase--image-right'
+  endif
+  if color_scheme == 'navy'
+    assign modifier_class = modifier_class | append: ' cw-feature-showcase--scheme-navy'
+  endif
+  if content_alignment == 'center'
+    assign modifier_class = modifier_class | append: ' cw-feature-showcase--content-center'
+  endif
+  if vertical_alignment == 'top'
+    assign modifier_class = modifier_class | append: ' cw-feature-showcase--valign-top'
+  elsif vertical_alignment == 'bottom'
+    assign modifier_class = modifier_class | append: ' cw-feature-showcase--valign-bottom'
+  endif
+  if mobile_order == 'content_first'
+    assign modifier_class = modifier_class | append: ' cw-feature-showcase--mobile-content-first'
+  endif
+  assign ratio_class = ' cw-feature-showcase--ratio-' | append: column_ratio
+  assign modifier_class = modifier_class | append: ratio_class
+
+  if section.settings.feature_alignment == 'center'
+    assign modifier_class = modifier_class | append: ' cw-feature-showcase--features-center'
+  endif
+  if section.settings.feature_spacing == 'tight'
+    assign modifier_class = modifier_class | append: ' cw-feature-showcase--features-tight'
+  elsif section.settings.feature_spacing == 'loose'
+    assign modifier_class = modifier_class | append: ' cw-feature-showcase--features-loose'
+  endif
+
+  capture section_style_attr
+    render 'section-style', section: section
+  endcapture
+  assign section_style_attr = section_style_attr | strip
+  if section_style_attr != blank
+    assign section_style_value = section_style_attr | remove: 'style="' | remove: '"'
+  else
+    assign section_style_value = ''
+  endif
+  assign cw_style = '--cw-top-spacing:' | append: section.settings.top_spacing | append: 'px;--cw-bottom-spacing:' | append: section.settings.bottom_spacing | append: 'px;--cw-column-gap:' | append: section.settings.column_gap | append: 'px;--cw-feature-icon-color:' | append: section.settings.feature_icon_color | append: ';'
+  if section_style_value != blank
+    assign combined_style = section_style_value | append: ' ' | append: cw_style
+  else
+    assign combined_style = cw_style
+  endif
+-%}
+
+{% if show_section %}
+<section class="cw-feature-showcase{{ modifier_class }}{% if section_animation_enabled %} show-on-scroll{% endif %}" id="cw-feature-showcase-{{ section.id }}" style="{{ combined_style }}">
+  <div class="cw-feature-showcase__inner">
+    <div class="cw-feature-showcase__grid">
+      <div class="cw-feature-showcase__media">
+        {% if section.settings.image != blank %}
+          {{ section.settings.image | image_url: width: 800 | image_tag: widths: '800,600,400,300', loading: 'lazy', alt: image_alt, class: 'cw-feature-showcase__image' }}
+        {% else %}
+          <div class="cw-feature-showcase__image cw-feature-showcase__image--placeholder" style="background:var(--calder-ivory, #F4F1EA);"></div>
+        {% endif %}
+      </div>
+
+      <div class="cw-feature-showcase__content">
+        {% if show_eyebrow and section.settings.eyebrow != blank %}
+          <div class="cw-feature-showcase__eyebrow">{{ section.settings.eyebrow }}</div>
+        {% endif %}
+
+        {% if section.settings.heading != blank %}
+          <h2 class="cw-feature-showcase__heading">{{ section.settings.heading }}</h2>
+        {% endif %}
+
+        {% if section.settings.description != blank %}
+          <div class="cw-feature-showcase__description">{{ section.settings.description }}</div>
+        {% endif %}
+
+        {% if show_cta and cta_url != blank and section.settings.cta_label != blank %}
+          <div class="cw-feature-showcase__actions">
+            <a href="{{ cta_url }}" class="cw-feature-showcase__cta">
+              {{ section.settings.cta_label }}
+              {% if show_arrow %}
+                <svg class="cw-feature-showcase__cta-arrow" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                  <path d="M4 2L8 6L4 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              {% endif %}
+            </a>
+          </div>
+        {% endif %}
+
+        {% if show_features and section.blocks.size > 0 %}
+          <div class="cw-feature-showcase__features">
+            {% for block in section.blocks %}
+              <div class="cw-feature-showcase__feature" {{ block.shopify_attributes }}>
+                <div class="cw-feature-showcase__feature-icon">
+                  {%- if block.settings.icon_custom_svg != blank %}
+                    {{ block.settings.icon_custom_svg }}
+                  {%- elsif block.settings.icon_custom_image != blank %}
+                  {%- assign icon_url = block.settings.icon_custom_image | image_url: width: 48 -%}
+                  {%- assign icon_url_lower = icon_url | downcase -%}
+                  {%- if icon_url_lower contains '.svg' %}
+                  <span class="cw-feature-showcase__feature-custom-icon" style="--cw-feature-icon-url: url('{{ icon_url }}');" aria-hidden="true"></span>
+                  {%- else %}
+                  {{ icon_url | image_tag: class: 'cw-feature-showcase__feature-custom-icon', loading: 'lazy', alt: block.settings.title }}
+                  {%- endif %}
+                  {%- else %}
+                  {%- case block.settings.icon %}
+                    {%- when 'strength' %}
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <path d="M12 2L14 6 18 6 15 9 15 14 12 12 8 14 9 9 6 6 10 6 12 2Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                    {%- when 'craftsmanship' %}
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <path d="M6 4L18 4 18 12 14 12 14 18 6 18 6 12 10 12 10 4M4 8L8 8 8 12 4 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                    {%- when 'customization' %}
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                        <path d="M12 2L14 6 18 10 14 10 10 14 12 18 8 18 6 14 8 10 12 6Z" stroke="currentColor" stroke-width="1.2" fill="none"/>
+                      </svg>
+                    {%- when 'clock' %}
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                        <path d="M12 12L12 4M12 12L16 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                      </svg>
+                    {%- when 'shield' %}
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <path d="M6 2L18 2 21 8 21 18 3 18 3 8 6 14 18 14 12 20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                    {%- when 'package' %}
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <rect x="4" y="4" width="16" height="16" stroke="currentColor" stroke-width="1.5" fill="none" rx="1"/>
+                        <path d="M6 6L18 6 18 18 6 18" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                      </svg>
+                    {%- when 'precision' %}
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                        <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                        <path d="M12 2L12 22" stroke="currentColor" stroke-width="1" stroke-linecap="round"/>
+                      </svg>
+                    {%- when 'engineering' %}
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                        <path d="M8 4L16 4 16 12 8 12M8 16L16 16 16 20 8 20" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                    {%- else %}
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                        <path d="M12 2L14 6 18 10 14 14 10 18 12 22" stroke="currentColor" stroke-width="1.2" fill="none"/>
+                      </svg>
+                  {%- endcase %}
+                  {%- endif %}
+                </div>
+                <div class="cw-feature-showcase__feature-text">
+                  <span class="cw-feature-showcase__feature-title">{{ block.settings.title }}</span>
+                  {% if block.settings.show_description and block.settings.description != blank %}
+                    <span class="cw-feature-showcase__feature-desc">{{ block.settings.description }}</span>
+                  {% endif %}
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Calder — Feature Showcase",
+  "tag": "section",
+  "class": "section section--cw-feature-showcase",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_section",
+      "label": "Show section content",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "options": [
+        { "value": "cream", "label": "Light / Cream" },
+        { "value": "navy", "label": "Dark / Navy" }
+      ],
+      "default": "cream"
+    },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "Image position",
+      "options": [
+        { "value": "left", "label": "Image Left / Content Right" },
+        { "value": "right", "label": "Content Left / Image Right" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "select",
+      "id": "column_ratio",
+      "label": "Desktop columns",
+      "options": [
+        { "value": "50_50", "label": "50/50" },
+        { "value": "55_45", "label": "55/45" },
+        { "value": "45_55", "label": "45/55" }
+      ],
+      "default": "50_50"
+    },
+    {
+      "type": "select",
+      "id": "content_alignment",
+      "label": "Content alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "select",
+      "id": "vertical_alignment",
+      "label": "Vertical alignment",
+      "options": [
+        { "value": "top", "label": "Top" },
+        { "value": "center", "label": "Center" },
+        { "value": "bottom", "label": "Bottom" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "select",
+      "id": "mobile_order",
+      "label": "Mobile content order",
+      "options": [
+        { "value": "image_first", "label": "Image first" },
+        { "value": "content_first", "label": "Content first" }
+      ],
+      "default": "image_first"
+    },
+    {
+      "type": "select",
+      "id": "section_width",
+      "label": "Section width",
+      "options": [
+        { "value": "global", "label": "Use store width" },
+        { "value": "full", "label": "Full width" }
+      ],
+      "default": "global"
+    },
+    {
+      "type": "header",
+      "content": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Feature image"
+    },
+    {
+      "type": "text",
+      "id": "image_alt",
+      "label": "Image alt text override",
+      "info": "Leave blank to use heading as alt text"
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_eyebrow",
+      "label": "Show eyebrow",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow text",
+      "default": "Feature"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Feature Heading",
+      "info": "Wrap text in <span class=\"cw-feature-showcase__highlight\"> to highlight in gold"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>Describe the feature or benefit shown here.</p>"
+    },
+    {
+      "type": "header",
+      "content": "CTA"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_cta",
+      "label": "Show CTA",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "CTA label",
+      "default": "Learn More"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "CTA URL"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_arrow",
+      "label": "Show arrow",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Feature Icons"
+    },
+    {
+      "type": "color",
+      "id": "feature_icon_color",
+      "label": "Feature icon color",
+      "default": "#0E2A3E"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_features",
+      "label": "Show feature group",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "feature_alignment",
+      "label": "Feature alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "select",
+      "id": "feature_spacing",
+      "label": "Feature spacing",
+      "options": [
+        { "value": "tight", "label": "Tight" },
+        { "value": "normal", "label": "Normal" },
+        { "value": "loose", "label": "Loose" }
+      ],
+      "default": "normal"
+    },
+    {
+      "type": "range",
+      "id": "top_spacing",
+      "min": 0,
+      "max": 200,
+      "step": 8,
+      "unit": "px",
+      "label": "Top spacing",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "bottom_spacing",
+      "min": 0,
+      "max": 200,
+      "step": 8,
+      "unit": "px",
+      "label": "Bottom spacing",
+      "default": 48
+    },
+    {
+      "type": "select",
+      "id": "column_gap",
+      "label": "Column gap",
+      "options": [
+        { "value": "16", "label": "16px" },
+        { "value": "24", "label": "24px" },
+        { "value": "32", "label": "32px" },
+        { "value": "40", "label": "40px" },
+        { "value": "48", "label": "48px" }
+      ],
+      "default": "32"
+    },
+    {
+      "type": "header",
+      "content": "SECTION GENERAL"
+    },
+    {
+      "type": "checkbox",
+      "id": "section_animation",
+      "label": "Enable soft appearing of section",
+      "default": true,
+      "info": "Global sections animation disabling in Theme Settings / General / Sections. AUTODISABLED if section has top or bottom separator."
+    },
+    {
+      "type": "header",
+      "content": "SECTION MARGIN"
+    },
+    {
+      "type": "range",
+      "id": "spacing_sections",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Vertical space above the section on Desktop",
+      "default": 100
+    },
+    {
+      "type": "checkbox",
+      "id": "use_global_desktop_space",
+      "label": "Use global space on desktop",
+      "default": true,
+      "info": "from Theme Settings / General / Layout"
+    },
+    {
+      "type": "range",
+      "id": "spacing_sections_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Vertical space above the section on Mobile",
+      "default": 70
+    },
+    {
+      "type": "checkbox",
+      "id": "use_global_mobile_space",
+      "label": "Use global space on mobile",
+      "default": true,
+      "info": "from Theme Settings / General / Layout"
+    },
+    {
+      "type": "header",
+      "content": "SECTION PADDING",
+      "info": "Only if SECTION BACKGROUND or SECTION SEPARATOR was enabled"
+    },
+    {
+      "type": "range",
+      "id": "spacing_padding_sections",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Vertical inner padding on Desktop",
+      "default": 100
+    },
+    {
+      "type": "checkbox",
+      "id": "use_global_desktop_space_padding",
+      "label": "Use global inner padding on desktop",
+      "default": true,
+      "info": "from Theme Settings / General / Layout"
+    },
+    {
+      "type": "range",
+      "id": "spacing_padding_sections_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Vertical inner padding on Mobile",
+      "default": 70
+    },
+    {
+      "type": "checkbox",
+      "id": "use_global_mobile_space_padding",
+      "label": "Use global inner padding on Mobile",
+      "default": true,
+      "info": "from Theme Settings / General / Layout"
+    },
+    {
+      "type": "header",
+      "content": "SECTION BACKGROUND"
+    },
+    {
+      "type": "checkbox",
+      "id": "background",
+      "label": "Enable background",
+      "default": false,
+      "info": "by default inherits Secondary background color from Theme Settings / Colors - General Secondary"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background image - custom on Desktop"
+    },
+    {
+      "type": "select",
+      "id": "background_behavior",
+      "label": "Background image behavior",
+      "options": [
+        { "value": "bg-cover", "label": "Cover" },
+        { "value": "bg-contain", "label": "Contain" },
+        { "value": "bg-repeat", "label": "Repeat" }
+      ],
+      "default": "bg-cover"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image_mobile",
+      "label": "Background image - custom on Mobile",
+      "info": "only if Background image - custom on Desktop selected"
+    },
+    {
+      "type": "select",
+      "id": "background_image_placeholder_type",
+      "label": "Placeholder background color",
+      "options": [
+        { "value": "color_global_primary_bg", "label": "Primary background color" },
+        { "value": "color_global_secondary_bg", "label": "Secondary background color" },
+        { "value": "custom", "label": "Custom color" }
+      ],
+      "default": "color_global_secondary_bg"
+    },
+    {
+      "type": "color",
+      "id": "background_image_placeholder",
+      "label": "Custom - Placeholder background color"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "strength", "label": "Strength" },
+            { "value": "craftsmanship", "label": "Craftsmanship" },
+            { "value": "customization", "label": "Customization" },
+            { "value": "clock", "label": "Clock" },
+            { "value": "shield", "label": "Shield" },
+            { "value": "package", "label": "Package" },
+            { "value": "precision", "label": "Precision" },
+            { "value": "engineering", "label": "Engineering" }
+          ],
+          "default": "strength"
+        },
+        {
+          "type": "header",
+          "content": "Custom icon options (overrides preset icon above)"
+        },
+        {
+          "type": "textarea",
+          "id": "icon_custom_svg",
+          "label": "Custom SVG code",
+          "info": "Paste raw SVG markup. Overrides the preset icon select and custom image."
+        },
+        {
+          "type": "image_picker",
+          "id": "icon_custom_image",
+          "label": "Custom icon image",
+          "info": "Upload an SVG, PNG, or JPG. Overrides the preset icon select."
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Feature title",
+          "default": "Feature"
+        },
+        {
+          "type": "text",
+          "id": "description",
+          "label": "Description"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_description",
+          "label": "Show description",
+          "default": false
+        }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [
+    {
+      "name": "Calder — Spun Forged Showcase",
+      "category": "Home",
+      "settings": {
+        "color_scheme": "cream",
+        "image_position": "left",
+        "eyebrow": "SUPERIOR CONSTRUCTION",
+        "heading": "TRUE 2-PIECE <span class=\"cw-feature-showcase__highlight\">SPUN FORGED</span> WHEELS",
+        "description": "<p>A true 2-piece spun forged design combines strength, precision, and fully customizable styling. Each wheel is engineered for performance while giving you the freedom to create a look that&#39;s uniquely yours.</p>",
+        "cta_label": "LEARN MORE"
+      },
+      "blocks": [
+        {
+          "type": "feature",
+          "settings": {
+            "icon": "strength",
+            "title": "Lightweight Strength"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "icon": "craftsmanship",
+            "title": "Premium Craftsmanship"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "icon": "customization",
+            "title": "Fully Customizable"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Calder — 24HR Assembly Showcase",
+      "category": "Home",
+      "settings": {
+        "color_scheme": "navy",
+        "image_position": "right",
+        "eyebrow": "FAST. PRECISE. RELIABLE.",
+        "heading": "ASSEMBLED WITHIN <span class=\"cw-feature-showcase__highlight\">24HRS</span>",
+        "description": "<p>Our in-house process allows us to assemble most custom wheel builds within 24 hours. Faster turnaround, without compromising on quality, so you can get on the road sooner.</p>",
+        "cta_label": "OUR PROCESS"
+      },
+      "blocks": [
+        {
+          "type": "feature",
+          "settings": {
+            "icon": "clock",
+            "title": "24HR Assembly"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "icon": "shield",
+            "title": "Strict Quality Control"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "icon": "package",
+            "title": "Ready to Ship"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

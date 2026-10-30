@@ -42,7 +42,7 @@
       if (vehicle && vehicle.year && vehicle.make) {
         fitmentPanel.classList.remove('calder-fitment-panel--unset');
         fitmentText.textContent = 'Fits your ';
-        fitmentVehicle.textContent = vehicle.year + ' ' + vehicle.make + ' ' + (vehicle.model || '');
+        fitmentVehicle.textContent = vehicle.display_name || (vehicle.year + ' ' + vehicle.make + ' ' + (vehicle.model || ''));
         fitmentVehicle.style.display = 'inline';
         fitmentActionText.textContent = 'Change Vehicle';
       }
@@ -62,7 +62,7 @@
         if (v && v.year && v.make) {
           fitmentPanel.classList.remove('calder-fitment-panel--unset');
           fitmentText.textContent = 'Fits your ';
-          fitmentVehicle.textContent = v.year + ' ' + v.make + ' ' + (v.model || '');
+          fitmentVehicle.textContent = v.display_name || (v.year + ' ' + v.make + ' ' + (v.model || ''));
           fitmentVehicle.style.display = 'inline';
           fitmentActionText.textContent = 'Change Vehicle';
         }

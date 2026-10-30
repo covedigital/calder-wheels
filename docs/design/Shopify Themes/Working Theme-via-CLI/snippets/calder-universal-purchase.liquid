@@ -1,0 +1,38 @@
+{%- comment -%}
+  Calder universal PDP purchase block (Prompt 06). Rendered instead of the native
+  buy-buttons/form ONLY for universal design products. The visible CTA is driven by
+  assets/calder-universal-cta.js (state matrix + AJAX cart add of the resolved
+  LEGACY variant). tel: link renders only when a business phone setting is populated;
+  otherwise the contact page is the approved destination. Never hardcode a phone number.
+{%- endcomment -%}
+{%- liquid
+  assign uc_phone = settings.phone | default: settings.header_get_help_phone | default: '' | strip
+  assign uc_contact_url = routes.root_url | append: 'pages/contact'
+-%}
+<div
+  class="calder-upc"
+  data-calder-universal-purchase
+  data-calder-uc-support-url="{{ uc_contact_url }}"
+  data-calder-min-qty="{{ min_qty | default: 10 }}"
+>
+  <button
+    type="button"
+    class="calder-pdp__add-btn calder-upc__cta"
+    data-calder-uc-cta
+    data-calder-uc-state="AVAILABLE"
+    aria-live="polite"
+  >
+    <span data-calder-uc-cta-label>Add to Cart</span>
+  </button>
+  <p class="calder-upc__message" data-calder-uc-message role="status"></p>
+  <div class="calder-upc__support">
+    {%- if uc_phone != blank -%}
+      <a class="calder-upc__support-link" href="tel:{{ uc_phone | remove: ' ' | remove: '-' }}">Speak With Support — {{ uc_phone }}</a>
+    {%- else -%}
+      <a class="calder-upc__support-link" href="{{ uc_contact_url }}">Speak With Support</a>
+    {%- endif -%}
+  </div>
+  <noscript>
+    <p class="calder-upc__noscript">Enable JavaScript to purchase this configuration, or contact a representative to order.</p>
+  </noscript>
+</div>

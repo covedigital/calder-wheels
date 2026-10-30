@@ -194,6 +194,95 @@ def _init_catalog():
     axiom.add_fitment("5x127", 20, 9.0, 25, 78.1)
     WHEEL_DESIGNS[axiom.code] = axiom
 
+    # === Series: SUV Spun Forged (Calder SUV Line) ===
+    # Source: SUV Data Sheet revised 10-05-26
+    # All SUV wheels: width=10", 3 diameters (22/24/26)
+    # Load rating: 2,650 lbs (client confirmed)
+    # Construction: Spun Forged (client confirmed, replaces "flow formed" / "3-piece forged")
+
+    design_201 = WheelDesign("201 Calder", "CLM01", "spun_forged",
+                             "SUV Spun Forged — 5-spoke modular design")
+    design_201.add_fitment("6x139.7", 22, 10, 25, 78.1, 1200)
+    design_201.add_fitment("6x139.7", 24, 10, 25, 78.1, 1200)
+    design_201.add_fitment("6x139.7", 26, 10, 25, 78.1, 1200)
+    design_201.add_fitment("6x139.7", 22, 10, 30, 106.1, 1200)
+    design_201.add_fitment("6x139.7", 24, 10, 30, 106.1, 1200)
+    design_201.add_fitment("6x139.7", 26, 10, 30, 106.1, 1200)
+    design_201.add_fitment("6x135", 22, 10, 30, 87.1, 1200)
+    design_201.add_fitment("6x135", 24, 10, 30, 87.1, 1200)
+    design_201.add_fitment("6x135", 26, 10, 30, 87.1, 1200)
+    WHEEL_DESIGNS[design_201.code] = design_201
+
+    design_202 = WheelDesign("202 Calder", "CLM02", "spun_forged",
+                             "SUV Spun Forged — 6-spoke modular design")
+    design_202.add_fitment("6x139.7", 22, 10, 25, 78.1, 1200)
+    design_202.add_fitment("6x139.7", 24, 10, 25, 78.1, 1200)
+    design_202.add_fitment("6x139.7", 26, 10, 25, 78.1, 1200)
+    design_202.add_fitment("6x139.7", 22, 10, 30, 106.1, 1200)
+    design_202.add_fitment("6x139.7", 24, 10, 30, 106.1, 1200)
+    design_202.add_fitment("6x139.7", 26, 10, 30, 106.1, 1200)
+    design_202.add_fitment("6x135", 22, 10, 30, 87.1, 1200)
+    design_202.add_fitment("6x135", 24, 10, 30, 87.1, 1200)
+    design_202.add_fitment("6x135", 26, 10, 30, 87.1, 1200)
+    design_202.add_fitment("5x130", 22, 10, 25, 84.1, 1200)
+    design_202.add_fitment("5x130", 24, 10, 25, 84.1, 1200)
+    design_202.add_fitment("5x130", 26, 10, 25, 84.1, 1200)
+    design_202.add_fitment("5x120", 22, 10, 32, 72.6, 1200)
+    design_202.add_fitment("5x120", 24, 10, 32, 72.6, 1200)
+    design_202.add_fitment("5x120", 26, 10, 32, 72.6, 1200)
+    WHEEL_DESIGNS[design_202.code] = design_202
+
+    design_203 = WheelDesign("203 Calder", "CLM03", "spun_forged",
+                             "SUV Spun Forged — 8-spoke modular design")
+    design_203.add_fitment("6x139.7", 22, 10, 25, 78.1, 1200)
+    design_203.add_fitment("6x139.7", 24, 10, 25, 78.1, 1200)
+    design_203.add_fitment("6x139.7", 26, 10, 25, 78.1, 1200)
+    design_203.add_fitment("6x139.7", 22, 10, 30, 106.1, 1200)
+    design_203.add_fitment("6x139.7", 24, 10, 30, 106.1, 1200)
+    design_203.add_fitment("6x139.7", 26, 10, 30, 106.1, 1200)
+    design_203.add_fitment("6x135", 22, 10, 30, 87.1, 1200)
+    design_203.add_fitment("6x135", 24, 10, 30, 87.1, 1200)
+    design_203.add_fitment("6x135", 26, 10, 30, 87.1, 1200)
+    WHEEL_DESIGNS[design_203.code] = design_203
+
+    design_206 = WheelDesign("206 Calder", "CLB06", "spun_forged",
+                             "SUV Spun Forged — 6-spoke bold design")
+    design_206.add_fitment("6x139.7", 22, 10, 25, 78.1, 1200)
+    design_206.add_fitment("6x139.7", 24, 10, 25, 78.1, 1200)
+    design_206.add_fitment("6x139.7", 26, 10, 25, 78.1, 1200)
+    design_206.add_fitment("6x139.7", 22, 10, 30, 106.1, 1200)
+    design_206.add_fitment("6x139.7", 24, 10, 30, 106.1, 1200)
+    design_206.add_fitment("6x139.7", 26, 10, 30, 106.1, 1200)
+    design_206.add_fitment("6x135", 22, 10, 30, 87.1, 1200)
+    design_206.add_fitment("6x135", 24, 10, 30, 87.1, 1200)
+    design_206.add_fitment("6x135", 26, 10, 30, 87.1, 1200)
+    design_206.add_fitment("5x130", 22, 10, 25, 84.1, 1200)
+    design_206.add_fitment("5x130", 24, 10, 25, 84.1, 1200)
+    design_206.add_fitment("5x130", 26, 10, 25, 84.1, 1200)
+    design_206.add_fitment("5x120", 22, 10, 32, 72.6, 1200)
+    design_206.add_fitment("5x120", 24, 10, 32, 72.6, 1200)
+    design_206.add_fitment("5x120", 26, 10, 32, 72.6, 1200)
+    WHEEL_DESIGNS[design_206.code] = design_206
+
+    design_207 = WheelDesign("207 Calder", "CLB07", "spun_forged",
+                             "SUV Spun Forged — 8-spoke bold design")
+    design_207.add_fitment("6x139.7", 22, 10, 25, 78.1, 1200)
+    design_207.add_fitment("6x139.7", 24, 10, 25, 78.1, 1200)
+    design_207.add_fitment("6x139.7", 26, 10, 25, 78.1, 1200)
+    design_207.add_fitment("6x139.7", 22, 10, 30, 106.1, 1200)
+    design_207.add_fitment("6x139.7", 24, 10, 30, 106.1, 1200)
+    design_207.add_fitment("6x139.7", 26, 10, 30, 106.1, 1200)
+    design_207.add_fitment("6x135", 22, 10, 30, 87.1, 1200)
+    design_207.add_fitment("6x135", 24, 10, 30, 87.1, 1200)
+    design_207.add_fitment("6x135", 26, 10, 30, 87.1, 1200)
+    design_207.add_fitment("5x130", 22, 10, 25, 84.1, 1200)
+    design_207.add_fitment("5x130", 24, 10, 25, 84.1, 1200)
+    design_207.add_fitment("5x130", 26, 10, 25, 84.1, 1200)
+    design_207.add_fitment("5x120", 22, 10, 32, 72.6, 1200)
+    design_207.add_fitment("5x120", 24, 10, 32, 72.6, 1200)
+    design_207.add_fitment("5x120", 26, 10, 32, 72.6, 1200)
+    WHEEL_DESIGNS[design_207.code] = design_207
+
 
 # Initialize the catalog on import
 _init_catalog()

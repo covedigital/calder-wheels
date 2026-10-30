@@ -1,0 +1,18 @@
+{%- comment -%}Read-only catalog of preset products, scoped to the builder collection. No cart behavior is replaced.{%- endcomment -%}
+{%- if wheel_collection != blank -%}
+<script>
+window._calderConfigurationCatalog = window._calderConfigurationCatalog || {};
+{%- paginate wheel_collection.products by 250 -%}
+  {%- for candidate in wheel_collection.products -%}
+    {%- assign hardware = candidate.metafields.custom.hardware_rivet_finish_options.value | default: candidate.metafields.custom.hardware_rivet_finish_options -%}
+    window._calderConfigurationCatalog[{{ candidate.handle | json }}] = {
+      handle: {{ candidate.handle | json }},
+      design: {{ candidate.metafields.custom.design_code.value | default: candidate.title | json }},
+      bolt_pattern: {{ candidate.metafields.custom.bolt_pattern.value | json }},
+      hardware: {{ hardware | json }},
+      variants: {{ candidate.variants | json }}
+    };
+  {%- endfor -%}
+{%- endpaginate -%}
+</script>
+{%- endif -%}
