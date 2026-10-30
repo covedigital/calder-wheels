@@ -749,3 +749,28 @@ Client locked the launch state (commit f88ccb8) and reported: after CTA add on t
 ### [AGENT] Session Metadata
 - Agent: OpenCode (build)
 - Model: DeepSeek V4 Pro
+
+---
+## [2026-10-29 #6] — SKU presentation: two-line spec cell + .calder-pdp__sku block
+
+### [ACTIVITY] Session Mode
+BUILD
+
+### [COMPLETED] What Was Done
+Client-confirmed the minicart fix works; requested new SKU/Part# presentation (commit 2ad78d5):
+- Spec table cell `[data-calder-spec="sku"]`: `SKU: CFG-CLB07-22-GB-GBL-CH<br />Universal Part#: CLB0722105207232GB21` (was single-line "SKU: X | Universal Part#: Y").
+- PDP `.calder-pdp__sku` block: `<span class="sku"><span>SKU:</span> CFG-...</span><br /><span class="universal-part"><span>Universal Part#:</span> CLB...</span>` — BOTH values update dynamically on every calder-uc selection (calder:universal-resolved handler in calder-universal-pdp.js).
+- calder-product.liquid renders the same structure server-side (variant CFG SKU; Part# = "—" until the registry resolves on load). data-render="sku-{form_id}" preserved for Lumia.
+- Values sanitized to [A-Za-z0-9#-] before innerHTML writes; e2e extended (two-line cell, block spans, dynamic 22"→24" updates on both targets). 63 node + 77 python green.
+
+### [FILES] Files Modified This Session
+- `assets/calder-universal-pdp.js`
+- `sections/calder-product.liquid`
+- `docs/architecture/tests/calder-pdp-e2e.test.mjs`
+
+### [NEXT] Client re-push (2 files)
+- `assets/calder-universal-pdp.js`, `sections/calder-product.liquid`
+
+### [AGENT] Session Metadata
+- Agent: OpenCode (build)
+- Model: DeepSeek V4 Pro
