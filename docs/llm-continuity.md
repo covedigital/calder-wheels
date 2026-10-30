@@ -774,3 +774,25 @@ Client-confirmed the minicart fix works; requested new SKU/Part# presentation (c
 ### [AGENT] Session Metadata
 - Agent: OpenCode (build)
 - Model: DeepSeek V4 Pro
+
+---
+## [2026-10-29 #7] — Universal gallery zoom (native Lumia parity)
+
+### [COMPLETED] What Was Done
+Client asked why the universal gallery lacks the native Lumia zoom. Answer: the universal gallery is a deliberately self-contained controller (the approved thumbs strip lives OUTSIDE <product-gallery>, which Lumia's Swiper-based ProductGallery cannot manage), and the native zoom layer (app.js addZoom → ezPlus inner hover-zoom + .js-prd-zoom-link icon → jq_lumia.fancybox gallery) was never ported into it. Implemented now (commit 0d3f4b0), scoped to the gallery only per client instruction:
+- Hover zoom: ezPlus inner zoom on the active product-media slide, native options mirrored (respond 100-1024 disabled, zoomReserve 1.1, zoom-init one-time guard). Gated by settings.product_media_zoom like product-media-main.liquid. Preview slide (layered composite) intentionally unzoomed.
+- Lightbox: native .js-prd-zoom-link icon markup reuses Lumia CSS; opens jq_lumia.fancybox with full-size sources (zoom animation, thumbs strip, light skin) — zoomLinkEvent options mirrored. Icon hidden when no media/fancybox.
+- Slider behavior (slides/arrows/thumbs/active-sync), calder-uc, PDP, and buying flow untouched — zoom hooks are additive.
+- Tests: 64 node + 77 python green (+1 structural zoom test).
+
+### [FILES] Files Modified This Session
+- `snippets/calder-universal-gallery.liquid`, `assets/calder-universal-pdp.js`
+- `docs/architecture/tests/calder-universal-controls.test.mjs`
+
+### [NEXT] Client re-push (2 files)
+- `snippets/calder-universal-gallery.liquid`, `assets/calder-universal-pdp.js`
+- Note: ezPlus hover zoom needs the theme's jquery.ez-plus.js + jq_lumia loaded on the PDP (they are part of the theme's global script stack; if hover zoom doesn't fire, verify those two assets load on the product template).
+
+### [AGENT] Session Metadata
+- Agent: OpenCode (build)
+- Model: DeepSeek V4 Pro
