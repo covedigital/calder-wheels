@@ -446,14 +446,21 @@
           </div>
         {%- endif -%}
         {%- if current_variant.sku != blank -%}
+          {%- comment -%}
+            Universal designs: calder-universal-pdp.js rewrites this block on
+            every calder-uc selection with the resolved CFG SKU + Universal
+            Part#. Initial paint mirrors the JS structure; the Part# reads
+            "—" until the registry resolves (progressive enhancement).
+          {%- endcomment -%}
           <div
             class="calder-pdp__sku"
             data-render="sku-{{ product_form_id }}"
           >
-            SKU:
-            <span data-calder-sku>
-              {{ current_variant.sku }}
-            </span>
+            <span class="sku"><span>SKU:</span> {{ current_variant.sku }}</span>
+            {%- if is_universal_design -%}
+              <br />
+              <span class="universal-part"><span>Universal Part#:</span> —</span>
+            {%- endif -%}
           </div>
         {%- endif -%}
       </div>

@@ -141,21 +141,40 @@
     var UC_CENTER_CODE = { 'gloss-black': 'GB', 'black-titanium': 'BT', 'titanium-tint': 'TT' };
     var UC_LIP_CODE = { 'gloss-black': 'GBL', 'polished': 'POL' };
     var UC_BOLT_CODE = { 'chrome': 'CH', 'black': 'BK' };
+    /* SKU + Universal Part# presentation (client-approved format 2026-10-29):
+       spec table cell:   SKU: CFG-... <br /> Universal Part#: CLB...
+       PDP .calder-pdp__sku block:
+         <span class="sku"><span>SKU:</span> CFG-...</span><br />
+         <span class="universal-part"><span>Universal Part#:</span> CLB...</span>
+       Values are registry tokens (alnum/dash); sanitizeSpecValue keeps the
+       innerHTML write safe. Both targets update on EVERY calder-uc selection
+       (the CTA broadcasts calder:universal-resolved with the resolved record). */
+    function sanitizeSpecValue(value) {
+      return String(value == null ? '' : value).replace(/[^A-Za-z0-9#-]/g, '');
+    }
     document.addEventListener('calder:universal-resolved', function (e) {
       var out = e && e.detail;
-      var cell = document.querySelector('[data-calder-spec="sku"]');
-      if (!cell) { return; }
       var t = state.getState().tokens;
       var cfgSku = resolver && resolver.design && resolver.design.designCode && t.diameter
         ? 'CFG-' + resolver.design.designCode + '-' + t.diameter + '-' + (UC_CENTER_CODE[t.center] || '') + '-' + (UC_LIP_CODE[t.barrel] || '') + '-' + (UC_BOLT_CODE[t.hardware] || '')
         : '';
       var pn = out && out.partNumber ? out.partNumber : null;
-      if (cfgSku && pn) {
-        cell.textContent = 'SKU: ' + cfgSku + ' | Universal Part#: ' + pn;
-      } else if (pn) {
-        cell.textContent = 'Universal Part#: ' + pn;
-      } else {
-        cell.textContent = cfgSku ? 'SKU: ' + cfgSku : '—';
+      var cell = document.querySelector('[data-calder-spec="sku"]');
+      if (cell) {
+        if (cfgSku && pn) {
+          cell.innerHTML = 'SKU: ' + sanitizeSpecValue(cfgSku) + '<br />Universal Part#: ' + sanitizeSpecValue(pn);
+        } else if (pn) {
+          cell.innerHTML = 'Universal Part#: ' + sanitizeSpecValue(pn);
+        } else {
+          cell.innerHTML = cfgSku ? 'SKU: ' + sanitizeSpecValue(cfgSku) : '—';
+        }
+      }
+      var block = document.querySelector('.calder-pdp__sku');
+      if (block) {
+        block.innerHTML =
+          '<span class="sku"><span>SKU:</span> ' + (cfgSku ? sanitizeSpecValue(cfgSku) : '—') + '</span>' +
+          '<br />' +
+          '<span class="universal-part"><span>Universal Part#:</span> ' + (pn ? sanitizeSpecValue(pn) : '—') + '</span>';
       }
     });
 

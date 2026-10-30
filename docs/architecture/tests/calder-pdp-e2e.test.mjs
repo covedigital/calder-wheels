@@ -34,7 +34,7 @@ function mk(attrs = {}) {
     focus() {},
     style: {}
   };
-  Object.defineProperty(el, 'textContent', { get() { return el.attrs.textContent || ''; }, set(v) { el.attrs.textContent = String(v); } });
+  Object.defineProperty(el, 'textContent', { get() { return el.attrs.textContent != null ? el.attrs.textContent : (el.attrs.innerHTML || ''); }, set(v) { el.attrs.textContent = String(v); } });
   Object.defineProperty(el, 'innerHTML', { get() { return el.attrs.innerHTML || ''; }, set(v) { el.attrs.innerHTML = String(v); } });
   Object.defineProperty(el, 'hidden', { get() { return el.attrs.hidden === 'hidden'; }, set(v) { el.attrs.hidden = v ? 'hidden' : ''; } });
   Object.defineProperty(el, 'tabIndex', { get() { return el.attrs.tabindex || 0; }, set(v) { el.attrs.tabindex = v; } });
@@ -108,6 +108,7 @@ test('E2E: vehicle select -> fitment text hidden -> CTA available -> SKU cell li
   const purchaseRoot = mk({ 'data-calder-universal-purchase': '', 'data-calder-min-qty': '10' });
   const ctaBtn = mk(); const ctaLabel = mk(); const message = mk();
   const skuCell = mk({ 'data-calder-spec': 'sku' });
+  const pdpSkuBlock = mk({ class: 'calder-pdp__sku' });
   const diaCell = mk({ 'data-calder-spec': 'diameter' });
   const devPanel = mk({ 'data-calder-dev': '' });
   const devSkuCell = mk(); const devPayload = mk();
@@ -121,6 +122,7 @@ test('E2E: vehicle select -> fitment text hidden -> CTA available -> SKU cell li
       if (sel.includes('data-calder-uc-fallback')) return null;
       if (sel.includes('.calder-pdp__qty-input')) { const q = mk(); q.attrs.value = '1'; return q; }
       if (sel.includes('[data-calder-spec="sku"]')) return skuCell;
+      if (sel.includes('.calder-pdp__sku')) return pdpSkuBlock;
       if (sel.startsWith('[data-calder-spec="')) return specCells[/"([a-z]+)"/.exec(sel)[1]] || null;
       if (sel.includes('[data-calder-dev')) return devPanel;
       return null;
@@ -193,12 +195,20 @@ test('E2E: vehicle select -> fitment text hidden -> CTA available -> SKU cell li
   // 2) SKU cell is live with part_number even on initial load
   assert.ok(skuCell.textContent.includes('Universal Part#'), 'SKU cell has Universal Part# on load: ' + skuCell.textContent);
   assert.ok(/Part#: [A-Z]/.test(skuCell.textContent), 'part number is a real code: ' + skuCell.textContent);
+  // approved two-line spec-cell format: SKU: CFG-... <br /> Universal Part#: ...
+  assert.ok(skuCell.innerHTML.includes('<br />Universal Part#:'), 'spec cell uses the two-line <br /> format: ' + skuCell.innerHTML);
+  assert.ok(/^SKU: CFG-CLB06-22-/.test(skuCell.innerHTML), 'spec cell leads with the CFG SKU: ' + skuCell.innerHTML);
+  // .calder-pdp__sku block: <span class="sku">…</span><br /><span class="universal-part">…</span>
+  assert.ok(pdpSkuBlock.innerHTML.includes('<span class="sku"><span>SKU:</span> CFG-CLB06-22-'), 'pdp sku block has the CFG SKU span: ' + pdpSkuBlock.innerHTML);
+  assert.ok(pdpSkuBlock.innerHTML.includes('<br /><span class="universal-part"><span>Universal Part#:</span> CLB'), 'pdp sku block has the universal part span: ' + pdpSkuBlock.innerHTML);
 
-  // 3) change a .calder-uc selection -> SKU + part number update
+  // 3) change a .calder-uc selection -> SKU + part number update (cell AND pdp block)
   const clickOpt = optionButtons[1]; clickOpt.closest = () => clickOpt;
   controlsRoot.handlers.click[0]({ preventDefault() {}, target: clickOpt });
   await new Promise(r => setTimeout(r, 10));
   assert.ok(skuCell.textContent.includes('24'), 'SKU cell shows 24" after selection: ' + skuCell.textContent);
+  assert.ok(skuCell.innerHTML.includes('CFG-CLB06-24-'), 'spec cell CFG SKU switched to 24": ' + skuCell.innerHTML);
+  assert.ok(pdpSkuBlock.innerHTML.includes('CFG-CLB06-24-'), 'pdp sku block CFG SKU switched to 24": ' + pdpSkuBlock.innerHTML);
 
   // 4) select a vehicle via mini-form (finder shape {year,make,model,bolt_pattern})
   store['calder_selected_vehicle'] = JSON.stringify({ year: 2022, make: 'Range Rover', model: 'Sport', bolt_pattern: '5X120' });
