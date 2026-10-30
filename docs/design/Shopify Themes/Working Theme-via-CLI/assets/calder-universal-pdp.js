@@ -235,6 +235,85 @@
           t.classList.toggle('calder-uc-gal__thumb--active', t.getAttribute('data-media-id') === activeId);
         });
       }
+
+      /* ── Zoom — native Lumia parity (added 2026-10-29) ──
+         Ports app.js ProductGallery zoom into this self-contained controller:
+         - addZoom(): ezPlus INNER hover zoom on the ACTIVE product-media
+           slide's img[data-zoom-image], disabled ≤1024px (native respond
+           range), skipped when the source is not meaningfully larger than
+           the frame (native zoomReserve 1.1). The layered preview slide has
+           no single full-size source, so hover zoom applies to real media
+           slides only. One-time per slide ('zoom-init' guard, like native).
+         - zoomLinkEvent(): the .js-prd-zoom-link icon opens
+           jq_lumia.fancybox with every media slide's full-size source —
+           same options as native (zoom animation, thumbs strip, light skin).
+         Fails silently (icon hidden) when jq_lumia/ezPlus/fancybox or media
+         images are absent — slides/arrows/thumbs behavior is untouched. */
+      function galEzPlusAvailable() {
+        return typeof window.jq_lumia === 'function' && window.jq_lumia.fn && typeof window.jq_lumia.fn.ezPlus === 'function';
+      }
+      function activateSlideZoom(idx) {
+        if (!galEzPlusAvailable()) { return; }
+        var slide = galSlides[idx];
+        if (!slide || slide.classList.contains('zoom-init')) { return; }
+        var img = slide.querySelector('img[data-zoom-image]');
+        if (!img) { return; }
+        var srcW = parseInt(img.getAttribute('data-image-width'), 10) || 0;
+        var frameW = slide.clientWidth || img.clientWidth || 0;
+        if (srcW && frameW && srcW <= frameW * 1.1) { slide.classList.add('zoom-init'); return; }
+        window.jq_lumia(img).ezPlus({
+          zoomType: 'inner',
+          zoomWindowFadeIn: 500,
+          zoomWindowFadeOut: 500,
+          lensFadeIn: 500,
+          lensFadeOut: 500,
+          imageCrossfade: true,
+          responsive: true,
+          cursor: 'crosshair',
+          respond: [{ range: '100-1024', enabled: false, showLens: false }],
+          onZoomedImageLoaded: function () { slide.classList.add('zoom-init'); }
+        });
+        slide.classList.add('zoom-init');
+      }
+      function galZoomObjects() {
+        var objs = [];
+        galSlides.forEach(function (slide, i) {
+          if (i === 0) { return; }
+          var img = slide.querySelector('img[data-zoom-image]');
+          if (img && img.getAttribute('data-zoom-image')) {
+            objs.push({ src: img.getAttribute('data-zoom-image'), opts: { thumb: img.getAttribute('data-zoom-image'), caption: img.alt || '' } });
+          }
+        });
+        return objs;
+      }
+      var galZoomBtn = galRoot.querySelector('[data-calder-uc-gal-zoom]');
+      var galZoomObjs = (window.jq_lumia && window.jq_lumia.fancybox) ? galZoomObjects() : [];
+      if (galZoomBtn && !galZoomObjs.length) {
+        galZoomBtn.hidden = true;
+        galZoomBtn.classList.add('hidden');
+      }
+      if (galZoomBtn && galZoomObjs.length) {
+        galZoomBtn.addEventListener('click', function (evt) {
+          evt.preventDefault();
+          if (!window.jq_lumia || !window.jq_lumia.fancybox) { return; }
+          window.jq_lumia.fancybox.open(galZoomObjs, {
+            loop: false,
+            animationEffect: 'zoom',
+            touch: true,
+            buttons: ['close'],
+            clickSlide: 'close',
+            clickOutside: 'close',
+            mobile: { clickSlide: 'close', clickOutside: 'close' },
+            thumbs: { autoStart: true, axis: 'x' },
+            arrows: true,
+            beforeShow: function () {
+              var containers = document.querySelectorAll('.fancybox-container');
+              if (containers.length) { containers[containers.length - 1].classList.add('fancybox--light', 'fancybox-gallery'); }
+            }
+          }, Math.max(0, galActive - 1));
+        });
+      }
+
       function goTo(i) {
         if (!galSlides.length) { return; }
         galActive = Math.max(0, Math.min(galSlides.length - 1, i));
@@ -246,6 +325,7 @@
         if (nextBtn) { nextBtn.classList.toggle('calder-uc-gal__arrow--disabled', galActive === galSlides.length - 1); }
         if (prevBtn) { prevBtn.classList.toggle('calder-uc-gal__arrow--disabled', galActive === 0); }
         galSetThumbActive();
+        activateSlideZoom(galActive);
       }
       var nextBtn = galRoot.querySelector('[data-calder-uc-gal-next]');
       var prevBtn = galRoot.querySelector('[data-calder-uc-gal-prev]');

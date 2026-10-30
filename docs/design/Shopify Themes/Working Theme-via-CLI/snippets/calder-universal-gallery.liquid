@@ -3,12 +3,32 @@
   Slide 1 = the layered preview (selection-synced). Slides 2+ = the product's
   own media images. Component detail renders are NOT gallery slides.
   Arrows are owned by the controller (inline SVG, no Swiper dependency).
+
+  Zoom (native Lumia parity, added 2026-10-29): product-media slides carry
+  data-zoom-image/data-image-width under the SAME settings.product_media_zoom
+  gating as snippets/product-media-main.liquid (the preview slide is a layered
+  composite — no single full-size source, so no hover zoom on it). The
+  .js-prd-zoom-link icon reuses Lumia's native markup/CSS; calder-universal-pdp.js
+  ports app.js addZoom (ezPlus inner hover zoom, disabled ≤1024px) and
+  zoomLinkEvent (jq_lumia.fancybox gallery of full-size sources).
 {%- endcomment -%}
+{%- liquid
+  assign uc_zoom_setting = settings.product_media_zoom | default: 'original'
+-%}
 <div class="calder-uc-gallery" data-calder-uc-gallery>
   <div class="calder-pdp__main-image calder-uc-gal__main" data-calder-uc-gal-main>
     <div class="calder-uc-gal__slides">
       {%- render 'calder-universal-gallery-slide', part: 'main', product: product, section: section -%}
       {%- for media in product.media -%}
+        {%- liquid
+          if uc_zoom_setting == 'original'
+            assign uc_zoom_width = media.preview_image.width | default: 2400
+          elsif uc_zoom_setting == 'custom'
+            assign uc_zoom_width = settings.product_media_zoom_custom | default: 2000
+          else
+            assign uc_zoom_width = 2400
+          endif
+        -%}
         <div class="calder-uc__gallery-slide" data-media-id="media-{{ media.id }}" data-media-type="{{ media.media_type }}">
           <div class="image-container calder-uc__preview-canvas">
             <img
@@ -18,11 +38,21 @@
               sizes="(min-width: 1200px) 559px, calc(100vw - 30px)"
               alt="{{ media.alt | escape }}"
               width="1200" height="1200"
+              {% if media.media_type == 'image' and uc_zoom_setting != 'none' %}
+              data-zoom-image="{{ media.preview_image | image_url: width: uc_zoom_width }}"
+              data-image-width="{{ uc_zoom_width }}"
+              {% endif %}
               loading="lazy" decoding="async">
           </div>
         </div>
       {%- endfor -%}
     </div>
+    {%- if product.media.size > 0 -%}
+      <a href="#" class="prd-zoom-link js-prd-zoom-link" data-calder-uc-gal-zoom>
+        <span class="visually-hidden">{{ 'theme.general.zoom' | t }}</span>
+        {% render 'icon-zoom' %}
+      </a>
+    {%- endif -%}
     <div class="calder-uc-gal__nav">
       <button type="button" class="calder-uc-gal__arrow calder-uc-gal__arrow--prev" data-calder-uc-gal-prev aria-label="Previous slide">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>

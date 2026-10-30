@@ -438,3 +438,28 @@ test('boot regression: controller boots WITH the gallery present — no Referenc
   prevBtn.handlers.click[0]({});
   assert.ok(slides[2].classes.has('calder-uc-gal__slide--active'), 'prev arrow returns one step');
 });
+
+test('gallery zoom: native Lumia parity (ezPlus hover zoom + fancybox lightbox) is wired without touching slider behavior', () => {
+  const pdpSrc = readFileSync(path.join(ASSETS, 'calder-universal-pdp.js'), 'utf8');
+  /* snippet side: media images carry the native zoom source attributes,
+     gated by the SAME theme setting as product-media-main.liquid;
+     zoom icon reuses Lumia's native markup/classes */
+  assert.ok(universalGallery.includes('data-zoom-image='), 'media slide images expose data-zoom-image');
+  assert.ok(universalGallery.includes('data-image-width='), 'media slide images expose data-image-width');
+  assert.ok(universalGallery.includes('uc_zoom_setting'), 'zoom source width follows settings.product_media_zoom');
+  assert.ok(universalGallery.includes('prd-zoom-link js-prd-zoom-link'), 'zoom icon reuses native Lumia markup + CSS classes');
+  assert.ok(universalGallery.includes('data-calder-uc-gal-zoom'), 'zoom icon hook for the controller');
+  /* controller side: ports app.js addZoom + zoomLinkEvent, inert without the
+     jQuery stack, and cannot alter slides/arrows/thumbs behavior */
+  assert.ok(pdpSrc.includes('jq_lumia.fn.ezPlus'), 'hover zoom only activates when the theme ezPlus plugin is present');
+  assert.ok(pdpSrc.includes("zoomType: 'inner'"), 'native inner hover zoom type');
+  assert.ok(pdpSrc.includes("range: '100-1024', enabled: false"), 'native respond range disables zoom on small viewports');
+  assert.ok(pdpSrc.includes('zoom-init'), 'one-time per-slide init guard (native pattern)');
+  assert.ok(pdpSrc.includes('srcW <= frameW * 1.1'), 'zoom skipped when source is not larger than the frame (native zoomReserve)');
+  assert.ok(pdpSrc.includes('jq_lumia.fancybox.open'), 'zoom icon opens the native fancybox gallery');
+  assert.ok(pdpSrc.includes("animationEffect: 'zoom'"), 'native fancybox zoom animation');
+  assert.ok(pdpSrc.includes("fancybox--light", ) || pdpSrc.includes("'fancybox--light'"), 'native light gallery skin');
+  assert.ok(pdpSrc.includes('galZoomBtn.hidden = true'), 'zoom icon hidden when there is nothing to zoom');
+  /* goTo still owns ONLY slide class/thumb/arrow sync + the additive zoom hook */
+  assert.ok(/galSetThumbActive\(\);\s*\n\s*activateSlideZoom\(galActive\);/.test(pdpSrc), 'zoom activation is an additive hook in goTo, slider logic unchanged');
+});
