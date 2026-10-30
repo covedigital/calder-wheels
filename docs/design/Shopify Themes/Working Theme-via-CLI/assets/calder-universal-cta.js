@@ -328,11 +328,51 @@
       });
     }
 
+    /* ── Cart refresh ──────────────────────────────────────────────────
+       The universal CTA performs its own /cart/add.js, so it must refresh
+       the minicart EXACTLY like the theme does for normal products:
+       cart-items.renderContents() applies each section response with
+       Lumia's own per-selector extraction (.js-contents-cart-items etc.).
+       NEVER dump a whole section response into an element — the Section
+       Rendering response is a full #shopify-section-... wrapper; injecting
+       it raw duplicates the cart icon, the popup and every section ID
+       inside #header-cart and breaks the minicart (fixed 2026-10-29). */
+    function renderCartLikeTheme(cartItemsEl, json) {
+      if (!cartItemsEl || typeof cartItemsEl.renderContents !== 'function') { return false; }
+      cartItemsEl.renderContents(json);
+      if (typeof cartItemsEl.toggleEmptyClass === 'function') { try { cartItemsEl.toggleEmptyClass(json); } catch (e) {} }
+      if (typeof cartItemsEl.setParsedState === 'function') { try { cartItemsEl.setParsedState(json); } catch (e) {} }
+      if (typeof cartItemsEl.setCartJs === 'function') { try { cartItemsEl.setCartJs(); } catch (e) {} }
+      var shippingCalculator = document.querySelector('shipping-calculator') || document.querySelector('shipping-calculator-cart');
+      if (shippingCalculator && typeof shippingCalculator.setUpdateStatus === 'function') {
+        try { shippingCalculator.setUpdateStatus('true'); } catch (e) {}
+      }
+      return true;
+    }
+    /* Fallback for pages without the cart-items element (e.g. stripped-down
+       templates). Section responses are ONE wrapper element
+       (<div id="shopify-section-{key}">…</div>) — swap the page's existing
+       wrapper's innerHTML with the response wrapper's innerHTML so nothing
+       is nested or duplicated. */
+    function extractSectionInner(html, key) {
+      var marker = 'id="shopify-section-' + key + '"';
+      var i = html.indexOf(marker);
+      if (i === -1) { return html; }
+      var openEnd = html.indexOf('>', i);
+      var close = html.lastIndexOf('</div>');
+      if (openEnd === -1 || close === -1 || close <= openEnd) { return html; }
+      return html.slice(openEnd + 1, close);
+    }
     function addSectionResponses(response) {
       if (!response || !response.sections) { return; }
       Object.keys(response.sections).forEach(function (key) {
-        var el = document.getElementById(key);
-        if (el && typeof response.sections[key] === 'string') { el.innerHTML = response.sections[key]; }
+        var html = response.sections[key];
+        if (typeof html !== 'string') { return; }
+        var inner = extractSectionInner(html, key);
+        var pageWrapper = document.getElementById('shopify-section-' + key);
+        if (pageWrapper) { pageWrapper.innerHTML = inner; return; }
+        var root = document.getElementById(key);
+        if (root) { root.innerHTML = inner; }
       });
     }
     function tryOpenMinicart() {
@@ -359,7 +399,8 @@
         try {
           var cooked = Array.from(new Set(cartItems.getSectionsToRender()
             .filter(function (item) { return Boolean(document.getElementById(item.id)); })
-            .map(function (s) { return s.section; }))).slice(0, 5);
+            .map(function (s) { return s.section; })
+            .filter(function (name) { return typeof name === 'string'; }))).slice(0, 5);
           if (cooked.length) { sections = cooked; }
         } catch (e) { sections = CART_SECTIONS.slice(); }
       }
@@ -378,7 +419,7 @@
         submitting = false;
         root.removeAttribute('data-calder-uc-submitting');
         if (r.ok) {
-          addSectionResponses(r.json);
+          if (!renderCartLikeTheme(cartItems, r.json)) { addSectionResponses(r.json); }
           ctaLabel.textContent = 'Added to Cart ✓';
           tryOpenMinicart();
           window.setTimeout(recheck, 1200);

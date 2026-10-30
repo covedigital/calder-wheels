@@ -401,7 +401,10 @@
       }
     };
     xhr.onerror = function () { callback('Network error', null); };
-    var body = { id: variantId, quantity: quantity || 1, properties: properties || {} };
+    /* 2026-10-29: /cart/add.js with Content-Type: application/json REQUIRES
+       the items[] format — a bare {id, quantity} is rejected with
+       "Required parameter missing or invalid: items". */
+    var body = { items: [{ id: variantId, quantity: quantity || 1, properties: properties || {} }] };
     var sp = cartSectionsParam();
     body.sections = sp.sections;
     body.sections_url = sp.sections_url;

@@ -1209,7 +1209,10 @@ var variants = this.getPdpVariants();
         self.setAddingState(false);
         self.showAddError('Network error. Please check your connection and try again.');
       };
-      var body = { id: variantId, quantity: qty, properties: properties };
+      /* 2026-10-29: /cart/add.js with Content-Type: application/json REQUIRES
+         the items[] format — a bare {id, quantity} is rejected with
+         "Required parameter missing or invalid: items". */
+      var body = { items: [{ id: variantId, quantity: qty, properties: properties }] };
       body.sections = self.sectionsParam();
       body.sections_url = window.location.pathname || '/';
       xhr.send(JSON.stringify(body));

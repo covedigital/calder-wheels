@@ -117,6 +117,12 @@ function buildSandbox(opts) {
   };
   if (o.qbParts) Object.assign(QB_PARTS, o.qbParts);
   if (o.minQty) purchase.root.setAttribute('data-calder-min-qty', String(o.minQty));
+  const cartItems = fakeElement({});
+  if (o.cartItemsImpl) { Object.assign(cartItems, o.cartItemsImpl); }
+  if (!cartItems.getSectionsToRender) {
+    cartItems.getSectionsToRender = o.cartSections ||
+      (() => [{ id: 'header-cart', section: 'header-cart', selector: '.js-contents-cart-items' }]);
+  }
   const w = {
     CALDER_DESIGN_REGISTRY: registrySlice,
     CALDER_QUICKBOOKS_INVENTORY: { source: 'quickbooks-demo-test', synced_at: '2026-10-29T00:00:00Z', parts: QB_PARTS },
@@ -126,6 +132,7 @@ function buildSandbox(opts) {
         if (sel.includes('[data-calder-universal]') && !sel.includes('purchase')) return controls.root;
         if (sel.includes('[data-calder-universal-purchase]')) return purchase.root;
         if (sel.includes('calder-pdp__qty-input')) return qtyInput;
+        if (sel === 'cart-items') return o.withoutCartItems ? null : cartItems;
         return null;
       },
       getElementById: (id) => (id in sectionsDom ? sectionsDom[id] : null),
@@ -309,6 +316,56 @@ test('successful add applies returned section HTML and restores Add to Cart', as
   await tick();
   assert.equal(headerCart.innerHTML, '<div>cart html</div>', 'minicart section refreshed from response');
   assert.equal(env.purchase.ctaLabel.textContent, 'Added to Cart ✓', 'inline success state');
+});
+
+test('successful add delegates rendering to the theme cart-items renderer (no raw section dumping)', async () => {
+  const renderContentsCalls = [];
+  let toggleEmptyClassCalls = 0;
+  const impl = {
+    renderContents(json) { renderContentsCalls.push(json); },
+    toggleEmptyClass() { toggleEmptyClassCalls += 1; },
+    getSectionsToRender() {
+      return [
+        { id: 'header-cart', section: 'header-cart', selector: '.js-contents-cart-items' },
+        { id: 'main-cart-items', section: undefined }
+      ];
+    }
+  };
+  const headerCart = fakeElement({});
+  let postedBody = null;
+  const env = buildSandbox({
+    cartItemsImpl: impl,
+    sectionsDom: { 'header-cart': headerCart },
+    fetchImpl: async (url, init) => {
+      postedBody = JSON.parse(init.body);
+      return { ok: true, json: async () => ({ items: [{ id: 987654 }], sections: { 'header-cart': '<div id="shopify-section-header-cart">SECTION</div>' } }) };
+    }
+  });
+  await tick();
+  env.purchase.ctaBtn.click();
+  await tick();
+  assert.equal(renderContentsCalls.length, 1, 'theme renderContents invoked exactly once');
+  assert.equal(renderContentsCalls[0].items[0].id, 987654, 'full cart response passed to the theme renderer');
+  assert.ok(toggleEmptyClassCalls >= 1, 'toggleEmptyClass invoked');
+  assert.ok(postedBody.sections.includes('header-cart'), 'sections requested for the theme renderer');
+  assert.ok(!postedBody.sections.some((s) => s == null || s === undefined), 'undefined section names filtered out of the request');
+  assert.equal(headerCart.attrs.innerHTML || '', '', 'raw section HTML is never dumped into #header-cart');
+});
+
+test('fallback section rendering swaps the #shopify-section wrapper content without nesting', async () => {
+  const wrapper = fakeElement({});
+  const env = buildSandbox({
+    withoutCartItems: true,
+    sectionsDom: { 'shopify-section-header-cart': wrapper },
+    fetchImpl: async () => ({
+      ok: true,
+      json: async () => ({ items: [{ id: 1 }], sections: { 'header-cart': '<div id="shopify-section-header-cart" class="shopify-section"><div class="js-contents-cart-items">FRESH</div></div>' } })
+    })
+  });
+  await tick();
+  env.purchase.ctaBtn.click();
+  await tick();
+  assert.equal(wrapper.innerHTML, '<div class="js-contents-cart-items">FRESH</div>', 'wrapper innerHTML replaced in place; no duplicated icon/popup/section IDs');
 });
 
 test('low-availability warning uses the minimum component quantity threshold (no exact counts)', async () => {
