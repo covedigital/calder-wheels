@@ -719,3 +719,33 @@ Target handle scheme implemented: legacy product handles become a pure function 
 ### [AGENT] Session Metadata
 - Agent: OpenCode (build)
 - Model: DeepSeek V4 Pro
+
+---
+## [2026-10-29 #5] — Minicart fix: theme-delegated cart rendering + items[] add.js format
+
+### [ACTIVITY] Session Mode
+BUILD / DEBUG
+
+### [STATE] Current Status
+Client locked the launch state (commit f88ccb8) and reported: after CTA add on the universal PDP, #dropdnMinicartPopup renders only a small cart icon + qty badge; console showed "Required parameter missing or invalid: items" on add.js. Both diagnosed against the live store (wvpnpr-t7.myshopify.com) and fixed. Commit eb51627.
+
+### [COMPLETED] What Was Done
+**Minicart root cause:** calder-universal-cta.js's addSectionResponses injected the RAW Section-Rendering response (a whole `<div id="shopify-section-header-cart">` wrapper containing the cart-icon link + a fresh `#dropdnMinicartPopup` + another `cart-items#header-cart`) into `#header-cart`. Result: nested duplication, duplicate IDs, and the visible popup content = the header icon link ("small cart icon with qty indicator, upper left corner"). Lumia never renders this way — cart.js `renderContents()` extracts per-selector zones (.js-contents-cart-items/.js-contents-subtotal/.js-contents-buttons/.header-cart-count).
+**Fix:** the CTA now calls `cart-items.renderContents(json)` + `toggleEmptyClass` + `setParsedState` + `setCartJs` + shipping-calculator update — the exact tail of product-form.js's success path for normal products. Fallback (no cart-items): swap `#shopify-section-{key}` wrapper innerHTML in place; never nest. Sections request filters undefined section names.
+**items[] error root cause:** modern /cart/add.js rejects JSON bodies without `items[]` ("Required parameter missing or invalid: items"). Three theme posters sent bare JSON `{id, quantity}`: dealer-backend.js (dealer order submission), configurator-app.js + configurator-api.js (old build-your-wheel page — still live, so its add button produces exactly this error). All three converted to `items: [{id, quantity, properties}]`. The CTA itself already used items[] and its adds succeeded (cart showed the added wheels).
+**Verification:** live PDP script set confirmed (no old configurator JS on the PDP); 63 node + 77 python tests pass, incl. 3 new CTA tests (delegation, undefined-section filter, wrapper-swap fallback).
+
+### [FILES] Files Modified This Session
+- `assets/calder-universal-cta.js` (renderCartLikeTheme + extractSectionInner fallback + sections filter)
+- `assets/dealer-backend.js`, `assets/configurator-app.js`, `assets/configurator-api.js` (items[] format)
+- `docs/architecture/tests/calder-universal-cta.test.mjs` (+3 tests)
+- `docs/llm-continuity.md` (this entry)
+
+### [NEXT] Client re-push (4 assets)
+- `calder-universal-cta.js`, `dealer-backend.js`, `configurator-app.js`, `configurator-api.js`
+- After push: CTA add should open a fully-rendered minicart (items, subtotal, buttons) identical to normal products. "Clear-Site-Data header found" console line is a benign dev-store response header warning — ignore.
+- Open item: old build-your-wheel page still live — amendment requires retiring it and unlinking nav (P0 checklist "old standalone builder retired safely"). It now works again post-fix, but decide retirement before SEMA.
+
+### [AGENT] Session Metadata
+- Agent: OpenCode (build)
+- Model: DeepSeek V4 Pro
