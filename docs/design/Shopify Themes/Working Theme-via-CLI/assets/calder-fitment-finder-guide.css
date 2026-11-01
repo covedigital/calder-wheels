@@ -32,6 +32,40 @@
   margin-bottom: 0;
 }
 
+/* The card's controls gain a second action (RESET) in the finder
+   context only — the PDP guide keeps its three-field + submit grid. */
+.hf-fitment .cw-fitment-guide__controls {
+  grid-template-columns: 1fr 1fr 1fr auto auto;
+}
+
+/* Secondary action — same button language as the guide's submit. */
+.hf-fitment .cw-fitment-guide__reset {
+  height: 45px;
+  padding: 0 20px;
+  background: #FFFFFF;
+  color: var(--calder-navy, #102C40);
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border: 1px solid #E3E8ED;
+  border-radius: 2px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.hf-fitment .cw-fitment-guide__reset:hover {
+  border-color: var(--calder-gold, #C2A48A);
+  color: var(--calder-gold, #C2A48A);
+}
+
+.hf-fitment .cw-fitment-guide__reset:focus-visible {
+  outline: 2px solid var(--calder-gold, #C2A48A);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
 /* ── Responsive (matches the finder's mobile breakpoint) ── */
 
 @media (max-width: 768px) {
@@ -41,5 +75,11 @@
 
   .hf-fitment .cw-fitment-guide__card {
     padding: 16px;
+  }
+
+  /* Restore the PDP mobile single-column control stack (our desktop
+     5-column override outranks the PDP rule by specificity). */
+  .hf-fitment .cw-fitment-guide__controls {
+    grid-template-columns: 1fr;
   }
 }

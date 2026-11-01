@@ -55,7 +55,7 @@
       <!-- Technical artwork (absolutely positioned, shared across tabs) -->
       <div class="hf-fitment__art" aria-hidden="true">
         {%- assign art_svg = 'technical-wheel-bg.svg' | asset_url -%}
-        <img src="{{ art_svg }}" alt="" class="hf-fitment__art-img" loading="lazy">
+        <img src="{{ art_svg }}" alt="" class="hf-fitment__art-img" width="900" height="500" loading="lazy">
       </div>
 
       <!-- Inner layout: finder + vehicle divider + vehicle status -->
@@ -121,6 +121,13 @@
                   disabled
                 >
                   {{ section.settings.guide_button_text | default: 'SEE FITMENT' }}
+                </button>
+                <button
+                  type="button"
+                  class="cw-fitment-guide__reset"
+                  data-guide-reset
+                >
+                  {{ section.settings.guide_reset_text | default: 'RESET' }}
                 </button>
               </div>
 
@@ -421,6 +428,12 @@
       "id": "guide_button_text",
       "label": "By Vehicle card button text",
       "default": "SEE FITMENT"
+    },
+    {
+      "type": "text",
+      "id": "guide_reset_text",
+      "label": "By Vehicle card reset text",
+      "default": "RESET"
     },
     {
       "type": "header",

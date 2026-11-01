@@ -52,6 +52,14 @@
       to its original name, the Bolt Pattern facet block is
       restored, and the facet watcher stops re-applying the
       vehicle state.
+   7. The card's RESET button (data-guide-reset) starts the shopper
+      over: clears the persistent vehicle, resets the card through
+      the guide's own change cascade, hides the status panel, reverts
+      the vehicle presentation state, and — when URL filter params
+      exist — navigates to the bare collection URL so the facet
+      sidebar rebuilds fully unfiltered (a full reload is the only
+      way to reset the sidebar's checkbox states cleanly; the
+      theme's renderFilters does not re-render them).
    ============================================================ */
 (function () {
   'use strict';
@@ -305,6 +313,38 @@
     });
   }
 
+  /* ── Reset (start over) ── */
+
+  function resetFitment(section) {
+    // 1. Persistent vehicle cleared first — a reload must not restore it.
+    try { localStorage.removeItem(STORAGE_KEY); } catch (e) { /* storage unavailable */ }
+
+    // 2. Card back to pristine through the guide's own change cascade
+    //    (make/model reset, submit disabled, results hidden).
+    resetCard(section);
+
+    // 3. Vehicle presentation state off.
+    vehicleActive = false;
+    activeSection = null;
+    setBoltPatternFilterVisibility(false);
+    restoreCollectionTitle();
+
+    // 4. Finder status panel -> hidden (the empty state syncs through
+    //    the section's own MutationObserver, and the vehicle-cleared
+    //    event dispatches through the panel observer).
+    var panel = section.querySelector('[data-fitment-status]');
+    if (panel) {
+      panel.setAttribute('hidden', '');
+      panel.style.display = 'none';
+    }
+
+    // 5. Persistent URL filter params -> clean listing. Full reload so
+    //    the facet sidebar's checkbox states rebuild unfiltered.
+    if (window.location.search) {
+      window.location.href = window.location.pathname;
+    }
+  }
+
   /* ── Init ── */
 
   function initSection(section) {
@@ -359,6 +399,15 @@
       syncCollectionFilter(section);
       setBoltPatternFilterVisibility(true);
       applyCollectionTitle(section);
+    }
+
+    // Card reset (start over) — clears the persistent vehicle, card
+    // state, vehicle presentation state, and URL filter params.
+    var resetBtn = card.querySelector('[data-guide-reset]');
+    if (resetBtn) {
+      resetBtn.addEventListener('click', function () {
+        resetFitment(section);
+      });
     }
   }
 
