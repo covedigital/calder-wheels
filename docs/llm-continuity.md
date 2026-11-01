@@ -820,3 +820,57 @@ Client request: move .calder-pdp__fitment-reset next to .calder-pdp__fitment-act
 ### [AGENT] Session Metadata
 - Agent: OpenCode (build)
 - Model: DeepSeek V4 Pro
+---
+## [2026-10-31] — Session #9: instructed QA fixes + benchmark commit + MD prompt-pack re-review
+
+### [ACTIVITY] Session Mode
+BUILD
+
+### [STATE] Current Status
+All developer-instructed fixes applied and committed as a benchmark (93f9dea client-WIP adoption, 388e830 benchmark). 67 node + 118 python tests green; theme check 40 -> 13 errors (all 13 remaining are documented false positives or deliberately-left items). Files pending client re-push listed below.
+
+### [COMPLETED] What Was Done
+- **Gallery zoom root cause found and fixed**: app.js declares `const jq_lumia = $.noConflict()` — a const binding is NOT a window property, so every `window.jq_lumia` check in the ported zoom silently failed (hover zoom never initialized, lightbox icon hidden). Added `zoomLib()` resolver in calder-universal-pdp.js (window property OR global lexical binding). Live CLB-07 verified: 8 slides, 7 data-zoom-image attrs, all libs deferred — snippet push had landed; only the JS gate was broken. Hover zoom still requires viewport >1024px (native respond range).
+- **calder-product.liquid**: closed the section-root `.calder-pdp` div after the JSON-LD block (verified against live rendered HTML: only the root close was missing; fix proven in a temp-copy theme-check re-run before applying — 40->39 errors, no new offenses).
+- **Inventory-source setting built** (Theme settings → Calder Wheels — API): `calder_inventory_source` = demo|native|quickbooks, default demo, set to demo in settings_data. Wiring: calder-universal-controls.liquid loads calder-demo-inventory.js only in demo mode; calder-universal-purchase.liquid passes data-calder-inventory-source; calder-universal-cta.js skips the QB component gate entirely on native (Shopify availability decides), keeps fail-safe ERROR on missing demo/quickbooks payloads; theme.liquid legacy path gated on the same setting.
+- **Theme check cleanups**: deferred parser-blocking scripts in theme.liquid (demo-inventory/dealer-backend/dealer-portal/esm.sh nomodule); img width/height added across 10 files (21 errors); restored snippets/header-minicart-sticky.liquid as an EMPTY file exactly as stock Lumia ships it.
+- **Center Bore Matrixify pack**: build_center_bore_import.py + full 96-row import (CSV+XLSX, custom.center_bore [number_decimal], Command=MERGE, validated) + 10-row parts 01–10 for the Matrixify free plan. Client confirmed metafield type = number_decimal. Universal products excluded (selection-aware via registry).
+- **Fitment test reconciliation**: series test now accepts spun_forged; F-150 split into negative (5x108 spec → 0 matches — precise invariant via find_matches_for_spec; the C-Class negative proposal was data-wrong because the fitment MANIFEST includes 5x112 beyond the six launch registry groups) + positive (6x135 IS a launch group — F-150 matches, all 6x135).
+- **Tests**: +3 (zoomLib resolver assertion, native-mode behavioral test, inventory-source wiring test). 67 node + 118 python green.
+- **Adopted client repo state**: 4 WIP fitment-guide files committed (93f9dea); Matrixify template xlsx; client removed superseded SUV Data Sheet 10-05-26.
+- **Corrections to session #9's own earlier diagnosis**: homepage DOES render index.json sections (earlier grep excluded digits in template IDs — artifact). Live homepage = older 3-section revision (home-hero + brands-carousel + negative-space); the local 13-section index.json (feature showcases, fitment panel, engineering, galleries, newsletter) is PENDING RE-PUSH.
+
+### [IN-PROGRESS] What's Partially Done
+- Homepage: local index.json richer than live homepage revision (pending re-push).
+- Builder retirement: code kept as reference per client; front-end CTA repoints ("Explore Wheels" / collection) still to do; /pages/build-your-wheel page still to unpublish in Shopify admin.
+- QuickBooks production feed: demo dataset remains the availability gate by client policy (now switchable via calder_inventory_source).
+
+### [BLOCKED] What's Waiting (client actions)
+1. Re-push to live: assets/calder-universal-pdp.js, assets/calder-universal-cta.js, sections/calder-product.liquid, snippets/calder-universal-controls.liquid, snippets/calder-universal-purchase.liquid, layout/theme.liquid, config/settings_schema.json + settings_data.json, snippets/header-minicart-sticky.liquid (empty), sections/{wheel-configurator,build-your-wheel-page,calder-product-fitment-guide,fitment-finder-guide,home-fitment,dealer-dashboard}.liquid, snippets/{dealer-featured-wheels,dealer-sidebar,placeholder-image}.liquid — then verify zoom on CLB-07 at >1024px viewport.
+2. Import Center Bore parts 01–10 (Matrixify free plan) after confirming store metafield type = number_decimal.
+3. Storefront access token (instructions in the 2026-10-31 report §5) when ready.
+4. settings.demo answered: stock Lumia "Developer mode" checkbox (System group), currently false — custom.css never loads; inert.
+
+### [DECISION] Decisions Made This Session
+- Zoom fix via zoomLib() resolver instead of touching app.js (no core theme edits).
+- F-150 test negative case switched from C-Class to a 5x108 VehicleSpec (5x112 exists in the broader fitment MANIFEST even though it is not one of the six launch registry groups).
+- header-minicart-sticky snippet restored empty (byte-parity with stock Lumia) rather than inventing markup.
+- Remaining 13 theme-check errors accepted as false positives (push/parse_json valid Shopify filters; conditional-branch markup verified balanced per-branch AND against live-rendered HTML; home.css.liquid is a CSS-selector misparse) + 2 deliberately-left non-blocking items (configurator-data 'x' CDN-base hack; custom.css behind demo=false).
+
+### [WARNING] Known Pitfalls & Cautions
+- Hover zoom is intentionally disabled at viewport <=1024px (native Lumia respond range) — test zoom wider than that.
+- With calder_inventory_source = native, low-stock messaging and NO_STOCK component gating disappear by design (Shopify variant availability only).
+- The 4 formerly-uncommitted WIP files are now committed; future client edits in those files start from 93f9dea.
+
+### [FILES] Files Modified This Session
+- Committed in 93f9dea (client WIP) and 388e830 (benchmark): see commit messages for the full list.
+- docs/llm-continuity.md (this entry)
+
+### [BRANCH] Git Context
+- Branch: presentation-polish
+- Last commit: 388e830
+- Uncommitted: none (clean tree)
+
+### [AGENT] Session Metadata
+- Agent: OpenCode (build)
+- Model: DeepSeek V4 Pro
