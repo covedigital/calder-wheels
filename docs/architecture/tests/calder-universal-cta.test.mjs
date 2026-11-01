@@ -117,6 +117,7 @@ function buildSandbox(opts) {
   };
   if (o.qbParts) Object.assign(QB_PARTS, o.qbParts);
   if (o.minQty) purchase.root.setAttribute('data-calder-min-qty', String(o.minQty));
+  if (o.inventorySource) purchase.root.setAttribute('data-calder-inventory-source', String(o.inventorySource));
   const cartItems = fakeElement({});
   if (o.cartItemsImpl) { Object.assign(cartItems, o.cartItemsImpl); }
   if (!cartItems.getSectionsToRender) {
@@ -125,7 +126,7 @@ function buildSandbox(opts) {
   }
   const w = {
     CALDER_DESIGN_REGISTRY: registrySlice,
-    CALDER_QUICKBOOKS_INVENTORY: { source: 'quickbooks-demo-test', synced_at: '2026-10-29T00:00:00Z', parts: QB_PARTS },
+    CALDER_QUICKBOOKS_INVENTORY: o.noQb ? null : { source: 'quickbooks-demo-test', synced_at: '2026-10-29T00:00:00Z', parts: QB_PARTS },
     document: {
       readyState: 'complete',
       querySelector: (sel) => {
@@ -420,4 +421,28 @@ test('no invented phone numbers: tel: renders only from settings, contact page i
   assert.ok(purchaseSnippet.includes('if uc_phone != blank'), 'tel: is conditional on a verified setting');
   assert.ok(purchaseSnippet.includes('pages/contact'), 'contact page fallback present');
   assert.ok(purchaseSnippet.includes('Speak With Support'), 'support label present');
+});
+
+test('inventory source = native skips the QuickBooks component gate entirely', async () => {
+  // No CALDER_QUICKBOOKS_INVENTORY payload in the sandbox at all:
+  // source=native must stay AVAILABLE (Shopify availability decides) instead of
+  // degrading to the "could not be verified" ERROR that demo/quickbooks modes show.
+  const env = buildSandbox({ inventorySource: 'native', noQb: true });
+  await tick();
+  assert.equal(env.purchase.root.getAttribute('data-calder-uc-state'), 'AVAILABLE', 'native mode stays AVAILABLE without any component payload');
+  assert.ok(!/could not be verified/i.test(env.purchase.message.textContent), 'native mode never errors on missing component data');
+  assert.ok(env.w.CALDER_UNIVERSAL_PDP, 'PDP untouched');
+});
+
+test('inventory source setting is wired through schema, snippets and the CTA controller', () => {
+  const controlsSnippet = readFileSync(path.join(THEME, 'snippets', 'calder-universal-controls.liquid'), 'utf8');
+  const ctaSrc = readFileSync(path.join(ASSETS, 'calder-universal-cta.js'), 'utf8');
+  const schema = JSON.parse(readFileSync(path.join(THEME, 'config', 'settings_schema.json'), 'utf8'));
+  const group = schema.find((g) => String(g.name).includes('Calder Wheels'));
+  const setting = group.settings.find((s) => s.id === 'calder_inventory_source');
+  assert.deepEqual(setting.options.map((o) => o.value).sort(), ['demo', 'native', 'quickbooks'], 'schema exposes demo/native/quickbooks');
+  assert.equal(setting.default, 'demo', 'default source is the demo dataset');
+  assert.ok(purchaseSnippet.includes('data-calder-inventory-source='), 'purchase root passes the source to the CTA controller');
+  assert.ok(controlsSnippet.includes("uc_inventory_source == 'demo'"), 'demo component file loads only in demo mode');
+  assert.ok(ctaSrc.includes("inventorySource === 'native'"), 'CTA skips the component gate when source = native');
 });

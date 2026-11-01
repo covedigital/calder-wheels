@@ -7466,6 +7466,27 @@
         "id": "calder_storefront_access_token",
         "label": "Storefront access token (SKU-first purchase lookup)",
         "info": "Public headless storefront token. When set, the universal PDP resolves the exact sellable variant by SKU alone (Storefront API), so product-handle changes can never break Add to Cart. Leave empty to use the handle+SKU fallback."
+      },
+      {
+        "type": "select",
+        "id": "calder_inventory_source",
+        "label": "Inventory availability source",
+        "options": [
+          {
+            "value": "demo",
+            "label": "Demo component dataset (calder-demo-inventory.js)"
+          },
+          {
+            "value": "native",
+            "label": "Native Shopify variant availability (no component gate)"
+          },
+          {
+            "value": "quickbooks",
+            "label": "QuickBooks component feed (window.CALDER_QUICKBOOKS_INVENTORY via n8n)"
+          }
+        ],
+        "default": "demo",
+        "info": "Demo loads the bundled demo component dataset. Native skips the QuickBooks component check entirely and trusts Shopify variant availability (available/sold out). QuickBooks expects an n8n-published window.CALDER_QUICKBOOKS_INVENTORY payload; if it is missing, purchase is blocked with a verification message (never fail-open)."
       }
     ]
   }

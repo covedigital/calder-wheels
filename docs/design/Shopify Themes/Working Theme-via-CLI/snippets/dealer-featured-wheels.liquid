@@ -50,7 +50,7 @@
           <a href="{{ prod_url }}" class="dp-featured__card-image-link">
             <div class="dp-featured__card-image">
               {% if prod_image %}
-                <img src="{{ prod_image | img_url: '240x240', crop: 'center' }}" alt="{{ prod_title | escape }}" loading="lazy">
+                <img src="{{ prod_image | img_url: '240x240', crop: 'center' }}" alt="{{ prod_title | escape }}" width="240" height="240" loading="lazy">
               {% else %}
                 <svg width="120" height="120" viewBox="0 0 120 120" fill="none">
                   <circle cx="60" cy="60" r="50" stroke="#C2A48A" stroke-width="2" fill="#081D2D"/>

@@ -52,14 +52,22 @@
       var groups = resolver.design.fitmentGroups || [];
       return groups.length ? groups[0].id : null;
     }
-    /* QuickBooks component availability (calder-demo-inventory.js publishes
-       window.CALDER_QUICKBOOKS_INVENTORY.parts; n8n cron refreshes it).
+    /* Inventory availability source (Theme settings → Calder Wheels — API →
+       calder_inventory_source), rendered on the purchase root:
+         demo       — bundled demo component dataset (calder-demo-inventory.js)
+         quickbooks — n8n-published window.CALDER_QUICKBOOKS_INVENTORY payload
+         native     — SKIP the component gate entirely; Shopify variant
+                      availability alone decides AVAILABLE/SOLD_OUT.
        Finished wheel = diameter blank x1 + center x1 + barrel/lip x1 + hardware x20. */
+    var inventorySource = (root.getAttribute('data-calder-inventory-source') || 'demo').toLowerCase();
     var QB_CENTER_CODE = { 'gloss-black': 'BKUTI', 'black-titanium': 'BK', 'titanium-tint': 'SU' };
     var QB_BARREL_CODE = { 'gloss-black': 'BK', 'polished': 'POLISH' };
     var QB_BOLT_CODE = { 'chrome': 'CHROME', 'black': 'BK' };
     var BOLTS_PER_WHEEL = 20;
     function qbAvailability(tokens, qty) {
+      if (inventorySource === 'native') {
+        return { known: true, available_to_build: Infinity, components: null, source: 'native' };
+      }
       var payload = (typeof window !== 'undefined' && window.CALDER_QUICKBOOKS_INVENTORY) || null;
       var parts = payload && payload.parts ? payload.parts : null;
       var designNumber = resolver.design.designNumber;
@@ -222,6 +230,13 @@
           td.textContent = 'components unknown (source: ' + (qb.source || 'missing') + ')';
           tr.appendChild(td);
           qbBody.appendChild(tr);
+        } else if (qb.source === 'native') {
+          var trN = document.createElement('tr');
+          var tdN = document.createElement('td');
+          tdN.colSpan = 5;
+          tdN.textContent = 'component gate skipped — native Shopify availability (calder_inventory_source: ' + inventorySource + ')';
+          trN.appendChild(tdN);
+          qbBody.appendChild(trN);
         }
       }
       var payloadEl = dev.querySelector('[data-calder-dev="cartPayload"]');

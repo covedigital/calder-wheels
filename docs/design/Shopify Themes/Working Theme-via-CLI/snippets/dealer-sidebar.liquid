@@ -13,7 +13,7 @@
   <div class="dp-sidebar__brand">
     <a href="/" class="dp-sidebar__logo">
       {% if dealer_logo != blank %}
-        <img src="{{ dealer_logo | img_url: 'master' }}" alt="Calder Wheels" class="dp-sidebar__logo-img" style="width:{{ dealer_logo_width | default: 120 }}px;max-height:60px;object-fit:contain">
+        <img src="{{ dealer_logo | img_url: 'master' }}" alt="Calder Wheels" class="dp-sidebar__logo-img" width="{{ dealer_logo_width | default: 120 }}" height="60" style="width:{{ dealer_logo_width | default: 120 }}px;max-height:60px;object-fit:contain">
       {% else %}
       <div class="dp-sidebar__logo-mark">
         <svg width="28" height="28" viewBox="0 0 28 28" fill="none">

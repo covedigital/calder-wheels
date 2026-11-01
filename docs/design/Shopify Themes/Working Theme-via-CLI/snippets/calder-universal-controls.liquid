@@ -10,7 +10,13 @@
 <link rel="stylesheet" href="{{ 'calder-universal-controls.css' | asset_url }}" media="all">
 <script src="{{ uc_registry_file | asset_url }}" defer></script>
 <script src="{{ 'calder-config-resolver.js' | asset_url }}" defer></script>
+{%- comment -%} Inventory source (Theme settings → Calder Wheels — API):
+  demo = bundled demo component dataset; quickbooks = n8n-published
+  window.CALDER_QUICKBOOKS_INVENTORY; native = no component file at all. {%- endcomment -%}
+{%- assign uc_inventory_source = settings.calder_inventory_source | default: 'demo' -%}
+{%- if uc_inventory_source == 'demo' -%}
 <script src="{{ 'calder-demo-inventory.js' | asset_url }}" defer></script>
+{%- endif -%}
 <script src="{{ 'calder-pdp-state.js' | asset_url }}" defer></script>
 <script src="{{ 'calder-universal-pdp.js' | asset_url }}" defer></script>
 <script src="{{ 'calder-universal-cta.js' | asset_url }}" defer></script>

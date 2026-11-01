@@ -9,11 +9,15 @@
   assign uc_phone = settings.phone | default: settings.header_get_help_phone | default: '' | strip
   assign uc_contact_url = routes.root_url | append: 'pages/contact'
 -%}
+{%- liquid
+  assign uc_inventory_source = settings.calder_inventory_source | default: 'demo'
+-%}
 <div
   class="calder-upc"
   data-calder-universal-purchase
   data-calder-uc-support-url="{{ uc_contact_url }}"
   data-calder-min-qty="{{ min_qty | default: 10 }}"
+  data-calder-inventory-source="{{ uc_inventory_source }}"
 >
   <button
     type="button"

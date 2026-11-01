@@ -77,7 +77,10 @@
       -%}
       {%- if load_configurator -%}
         {{ 'wheel-configurator.css' | asset_url | stylesheet_tag }}
-        {{ 'calder-demo-inventory.js' | asset_url | script_tag }}
+        {%- assign calder_inv_src = settings.calder_inventory_source | default: 'demo' -%}
+        {%- if calder_inv_src == 'demo' -%}
+          <script src="{{ 'calder-demo-inventory.js' | asset_url }}" defer></script>
+        {%- endif -%}
       {%- endif -%}
       {%- if template.suffix == 'calder' -%}
         {{ 'calder-product.css' | asset_url | stylesheet_tag }}
@@ -98,8 +101,8 @@
 
     {%- if is_dealer_route -%}
       {{ 'dealer-portal.css' | asset_url | stylesheet_tag }}
-      {{ 'dealer-backend.js' | asset_url | script_tag }}
-      {{ 'dealer-portal.js' | asset_url | script_tag }}
+      <script src="{{ 'dealer-backend.js' | asset_url }}" defer></script>
+      <script src="{{ 'dealer-portal.js' | asset_url }}" defer></script>
     {%- endif -%}
     {%- if request.design_mode -%}
       {% section 'megamenu' %}
@@ -324,6 +327,7 @@
 
     <script
       nomodule
+      defer
       src="https://esm.sh/ionicons@8.0.13/loader">
     </script>
     

@@ -249,11 +249,23 @@
            same options as native (zoom animation, thumbs strip, light skin).
          Fails silently (icon hidden) when jq_lumia/ezPlus/fancybox or media
          images are absent — slides/arrows/thumbs behavior is untouched. */
+      /* app.js declares `const jq_lumia = $.noConflict()` at top level — a
+         const binding is NOT a window property, so window.jq_lumia stays
+         undefined even though native zoom works inside app.js's own scope.
+         Resolve the library through BOTH paths: the window property first,
+         then the global lexical binding that classic scripts can see. */
+      function zoomLib() {
+        if (typeof window.jq_lumia === 'function' && window.jq_lumia.fn) { return window.jq_lumia; }
+        try { if (typeof jq_lumia === 'function' && jq_lumia.fn && jq_lumia.fn.ezPlus) { return jq_lumia; } } catch (e) {}
+        return null;
+      }
       function galEzPlusAvailable() {
-        return typeof window.jq_lumia === 'function' && window.jq_lumia.fn && typeof window.jq_lumia.fn.ezPlus === 'function';
+        var lib = zoomLib();
+        return !!(lib && typeof lib.fn.ezPlus === 'function');
       }
       function activateSlideZoom(idx) {
-        if (!galEzPlusAvailable()) { return; }
+        var lib = zoomLib();
+        if (!lib || !galEzPlusAvailable()) { return; }
         var slide = galSlides[idx];
         if (!slide || slide.classList.contains('zoom-init')) { return; }
         var img = slide.querySelector('img[data-zoom-image]');
@@ -261,7 +273,7 @@
         var srcW = parseInt(img.getAttribute('data-image-width'), 10) || 0;
         var frameW = slide.clientWidth || img.clientWidth || 0;
         if (srcW && frameW && srcW <= frameW * 1.1) { slide.classList.add('zoom-init'); return; }
-        window.jq_lumia(img).ezPlus({
+        lib(img).ezPlus({
           zoomType: 'inner',
           zoomWindowFadeIn: 500,
           zoomWindowFadeOut: 500,
@@ -287,7 +299,8 @@
         return objs;
       }
       var galZoomBtn = galRoot.querySelector('[data-calder-uc-gal-zoom]');
-      var galZoomObjs = (window.jq_lumia && window.jq_lumia.fancybox) ? galZoomObjects() : [];
+      var jq_lumia = zoomLib();
+      var galZoomObjs = (jq_lumia && jq_lumia.fancybox) ? galZoomObjects() : [];
       if (galZoomBtn && !galZoomObjs.length) {
         galZoomBtn.hidden = true;
         galZoomBtn.classList.add('hidden');
@@ -295,8 +308,9 @@
       if (galZoomBtn && galZoomObjs.length) {
         galZoomBtn.addEventListener('click', function (evt) {
           evt.preventDefault();
-          if (!window.jq_lumia || !window.jq_lumia.fancybox) { return; }
-          window.jq_lumia.fancybox.open(galZoomObjs, {
+          var jq_lumia = zoomLib();
+          if (!jq_lumia || !jq_lumia.fancybox) { return; }
+          jq_lumia.fancybox.open(galZoomObjs, {
             loop: false,
             animationEffect: 'zoom',
             touch: true,

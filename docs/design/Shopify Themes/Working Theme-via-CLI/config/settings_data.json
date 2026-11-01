@@ -476,6 +476,7 @@
     "color_product_inventory_status_line_max_color": "#ff0000",
     "fitment_api_url": "https://calder-dev.covedigitalworks.com",
     "configurator_api_url": "https://calder-dev.covedigitalworks.com",
+    "calder_inventory_source": "demo",
     "use_preload_image": true,
     "preload_image_mobile": "shopify://shop_images/slide-index1-m.png",
     "preload_image": "shopify://shop_images/slide-index1_ff1c6058-bea7-45d8-be96-f5e0ee6835e0.png",

@@ -452,6 +452,7 @@ test('gallery zoom: native Lumia parity (ezPlus hover zoom + fancybox lightbox) 
   /* controller side: ports app.js addZoom + zoomLinkEvent, inert without the
      jQuery stack, and cannot alter slides/arrows/thumbs behavior */
   assert.ok(pdpSrc.includes('jq_lumia.fn.ezPlus'), 'hover zoom only activates when the theme ezPlus plugin is present');
+  assert.ok(pdpSrc.includes('function zoomLib()'), 'zoom resolves jq_lumia via window OR the app.js const binding (window.jq_lumia alone is always undefined)');
   assert.ok(pdpSrc.includes("zoomType: 'inner'"), 'native inner hover zoom type');
   assert.ok(pdpSrc.includes("range: '100-1024', enabled: false"), 'native respond range disables zoom on small viewports');
   assert.ok(pdpSrc.includes('zoom-init'), 'one-time per-slide init guard (native pattern)');

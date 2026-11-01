@@ -282,7 +282,7 @@ class TestWheelCatalog(unittest.TestCase):
 
     def test_all_designs_have_series(self):
         for code, design in WHEEL_DESIGNS.items():
-            self.assertIn(design.series, ["forged", "flow_formed", "three_piece"],
+            self.assertIn(design.series, ["forged", "flow_formed", "three_piece", "spun_forged"],
                           f"{code}: invalid series '{design.series}'")
 
     def test_all_designs_have_fitments(self):
@@ -390,10 +390,20 @@ class TestFitmentEngine(unittest.TestCase):
             self.assertGreaterEqual(m.hub_bore, 66.6)
 
     def test_incompatible_bolt_pattern(self):
-        """No wheels should match for a vehicle with different bolt pattern."""
-        # F-150 uses 6x135 — none of our wheels should match
-        matches = self.engine.find_matches("FORD", "F-150", 2024)
+        """A bolt pattern with no catalog wheels must match nothing."""
+        # 5x108 (e.g. Volvo) is not offered by any design in WHEEL_DESIGNS,
+        # so a vehicle with that pattern can never receive a match.
+        # (5x112 — C-Class — IS a catalog pattern, so it cannot serve as
+        # the negative case even though it is outside the six launch groups.)
+        spec = VehicleSpec(2024, "VOLVO", "XC90", "5x108", 17, 22, 7, 10, 20, 50, 63.4, 800)
+        matches = self.engine.find_matches_for_spec(spec)
         self.assertEqual(len(matches), 0)
+
+    def test_f150_matches_6x135_wheels(self):
+        # 6x135 IS a launch group (registry: 6x135-30mm-87.1) — F-150 must match
+        matches = self.engine.find_matches("FORD", "F-150", 2024)
+        self.assertTrue(all(m.bolt_pattern == "6x135" for m in matches))
+        self.assertGreater(len(matches), 0)
 
     def test_tacoma_fitment_empty(self):
         """Tacoma uses 6x139.7 — none of our launch wheels should match."""
