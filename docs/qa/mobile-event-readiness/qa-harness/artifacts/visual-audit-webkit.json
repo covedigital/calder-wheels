@@ -1,0 +1,5358 @@
+{
+  "m-320-narrow:home": {
+    "viewport": {
+      "width": 320,
+      "height": 568
+    },
+    "docWidth": 320,
+    "overflowingElements": [],
+    "brokenImages": [
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/files/off_road_olive.png?v=1793067430&width=651"
+      },
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/files/Silverado-Black_1.png?v=1792635017&width=645"
+      },
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/files/Range-Rover-M-07_1.png?v=1792635004&width=645"
+      },
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/files/F150-Raptor_1.png?v=1792634987&width=645"
+      },
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/files/Black_Silverado_on_a_Desert_Highway.png?v=1792979374&width=600"
+      }
+    ],
+    "aspectIssues": [
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/files/luxury_suv_white.png?v=1793067430&width=651",
+        "natural": 2.133,
+        "rendered": 1,
+        "cls": "fade-up w-100 lazyloaded"
+      },
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/files/full_size_truck_blue.png?v=1793067430&width=651",
+        "natural": 2.667,
+        "rendered": 1,
+        "cls": "fade-up w-100 lazyloaded"
+      },
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/files/performance_red.png?v=1793067430&width=651",
+        "natural": 3.107,
+        "rendered": 1,
+        "cls": "fade-up w-100 lazyloaded"
+      },
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/files/custom_builds_bronze.png?v=1793067430&width=651",
+        "natural": 2.52,
+        "rendered": 1,
+        "cls": "fade-up w-100 lazyloaded"
+      },
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/files/scenic-placeholder-01.jpg?v=1790029260&width=768",
+        "natural": 1.839,
+        "rendered": 0.477,
+        "cls": "home-newsletter__background-image"
+      }
+    ],
+    "tinyTouchTargets": [
+      {
+        "tag": "a",
+        "cls": "skip-to-content-link btn visually-hidden",
+        "text": "Skip to content",
+        "w": 1,
+        "h": 1
+      },
+      {
+        "tag": "a",
+        "cls": "dropdn-link",
+        "text": "",
+        "w": 36,
+        "h": 17
+      },
+      {
+        "tag": "a",
+        "cls": "dropdn-link",
+        "text": "",
+        "w": 36,
+        "h": 17
+      },
+      {
+        "tag": "a",
+        "cls": "dropdn-link",
+        "text": "",
+        "w": 36,
+        "h": 17
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet swiper-pagination-bullet-active",
+        "text": "",
+        "w": 37,
+        "h": 6
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet",
+        "text": "",
+        "w": 16,
+        "h": 6
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet",
+        "text": "",
+        "w": 16,
+        "h": 6
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet",
+        "text": "",
+        "w": 16,
+        "h": 6
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet",
+        "text": "",
+        "w": 16,
+        "h": 6
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet",
+        "text": "",
+        "w": 16,
+        "h": 6
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet",
+        "text": "",
+        "w": 16,
+        "h": 6
+      },
+      {
+        "tag": "a",
+        "cls": "",
+        "text": "CLB-06",
+        "w": 68,
+        "h": 21
+      },
+      {
+        "tag": "button",
+        "cls": "prd-quantity-btn prd-quantity-up",
+        "text": "Increase quantity for CLB-06 22&quot; / ",
+        "w": 21,
+        "h": 38
+      },
+      {
+        "tag": "button",
+        "cls": "prd-quantity-btn prd-quantity-down",
+        "text": "Decrease quantity for CLB-06 22&quot; / ",
+        "w": 21,
+        "h": 38
+      },
+      {
+        "tag": "a",
+        "cls": "",
+        "text": "CLB-07",
+        "w": 66,
+        "h": 21
+      },
+      {
+        "tag": "button",
+        "cls": "prd-quantity-btn prd-quantity-up",
+        "text": "Increase quantity for CLB-07 22&quot; / ",
+        "w": 21,
+        "h": 38
+      },
+      {
+        "tag": "button",
+        "cls": "prd-quantity-btn prd-quantity-down",
+        "text": "Decrease quantity for CLB-07 22&quot; / ",
+        "w": 21,
+        "h": 38
+      },
+      {
+        "tag": "a",
+        "cls": "",
+        "text": "CLM-01",
+        "w": 69,
+        "h": 21
+      },
+      {
+        "tag": "button",
+        "cls": "prd-quantity-btn prd-quantity-up",
+        "text": "Increase quantity for CLM-01 22&quot; / ",
+        "w": 21,
+        "h": 38
+      },
+      {
+        "tag": "button",
+        "cls": "prd-quantity-btn prd-quantity-down",
+        "text": "Decrease quantity for CLM-01 22&quot; / ",
+        "w": 21,
+        "h": 38
+      },
+      {
+        "tag": "a",
+        "cls": "",
+        "text": "CLM-02",
+        "w": 72,
+        "h": 21
+      },
+      {
+        "tag": "button",
+        "cls": "prd-quantity-btn prd-quantity-up",
+        "text": "Increase quantity for CLM-02 22&quot; / ",
+        "w": 21,
+        "h": 38
+      },
+      {
+        "tag": "button",
+        "cls": "prd-quantity-btn prd-quantity-down",
+        "text": "Decrease quantity for CLM-02 22&quot; / ",
+        "w": 21,
+        "h": 38
+      },
+      {
+        "tag": "a",
+        "cls": "",
+        "text": "CLM-03",
+        "w": 72,
+        "h": 21
+      },
+      {
+        "tag": "button",
+        "cls": "prd-quantity-btn prd-quantity-up",
+        "text": "Increase quantity for CLM-03 22&quot; / ",
+        "w": 21,
+        "h": 38
+      }
+    ],
+    "stickyElements": [
+      {
+        "tag": "header",
+        "cls": "shopify-section hdr-wrap",
+        "id": "shopify-section-header",
+        "pos": "sticky",
+        "rect": {
+          "top": 0,
+          "left": 0,
+          "w": 320,
+          "h": 64
+        }
+      },
+      {
+        "tag": "div",
+        "cls": "hdr-mobile-bottom show-mobile scroll-down",
+        "id": "",
+        "pos": "fixed",
+        "rect": {
+          "top": 506,
+          "left": 0,
+          "w": 320,
+          "h": 62
+        }
+      },
+      {
+        "tag": "a",
+        "cls": "back-to-top js-back-to-top compensate-for-scrollbar",
+        "id": "",
+        "pos": "fixed",
+        "rect": {
+          "top": 618,
+          "left": 260,
+          "w": 50,
+          "h": 50
+        }
+      }
+    ]
+  },
+  "m-320-narrow:pdp-clm-01": {
+    "viewport": {
+      "width": 320,
+      "height": 568
+    },
+    "docWidth": 486,
+    "overflowingElements": [
+      {
+        "tag": "span",
+        "cls": "",
+        "right": 418,
+        "left": 300,
+        "width": 118
+      },
+      {
+        "tag": "span",
+        "cls": "visually-hidden",
+        "right": 426,
+        "left": 425,
+        "width": 1
+      },
+      {
+        "tag": "path",
+        "cls": "",
+        "right": 436,
+        "left": 416,
+        "width": 20
+      },
+      {
+        "tag": "img",
+        "cls": "js-prd-img fade-up lazyloaded",
+        "right": 463,
+        "left": 286,
+        "width": 176
+      },
+      {
+        "tag": "div",
+        "cls": "",
+        "right": 400,
+        "left": 350,
+        "width": 50
+      },
+      {
+        "tag": "div",
+        "cls": "calder-card__type",
+        "right": 458,
+        "left": 291,
+        "width": 166
+      },
+      {
+        "tag": "a",
+        "cls": "",
+        "right": 360,
+        "left": 291,
+        "width": 69
+      },
+      {
+        "tag": "div",
+        "cls": "calder-card__section-label",
+        "right": 458,
+        "left": 291,
+        "width": 166
+      },
+      {
+        "tag": "div",
+        "cls": "calder-card__sizes-values",
+        "right": 458,
+        "left": 291,
+        "width": 166
+      },
+      {
+        "tag": "div",
+        "cls": "calder-card__config-heading",
+        "right": 448,
+        "left": 301,
+        "width": 146
+      },
+      {
+        "tag": "span",
+        "cls": "calder-card__config-label",
+        "right": 353,
+        "left": 301,
+        "width": 51
+      },
+      {
+        "tag": "span",
+        "cls": "calder-card__config-value",
+        "right": 324,
+        "left": 301,
+        "width": 23
+      }
+    ],
+    "brokenImages": [
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/files/Silverado-Red_1.png?v=1792635018&width=645"
+      },
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/files/Tahoe-M-2_1.png?v=1792635043&width=645"
+      },
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/files/Escalade-V-White_1.png?v=1792634979&width=645"
+      },
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/files/Escalade-V-01_1.png?v=1792634961&width=645"
+      },
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/files/Range-Rover-M-07_1.png?v=1792635004&width=645"
+      },
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/files/Silverado-Black_1.png?v=1792635017&width=645"
+      },
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/files/Tahoe-Black_1.png?v=1792635029&width=645"
+      }
+    ],
+    "aspectIssues": [
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/files/calder-201.webp?v=1793622589&width=600",
+        "natural": 1,
+        "rendered": 1.324,
+        "cls": "calder-uc-gal__media-img"
+      },
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/files/calder-201.webp?v=1793622589&width=300",
+        "natural": 1,
+        "rendered": 0.59,
+        "cls": ""
+      },
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/t/6/assets/201-disk-gb.png?v=89349681904372146901793627524",
+        "natural": 1.56,
+        "rendered": 1,
+        "cls": ""
+      },
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/t/6/assets/201-disk-bt.png?v=113323585712417822331793627524",
+        "natural": 1.56,
+        "rendered": 1,
+        "cls": ""
+      },
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/t/6/assets/201-disk-ti.png?v=137998450388110070541793627524",
+        "natural": 1.56,
+        "rendered": 1,
+        "cls": ""
+      },
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/t/6/assets/201-barrel-gb.png?v=114327078231708879501793627524",
+        "natural": 1.56,
+        "rendered": 1,
+        "cls": ""
+      },
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/t/6/assets/201-barrel-gbl.png?v=32162214983647345581793627524",
+        "natural": 1.56,
+        "rendered": 1,
+        "cls": ""
+      },
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/t/6/assets/201-24pcs-ch.png?v=99137525893285061061793627524",
+        "natural": 1.56,
+        "rendered": 1,
+        "cls": ""
+      },
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/t/6/assets/201-24pcs-bk.png?v=158259914684192957471793627524",
+        "natural": 1.56,
+        "rendered": 1,
+        "cls": ""
+      },
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/files/Calder-Wheels-Close-up_2.png?v=1792680391&width=700",
+        "natural": 1,
+        "rendered": 0.502,
+        "cls": "calder-engineering__hero-img"
+      }
+    ],
+    "tinyTouchTargets": [
+      {
+        "tag": "a",
+        "cls": "skip-to-content-link btn visually-hidden",
+        "text": "Skip to content",
+        "w": 1,
+        "h": 1
+      },
+      {
+        "tag": "a",
+        "cls": "dropdn-link",
+        "text": "",
+        "w": 36,
+        "h": 17
+      },
+      {
+        "tag": "a",
+        "cls": "dropdn-link",
+        "text": "",
+        "w": 36,
+        "h": 17
+      },
+      {
+        "tag": "a",
+        "cls": "dropdn-link",
+        "text": "",
+        "w": 36,
+        "h": 17
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet swiper-pagination-bullet-active",
+        "text": "",
+        "w": 37,
+        "h": 6
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet",
+        "text": "",
+        "w": 16,
+        "h": 6
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet",
+        "text": "",
+        "w": 16,
+        "h": 6
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet",
+        "text": "",
+        "w": 16,
+        "h": 6
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet",
+        "text": "",
+        "w": 16,
+        "h": 6
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet",
+        "text": "",
+        "w": 16,
+        "h": 6
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet",
+        "text": "",
+        "w": 16,
+        "h": 6
+      },
+      {
+        "tag": "a",
+        "cls": "",
+        "text": "Home",
+        "w": 35,
+        "h": 16
+      },
+      {
+        "tag": "a",
+        "cls": "calder-upc__support-link",
+        "text": "Speak With Support — +1-202-555-0158",
+        "w": 252,
+        "h": 16
+      },
+      {
+        "tag": "a",
+        "cls": "",
+        "text": "CLM-01",
+        "w": 69,
+        "h": 21
+      },
+      {
+        "tag": "button",
+        "cls": "prd-quantity-btn prd-quantity-up",
+        "text": "Increase quantity for CLM-01 22&quot; / ",
+        "w": 21,
+        "h": 38
+      },
+      {
+        "tag": "button",
+        "cls": "prd-quantity-btn prd-quantity-down",
+        "text": "Decrease quantity for CLM-01 22&quot; / ",
+        "w": 21,
+        "h": 38
+      },
+      {
+        "tag": "a",
+        "cls": "",
+        "text": "CLM-01",
+        "w": 69,
+        "h": 21
+      },
+      {
+        "tag": "button",
+        "cls": "prd-quantity-btn prd-quantity-up",
+        "text": "Increase quantity for CLM-01 22&quot; / ",
+        "w": 21,
+        "h": 38
+      },
+      {
+        "tag": "button",
+        "cls": "prd-quantity-btn prd-quantity-down",
+        "text": "Decrease quantity for CLM-01 22&quot; / ",
+        "w": 21,
+        "h": 38
+      },
+      {
+        "tag": "a",
+        "cls": "",
+        "text": "CLM-01",
+        "w": 69,
+        "h": 21
+      },
+      {
+        "tag": "button",
+        "cls": "prd-quantity-btn prd-quantity-up",
+        "text": "Increase quantity for CLM-01 22&quot; / ",
+        "w": 21,
+        "h": 38
+      },
+      {
+        "tag": "button",
+        "cls": "prd-quantity-btn prd-quantity-down",
+        "text": "Decrease quantity for CLM-01 22&quot; / ",
+        "w": 21,
+        "h": 38
+      },
+      {
+        "tag": "a",
+        "cls": "",
+        "text": "CLM-01",
+        "w": 69,
+        "h": 21
+      },
+      {
+        "tag": "button",
+        "cls": "prd-quantity-btn prd-quantity-up",
+        "text": "Increase quantity for CLM-01 22&quot; / ",
+        "w": 21,
+        "h": 38
+      },
+      {
+        "tag": "button",
+        "cls": "prd-quantity-btn prd-quantity-down",
+        "text": "Decrease quantity for CLM-01 22&quot; / ",
+        "w": 21,
+        "h": 38
+      }
+    ],
+    "stickyElements": [
+      {
+        "tag": "header",
+        "cls": "shopify-section hdr-wrap",
+        "id": "shopify-section-header",
+        "pos": "sticky",
+        "rect": {
+          "top": 0,
+          "left": 0,
+          "w": 320,
+          "h": 64
+        }
+      },
+      {
+        "tag": "div",
+        "cls": "hdr-mobile-bottom show-mobile scroll-down",
+        "id": "",
+        "pos": "fixed",
+        "rect": {
+          "top": 506,
+          "left": 0,
+          "w": 320,
+          "h": 62
+        }
+      },
+      {
+        "tag": "a",
+        "cls": "back-to-top js-back-to-top compensate-for-scrollbar",
+        "id": "",
+        "pos": "fixed",
+        "rect": {
+          "top": 618,
+          "left": 260,
+          "w": 50,
+          "h": 50
+        }
+      }
+    ]
+  },
+  "m-320-narrow:fitment": {
+    "viewport": {
+      "width": 320,
+      "height": 568
+    },
+    "docWidth": 320,
+    "overflowingElements": [],
+    "brokenImages": [],
+    "aspectIssues": [
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/files/Tahoe-M-2_1.png?v=1792635043&width=768",
+        "natural": 1.778,
+        "rendered": 0.842,
+        "cls": "fitment-finder-hero__image"
+      },
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/files/Silverado-Black_1.png?v=1792635017&width=900",
+        "natural": 1.788,
+        "rendered": 0.821,
+        "cls": "fitment-finder-help-cta__image"
+      }
+    ],
+    "tinyTouchTargets": [
+      {
+        "tag": "a",
+        "cls": "skip-to-content-link btn visually-hidden",
+        "text": "Skip to content",
+        "w": 1,
+        "h": 1
+      },
+      {
+        "tag": "a",
+        "cls": "dropdn-link",
+        "text": "",
+        "w": 36,
+        "h": 17
+      },
+      {
+        "tag": "a",
+        "cls": "dropdn-link",
+        "text": "",
+        "w": 36,
+        "h": 17
+      },
+      {
+        "tag": "a",
+        "cls": "dropdn-link",
+        "text": "",
+        "w": 36,
+        "h": 17
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet swiper-pagination-bullet-active",
+        "text": "",
+        "w": 37,
+        "h": 6
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet",
+        "text": "",
+        "w": 16,
+        "h": 6
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet",
+        "text": "",
+        "w": 16,
+        "h": 6
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet",
+        "text": "",
+        "w": 16,
+        "h": 6
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet",
+        "text": "",
+        "w": 16,
+        "h": 6
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet",
+        "text": "",
+        "w": 16,
+        "h": 6
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet",
+        "text": "",
+        "w": 16,
+        "h": 6
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "All Wheels",
+        "w": 75,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "By Vehicle",
+        "w": 74,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "By Style",
+        "w": 58,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "Accessories",
+        "w": 87,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "Our Story",
+        "w": 68,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "Engineering",
+        "w": 85,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "Gallery",
+        "w": 50,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "Find a Dealer",
+        "w": 94,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "  active top-level-link\n          ",
+        "text": "Fitment Tool",
+        "w": 87,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "Build Your Wheel",
+        "w": 121,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "Vehicle Gallery",
+        "w": 106,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "Wheel Gallery",
+        "w": 99,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "Contact",
+        "w": 56,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "FAQs",
+        "w": 37,
+        "h": 19
+      }
+    ],
+    "stickyElements": [
+      {
+        "tag": "header",
+        "cls": "shopify-section hdr-wrap",
+        "id": "shopify-section-header",
+        "pos": "sticky",
+        "rect": {
+          "top": 0,
+          "left": 0,
+          "w": 320,
+          "h": 64
+        }
+      },
+      {
+        "tag": "div",
+        "cls": "hdr-mobile-bottom show-mobile scroll-down",
+        "id": "",
+        "pos": "fixed",
+        "rect": {
+          "top": 506,
+          "left": 0,
+          "w": 320,
+          "h": 62
+        }
+      },
+      {
+        "tag": "a",
+        "cls": "back-to-top js-back-to-top compensate-for-scrollbar",
+        "id": "",
+        "pos": "fixed",
+        "rect": {
+          "top": 618,
+          "left": 260,
+          "w": 50,
+          "h": 50
+        }
+      }
+    ]
+  },
+  "m-320-narrow:wheel-gallery": {
+    "viewport": {
+      "width": 320,
+      "height": 568
+    },
+    "docWidth": 320,
+    "overflowingElements": [],
+    "brokenImages": [],
+    "aspectIssues": [],
+    "tinyTouchTargets": [
+      {
+        "tag": "a",
+        "cls": "skip-to-content-link btn visually-hidden",
+        "text": "Skip to content",
+        "w": 1,
+        "h": 1
+      },
+      {
+        "tag": "a",
+        "cls": "dropdn-link",
+        "text": "",
+        "w": 36,
+        "h": 17
+      },
+      {
+        "tag": "a",
+        "cls": "dropdn-link",
+        "text": "",
+        "w": 36,
+        "h": 17
+      },
+      {
+        "tag": "a",
+        "cls": "dropdn-link",
+        "text": "",
+        "w": 36,
+        "h": 17
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet swiper-pagination-bullet-active",
+        "text": "",
+        "w": 37,
+        "h": 6
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet",
+        "text": "",
+        "w": 16,
+        "h": 6
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet",
+        "text": "",
+        "w": 16,
+        "h": 6
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet",
+        "text": "",
+        "w": 16,
+        "h": 6
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet",
+        "text": "",
+        "w": 16,
+        "h": 6
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet",
+        "text": "",
+        "w": 16,
+        "h": 6
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet",
+        "text": "",
+        "w": 16,
+        "h": 6
+      },
+      {
+        "tag": "select",
+        "cls": "",
+        "text": "Wheel ModelCLM-01",
+        "w": 110,
+        "h": 23
+      },
+      {
+        "tag": "select",
+        "cls": "",
+        "text": "Diameter",
+        "w": 110,
+        "h": 23
+      },
+      {
+        "tag": "select",
+        "cls": "",
+        "text": "FinishGloss Black",
+        "w": 110,
+        "h": 23
+      },
+      {
+        "tag": "select",
+        "cls": "",
+        "text": "Bolt Pattern",
+        "w": 110,
+        "h": 23
+      },
+      {
+        "tag": "select",
+        "cls": "",
+        "text": "SeriesForged Monoblock",
+        "w": 142,
+        "h": 23
+      },
+      {
+        "tag": "select",
+        "cls": "",
+        "text": "Construction",
+        "w": 110,
+        "h": 23
+      },
+      {
+        "tag": "select",
+        "cls": "",
+        "text": "Wheel Style",
+        "w": 110,
+        "h": 23
+      },
+      {
+        "tag": "select",
+        "cls": "",
+        "text": "FeaturedName A–ZName Z–A",
+        "w": 110,
+        "h": 23
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "All Wheels",
+        "w": 75,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "By Vehicle",
+        "w": 74,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "By Style",
+        "w": 58,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "Accessories",
+        "w": 87,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "Our Story",
+        "w": 68,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "Engineering",
+        "w": 85,
+        "h": 19
+      }
+    ],
+    "stickyElements": [
+      {
+        "tag": "header",
+        "cls": "shopify-section hdr-wrap",
+        "id": "shopify-section-header",
+        "pos": "sticky",
+        "rect": {
+          "top": 0,
+          "left": 0,
+          "w": 320,
+          "h": 64
+        }
+      },
+      {
+        "tag": "div",
+        "cls": "hdr-mobile-bottom show-mobile scroll-down",
+        "id": "",
+        "pos": "fixed",
+        "rect": {
+          "top": 506,
+          "left": 0,
+          "w": 320,
+          "h": 62
+        }
+      },
+      {
+        "tag": "a",
+        "cls": "back-to-top js-back-to-top compensate-for-scrollbar",
+        "id": "",
+        "pos": "fixed",
+        "rect": {
+          "top": 618,
+          "left": 260,
+          "w": 50,
+          "h": 50
+        }
+      }
+    ]
+  },
+  "m-375-iphone:home": {
+    "viewport": {
+      "width": 375,
+      "height": 667
+    },
+    "docWidth": 375,
+    "overflowingElements": [],
+    "brokenImages": [
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/files/Silverado-Black_1.png?v=1792635017&width=260"
+      },
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/files/F150-Raptor_1.png?v=1792634987&width=260"
+      },
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/files/Black_Silverado_on_a_Desert_Highway.png?v=1792979374&width=600"
+      }
+    ],
+    "aspectIssues": [
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/files/luxury_suv_white.png?v=1793067430&width=696",
+        "natural": 2.131,
+        "rendered": 1,
+        "cls": "fade-up w-100 lazyloaded"
+      },
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/files/full_size_truck_blue.png?v=1793067430&width=765",
+        "natural": 2.66,
+        "rendered": 1,
+        "cls": "fade-up w-100 lazyloaded"
+      },
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/files/performance_red.png?v=1793067430&width=765",
+        "natural": 3.099,
+        "rendered": 1,
+        "cls": "fade-up w-100 lazyloaded"
+      },
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/files/off_road_olive.png?v=1793067430&width=765",
+        "natural": 2.315,
+        "rendered": 1,
+        "cls": "fade-up w-100 lazyloaded"
+      },
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/files/custom_builds_bronze.png?v=1793067430&width=765",
+        "natural": 2.517,
+        "rendered": 1,
+        "cls": "fade-up w-100 lazyloaded"
+      },
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/files/scenic-placeholder-01.jpg?v=1790029260&width=768",
+        "natural": 1.833,
+        "rendered": 0.577,
+        "cls": "home-newsletter__background-image"
+      }
+    ],
+    "tinyTouchTargets": [
+      {
+        "tag": "a",
+        "cls": "skip-to-content-link btn visually-hidden",
+        "text": "Skip to content",
+        "w": 1,
+        "h": 1
+      },
+      {
+        "tag": "a",
+        "cls": "dropdn-link",
+        "text": "",
+        "w": 36,
+        "h": 17
+      },
+      {
+        "tag": "a",
+        "cls": "dropdn-link",
+        "text": "",
+        "w": 36,
+        "h": 17
+      },
+      {
+        "tag": "a",
+        "cls": "dropdn-link",
+        "text": "",
+        "w": 36,
+        "h": 17
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet swiper-pagination-bullet-active",
+        "text": "",
+        "w": 37,
+        "h": 6
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet",
+        "text": "",
+        "w": 16,
+        "h": 6
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet",
+        "text": "",
+        "w": 16,
+        "h": 6
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet",
+        "text": "",
+        "w": 16,
+        "h": 6
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet",
+        "text": "",
+        "w": 16,
+        "h": 6
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet",
+        "text": "",
+        "w": 16,
+        "h": 6
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet",
+        "text": "",
+        "w": 16,
+        "h": 6
+      },
+      {
+        "tag": "a",
+        "cls": "",
+        "text": "CLB-06",
+        "w": 68,
+        "h": 21
+      },
+      {
+        "tag": "button",
+        "cls": "prd-quantity-btn prd-quantity-up",
+        "text": "Increase quantity for CLB-06 22&quot; / ",
+        "w": 21,
+        "h": 38
+      },
+      {
+        "tag": "button",
+        "cls": "prd-quantity-btn prd-quantity-down",
+        "text": "Decrease quantity for CLB-06 22&quot; / ",
+        "w": 21,
+        "h": 38
+      },
+      {
+        "tag": "a",
+        "cls": "",
+        "text": "CLB-07",
+        "w": 66,
+        "h": 21
+      },
+      {
+        "tag": "button",
+        "cls": "prd-quantity-btn prd-quantity-up",
+        "text": "Increase quantity for CLB-07 22&quot; / ",
+        "w": 21,
+        "h": 38
+      },
+      {
+        "tag": "button",
+        "cls": "prd-quantity-btn prd-quantity-down",
+        "text": "Decrease quantity for CLB-07 22&quot; / ",
+        "w": 21,
+        "h": 38
+      },
+      {
+        "tag": "a",
+        "cls": "",
+        "text": "CLM-01",
+        "w": 69,
+        "h": 21
+      },
+      {
+        "tag": "button",
+        "cls": "prd-quantity-btn prd-quantity-up",
+        "text": "Increase quantity for CLM-01 22&quot; / ",
+        "w": 21,
+        "h": 38
+      },
+      {
+        "tag": "button",
+        "cls": "prd-quantity-btn prd-quantity-down",
+        "text": "Decrease quantity for CLM-01 22&quot; / ",
+        "w": 21,
+        "h": 38
+      },
+      {
+        "tag": "a",
+        "cls": "",
+        "text": "CLM-02",
+        "w": 72,
+        "h": 21
+      },
+      {
+        "tag": "button",
+        "cls": "prd-quantity-btn prd-quantity-up",
+        "text": "Increase quantity for CLM-02 22&quot; / ",
+        "w": 21,
+        "h": 38
+      },
+      {
+        "tag": "button",
+        "cls": "prd-quantity-btn prd-quantity-down",
+        "text": "Decrease quantity for CLM-02 22&quot; / ",
+        "w": 21,
+        "h": 38
+      },
+      {
+        "tag": "a",
+        "cls": "",
+        "text": "CLM-03",
+        "w": 72,
+        "h": 21
+      },
+      {
+        "tag": "button",
+        "cls": "prd-quantity-btn prd-quantity-up",
+        "text": "Increase quantity for CLM-03 22&quot; / ",
+        "w": 21,
+        "h": 38
+      }
+    ],
+    "stickyElements": [
+      {
+        "tag": "header",
+        "cls": "shopify-section hdr-wrap",
+        "id": "shopify-section-header",
+        "pos": "sticky",
+        "rect": {
+          "top": 0,
+          "left": 0,
+          "w": 375,
+          "h": 64
+        }
+      },
+      {
+        "tag": "div",
+        "cls": "hdr-mobile-bottom show-mobile scroll-down",
+        "id": "",
+        "pos": "fixed",
+        "rect": {
+          "top": 605,
+          "left": 0,
+          "w": 375,
+          "h": 62
+        }
+      },
+      {
+        "tag": "a",
+        "cls": "back-to-top js-back-to-top compensate-for-scrollbar",
+        "id": "",
+        "pos": "fixed",
+        "rect": {
+          "top": 717,
+          "left": 315,
+          "w": 50,
+          "h": 50
+        }
+      }
+    ]
+  },
+  "m-375-iphone:pdp-clm-01": {
+    "viewport": {
+      "width": 375,
+      "height": 667
+    },
+    "docWidth": 486,
+    "overflowingElements": [
+      {
+        "tag": "span",
+        "cls": "",
+        "right": 500,
+        "left": 355,
+        "width": 145
+      },
+      {
+        "tag": "span",
+        "cls": "visually-hidden",
+        "right": 426,
+        "left": 425,
+        "width": 1
+      },
+      {
+        "tag": "path",
+        "cls": "",
+        "right": 436,
+        "left": 416,
+        "width": 20
+      },
+      {
+        "tag": "img",
+        "cls": "js-prd-img fade-up lazyloaded",
+        "right": 463,
+        "left": 286,
+        "width": 176
+      },
+      {
+        "tag": "div",
+        "cls": "",
+        "right": 400,
+        "left": 350,
+        "width": 50
+      },
+      {
+        "tag": "div",
+        "cls": "calder-card__type",
+        "right": 458,
+        "left": 291,
+        "width": 166
+      },
+      {
+        "tag": "h3",
+        "cls": "calder-card__title",
+        "right": 458,
+        "left": 291,
+        "width": 166
+      },
+      {
+        "tag": "div",
+        "cls": "calder-card__section-label",
+        "right": 458,
+        "left": 291,
+        "width": 166
+      },
+      {
+        "tag": "div",
+        "cls": "calder-card__sizes-values",
+        "right": 458,
+        "left": 291,
+        "width": 166
+      },
+      {
+        "tag": "div",
+        "cls": "calder-card__config-heading",
+        "right": 448,
+        "left": 301,
+        "width": 146
+      },
+      {
+        "tag": "div",
+        "cls": "calder-card__config-cell",
+        "right": 448,
+        "left": 301,
+        "width": 146
+      },
+      {
+        "tag": "span",
+        "cls": "label-per-wheel",
+        "right": 458,
+        "left": 399,
+        "width": 58
+      }
+    ],
+    "brokenImages": [
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/files/Silverado-Black_1.png?v=1792635017&width=260"
+      }
+    ],
+    "aspectIssues": [
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/files/calder-201.webp?v=1793622589&width=900",
+        "natural": 1,
+        "rendered": 1.34,
+        "cls": "calder-uc-gal__media-img"
+      },
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/files/calder-201.webp?v=1793622589&width=300",
+        "natural": 1,
+        "rendered": 0.728,
+        "cls": ""
+      },
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/t/6/assets/201-disk-gb.png?v=89349681904372146901793627524",
+        "natural": 1.56,
+        "rendered": 1,
+        "cls": ""
+      },
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/t/6/assets/201-disk-bt.png?v=113323585712417822331793627524",
+        "natural": 1.56,
+        "rendered": 1,
+        "cls": ""
+      },
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/t/6/assets/201-disk-ti.png?v=137998450388110070541793627524",
+        "natural": 1.56,
+        "rendered": 1,
+        "cls": ""
+      },
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/t/6/assets/201-barrel-gb.png?v=114327078231708879501793627524",
+        "natural": 1.56,
+        "rendered": 1,
+        "cls": ""
+      },
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/t/6/assets/201-barrel-gbl.png?v=32162214983647345581793627524",
+        "natural": 1.56,
+        "rendered": 1,
+        "cls": ""
+      },
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/t/6/assets/201-24pcs-ch.png?v=99137525893285061061793627524",
+        "natural": 1.56,
+        "rendered": 1,
+        "cls": ""
+      },
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/t/6/assets/201-24pcs-bk.png?v=158259914684192957471793627524",
+        "natural": 1.56,
+        "rendered": 1,
+        "cls": ""
+      },
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/files/Calder-Wheels-Close-up_2.png?v=1792680391&width=1000",
+        "natural": 1,
+        "rendered": 0.64,
+        "cls": "calder-engineering__hero-img"
+      }
+    ],
+    "tinyTouchTargets": [
+      {
+        "tag": "a",
+        "cls": "skip-to-content-link btn visually-hidden",
+        "text": "Skip to content",
+        "w": 1,
+        "h": 1
+      },
+      {
+        "tag": "a",
+        "cls": "dropdn-link",
+        "text": "",
+        "w": 36,
+        "h": 17
+      },
+      {
+        "tag": "a",
+        "cls": "dropdn-link",
+        "text": "",
+        "w": 36,
+        "h": 17
+      },
+      {
+        "tag": "a",
+        "cls": "dropdn-link",
+        "text": "",
+        "w": 36,
+        "h": 17
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet swiper-pagination-bullet-active",
+        "text": "",
+        "w": 37,
+        "h": 6
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet",
+        "text": "",
+        "w": 16,
+        "h": 6
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet",
+        "text": "",
+        "w": 16,
+        "h": 6
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet",
+        "text": "",
+        "w": 16,
+        "h": 6
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet",
+        "text": "",
+        "w": 16,
+        "h": 6
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet",
+        "text": "",
+        "w": 16,
+        "h": 6
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet",
+        "text": "",
+        "w": 16,
+        "h": 6
+      },
+      {
+        "tag": "a",
+        "cls": "",
+        "text": "Home",
+        "w": 35,
+        "h": 16
+      },
+      {
+        "tag": "a",
+        "cls": "calder-upc__support-link",
+        "text": "Speak With Support — +1-202-555-0158",
+        "w": 252,
+        "h": 16
+      },
+      {
+        "tag": "a",
+        "cls": "",
+        "text": "CLM-01",
+        "w": 69,
+        "h": 21
+      },
+      {
+        "tag": "button",
+        "cls": "prd-quantity-btn prd-quantity-up",
+        "text": "Increase quantity for CLM-01 22&quot; / ",
+        "w": 21,
+        "h": 38
+      },
+      {
+        "tag": "button",
+        "cls": "prd-quantity-btn prd-quantity-down",
+        "text": "Decrease quantity for CLM-01 22&quot; / ",
+        "w": 21,
+        "h": 38
+      },
+      {
+        "tag": "a",
+        "cls": "",
+        "text": "CLM-01",
+        "w": 69,
+        "h": 21
+      },
+      {
+        "tag": "button",
+        "cls": "prd-quantity-btn prd-quantity-up",
+        "text": "Increase quantity for CLM-01 22&quot; / ",
+        "w": 21,
+        "h": 38
+      },
+      {
+        "tag": "button",
+        "cls": "prd-quantity-btn prd-quantity-down",
+        "text": "Decrease quantity for CLM-01 22&quot; / ",
+        "w": 21,
+        "h": 38
+      },
+      {
+        "tag": "a",
+        "cls": "",
+        "text": "CLM-01",
+        "w": 69,
+        "h": 21
+      },
+      {
+        "tag": "button",
+        "cls": "prd-quantity-btn prd-quantity-up",
+        "text": "Increase quantity for CLM-01 22&quot; / ",
+        "w": 21,
+        "h": 38
+      },
+      {
+        "tag": "button",
+        "cls": "prd-quantity-btn prd-quantity-down",
+        "text": "Decrease quantity for CLM-01 22&quot; / ",
+        "w": 21,
+        "h": 38
+      },
+      {
+        "tag": "a",
+        "cls": "",
+        "text": "CLM-01",
+        "w": 69,
+        "h": 21
+      },
+      {
+        "tag": "button",
+        "cls": "prd-quantity-btn prd-quantity-up",
+        "text": "Increase quantity for CLM-01 22&quot; / ",
+        "w": 21,
+        "h": 38
+      },
+      {
+        "tag": "button",
+        "cls": "prd-quantity-btn prd-quantity-down",
+        "text": "Decrease quantity for CLM-01 22&quot; / ",
+        "w": 21,
+        "h": 38
+      }
+    ],
+    "stickyElements": [
+      {
+        "tag": "header",
+        "cls": "shopify-section hdr-wrap",
+        "id": "shopify-section-header",
+        "pos": "sticky",
+        "rect": {
+          "top": 0,
+          "left": 0,
+          "w": 375,
+          "h": 64
+        }
+      },
+      {
+        "tag": "div",
+        "cls": "hdr-mobile-bottom show-mobile scroll-down",
+        "id": "",
+        "pos": "fixed",
+        "rect": {
+          "top": 605,
+          "left": 0,
+          "w": 375,
+          "h": 62
+        }
+      },
+      {
+        "tag": "a",
+        "cls": "back-to-top js-back-to-top compensate-for-scrollbar",
+        "id": "",
+        "pos": "fixed",
+        "rect": {
+          "top": 716,
+          "left": 315,
+          "w": 50,
+          "h": 50
+        }
+      }
+    ]
+  },
+  "m-375-iphone:fitment": {
+    "viewport": {
+      "width": 375,
+      "height": 667
+    },
+    "docWidth": 375,
+    "overflowingElements": [],
+    "brokenImages": [],
+    "aspectIssues": [
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/files/Tahoe-M-2_1.png?v=1792635043&width=768",
+        "natural": 1.781,
+        "rendered": 0.987,
+        "cls": "fitment-finder-hero__image"
+      },
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/files/Silverado-Black_1.png?v=1792635017&width=900",
+        "natural": 1.786,
+        "rendered": 0.962,
+        "cls": "fitment-finder-help-cta__image"
+      }
+    ],
+    "tinyTouchTargets": [
+      {
+        "tag": "a",
+        "cls": "skip-to-content-link btn visually-hidden",
+        "text": "Skip to content",
+        "w": 1,
+        "h": 1
+      },
+      {
+        "tag": "a",
+        "cls": "dropdn-link",
+        "text": "",
+        "w": 36,
+        "h": 17
+      },
+      {
+        "tag": "a",
+        "cls": "dropdn-link",
+        "text": "",
+        "w": 36,
+        "h": 17
+      },
+      {
+        "tag": "a",
+        "cls": "dropdn-link",
+        "text": "",
+        "w": 36,
+        "h": 17
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet swiper-pagination-bullet-active",
+        "text": "",
+        "w": 37,
+        "h": 6
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet",
+        "text": "",
+        "w": 16,
+        "h": 6
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet",
+        "text": "",
+        "w": 16,
+        "h": 6
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet",
+        "text": "",
+        "w": 16,
+        "h": 6
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet",
+        "text": "",
+        "w": 16,
+        "h": 6
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet",
+        "text": "",
+        "w": 16,
+        "h": 6
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet",
+        "text": "",
+        "w": 16,
+        "h": 6
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "All Wheels",
+        "w": 75,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "By Vehicle",
+        "w": 74,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "By Style",
+        "w": 58,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "Accessories",
+        "w": 87,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "Our Story",
+        "w": 68,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "Engineering",
+        "w": 85,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "Gallery",
+        "w": 50,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "Find a Dealer",
+        "w": 94,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "  active top-level-link\n          ",
+        "text": "Fitment Tool",
+        "w": 87,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "Build Your Wheel",
+        "w": 121,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "Vehicle Gallery",
+        "w": 106,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "Wheel Gallery",
+        "w": 99,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "Contact",
+        "w": 56,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "FAQs",
+        "w": 37,
+        "h": 19
+      }
+    ],
+    "stickyElements": [
+      {
+        "tag": "header",
+        "cls": "shopify-section hdr-wrap",
+        "id": "shopify-section-header",
+        "pos": "sticky",
+        "rect": {
+          "top": 0,
+          "left": 0,
+          "w": 375,
+          "h": 64
+        }
+      },
+      {
+        "tag": "div",
+        "cls": "hdr-mobile-bottom show-mobile scroll-down",
+        "id": "",
+        "pos": "fixed",
+        "rect": {
+          "top": 605,
+          "left": 0,
+          "w": 375,
+          "h": 62
+        }
+      },
+      {
+        "tag": "a",
+        "cls": "back-to-top js-back-to-top compensate-for-scrollbar",
+        "id": "",
+        "pos": "fixed",
+        "rect": {
+          "top": 717,
+          "left": 315,
+          "w": 50,
+          "h": 50
+        }
+      }
+    ]
+  },
+  "m-375-iphone:wheel-gallery": {
+    "viewport": {
+      "width": 375,
+      "height": 667
+    },
+    "docWidth": 375,
+    "overflowingElements": [],
+    "brokenImages": [],
+    "aspectIssues": [],
+    "tinyTouchTargets": [
+      {
+        "tag": "a",
+        "cls": "skip-to-content-link btn visually-hidden",
+        "text": "Skip to content",
+        "w": 1,
+        "h": 1
+      },
+      {
+        "tag": "a",
+        "cls": "dropdn-link",
+        "text": "",
+        "w": 36,
+        "h": 17
+      },
+      {
+        "tag": "a",
+        "cls": "dropdn-link",
+        "text": "",
+        "w": 36,
+        "h": 17
+      },
+      {
+        "tag": "a",
+        "cls": "dropdn-link",
+        "text": "",
+        "w": 36,
+        "h": 17
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet swiper-pagination-bullet-active",
+        "text": "",
+        "w": 37,
+        "h": 6
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet",
+        "text": "",
+        "w": 16,
+        "h": 6
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet",
+        "text": "",
+        "w": 16,
+        "h": 6
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet",
+        "text": "",
+        "w": 16,
+        "h": 6
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet",
+        "text": "",
+        "w": 16,
+        "h": 6
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet",
+        "text": "",
+        "w": 16,
+        "h": 6
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet",
+        "text": "",
+        "w": 16,
+        "h": 6
+      },
+      {
+        "tag": "select",
+        "cls": "",
+        "text": "Wheel ModelCLM-01",
+        "w": 110,
+        "h": 23
+      },
+      {
+        "tag": "select",
+        "cls": "",
+        "text": "Diameter",
+        "w": 110,
+        "h": 23
+      },
+      {
+        "tag": "select",
+        "cls": "",
+        "text": "FinishGloss Black",
+        "w": 110,
+        "h": 23
+      },
+      {
+        "tag": "select",
+        "cls": "",
+        "text": "Bolt Pattern",
+        "w": 110,
+        "h": 23
+      },
+      {
+        "tag": "select",
+        "cls": "",
+        "text": "SeriesForged Monoblock",
+        "w": 142,
+        "h": 23
+      },
+      {
+        "tag": "select",
+        "cls": "",
+        "text": "Construction",
+        "w": 110,
+        "h": 23
+      },
+      {
+        "tag": "select",
+        "cls": "",
+        "text": "Wheel Style",
+        "w": 110,
+        "h": 23
+      },
+      {
+        "tag": "select",
+        "cls": "",
+        "text": "FeaturedName A–ZName Z–A",
+        "w": 110,
+        "h": 23
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "All Wheels",
+        "w": 75,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "By Vehicle",
+        "w": 74,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "By Style",
+        "w": 58,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "Accessories",
+        "w": 87,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "Our Story",
+        "w": 68,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "Engineering",
+        "w": 85,
+        "h": 19
+      }
+    ],
+    "stickyElements": [
+      {
+        "tag": "header",
+        "cls": "shopify-section hdr-wrap",
+        "id": "shopify-section-header",
+        "pos": "sticky",
+        "rect": {
+          "top": 0,
+          "left": 0,
+          "w": 375,
+          "h": 64
+        }
+      },
+      {
+        "tag": "div",
+        "cls": "hdr-mobile-bottom show-mobile scroll-down",
+        "id": "",
+        "pos": "fixed",
+        "rect": {
+          "top": 605,
+          "left": 0,
+          "w": 375,
+          "h": 62
+        }
+      },
+      {
+        "tag": "a",
+        "cls": "back-to-top js-back-to-top compensate-for-scrollbar",
+        "id": "",
+        "pos": "fixed",
+        "rect": {
+          "top": 717,
+          "left": 315,
+          "w": 50,
+          "h": 50
+        }
+      }
+    ]
+  },
+  "m-393-iphone:home": {
+    "viewport": {
+      "width": 393,
+      "height": 852
+    },
+    "docWidth": 393,
+    "overflowingElements": [],
+    "brokenImages": [
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/files/F150-Raptor_1.png?v=1792634987&width=390"
+      },
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/files/Black_Silverado_on_a_Desert_Highway.png?v=1792979374&width=600"
+      }
+    ],
+    "aspectIssues": [
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/files/luxury_suv_white.png?v=1793067430&width=696",
+        "natural": 2.136,
+        "rendered": 1,
+        "cls": "fade-up w-100 lazyloaded"
+      },
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/files/full_size_truck_blue.png?v=1793067430&width=1097",
+        "natural": 2.649,
+        "rendered": 1,
+        "cls": "fade-up w-100 lazyloaded"
+      },
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/files/performance_red.png?v=1793067430&width=994",
+        "natural": 3.094,
+        "rendered": 1,
+        "cls": "fade-up w-100 lazyloaded"
+      },
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/files/off_road_olive.png?v=1793067430&width=818",
+        "natural": 2.312,
+        "rendered": 1,
+        "cls": "fade-up w-100 lazyloaded"
+      },
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/files/custom_builds_bronze.png?v=1793067430&width=940",
+        "natural": 2.519,
+        "rendered": 1,
+        "cls": "fade-up w-100 lazyloaded"
+      },
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/files/Calder_Wheel_CNC_Machining_Splash.png?v=1792684383&width=600",
+        "natural": 1,
+        "rendered": 1.241,
+        "cls": "home-engineering__image"
+      },
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/files/scenic-placeholder-01.jpg?v=1790029260&width=1200",
+        "natural": 1.836,
+        "rendered": 0.605,
+        "cls": "home-newsletter__background-image"
+      }
+    ],
+    "tinyTouchTargets": [
+      {
+        "tag": "a",
+        "cls": "skip-to-content-link btn visually-hidden",
+        "text": "Skip to content",
+        "w": 1,
+        "h": 1
+      },
+      {
+        "tag": "a",
+        "cls": "dropdn-link",
+        "text": "",
+        "w": 36,
+        "h": 17
+      },
+      {
+        "tag": "a",
+        "cls": "dropdn-link",
+        "text": "",
+        "w": 36,
+        "h": 17
+      },
+      {
+        "tag": "a",
+        "cls": "dropdn-link",
+        "text": "",
+        "w": 36,
+        "h": 17
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet swiper-pagination-bullet-active",
+        "text": "",
+        "w": 37,
+        "h": 6
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet",
+        "text": "",
+        "w": 16,
+        "h": 6
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet",
+        "text": "",
+        "w": 16,
+        "h": 6
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet",
+        "text": "",
+        "w": 16,
+        "h": 6
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet",
+        "text": "",
+        "w": 16,
+        "h": 6
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet",
+        "text": "",
+        "w": 16,
+        "h": 6
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet",
+        "text": "",
+        "w": 16,
+        "h": 6
+      },
+      {
+        "tag": "a",
+        "cls": "",
+        "text": "CLB-06",
+        "w": 68,
+        "h": 21
+      },
+      {
+        "tag": "button",
+        "cls": "prd-quantity-btn prd-quantity-up",
+        "text": "Increase quantity for CLB-06 22&quot; / ",
+        "w": 21,
+        "h": 38
+      },
+      {
+        "tag": "button",
+        "cls": "prd-quantity-btn prd-quantity-down",
+        "text": "Decrease quantity for CLB-06 22&quot; / ",
+        "w": 21,
+        "h": 38
+      },
+      {
+        "tag": "a",
+        "cls": "",
+        "text": "CLB-07",
+        "w": 66,
+        "h": 21
+      },
+      {
+        "tag": "button",
+        "cls": "prd-quantity-btn prd-quantity-up",
+        "text": "Increase quantity for CLB-07 22&quot; / ",
+        "w": 21,
+        "h": 38
+      },
+      {
+        "tag": "button",
+        "cls": "prd-quantity-btn prd-quantity-down",
+        "text": "Decrease quantity for CLB-07 22&quot; / ",
+        "w": 21,
+        "h": 38
+      },
+      {
+        "tag": "a",
+        "cls": "",
+        "text": "CLM-01",
+        "w": 69,
+        "h": 21
+      },
+      {
+        "tag": "button",
+        "cls": "prd-quantity-btn prd-quantity-up",
+        "text": "Increase quantity for CLM-01 22&quot; / ",
+        "w": 21,
+        "h": 38
+      },
+      {
+        "tag": "button",
+        "cls": "prd-quantity-btn prd-quantity-down",
+        "text": "Decrease quantity for CLM-01 22&quot; / ",
+        "w": 21,
+        "h": 38
+      },
+      {
+        "tag": "a",
+        "cls": "",
+        "text": "CLM-02",
+        "w": 72,
+        "h": 21
+      },
+      {
+        "tag": "button",
+        "cls": "prd-quantity-btn prd-quantity-up",
+        "text": "Increase quantity for CLM-02 22&quot; / ",
+        "w": 21,
+        "h": 38
+      },
+      {
+        "tag": "button",
+        "cls": "prd-quantity-btn prd-quantity-down",
+        "text": "Decrease quantity for CLM-02 22&quot; / ",
+        "w": 21,
+        "h": 38
+      },
+      {
+        "tag": "a",
+        "cls": "",
+        "text": "CLM-03",
+        "w": 72,
+        "h": 21
+      },
+      {
+        "tag": "button",
+        "cls": "prd-quantity-btn prd-quantity-up",
+        "text": "Increase quantity for CLM-03 22&quot; / ",
+        "w": 21,
+        "h": 38
+      }
+    ],
+    "stickyElements": [
+      {
+        "tag": "header",
+        "cls": "shopify-section hdr-wrap",
+        "id": "shopify-section-header",
+        "pos": "sticky",
+        "rect": {
+          "top": 0,
+          "left": 0,
+          "w": 393,
+          "h": 64
+        }
+      },
+      {
+        "tag": "div",
+        "cls": "hdr-mobile-bottom show-mobile scroll-down",
+        "id": "",
+        "pos": "fixed",
+        "rect": {
+          "top": 790,
+          "left": 0,
+          "w": 393,
+          "h": 62
+        }
+      },
+      {
+        "tag": "a",
+        "cls": "back-to-top js-back-to-top compensate-for-scrollbar",
+        "id": "",
+        "pos": "fixed",
+        "rect": {
+          "top": 902,
+          "left": 333,
+          "w": 50,
+          "h": 50
+        }
+      }
+    ]
+  },
+  "m-393-iphone:pdp-clm-01": {
+    "viewport": {
+      "width": 393,
+      "height": 852
+    },
+    "docWidth": 486,
+    "overflowingElements": [
+      {
+        "tag": "span",
+        "cls": "",
+        "right": 527,
+        "left": 373,
+        "width": 154
+      },
+      {
+        "tag": "span",
+        "cls": "visually-hidden",
+        "right": 426,
+        "left": 425,
+        "width": 1
+      },
+      {
+        "tag": "path",
+        "cls": "",
+        "right": 436,
+        "left": 416,
+        "width": 20
+      },
+      {
+        "tag": "img",
+        "cls": "js-prd-img fade-up lazyloaded",
+        "right": 463,
+        "left": 286,
+        "width": 176
+      },
+      {
+        "tag": "div",
+        "cls": "",
+        "right": 400,
+        "left": 350,
+        "width": 50
+      },
+      {
+        "tag": "div",
+        "cls": "calder-card__type",
+        "right": 458,
+        "left": 291,
+        "width": 166
+      },
+      {
+        "tag": "h3",
+        "cls": "calder-card__title",
+        "right": 458,
+        "left": 291,
+        "width": 166
+      },
+      {
+        "tag": "div",
+        "cls": "calder-card__section-label",
+        "right": 458,
+        "left": 291,
+        "width": 166
+      },
+      {
+        "tag": "div",
+        "cls": "calder-card__sizes-values",
+        "right": 458,
+        "left": 291,
+        "width": 166
+      },
+      {
+        "tag": "div",
+        "cls": "calder-card__config-heading",
+        "right": 448,
+        "left": 301,
+        "width": 146
+      },
+      {
+        "tag": "div",
+        "cls": "calder-card__config-cell",
+        "right": 448,
+        "left": 301,
+        "width": 146
+      },
+      {
+        "tag": "span",
+        "cls": "label-per-wheel",
+        "right": 458,
+        "left": 399,
+        "width": 58
+      }
+    ],
+    "brokenImages": [],
+    "aspectIssues": [
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/files/calder-201.webp?v=1793622589&width=1200",
+        "natural": 1,
+        "rendered": 1.344,
+        "cls": "calder-uc-gal__media-img"
+      },
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/files/calder-201.webp?v=1793622589&width=300",
+        "natural": 1,
+        "rendered": 0.772,
+        "cls": ""
+      },
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/t/6/assets/201-disk-gb.png?v=89349681904372146901793627524",
+        "natural": 1.56,
+        "rendered": 1,
+        "cls": ""
+      },
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/t/6/assets/201-disk-bt.png?v=113323585712417822331793627524",
+        "natural": 1.56,
+        "rendered": 1,
+        "cls": ""
+      },
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/t/6/assets/201-disk-ti.png?v=137998450388110070541793627524",
+        "natural": 1.56,
+        "rendered": 1,
+        "cls": ""
+      },
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/t/6/assets/201-barrel-gb.png?v=114327078231708879501793627524",
+        "natural": 1.56,
+        "rendered": 1,
+        "cls": ""
+      },
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/t/6/assets/201-barrel-gbl.png?v=32162214983647345581793627524",
+        "natural": 1.56,
+        "rendered": 1,
+        "cls": ""
+      },
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/t/6/assets/201-24pcs-ch.png?v=99137525893285061061793627524",
+        "natural": 1.56,
+        "rendered": 1,
+        "cls": ""
+      },
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/t/6/assets/201-24pcs-bk.png?v=158259914684192957471793627524",
+        "natural": 1.56,
+        "rendered": 1,
+        "cls": ""
+      },
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/files/Calder-Wheels-Close-up_2.png?v=1792680391&width=1400",
+        "natural": 1,
+        "rendered": 0.673,
+        "cls": "calder-engineering__hero-img"
+      }
+    ],
+    "tinyTouchTargets": [
+      {
+        "tag": "a",
+        "cls": "skip-to-content-link btn visually-hidden",
+        "text": "Skip to content",
+        "w": 1,
+        "h": 1
+      },
+      {
+        "tag": "a",
+        "cls": "dropdn-link",
+        "text": "",
+        "w": 36,
+        "h": 17
+      },
+      {
+        "tag": "a",
+        "cls": "dropdn-link",
+        "text": "",
+        "w": 36,
+        "h": 17
+      },
+      {
+        "tag": "a",
+        "cls": "dropdn-link",
+        "text": "",
+        "w": 36,
+        "h": 17
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet swiper-pagination-bullet-active",
+        "text": "",
+        "w": 37,
+        "h": 6
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet",
+        "text": "",
+        "w": 16,
+        "h": 6
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet",
+        "text": "",
+        "w": 16,
+        "h": 6
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet",
+        "text": "",
+        "w": 16,
+        "h": 6
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet",
+        "text": "",
+        "w": 16,
+        "h": 6
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet",
+        "text": "",
+        "w": 16,
+        "h": 6
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet",
+        "text": "",
+        "w": 16,
+        "h": 6
+      },
+      {
+        "tag": "a",
+        "cls": "",
+        "text": "Home",
+        "w": 35,
+        "h": 16
+      },
+      {
+        "tag": "a",
+        "cls": "calder-upc__support-link",
+        "text": "Speak With Support — +1-202-555-0158",
+        "w": 252,
+        "h": 16
+      },
+      {
+        "tag": "a",
+        "cls": "",
+        "text": "CLM-01",
+        "w": 69,
+        "h": 21
+      },
+      {
+        "tag": "button",
+        "cls": "prd-quantity-btn prd-quantity-up",
+        "text": "Increase quantity for CLM-01 22&quot; / ",
+        "w": 21,
+        "h": 38
+      },
+      {
+        "tag": "button",
+        "cls": "prd-quantity-btn prd-quantity-down",
+        "text": "Decrease quantity for CLM-01 22&quot; / ",
+        "w": 21,
+        "h": 38
+      },
+      {
+        "tag": "a",
+        "cls": "",
+        "text": "CLM-01",
+        "w": 69,
+        "h": 21
+      },
+      {
+        "tag": "button",
+        "cls": "prd-quantity-btn prd-quantity-up",
+        "text": "Increase quantity for CLM-01 22&quot; / ",
+        "w": 21,
+        "h": 38
+      },
+      {
+        "tag": "button",
+        "cls": "prd-quantity-btn prd-quantity-down",
+        "text": "Decrease quantity for CLM-01 22&quot; / ",
+        "w": 21,
+        "h": 38
+      },
+      {
+        "tag": "a",
+        "cls": "",
+        "text": "CLM-01",
+        "w": 69,
+        "h": 21
+      },
+      {
+        "tag": "button",
+        "cls": "prd-quantity-btn prd-quantity-up",
+        "text": "Increase quantity for CLM-01 22&quot; / ",
+        "w": 21,
+        "h": 38
+      },
+      {
+        "tag": "button",
+        "cls": "prd-quantity-btn prd-quantity-down",
+        "text": "Decrease quantity for CLM-01 22&quot; / ",
+        "w": 21,
+        "h": 38
+      },
+      {
+        "tag": "a",
+        "cls": "",
+        "text": "CLM-01",
+        "w": 69,
+        "h": 21
+      },
+      {
+        "tag": "button",
+        "cls": "prd-quantity-btn prd-quantity-up",
+        "text": "Increase quantity for CLM-01 22&quot; / ",
+        "w": 21,
+        "h": 38
+      },
+      {
+        "tag": "button",
+        "cls": "prd-quantity-btn prd-quantity-down",
+        "text": "Decrease quantity for CLM-01 22&quot; / ",
+        "w": 21,
+        "h": 38
+      }
+    ],
+    "stickyElements": [
+      {
+        "tag": "header",
+        "cls": "shopify-section hdr-wrap",
+        "id": "shopify-section-header",
+        "pos": "sticky",
+        "rect": {
+          "top": 0,
+          "left": 0,
+          "w": 393,
+          "h": 64
+        }
+      },
+      {
+        "tag": "div",
+        "cls": "hdr-mobile-bottom show-mobile scroll-down",
+        "id": "",
+        "pos": "fixed",
+        "rect": {
+          "top": 790,
+          "left": 0,
+          "w": 393,
+          "h": 62
+        }
+      },
+      {
+        "tag": "a",
+        "cls": "back-to-top js-back-to-top compensate-for-scrollbar",
+        "id": "",
+        "pos": "fixed",
+        "rect": {
+          "top": 902,
+          "left": 333,
+          "w": 50,
+          "h": 50
+        }
+      }
+    ]
+  },
+  "m-393-iphone:fitment": {
+    "viewport": {
+      "width": 393,
+      "height": 852
+    },
+    "docWidth": 393,
+    "overflowingElements": [],
+    "brokenImages": [],
+    "aspectIssues": [
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/files/Tahoe-M-2_1.png?v=1792635043&width=1200",
+        "natural": 1.778,
+        "rendered": 1.034,
+        "cls": "fitment-finder-hero__image"
+      },
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/files/Silverado-Black_1.png?v=1792635017&width=1200",
+        "natural": 1.778,
+        "rendered": 1.008,
+        "cls": "fitment-finder-help-cta__image"
+      }
+    ],
+    "tinyTouchTargets": [
+      {
+        "tag": "a",
+        "cls": "skip-to-content-link btn visually-hidden",
+        "text": "Skip to content",
+        "w": 1,
+        "h": 1
+      },
+      {
+        "tag": "a",
+        "cls": "dropdn-link",
+        "text": "",
+        "w": 36,
+        "h": 17
+      },
+      {
+        "tag": "a",
+        "cls": "dropdn-link",
+        "text": "",
+        "w": 36,
+        "h": 17
+      },
+      {
+        "tag": "a",
+        "cls": "dropdn-link",
+        "text": "",
+        "w": 36,
+        "h": 17
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet swiper-pagination-bullet-active",
+        "text": "",
+        "w": 37,
+        "h": 6
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet",
+        "text": "",
+        "w": 16,
+        "h": 6
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet",
+        "text": "",
+        "w": 16,
+        "h": 6
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet",
+        "text": "",
+        "w": 16,
+        "h": 6
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet",
+        "text": "",
+        "w": 16,
+        "h": 6
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet",
+        "text": "",
+        "w": 16,
+        "h": 6
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet",
+        "text": "",
+        "w": 16,
+        "h": 6
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "All Wheels",
+        "w": 75,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "By Vehicle",
+        "w": 74,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "By Style",
+        "w": 58,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "Accessories",
+        "w": 87,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "Our Story",
+        "w": 68,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "Engineering",
+        "w": 85,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "Gallery",
+        "w": 50,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "Find a Dealer",
+        "w": 94,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "  active top-level-link\n          ",
+        "text": "Fitment Tool",
+        "w": 87,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "Build Your Wheel",
+        "w": 121,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "Vehicle Gallery",
+        "w": 106,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "Wheel Gallery",
+        "w": 99,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "Contact",
+        "w": 56,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "FAQs",
+        "w": 37,
+        "h": 19
+      }
+    ],
+    "stickyElements": [
+      {
+        "tag": "header",
+        "cls": "shopify-section hdr-wrap",
+        "id": "shopify-section-header",
+        "pos": "sticky",
+        "rect": {
+          "top": 0,
+          "left": 0,
+          "w": 393,
+          "h": 64
+        }
+      },
+      {
+        "tag": "div",
+        "cls": "hdr-mobile-bottom show-mobile scroll-down",
+        "id": "",
+        "pos": "fixed",
+        "rect": {
+          "top": 790,
+          "left": 0,
+          "w": 393,
+          "h": 62
+        }
+      },
+      {
+        "tag": "a",
+        "cls": "back-to-top js-back-to-top compensate-for-scrollbar",
+        "id": "",
+        "pos": "fixed",
+        "rect": {
+          "top": 902,
+          "left": 333,
+          "w": 50,
+          "h": 50
+        }
+      }
+    ]
+  },
+  "m-393-iphone:wheel-gallery": {
+    "viewport": {
+      "width": 393,
+      "height": 852
+    },
+    "docWidth": 393,
+    "overflowingElements": [],
+    "brokenImages": [],
+    "aspectIssues": [],
+    "tinyTouchTargets": [
+      {
+        "tag": "a",
+        "cls": "skip-to-content-link btn visually-hidden",
+        "text": "Skip to content",
+        "w": 1,
+        "h": 1
+      },
+      {
+        "tag": "a",
+        "cls": "dropdn-link",
+        "text": "",
+        "w": 36,
+        "h": 17
+      },
+      {
+        "tag": "a",
+        "cls": "dropdn-link",
+        "text": "",
+        "w": 36,
+        "h": 17
+      },
+      {
+        "tag": "a",
+        "cls": "dropdn-link",
+        "text": "",
+        "w": 36,
+        "h": 17
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet swiper-pagination-bullet-active",
+        "text": "",
+        "w": 37,
+        "h": 6
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet",
+        "text": "",
+        "w": 16,
+        "h": 6
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet",
+        "text": "",
+        "w": 16,
+        "h": 6
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet",
+        "text": "",
+        "w": 16,
+        "h": 6
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet",
+        "text": "",
+        "w": 16,
+        "h": 6
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet",
+        "text": "",
+        "w": 16,
+        "h": 6
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet",
+        "text": "",
+        "w": 16,
+        "h": 6
+      },
+      {
+        "tag": "select",
+        "cls": "",
+        "text": "Wheel ModelCLM-01",
+        "w": 110,
+        "h": 23
+      },
+      {
+        "tag": "select",
+        "cls": "",
+        "text": "Diameter",
+        "w": 110,
+        "h": 23
+      },
+      {
+        "tag": "select",
+        "cls": "",
+        "text": "FinishGloss Black",
+        "w": 110,
+        "h": 23
+      },
+      {
+        "tag": "select",
+        "cls": "",
+        "text": "Bolt Pattern",
+        "w": 110,
+        "h": 23
+      },
+      {
+        "tag": "select",
+        "cls": "",
+        "text": "SeriesForged Monoblock",
+        "w": 142,
+        "h": 23
+      },
+      {
+        "tag": "select",
+        "cls": "",
+        "text": "Construction",
+        "w": 110,
+        "h": 23
+      },
+      {
+        "tag": "select",
+        "cls": "",
+        "text": "Wheel Style",
+        "w": 110,
+        "h": 23
+      },
+      {
+        "tag": "select",
+        "cls": "",
+        "text": "FeaturedName A–ZName Z–A",
+        "w": 110,
+        "h": 23
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "All Wheels",
+        "w": 75,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "By Vehicle",
+        "w": 74,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "By Style",
+        "w": 58,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "Accessories",
+        "w": 87,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "Our Story",
+        "w": 68,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "Engineering",
+        "w": 85,
+        "h": 19
+      }
+    ],
+    "stickyElements": [
+      {
+        "tag": "header",
+        "cls": "shopify-section hdr-wrap",
+        "id": "shopify-section-header",
+        "pos": "sticky",
+        "rect": {
+          "top": 0,
+          "left": 0,
+          "w": 393,
+          "h": 64
+        }
+      },
+      {
+        "tag": "div",
+        "cls": "hdr-mobile-bottom show-mobile scroll-down",
+        "id": "",
+        "pos": "fixed",
+        "rect": {
+          "top": 790,
+          "left": 0,
+          "w": 393,
+          "h": 62
+        }
+      },
+      {
+        "tag": "a",
+        "cls": "back-to-top js-back-to-top compensate-for-scrollbar",
+        "id": "",
+        "pos": "fixed",
+        "rect": {
+          "top": 902,
+          "left": 333,
+          "w": 50,
+          "h": 50
+        }
+      }
+    ]
+  },
+  "t-768-small-tablet:home": {
+    "viewport": {
+      "width": 768,
+      "height": 1024
+    },
+    "docWidth": 768,
+    "overflowingElements": [],
+    "brokenImages": [
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/files/F150-Raptor_1.png?v=1792634987&width=324"
+      },
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/files/Black_Silverado_on_a_Desert_Highway.png?v=1792979374&width=600"
+      }
+    ],
+    "aspectIssues": [
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/files/luxury_suv_white.png?v=1793067430&width=696",
+        "natural": 2.133,
+        "rendered": 1,
+        "cls": "fade-up w-100 lazyloaded"
+      },
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/files/full_size_truck_blue.png?v=1793067430&width=1097",
+        "natural": 2.648,
+        "rendered": 1,
+        "cls": "fade-up w-100 lazyloaded"
+      },
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/files/performance_red.png?v=1793067430&width=994",
+        "natural": 3.097,
+        "rendered": 1,
+        "cls": "fade-up w-100 lazyloaded"
+      },
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/files/off_road_olive.png?v=1793067430&width=818",
+        "natural": 2.313,
+        "rendered": 1,
+        "cls": "fade-up w-100 lazyloaded"
+      },
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/files/custom_builds_bronze.png?v=1793067430&width=940",
+        "natural": 2.518,
+        "rendered": 1,
+        "cls": "fade-up w-100 lazyloaded"
+      },
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/files/Calder_Wheel_CNC_Machining_Splash.png?v=1792684383&width=600",
+        "natural": 1,
+        "rendered": 2.63,
+        "cls": "home-engineering__image"
+      }
+    ],
+    "tinyTouchTargets": [
+      {
+        "tag": "a",
+        "cls": "skip-to-content-link btn visually-hidden",
+        "text": "Skip to content",
+        "w": 1,
+        "h": 1
+      },
+      {
+        "tag": "a",
+        "cls": "dropdn-link",
+        "text": "",
+        "w": 36,
+        "h": 18
+      },
+      {
+        "tag": "a",
+        "cls": "dropdn-link",
+        "text": "",
+        "w": 36,
+        "h": 18
+      },
+      {
+        "tag": "a",
+        "cls": "dropdn-link",
+        "text": "",
+        "w": 36,
+        "h": 18
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet swiper-pagination-bullet-active",
+        "text": "",
+        "w": 37,
+        "h": 6
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet",
+        "text": "",
+        "w": 16,
+        "h": 6
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet",
+        "text": "",
+        "w": 16,
+        "h": 6
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet",
+        "text": "",
+        "w": 16,
+        "h": 6
+      },
+      {
+        "tag": "a",
+        "cls": "",
+        "text": "CLB-06",
+        "w": 68,
+        "h": 21
+      },
+      {
+        "tag": "button",
+        "cls": "prd-quantity-btn prd-quantity-up",
+        "text": "Increase quantity for CLB-06 22&quot; / ",
+        "w": 21,
+        "h": 38
+      },
+      {
+        "tag": "button",
+        "cls": "prd-quantity-btn prd-quantity-down",
+        "text": "Decrease quantity for CLB-06 22&quot; / ",
+        "w": 21,
+        "h": 38
+      },
+      {
+        "tag": "a",
+        "cls": "",
+        "text": "CLB-07",
+        "w": 66,
+        "h": 21
+      },
+      {
+        "tag": "button",
+        "cls": "prd-quantity-btn prd-quantity-up",
+        "text": "Increase quantity for CLB-07 22&quot; / ",
+        "w": 21,
+        "h": 38
+      },
+      {
+        "tag": "button",
+        "cls": "prd-quantity-btn prd-quantity-down",
+        "text": "Decrease quantity for CLB-07 22&quot; / ",
+        "w": 21,
+        "h": 38
+      },
+      {
+        "tag": "a",
+        "cls": "",
+        "text": "CLM-01",
+        "w": 69,
+        "h": 21
+      },
+      {
+        "tag": "button",
+        "cls": "prd-quantity-btn prd-quantity-up",
+        "text": "Increase quantity for CLM-01 22&quot; / ",
+        "w": 21,
+        "h": 38
+      },
+      {
+        "tag": "button",
+        "cls": "prd-quantity-btn prd-quantity-down",
+        "text": "Decrease quantity for CLM-01 22&quot; / ",
+        "w": 21,
+        "h": 38
+      },
+      {
+        "tag": "a",
+        "cls": "",
+        "text": "CLM-02",
+        "w": 72,
+        "h": 21
+      },
+      {
+        "tag": "button",
+        "cls": "prd-quantity-btn prd-quantity-up",
+        "text": "Increase quantity for CLM-02 22&quot; / ",
+        "w": 21,
+        "h": 38
+      },
+      {
+        "tag": "button",
+        "cls": "prd-quantity-btn prd-quantity-down",
+        "text": "Decrease quantity for CLM-02 22&quot; / ",
+        "w": 21,
+        "h": 38
+      },
+      {
+        "tag": "a",
+        "cls": "",
+        "text": "CLM-03",
+        "w": 72,
+        "h": 21
+      },
+      {
+        "tag": "button",
+        "cls": "prd-quantity-btn prd-quantity-up",
+        "text": "Increase quantity for CLM-03 22&quot; / ",
+        "w": 21,
+        "h": 38
+      },
+      {
+        "tag": "button",
+        "cls": "prd-quantity-btn prd-quantity-down",
+        "text": "Decrease quantity for CLM-03 22&quot; / ",
+        "w": 21,
+        "h": 38
+      },
+      {
+        "tag": "a",
+        "cls": "",
+        "text": "CLM-05",
+        "w": 72,
+        "h": 21
+      },
+      {
+        "tag": "button",
+        "cls": "prd-quantity-btn prd-quantity-up",
+        "text": "Increase quantity for CLM-05 22&quot; / ",
+        "w": 21,
+        "h": 38
+      }
+    ],
+    "stickyElements": [
+      {
+        "tag": "header",
+        "cls": "shopify-section hdr-wrap",
+        "id": "shopify-section-header",
+        "pos": "sticky",
+        "rect": {
+          "top": 0,
+          "left": 0,
+          "w": 768,
+          "h": 64
+        }
+      },
+      {
+        "tag": "div",
+        "cls": "hdr-mobile-bottom show-mobile scroll-down",
+        "id": "",
+        "pos": "fixed",
+        "rect": {
+          "top": 962,
+          "left": 0,
+          "w": 768,
+          "h": 62
+        }
+      },
+      {
+        "tag": "a",
+        "cls": "back-to-top js-back-to-top compensate-for-scrollbar",
+        "id": "",
+        "pos": "fixed",
+        "rect": {
+          "top": 1074,
+          "left": 708,
+          "w": 50,
+          "h": 50
+        }
+      }
+    ]
+  },
+  "t-768-small-tablet:pdp-clm-01": {
+    "viewport": {
+      "width": 768,
+      "height": 1024
+    },
+    "docWidth": 768,
+    "overflowingElements": [],
+    "brokenImages": [],
+    "aspectIssues": [
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/files/calder-201.webp?v=1793622589&width=1200",
+        "natural": 1,
+        "rendered": 1.363,
+        "cls": "calder-uc-gal__media-img"
+      },
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/files/calder-201.webp?v=1793622589&width=300",
+        "natural": 1,
+        "rendered": 1.68,
+        "cls": ""
+      },
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/t/6/assets/201-disk-gb.png?v=89349681904372146901793627524",
+        "natural": 1.56,
+        "rendered": 1,
+        "cls": ""
+      },
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/t/6/assets/201-disk-bt.png?v=113323585712417822331793627524",
+        "natural": 1.56,
+        "rendered": 1,
+        "cls": ""
+      },
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/t/6/assets/201-disk-ti.png?v=137998450388110070541793627524",
+        "natural": 1.56,
+        "rendered": 1,
+        "cls": ""
+      },
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/t/6/assets/201-barrel-gb.png?v=114327078231708879501793627524",
+        "natural": 1.56,
+        "rendered": 1,
+        "cls": ""
+      },
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/t/6/assets/201-barrel-gbl.png?v=32162214983647345581793627524",
+        "natural": 1.56,
+        "rendered": 1,
+        "cls": ""
+      },
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/t/6/assets/201-24pcs-ch.png?v=99137525893285061061793627524",
+        "natural": 1.56,
+        "rendered": 1,
+        "cls": ""
+      },
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/t/6/assets/201-24pcs-bk.png?v=158259914684192957471793627524",
+        "natural": 1.56,
+        "rendered": 1,
+        "cls": ""
+      },
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/files/Calder-Wheels-Close-up_2.png?v=1792680391&width=1000",
+        "natural": 1,
+        "rendered": 0.559,
+        "cls": "calder-engineering__hero-img"
+      }
+    ],
+    "tinyTouchTargets": [
+      {
+        "tag": "a",
+        "cls": "skip-to-content-link btn visually-hidden",
+        "text": "Skip to content",
+        "w": 1,
+        "h": 1
+      },
+      {
+        "tag": "a",
+        "cls": "dropdn-link",
+        "text": "",
+        "w": 36,
+        "h": 18
+      },
+      {
+        "tag": "a",
+        "cls": "dropdn-link",
+        "text": "",
+        "w": 36,
+        "h": 18
+      },
+      {
+        "tag": "a",
+        "cls": "dropdn-link",
+        "text": "",
+        "w": 36,
+        "h": 18
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet swiper-pagination-bullet-active",
+        "text": "",
+        "w": 37,
+        "h": 6
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet",
+        "text": "",
+        "w": 16,
+        "h": 6
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet",
+        "text": "",
+        "w": 16,
+        "h": 6
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet",
+        "text": "",
+        "w": 16,
+        "h": 6
+      },
+      {
+        "tag": "a",
+        "cls": "",
+        "text": "Home",
+        "w": 35,
+        "h": 16
+      },
+      {
+        "tag": "a",
+        "cls": "calder-upc__support-link",
+        "text": "Speak With Support — +1-202-555-0158",
+        "w": 252,
+        "h": 16
+      },
+      {
+        "tag": "a",
+        "cls": "",
+        "text": "CLM-01",
+        "w": 69,
+        "h": 21
+      },
+      {
+        "tag": "button",
+        "cls": "prd-quantity-btn prd-quantity-up",
+        "text": "Increase quantity for CLM-01 22&quot; / ",
+        "w": 21,
+        "h": 38
+      },
+      {
+        "tag": "button",
+        "cls": "prd-quantity-btn prd-quantity-down",
+        "text": "Decrease quantity for CLM-01 22&quot; / ",
+        "w": 21,
+        "h": 38
+      },
+      {
+        "tag": "a",
+        "cls": "",
+        "text": "CLM-01",
+        "w": 69,
+        "h": 21
+      },
+      {
+        "tag": "button",
+        "cls": "prd-quantity-btn prd-quantity-up",
+        "text": "Increase quantity for CLM-01 22&quot; / ",
+        "w": 21,
+        "h": 38
+      },
+      {
+        "tag": "button",
+        "cls": "prd-quantity-btn prd-quantity-down",
+        "text": "Decrease quantity for CLM-01 22&quot; / ",
+        "w": 21,
+        "h": 38
+      },
+      {
+        "tag": "a",
+        "cls": "",
+        "text": "CLM-01",
+        "w": 69,
+        "h": 21
+      },
+      {
+        "tag": "button",
+        "cls": "prd-quantity-btn prd-quantity-up",
+        "text": "Increase quantity for CLM-01 22&quot; / ",
+        "w": 21,
+        "h": 38
+      },
+      {
+        "tag": "button",
+        "cls": "prd-quantity-btn prd-quantity-down",
+        "text": "Decrease quantity for CLM-01 22&quot; / ",
+        "w": 21,
+        "h": 38
+      },
+      {
+        "tag": "a",
+        "cls": "",
+        "text": "CLM-01",
+        "w": 69,
+        "h": 21
+      },
+      {
+        "tag": "button",
+        "cls": "prd-quantity-btn prd-quantity-up",
+        "text": "Increase quantity for CLM-01 22&quot; / ",
+        "w": 21,
+        "h": 38
+      },
+      {
+        "tag": "button",
+        "cls": "prd-quantity-btn prd-quantity-down",
+        "text": "Decrease quantity for CLM-01 22&quot; / ",
+        "w": 21,
+        "h": 38
+      },
+      {
+        "tag": "a",
+        "cls": "calder-specialist-cta__method",
+        "text": "Call Us",
+        "w": 89,
+        "h": 21
+      },
+      {
+        "tag": "a",
+        "cls": "calder-specialist-cta__method",
+        "text": "Live Chat",
+        "w": 101,
+        "h": 21
+      },
+      {
+        "tag": "a",
+        "cls": "calder-specialist-cta__method",
+        "text": "Email Us",
+        "w": 97,
+        "h": 21
+      }
+    ],
+    "stickyElements": [
+      {
+        "tag": "header",
+        "cls": "shopify-section hdr-wrap",
+        "id": "shopify-section-header",
+        "pos": "sticky",
+        "rect": {
+          "top": 0,
+          "left": 0,
+          "w": 768,
+          "h": 64
+        }
+      },
+      {
+        "tag": "div",
+        "cls": "hdr-mobile-bottom show-mobile scroll-down",
+        "id": "",
+        "pos": "fixed",
+        "rect": {
+          "top": 962,
+          "left": 0,
+          "w": 768,
+          "h": 62
+        }
+      },
+      {
+        "tag": "a",
+        "cls": "back-to-top js-back-to-top compensate-for-scrollbar",
+        "id": "",
+        "pos": "fixed",
+        "rect": {
+          "top": 1074,
+          "left": 708,
+          "w": 50,
+          "h": 50
+        }
+      }
+    ]
+  },
+  "t-768-small-tablet:fitment": {
+    "viewport": {
+      "width": 768,
+      "height": 1024
+    },
+    "docWidth": 768,
+    "overflowingElements": [],
+    "brokenImages": [],
+    "aspectIssues": [
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/files/Silverado-Black_1.png?v=1792635017&width=1200",
+        "natural": 1.778,
+        "rendered": 2.743,
+        "cls": "fitment-finder-help-cta__image"
+      }
+    ],
+    "tinyTouchTargets": [
+      {
+        "tag": "a",
+        "cls": "skip-to-content-link btn visually-hidden",
+        "text": "Skip to content",
+        "w": 1,
+        "h": 1
+      },
+      {
+        "tag": "a",
+        "cls": "dropdn-link",
+        "text": "",
+        "w": 36,
+        "h": 18
+      },
+      {
+        "tag": "a",
+        "cls": "dropdn-link",
+        "text": "",
+        "w": 36,
+        "h": 18
+      },
+      {
+        "tag": "a",
+        "cls": "dropdn-link",
+        "text": "",
+        "w": 36,
+        "h": 18
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet swiper-pagination-bullet-active",
+        "text": "",
+        "w": 37,
+        "h": 6
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet",
+        "text": "",
+        "w": 16,
+        "h": 6
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet",
+        "text": "",
+        "w": 16,
+        "h": 6
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet",
+        "text": "",
+        "w": 16,
+        "h": 6
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "All Wheels",
+        "w": 75,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "By Vehicle",
+        "w": 74,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "By Style",
+        "w": 58,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "Accessories",
+        "w": 87,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "Our Story",
+        "w": 68,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "Engineering",
+        "w": 85,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "Gallery",
+        "w": 50,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "Find a Dealer",
+        "w": 94,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "  active top-level-link\n          ",
+        "text": "Fitment Tool",
+        "w": 87,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "Build Your Wheel",
+        "w": 121,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "Vehicle Gallery",
+        "w": 106,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "Wheel Gallery",
+        "w": 99,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "Contact",
+        "w": 56,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "FAQs",
+        "w": 37,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "Shipping",
+        "w": 62,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "Returns",
+        "w": 55,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "",
+        "text": "Calder Wheels",
+        "w": 91,
+        "h": 16
+      }
+    ],
+    "stickyElements": [
+      {
+        "tag": "header",
+        "cls": "shopify-section hdr-wrap",
+        "id": "shopify-section-header",
+        "pos": "sticky",
+        "rect": {
+          "top": 0,
+          "left": 0,
+          "w": 768,
+          "h": 64
+        }
+      },
+      {
+        "tag": "div",
+        "cls": "hdr-mobile-bottom show-mobile scroll-down",
+        "id": "",
+        "pos": "fixed",
+        "rect": {
+          "top": 962,
+          "left": 0,
+          "w": 768,
+          "h": 62
+        }
+      },
+      {
+        "tag": "a",
+        "cls": "back-to-top js-back-to-top compensate-for-scrollbar",
+        "id": "",
+        "pos": "fixed",
+        "rect": {
+          "top": 1074,
+          "left": 708,
+          "w": 50,
+          "h": 50
+        }
+      }
+    ]
+  },
+  "t-768-small-tablet:wheel-gallery": {
+    "viewport": {
+      "width": 768,
+      "height": 1024
+    },
+    "docWidth": 768,
+    "overflowingElements": [],
+    "brokenImages": [],
+    "aspectIssues": [],
+    "tinyTouchTargets": [
+      {
+        "tag": "a",
+        "cls": "skip-to-content-link btn visually-hidden",
+        "text": "Skip to content",
+        "w": 1,
+        "h": 1
+      },
+      {
+        "tag": "a",
+        "cls": "dropdn-link",
+        "text": "",
+        "w": 36,
+        "h": 18
+      },
+      {
+        "tag": "a",
+        "cls": "dropdn-link",
+        "text": "",
+        "w": 36,
+        "h": 18
+      },
+      {
+        "tag": "a",
+        "cls": "dropdn-link",
+        "text": "",
+        "w": 36,
+        "h": 18
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet swiper-pagination-bullet-active",
+        "text": "",
+        "w": 37,
+        "h": 6
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet",
+        "text": "",
+        "w": 16,
+        "h": 6
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet",
+        "text": "",
+        "w": 16,
+        "h": 6
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet",
+        "text": "",
+        "w": 16,
+        "h": 6
+      },
+      {
+        "tag": "select",
+        "cls": "",
+        "text": "Wheel ModelCLM-01",
+        "w": 110,
+        "h": 23
+      },
+      {
+        "tag": "select",
+        "cls": "",
+        "text": "Diameter",
+        "w": 110,
+        "h": 23
+      },
+      {
+        "tag": "select",
+        "cls": "",
+        "text": "FinishGloss Black",
+        "w": 110,
+        "h": 23
+      },
+      {
+        "tag": "select",
+        "cls": "",
+        "text": "Bolt Pattern",
+        "w": 110,
+        "h": 23
+      },
+      {
+        "tag": "select",
+        "cls": "",
+        "text": "SeriesForged Monoblock",
+        "w": 142,
+        "h": 23
+      },
+      {
+        "tag": "select",
+        "cls": "",
+        "text": "Construction",
+        "w": 110,
+        "h": 23
+      },
+      {
+        "tag": "select",
+        "cls": "",
+        "text": "Wheel Style",
+        "w": 110,
+        "h": 23
+      },
+      {
+        "tag": "select",
+        "cls": "",
+        "text": "FeaturedName A–ZName Z–A",
+        "w": 110,
+        "h": 23
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "All Wheels",
+        "w": 75,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "By Vehicle",
+        "w": 74,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "By Style",
+        "w": 58,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "Accessories",
+        "w": 87,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "Our Story",
+        "w": 68,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "Engineering",
+        "w": 85,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "Gallery",
+        "w": 50,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "Find a Dealer",
+        "w": 94,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "Fitment Tool",
+        "w": 87,
+        "h": 19
+      }
+    ],
+    "stickyElements": [
+      {
+        "tag": "header",
+        "cls": "shopify-section hdr-wrap",
+        "id": "shopify-section-header",
+        "pos": "sticky",
+        "rect": {
+          "top": 0,
+          "left": 0,
+          "w": 768,
+          "h": 64
+        }
+      },
+      {
+        "tag": "div",
+        "cls": "hdr-mobile-bottom show-mobile scroll-down",
+        "id": "",
+        "pos": "fixed",
+        "rect": {
+          "top": 962,
+          "left": 0,
+          "w": 768,
+          "h": 62
+        }
+      },
+      {
+        "tag": "a",
+        "cls": "back-to-top js-back-to-top compensate-for-scrollbar",
+        "id": "",
+        "pos": "fixed",
+        "rect": {
+          "top": 1074,
+          "left": 708,
+          "w": 50,
+          "h": 50
+        }
+      }
+    ]
+  },
+  "t-1180-tablet-landscape:home": {
+    "viewport": {
+      "width": 1180,
+      "height": 820
+    },
+    "docWidth": 1180,
+    "overflowingElements": [],
+    "brokenImages": [
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/files/Escalade-M-07_1.png?v=1792634950&width=430"
+      },
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/files/Silverado-Black_1.png?v=1792635017&width=430"
+      },
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/files/Range-Rover-M-07_1.png?v=1792635004&width=430"
+      },
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/files/F150-Raptor_1.png?v=1792634987&width=430"
+      },
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/files/Black_Silverado_on_a_Desert_Highway.png?v=1792979374&width=600"
+      }
+    ],
+    "aspectIssues": [
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/files/luxury_suv_white.png?v=1793067430&width=434",
+        "natural": 2.127,
+        "rendered": 1,
+        "cls": "fade-up w-100 lazyloaded"
+      },
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/files/full_size_truck_blue.png?v=1793067430&width=434",
+        "natural": 2.646,
+        "rendered": 1,
+        "cls": "fade-up w-100 lazyloaded"
+      },
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/files/performance_red.png?v=1793067430&width=434",
+        "natural": 3.1,
+        "rendered": 1,
+        "cls": "fade-up w-100 lazyloaded"
+      },
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/files/off_road_olive.png?v=1793067430&width=434",
+        "natural": 2.309,
+        "rendered": 1,
+        "cls": "fade-up w-100 lazyloaded"
+      },
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/files/custom_builds_bronze.png?v=1793067430&width=434",
+        "natural": 2.523,
+        "rendered": 1,
+        "cls": "fade-up w-100 lazyloaded"
+      },
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/files/Calder_Wheel_CNC_Machining_Splash.png?v=1792684383&width=600",
+        "natural": 1,
+        "rendered": 1.342,
+        "cls": "home-engineering__image"
+      },
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/files/scenic-placeholder-01.jpg?v=1790029260&width=2400",
+        "natural": 1.836,
+        "rendered": 3.587,
+        "cls": "home-newsletter__background-image"
+      }
+    ],
+    "tinyTouchTargets": [
+      {
+        "tag": "a",
+        "cls": "skip-to-content-link btn visually-hidden",
+        "text": "Skip to content",
+        "w": 1,
+        "h": 1
+      },
+      {
+        "tag": "a",
+        "cls": "  active top-level-link\n          ",
+        "text": "Home",
+        "w": 75,
+        "h": 20
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "Wheels",
+        "w": 93,
+        "h": 20
+      },
+      {
+        "tag": "a",
+        "cls": "dropdn-link",
+        "text": "",
+        "w": 32,
+        "h": 18
+      },
+      {
+        "tag": "a",
+        "cls": "dropdn-link",
+        "text": "USER ACCOUNT",
+        "w": 32,
+        "h": 18
+      },
+      {
+        "tag": "a",
+        "cls": "dropdn-link",
+        "text": "Wishlist",
+        "w": 32,
+        "h": 18
+      },
+      {
+        "tag": "a",
+        "cls": "dropdn-link minicart-link js-minicart-link ",
+        "text": "Cart\n    Shopping Cart",
+        "w": 32,
+        "h": 18
+      },
+      {
+        "tag": "button",
+        "cls": "prd-quantity-btn prd-quantity-up",
+        "text": "Increase quantity for CLB-06 22&quot; / ",
+        "w": 21,
+        "h": 36
+      },
+      {
+        "tag": "button",
+        "cls": "prd-quantity-btn prd-quantity-down",
+        "text": "Decrease quantity for CLB-06 22&quot; / ",
+        "w": 21,
+        "h": 36
+      },
+      {
+        "tag": "button",
+        "cls": "prd-quantity-btn prd-quantity-up",
+        "text": "Increase quantity for CLB-07 22&quot; / ",
+        "w": 21,
+        "h": 36
+      },
+      {
+        "tag": "button",
+        "cls": "prd-quantity-btn prd-quantity-down",
+        "text": "Decrease quantity for CLB-07 22&quot; / ",
+        "w": 21,
+        "h": 36
+      },
+      {
+        "tag": "button",
+        "cls": "prd-quantity-btn prd-quantity-up",
+        "text": "Increase quantity for CLM-01 22&quot; / ",
+        "w": 21,
+        "h": 36
+      },
+      {
+        "tag": "button",
+        "cls": "prd-quantity-btn prd-quantity-down",
+        "text": "Decrease quantity for CLM-01 22&quot; / ",
+        "w": 21,
+        "h": 36
+      },
+      {
+        "tag": "button",
+        "cls": "prd-quantity-btn prd-quantity-up",
+        "text": "Increase quantity for CLM-02 22&quot; / ",
+        "w": 21,
+        "h": 36
+      },
+      {
+        "tag": "button",
+        "cls": "prd-quantity-btn prd-quantity-down",
+        "text": "Decrease quantity for CLM-02 22&quot; / ",
+        "w": 21,
+        "h": 36
+      },
+      {
+        "tag": "button",
+        "cls": "prd-quantity-btn prd-quantity-up",
+        "text": "Increase quantity for CLM-03 22&quot; / ",
+        "w": 21,
+        "h": 36
+      },
+      {
+        "tag": "button",
+        "cls": "prd-quantity-btn prd-quantity-down",
+        "text": "Decrease quantity for CLM-03 22&quot; / ",
+        "w": 21,
+        "h": 36
+      },
+      {
+        "tag": "button",
+        "cls": "prd-quantity-btn prd-quantity-up",
+        "text": "Increase quantity for CLM-05 22&quot; / ",
+        "w": 21,
+        "h": 36
+      },
+      {
+        "tag": "button",
+        "cls": "prd-quantity-btn prd-quantity-down",
+        "text": "Decrease quantity for CLM-05 22&quot; / ",
+        "w": 21,
+        "h": 36
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet swiper-pagination-bullet-active",
+        "text": "",
+        "w": 37,
+        "h": 6
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet",
+        "text": "",
+        "w": 16,
+        "h": 6
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet",
+        "text": "",
+        "w": 16,
+        "h": 6
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet",
+        "text": "",
+        "w": 16,
+        "h": 6
+      },
+      {
+        "tag": "span",
+        "cls": "swiper-pagination-bullet",
+        "text": "",
+        "w": 16,
+        "h": 6
+      },
+      {
+        "tag": "a",
+        "cls": "gallery-fancybox-link",
+        "text": "",
+        "w": 42,
+        "h": 19
+      }
+    ],
+    "stickyElements": [
+      {
+        "tag": "div",
+        "cls": "hdr-content hdr-content-sticky hide-mobile compensate-for-sc",
+        "id": "Sticky-header",
+        "pos": "fixed",
+        "rect": {
+          "top": -64,
+          "left": 0,
+          "w": 1180,
+          "h": 64
+        }
+      },
+      {
+        "tag": "a",
+        "cls": "back-to-top js-back-to-top compensate-for-scrollbar",
+        "id": "",
+        "pos": "fixed",
+        "rect": {
+          "top": 870,
+          "left": 1080,
+          "w": 50,
+          "h": 50
+        }
+      }
+    ]
+  },
+  "t-1180-tablet-landscape:pdp-clm-01": {
+    "viewport": {
+      "width": 1180,
+      "height": 820
+    },
+    "docWidth": 1180,
+    "overflowingElements": [],
+    "brokenImages": [
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/files/Silverado-Red_1.png?v=1792635018&width=430"
+      },
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/files/Tahoe-M-2_1.png?v=1792635043&width=430"
+      },
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/files/Escalade-V-White_1.png?v=1792634979&width=430"
+      },
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/files/Escalade-V-01_1.png?v=1792634961&width=430"
+      },
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/files/Range-Rover-M-07_1.png?v=1792635004&width=430"
+      },
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/files/Silverado-Black_1.png?v=1792635017&width=430"
+      }
+    ],
+    "aspectIssues": [
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/files/calder-201.webp?v=1793622589&width=300",
+        "natural": 1,
+        "rendered": 1.329,
+        "cls": ""
+      },
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/t/6/assets/201-disk-gb.png?v=89349681904372146901793627524",
+        "natural": 1.56,
+        "rendered": 1,
+        "cls": ""
+      },
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/t/6/assets/201-disk-bt.png?v=113323585712417822331793627524",
+        "natural": 1.56,
+        "rendered": 1,
+        "cls": ""
+      },
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/t/6/assets/201-disk-ti.png?v=137998450388110070541793627524",
+        "natural": 1.56,
+        "rendered": 1,
+        "cls": ""
+      },
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/t/6/assets/201-barrel-gb.png?v=114327078231708879501793627524",
+        "natural": 1.56,
+        "rendered": 1,
+        "cls": ""
+      },
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/t/6/assets/201-barrel-gbl.png?v=32162214983647345581793627524",
+        "natural": 1.56,
+        "rendered": 1,
+        "cls": ""
+      },
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/t/6/assets/201-24pcs-ch.png?v=99137525893285061061793627524",
+        "natural": 1.56,
+        "rendered": 1,
+        "cls": ""
+      },
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/t/6/assets/201-24pcs-bk.png?v=158259914684192957471793627524",
+        "natural": 1.56,
+        "rendered": 1,
+        "cls": ""
+      }
+    ],
+    "tinyTouchTargets": [
+      {
+        "tag": "a",
+        "cls": "skip-to-content-link btn visually-hidden",
+        "text": "Skip to content",
+        "w": 1,
+        "h": 1
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "Home",
+        "w": 75,
+        "h": 20
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "Wheels",
+        "w": 93,
+        "h": 20
+      },
+      {
+        "tag": "a",
+        "cls": "dropdn-link",
+        "text": "",
+        "w": 32,
+        "h": 18
+      },
+      {
+        "tag": "a",
+        "cls": "dropdn-link",
+        "text": "USER ACCOUNT",
+        "w": 32,
+        "h": 18
+      },
+      {
+        "tag": "a",
+        "cls": "dropdn-link",
+        "text": "Wishlist",
+        "w": 32,
+        "h": 18
+      },
+      {
+        "tag": "a",
+        "cls": "dropdn-link minicart-link js-minicart-link ",
+        "text": "Cart\n    Shopping Cart",
+        "w": 32,
+        "h": 18
+      },
+      {
+        "tag": "a",
+        "cls": "",
+        "text": "Home",
+        "w": 35,
+        "h": 16
+      },
+      {
+        "tag": "a",
+        "cls": "calder-upc__support-link",
+        "text": "Speak With Support — +1-202-555-0158",
+        "w": 252,
+        "h": 16
+      },
+      {
+        "tag": "a",
+        "cls": "gallery-fancybox-link",
+        "text": "",
+        "w": 42,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "gallery-fancybox-link",
+        "text": "",
+        "w": 42,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "gallery-fancybox-link",
+        "text": "",
+        "w": 42,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "gallery-fancybox-link",
+        "text": "",
+        "w": 42,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "gallery-fancybox-link",
+        "text": "",
+        "w": 42,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "gallery-fancybox-link",
+        "text": "",
+        "w": 42,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "gallery-fancybox-link",
+        "text": "",
+        "w": 42,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "gallery-fancybox-link",
+        "text": "",
+        "w": 42,
+        "h": 19
+      },
+      {
+        "tag": "button",
+        "cls": "prd-quantity-btn prd-quantity-up",
+        "text": "Increase quantity for CLM-01 22&quot; / ",
+        "w": 21,
+        "h": 36
+      },
+      {
+        "tag": "button",
+        "cls": "prd-quantity-btn prd-quantity-down",
+        "text": "Decrease quantity for CLM-01 22&quot; / ",
+        "w": 21,
+        "h": 36
+      },
+      {
+        "tag": "button",
+        "cls": "prd-quantity-btn prd-quantity-up",
+        "text": "Increase quantity for CLM-01 22&quot; / ",
+        "w": 21,
+        "h": 36
+      },
+      {
+        "tag": "button",
+        "cls": "prd-quantity-btn prd-quantity-down",
+        "text": "Decrease quantity for CLM-01 22&quot; / ",
+        "w": 21,
+        "h": 36
+      },
+      {
+        "tag": "button",
+        "cls": "prd-quantity-btn prd-quantity-up",
+        "text": "Increase quantity for CLM-01 22&quot; / ",
+        "w": 21,
+        "h": 36
+      },
+      {
+        "tag": "button",
+        "cls": "prd-quantity-btn prd-quantity-down",
+        "text": "Decrease quantity for CLM-01 22&quot; / ",
+        "w": 21,
+        "h": 36
+      },
+      {
+        "tag": "button",
+        "cls": "prd-quantity-btn prd-quantity-up",
+        "text": "Increase quantity for CLM-01 22&quot; / ",
+        "w": 21,
+        "h": 36
+      },
+      {
+        "tag": "button",
+        "cls": "prd-quantity-btn prd-quantity-down",
+        "text": "Decrease quantity for CLM-01 22&quot; / ",
+        "w": 21,
+        "h": 36
+      }
+    ],
+    "stickyElements": [
+      {
+        "tag": "div",
+        "cls": "hdr-content hdr-content-sticky hide-mobile compensate-for-sc",
+        "id": "Sticky-header",
+        "pos": "fixed",
+        "rect": {
+          "top": -53,
+          "left": 0,
+          "w": 1180,
+          "h": 64
+        }
+      },
+      {
+        "tag": "div",
+        "cls": "aside-content",
+        "id": "",
+        "pos": "sticky",
+        "rect": {
+          "top": 160,
+          "left": 18,
+          "w": 591,
+          "h": 659
+        }
+      },
+      {
+        "tag": "a",
+        "cls": "back-to-top js-back-to-top compensate-for-scrollbar",
+        "id": "",
+        "pos": "fixed",
+        "rect": {
+          "top": 866,
+          "left": 1080,
+          "w": 50,
+          "h": 50
+        }
+      }
+    ]
+  },
+  "t-1180-tablet-landscape:fitment": {
+    "viewport": {
+      "width": 1180,
+      "height": 820
+    },
+    "docWidth": 1180,
+    "overflowingElements": [],
+    "brokenImages": [],
+    "aspectIssues": [
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/files/Tahoe-M-2_1.png?v=1792635043&width=2400",
+        "natural": 1.78,
+        "rendered": 3.105,
+        "cls": "fitment-finder-hero__image"
+      },
+      {
+        "src": "https://wvpnpr-t7.myshopify.com/cdn/shop/files/Silverado-Black_1.png?v=1792635017&width=1200",
+        "natural": 1.78,
+        "rendered": 3.371,
+        "cls": "fitment-finder-help-cta__image"
+      }
+    ],
+    "tinyTouchTargets": [
+      {
+        "tag": "a",
+        "cls": "skip-to-content-link btn visually-hidden",
+        "text": "Skip to content",
+        "w": 1,
+        "h": 1
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "Home",
+        "w": 75,
+        "h": 20
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "Wheels",
+        "w": 93,
+        "h": 20
+      },
+      {
+        "tag": "a",
+        "cls": "dropdn-link",
+        "text": "",
+        "w": 32,
+        "h": 18
+      },
+      {
+        "tag": "a",
+        "cls": "dropdn-link",
+        "text": "USER ACCOUNT",
+        "w": 32,
+        "h": 18
+      },
+      {
+        "tag": "a",
+        "cls": "dropdn-link",
+        "text": "Wishlist",
+        "w": 32,
+        "h": 18
+      },
+      {
+        "tag": "a",
+        "cls": "dropdn-link minicart-link js-minicart-link ",
+        "text": "Cart\n    Shopping Cart",
+        "w": 32,
+        "h": 18
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "All Wheels",
+        "w": 75,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "By Vehicle",
+        "w": 74,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "By Style",
+        "w": 58,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "Accessories",
+        "w": 87,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "Our Story",
+        "w": 68,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "Engineering",
+        "w": 85,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "Gallery",
+        "w": 50,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "Find a Dealer",
+        "w": 94,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "  active top-level-link\n          ",
+        "text": "Fitment Tool",
+        "w": 87,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "Build Your Wheel",
+        "w": 121,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "Vehicle Gallery",
+        "w": 106,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "Wheel Gallery",
+        "w": 99,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "Contact",
+        "w": 56,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "FAQs",
+        "w": 37,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "Shipping",
+        "w": 62,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "Returns",
+        "w": 55,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "",
+        "text": "Calder Wheels",
+        "w": 91,
+        "h": 16
+      }
+    ],
+    "stickyElements": [
+      {
+        "tag": "div",
+        "cls": "hdr-content hdr-content-sticky hide-mobile compensate-for-sc",
+        "id": "Sticky-header",
+        "pos": "fixed",
+        "rect": {
+          "top": -64,
+          "left": 0,
+          "w": 1180,
+          "h": 64
+        }
+      },
+      {
+        "tag": "a",
+        "cls": "back-to-top js-back-to-top compensate-for-scrollbar",
+        "id": "",
+        "pos": "fixed",
+        "rect": {
+          "top": 870,
+          "left": 1080,
+          "w": 50,
+          "h": 50
+        }
+      }
+    ]
+  },
+  "t-1180-tablet-landscape:wheel-gallery": {
+    "viewport": {
+      "width": 1180,
+      "height": 820
+    },
+    "docWidth": 1180,
+    "overflowingElements": [],
+    "brokenImages": [],
+    "aspectIssues": [],
+    "tinyTouchTargets": [
+      {
+        "tag": "a",
+        "cls": "skip-to-content-link btn visually-hidden",
+        "text": "Skip to content",
+        "w": 1,
+        "h": 1
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "Home",
+        "w": 75,
+        "h": 20
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "Wheels",
+        "w": 93,
+        "h": 20
+      },
+      {
+        "tag": "a",
+        "cls": "dropdn-link",
+        "text": "",
+        "w": 32,
+        "h": 18
+      },
+      {
+        "tag": "a",
+        "cls": "dropdn-link",
+        "text": "USER ACCOUNT",
+        "w": 32,
+        "h": 18
+      },
+      {
+        "tag": "a",
+        "cls": "dropdn-link",
+        "text": "Wishlist",
+        "w": 32,
+        "h": 18
+      },
+      {
+        "tag": "a",
+        "cls": "dropdn-link minicart-link js-minicart-link ",
+        "text": "Cart\n    Shopping Cart",
+        "w": 32,
+        "h": 18
+      },
+      {
+        "tag": "select",
+        "cls": "",
+        "text": "Wheel ModelCLM-01",
+        "w": 110,
+        "h": 23
+      },
+      {
+        "tag": "select",
+        "cls": "",
+        "text": "Diameter",
+        "w": 110,
+        "h": 23
+      },
+      {
+        "tag": "select",
+        "cls": "",
+        "text": "FinishGloss Black",
+        "w": 110,
+        "h": 23
+      },
+      {
+        "tag": "select",
+        "cls": "",
+        "text": "Bolt Pattern",
+        "w": 110,
+        "h": 23
+      },
+      {
+        "tag": "select",
+        "cls": "",
+        "text": "SeriesForged Monoblock",
+        "w": 142,
+        "h": 23
+      },
+      {
+        "tag": "select",
+        "cls": "",
+        "text": "Construction",
+        "w": 110,
+        "h": 23
+      },
+      {
+        "tag": "select",
+        "cls": "",
+        "text": "Wheel Style",
+        "w": 110,
+        "h": 23
+      },
+      {
+        "tag": "select",
+        "cls": "",
+        "text": "FeaturedName A–ZName Z–A",
+        "w": 110,
+        "h": 23
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "All Wheels",
+        "w": 75,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "By Vehicle",
+        "w": 74,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "By Style",
+        "w": 58,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "Accessories",
+        "w": 87,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "Our Story",
+        "w": 68,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "Engineering",
+        "w": 85,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "Gallery",
+        "w": 50,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "Find a Dealer",
+        "w": 94,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "Fitment Tool",
+        "w": 87,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "Build Your Wheel",
+        "w": 121,
+        "h": 19
+      }
+    ],
+    "stickyElements": [
+      {
+        "tag": "div",
+        "cls": "hdr-content hdr-content-sticky hide-mobile compensate-for-sc",
+        "id": "Sticky-header",
+        "pos": "fixed",
+        "rect": {
+          "top": -60,
+          "left": 0,
+          "w": 1180,
+          "h": 64
+        }
+      },
+      {
+        "tag": "a",
+        "cls": "back-to-top js-back-to-top compensate-for-scrollbar",
+        "id": "",
+        "pos": "fixed",
+        "rect": {
+          "top": 870,
+          "left": 1080,
+          "w": 50,
+          "h": 50
+        }
+      }
+    ]
+  }
+}

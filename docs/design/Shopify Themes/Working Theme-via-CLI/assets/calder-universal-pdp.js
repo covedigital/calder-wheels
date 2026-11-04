@@ -27,21 +27,59 @@
     }
     var previewFallback = document.querySelector('[data-calder-uc-fallback]');
     function allLayers(dim) { return Array.prototype.slice.call(document.querySelectorAll('[data-calder-uc-layer="' + dim + '"]')); }
-    var ASSET_MAP = {
-      center: {
-        'gloss-black': { src: assetUrl('wheel-component-center-spun-gloss-black.png'), alt: 'Gloss Black center' },
-        'black-titanium': { src: assetUrl('wheel-component-center-spun-black-tint.png'), alt: 'Black Titanium center' },
-        'titanium-tint': { src: assetUrl('wheel-component-center-spun-titanium-tint.png'), alt: 'Titanium Tint center' }
-      },
-      barrel: {
-        'gloss-black': { src: assetUrl('wheel-component-barrel-spun-gloss-black.png'), alt: 'Gloss Black barrel and lip' },
-        'polished': { src: assetUrl('wheel-component-barrel-spun-polished.png'), alt: 'Polished barrel and lip' }
-      },
-      hardware: {
-        'chrome': { src: assetUrl('finish-bolt-chrome.png'), alt: 'Chrome bolts hardware' },
-        'black': { src: assetUrl('finish-bolt-bk.png'), alt: 'Black bolts hardware' }
-      }
+    /* Design-specific component renders (2026-11-02): every universal design has
+       its own CalderRender layer set —
+         {design_number}-disk-{gb|bt|ti}.png      (center: gloss-black / black-titanium / titanium-tint)
+         {design_number}-barrel-{gb|gbl}.png      (lip: gloss-black / polished)
+         {design_number}-{24|30}pcs-{bk|ch}.png  (hardware: black / chrome; 203 & 205 are 30-bolt)
+       Selected by the registry design_number (resolver.design.designNumber).
+       Designs without a render set fall back to the original generic component
+       images; a 404 on any layer still trips the data-calder-uc-missing path. */
+    var DESIGN_IMAGE_SETS = {
+      201: { pcs: '24pcs' },
+      202: { pcs: '24pcs' },
+      203: { pcs: '30pcs' },
+      205: { pcs: '30pcs' },
+      206: { pcs: '24pcs' },
+      207: { pcs: '24pcs' }
     };
+    function buildAssetMap(designNumber) {
+      var n = String(designNumber == null ? '' : designNumber).trim();
+      var set = DESIGN_IMAGE_SETS[n];
+      if (!set) {
+        return {
+          center: {
+            'gloss-black': { src: assetUrl('wheel-component-center-spun-gloss-black.png'), alt: 'Gloss Black center' },
+            'black-titanium': { src: assetUrl('wheel-component-center-spun-black-tint.png'), alt: 'Black Titanium center' },
+            'titanium-tint': { src: assetUrl('wheel-component-center-spun-titanium-tint.png'), alt: 'Titanium Tint center' }
+          },
+          barrel: {
+            'gloss-black': { src: assetUrl('wheel-component-barrel-spun-gloss-black.png'), alt: 'Gloss Black barrel and lip' },
+            'polished': { src: assetUrl('wheel-component-barrel-spun-polished.png'), alt: 'Polished barrel and lip' }
+          },
+          hardware: {
+            'chrome': { src: assetUrl('finish-bolt-chrome.png'), alt: 'Chrome bolts hardware' },
+            'black': { src: assetUrl('finish-bolt-bk.png'), alt: 'Black bolts hardware' }
+          }
+        };
+      }
+      return {
+        center: {
+          'gloss-black': { src: assetUrl(n + '-disk-gb.png'), alt: 'Gloss Black center' },
+          'black-titanium': { src: assetUrl(n + '-disk-bt.png'), alt: 'Black Titanium center' },
+          'titanium-tint': { src: assetUrl(n + '-disk-ti.png'), alt: 'Titanium Tint center' }
+        },
+        barrel: {
+          'gloss-black': { src: assetUrl(n + '-barrel-gb.png'), alt: 'Gloss Black barrel and lip' },
+          'polished': { src: assetUrl(n + '-barrel-gbl.png'), alt: 'Polished barrel and lip' }
+        },
+        hardware: {
+          'chrome': { src: assetUrl(n + '-' + set.pcs + '-ch.png'), alt: 'Chrome bolts hardware' },
+          'black': { src: assetUrl(n + '-' + set.pcs + '-bk.png'), alt: 'Black bolts hardware' }
+        }
+      };
+    }
+    var ASSET_MAP = buildAssetMap(resolver.design.designNumber);
     function assetUrl(name) {
       var el = document.querySelector('script[src*="calder-universal-pdp.js"], link[href*="calder-universal-controls.css"]');
       if (el) {
@@ -187,10 +225,18 @@
       root.setAttribute('data-calder-uc-source', snap.source);
     }
 
+    /* Gallery reset hook — assigned by the self-contained gallery controller
+       below. Any option click snaps the gallery back to the configurator
+       preview slide (the slide paired with the .calder-uc__thumb-stack
+       thumbnail — normally the first slide). */
+    var galGoToSlide = null;
+    var galPreviewSlideIndex = 0;
+
     root.addEventListener('click', function (evt) {
       var btn = evt.target.closest ? evt.target.closest('[data-calder-uc-option]') : null;
       if (!btn || !root.contains(btn)) { return; }
       evt.preventDefault();
+      if (galGoToSlide) { galGoToSlide(galPreviewSlideIndex); }
       var dim = btn.getAttribute('data-dim');
       var token = btn.getAttribute('data-token');
       if (state.getState().tokens[dim] === token) { return; }
@@ -215,6 +261,33 @@
 
     syncFromState(state.getState());
     state.subscribe(syncFromState);
+
+    /* ── Explore Other Designs (2026-11-02 A) ──
+       The design nav (snippets/calder-design-nav.liquid) links to the other
+       universal PDPs. At click time the CURRENT builder configuration rides
+       along as query params (same namespaced contract as card deep links).
+       The destination PDP validates every param against its own options
+       (calder-pdp-state.js parseUrl) and resets invalid values gracefully,
+       so incompatible options/bolts are never transferred — invalid cells
+       show the pending "Select an option" state instead. The pcd param
+       (bolt pattern carried from listings) passes through unchanged when
+       present; calder-universal-cta.js validates it on the destination. */
+    var designNav = document.querySelector('[data-calder-design-nav]');
+    if (designNav) {
+      designNav.addEventListener('click', function (evt) {
+        var link = evt.target.closest ? evt.target.closest('[data-calder-design-nav-link]') : null;
+        if (!link || !designNav.contains(link)) { return; }
+        var snap = state.getState();
+        var parts = [];
+        DIMS.forEach(function (dim) {
+          if (snap.tokens[dim]) { parts.push(dim + '=' + encodeURIComponent(snap.tokens[dim])); }
+        });
+        var pcd = new URLSearchParams(window.location.search).get('pcd');
+        if (pcd) { parts.push('pcd=' + encodeURIComponent(pcd)); }
+        var qs = parts.join('&');
+        if (qs) { link.setAttribute('href', (link.getAttribute('href') || '').split('?')[0] + '?' + qs); }
+      });
+    }
 
     /* ── Self-contained gallery slider ──
        The universal gallery does not use Swiper or Lumia's ProductGallery
@@ -352,15 +425,44 @@
       galRoot.setAttribute('data-calder-uc-gal-count', String(galSlides.length));
       var strip = galRoot.querySelector('.calder-pdp__thumbs-wrap');
       if (strip) {
+        /* Thumbs are divs — make them keyboard-operable (2026-11-02 E):
+           role=button + tabindex set here so the markup contract stays
+           unchanged; Enter/Space trigger the same slide switch as click. */
+        var thumbNodes = strip.querySelectorAll('[data-media-id]');
+        Array.prototype.forEach.call(thumbNodes, function (thumb) {
+          if (thumb.tagName === 'BUTTON' || thumb.tagName === 'A') { return; }
+          thumb.setAttribute('role', 'button');
+          thumb.setAttribute('tabindex', '0');
+        });
+        var selectThumb = function (id) {
+          for (var i = 0; i < galSlides.length; i++) {
+            if (galSlides[i].getAttribute('data-media-id') === id) { goTo(i); return true; }
+          }
+          return false;
+        };
         strip.addEventListener('click', function (evt) {
           var thumb = evt.target.closest ? evt.target.closest('[data-media-id]') : null;
           if (!thumb || !strip.contains(thumb)) { return; }
-          var id = thumb.getAttribute('data-media-id');
-          for (var i = 0; i < galSlides.length; i++) {
-            if (galSlides[i].getAttribute('data-media-id') === id) { goTo(i); return; }
-          }
+          selectThumb(thumb.getAttribute('data-media-id'));
+        });
+        strip.addEventListener('keydown', function (evt) {
+          if (evt.key !== 'Enter' && evt.key !== ' ') { return; }
+          var thumb = evt.target.closest ? evt.target.closest('[data-media-id]') : null;
+          if (!thumb || !strip.contains(thumb)) { return; }
+          evt.preventDefault();
+          selectThumb(thumb.getAttribute('data-media-id'));
         });
       }
+      /* Expose goTo to the option-click handler: locate the preview slide
+         (the one holding the [data-calder-uc-stack] layer stack) so option
+         clicks always return the gallery to it. Defaults to the first
+         slide when no stack is found. */
+      var previewSlideIdx = 0;
+      for (var psi = 0; psi < galSlides.length; psi++) {
+        if (galSlides[psi].querySelector('[data-calder-uc-stack]')) { previewSlideIdx = psi; break; }
+      }
+      galPreviewSlideIndex = previewSlideIdx;
+      galGoToSlide = goTo;
       goTo(0);
     }
 

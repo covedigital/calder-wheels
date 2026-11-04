@@ -72,6 +72,26 @@
           {{ button_text }}
         </button>
       </div>
+
+      {%- comment -%}
+        Vehicle-mode finish filters (2026-11-02 B): barrel/lip + bolt/hardware
+        options from real product option data (fitment-catalog); fitment-finder.js
+        populates and applies them client-side to the vehicle-matched results.
+      {%- endcomment -%}
+      <div class="fitment-finder__select-row fitment-finder__finish-row">
+        <div class="fitment-finder__select-col">
+          <label class="hf-visually-hidden" for="hf-vehicle-barrel-{{ section.id }}">Barrel finish</label>
+          <select id="hf-vehicle-barrel-{{ section.id }}" class="form-control fitment-finder__select" data-fitment="barrel-finish">
+            <option value="">All Barrel Finishes</option>
+          </select>
+        </div>
+        <div class="fitment-finder__select-col">
+          <label class="hf-visually-hidden" for="hf-vehicle-bolt-{{ section.id }}">Bolt finish</label>
+          <select id="hf-vehicle-bolt-{{ section.id }}" class="form-control fitment-finder__select" data-fitment="bolt-finish">
+            <option value="">All Bolt Finishes</option>
+          </select>
+        </div>
+      </div>
     </div>
 
     </div>
@@ -101,6 +121,15 @@
           <div class="fitment-finder__select-col">
             <label class="hf-visually-hidden" for="hf-bolt-{{ section.id }}">Bolt pattern</label>
             <select id="hf-bolt-{{ section.id }}" class="form-control fitment-finder__select"><option value="">All Bolt Patterns</option></select>
+          </div>
+          {%- comment -%}Style-mode component filters (2026-11-02 B){%- endcomment -%}
+          <div class="fitment-finder__select-col">
+            <label class="hf-visually-hidden" for="hf-barrel-finish-{{ section.id }}">Barrel finish</label>
+            <select id="hf-barrel-finish-{{ section.id }}" class="form-control fitment-finder__select" data-fitment="style-barrel-finish"><option value="">All Barrel Finishes</option></select>
+          </div>
+          <div class="fitment-finder__select-col">
+            <label class="hf-visually-hidden" for="hf-bolt-finish-{{ section.id }}">Bolt finish</label>
+            <select id="hf-bolt-finish-{{ section.id }}" class="form-control fitment-finder__select" data-fitment="style-bolt-finish"><option value="">All Bolt Finishes</option></select>
           </div>
         </div>
         <div class="fitment-finder__action">

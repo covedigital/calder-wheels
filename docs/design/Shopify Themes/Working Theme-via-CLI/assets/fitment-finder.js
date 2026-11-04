@@ -152,40 +152,66 @@
       style: section.querySelector('[id^="hf-panel-style-"]')
     };
 
-    tabs.forEach(function (tab) {
-      tab.addEventListener('click', function () {
-        var target = this.getAttribute('data-tab');
-        tabs.forEach(function (t) {
-          t.classList.remove('hf-fitment__tab--active');
-          t.setAttribute('aria-selected', 'false');
-        });
-        this.classList.add('hf-fitment__tab--active');
-        this.setAttribute('aria-selected', 'true');
-        Object.keys(panels).forEach(function (key) {
-          if (panels[key]) {
-            if (key === target) {
-              panels[key].classList.add('hf-fitment__panel--active');
-              panels[key].removeAttribute('hidden');
-              panels[key].style.setProperty('display', 'block', 'important');
-            } else {
-              panels[key].classList.remove('hf-fitment__panel--active');
-              panels[key].setAttribute('hidden', '');
-              panels[key].style.setProperty('display', 'none', 'important');
-            }
-          }
-        });
-        // Toggle descriptions
-        var descVehicle = section.querySelector('[data-description-vehicle]');
-        var descStyle = section.querySelector('[data-description-style]');
-        if (descVehicle && descStyle) {
-          if (target === 'vehicle') {
-            descVehicle.removeAttribute('hidden');
-            descStyle.setAttribute('hidden', '');
+    function selectTab(tabEl) {
+      var target = tabEl.getAttribute('data-tab');
+      tabs.forEach(function (t) {
+        t.classList.remove('hf-fitment__tab--active');
+        t.setAttribute('aria-selected', 'false');
+        t.setAttribute('tabindex', '-1');
+      });
+      tabEl.classList.add('hf-fitment__tab--active');
+      tabEl.setAttribute('aria-selected', 'true');
+      tabEl.setAttribute('tabindex', '0');
+      Object.keys(panels).forEach(function (key) {
+        if (panels[key]) {
+          if (key === target) {
+            panels[key].classList.add('hf-fitment__panel--active');
+            panels[key].removeAttribute('hidden');
+            panels[key].style.setProperty('display', 'block', 'important');
           } else {
-            descStyle.removeAttribute('hidden');
-            descVehicle.setAttribute('hidden', '');
+            panels[key].classList.remove('hf-fitment__panel--active');
+            panels[key].setAttribute('hidden', '');
+            panels[key].style.setProperty('display', 'none', 'important');
           }
         }
+      });
+      // Toggle descriptions
+      var descVehicle = section.querySelector('[data-description-vehicle]');
+      var descStyle = section.querySelector('[data-description-style]');
+      if (descVehicle && descStyle) {
+        if (target === 'vehicle') {
+          descVehicle.removeAttribute('hidden');
+          descStyle.setAttribute('hidden', '');
+        } else {
+          descStyle.removeAttribute('hidden');
+          descVehicle.setAttribute('hidden', '');
+        }
+      }
+      /* Style mode clears stale vehicle context (2026-11-02 B): switching
+         into the design/style mode ends the vehicle session — saved vehicle
+         cleared, status panel hidden (the fitment guide glue's observer
+         resets the guide card, restores the collection title and Bolt
+         Pattern facet block, and strips the vehicle-driven URL filters
+         through calder:vehicle-cleared). A vehicle selection never leaks
+         into style browsing. */
+      if (target === 'style') {
+        var saved = loadVehicle();
+        if (saved) {
+          clearVehicle();
+          updateStatusPanel(sectionId, null);
+        }
+      }
+    }
+
+    tabs.forEach(function (tab, i) {
+      tab.setAttribute('tabindex', i === 0 ? '0' : '-1');
+      tab.addEventListener('click', function () { selectTab(this); });
+      tab.addEventListener('keydown', function (evt) {
+        if (evt.key !== 'ArrowRight' && evt.key !== 'ArrowLeft') return;
+        evt.preventDefault();
+        var dir = evt.key === 'ArrowRight' ? 1 : -1;
+        var next = tabs[(Array.prototype.indexOf.call(tabs, this) + dir + tabs.length) % tabs.length];
+        if (next) { selectTab(next); next.focus(); }
       });
     });
   }
@@ -196,6 +222,8 @@
     var diameter = document.getElementById('hf-diameter-' + sectionId);
     var bolt = document.getElementById('hf-bolt-' + sectionId);
     var finish = document.getElementById('hf-finish-' + sectionId);
+    var barrelFinish = document.getElementById('hf-barrel-finish-' + sectionId);
+    var boltFinish = document.getElementById('hf-bolt-finish-' + sectionId);
     function populate(select, placeholder, options) {
       if (!select) return;
       select.replaceChildren(new Option(placeholder, ''));
@@ -211,15 +239,36 @@
     var diameterSet = {};
     var finishSet = {};
     var boltSet = {};
+    var barrelFinishSet = {};
+    var boltFinishSet = {};
     catalog.forEach(function (p) {
       var labels = p.diameter_labels && p.diameter_labels.length ? p.diameter_labels : (p.diameters || []).map(function (d) { return d + '"'; });
       labels.forEach(function (raw) {
+        /* Demo-data guard (2026-11-03 client review): demo wheel products
+           carry width-combined size labels like "18 x 8.5", "20 x 9.5",
+           "22 x 10.5". Real Calder diameter option values are pure inch
+           labels (22" / 24" / 26"), so any label containing "x" is demo
+           data and never offered as a Diameter filter. */
+        if (/[x×]/i.test(String(raw))) { return; }
         var n = parseInt(raw);
         if (n > 0) diameterSet[raw] = true;
       });
       (p.finishes || []).forEach(function (f) { if (f) finishSet[f] = true; });
       var bolts = p.bolt_patterns && p.bolt_patterns.length ? p.bolt_patterns : (p.bolt_pattern ? [p.bolt_pattern] : []);
-      bolts.forEach(function (b) { if (b) boltSet[b] = true; });
+      bolts.forEach(function (b) {
+        /* PCD normalization (2026-11-03 client review): the curated data-sheet
+           form ("6x139.7") and the store metafield form ("6x139") describe the
+           same pattern. Normalize to the store's metafield notation (trailing
+           decimals stripped — the convention already used by the vehicle
+           matching) and de-duplicate, so "6x139.7" never appears as its own
+           option and the submitted filter value matches the metafield facet. */
+        if (!b) { return; }
+        boltSet[String(b).trim().toLowerCase().replace(/\.\d+$/, '')] = true;
+      });
+      /* Barrel/lip + bolt/hardware finish options come from the real
+         product option data and the hardware metafield (2026-11-02 B). */
+      (p.barrel_finishes || []).forEach(function (b) { if (b) barrelFinishSet[b] = true; });
+      if (p.bolt_finish) boltFinishSet[p.bolt_finish] = true;
     });
     var dOpts = Object.keys(diameterSet).sort(function (a, b) { return parseFloat(a) - parseFloat(b); });
     if (dOpts.length === 0) { dOpts = ['22"', '24"', '26"']; }
@@ -230,9 +279,12 @@
     var bOpts = Object.keys(boltSet).sort();
     if (bOpts.length === 0) { bOpts = ['5x112', '5x114.3', '5x120', '5x127', '5x130', '5x135', '5x139.7', '6x135', '6x139.7']; }
     populate(bolt, 'All Bolt Patterns', bOpts.map(function (b) { return [b, b]; }));
+    populate(barrelFinish, 'All Barrel Finishes', Object.keys(barrelFinishSet).sort().map(function (b) { return [b, b]; }));
+    populate(boltFinish, 'All Bolt Finishes', Object.keys(boltFinishSet).sort().map(function (b) { return [b, b]; }));
   }
 
   /* ── By Wheel Style Submit ── */
+
   function initStyleSubmit(sectionId) {
     var btn = document.getElementById('hf-style-submit-' + sectionId);
     if (!btn) return;
@@ -241,6 +293,27 @@
       var diameter = document.getElementById('hf-diameter-' + sectionId);
       var finish = document.getElementById('hf-finish-' + sectionId);
       var bolt = document.getElementById('hf-bolt-' + sectionId);
+      var barrelFinish = document.getElementById('hf-barrel-finish-' + sectionId);
+      var boltFinish = document.getElementById('hf-bolt-finish-' + sectionId);
+
+      function appendFinishParams(params) {
+        /* Barrel/lip + bolt/hardware finish filters (2026-11-02 B).
+           Barrel: the option value filters the Barrel & Lip option facet.
+           The store's facet param name for "Barrel & Lip Finish" is not
+           verified offline, so the slug form (barrel-lip-finish, matching
+           the verified center-finish convention) is emitted; Shopify drops
+           unknown filter params without error — confirm the live facet
+           param name in QA and trim the unconfirmed one.
+           Bolt finish: hardware_rivet_finish_options metafield filter
+           (requires the metafield enabled as a storefront filter in
+           Search & Discovery — client action; silently ignored until then). */
+        if (barrelFinish && barrelFinish.value) {
+          params.set('filter.v.option.barrel-lip-finish', barrelFinish.value);
+        }
+        if (boltFinish && boltFinish.value) {
+          params.set('filter.p.m.custom.hardware_rivet_finish_options', boltFinish.value);
+        }
+      }
 
       // On a collection page (theme product grid present), the selected
       // Diameter and Bolt Pattern update the listing's facet filters in
@@ -249,12 +322,14 @@
       // (page title, hidden Bolt Pattern facet block).
       var hasGrid = document.getElementById('product-grid') &&
         document.getElementById('ProductGridContainer');
-      var hasStyleFilters = (diameter && diameter.value) || (bolt && bolt.value);
+      var hasStyleFilters = (diameter && diameter.value) || (bolt && bolt.value) ||
+        (barrelFinish && barrelFinish.value) || (boltFinish && boltFinish.value);
 
       if (hasGrid && hasStyleFilters && !(model && model.value)) {
         var inlineParams = new URLSearchParams();
         if (diameter && diameter.value) inlineParams.set('filter.v.option.diameter', diameter.value);
         if (bolt && bolt.value) inlineParams.set('filter.p.m.custom.bolt_pattern', bolt.value);
+        appendFinishParams(inlineParams);
         var sortBy = new URLSearchParams(window.location.search).get('sort_by');
         if (sortBy) inlineParams.set('sort_by', sortBy);
         document.dispatchEvent(new CustomEvent('calder:style-filters-applied', {
@@ -271,6 +346,7 @@
       if (diameter && diameter.value) params.set('filter.v.option.diameter', diameter.value);
       if (finish && finish.value) params.set('filter.v.option.center-finish', finish.value);
       if (bolt && bolt.value) params.set('filter.p.m.custom.bolt_pattern', bolt.value);
+      appendFinishParams(params);
       var base = model && model.value ? '/search' : '/collections/all-calder-wheels';
       if (model && model.value) params.set('type', 'product');
       window.location.href = base + (params.toString() ? '?' + params.toString() : '');
@@ -594,9 +670,14 @@
           html += '<div class="fitment-finder__results-grid">';
           for (var p = 0; p < result.products.length; p++) {
             var prod = result.products[p];
-            html += '<a href="' + prod.url + '" class="fitment-finder__result-item">';
+            /* Vehicle-mode finish filters (2026-11-02 B): raw option data
+               rides on the card as data attributes; the barrel/bolt selects
+               toggle card visibility without touching fitment matching. */
+            html += '<a href="' + prod.url + '" class="fitment-finder__result-item"' +
+              ' data-barrel="' + ((prod.barrel_finishes || []).join('|') || '') + '"' +
+              ' data-bolt="' + (prod.bolt_finish || '') + '">';
             if (prod.featured_image) {
-              html += '<img src="' + prod.featured_image + '" alt="' + prod.title + '" class="fitment-finder__result-image" loading="lazy">';
+              html += '<img src="' + prod.featured_image + '" class="fitment-finder__result-image" alt="' + prod.title + '" loading="lazy">';
             }
             html += '<span class="fitment-finder__result-title">' + prod.title + '</span>';
             if (prod.price) {
@@ -702,6 +783,68 @@
     });
   }
 
+  /* ── Vehicle-mode finish filters (2026-11-02 B) ──
+     Barrel/lip + bolt/hardware finish selects narrow the already
+     vehicle-matched results client-side. Options come from the real
+     catalog (barrel_finishes option data, bolt_finish metafield).
+     Filtering only HIDES cards — it never widens the fitment match,
+     so incompatible combinations are never presented as purchasable. */
+
+  function initVehicleFinishFilters(sectionId) {
+    var barrelSel = document.getElementById('hf-vehicle-barrel-' + sectionId);
+    var boltSel = document.getElementById('hf-vehicle-bolt-' + sectionId);
+    if (!barrelSel && !boltSel) return;
+
+    var catalog = window.__fitmentCatalog || [];
+    var barrelSet = {};
+    var boltSet = {};
+    catalog.forEach(function (p) {
+      (p.barrel_finishes || []).forEach(function (b) { if (b) barrelSet[b] = true; });
+      if (p.bolt_finish) boltSet[p.bolt_finish] = true;
+    });
+    if (barrelSel) {
+      barrelSel.replaceChildren(new Option('All Barrel Finishes', ''));
+      Object.keys(barrelSet).sort().forEach(function (b) { barrelSel.add(new Option(b, b)); });
+    }
+    if (boltSel) {
+      boltSel.replaceChildren(new Option('All Bolt Finishes', ''));
+      Object.keys(boltSet).sort().forEach(function (b) { boltSel.add(new Option(b, b)); });
+    }
+
+    function applyVehicleFinishFilters() {
+      var resultsDiv = document.getElementById('hf-results-' + sectionId);
+      if (!resultsDiv) return;
+      var items = resultsDiv.querySelectorAll('.fitment-finder__result-item');
+      if (!items.length) return;
+      var barrelVal = barrelSel ? barrelSel.value : '';
+      var boltVal = boltSel ? boltSel.value : '';
+      var visible = 0;
+      items.forEach(function (item) {
+        var barrels = (item.getAttribute('data-barrel') || '').split('|').filter(Boolean);
+        var bolt = item.getAttribute('data-bolt') || '';
+        var show = (!barrelVal || barrels.indexOf(barrelVal) !== -1) &&
+                   (!boltVal || bolt === boltVal);
+        item.style.display = show ? '' : 'none';
+        if (show) visible++;
+      });
+      var countEl = resultsDiv.querySelector('.fitment-finder__results-count');
+      if (countEl) {
+        if (!countEl.getAttribute('data-original')) {
+          countEl.setAttribute('data-original', countEl.textContent);
+        }
+        var original = countEl.getAttribute('data-original');
+        if (barrelVal || boltVal) {
+          countEl.textContent = original + ' — ' + visible + ' shown';
+        } else {
+          countEl.textContent = original;
+        }
+      }
+    }
+
+    if (barrelSel) barrelSel.addEventListener('change', applyVehicleFinishFilters);
+    if (boltSel) boltSel.addEventListener('change', applyVehicleFinishFilters);
+  }
+
   /* ── Section Initialization ── */
 
   function initSection(sectionEl) {
@@ -718,6 +861,7 @@
     initStyleTab(id);
     initStyleSubmit(id);
     initStatusActions(id);
+    initVehicleFinishFilters(id);
 
     var savedVehicle = loadVehicle();
     if (savedVehicle) {

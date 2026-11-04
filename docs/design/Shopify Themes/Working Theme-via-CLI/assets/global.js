@@ -334,6 +334,14 @@ class VariantSelects extends HTMLElement {
     this.removeErrorMessage();
     if (!this.currentVariant) {
       this.toggleAddButton(true, '', true);
+      // Clear only the Calder snapshot; preserve native form/cart state.
+      const calderCard = this.closest('calder-product-card');
+      if (calderCard) {
+        calderCard.dispatchEvent(new CustomEvent('calder:card-configuration-change', {
+          bubbles: true,
+          detail: { variantId: null }
+        }));
+      }
     } else {
       this.updateMedia();
       this.updateURL();
@@ -760,7 +768,14 @@ class VariantSelects extends HTMLElement {
       if (!this.currentVariant.featured_media) return;
 
       if (this.sectionLayout === 'product-card' || this.sectionLayout === 'product-card-horizontal') {
-        this.closest('product-card').updateImage(this.currentVariant.id);
+        /* Calder premium cards (<calder-product-card>) render the same
+           variant-radios picker; they carry no Lumia ProductCard
+           updateImage method, so guard the lookup instead of throwing
+           (2026-11-02 D). Native <product-card> behavior is unchanged. */
+        const calderCard = this.closest('product-card, calder-product-card');
+        if (calderCard && typeof calderCard.updateImage === 'function') {
+          calderCard.updateImage(this.currentVariant.id);
+        }
 
       } else if ('product-card-compact, product-card-wishlist, product-sticky, header-cart-line-item'.includes(this.sectionLayout)) {
         let sizedImageUrl = '';

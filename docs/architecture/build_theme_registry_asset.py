@@ -5,6 +5,13 @@ Outputs (theme assets/):
   - calder-design-registry.js              full registry -> window.CALDER_DESIGN_REGISTRY
   - calder-design-registry-{code}.js       per-design slice -> window.CALDER_DESIGN_REGISTRY
                                             (code: clm01, clm02, clm03, clm05, clb06, clb07)
+  - calder-design-registry-clm06.js        RENAME ALIASES (2026-11-02 G): the universal
+  - calder-design-registry-clm07.js        CLB-06/CLB-07 products were renamed to CLM-06/
+                                            CLM-07 in the live store. If the rename changed the
+                                            custom.design_code metafield, the theme loads the
+                                            registry slice by the new code. The design identity
+                                            (CLB06/CLB07 data-sheet key, part numbers) is
+                                            unchanged — the alias slice carries the same data.
 
 The PDP template should include ONLY its design's slice via a Liquid case on
 product.metafields.custom.design_code (documented for Prompt 04 wiring).
@@ -33,6 +40,9 @@ def emit(path, payload):
 
 def main():
     registry = json.loads(REGISTRY.read_text())
+    # RENAME ALIASES (2026-11-02 G): renamed universal products CLM-06 / CLM-07
+    # resolve the same design slice as their original codes CLB-06 / CLB-07.
+    code_aliases = {'CLB06': ['CLM06'], 'CLB07': ['CLM07']}
     stats = []
     raw, gz = emit(THEME_ASSETS / 'calder-design-registry.js', json.dumps(registry, separators=(',', ':')))
     stats.append(('calder-design-registry.js (full)', raw, gz))
@@ -42,8 +52,12 @@ def main():
         name = f"calder-design-registry-{d['legacy_design_code'].lower()}.js"
         raw, gz = emit(THEME_ASSETS / name, json.dumps(slice_obj, separators=(',', ':')))
         stats.append((name, raw, gz))
+        for alias in code_aliases.get(d['legacy_design_code'], []):
+            alias_name = f'calder-design-registry-{alias.lower()}.js'
+            raw, gz = emit(THEME_ASSETS / alias_name, json.dumps(slice_obj, separators=(',', ':')))
+            stats.append((alias_name + ' (rename alias)', raw, gz))
     for name, raw, gz in stats:
-        print(f'{name:44} {raw/1024:7.1f} KB  gzip {gz/1024:6.1f} KB')
+        print(f'{name:52} {raw/1024:7.1f} KB  gzip {gz/1024:6.1f} KB')
 
 
 if __name__ == '__main__':

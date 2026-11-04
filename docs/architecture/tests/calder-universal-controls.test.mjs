@@ -29,28 +29,58 @@ const fitmentGuideJs = readFileSync(path.join(THEME, 'assets', 'calder-product-f
 const fitmentFormCss = readFileSync(path.join(THEME, 'assets', 'calder-pdp-fitment-form.css'), 'utf8');
 const controllerSrc = readFileSync(path.join(ASSETS, 'calder-universal-pdp.js'), 'utf8');
 
-// ---- 1. image asset mapping: every registry token has a verified existing asset ----
-test('image asset mapping: every token maps to an existing theme asset; alt text matches labels', () => {
+// ---- 1. image asset mapping: per-design render sets + generic fallbacks ----
+test('image asset mapping: every design has its own render set; tokens map to existing assets; fallbacks intact', () => {
   const tokens = registry.option_tokens;
-  const map = {
-    center: { 'gloss-black': 'wheel-component-center-spun-gloss-black.png', 'black-titanium': 'wheel-component-center-spun-black-tint.png', 'titanium-tint': 'wheel-component-center-spun-titanium-tint.png' },
-    barrel: { 'gloss-black': 'wheel-component-barrel-spun-gloss-black.png', 'polished': 'wheel-component-barrel-spun-polished.png' },
-    hardware: { 'chrome': 'finish-bolt-chrome.png', 'black': 'finish-bolt-bk.png' }
-  };
-  for (const dim of ['center', 'barrel', 'hardware']) {
-    assert.deepEqual(Object.keys(map[dim]).sort(), Object.keys(tokens[dim]).sort(), dim + ' tokens fully mapped');
-    for (const [token, file] of Object.entries(map[dim])) {
-      assert.ok(existsSync(path.join(ASSETS, file)), dim + '/' + token + ' asset exists: ' + file);
-      const referenced = gallerySlide.includes(file) || controllerSrc.includes(file) || snippet.includes(file);
-      assert.ok(referenced, 'layer/swatch asset referenced: ' + file);
-      assert.ok(snippet.includes('wheel-component-'), 'initial design uses wheel-component swatch renders');
-      assert.ok(controllerSrc.includes(file), 'controller references ' + file);
-      assert.ok(snippet.includes(`data-token="${token}"`), 'snippet offers token ' + token);
-      assert.ok(snippet.includes(tokens[dim][token]), 'label "' + tokens[dim][token] + '" rendered for ' + token);
+  const PCS = { 201: '24pcs', 202: '24pcs', 203: '30pcs', 205: '30pcs', 206: '24pcs', 207: '24pcs' };
+  for (const d of registry.designs) {
+    const n = String(d.design_number);
+    assert.ok(PCS[n], d.design_id + ' has a hardware pcs count');
+    const map = {
+      center: { 'gloss-black': `${n}-disk-gb.png`, 'black-titanium': `${n}-disk-bt.png`, 'titanium-tint': `${n}-disk-ti.png` },
+      barrel: { 'gloss-black': `${n}-barrel-gb.png`, 'polished': `${n}-barrel-gbl.png` },
+      hardware: { 'chrome': `${n}-${PCS[n]}-ch.png`, 'black': `${n}-${PCS[n]}-bk.png` }
+    };
+    for (const dim of ['center', 'barrel', 'hardware']) {
+      assert.deepEqual(Object.keys(map[dim]).sort(), Object.keys(tokens[dim]).sort(), d.design_id + ' ' + dim + ' tokens fully mapped');
+      for (const [token, file] of Object.entries(map[dim])) {
+        assert.ok(existsSync(path.join(ASSETS, file)), d.design_id + ' ' + dim + '/' + token + ' design asset exists: ' + file);
+      }
     }
   }
-  // known legacy filename mismatch documented: black-titanium -> center-spun-black-tint.png
-  assert.ok(controllerSrc.includes("'black-titanium': { src: assetUrl('wheel-component-center-spun-black-tint.png')"));
+  // controller builds the design set from the registry design_number + pcs table
+  assert.ok(controllerSrc.includes('DESIGN_IMAGE_SETS'), 'controller holds the design -> hardware pcs table');
+  assert.ok(controllerSrc.includes('resolver.design.designNumber'), 'layer set selected by registry design number');
+  for (const frag of ["'-disk-gb.png'", "'-disk-bt.png'", "'-disk-ti.png'", "'-barrel-gb.png'", "'-barrel-gbl.png'"]) {
+    assert.ok(controllerSrc.includes(frag), 'controller builds layer filename ' + frag);
+  }
+  assert.ok(controllerSrc.includes("pcs + '-ch.png'"), 'controller builds hardware chrome filename');
+  assert.ok(controllerSrc.includes("pcs + '-bk.png'"), 'controller builds hardware black filename');
+  // generic fallbacks remain for designs without a render set
+  const fallbacks = [
+    'wheel-component-center-spun-gloss-black.png', 'wheel-component-center-spun-black-tint.png', 'wheel-component-center-spun-titanium-tint.png',
+    'wheel-component-barrel-spun-gloss-black.png', 'wheel-component-barrel-spun-polished.png',
+    'finish-bolt-chrome.png', 'finish-bolt-bk.png'
+  ];
+  for (const file of fallbacks) {
+    assert.ok(existsSync(path.join(ASSETS, file)), 'fallback asset exists: ' + file);
+    assert.ok(controllerSrc.includes(file), 'controller keeps fallback for ' + file);
+  }
+  // snippets render the design's own initial layers/swatches (naming scheme + generic fallback branch)
+  for (const frag of ["'-barrel-gb.png'", "'-disk-gb.png'", "append: ucgs_pcs", "wheel-component-barrel-spun-gloss-black.png"]) {
+    assert.ok(gallerySlide.includes(frag), 'gallery slide builds design layer: ' + frag);
+  }
+  for (const frag of ["'-disk-gb.png'", "'-disk-bt.png'", "'-disk-ti.png'", "'-barrel-gb.png'", "'-barrel-gbl.png'", "append: uc_pcs", 'wheel-component-center-spun-gloss-black.png']) {
+    assert.ok(snippet.includes(frag), 'controls swatch uses design render: ' + frag);
+  }
+  for (const dim of ['center', 'barrel', 'hardware']) {
+    for (const [token] of Object.entries(tokens[dim])) {
+      assert.ok(snippet.includes(`data-token="${token}"`), 'snippet offers token ' + token);
+    }
+  }
+  for (const label of Object.values(tokens.center).concat(Object.values(tokens.barrel), Object.values(tokens.hardware))) {
+    assert.ok(snippet.includes(label), 'label "' + label + '" rendered');
+  }
 });
 
 test('control structure: initial .calder-uc design, 4 radiogroups, preview layers, script order', () => {
@@ -267,10 +297,10 @@ test('controller: selection sync, preview mapping, click + arrow-key wiring, fal
   assert.equal(byToken['diameter/24'].getAttribute('aria-checked'), 'true');
   assert.equal(byToken['diameter/22'].getAttribute('aria-checked'), 'false');
 
-  // preview mapping: barrel layer src should be gloss-black asset for default
-  assert.ok(layers.barrel.getAttribute('src').includes('wheel-component-barrel-spun-gloss-black.png'));
-  assert.ok(layers.center.getAttribute('src').includes('wheel-component-center-spun-gloss-black.png'));
-  assert.ok(layers.hardware.getAttribute('src').includes('finish-bolt-chrome.png'));
+  // preview mapping: CLB-06 -> design number 206 -> design's own render set (default config GB/GB/CH)
+  assert.ok(layers.barrel.getAttribute('src').includes('206-barrel-gb.png'));
+  assert.ok(layers.center.getAttribute('src').includes('206-disk-gb.png'));
+  assert.ok(layers.hardware.getAttribute('src').includes('206-24pcs-ch.png'));
 
   // arrow-key navigation within a group
   const keyEvt = { preventDefault() {}, target: Object.assign(Object.create(byToken['diameter/24']), { closest: () => byToken['diameter/24'] }), key: 'ArrowRight' };

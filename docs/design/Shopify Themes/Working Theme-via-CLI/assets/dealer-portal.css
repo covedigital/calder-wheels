@@ -104,8 +104,8 @@
 
 .dp-topbar__mobile-toggle {
   display: none;
-  width: 36px;
-  height: 36px;
+  width: 44px; /* touch target floor (mobile audit item 7, 2026-11-02) */
+  height: 44px;
   border: none;
   background: transparent;
   cursor: pointer;
@@ -913,6 +913,10 @@
   font-size: 12px;
   color: var(--dp-text-secondary);
   text-decoration: none;
+  /* Touch-target floor (mobile audit item 7, 2026-11-02): inline padding
+     grows the tap area to 44px without changing the table layout. */
+  padding: 12px 8px;
+  margin: -12px -8px;
 }
 
 .dp-table__action:hover {
@@ -1338,10 +1342,10 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  height: 26px;
-  padding: 0 10px;
+  min-height: 44px; /* touch target floor (mobile audit item 7, 2026-11-02) */
+  padding: 0 14px;
   border-radius: 4px;
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 600;
   text-decoration: none;
   white-space: nowrap;
@@ -1631,4 +1635,44 @@
 .dp-card,
 .dp-table {
   /* preserving legacy selectors for existing sections */
+}
+/* ── 14a. Quick-order table + inputs (2026-11-02, mobile audit item 4) ──
+   .dp-table-wrap (dealer-quick-order.liquid) had no CSS anywhere, so the
+   SKU table could not scroll horizontally on phones and the .dp-input
+   controls were unstyled. Mirrors .dp-table-responsive behavior and gives
+   dp-inputs real, tappable styling (16px floor — iOS tap-zoom). */
+.dp-table-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.dp-table-wrap .dp-table {
+  min-width: 640px;
+}
+.dp-input {
+  width: 100%;
+  min-height: 40px;
+  padding: 6px 10px;
+  border: 1px solid var(--dp-border, rgba(255, 255, 255, 0.14));
+  border-radius: 4px;
+  background: var(--dp-control-bg, rgba(255, 255, 255, 0.06));
+  color: inherit;
+  font-family: inherit;
+  font-size: 16px; /* iOS tap-zoom floor (mobile audit item 1) */
+}
+.dp-input::placeholder {
+  color: var(--dp-muted, #8b98a5);
+}
+.dp-input:focus {
+  outline: 2px solid var(--dp-accent, #d99a5c);
+  outline-offset: 1px;
+}
+/* Inline (borderless) dp-inputs inside selects keep the compact look but
+   stay 16px so iOS does not zoom. */
+.dp-table-wrap select.dp-input {
+  font-size: 16px;
+}
+@media (max-width: 900px) {
+  .dp-table-wrap .dp-table {
+    font-size: 12px;
+  }
 }

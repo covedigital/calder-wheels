@@ -14,7 +14,7 @@
       "settings": {
         "calder_min_component_qty": 10,
         "show_breadcrumbs": true,
-        "show_developer_output": true,
+        "show_developer_output": false,
         "section_width": "global",
         "container_max_width": 1178,
         "thumbs": true,

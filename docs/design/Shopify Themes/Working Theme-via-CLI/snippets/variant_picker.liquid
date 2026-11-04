@@ -67,6 +67,18 @@
     assign options_with_values = product.options_with_values
     assign quick_options = quick_options | default: false, allow_false: true
 
+    comment
+      Card option filter (2026-11-02 D): when `card_option_filter` is passed,
+      every option row whose NAME does not contain the filter string renders
+      with the hidden attribute — the row's inputs stay in the DOM and keep
+      their form associations so the existing variant-matching
+      (global.js updateOptions/updateMasterId) continues to see the full
+      option tuple. Used by the Calder premium product card to surface only
+      the Center Finish swatches. Rows are identified by name, never by
+      position. Default blank = unchanged behavior for every other caller.
+    endcomment
+    assign card_option_filter = card_option_filter | default: ''
+
     if quick_options == true
       if product_card_quick_options == 'first'
         if options_with_values.size > 0
@@ -173,7 +185,21 @@
               endif
             -%}
             {%- assign index = forloop.index0 -%}
-            <div class="prd-option tr_d {% if option.values.size == 1 and settings.product_card_single_option == false %}hidden{% endif %}">
+            {%- liquid
+              comment
+                Card option filter (2026-11-02 D): rows whose option name does
+                not contain the filter render hidden — inputs remain in the
+                DOM (form-associated, still matched by the existing variant
+                machinery). blank filter = every caller's current behavior.
+              endcomment
+              assign row_hidden = false
+              if card_option_filter != blank
+                unless option.name contains card_option_filter
+                  assign row_hidden = true
+                endunless
+              endif
+            -%}
+            <div class="prd-option tr_d {% if option.values.size == 1 and settings.product_card_single_option == false %}hidden{% endif %}"{% if row_hidden %} hidden{% endif %}>
               {%- unless quick_options -%}
                 <div class="prd-option-title td_d ">{{ option.name }}:
                   <span data-option-value>{{ option.selected_value }}</span>

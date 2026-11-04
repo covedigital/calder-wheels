@@ -3,15 +3,57 @@
   part='main'  -> the layered preview slide (slide 1; selection-synced).
   part='thumb' -> its matching thumbnail.
   Component detail renders are deliberately NOT gallery content.
+  Initial layers follow each design's registry default configuration
+  (gloss-black lip / gloss-black center / chrome hardware) using that
+  design's own CalderRender set: {design_number}-barrel-gb.png,
+  {design_number}-disk-gb.png, {design_number}-{24|30}pcs-ch.png
+  (203 & 205 are 30-bolt; the other universal designs are 24-bolt).
+  Designs without a render set fall back to the generic component
+  renders; calder-universal-pdp.js re-syncs every layer from the
+  resolver on boot. Render PNGs are 1920x1231 — keep the ratio in the
+  width/height attributes (layers use height:auto CSS).
 {%- endcomment -%}
+{%- liquid
+  assign ucgs_key = product.metafields.custom.design_code.value | default: product.metafields.custom.design_code | default: '' | strip | upcase | remove: '-'
+  assign ucgs_design_number = ''
+  assign ucgs_pcs = ''
+  if ucgs_key == 'CLM01'
+    assign ucgs_design_number = '201'
+    assign ucgs_pcs = '24pcs'
+  elsif ucgs_key == 'CLM02'
+    assign ucgs_design_number = '202'
+    assign ucgs_pcs = '24pcs'
+  elsif ucgs_key == 'CLM03'
+    assign ucgs_design_number = '203'
+    assign ucgs_pcs = '30pcs'
+  elsif ucgs_key == 'CLM05'
+    assign ucgs_design_number = '205'
+    assign ucgs_pcs = '30pcs'
+  elsif ucgs_key == 'CLB06' or ucgs_key == 'CLM06'
+    assign ucgs_design_number = '206'
+    assign ucgs_pcs = '24pcs'
+  elsif ucgs_key == 'CLB07' or ucgs_key == 'CLM07'
+    assign ucgs_design_number = '207'
+    assign ucgs_pcs = '24pcs'
+  endif
+  if ucgs_design_number != blank
+    assign ucgs_barrel_img = ucgs_design_number | append: '-barrel-gb.png'
+    assign ucgs_center_img = ucgs_design_number | append: '-disk-gb.png'
+    assign ucgs_hardware_img = ucgs_design_number | append: '-' | append: ucgs_pcs | append: '-ch.png'
+  else
+    assign ucgs_barrel_img = 'wheel-component-barrel-spun-gloss-black.png'
+    assign ucgs_center_img = 'wheel-component-center-spun-gloss-black.png'
+    assign ucgs_hardware_img = 'wheel-component-hardware-chrome-bolts.png'
+  endif
+-%}
 {%- if part == 'main' -%}
 <div class="calder-uc__gallery-slide" data-media-id="calder-preview-{{ section.id }}" data-media-type="image">
   <div class="image-container ic--bg calder-uc__preview-canvas">
     <div class="calder-uc__preview calder-uc__preview--gallery" data-calder-uc-preview>
       <div class="calder-uc__preview-stack" data-calder-uc-stack>
-        <img class="calder-uc__layer calder-uc__layer--barrel" data-calder-uc-layer="barrel" src="{{ 'wheel-component-barrel-spun-gloss-black.png' | asset_url }}" alt="Gloss Black barrel and lip" width="480" height="480" loading="eager" decoding="async">
-        <img class="calder-uc__layer calder-uc__layer--center" data-calder-uc-layer="center" src="{{ 'wheel-component-center-spun-gloss-black.png' | asset_url }}" alt="Gloss Black center" width="480" height="480" loading="eager" decoding="async">
-        <img class="calder-uc__layer calder-uc__layer--hardware" data-calder-uc-layer="hardware" src="{{ 'wheel-component-hardware-chrome-bolts.png' | asset_url }}" alt="Chrome bolts hardware" width="480" height="480" loading="eager" decoding="async">
+        <img class="calder-uc__layer calder-uc__layer--barrel" data-calder-uc-layer="barrel" src="{{ ucgs_barrel_img | asset_url }}" alt="Gloss Black barrel and lip" width="1920" height="1231" loading="eager" decoding="async">
+        <img class="calder-uc__layer calder-uc__layer--center" data-calder-uc-layer="center" src="{{ ucgs_center_img | asset_url }}" alt="Gloss Black center" width="1920" height="1231" loading="eager" decoding="async">
+        <img class="calder-uc__layer calder-uc__layer--hardware" data-calder-uc-layer="hardware" src="{{ ucgs_hardware_img | asset_url }}" alt="Chrome bolts hardware" width="1920" height="1231" loading="eager" decoding="async">
       </div>
       <p class="calder-uc__preview-fallback" data-calder-uc-fallback hidden>
         Preview unavailable for this finish — selected finish is shown in the options below.
@@ -23,9 +65,9 @@
 <div class="calder-uc-gal__thumb calder-uc__thumb-slide" data-media-id="calder-preview-{{ section.id }}" data-media-type="image">
   <div class="image-container calder-uc__thumb-canvas">
     <div class="calder-uc__thumb-stack" data-calder-uc-thumb-stack aria-hidden="true">
-      <img class="calder-uc__layer" data-calder-uc-layer="barrel" data-calder-uc-thumb-layer="true" src="{{ 'wheel-component-barrel-spun-gloss-black.png' | asset_url }}" alt="" width="110" height="110" loading="lazy" decoding="async">
-      <img class="calder-uc__layer" data-calder-uc-layer="center" data-calder-uc-thumb-layer="true" src="{{ 'wheel-component-center-spun-gloss-black.png' | asset_url }}" alt="" width="110" height="110" loading="lazy" decoding="async">
-      <img class="calder-uc__layer" data-calder-uc-layer="hardware" data-calder-uc-thumb-layer="true" src="{{ 'wheel-component-hardware-chrome-bolts.png' | asset_url }}" alt="" width="110" height="110" loading="lazy" decoding="async">
+      <img class="calder-uc__layer" data-calder-uc-layer="barrel" data-calder-uc-thumb-layer="true" src="{{ ucgs_barrel_img | asset_url }}" alt="" width="1920" height="1231" loading="lazy" decoding="async">
+      <img class="calder-uc__layer" data-calder-uc-layer="center" data-calder-uc-thumb-layer="true" src="{{ ucgs_center_img | asset_url }}" alt="" width="1920" height="1231" loading="lazy" decoding="async">
+      <img class="calder-uc__layer" data-calder-uc-layer="hardware" data-calder-uc-thumb-layer="true" src="{{ ucgs_hardware_img | asset_url }}" alt="" width="1920" height="1231" loading="lazy" decoding="async">
     </div>
   </div>
 </div>

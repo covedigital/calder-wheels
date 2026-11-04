@@ -53,6 +53,20 @@
   {%- assign diameter_labels = '' -%}
   {%- assign widths = '' -%}
   {%- assign finishes = '' -%}
+  {%- assign barrel_finishes = '' -%}
+
+  {%- comment -%}
+    Barrel/lip option position (2026-11-02 B): identified by NAME ('barrel'),
+    not position. Computed once per product; -1 when absent.
+  {%- endcomment -%}
+  {%- assign barrel_opt_index = -1 -%}
+  {%- for opt in product.options -%}
+    {%- if opt contains 'barrel' -%}
+      {%- assign barrel_opt_index = forloop.index0 -%}
+      {%- break -%}
+    {%- endif -%}
+  {%- endfor -%}
+
   {%- for variant in product.variants -%}
     {%- assign opt = variant.option1 | strip -%}
     {%- if opt != blank and opt != 'Default Title' -%}
@@ -82,6 +96,36 @@
         {%- assign finishes = finishes | append: finish -%}
       {%- endunless -%}
     {%- endif -%}
+    {%- comment -%}
+      Barrel/lip option values (2026-11-02 B): option identified by NAME
+      ('barrel'), not position. Combined "Barrel & Lip - Hardware" values on
+      universal products ("Gloss Black Lip - Chrome Bolts") contribute their
+      barrel/lip fragment only. Raw store values are preserved verbatim.
+    {%- endcomment -%}
+    {%- if barrel_opt_index >= 0 -%}
+      {%- assign barrel_val_raw = variant.options[barrel_opt_index] | strip -%}
+      {%- assign barrel_val = barrel_val_raw -%}
+      {%- if barrel_val_raw contains ' Bolts' and barrel_val_raw contains ' Lip' -%}
+        {%- assign barrel_val = barrel_val_raw | split: ' Lip' | first | append: ' Lip' -%}
+      {%- endif -%}
+      {%- if barrel_val != blank and barrel_val != 'Default Title' -%}
+        {%- unless barrel_finishes contains barrel_val -%}
+          {%- if barrel_finishes == '' -%}{%- assign barrel_finishes = barrel_val -%}{%- else -%}{%- assign barrel_finishes = barrel_finishes | append: ',' | append: barrel_val -%}{%- endif -%}
+        {%- endunless -%}
+      {%- endif -%}
+    {%- endif -%}
+  {%- endfor -%}
+
+  {%- comment -%}Bolt/hardware finish (2026-11-02 B): the product's own
+    hardware_rivet_finish_options metafield value, trimmed to the first
+    entry. Missing metafield -> empty list (no fabrication).{%- endcomment -%}
+  {%- assign hw_list = product.metafields.custom.hardware_rivet_finish_options.value | default: '' | strip | split: ',' -%}
+  {%- assign bolt_finish = '' -%}
+  {%- for hw in hw_list -%}
+    {%- assign hw_v = hw | strip -%}
+    {%- if hw_v != blank and bolt_finish == '' -%}
+      {%- assign bolt_finish = hw_v -%}
+    {%- endif -%}
   {%- endfor -%}
 
   {%- unless forloop.first -%},{%- endunless -%}
@@ -100,7 +144,9 @@
     "diameters": [{{ diameters }}],
     "diameter_labels": [{%- assign _dl_arr = diameter_labels | split: ',' -%}{%- assign _dl_seen = '' -%}{%- assign _dl_json = '' -%}{%- for _dl in _dl_arr -%}{%- assign _dlv = _dl | strip -%}{%- assign _s = _dl_seen | split: ',' -%}{%- unless _s contains _dlv -%}{%- assign _dl_seen = _dl_seen | append: _dlv | append: ',' -%}{%- if _dl_json != '' -%}{%- assign _dl_json = _dl_json | append: ',' -%}{%- endif -%}{%- capture _tok_dl -%}{{ _dlv | json }}{%- endcapture -%}{%- assign _dl_json = _dl_json | append: _tok_dl -%}{%- endunless -%}{%- endfor -%}{{ _dl_json }}],
     "widths": [{{ widths }}],
-    "finishes": [{{ finishes | prepend: '"' | append: '"' | replace: ',', '","' }}]
+    "finishes": [{{ finishes | prepend: '"' | append: '"' | replace: ',', '","' }}],
+    "barrel_finishes": [{%- if barrel_finishes != '' -%}{{ barrel_finishes | prepend: '"' | append: '"' | replace: ',', '","' }}{%- endif -%}],
+    "bolt_finish": {{ bolt_finish | json }}
   }
 {%- endfor -%}
 ]

@@ -87,17 +87,8 @@
       {%- endif -%}
     {%- endif -%}
 
-    {%- if request.page_type == 'page' -%}
-      {%- assign _gallery_suffixes = 'vehicle-gallery,wheel-gallery,gallery-build' | split: ',' -%}
-      {%- if _gallery_suffixes contains template.suffix -%}
-        {{ 'calder-gallery.css' | asset_url | stylesheet_tag }}
-      {%- endif -%}
-    {%- endif -%}
-
-    {%- if request.page_type == 'metaobject' and template.suffix == 'gallery_build' -%}
-      {{ 'calder-gallery.css' | asset_url | stylesheet_tag }}
-      {{ 'calder-gallery-detail.css' | asset_url | stylesheet_tag }}
-    {%- endif -%}
+    {%- comment -%}Gallery v1 CSS loads removed 2026-11-01: listing pages and the metaobject
+    gallery_build detail load calder-gallery-v2.css via their sections (audit BUG-02).{%- endcomment -%}
 
     {%- if is_dealer_route -%}
       {{ 'dealer-portal.css' | asset_url | stylesheet_tag }}

@@ -10,27 +10,40 @@
  <div class="cg-tabs"><div class="cg-container"><a href="/pages/vehicle-gallery" {% if gallery_type == 'vehicle' %}aria-current="page"{% endif %}>VEHICLE GALLERY</a><a href="/pages/wheel-gallery" {% if gallery_type == 'wheel' %}aria-current="page"{% endif %}>WHEEL GALLERY</a>{% if section.settings.show_search %}<label class="cg-search"><span class="visually-hidden">Search gallery</span><input data-gallery-search type="search" placeholder="Search wheels, series, or finish..."></label>{% endif %}</div></div>
  <div class="cg-container cg-listing">
  {% if section.settings.show_filters %}{% render 'calder-gallery-filters', filter_keys: filter_keys, filter_labels: filter_labels %}{% endif %}
- {% if section.settings.show_sort %}<label class="cg-sort">SORT BY <select data-gallery-sort><option value="default">Featured</option><option value="az">Name A–Z</option><option value="za">Name Z–A</option></select></label>{% endif %}
+  {% if section.settings.show_sort %}<label class="cg-sort">SORT BY <select data-gallery-sort><option value="default">Featured</option><option value="az">Name A–Z</option><option value="za">Name Z–A</option></select></label>{% endif %}
+  <p class="cg-count" data-gallery-count aria-live="polite"></p>
  <div class="calder-gallery-grid" data-gallery-grid data-items-per-page="{{ section.settings.per_page }}">
- {% assign all_builds = shop.metaobjects.gallery_build.values %}
- {% for build in all_builds %}
- {% assign gtype = build.gallery_type.value | default: build.gallery_type | default: 'vehicle' %}
- {% if gtype == gallery_type %}
- {% assign featured = build.featured_image.value | default: build.featured_image | default: build.gallery_images.value.first %}
- {% assign title = build.wheel_model.value | default: build.wheel_model %}
- {% if gallery_type == 'vehicle' %}{% capture title %}{{ build.vehicle_year.value }} {{ build.vehicle_make.value }} {{ build.vehicle_model.value }}{% endcapture %}{% endif %}
- {% assign detail_link = build.system.url | default: '' %}{% if detail_link == blank %}{% assign detail_link = '/pages/gallery-build?build=' | append: build.system.handle %}{% endif %}
- {% render 'calder-gallery-card', image: featured, heading: title, url: detail_link, make: build.vehicle_make.value, model: build.vehicle_model.value, wheel: build.wheel_model.value, series: build.wheel_series.value, finish: build.overall_finish.value, construction: build.construction.value, size: build.front_wheel_size.value, bolt: build.bolt_pattern.value, style: build.wheel_style.value %}
- {% endif %}{% endfor %}
- {% for block in section.blocks %}
- {% assign item = block.settings %}
- {% capture item_title %}{% if gallery_type == 'vehicle' %}{{ item.vehicle_year }} {{ item.vehicle_make }} {{ item.vehicle_model }}{% else %}{{ item.wheel_model }}{% endif %}{% endcapture %}
- {% assign detail_link = item.detail_url %}{% if item.gallery_handle != blank %}{% assign detail_link = '/pages/gallery-build?build=' | append: item.gallery_handle %}{% endif %}
- {% assign card_finish = item.overall_finish | default: item.finish %}
- {% assign card_size = item.wheel_diameter | default: item.wheel_size %}
- {% render 'calder-gallery-card', image: item.image, heading: item_title, url: detail_link, make: item.vehicle_make, model: item.vehicle_model, wheel: item.wheel_model, series: item.wheel_series, finish: card_finish, construction: item.construction, size: card_size, bolt: item.bolt_pattern, style: item.wheel_style %}
- {% endfor %}
- </div><p class="cg-no-results" data-gallery-empty hidden>No matching gallery items. Try another filter.</p>
+  {% assign all_builds = shop.metaobjects.gallery_build.values %}
+  {% assign gallery_card_count = 0 %}
+  {% for build in all_builds %}
+  {% assign gtype = build.gallery_type.value | default: build.gallery_type | default: 'vehicle' %}
+  {% if gtype == gallery_type %}
+  {% assign featured = build.featured_image.value | default: build.featured_image | default: build.gallery_images.value.first %}
+  {% assign title = build.wheel_model.value | default: build.wheel_model %}
+  {% assign detail_link = build.system.url | default: '' %}{% if detail_link == blank %}{% assign detail_link = '/pages/gallery-build?build=' | append: build.system.handle %}{% endif %}
+  {% comment %}Wheel-design cards deep link to the universal PDP with the shown configuration preselected (audit doc 07 G-1). Unmapped finishes degrade to the design's default configuration; sellability is never implied here.{% endcomment %}
+  {% assign dc = build.design_code.value | default: build.design_code | strip | upcase %}
+  {% assign dk = dc | remove: '-' %}
+  {% if dk == 'CLM01' or dk == 'CLM02' or dk == 'CLM03' or dk == 'CLM05' or dk == 'CLB06' or dk == 'CLB07' or dk == 'CLM06' or dk == 'CLM07' %}
+  {% assign design_slug = dk | downcase | replace: 'clm', 'clm-' | replace: 'clb', 'clb-' %}
+  {% capture ft_qs %}{% render 'calder-finish-tokens', diameter: build.front_wheel_size.value, center_finish: build.center_finish.value, lip_finish: build.lip_finish.value, hardware_finish: build.hardware_finish.value %}{% endcapture %}
+  {% assign detail_link = '/products/calder-' | append: design_slug | append: '-wheel' | append: ft_qs %}
+  {% endif %}
+  {% render 'calder-gallery-card', image: featured, heading: title, url: detail_link, make: build.vehicle_make.value, model: build.vehicle_model.value, wheel: build.wheel_model.value, series: build.wheel_series.value, finish: build.overall_finish.value, construction: build.construction.value, size: build.front_wheel_size.value, bolt: build.bolt_pattern.value, style: build.wheel_style.value %}
+  {% assign gallery_card_count = gallery_card_count | plus: 1 %}
+  {% endif %}{% endfor %}
+  {% for block in section.blocks %}
+  {% assign item = block.settings %}
+  {% capture item_title %}{% if gallery_type == 'vehicle' %}{{ item.vehicle_year }} {{ item.vehicle_make }} {{ item.vehicle_model }}{% else %}{{ item.wheel_model }}{% endif %}{% endcapture %}
+  {% assign detail_link = item.detail_url %}{% if item.gallery_handle != blank %}{% assign detail_link = '/pages/gallery-build?build=' | append: item.gallery_handle %}{% endif %}
+  {% assign card_finish = item.overall_finish | default: item.finish %}
+  {% assign card_size = item.wheel_diameter | default: item.wheel_size %}
+  {% render 'calder-gallery-card', image: item.image, heading: item_title, url: detail_link, make: item.vehicle_make, model: item.vehicle_model, wheel: item.wheel_model, series: item.wheel_series, finish: card_finish, construction: item.construction, size: card_size, bolt: item.bolt_pattern, style: item.wheel_style %}
+  {% assign gallery_card_count = gallery_card_count | plus: 1 %}
+  {% endfor %}
+  </div>
+  <p class="cg-no-results" data-gallery-empty-none {% if gallery_card_count > 0 %}hidden{% endif %}>Design photography is in progress. In the meantime, see real-world installations in the <a href="/pages/vehicle-gallery">Vehicle Gallery →</a></p>
+  <p class="cg-no-results" data-gallery-empty hidden>No designs match those filters. Clear a filter or press RESET to browse every design.</p>
  <nav class="cg-pagination" data-gallery-pagination aria-label="Gallery pages"></nav>
  {% if section.settings.show_cta %}<div class="cg-cta" {% if section.settings.cta_background != blank %}style="background-image:linear-gradient(90deg,rgba(5,16,25,.9),rgba(5,16,25,.5)),url('{{ section.settings.cta_background | image_url: width: 1800 }}')"{% endif %}><h2>{{ section.settings.cta_heading | escape }}</h2><p>{{ section.settings.cta_text | escape }}</p><a href="{{ section.settings.cta_url | default: '/pages/build-your-wheel' }}">{{ section.settings.cta_label | escape }} →</a></div>{% endif %}
  </div>

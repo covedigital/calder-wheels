@@ -64,6 +64,7 @@
 <div class="{% render 'section-class', layout: layout %}" {% render 'section-style', layout: layout %}>
   <div class="{% render 'section-container-class', layout: layout %}">
     {{ 'calder-product-card.css' | asset_url | stylesheet_tag }}
+    <script src="{{ 'calder-product-card.js' | asset_url }}" defer></script>
 
     {%- if section.settings.layout == 'mini_horizontal_banner' -%}
       <div class="row gy-4 {% if section.settings.mini_horizontal_banner_reversed %}flex-row-reverse{% endif %}">

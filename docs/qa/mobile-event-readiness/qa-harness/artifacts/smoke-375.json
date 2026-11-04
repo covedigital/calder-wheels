@@ -1,0 +1,515 @@
+[
+  {
+    "route": "home",
+    "path": "/",
+    "status": 200,
+    "title": "Calder Wheels",
+    "checks": {
+      "brokenImages": {
+        "count": 0,
+        "detail": [],
+        "status": "PASS"
+      },
+      "pageErrors": {
+        "count": 0,
+        "detail": [],
+        "status": "PASS"
+      },
+      "themeConsoleErrors": {
+        "count": 1,
+        "detail": [
+          {
+            "text": "Failed to load resource: the server responded with a status of 401 ()",
+            "location": "https://wvpnpr-t7.myshopify.com/sf_private_access_tokens"
+          }
+        ],
+        "status": "WARN"
+      },
+      "thirdPartyConsoleErrors": {
+        "count": 2,
+        "detail": [
+          {
+            "text": "Access to XMLHttpRequest at 'https://big-skins.com/sales/?version=7.0.1&uuid=&theme_id=44566068&store=https://wvpnpr-t7.myshopify.com&xyz=infoportions34gizmotrims.com&zzz=' from origin 'https://wvpnpr-t7.myshopify.com' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+            "location": "https://wvpnpr-t7.myshopify.com/"
+          },
+          {
+            "text": "Failed to load resource: net::ERR_FAILED",
+            "location": "https://big-skins.com/sales/?version=7.0.1&uuid=&theme_id=44566068&store=https://wvpnpr-t7.myshopify.com&xyz=infoportions34gizmotrims.com&zzz="
+          }
+        ],
+        "status": "INFO"
+      },
+      "themeFailedRequests": {
+        "count": 0,
+        "detail": [],
+        "status": "PASS"
+      },
+      "httpErrors": {
+        "count": 1,
+        "detail": [
+          {
+            "url": "https://wvpnpr-t7.myshopify.com/sf_private_access_tokens",
+            "status": 401
+          }
+        ],
+        "status": "WARN"
+      }
+    }
+  },
+  {
+    "route": "collection-wheels",
+    "path": "/collections/wheels",
+    "status": 200,
+    "title": "All Calder Wheels",
+    "checks": {
+      "brokenImages": {
+        "count": 0,
+        "detail": [],
+        "status": "PASS"
+      },
+      "pageErrors": {
+        "count": 0,
+        "detail": [],
+        "status": "PASS"
+      },
+      "themeConsoleErrors": {
+        "count": 1,
+        "detail": [
+          {
+            "text": "Failed to load resource: the server responded with a status of 401 ()",
+            "location": "https://wvpnpr-t7.myshopify.com/sf_private_access_tokens"
+          }
+        ],
+        "status": "WARN"
+      },
+      "thirdPartyConsoleErrors": {
+        "count": 2,
+        "detail": [
+          {
+            "text": "Access to XMLHttpRequest at 'https://big-skins.com/sales/?version=7.0.1&uuid=&theme_id=44566068&store=https://wvpnpr-t7.myshopify.com&xyz=infoportions34gizmotrims.com&zzz=' from origin 'https://wvpnpr-t7.myshopify.com' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+            "location": "https://wvpnpr-t7.myshopify.com/collections/wheels"
+          },
+          {
+            "text": "Failed to load resource: net::ERR_FAILED",
+            "location": "https://big-skins.com/sales/?version=7.0.1&uuid=&theme_id=44566068&store=https://wvpnpr-t7.myshopify.com&xyz=infoportions34gizmotrims.com&zzz="
+          }
+        ],
+        "status": "INFO"
+      },
+      "themeFailedRequests": {
+        "count": 0,
+        "detail": [],
+        "status": "PASS"
+      },
+      "httpErrors": {
+        "count": 1,
+        "detail": [
+          {
+            "url": "https://wvpnpr-t7.myshopify.com/sf_private_access_tokens",
+            "status": 401
+          }
+        ],
+        "status": "WARN"
+      }
+    }
+  },
+  {
+    "route": "pdp-clm-01",
+    "path": "/products/calder-clm-01-wheel",
+    "status": 200,
+    "title": "CLM-01 Spun Forged SUV Wheel – Calder Wheels",
+    "checks": {
+      "brokenImages": {
+        "count": 0,
+        "detail": [],
+        "status": "PASS"
+      },
+      "pageErrors": {
+        "count": 0,
+        "detail": [],
+        "status": "PASS"
+      },
+      "themeConsoleErrors": {
+        "count": 1,
+        "detail": [
+          {
+            "text": "Failed to load resource: the server responded with a status of 401 ()",
+            "location": "https://wvpnpr-t7.myshopify.com/sf_private_access_tokens"
+          }
+        ],
+        "status": "WARN"
+      },
+      "thirdPartyConsoleErrors": {
+        "count": 2,
+        "detail": [
+          {
+            "text": "Access to XMLHttpRequest at 'https://big-skins.com/sales/?version=7.0.1&uuid=&theme_id=44566068&store=https://wvpnpr-t7.myshopify.com&xyz=infoportions34gizmotrims.com&zzz=' from origin 'https://wvpnpr-t7.myshopify.com' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+            "location": "https://wvpnpr-t7.myshopify.com/products/calder-clm-01-wheel"
+          },
+          {
+            "text": "Failed to load resource: net::ERR_FAILED",
+            "location": "https://big-skins.com/sales/?version=7.0.1&uuid=&theme_id=44566068&store=https://wvpnpr-t7.myshopify.com&xyz=infoportions34gizmotrims.com&zzz="
+          }
+        ],
+        "status": "INFO"
+      },
+      "themeFailedRequests": {
+        "count": 0,
+        "detail": [],
+        "status": "PASS"
+      },
+      "httpErrors": {
+        "count": 1,
+        "detail": [
+          {
+            "url": "https://wvpnpr-t7.myshopify.com/sf_private_access_tokens",
+            "status": 401
+          }
+        ],
+        "status": "WARN"
+      }
+    }
+  },
+  {
+    "route": "pdp-clm-06",
+    "path": "/products/calder-clm-06-wheel",
+    "status": 200,
+    "title": "CLM-06 Spun Forged SUV Wheel – Calder Wheels",
+    "checks": {
+      "brokenImages": {
+        "count": 0,
+        "detail": [],
+        "status": "PASS"
+      },
+      "pageErrors": {
+        "count": 0,
+        "detail": [],
+        "status": "PASS"
+      },
+      "themeConsoleErrors": {
+        "count": 1,
+        "detail": [
+          {
+            "text": "Failed to load resource: the server responded with a status of 401 ()",
+            "location": "https://wvpnpr-t7.myshopify.com/sf_private_access_tokens"
+          }
+        ],
+        "status": "WARN"
+      },
+      "thirdPartyConsoleErrors": {
+        "count": 2,
+        "detail": [
+          {
+            "text": "Access to XMLHttpRequest at 'https://big-skins.com/sales/?version=7.0.1&uuid=&theme_id=44566068&store=https://wvpnpr-t7.myshopify.com&xyz=infoportions34gizmotrims.com&zzz=' from origin 'https://wvpnpr-t7.myshopify.com' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+            "location": "https://wvpnpr-t7.myshopify.com/products/calder-clm-06-wheel"
+          },
+          {
+            "text": "Failed to load resource: net::ERR_FAILED",
+            "location": "https://big-skins.com/sales/?version=7.0.1&uuid=&theme_id=44566068&store=https://wvpnpr-t7.myshopify.com&xyz=infoportions34gizmotrims.com&zzz="
+          }
+        ],
+        "status": "INFO"
+      },
+      "themeFailedRequests": {
+        "count": 0,
+        "detail": [],
+        "status": "PASS"
+      },
+      "httpErrors": {
+        "count": 1,
+        "detail": [
+          {
+            "url": "https://wvpnpr-t7.myshopify.com/sf_private_access_tokens",
+            "status": 401
+          }
+        ],
+        "status": "WARN"
+      }
+    }
+  },
+  {
+    "route": "fitment",
+    "path": "/pages/fitment",
+    "status": 200,
+    "title": "Fitment Finder – Calder Wheels",
+    "checks": {
+      "brokenImages": {
+        "count": 0,
+        "detail": [],
+        "status": "PASS"
+      },
+      "pageErrors": {
+        "count": 0,
+        "detail": [],
+        "status": "PASS"
+      },
+      "themeConsoleErrors": {
+        "count": 1,
+        "detail": [
+          {
+            "text": "Failed to load resource: the server responded with a status of 401 ()",
+            "location": "https://wvpnpr-t7.myshopify.com/sf_private_access_tokens"
+          }
+        ],
+        "status": "WARN"
+      },
+      "thirdPartyConsoleErrors": {
+        "count": 2,
+        "detail": [
+          {
+            "text": "Access to XMLHttpRequest at 'https://big-skins.com/sales/?version=7.0.1&uuid=&theme_id=44566068&store=https://wvpnpr-t7.myshopify.com&xyz=infoportions34gizmotrims.com&zzz=' from origin 'https://wvpnpr-t7.myshopify.com' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+            "location": "https://wvpnpr-t7.myshopify.com/pages/fitment"
+          },
+          {
+            "text": "Failed to load resource: net::ERR_FAILED",
+            "location": "https://big-skins.com/sales/?version=7.0.1&uuid=&theme_id=44566068&store=https://wvpnpr-t7.myshopify.com&xyz=infoportions34gizmotrims.com&zzz="
+          }
+        ],
+        "status": "INFO"
+      },
+      "themeFailedRequests": {
+        "count": 0,
+        "detail": [],
+        "status": "PASS"
+      },
+      "httpErrors": {
+        "count": 1,
+        "detail": [
+          {
+            "url": "https://wvpnpr-t7.myshopify.com/sf_private_access_tokens",
+            "status": 401
+          }
+        ],
+        "status": "WARN"
+      }
+    }
+  },
+  {
+    "route": "wheel-gallery",
+    "path": "/pages/wheel-gallery",
+    "status": 200,
+    "title": "Wheel Gallery – Calder Wheels",
+    "checks": {
+      "brokenImages": {
+        "count": 0,
+        "detail": [],
+        "status": "PASS"
+      },
+      "pageErrors": {
+        "count": 0,
+        "detail": [],
+        "status": "PASS"
+      },
+      "themeConsoleErrors": {
+        "count": 1,
+        "detail": [
+          {
+            "text": "Failed to load resource: the server responded with a status of 401 ()",
+            "location": "https://wvpnpr-t7.myshopify.com/sf_private_access_tokens"
+          }
+        ],
+        "status": "WARN"
+      },
+      "thirdPartyConsoleErrors": {
+        "count": 2,
+        "detail": [
+          {
+            "text": "Access to XMLHttpRequest at 'https://big-skins.com/sales/?version=7.0.1&uuid=&theme_id=44566068&store=https://wvpnpr-t7.myshopify.com&xyz=infoportions34gizmotrims.com&zzz=' from origin 'https://wvpnpr-t7.myshopify.com' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+            "location": "https://wvpnpr-t7.myshopify.com/pages/wheel-gallery"
+          },
+          {
+            "text": "Failed to load resource: net::ERR_FAILED",
+            "location": "https://big-skins.com/sales/?version=7.0.1&uuid=&theme_id=44566068&store=https://wvpnpr-t7.myshopify.com&xyz=infoportions34gizmotrims.com&zzz="
+          }
+        ],
+        "status": "INFO"
+      },
+      "themeFailedRequests": {
+        "count": 0,
+        "detail": [],
+        "status": "PASS"
+      },
+      "httpErrors": {
+        "count": 1,
+        "detail": [
+          {
+            "url": "https://wvpnpr-t7.myshopify.com/sf_private_access_tokens",
+            "status": 401
+          }
+        ],
+        "status": "WARN"
+      }
+    }
+  },
+  {
+    "route": "vehicle-gallery",
+    "path": "/pages/vehicle-gallery",
+    "status": 200,
+    "title": "Vehicle Gallery – Calder Wheels",
+    "checks": {
+      "brokenImages": {
+        "count": 0,
+        "detail": [],
+        "status": "PASS"
+      },
+      "pageErrors": {
+        "count": 0,
+        "detail": [],
+        "status": "PASS"
+      },
+      "themeConsoleErrors": {
+        "count": 1,
+        "detail": [
+          {
+            "text": "Failed to load resource: the server responded with a status of 401 ()",
+            "location": "https://wvpnpr-t7.myshopify.com/sf_private_access_tokens"
+          }
+        ],
+        "status": "WARN"
+      },
+      "thirdPartyConsoleErrors": {
+        "count": 2,
+        "detail": [
+          {
+            "text": "Access to XMLHttpRequest at 'https://big-skins.com/sales/?version=7.0.1&uuid=&theme_id=44566068&store=https://wvpnpr-t7.myshopify.com&xyz=infoportions34gizmotrims.com&zzz=' from origin 'https://wvpnpr-t7.myshopify.com' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+            "location": "https://wvpnpr-t7.myshopify.com/pages/vehicle-gallery"
+          },
+          {
+            "text": "Failed to load resource: net::ERR_FAILED",
+            "location": "https://big-skins.com/sales/?version=7.0.1&uuid=&theme_id=44566068&store=https://wvpnpr-t7.myshopify.com&xyz=infoportions34gizmotrims.com&zzz="
+          }
+        ],
+        "status": "INFO"
+      },
+      "themeFailedRequests": {
+        "count": 0,
+        "detail": [],
+        "status": "PASS"
+      },
+      "httpErrors": {
+        "count": 1,
+        "detail": [
+          {
+            "url": "https://wvpnpr-t7.myshopify.com/sf_private_access_tokens",
+            "status": 401
+          }
+        ],
+        "status": "WARN"
+      }
+    }
+  },
+  {
+    "route": "build-your-wheel",
+    "path": "/pages/build-your-wheel",
+    "status": 200,
+    "title": "Build Your Wheel – Calder Wheels",
+    "checks": {
+      "brokenImages": {
+        "count": 0,
+        "detail": [],
+        "status": "PASS"
+      },
+      "pageErrors": {
+        "count": 0,
+        "detail": [],
+        "status": "PASS"
+      },
+      "themeConsoleErrors": {
+        "count": 1,
+        "detail": [
+          {
+            "text": "Failed to load resource: the server responded with a status of 401 ()",
+            "location": "https://wvpnpr-t7.myshopify.com/sf_private_access_tokens"
+          }
+        ],
+        "status": "WARN"
+      },
+      "thirdPartyConsoleErrors": {
+        "count": 2,
+        "detail": [
+          {
+            "text": "Access to XMLHttpRequest at 'https://big-skins.com/sales/?version=7.0.1&uuid=&theme_id=44566068&store=https://wvpnpr-t7.myshopify.com&xyz=infoportions34gizmotrims.com&zzz=' from origin 'https://wvpnpr-t7.myshopify.com' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+            "location": "https://wvpnpr-t7.myshopify.com/pages/build-your-wheel"
+          },
+          {
+            "text": "Failed to load resource: net::ERR_FAILED",
+            "location": "https://big-skins.com/sales/?version=7.0.1&uuid=&theme_id=44566068&store=https://wvpnpr-t7.myshopify.com&xyz=infoportions34gizmotrims.com&zzz="
+          }
+        ],
+        "status": "INFO"
+      },
+      "themeFailedRequests": {
+        "count": 0,
+        "detail": [],
+        "status": "PASS"
+      },
+      "httpErrors": {
+        "count": 1,
+        "detail": [
+          {
+            "url": "https://wvpnpr-t7.myshopify.com/sf_private_access_tokens",
+            "status": 401
+          }
+        ],
+        "status": "WARN"
+      }
+    }
+  },
+  {
+    "route": "cart",
+    "path": "/cart",
+    "status": 200,
+    "title": "Your Shopping Cart – Calder Wheels",
+    "checks": {
+      "brokenImages": {
+        "count": 0,
+        "detail": [],
+        "status": "PASS"
+      },
+      "pageErrors": {
+        "count": 0,
+        "detail": [],
+        "status": "PASS"
+      },
+      "themeConsoleErrors": {
+        "count": 1,
+        "detail": [
+          {
+            "text": "Failed to load resource: the server responded with a status of 401 ()",
+            "location": "https://wvpnpr-t7.myshopify.com/sf_private_access_tokens"
+          }
+        ],
+        "status": "WARN"
+      },
+      "thirdPartyConsoleErrors": {
+        "count": 2,
+        "detail": [
+          {
+            "text": "Access to XMLHttpRequest at 'https://big-skins.com/sales/?version=7.0.1&uuid=&theme_id=44566068&store=https://wvpnpr-t7.myshopify.com&xyz=infoportions34gizmotrims.com&zzz=' from origin 'https://wvpnpr-t7.myshopify.com' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+            "location": "https://wvpnpr-t7.myshopify.com/cart"
+          },
+          {
+            "text": "Failed to load resource: net::ERR_FAILED",
+            "location": "https://big-skins.com/sales/?version=7.0.1&uuid=&theme_id=44566068&store=https://wvpnpr-t7.myshopify.com&xyz=infoportions34gizmotrims.com&zzz="
+          }
+        ],
+        "status": "INFO"
+      },
+      "themeFailedRequests": {
+        "count": 0,
+        "detail": [],
+        "status": "PASS"
+      },
+      "httpErrors": {
+        "count": 1,
+        "detail": [
+          {
+            "url": "https://wvpnpr-t7.myshopify.com/sf_private_access_tokens",
+            "status": 401
+          }
+        ],
+        "status": "WARN"
+      }
+    }
+  }
+]

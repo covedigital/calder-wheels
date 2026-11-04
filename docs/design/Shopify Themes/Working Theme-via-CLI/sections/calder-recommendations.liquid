@@ -1,4 +1,13 @@
 {% comment %}theme-check-disable NestedSnippet{% endcomment %}
+{%- comment -%}
+  2026-11-03 fix: recommendations cards render on the PDP, where nothing
+  else loads the premium product-card system. Without this stylesheet the
+  cards fell back to the legacy .calder-recommendations overrides in
+  calder-product.css and looked different from every other card on the
+  site. Loading it here makes the section use the same premium card style
+  as the collection grids (which load the same asset).
+{%- endcomment -%}
+{{ 'calder-product-card.css' | asset_url | stylesheet_tag }}
 {%- liquid
   assign heading = section.settings.heading | default: 'You May Also Like'
   assign limit = section.settings.limit | default: 4
@@ -17,6 +26,7 @@
   </div>
 </div>
 
+<script src="{{ 'calder-product-card.js' | asset_url }}" defer></script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
   var grid = document.querySelector('[data-calder-rec-grid]');

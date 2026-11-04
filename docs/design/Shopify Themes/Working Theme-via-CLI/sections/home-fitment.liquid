@@ -131,6 +131,26 @@
 
               <div class="cw-fitment-guide__divider"></div>
 
+              {%- comment -%}
+                Vehicle-mode finish filters (2026-11-02 B): same glue as the
+                fitment finder guide — calder-fitment-finder-guide.js populates
+                and applies them to the guide's vehicle-matched wheels grid.
+              {%- endcomment -%}
+              <div class="cw-fitment-guide__finish-filters" data-guide-finish-filters hidden>
+                <div class="cw-fitment-guide__finish-filter">
+                  <label class="hf-visually-hidden" for="hf-vehicle-barrel-{{ section.id }}">Barrel finish</label>
+                  <select id="hf-vehicle-barrel-{{ section.id }}" class="cw-fitment-guide__finish-select" aria-label="Barrel finish">
+                    <option value="">All Barrel Finishes</option>
+                  </select>
+                </div>
+                <div class="cw-fitment-guide__finish-filter">
+                  <label class="hf-visually-hidden" for="hf-vehicle-bolt-{{ section.id }}">Bolt finish</label>
+                  <select id="hf-vehicle-bolt-{{ section.id }}" class="cw-fitment-guide__finish-select" aria-label="Bolt finish">
+                    <option value="">All Bolt Finishes</option>
+                  </select>
+                </div>
+              </div>
+
               <div class="cw-fitment-guide__results" data-guide-results style="display:none;"></div>
             </div>
           </div>
@@ -138,28 +158,30 @@
           <!-- BY WHEEL STYLE form -->
           <div id="hf-panel-style-{{ section.id }}" class="hf-fitment__form-panel" hidden>
             <div class="hf-fitment__controls">
+              {%- comment -%}
+                Style-tab filters reduced (2026-11-03 client review, mirrors
+                fitment-finder-guide.liquid): keep Diameter, Bolt Pattern,
+                Bolt Finish. Width and Barrel Finish rendered only "All …"
+                placeholders; FINISH (center) dropped per the approved
+                keep-list. fitment-finder.js stays null-safe for every
+                removed select.
+              {%- endcomment -%}
               <div class="hf-fitment__control">
-                <label class="hf-fitment__label" for="hf-diameter-{{ section.id }}">DIAMETER</label>
+                <label class="hf-fitment__label" for="hf-diameter-{{ section.id }}">Diameter</label>
                 <select id="hf-diameter-{{ section.id }}" class="hf-fitment__select" data-fitment="diameter">
                   <option value="">{{ section.settings.placeholder_diameter | default: 'All Diameters' }}</option>
                 </select>
               </div>
               <div class="hf-fitment__control">
-                <label class="hf-fitment__label" for="hf-width-{{ section.id }}">WIDTH</label>
-                <select id="hf-width-{{ section.id }}" class="hf-fitment__select" data-fitment="width">
-                  <option value="">{{ section.settings.placeholder_width | default: 'All Widths' }}</option>
-                </select>
-              </div>
-              <div class="hf-fitment__control">
-                <label class="hf-fitment__label" for="hf-bolt-{{ section.id }}">BOLT PATTERN</label>
+                <label class="hf-fitment__label" for="hf-bolt-{{ section.id }}">Bolt Pattern</label>
                 <select id="hf-bolt-{{ section.id }}" class="hf-fitment__select" data-fitment="bolt">
                   <option value="">{{ section.settings.placeholder_bolt | default: 'All Bolt Patterns' }}</option>
                 </select>
               </div>
               <div class="hf-fitment__control">
-                <label class="hf-fitment__label" for="hf-finish-{{ section.id }}">FINISH</label>
-                <select id="hf-finish-{{ section.id }}" class="hf-fitment__select" data-fitment="finish">
-                  <option value="">{{ section.settings.placeholder_finish | default: 'All Finishes' }}</option>
+                <label class="hf-fitment__label" for="hf-bolt-finish-{{ section.id }}">Bolt Finish</label>
+                <select id="hf-bolt-finish-{{ section.id }}" class="hf-fitment__select" data-fitment="style-bolt-finish">
+                  <option value="">All Bolt Finishes</option>
                 </select>
               </div>
               <div class="hf-fitment__action">

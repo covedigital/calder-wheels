@@ -6,13 +6,22 @@
   parses the query params and preloads the exact clicked configuration.
   Dashed design_code metafields ('CLB-06') are normalized to the
   canonical handle via design_key.
+  Rename aliases (2026-11-02 G): the universal CLB-06/CLB-07 products were
+  renamed to CLM-06/CLM-07 including handles. Design codes CLM06/CLM07
+  (post-rename metafield) link to the renamed product handles
+  calder-clm-06-wheel / calder-clm-07-wheel; CLB06/CLB07 keep the original
+  registry handles (redirect-covered if the live handle changed).
+  pcd (2026-11-02 C): the clicked product's bolt pattern rides along as a
+  namespaced query param so the style-mode bolt selection stays applied on
+  the design PDP; calder-universal-cta.js validates it against the design's
+  fitment groups and ignores it when unsupported.
 {%- endcomment -%}
 {%- liquid
   assign design_code = product.metafields.custom.design_code.value | default: product.metafields.custom.design_code | default: '' | strip | upcase
   assign design_key = design_code | remove: '-'
   assign cv = current_variant | default: product.selected_or_first_available_variant
   assign design_slug = ''
-  if design_key == 'CLM01' or design_key == 'CLM02' or design_key == 'CLM03' or design_key == 'CLM05' or design_key == 'CLB06' or design_key == 'CLB07'
+  if design_key == 'CLM01' or design_key == 'CLM02' or design_key == 'CLM03' or design_key == 'CLM05' or design_key == 'CLB06' or design_key == 'CLB07' or design_key == 'CLM06' or design_key == 'CLM07'
     assign design_slug = design_key | downcase | replace: 'clm', 'clm-' | replace: 'clb', 'clb-' | append: '-wheel'
   endif
   assign diameter_token = ''
@@ -65,6 +74,16 @@
     assign design_url = design_url | append: '&center=' | append: center_token
     assign design_url = design_url | append: '&barrel=' | append: barrel_token
     assign design_url = design_url | append: '&hardware=' | append: hardware_token
+    comment
+      Bolt-pattern carry (2026-11-02 C): the clicked product's own bolt
+      pattern (product metafield, verified data) transfers to the design
+      PDP as a namespaced param. calder-universal-cta.js validates it
+      against the design's fitment groups; unknown values are ignored.
+    endcomment
+    assign pcd = product.metafields.custom.bolt_pattern.value | default: product.metafields.custom.bolt_pattern | strip
+    if pcd != blank
+      assign design_url = design_url | append: '&pcd=' | append: pcd
+    endif
     echo design_url
   endif
 -%}

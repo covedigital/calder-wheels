@@ -1,0 +1,238 @@
+[
+  {
+    "area": "1-home-nav",
+    "name": "mobile drawer menu content",
+    "status": "PASS",
+    "links": [
+      {
+        "text": "Home",
+        "href": "/"
+      },
+      {
+        "text": "Wheels",
+        "href": "/collections/wheels"
+      }
+    ],
+    "items": [
+      "Home",
+      "Wheels",
+      "Gallery"
+    ]
+  },
+  {
+    "area": "1-home-nav",
+    "name": "drawer link navigates",
+    "status": "PASS",
+    "url": "https://wvpnpr-t7.myshopify.com/collections/wheels?_su_rec=1b8vJVjvxmw4ZiLy70se40z0LobZ5Pb6r3d9v8K7ylkNdRYx5EnkpIdITRQp9tlkcOGsVHwdh6Dhi445STLd3lER4HFgmlkp_fYoOv7D2fFePg1k-6O3G2K0ziqbFoUU8_KBjt0ioQBAuN4yIYronrya04LHzCUuuqesqR2-BKiJkgBSBMKzukSw0vNJX_w1cI7HUKIairvYGvV5ZWFmzXXgrwRoBVepX4GlNHjVDuiMCzDp-r7LXVCADbUnKLEighhc_rw0ydOiQWPR_-w3CZeueA5iL8q8Jh9eK2GQ8-ISJwJ72f4-N1vaLA9sVtfyKE3bx5fJX6SaWZ3F_Kz31qBDcmUOUJES_CsvHLq3_9Rt4w&_su_rec_id=43e14823-a836-40a9-a65e-f83c3fef8ad9-1793718302"
+  },
+  {
+    "area": "2-product-cards",
+    "name": "cards render",
+    "status": "PASS",
+    "productLinks": 96,
+    "priceEls": 24
+  },
+  {
+    "area": "2-product-cards",
+    "name": "card tap opens PDP",
+    "status": "PASS",
+    "url": "https://wvpnpr-t7.myshopify.com/collections/wheels/products/calder-clm-07-wheel"
+  },
+  {
+    "area": "3-wheel-gallery",
+    "name": "gallery item tap-through",
+    "status": "PASS",
+    "href": "/pages/vehicle-gallery",
+    "landed": "https://wvpnpr-t7.myshopify.com/pages/vehicle-gallery"
+  },
+  {
+    "area": "3-wheel-gallery",
+    "name": "gallery inventory",
+    "status": "PASS",
+    "items": 5,
+    "tabs": 2,
+    "search": 1
+  },
+  {
+    "area": "4-vehicle-gallery",
+    "name": "vehicle gallery inventory + tap",
+    "status": "PASS",
+    "items": 4,
+    "tapped": false,
+    "landed": "https://wvpnpr-t7.myshopify.com/pages/vehicle-gallery"
+  },
+  {
+    "area": "5-configurator",
+    "name": "center finish updates selected label",
+    "status": "PASS",
+    "labelBefore": "Gloss Black",
+    "labelAfter": "Black Titanium"
+  },
+  {
+    "area": "5-configurator",
+    "name": "SKU cell reacts to config",
+    "status": "PASS",
+    "skuBefore": "SKU: CFG-CLM01-22-GB-GBL-CHUniversal Par",
+    "skuAfter": "SKU: CFG-CLM01-22-BT-GBL-CHUniversal Par"
+  },
+  {
+    "area": "5-configurator",
+    "name": "diameter option updates",
+    "status": "PASS",
+    "diameter": "24"
+  },
+  {
+    "area": "6-compositing",
+    "name": "center layer src swaps on finish change",
+    "status": "PASS",
+    "before": ".com/cdn/shop/t/6/assets/201-disk-gb.png",
+    "after": ".com/cdn/shop/t/6/assets/201-disk-ti.png"
+  },
+  {
+    "area": "6-compositing",
+    "name": "barrel layer src swaps on lip change",
+    "status": "PASS",
+    "before": "om/cdn/shop/t/6/assets/201-barrel-gb.png",
+    "after": "m/cdn/shop/t/6/assets/201-barrel-gbl.png"
+  },
+  {
+    "area": "6-compositing",
+    "name": "all composite layer images load",
+    "status": "PASS",
+    "missing": []
+  },
+  {
+    "area": "7-fitment",
+    "name": "fitment selects populate + submit produces results",
+    "status": "PASS",
+    "selectCount": 3,
+    "resultsBefore": 0,
+    "resultsAfter": 0
+  },
+  {
+    "area": "8-availability",
+    "name": "default config CTA state",
+    "status": "PASS",
+    "label": "Add to Cart",
+    "enabled": true
+  },
+  {
+    "area": "8-availability",
+    "name": "qty 99 click: component gate enforced at click time",
+    "status": "FAIL",
+    "gated": false,
+    "label": "Add to Cart",
+    "message": "This exact combination isn’t in stock — please speak with a support representative to confirm availability.",
+    "state": "NO_STOCK",
+    "cartBefore": 0,
+    "cartAfter": 50,
+    "addRequests": [
+      "{\"items\":[{\"id\":67971205923125,\"quantity\":99}],\"sections\":[\"header-cart\",\"cart-icon-bubble\",\"cart-live-region-text\"],\"sections_url\":\"/products/calder-clm-01-whe"
+    ]
+  },
+  {
+    "area": "8-availability",
+    "name": "qty reset restores availability",
+    "status": "INFO",
+    "enabled": false
+  },
+  {
+    "area": "9-cart",
+    "name": "add-to-cart increments cart",
+    "status": "PASS",
+    "cartBefore": 0,
+    "cartAfter": 1
+  },
+  {
+    "area": "9-cart",
+    "name": "cart cleared after test",
+    "status": "PASS",
+    "cartCleared": 0
+  },
+  {
+    "area": "9-cart",
+    "name": "unlisted combo → disabled CTA + request notice",
+    "status": "INFO",
+    "enabled": true,
+    "message": "Low availability for this configuration — contact us to confirm current stock."
+  },
+  {
+    "area": "10-forms-buttons",
+    "name": "form font floor >= 16px",
+    "status": "PASS",
+    "controls": 3,
+    "under16": []
+  },
+  {
+    "area": "10-forms-buttons",
+    "name": "CTA height",
+    "status": "PASS",
+    "h": 56
+  },
+  {
+    "area": "11-sticky-ui",
+    "name": "sticky/fixed overlap check @scroll 1200",
+    "status": "PASS",
+    "fixedCount": 3,
+    "overlaps": []
+  },
+  {
+    "area": "12-orientation",
+    "name": "m-375-iphone -> 667x375",
+    "status": "PASS",
+    "vw": 667,
+    "doc": 667,
+    "stackVisible": true
+  },
+  {
+    "area": "12-orientation",
+    "name": "t-768-small-tablet -> 1024x768",
+    "status": "WARN",
+    "vw": 1024,
+    "doc": 1074,
+    "stackVisible": true
+  },
+  {
+    "area": "12-orientation",
+    "name": "t-768-small-tablet -> 1024x768",
+    "status": "WARN",
+    "vw": 1024,
+    "doc": 1074,
+    "stackVisible": true
+  },
+  {
+    "0": {
+      "href": "/products/calder-clm-02-wheel",
+      "status": 200
+    },
+    "1": {
+      "href": "/products/calder-clm-03-wheel",
+      "status": 200
+    },
+    "2": {
+      "href": "/products/calder-clm-05-wheel",
+      "status": 200
+    },
+    "3": {
+      "href": "/products/calder-clm-06-wheel",
+      "status": 200
+    },
+    "4": {
+      "href": "/products/calder-clm-07-wheel",
+      "status": 200
+    },
+    "area": "5-configurator",
+    "name": "design nav: all links < 400",
+    "status": "PASS"
+  },
+  {
+    "area": "5-configurator",
+    "name": "BYW configurator hydration + interaction",
+    "status": "PASS",
+    "options": 7,
+    "layers": 3,
+    "interactionWorks": false,
+    "brokenSwatches": [],
+    "pageErrors": []
+  }
+]

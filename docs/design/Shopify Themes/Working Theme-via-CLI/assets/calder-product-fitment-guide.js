@@ -281,7 +281,13 @@
       if (diaRange) metaParts.push(diaRange);
       if (finishCount > 0) metaParts.push(finishCount + ' finish' + (finishCount !== 1 ? 'es' : ''));
       if (prod.construction) metaParts.push(prod.construction);
-      html += '<a href="' + prod.url + '" class="cw-fitment-guide__wheel-card">';
+      /* 2026-11-02 B: raw finish option data rides on the card as data
+         attributes so the vehicle-mode barrel/bolt selects (calder-
+         fitment-finder-guide.js) can narrow the grid client-side without
+         touching the approved fitment matching. */
+      html += '<a href="' + prod.url + '" class="cw-fitment-guide__wheel-card"' +
+        ' data-barrel="' + ((prod.barrel_finishes || []).join('|') || '') + '"' +
+        ' data-bolt="' + (prod.bolt_finish || '') + '">';
       if (prod.featured_image) {
         html += '<img src="' + prod.featured_image + '" alt="' + prod.title + '" class="cw-fitment-guide__wheel-image" loading="lazy">';
       }

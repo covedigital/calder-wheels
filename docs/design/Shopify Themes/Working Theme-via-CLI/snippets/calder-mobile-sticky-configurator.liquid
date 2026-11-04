@@ -1,0 +1,109 @@
+{%- comment -%}
+  Calder mobile sticky configurator (feature/calder-mobile-sticky-configurator).
+  Two-state mobile UI for universal PDPs: collapsed navy customization bar +
+  expanded white bottom sheet. Rendered ONLY by sections/calder-product.liquid
+  when the product is a universal design AND the Theme Editor setting
+  `calder_mobile_configurator_mode` is not 'disabled'. All behavior lives in
+  assets/calder-mobile-sticky-configurator.js, which shares the authoritative
+  window.CALDER_UNIVERSAL_PDP state — no second state instance, no duplicated
+  resolver logic, no independent URL writes. Option lists are built at runtime
+  from resolver.options/labels; nothing here duplicates the registry.
+  Feature assets load only when this snippet renders — disabled mode ships
+  zero markup, zero CSS, zero JS.
+{%- endcomment -%}
+
+{%- liquid
+  assign muc_design_code = product.metafields.custom.design_code.value | default: product.metafields.custom.design_code | default: '' | strip | upcase
+  assign muc_design_key = muc_design_code | remove: '-'
+  assign muc_display_code = muc_design_code
+  comment
+    Normalize the display code to the mockup format (CLM-05). The live
+    metafield may be hyphenated (CLM-05) or not (CLM05), and legacy
+    CLB-06/CLB-07 products now present as CLM-06/CLM-07. Resolver identity
+    is NOT affected — this is presentation only.
+  endcomment
+  if muc_design_key.size == 5 and muc_design_key contains 'CL'
+    assign muc_digits = muc_design_key | slice: -2, 2
+    assign muc_display_code = 'CLM-' | append: muc_digits
+  endif
+-%}
+
+<link rel="stylesheet" href="{{ 'calder-mobile-sticky-configurator.css' | asset_url }}" media="all">
+<script src="{{ 'calder-mobile-sticky-configurator.js' | asset_url }}" defer></script>
+
+<div class="calder-mobile-uc" data-calder-mobile-uc data-design-code="{{ muc_design_code }}" data-design-display-code="{{ muc_display_code }}" hidden>
+  {%- comment -%} Collapsed customization bar {%- endcomment -%}
+  <button
+    type="button"
+    class="calder-mobile-uc__bar"
+    data-calder-mobile-uc-bar
+    aria-expanded="false"
+    aria-controls="calder-mobile-uc-sheet"
+  >
+    <span class="calder-mobile-uc__bar-thumb" data-calder-mobile-uc-thumb aria-hidden="true">
+      <img class="calder-mobile-uc__thumb-layer" data-calder-mobile-uc-thumb-layer="barrel" alt="" width="40" height="26" loading="lazy" decoding="async" tabindex="-1">
+      <img class="calder-mobile-uc__thumb-layer" data-calder-mobile-uc-thumb-layer="center" alt="" width="40" height="26" loading="lazy" decoding="async" tabindex="-1">
+      <img class="calder-mobile-uc__thumb-layer" data-calder-mobile-uc-thumb-layer="hardware" alt="" width="40" height="26" loading="lazy" decoding="async" tabindex="-1">
+    </span>
+    <span class="calder-mobile-uc__bar-text">
+      <span class="calder-mobile-uc__bar-label">Customize <span data-calder-mobile-uc-code>{{ muc_display_code }}</span></span>
+      <span class="calder-mobile-uc__bar-summary" data-calder-mobile-uc-summary>Customize your wheel</span>
+    </span>
+    <span class="calder-mobile-uc__bar-chevron" aria-hidden="true">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><polyline points="6 15 12 9 18 15"></polyline></svg>
+    </span>
+  </button>
+
+  {%- comment -%} Expanded bottom sheet {%- endcomment -%}
+  <div
+    class="calder-mobile-uc__sheet"
+    id="calder-mobile-uc-sheet"
+    data-calder-mobile-uc-sheet
+    role="dialog"
+    aria-modal="false"
+    aria-label="Customize your wheel"
+    hidden
+  >
+    <div class="calder-mobile-uc__grab" data-calder-mobile-uc-grab role="button" tabindex="0" aria-label="Close customization panel">
+      <span class="calder-mobile-uc__grab-handle" aria-hidden="true"></span>
+    </div>
+
+    <div class="calder-mobile-uc__head">
+      <span class="calder-mobile-uc__title">Customize Your Wheel</span>
+      <span class="calder-mobile-uc__head-right">
+        <span class="calder-mobile-uc__code" data-calder-mobile-uc-code>{{ muc_display_code }}</span>
+        <button
+          type="button"
+          class="calder-mobile-uc__minimize"
+          data-calder-mobile-uc-minimize
+          aria-label="Minimize customization panel"
+        >
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </button>
+      </span>
+    </div>
+
+    <div class="calder-mobile-uc__tabs" data-calder-mobile-uc-tabs role="tablist" aria-label="Wheel configuration categories"></div>
+
+    <div class="calder-mobile-uc__body" data-calder-mobile-uc-body>
+      <p class="calder-mobile-uc__category" data-calder-mobile-uc-category></p>
+      <div class="calder-mobile-uc__options" data-calder-mobile-uc-options></div>
+    </div>
+
+    <div class="calder-mobile-uc__summary">
+      <span class="calder-mobile-uc__summary-thumb" data-calder-mobile-uc-thumb aria-hidden="true">
+        <img class="calder-mobile-uc__thumb-layer" data-calder-mobile-uc-thumb-layer="barrel" alt="" width="34" height="22" loading="lazy" decoding="async" tabindex="-1">
+        <img class="calder-mobile-uc__thumb-layer" data-calder-mobile-uc-thumb-layer="center" alt="" width="34" height="22" loading="lazy" decoding="async" tabindex="-1">
+        <img class="calder-mobile-uc__thumb-layer" data-calder-mobile-uc-thumb-layer="hardware" alt="" width="34" height="22" loading="lazy" decoding="async" tabindex="-1">
+      </span>
+      <span class="calder-mobile-uc__summary-text">
+        <span class="calder-mobile-uc__summary-eyebrow">Current Configuration</span>
+        <span class="calder-mobile-uc__summary-value" data-calder-mobile-uc-summary aria-live="polite">Select your options</span>
+      </span>
+      <span class="calder-mobile-uc__status" data-calder-mobile-uc-status role="status" aria-label="Configuration status">
+        <span class="calder-mobile-uc__status-dot" aria-hidden="true"></span>
+        <span class="calder-mobile-uc__status-text" data-calder-mobile-uc-status-text>Incomplete</span>
+      </span>
+    </div>
+  </div>
+</div>

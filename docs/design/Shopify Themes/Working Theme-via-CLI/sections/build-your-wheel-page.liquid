@@ -53,7 +53,7 @@
   assign specialist_dealer_url = section.settings.specialist_dealer_url | default: '/pages/dealer-portal'
 
   assign show_360 = section.settings.show_360 | default: false
-  assign lead_time_text = section.settings.lead_time_text | default: 'Ships in 5\u201310 business days'
+  assign lead_time_text = section.settings.lead_time_text | default: 'Ships in 5–10 business days'
 
   assign no_products_message = section.settings.no_products_message | default: 'No wheel designs are currently available for configuration.'
 -%}
@@ -570,7 +570,7 @@
       "type": "text",
       "id": "lead_time_text",
       "label": "Lead time text",
-      "default": "Ships in 5\u201310 business days"
+      "default": "Ships in 5–10 business days"
     },
     {
       "type": "header",

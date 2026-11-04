@@ -367,3 +367,28 @@ test('token normalization', () => {
 test('unknown design throws safely', () => {
   assert.throws(() => makeR('XXX-99'));
 });
+
+test('rename aliases (2026-11-02 G): CLM-06/CLM-07 resolve their CLB-06/CLB-07 design data', () => {
+  // Metafield-value forms after the live-store product rename
+  for (const [aliasCode, originalId] of [['CLM-06', 'CLB-06'], ['CLM-07', 'CLB-07'], ['CLM06', 'CLB-06'], ['CLM07', 'CLB-07']]) {
+    const r = resolverFactory.create({ registry, designCode: aliasCode, availability: okAvailability });
+    assert.equal(r.design.designId, originalId, aliasCode + ' -> ' + originalId);
+    assert.equal(r.design.designNumber, originalId === 'CLB-06' ? '206' : '207');
+    assert.equal(r.design.designCode, originalId === 'CLB-06' ? 'CLB06' : 'CLB07');
+    assert.equal(r.design.handle, originalId === 'CLB-06' ? 'calder-clb-06-wheel' : 'calder-clb-07-wheel');
+  }
+  // Alias registry slices carry the identical design payload
+  const alias06 = loadRegistryAsset('calder-design-registry-clm06.js');
+  assert.equal(JSON.stringify(alias06.designs[0]), JSON.stringify(byDesign['CLB-06']));
+  const alias07 = loadRegistryAsset('calder-design-registry-clm07.js');
+  assert.equal(JSON.stringify(alias07.designs[0]), JSON.stringify(byDesign['CLB-07']));
+});
+
+test('pcd param source (2026-11-02 C): design deep links can carry a bolt pattern validated against fitment groups', async () => {
+  const r = makeR('CLB-06', { availability: okAvailability });
+  const groups = r.design.fitment_groups || r.design.fitmentGroups || [];
+  assert.ok(groups.length > 0, 'CLB-06 has fitment groups');
+  const groupIds = groups.map((g) => g.id);
+  const peek = r.peek({ diameter: '22', center: 'gloss-black', barrel: 'gloss-black', hardware: 'chrome' }, groupIds[0]);
+  assert.ok(peek, 'peek works with an explicit group (pcd -> group path)');
+});

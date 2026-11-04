@@ -5,6 +5,7 @@
   assign eng_text = section.settings.engineering_text
 
   assign bolt_pattern = product.metafields.custom.bolt_pattern.value
+  assign center_bore = product.metafields.custom.center_bore.value
   assign construction = product.metafields.custom.construction.value
   assign load_rating = product.metafields.custom.load_rating.value
   assign design_code = product.metafields.custom.design_code.value
@@ -35,7 +36,7 @@
   assign uc_design_code = product.metafields.custom.design_code.value | default: product.metafields.custom.design_code | default: '' | strip | upcase
   assign uc_design_key = uc_design_code | remove: '-'
   assign is_universal_design = false
-  if uc_design_key == 'CLM01' or uc_design_key == 'CLM02' or uc_design_key == 'CLM03' or uc_design_key == 'CLM05' or uc_design_key == 'CLB06' or uc_design_key == 'CLB07'
+  if uc_design_key == 'CLM01' or uc_design_key == 'CLM02' or uc_design_key == 'CLM03' or uc_design_key == 'CLM05' or uc_design_key == 'CLB06' or uc_design_key == 'CLB07' or uc_design_key == 'CLM06' or uc_design_key == 'CLM07'
     assign is_universal_design = true
   endif
 
@@ -132,6 +133,13 @@
               <tr>
                 <td>Bolt Pattern</td>
                 <td>{{ section.settings.spec_bolt | default: '5x112' }}</td>
+              </tr>
+              {% endif %}
+
+              {% if center_bore != blank %}
+              <tr>
+                <td>Center Bore</td>
+                <td>{{ center_bore }}mm</td>
               </tr>
               {% endif %}
 

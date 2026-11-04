@@ -45,21 +45,35 @@
       (.cw-fitment-guide__vehicle-name), e.g. "Forged Wheels" →
       "2021 GM Escalade Wheels". Restored when the vehicle is
       cleared; re-applied after facet re-renders.
-   6. When the "By Wheel Style" CTA applies its own Diameter/Bolt
-      Pattern filters on a collection page (fitment-finder.js
-      dispatches `calder:style-filters-applied`), the vehicle-driven
-      presentation state is exited: the collection heading reverts
-      to its original name, the Bolt Pattern facet block is
-      restored, and the facet watcher stops re-applying the
-      vehicle state.
-   7. The card's RESET button (data-guide-reset) starts the shopper
-      over: clears the persistent vehicle, resets the card through
-      the guide's own change cascade, hides the status panel, reverts
-      the vehicle presentation state, and — when URL filter params
-      exist — navigates to the bare collection URL so the facet
-      sidebar rebuilds fully unfiltered (a full reload is the only
-      way to reset the sidebar's checkbox states cleanly; the
-      theme's renderFilters does not re-render them).
+     6. When the "By Wheel Style" CTA applies its own Diameter/Bolt
+        Pattern filters on a collection page (fitment-finder.js
+        dispatches `calder:style-filters-applied`), the vehicle-driven
+        presentation state is exited: the collection heading reverts
+        to its original name, the Bolt Pattern facet block is
+        restored, and the facet watcher stops re-applying the
+        vehicle state.
+     7. The card's RESET button (data-guide-reset) starts the shopper
+        over: clears the persistent vehicle, resets the card through
+        the guide's own change cascade, hides the status panel, reverts
+        the vehicle presentation state, and — when URL filter params
+        exist — navigates to the bare collection URL so the facet
+        sidebar rebuilds fully unfiltered (a full reload is the only
+        way to reset the sidebar's checkbox states cleanly; the
+        theme's renderFilters does not re-render them).
+     8. Vehicle lock (2026-11-02 B): while a vehicle is selected, the
+        individually dismissible applied-filter chips (.filter-row-
+        selected) are hidden — the vehicle's fitment constraints can
+        only be removed through the dedicated Reset action, never
+        chipped away one filter at a time. Restored on vehicle clear.
+     9. Style-mode stale-vehicle cleanup (2026-11-02 B): switching the
+        browse tabs to By Wheel Style clears the saved vehicle
+        (fitment-finder.js) and hides the status panel; on collection
+        pages the vehicle-driven URL filter params are then stripped
+        so style browsing never inherits the vehicle's constraints.
+    10. Vehicle-mode finish filters (2026-11-02 B): barrel/lip and
+        bolt/hardware finish selects (real option data from
+        fitment-catalog) narrow the guide's already vehicle-matched
+        wheels grid client-side; the visible count updates with them.
    ============================================================ */
 (function () {
   'use strict';
@@ -234,6 +248,49 @@
     });
   }
 
+  /* ── Vehicle lock: applied-filter chips (2026-11-02 B) ──
+     The vehicle's bolt-pattern/diameter constraints are URL facet params,
+     which the sidebar renders as individually dismissible chips
+     (.filter-row-selected). While a vehicle is selected those chips are
+     hidden so the fitment can only be removed through the dedicated Reset
+     action; restored when the vehicle clears. */
+  function setAppliedFilterChipsVisibility(hidden) {
+    var chips = document.querySelectorAll(
+      'facet-filters-form .filter-row-selected, filter-popup .filter-row-selected'
+    );
+    Array.prototype.forEach.call(chips, function (row) {
+      row.style.display = hidden ? 'none' : '';
+    });
+  }
+
+  /* ── Style-mode stale-vehicle cleanup (2026-11-02 B) ──
+     Switching browse modes to By Wheel Style cleared the saved vehicle
+     (fitment-finder.js). On collection pages the URL may still carry the
+     vehicle-driven filter params — strip them so style browsing starts
+     from the unfiltered listing. Uses the theme-native AJAX refresh when
+     available, otherwise a same-path navigation. */
+  function stripVehicleFilterParams() {
+    if (!/^\/collections(\/|$)/.test(window.location.pathname)) return;
+    var params = new URLSearchParams(window.location.search);
+    var hadVehicleParams = false;
+    ['filter.p.m.custom.bolt_pattern', 'filter.v.option.diameter'].forEach(function (key) {
+      if (params.get(key) !== null) { hadVehicleParams = true; params.delete(key); }
+    });
+    if (!hadVehicleParams) return;
+    var search = params.toString();
+    var hasGrid = typeof FacetFiltersForm !== 'undefined' &&
+      document.getElementById('product-grid') &&
+      document.getElementById('ProductGridContainer') &&
+      document.querySelector('[data-facets-sorting]');
+    if (hasGrid) {
+      try {
+        FacetFiltersForm.renderPage(search, null);
+        return;
+      } catch (e) { /* fall through to navigation */ }
+    }
+    window.location.search = search ? '?' + search : '';
+  }
+
   /* ── Collection page title ──
      e.g. "Forged Wheels" → "2021 GM Escalade Wheels": everything
      before the "Wheels" word is replaced by the vehicle name. */
@@ -305,7 +362,10 @@
       pending = setTimeout(function () {
         pending = null;
         if (boltFilterHidden) setBoltPatternFilterVisibility(true);
-        if (vehicleActive && activeSection) applyCollectionTitle(activeSection);
+        if (vehicleActive && activeSection) {
+          setAppliedFilterChipsVisibility(true);
+          applyCollectionTitle(activeSection);
+        }
       }, 50);
     });
     targets.forEach(function (target) {
@@ -315,7 +375,13 @@
 
   /* ── Reset (start over) ── */
 
+  var suppressParamStrip = false;
+
   function resetFitment(section) {
+    // The Reset action owns the full navigation to the bare collection URL
+    // (step 5 below); the cleared-observer's param strip must not race it.
+    suppressParamStrip = true;
+    setTimeout(function () { suppressParamStrip = false; }, 0);
     // 1. Persistent vehicle cleared first — a reload must not restore it.
     try { localStorage.removeItem(STORAGE_KEY); } catch (e) { /* storage unavailable */ }
 
@@ -327,6 +393,7 @@
     vehicleActive = false;
     activeSection = null;
     setBoltPatternFilterVisibility(false);
+    setAppliedFilterChipsVisibility(false);
     restoreCollectionTitle();
 
     // 4. Finder status panel -> hidden (the empty state syncs through
@@ -374,19 +441,24 @@
         }
         syncCollectionFilter(section);
         setBoltPatternFilterVisibility(true);
+        setAppliedFilterChipsVisibility(true);
         applyCollectionTitle(section);
       }
     }).observe(results, { childList: true });
 
-    // Finder cleared the vehicle (Change Vehicle / Reset) → reset the card
-    // and restore the Bolt Pattern facet block and the collection heading.
+    // Finder cleared the vehicle (Change Vehicle / Reset / switching to the
+    // By Wheel Style browse mode) → reset the card, restore the Bolt Pattern
+    // facet block, show the applied-filter chips again, strip the
+    // vehicle-driven URL params on collection pages, and restore the heading.
     new MutationObserver(function () {
       if (statusPanel.hidden) {
         vehicleActive = false;
         activeSection = null;
         resetCard(section);
         setBoltPatternFilterVisibility(false);
+        setAppliedFilterChipsVisibility(false);
         restoreCollectionTitle();
+        if (!suppressParamStrip) { stripVehicleFilterParams(); }
         document.dispatchEvent(new CustomEvent('calder:vehicle-cleared'));
       }
     }).observe(statusPanel, { attributes: true, attributeFilter: ['hidden'] });
@@ -398,6 +470,7 @@
       syncStatusPanel(section);
       syncCollectionFilter(section);
       setBoltPatternFilterVisibility(true);
+      setAppliedFilterChipsVisibility(true);
       applyCollectionTitle(section);
     }
 
@@ -409,6 +482,84 @@
         resetFitment(section);
       });
     }
+
+    initGuideFinishFilters(section, card, results);
+  }
+
+  /* ── Vehicle-mode finish filters (2026-11-02 B) ──
+     Barrel/lip + bolt/hardware finish selects narrow the guide's already
+     vehicle-matched wheels grid. Options come from the real catalog data
+     (fitment-catalog barrel_finishes/bolt_finish; stamped on each wheel
+     card by calder-product-fitment-guide.js). Filtering only hides cards —
+     the fitment match itself is untouched, so nothing incompatible is
+     ever presented as purchasable. The filter row appears with the
+     results and hides again when the vehicle clears. */
+  function initGuideFinishFilters(section, card, results) {
+    var filterRow = card.querySelector('[data-guide-finish-filters]');
+    if (!filterRow) return;
+    var barrelSel = filterRow.querySelector('[id^="hf-vehicle-barrel-"]');
+    var boltSel = filterRow.querySelector('[id^="hf-vehicle-bolt-"]');
+    if (!barrelSel && !boltSel) return;
+
+    var catalog = window.__fitmentCatalog || [];
+    var barrelSet = {};
+    var boltSet = {};
+    catalog.forEach(function (p) {
+      (p.barrel_finishes || []).forEach(function (b) { if (b) barrelSet[b] = true; });
+      if (p.bolt_finish) boltSet[p.bolt_finish] = true;
+    });
+    if (barrelSel) {
+      barrelSel.replaceChildren(new Option('All Barrel Finishes', ''));
+      Object.keys(barrelSet).sort().forEach(function (b) { barrelSel.add(new Option(b, b)); });
+    }
+    if (boltSel) {
+      boltSel.replaceChildren(new Option('All Bolt Finishes', ''));
+      Object.keys(boltSet).sort().forEach(function (b) { boltSel.add(new Option(b, b)); });
+    }
+
+    function applyGuideFinishFilters() {
+      var cards = results.querySelectorAll('.cw-fitment-guide__wheel-card');
+      if (!cards.length) return;
+      var barrelVal = barrelSel ? barrelSel.value : '';
+      var boltVal = boltSel ? boltSel.value : '';
+      var visible = 0;
+      Array.prototype.forEach.call(cards, function (wheelCard) {
+        var barrels = (wheelCard.getAttribute('data-barrel') || '').split('|').filter(Boolean);
+        var bolt = wheelCard.getAttribute('data-bolt') || '';
+        var show = (!barrelVal || barrels.indexOf(barrelVal) !== -1) &&
+                   (!boltVal || bolt === boltVal);
+        wheelCard.style.display = show ? '' : 'none';
+        if (show) visible++;
+      });
+      var countEl = results.querySelector('.cw-fitment-guide__wheels-count');
+      if (countEl) {
+        if (!countEl.getAttribute('data-original')) {
+          countEl.setAttribute('data-original', countEl.textContent);
+        }
+        var original = countEl.getAttribute('data-original');
+        if (barrelVal || boltVal) {
+          countEl.textContent = original + ' — ' + visible + ' shown';
+        } else {
+          countEl.textContent = original;
+        }
+      }
+    }
+
+    if (barrelSel) barrelSel.addEventListener('change', applyGuideFinishFilters);
+    if (boltSel) boltSel.addEventListener('change', applyGuideFinishFilters);
+
+    /* The filter row is part of the card UI: show it whenever the guide
+       renders vehicle results, hide it when the results clear. */
+    var syncFilterRow = function () {
+      var hasResults = !!results.querySelector(RENDERED_SELECTOR);
+      filterRow.hidden = !hasResults;
+      if (!hasResults) {
+        if (barrelSel) barrelSel.value = '';
+        if (boltSel) boltSel.value = '';
+      }
+    };
+    new MutationObserver(syncFilterRow).observe(results, { childList: true });
+    syncFilterRow();
   }
 
   function init() {
@@ -439,6 +590,7 @@
     vehicleActive = false;
     activeSection = null;
     setBoltPatternFilterVisibility(false);
+    setAppliedFilterChipsVisibility(false);
     restoreCollectionTitle();
   });
 })();

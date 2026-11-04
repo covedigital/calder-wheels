@@ -90,7 +90,11 @@
   /* ─── Finish label → component finish code maps ─── */
   var DESIGN_CODE_TO_NUMBER = {
     'clm-01': '201', 'clm-02': '202', 'clm-03': '203',
-    'clm-05': '204', 'clb-06': '206', 'clb-07': '207'
+    'clm-05': '204', 'clb-06': '206', 'clb-07': '207',
+    /* Rename aliases (2026-11-02 G): renamed universal products CLM-06 /
+       CLM-07 resolve their (unchanged) CLB-06 / CLB-07 design data.
+       No stock values or behavior change — key-level compatibility only. */
+    'clm-06': '206', 'clm-07': '207'
   };
 
   var CENTER_LABEL_CODES = { 'black tint': 'BK', 'gloss black': 'BKUTI', 'titanium tint': 'SU' };

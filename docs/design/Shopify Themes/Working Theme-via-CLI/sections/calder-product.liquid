@@ -36,7 +36,7 @@
   assign uc_design_code = product.metafields.custom.design_code.value | default: product.metafields.custom.design_code | default: '' | strip | upcase
   assign uc_design_key = uc_design_code | remove: '-'
   assign is_universal_design = false
-  if uc_design_key == 'CLM01' or uc_design_key == 'CLM02' or uc_design_key == 'CLM03' or uc_design_key == 'CLM05' or uc_design_key == 'CLB06' or uc_design_key == 'CLB07'
+  if uc_design_key == 'CLM01' or uc_design_key == 'CLM02' or uc_design_key == 'CLM03' or uc_design_key == 'CLM05' or uc_design_key == 'CLB06' or uc_design_key == 'CLB07' or uc_design_key == 'CLM06' or uc_design_key == 'CLM07'
     assign is_universal_design = true
   endif
 
@@ -359,13 +359,46 @@
       <div class="calder-pdp__heading">
         <div class="calder-pdp__heading-main">
           <div class="calder-pdp__eyebrow">2-PIECE SPUN FORGED</div>
-          {%- if design_code != blank -%}
-            <div class="calder-pdp__design-code">
-              {{ design_code }}
-            </div>
-          {%- endif -%}
+          {% comment %}
+            Design code display formatting: insert a hyphen after the last
+            letter and before the first number (CLM01 -> CLM-01). Existing
+            hyphens are normalized first, so CLM-01 stays CLM-01.
+            Suppress the title text when it duplicates the design code: the
+            metafield value can differ from the title's formatting (e.g.
+            CLB06 vs CLB-06), so the title is checked against both the
+            stored code and the formatted display code.
+          {% endcomment %}
+          {%- liquid
+            assign design_code_display = ''
+            assign dc_chars = design_code | remove: '-' | split: ''
+            assign dc_inserted = false
+            assign dc_has_letter = false
+            for dc_ch in dc_chars
+              if dc_ch == '0' or dc_ch == '1' or dc_ch == '2' or dc_ch == '3' or dc_ch == '4' or dc_ch == '5' or dc_ch == '6' or dc_ch == '7' or dc_ch == '8' or dc_ch == '9'
+                if dc_has_letter and dc_inserted == false
+                  assign design_code_display = design_code_display | append: '-'
+                  assign dc_inserted = true
+                endif
+              else
+                assign dc_has_letter = true
+              endif
+              assign design_code_display = design_code_display | append: dc_ch
+            endfor
+            assign design_code_display = design_code_display | strip
+            assign design_code_in_title = false
+            if design_code != blank
+              if product.title contains design_code or product.title contains design_code_display
+                assign design_code_in_title = true
+              endif
+            endif
+          -%}
           <h1 class="calder-pdp__title">
-            {% unless design_code != blank and product.title contains design_code %}
+            {%- if design_code != blank -%}
+              <div class="calder-pdp__design-code">
+                {{ design_code_display }}
+              </div>
+            {%- endif -%}
+            {% unless design_code_in_title %}
               {{ product.title | escape }}
             {% endunless %}
           </h1>
@@ -610,6 +643,27 @@
             product: product,
             product_form_id: product_form_id
           %}
+          {% comment %}
+            Explore Other Designs (2026-11-02 A): fast design switching without
+            returning to listings. Config carry is click-time + validated on the
+            destination; see snippets/calder-design-nav.liquid.
+          {% endcomment %}
+          {% render 'calder-design-nav', product: product %}
+
+          {% comment %}
+            Mobile sticky configurator (feature/calder-mobile-sticky-configurator).
+            Isolated two-state mobile UI sharing CALDER_UNIVERSAL_PDP.state.
+            'disabled' default renders NOTHING (no markup/CSS/JS). 'developer'
+            renders only inside Theme Editor previews (request.design_mode) —
+            invisible to ordinary visitors on any theme. 'enabled' renders on
+            eligible universal product pages (mobile-only via CSS).
+          {% endcomment %}
+          {%- assign calder_muc_mode = settings.calder_mobile_configurator_mode | default: 'enabled' -%}
+          {%- if calder_muc_mode == 'enabled' -%}
+            {% render 'calder-mobile-sticky-configurator', product: product %}
+          {%- elsif calder_muc_mode == 'developer' and request.design_mode -%}
+            {% render 'calder-mobile-sticky-configurator', product: product %}
+          {%- endif -%}
         {%- elsif has_native_options -%}
           <div class="calder-pdp__native-variants">
             {% render 'variant_picker',

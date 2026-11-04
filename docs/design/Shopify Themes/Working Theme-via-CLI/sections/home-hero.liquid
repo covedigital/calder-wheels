@@ -6,8 +6,15 @@
   assign hero_video_url = section.settings.hero_video_url
   assign hero_video_file = section.settings.hero_video_file
   assign is_youtube = false
+  assign youtube_id = ''
   if hero_video_type == 'youtube' and hero_video_url != blank
     assign is_youtube = true
+    assign youtube_id = hero_video_url
+    if youtube_id contains 'v='
+      assign youtube_id = youtube_id | split: 'v=' | last | split: '&' | first | split: '?' | first | split: '#' | first
+    else
+      assign youtube_id = youtube_id | split: '/' | last | split: '?' | first | split: '&' | first | split: '#' | first
+    endif
   endif
   assign eyebrow = section.settings.eyebrow | default: 'Precision Engineering'
   assign heading = section.settings.heading | default: 'MADE WITH<br>PRECISION'
@@ -35,12 +42,14 @@
   <div class="home-hero__media">
     {% if section.settings.hero_media_type == 'video' %}
       {% if is_youtube %}
-        <div class="home-hero__video-embed" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;">
-          <iframe src="https://www.youtube-nocookie.com/embed/{{ hero_video_url | replace: 'https://www.youtube.com/watch?v=', '' | replace: 'https://youtu.be/', '' | replace: 'https://www.youtube-nocookie.com/embed/', '' | url_encode }}?autoplay=1&loop=1&mute=1&controls=0&playlist={{ hero_video_url | replace: 'https://www.youtube.com/watch?v=', '' | replace: 'https://youtu.be/', '' | replace: 'https://www.youtube-nocookie.com/embed/', '' }}" width="100%" height="100%" style="width:100%;height:100%;object-fit:cover;border:0;" frameborder="0" allow="autoplay;encrypted-media" allowfullscreen></iframe>
+        <div class="home-hero__video-embed">
+          <iframe src="https://www.youtube-nocookie.com/embed/{{ youtube_id }}?autoplay=1&loop=1&mute=1&controls=0&playsinline=1&playlist={{ youtube_id }}" title="Hero video" allow="autoplay; encrypted-media" tabindex="-1"></iframe>
         </div>
       {% elsif hero_video_type == 'file' and hero_video_file != blank %}
         <video class="home-hero__video" autoplay muted loop playsinline poster="{{ hero_image | image_url: width: 1920 }}">
-          <source src="{{ hero_video_file | image_url: width: 1920 }}" type="video/mp4">
+          {%- for source in hero_video_file.sources -%}
+            <source src="{{ source.url }}" type="{{ source.mime_type }}">
+          {%- endfor -%}
         </video>
       {% elsif hero_video_url != blank %}
         <video class="home-hero__video" autoplay muted loop playsinline poster="{{ hero_image | image_url: width: 1920 }}">
@@ -272,7 +281,7 @@
       "label": "Video URL or YouTube link"
     },
     {
-      "type": "image_picker",
+      "type": "video",
       "id": "hero_video_file",
       "label": "Upload video file"
     },

@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "wheel-gallery": {
@@ -7,11 +16,16 @@
           "type": "wheel_build",
           "settings": {
             "image": "shopify://shop_images/Calder-Wheels-Close-up_2.png",
-            "wheel_model": "Design 201",
-            "wheel_series": "X5 12",
-            "finish": "Black",
-            "detail_url": "shopify://products/apex-201",
-            "gallery_handle": ""
+            "wheel_model": "CLM-01",
+            "wheel_series": "Forged Monoblock",
+            "finish": "Gloss Black",
+            "detail_url": "shopify://products/calder-clm-01-wheel",
+            "gallery_handle": "",
+            "wheel_style": "",
+            "construction": "",
+            "bolt_pattern": "",
+            "wheel_diameter": "",
+            "description": ""
           }
         }
       },
@@ -20,7 +34,7 @@
       ],
       "settings": {
         "hero_title": "Wheel Gallery",
-        "hero_subtitle": "Explore Calder wheel designs, finishes, and configurations. Browse by design \u2014 discover every finish combination.",
+        "hero_subtitle": "Explore Calder wheel designs, finishes, and configurations. Browse by design — discover every finish combination.",
         "per_page": 12,
         "builder_url": "",
         "show_cta": true,
@@ -30,14 +44,16 @@
         "cta_label": "Build Your Wheel",
         "section_width": "global",
         "container_max_width": 1178,
+        "hero_image": "shopify://shop_images/Escalade-M-01_3.png",
         "hero_eyebrow": "CALDER WHEELS",
+        "hero_height": 300,
         "hero_overlay": 55,
         "columns_desktop": 4,
         "columns_mobile": "2",
         "show_search": true,
         "show_sort": true,
         "show_filters": true,
-        "hero_height": 300
+        "style_filter_values": ""
       }
     }
   },

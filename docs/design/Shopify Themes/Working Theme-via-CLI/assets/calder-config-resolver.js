@@ -40,6 +40,14 @@
     hardware: { 'chrome bolts': 'chrome', 'chrome': 'chrome', 'black bolts': 'black', 'black': 'black' }
   };
 
+  /* Design-code aliases (2026-11-02 G): the universal CLB-06 / CLB-07 products
+     were renamed to CLM-06 / CLM-07 in the live store. If the admin rename also
+     updated the custom.design_code metafield, the PDP boots with 'CLM06' /
+     'CLM07'. The registry keys the design by its data-sheet identity
+     (CLB06/CLB07 — part numbers CLB06xx…), so map the renamed codes back to
+     the registry key before lookup. SKUs/part numbers are NOT affected. */
+  var DESIGN_KEY_ALIASES = { 'clm06': 'clb06', 'clm07': 'clb07' };
+
   function norm(value) {
     return String(value == null ? '' : value).trim().toLowerCase().replace(/\s+/g, ' ');
   }
@@ -123,6 +131,7 @@
     }
     var key = opts.designCode || opts.designId || opts.handle || '';
     var k = norm(key).replace(/calder-/, '').replace(/-/g, '');
+    if (DESIGN_KEY_ALIASES[k]) { k = DESIGN_KEY_ALIASES[k]; }
     var design = null;
     for (var i = 0; i < registry.designs.length; i++) {
       var d = registry.designs[i];

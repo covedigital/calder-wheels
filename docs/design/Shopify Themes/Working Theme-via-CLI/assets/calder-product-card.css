@@ -587,7 +587,7 @@ calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__med
   aspect-ratio: 1 / 1;
 }
 calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__content {
-  padding: 4px 14px 0;
+  padding: 4px 5px 0;
 }
 calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__type,
 calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__type a,
@@ -702,7 +702,7 @@ calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__med
     padding: 0;
   }
   calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__content {
-    padding: 4px 12px 14px;
+    padding: 4px 5px 10px;
   }
   calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__title {
     font-size: 18px !important;
@@ -742,7 +742,8 @@ calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__act
 calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__action .form.js-product-form > .quantity,
 calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__action .form.js-product-form > .quantity-input,
 calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__action .form.js-product-form > quantity-input,
-calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__action .form.js-product-form > .prd-quantity {
+calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__action .form.js-product-form > .prd-quantity,
+calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__action .form.js-product-form > [data-render^="qty-"] {
   flex: 1 1 calc(50% - 4px);
   min-width: 0;
   margin: 0 !important;
@@ -756,6 +757,32 @@ calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__act
 }
 calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__action .form.js-product-form > quickview-popup > .btn {
   width: 100% !important;
+}
+
+/* Quantity wrapper fix: the qty markup renders as
+   form > div[data-render="qty-..."] > quantity-input, so the wrapper div is
+   the real flex item. Size it to its half of the row (same as the button)
+   and let the input fill the box. Without this the qty keeps its intrinsic
+   width and the CTA wraps onto its own line on narrower cards. */
+calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__action [data-render^="qty-"] > quantity-input {
+  display: block;
+  width: 100%;
+}
+calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__action [data-render^="qty-"] .prd-quantity {
+  width: 100%;
+}
+calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__action [data-render^="qty-"] .prd-quantity > input.form-control {
+  flex: 1 1 auto;
+  width: 100%;
+}
+
+/* CTA box-sizing fix: <button> is border-box via the UA default, but the
+   anchor CTA (quickshop) is content-box — its 16px horizontal padding was
+   added ON TOP of the 50% flex-basis, pushing it onto a new line. Normalize
+   both to border-box so qty + CTA always share the row on every card. */
+calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__action .form.js-product-form > .btn,
+calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__action .form.js-product-form > quickview-popup > .btn {
+  box-sizing: border-box;
 }
 @media(max-width: 900px) {
   calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__title {
@@ -777,4 +804,185 @@ calder-product-card:is(.calder-card--light,.calder-card--dark) .label-per-wheel 
   font-size: 0.8rem;
   font-weight: normal;
   color: var(--calder-card-secondary, #667085);
+}
+
+/* ============================================================
+   Premium card sections — Available Sizes / Shown Configuration.
+   Scoped to the premium layouts, above .calder-card__price.
+   Legacy layouts untouched.
+   ============================================================ */
+calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__section-label {
+  font-size: 11px;
+  font-weight: 600;
+  //letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--calder-card-secondary, #667085);
+  margin: 0 0 0;
+}
+calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__sizes-values {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--calder-card-text, #0e2a3e);
+  line-height: 1.3;
+}
+calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__finishes-list {
+  font-size: 13px;
+  color: var(--calder-card-text, #0e2a3e);
+  line-height: 1.4;
+}
+/* Keep existing picker inputs available to the form without displaying
+   an Available Finishes section on the premium card. */
+calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__finishes[hidden] {
+  display: none !important;
+}
+/* Available Finishes: the existing variant picker, compacted. The hidden
+   non-target option rows (card_option_filter) stay functional but
+   invisible; the Center Finish row shows swatches with visible names
+   that wrap (no overflow). */
+calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__finishes .prd-option-title {
+  display: none !important;
+}
+calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__finishes .prd-options {
+  display: block;
+  max-height: none;
+}
+calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__finishes .prd-option-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__finishes .prd-option .label-radio {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  min-height: 28px;
+  border: 1px solid var(--calder-card-border, rgba(14, 42, 62, 0.18));
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 13px;
+  line-height: 1.2;
+  color: var(--calder-card-text, #0e2a3e);
+  white-space: normal;
+  word-break: break-word;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__finishes .prd-option .label-radio.swatch-active {
+  border-color: var(--calder-card-accent, #e79a45);
+  box-shadow: 0 0 0 1px var(--calder-card-accent, #e79a45);
+  font-weight: 600;
+}
+calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__finishes .prd-option .label-radio.disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__finishes .prd-option input[type="radio"] {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+/* Shown Configuration: compact two-column snapshot with labels above
+   values, a shared row divider and subtle column separators. */
+calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__config {
+  margin: 12px 0 14px;
+  padding: 14px 18px;
+  border-radius: 6px;
+  background: #f3f4f6;
+  box-sizing: border-box;
+  min-width: 0;
+  container-type: inline-size;
+  container-name: calder-card-config;
+}
+calder-product-card.calder-card--dark .calder-card__config {
+  background: rgba(255, 255, 255, 0.06);
+}
+calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__config-heading {
+  font-size: 12px;
+  font-weight: 500;
+  //letter-spacing: 0.12em;
+  //text-transform: uppercase;
+  color: var(--calder-card-secondary, #667085);
+  margin-bottom: 10px;
+  line-height: 1.4;
+}
+calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__config-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0;
+}
+calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__config-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 3px;
+  min-width: 0;
+  padding: 0 10px 10px 0;
+  box-sizing: border-box;
+}
+calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__config-cell[data-calder-config-cell="d"],
+calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__config-cell[data-calder-config-cell="h"] {
+  grid-column: 1;
+}
+calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__config-cell[data-calder-config-cell="c"],
+calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__config-cell[data-calder-config-cell="b"] {
+  grid-column: 2;
+  padding-right: 0;
+  padding-left: 10px;
+  border-left: 1px solid var(--calder-card-border, rgba(14, 42, 62, 0.18));
+}
+calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__config-cell[data-calder-config-cell="d"],
+calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__config-cell[data-calder-config-cell="c"] {
+  grid-row: 1;
+}
+calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__config-cell[data-calder-config-cell="h"],
+calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__config-cell[data-calder-config-cell="b"] {
+  grid-row: 2;
+  padding-top: 10px;
+  padding-bottom: 0;
+  border-top: 1px solid var(--calder-card-border, rgba(14, 42, 62, 0.18));
+}
+calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__config-label {
+  font-size: 12px;
+  color: var(--calder-card-secondary, #667085);
+  line-height: 1.3;
+}
+calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__config-value {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--calder-card-text, #0e2a3e);
+  text-align: left;
+  line-height: 1.25;
+  overflow-wrap: break-word;
+}
+@media (max-width: 420px) {
+  calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__config {
+    padding: 10px;
+  }
+  calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__config-value {
+    font-size: 13px;
+  }
+}
+/* Use the card's width rather than the page width: desktop collection
+   columns can be narrower than a full-width mobile card. */
+@container calder-card-config (max-width: 150px) {
+  calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__config-grid {
+    grid-template-columns: 1fr;
+  }
+  calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__config-cell[data-calder-config-cell] {
+    grid-column: auto;
+    grid-row: auto;
+    padding: 8px 0;
+    border-left: none;
+    border-top: 1px solid var(--calder-card-border, rgba(14, 42, 62, 0.18));
+  }
+  calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__config-cell:first-child {
+    padding-top: 0;
+    border-top: none;
+  }
+}
+
+.calder-card__media div.prd-icons {
+  display: none !important;
 }

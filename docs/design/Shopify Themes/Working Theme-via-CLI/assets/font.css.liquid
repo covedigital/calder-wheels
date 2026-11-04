@@ -15,9 +15,13 @@
     font-display: swap;
 }
 
+/* Garet Bold: the supplied garet-bold.otf is a 96-glyph ASCII-only subset
+   (missing en/em dashes, curly quotes, apostrophe, minus — mobile per-glyph
+   fallback). Until a complete Garet Bold is supplied, the 700 slot serves
+   Poppins Bold (brand-sanctioned fallback, complete Latin coverage). */
 @font-face {
     font-family: 'Garet';
-    src: url('{{ "garet-bold.otf" | asset_url }}') format('opentype');
+    src: url('{{ "Poppins-Bold.ttf" | asset_url }}') format('truetype');
     font-weight: 700;
     font-style: normal;
     font-display: swap;

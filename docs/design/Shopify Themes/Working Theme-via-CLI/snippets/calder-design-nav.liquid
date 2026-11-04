@@ -1,0 +1,138 @@
+{%- comment -%}
+  Calder universal PDP — Explore Other Designs (2026-11-02 A).
+
+  Prominent, accessible design-switching nav rendered on every universal
+  design PDP (all six designs). Resolves each design's CURRENT product URL
+  from the store catalog (universal products: tagged 'Universal Design' or
+  handle ending '-wheel') so live-store handle changes — e.g. the
+  CLB-06 -> CLM-06 product rename — are followed automatically.
+
+  2026-11-03 fix: the lookup previously iterated collections.all.products
+  WITHOUT paginate, so Shopify served only the first 50 products — every
+  universal product sits beyond that cap, every lookup missed, and the
+  fallback URL for the renamed CLM-06 product (/products/calder-clm-06-wheel)
+  404'd on the live store. The lookup now paginates the full catalog, so
+  links always use each design's real current URL.
+
+  Design keys are normalized through the rename aliases (CLB06 == CLM06,
+  CLB07 == CLM07) so the nav works whether the live metafield still carries
+  the original CLB-06/CLB-07 code or the renamed CLM-06/CLM-07 code.
+  Display names drop the leading "Calder " (client request 2026-11-03).
+
+  The current design is excluded. calder-universal-pdp.js appends the live
+  builder configuration (diameter/center/barrel/hardware + pcd) to the link
+  at click time; the destination PDP validates every param against its own
+  options (calder-pdp-state.js) and resets gracefully on mismatch, so no
+  incompatible options or bolts are ever transferred (spec A state rules).
+
+  Fallback (catalog lookup unavailable): registry canonical handles
+  (calder-clm-0X-wheel for the never-renamed designs; calder-clb-06/07-wheel
+  for the renamed pair — redirect-covered when the rename was done in admin).
+{%- endcomment -%}
+{%- liquid
+  comment
+    cdn_normalize: uppercase key without dashes, with CLB06/CLB07 folded to
+    their renamed CLM06/CLM07 identity (08_G).
+  endcomment
+  assign cdn_code = product.metafields.custom.design_code.value | default: product.metafields.custom.design_code | default: '' | strip | upcase
+  assign cdn_current_key = cdn_code | remove: '-'
+  if cdn_current_key == 'CLB06'
+    assign cdn_current_key = 'CLM06'
+  elsif cdn_current_key == 'CLB07'
+    assign cdn_current_key = 'CLM07'
+  endif
+
+  assign cdn_keys = 'CLM01,CLM02,CLM03,CLM05,CLM06,CLM07' | split: ','
+  assign cdn_numbers = '201,202,203,205,206,207' | split: ','
+  assign cdn_names = 'CLM-01,CLM-02,CLM-03,CLM-05,CLM-06,CLM-07' | split: ','
+  assign cdn_fallback_handles = 'calder-clm-01-wheel,calder-clm-02-wheel,calder-clm-03-wheel,calder-clm-05-wheel,calder-clb-06-wheel,calder-clb-07-wheel' | split: ','
+
+  assign cdn_urls = ''
+  assign cdn_titles = ''
+-%}
+{%- if collections.all != blank -%}
+  {%- paginate collections.all.products by 250 -%}
+    {%- for cdn_p in collections.all.products -%}
+      {%- liquid
+        assign cdn_h = cdn_p.handle
+        assign cdn_h_len = cdn_h.size | minus: 6
+        assign cdn_h_tail = cdn_h | slice: cdn_h_len
+        assign cdn_is_universal = false
+        if cdn_p.tags contains 'Universal Design' or cdn_h_tail == '-wheel'
+          assign cdn_is_universal = true
+        endif
+      -%}
+      {%- if cdn_is_universal -%}
+        {%- liquid
+          assign cdn_p_code = cdn_p.metafields.custom.design_code.value | default: cdn_p.metafields.custom.design_code | default: '' | strip | upcase
+          assign cdn_p_key = cdn_p_code | remove: '-'
+          if cdn_p_key == 'CLB06'
+            assign cdn_p_key = 'CLM06'
+          elsif cdn_p_key == 'CLB07'
+            assign cdn_p_key = 'CLM07'
+          endif
+          if cdn_p_key != blank
+            assign cdn_urls = cdn_urls | append: cdn_p_key | append: '|' | append: cdn_p.url | append: ','
+            assign cdn_titles = cdn_titles | append: cdn_p_key | append: '|' | append: cdn_p.title | append: ','
+          endif
+        -%}
+      {%- endif -%}
+    {%- endfor -%}
+  {%- endpaginate -%}
+{%- endif -%}
+{%- if cdn_current_key != blank -%}
+<nav class="calder-design-nav" data-calder-design-nav aria-label="Explore other wheel designs">
+  <div class="calder-design-nav__heading">Explore Other Designs</div>
+  <ul class="calder-design-nav__list">
+    {%- for cdn_key in cdn_keys -%}
+      {%- if cdn_key != cdn_current_key -%}
+        {%- liquid
+          assign cdn_i = forloop.index0
+          assign cdn_number = cdn_numbers[cdn_i]
+          assign cdn_url = ''
+          assign cdn_title = ''
+          assign cdn_pairs = cdn_urls | split: ','
+          for cdn_pair in cdn_pairs
+            assign cdn_pk = cdn_pair | split: '|' | first
+            if cdn_pk == cdn_key
+              assign cdn_url = cdn_pair | split: '|' | last
+              break
+            endif
+          endfor
+          assign cdn_title_pairs = cdn_titles | split: ','
+          for cdn_pair in cdn_title_pairs
+            assign cdn_pk = cdn_pair | split: '|' | first
+            if cdn_pk == cdn_key
+              assign cdn_title = cdn_pair | split: '|' | last
+              break
+            endif
+          endfor
+          if cdn_title == blank
+            assign cdn_title = cdn_names[cdn_i]
+          endif
+          if cdn_url == blank
+            comment
+              Fallback: the renamed-handle scheme (calder-clm-06-wheel). If the
+              live handle differs, Shopify's rename redirect covers the
+              registry path; verify live handles in QA.
+            endcomment
+            assign cdn_url = '/products/' | append: cdn_fallback_handles[cdn_i]
+          endif
+        -%}
+        <li class="calder-design-nav__item">
+          <a class="calder-design-nav__link" href="{{ cdn_url }}" data-calder-design-nav-link>
+            <span class="calder-design-nav__thumb" aria-hidden="true">
+              <img src="{{ cdn_number | append: '-disk-gb.png' | asset_url }}" alt="" width="88" height="56" loading="lazy" decoding="async">
+            </span>
+            {%- comment -%}Leading "Calder " removed from the design name
+              (client request 2026-11-03) — live titles ("Calder CLM-06")
+              and fallback names render identically as "CLM-06".{%- endcomment -%}
+            <span class="calder-design-nav__name">{{ cdn_title | remove: 'Calder ' | escape }}</span>
+            <span class="calder-design-nav__number">{{ cdn_number }}</span>
+          </a>
+        </li>
+      {%- endif -%}
+    {%- endfor -%}
+  </ul>
+</nav>
+{%- endif -%}

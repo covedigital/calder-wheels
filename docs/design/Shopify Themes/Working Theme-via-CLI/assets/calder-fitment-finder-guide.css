@@ -83,3 +83,18 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* ── Vehicle-mode finish filters (2026-11-02 B) ──
+   Barrel/lip + bolt/hardware selects under the guide card; shown only
+   while vehicle results are rendered (calder-fitment-finder-guide.js). */
+.cw-fitment-guide__finish-filters { display: flex; flex-wrap: wrap; gap: 10px; margin: 0 0 16px; }
+.cw-fitment-guide__finish-filters[hidden] { display: none; }
+.cw-fitment-guide__finish-filter { flex: 1 1 180px; min-width: 0; }
+.cw-fitment-guide__finish-select {
+  width: 100%; height: 44px; padding: 0 12px;
+  border: 1px solid #d5dbe2; border-radius: 4px;
+  background: #fff; color: #0e2a3e;
+  font-size: 16px; /* iOS tap-zoom floor (mobile audit item 1) */
+  cursor: pointer;
+}
+.cw-fitment-guide__finish-select:focus-visible { outline: 2px solid #1e4c68; outline-offset: 2px; }

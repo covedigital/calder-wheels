@@ -424,11 +424,13 @@
   background: transparent;
   border: none;
   font-family: inherit;
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 600;
   color: var(--calder-muted, #727D87);
   cursor: pointer;
-  padding: 2px 6px;
+  min-height: 44px; /* touch target floor (mobile audit item 7, 2026-11-02) */
+  padding: 10px 10px;
+  margin: -10px -6px;
   border-radius: 3px;
   transition: color 0.2s;
 }
@@ -947,17 +949,37 @@
 }
 
 .cbp-popular__dot {
-  width: 8px;
-  height: 8px;
+  /* Touch-target floor (mobile audit item 7, 2026-11-02): the visual dot
+     stays 8x8 via the pseudo-element; the button itself is a 28x28 hit
+     area so the dot remains tappable on phones (arrows are hidden there). */
+  position: relative;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
-  background: rgba(0,0,0,0.12);
+  background: transparent;
   border: none;
   cursor: pointer;
   padding: 0;
   transition: background 0.2s;
 }
 
+.cbp-popular__dot::before {
+  content: "";
+  position: absolute;
+  inset: 50% auto auto 50%;
+  transform: translate(-50%, -50%);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.12);
+  transition: background 0.2s;
+}
+
 .cbp-popular__dot--active {
+  background: transparent;
+}
+
+.cbp-popular__dot--active::before {
   background: var(--calder-gold, #C2A48A);
 }
 

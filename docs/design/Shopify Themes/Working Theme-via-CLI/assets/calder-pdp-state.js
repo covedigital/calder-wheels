@@ -44,6 +44,15 @@
     function urlFor(tokens) {
       var base = env.location.pathname;
       var qs = DIMS.map(function (d) { return PARAM_BY_DIM[d] + '=' + encodeURIComponent(tokens[d]); }).join('&');
+      /* pcd carry (2026-11-02 C): the bolt pattern transferred from style-mode
+         listings rides along on every builder URL update (refresh, back/
+         forward, pushState) so the selection context survives interactions.
+         parseUrl ignores unknown params; calder-universal-cta.js validates
+         pcd against the design's fitment groups and ignores invalid values. */
+      try {
+        var carry = new URLSearchParams(env.location.search).get('pcd');
+        if (carry) { qs += '&pcd=' + encodeURIComponent(carry); }
+      } catch (e) { /* URLSearchParams unavailable — skip carry */ }
       return base + '?' + qs;
     }
 

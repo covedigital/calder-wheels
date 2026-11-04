@@ -7489,5 +7489,35 @@
         "info": "Demo loads the bundled demo component dataset. Native skips the QuickBooks component check entirely and trusts Shopify variant availability (available/sold out). QuickBooks expects an n8n-published window.CALDER_QUICKBOOKS_INVENTORY payload; if it is missing, purchase is blocked with a verification message (never fail-open)."
       }
     ]
+  },
+  {
+    "name": "Calder Wheels — Mobile Configurator",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Mobile sticky configurator for universal wheel product pages: a collapsed Calder navy customization bar above the mobile bottom navigation that expands into a bottom-sheet configurator (Diameter, Center, Barrel & Lip, Hardware). It shares the existing product configurator state — pricing, inventory, SKU, fitment, and purchase logic are unchanged."
+      },
+      {
+        "type": "select",
+        "id": "calder_mobile_configurator_mode",
+        "label": "Visibility mode",
+        "options": [
+          {
+            "value": "enabled",
+            "label": "Enabled for all mobile visitors (default)"
+          },
+          {
+            "value": "developer",
+            "label": "Developer preview only (Theme Editor previews)"
+          },
+          {
+            "value": "disabled",
+            "label": "Disabled"
+          }
+        ],
+        "default": "enabled",
+        "info": "Enabled: renders on eligible universal wheel product pages for mobile visitors only (max-width 749px); desktop is never affected. Developer preview: renders only inside Shopify Theme Editor previews (request.design_mode) — invisible to ordinary visitors on the published theme. Disabled: no mobile configurator markup, styles, or scripts load — the storefront is unchanged."
+      }
+    ]
   }
 ]

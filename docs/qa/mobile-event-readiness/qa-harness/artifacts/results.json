@@ -1,0 +1,1062 @@
+{
+  "config": {
+    "configFile": "/Users/admin/Projects/Autonomous Agent/1 - Projects/Calder Wheels/docs/qa/mobile-event-readiness/qa-harness/playwright.config.mjs",
+    "rootDir": "/Users/admin/Projects/Autonomous Agent/1 - Projects/Calder Wheels/docs/qa/mobile-event-readiness/qa-harness/tests",
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "./artifacts/results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 15000
+    },
+    "quiet": false,
+    "projects": [
+      {
+        "outputDir": "/Users/admin/Projects/Autonomous Agent/1 - Projects/Calder Wheels/docs/qa/mobile-event-readiness/qa-harness/artifacts/test-results",
+        "repeatEach": 1,
+        "retries": 1,
+        "metadata": {},
+        "id": "chromium-mobile",
+        "name": "chromium-mobile",
+        "testDir": "/Users/admin/Projects/Autonomous Agent/1 - Projects/Calder Wheels/docs/qa/mobile-event-readiness/qa-harness/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 180000
+      },
+      {
+        "outputDir": "/Users/admin/Projects/Autonomous Agent/1 - Projects/Calder Wheels/docs/qa/mobile-event-readiness/qa-harness/artifacts/test-results",
+        "repeatEach": 1,
+        "retries": 1,
+        "metadata": {},
+        "id": "webkit-mobile",
+        "name": "webkit-mobile",
+        "testDir": "/Users/admin/Projects/Autonomous Agent/1 - Projects/Calder Wheels/docs/qa/mobile-event-readiness/qa-harness/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 180000
+      }
+    ],
+    "shard": null,
+    "updateSnapshots": "missing",
+    "version": "1.48.2",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "01-smoke.spec.mjs",
+      "file": "01-smoke.spec.mjs",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "smoke: critical routes",
+          "file": "01-smoke.spec.mjs",
+          "line": 11,
+          "column": 6,
+          "specs": [
+            {
+              "title": "smoke home (/)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 180000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-mobile",
+                  "projectName": "chromium-mobile",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "status": "passed",
+                      "duration": 16085,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-03T15:02:49.319Z",
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "3e5ca72f78b7919c938f-f2d480c9e76851670ad1",
+              "file": "01-smoke.spec.mjs",
+              "line": 24,
+              "column": 5
+            },
+            {
+              "title": "smoke collection-wheels (/collections/wheels)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 180000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-mobile",
+                  "projectName": "chromium-mobile",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "status": "passed",
+                      "duration": 15556,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-03T15:03:06.210Z",
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "3e5ca72f78b7919c938f-663ac024574e9ba4c1ec",
+              "file": "01-smoke.spec.mjs",
+              "line": 24,
+              "column": 5
+            },
+            {
+              "title": "smoke pdp-clm-01 (/products/calder-clm-01-wheel)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 180000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-mobile",
+                  "projectName": "chromium-mobile",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "status": "passed",
+                      "duration": 11622,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-03T15:03:21.770Z",
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "3e5ca72f78b7919c938f-c47f4d12e7698e169213",
+              "file": "01-smoke.spec.mjs",
+              "line": 24,
+              "column": 5
+            },
+            {
+              "title": "smoke pdp-clm-06 (/products/calder-clm-06-wheel)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 180000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-mobile",
+                  "projectName": "chromium-mobile",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "status": "passed",
+                      "duration": 10174,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-03T15:03:33.397Z",
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "3e5ca72f78b7919c938f-32f48ba43b613eaa487f",
+              "file": "01-smoke.spec.mjs",
+              "line": 24,
+              "column": 5
+            },
+            {
+              "title": "smoke fitment (/pages/fitment)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 180000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-mobile",
+                  "projectName": "chromium-mobile",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "status": "passed",
+                      "duration": 8561,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-03T15:03:43.584Z",
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "3e5ca72f78b7919c938f-018584d9e881af30d03f",
+              "file": "01-smoke.spec.mjs",
+              "line": 24,
+              "column": 5
+            },
+            {
+              "title": "smoke wheel-gallery (/pages/wheel-gallery)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 180000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-mobile",
+                  "projectName": "chromium-mobile",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "status": "passed",
+                      "duration": 10316,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-03T15:03:52.150Z",
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "3e5ca72f78b7919c938f-f9fcf5bb72130c763e5c",
+              "file": "01-smoke.spec.mjs",
+              "line": 24,
+              "column": 5
+            },
+            {
+              "title": "smoke vehicle-gallery (/pages/vehicle-gallery)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 180000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-mobile",
+                  "projectName": "chromium-mobile",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "status": "passed",
+                      "duration": 9201,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-03T15:04:02.482Z",
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "3e5ca72f78b7919c938f-9c30e42f1a0719548ac3",
+              "file": "01-smoke.spec.mjs",
+              "line": 24,
+              "column": 5
+            },
+            {
+              "title": "smoke build-your-wheel (/pages/build-your-wheel)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 180000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-mobile",
+                  "projectName": "chromium-mobile",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "status": "passed",
+                      "duration": 10331,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-03T15:04:11.697Z",
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "3e5ca72f78b7919c938f-d0b76cd35ee0304312bc",
+              "file": "01-smoke.spec.mjs",
+              "line": 24,
+              "column": 5
+            },
+            {
+              "title": "smoke cart (/cart)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 180000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-mobile",
+                  "projectName": "chromium-mobile",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "status": "passed",
+                      "duration": 11311,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-03T15:04:22.037Z",
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "3e5ca72f78b7919c938f-1aae5c762fc191c45aee",
+              "file": "01-smoke.spec.mjs",
+              "line": 24,
+              "column": 5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "04-functional.spec.mjs",
+      "file": "04-functional.spec.mjs",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "functional: 12 areas @375 chromium",
+          "file": "04-functional.spec.mjs",
+          "line": 20,
+          "column": 6,
+          "specs": [
+            {
+              "title": "1.1 mobile burger opens navigation drawer",
+              "ok": true,
+              "tags": [
+                "375"
+              ],
+              "tests": [
+                {
+                  "timeout": 180000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-mobile",
+                  "projectName": "chromium-mobile",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "status": "passed",
+                      "duration": 13714,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-03T15:04:33.453Z",
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "399b746b46bdaa1f8483-29dc9044018d8702eb9e",
+              "file": "04-functional.spec.mjs",
+              "line": 26,
+              "column": 3
+            },
+            {
+              "title": "1.2 drawer nav link navigates to target route",
+              "ok": true,
+              "tags": [
+                "375"
+              ],
+              "tests": [
+                {
+                  "timeout": 180000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-mobile",
+                  "projectName": "chromium-mobile",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "status": "passed",
+                      "duration": 19084,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-03T15:04:47.485Z",
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "399b746b46bdaa1f8483-9967497a3d5ab7a3dc95",
+              "file": "04-functional.spec.mjs",
+              "line": 48,
+              "column": 3
+            },
+            {
+              "title": "2.1 collection cards render with price + tap-through",
+              "ok": true,
+              "tags": [
+                "375"
+              ],
+              "tests": [
+                {
+                  "timeout": 180000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-mobile",
+                  "projectName": "chromium-mobile",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "status": "passed",
+                      "duration": 15955,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-03T15:05:06.579Z",
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "399b746b46bdaa1f8483-6c3051fdca7bd20b8339",
+              "file": "04-functional.spec.mjs",
+              "line": 64,
+              "column": 3
+            },
+            {
+              "title": "3.1 wheel gallery: tabs/count/interaction",
+              "ok": true,
+              "tags": [
+                "375"
+              ],
+              "tests": [
+                {
+                  "timeout": 180000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-mobile",
+                  "projectName": "chromium-mobile",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "status": "passed",
+                      "duration": 9104,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-03T15:05:22.541Z",
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "399b746b46bdaa1f8483-3dc82e5eea54a7568127",
+              "file": "04-functional.spec.mjs",
+              "line": 81,
+              "column": 3
+            },
+            {
+              "title": "4.1 vehicle gallery: items load + tap-through",
+              "ok": true,
+              "tags": [
+                "375"
+              ],
+              "tests": [
+                {
+                  "timeout": 180000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-mobile",
+                  "projectName": "chromium-mobile",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "status": "passed",
+                      "duration": 10890,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-03T15:05:31.648Z",
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "399b746b46bdaa1f8483-afa89308e9829497dfcf",
+              "file": "04-functional.spec.mjs",
+              "line": 107,
+              "column": 3
+            },
+            {
+              "title": "5.1 configurator: option click updates selected label + SKU",
+              "ok": true,
+              "tags": [
+                "375"
+              ],
+              "tests": [
+                {
+                  "timeout": 180000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-mobile",
+                  "projectName": "chromium-mobile",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "status": "passed",
+                      "duration": 11297,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-03T15:05:42.546Z",
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "399b746b46bdaa1f8483-a1ea52bcfefdca90c366",
+              "file": "04-functional.spec.mjs",
+              "line": 127,
+              "column": 3
+            },
+            {
+              "title": "6.1 compositing: layer image srcs swap with selections, no missing layers",
+              "ok": true,
+              "tags": [
+                "375"
+              ],
+              "tests": [
+                {
+                  "timeout": 180000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-mobile",
+                  "projectName": "chromium-mobile",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "status": "passed",
+                      "duration": 12179,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-03T15:05:53.848Z",
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "399b746b46bdaa1f8483-7b0e9602d8b1b2ba7c5f",
+              "file": "04-functional.spec.mjs",
+              "line": 156,
+              "column": 3
+            },
+            {
+              "title": "7.1 fitment page: cascading selects + results",
+              "ok": true,
+              "tags": [
+                "375"
+              ],
+              "tests": [
+                {
+                  "timeout": 180000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-mobile",
+                  "projectName": "chromium-mobile",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "status": "passed",
+                      "duration": 28536,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-03T15:06:06.032Z",
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "399b746b46bdaa1f8483-6909c8d35416e390c524",
+              "file": "04-functional.spec.mjs",
+              "line": 196,
+              "column": 3
+            },
+            {
+              "title": "8.1 availability: in-stock config enables CTA; qty > component stock behavior",
+              "ok": true,
+              "tags": [
+                "375"
+              ],
+              "tests": [
+                {
+                  "timeout": 180000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-mobile",
+                  "projectName": "chromium-mobile",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "status": "passed",
+                      "duration": 16838,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-03T15:06:34.571Z",
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "399b746b46bdaa1f8483-5f6e91c2fc07ec33688b",
+              "file": "04-functional.spec.mjs",
+              "line": 232,
+              "column": 3
+            },
+            {
+              "title": "9.1 add-to-cart flow updates cart, then clears (no checkout)",
+              "ok": true,
+              "tags": [
+                "375"
+              ],
+              "tests": [
+                {
+                  "timeout": 180000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-mobile",
+                  "projectName": "chromium-mobile",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "status": "passed",
+                      "duration": 18470,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-03T15:06:51.412Z",
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "399b746b46bdaa1f8483-7b61d07916cb49b9ea0f",
+              "file": "04-functional.spec.mjs",
+              "line": 279,
+              "column": 3
+            },
+            {
+              "title": "9.2 inquiry: unlisted config shows request notice, no add",
+              "ok": true,
+              "tags": [
+                "375"
+              ],
+              "tests": [
+                {
+                  "timeout": 180000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-mobile",
+                  "projectName": "chromium-mobile",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "status": "passed",
+                      "duration": 11599,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-03T15:07:09.885Z",
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "399b746b46bdaa1f8483-3fb39c9c70c91f17f5af",
+              "file": "04-functional.spec.mjs",
+              "line": 314,
+              "column": 3
+            },
+            {
+              "title": "10.1 form controls >= 16px font (iOS zoom guard) + CTA sizing",
+              "ok": true,
+              "tags": [
+                "375"
+              ],
+              "tests": [
+                {
+                  "timeout": 180000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-mobile",
+                  "projectName": "chromium-mobile",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "status": "passed",
+                      "duration": 13126,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-03T15:07:21.489Z",
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "399b746b46bdaa1f8483-a027b334fd104f3b4ba7",
+              "file": "04-functional.spec.mjs",
+              "line": 333,
+              "column": 3
+            },
+            {
+              "title": "11.1 sticky header/back-to-top/product sticky do not overlap on scroll",
+              "ok": true,
+              "tags": [
+                "375"
+              ],
+              "tests": [
+                {
+                  "timeout": 180000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-mobile",
+                  "projectName": "chromium-mobile",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "status": "passed",
+                      "duration": 9902,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-03T15:07:34.619Z",
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "399b746b46bdaa1f8483-f8360863a26f3f06161b",
+              "file": "04-functional.spec.mjs",
+              "line": 361,
+              "column": 3
+            },
+            {
+              "title": "12.1 orientation transition m-375-iphone -> landscape",
+              "ok": true,
+              "tags": [
+                "375"
+              ],
+              "tests": [
+                {
+                  "timeout": 180000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-mobile",
+                  "projectName": "chromium-mobile",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "status": "passed",
+                      "duration": 9970,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-03T15:07:44.528Z",
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "399b746b46bdaa1f8483-3049845b06757ad0d516",
+              "file": "04-functional.spec.mjs",
+              "line": 397,
+              "column": 5
+            },
+            {
+              "title": "12.1 orientation transition t-768-small-tablet -> landscape",
+              "ok": false,
+              "tags": [
+                "375"
+              ],
+              "tests": [
+                {
+                  "timeout": 180000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-mobile",
+                  "projectName": "chromium-mobile",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "status": "failed",
+                      "duration": 12465,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: <= \u001b[32m2\u001b[39m\nReceived:    \u001b[31m50\u001b[39m",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: <= \u001b[32m2\u001b[39m\nReceived:    \u001b[31m50\u001b[39m\n    at /Users/admin/Projects/Autonomous Agent/1 - Projects/Calder Wheels/docs/qa/mobile-event-readiness/qa-harness/tests/04-functional.spec.mjs:416:41",
+                        "location": {
+                          "file": "/Users/admin/Projects/Autonomous Agent/1 - Projects/Calder Wheels/docs/qa/mobile-event-readiness/qa-harness/tests/04-functional.spec.mjs",
+                          "column": 41,
+                          "line": 416
+                        },
+                        "snippet": "  414 |       }));\n  415 |       record('12-orientation', `${pKey} -> ${landscape.width}x${landscape.height}`, audit.doc - audit.vw <= 2 ? 'PASS' : 'WARN', audit);\n> 416 |       test.expect(audit.doc - audit.vw).toBeLessThanOrEqual(2);\n      |                                         ^\n  417 |       await ctx.close();\n  418 |     });\n  419 |   }"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/Users/admin/Projects/Autonomous Agent/1 - Projects/Calder Wheels/docs/qa/mobile-event-readiness/qa-harness/tests/04-functional.spec.mjs",
+                            "column": 41,
+                            "line": 416
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: <= \u001b[32m2\u001b[39m\nReceived:    \u001b[31m50\u001b[39m\n\n  414 |       }));\n  415 |       record('12-orientation', `${pKey} -> ${landscape.width}x${landscape.height}`, audit.doc - audit.vw <= 2 ? 'PASS' : 'WARN', audit);\n> 416 |       test.expect(audit.doc - audit.vw).toBeLessThanOrEqual(2);\n      |                                         ^\n  417 |       await ctx.close();\n  418 |     });\n  419 |   }\n\n    at /Users/admin/Projects/Autonomous Agent/1 - Projects/Calder Wheels/docs/qa/mobile-event-readiness/qa-harness/tests/04-functional.spec.mjs:416:41"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-03T15:07:54.506Z",
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/admin/Projects/Autonomous Agent/1 - Projects/Calder Wheels/docs/qa/mobile-event-readiness/qa-harness/artifacts/test-results/04-functional-functional-1-a9679-68-small-tablet---landscape-chromium-mobile/test-failed-1.png"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/admin/Projects/Autonomous Agent/1 - Projects/Calder Wheels/docs/qa/mobile-event-readiness/qa-harness/artifacts/test-results/04-functional-functional-1-a9679-68-small-tablet---landscape-chromium-mobile/trace.zip"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/Users/admin/Projects/Autonomous Agent/1 - Projects/Calder Wheels/docs/qa/mobile-event-readiness/qa-harness/tests/04-functional.spec.mjs",
+                        "column": 41,
+                        "line": 416
+                      }
+                    },
+                    {
+                      "workerIndex": 1,
+                      "status": "failed",
+                      "duration": 12263,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: <= \u001b[32m2\u001b[39m\nReceived:    \u001b[31m50\u001b[39m",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: <= \u001b[32m2\u001b[39m\nReceived:    \u001b[31m50\u001b[39m\n    at /Users/admin/Projects/Autonomous Agent/1 - Projects/Calder Wheels/docs/qa/mobile-event-readiness/qa-harness/tests/04-functional.spec.mjs:416:41",
+                        "location": {
+                          "file": "/Users/admin/Projects/Autonomous Agent/1 - Projects/Calder Wheels/docs/qa/mobile-event-readiness/qa-harness/tests/04-functional.spec.mjs",
+                          "column": 41,
+                          "line": 416
+                        },
+                        "snippet": "  414 |       }));\n  415 |       record('12-orientation', `${pKey} -> ${landscape.width}x${landscape.height}`, audit.doc - audit.vw <= 2 ? 'PASS' : 'WARN', audit);\n> 416 |       test.expect(audit.doc - audit.vw).toBeLessThanOrEqual(2);\n      |                                         ^\n  417 |       await ctx.close();\n  418 |     });\n  419 |   }"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/Users/admin/Projects/Autonomous Agent/1 - Projects/Calder Wheels/docs/qa/mobile-event-readiness/qa-harness/tests/04-functional.spec.mjs",
+                            "column": 41,
+                            "line": 416
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: <= \u001b[32m2\u001b[39m\nReceived:    \u001b[31m50\u001b[39m\n\n  414 |       }));\n  415 |       record('12-orientation', `${pKey} -> ${landscape.width}x${landscape.height}`, audit.doc - audit.vw <= 2 ? 'PASS' : 'WARN', audit);\n> 416 |       test.expect(audit.doc - audit.vw).toBeLessThanOrEqual(2);\n      |                                         ^\n  417 |       await ctx.close();\n  418 |     });\n  419 |   }\n\n    at /Users/admin/Projects/Autonomous Agent/1 - Projects/Calder Wheels/docs/qa/mobile-event-readiness/qa-harness/tests/04-functional.spec.mjs:416:41"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 1,
+                      "startTime": "2026-11-03T15:08:09.878Z",
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/admin/Projects/Autonomous Agent/1 - Projects/Calder Wheels/docs/qa/mobile-event-readiness/qa-harness/artifacts/test-results/04-functional-functional-1-a9679-68-small-tablet---landscape-chromium-mobile-retry1/test-failed-1.png"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/admin/Projects/Autonomous Agent/1 - Projects/Calder Wheels/docs/qa/mobile-event-readiness/qa-harness/artifacts/test-results/04-functional-functional-1-a9679-68-small-tablet---landscape-chromium-mobile-retry1/trace.zip"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/Users/admin/Projects/Autonomous Agent/1 - Projects/Calder Wheels/docs/qa/mobile-event-readiness/qa-harness/tests/04-functional.spec.mjs",
+                        "column": 41,
+                        "line": 416
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "399b746b46bdaa1f8483-c4bc803d06dc98ffb403",
+              "file": "04-functional.spec.mjs",
+              "line": 397,
+              "column": 5
+            },
+            {
+              "title": "5.2 design nav links all resolve (no 404s)",
+              "ok": true,
+              "tags": [
+                "375"
+              ],
+              "tests": [
+                {
+                  "timeout": 180000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-mobile",
+                  "projectName": "chromium-mobile",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "status": "passed",
+                      "duration": 12229,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-03T15:08:29.192Z",
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "399b746b46bdaa1f8483-bb2e231593c49eb713bd",
+              "file": "04-functional.spec.mjs",
+              "line": 422,
+              "column": 3
+            },
+            {
+              "title": "5.3 BYW page configurator hydrates + interacts; swatch integrity check",
+              "ok": true,
+              "tags": [
+                "375"
+              ],
+              "tests": [
+                {
+                  "timeout": 180000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-mobile",
+                  "projectName": "chromium-mobile",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "status": "passed",
+                      "duration": 13300,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-03T15:08:41.855Z",
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "399b746b46bdaa1f8483-1b6bb63e12cc148d879a",
+              "file": "04-functional.spec.mjs",
+              "line": 443,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-03T15:02:48.289Z",
+    "duration": 367041.967,
+    "expected": 25,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

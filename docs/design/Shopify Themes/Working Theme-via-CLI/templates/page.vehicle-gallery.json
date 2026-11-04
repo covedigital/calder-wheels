@@ -1,24 +1,37 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "vehicle-gallery": {
       "type": "calder-vehicle-gallery",
       "settings": {
         "hero_title": "Vehicle Gallery",
-        "hero_subtitle": "Explore real-world vehicle builds featuring Calder Wheels. Browse by vehicle \u2014 see how our wheels look on your car.",
+        "hero_subtitle": "Explore real-world vehicle builds featuring Calder Wheels. Browse by vehicle — see how our wheels look on your car.",
         "per_page": 12,
         "show_cta": true,
         "cta_heading": "Find Your Perfect Fitment",
         "cta_text": "Not sure what fits your vehicle? Use our fitment finder to discover compatible Calder wheel configurations.",
+        "cta_url": "",
         "cta_label": "Find Your Fit",
         "section_width": "global",
+        "container_max_width": 1178,
+        "hero_image": "shopify://shop_images/Silverado-Red.png",
         "hero_eyebrow": "CALDER WHEELS",
+        "hero_height": 300,
         "hero_overlay": 55,
         "columns_desktop": 4,
         "columns_mobile": "2",
         "show_search": true,
         "show_sort": true,
         "show_filters": true,
-        "hero_height": 300
+        "style_filter_values": ""
       }
     }
   },

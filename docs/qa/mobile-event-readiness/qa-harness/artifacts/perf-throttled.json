@@ -1,0 +1,188 @@
+[
+  {
+    "kind": "perf-throttled",
+    "name": "home @m-375-iphone",
+    "status": "PASS",
+    "navMs": 16717,
+    "metrics": {
+      "ttfb": 585,
+      "domContentLoaded": 1602,
+      "loadEvent": 2745,
+      "paints": [
+        {
+          "name": "first-paint",
+          "ms": 863
+        },
+        {
+          "name": "first-contentful-paint",
+          "ms": 863
+        }
+      ],
+      "cls": 0,
+      "resourceCount": 202,
+      "totalKB": 1434,
+      "slow": []
+    },
+    "brokenImages": [],
+    "overflowPx": 0,
+    "consoleErrors": 3,
+    "pageErrors": 0,
+    "failedRequests": 1,
+    "errorSamples": [
+      {
+        "text": "Failed to load resource: the server responded with a status of 401 ()",
+        "location": "https://wvpnpr-t7.myshopify.com/sf_private_access_tokens"
+      },
+      {
+        "text": "Access to XMLHttpRequest at 'https://big-skins.com/sales/?version=7.0.1&uuid=&theme_id=44566068&store=https://wvpnpr-t7.myshopify.com&xyz=infoportions34gizmotrims.com&zzz=' from origin 'https://wvpnpr-t7.myshopify.com' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+        "location": "https://wvpnpr-t7.myshopify.com/"
+      },
+      {
+        "text": "Failed to load resource: net::ERR_FAILED",
+        "location": "https://big-skins.com/sales/?version=7.0.1&uuid=&theme_id=44566068&store=https://wvpnpr-t7.myshopify.com&xyz=infoportions34gizmotrims.com&zzz="
+      }
+    ]
+  },
+  {
+    "kind": "perf-throttled",
+    "name": "pdp @m-375-iphone",
+    "status": "PASS",
+    "navMs": 17012,
+    "metrics": {
+      "ttfb": 167,
+      "domContentLoaded": 1915,
+      "loadEvent": 2540,
+      "paints": [
+        {
+          "name": "first-paint",
+          "ms": 466
+        },
+        {
+          "name": "first-contentful-paint",
+          "ms": 466
+        }
+      ],
+      "cls": 0,
+      "resourceCount": 248,
+      "totalKB": 3624,
+      "slow": [
+        {
+          "url": "https://otlp-http-production.shopifysvc.com/v1/metrics",
+          "ms": 1893,
+          "size": 0
+        }
+      ]
+    },
+    "brokenImages": [],
+    "overflowPx": 111,
+    "consoleErrors": 3,
+    "pageErrors": 0,
+    "failedRequests": 1,
+    "errorSamples": [
+      {
+        "text": "Failed to load resource: the server responded with a status of 401 ()",
+        "location": "https://wvpnpr-t7.myshopify.com/sf_private_access_tokens"
+      },
+      {
+        "text": "Access to XMLHttpRequest at 'https://big-skins.com/sales/?version=7.0.1&uuid=&theme_id=44566068&store=https://wvpnpr-t7.myshopify.com&xyz=infoportions34gizmotrims.com&zzz=' from origin 'https://wvpnpr-t7.myshopify.com' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+        "location": "https://wvpnpr-t7.myshopify.com/products/calder-clm-01-wheel"
+      },
+      {
+        "text": "Failed to load resource: net::ERR_FAILED",
+        "location": "https://big-skins.com/sales/?version=7.0.1&uuid=&theme_id=44566068&store=https://wvpnpr-t7.myshopify.com&xyz=infoportions34gizmotrims.com&zzz="
+      }
+    ]
+  },
+  {
+    "kind": "perf-throttled",
+    "name": "fitment @m-412-android",
+    "status": "PASS",
+    "navMs": 16387,
+    "metrics": {
+      "ttfb": 201,
+      "domContentLoaded": 1266,
+      "loadEvent": 1735,
+      "paints": [
+        {
+          "name": "first-paint",
+          "ms": 502
+        },
+        {
+          "name": "first-contentful-paint",
+          "ms": 502
+        }
+      ],
+      "cls": 0,
+      "resourceCount": 208,
+      "totalKB": 1617,
+      "slow": [
+        {
+          "url": "https://otlp-http-production.shopifysvc.com/v1/metrics",
+          "ms": 1519,
+          "size": 0
+        }
+      ]
+    },
+    "brokenImages": [],
+    "overflowPx": 0,
+    "consoleErrors": 2,
+    "pageErrors": 0,
+    "failedRequests": 1,
+    "errorSamples": [
+      {
+        "text": "Access to XMLHttpRequest at 'https://big-skins.com/sales/?version=7.0.1&uuid=&theme_id=44566068&store=https://wvpnpr-t7.myshopify.com&xyz=infoportions34gizmotrims.com&zzz=' from origin 'https://wvpnpr-t7.myshopify.com' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+        "location": "https://wvpnpr-t7.myshopify.com/pages/fitment"
+      },
+      {
+        "text": "Failed to load resource: net::ERR_FAILED",
+        "location": "https://big-skins.com/sales/?version=7.0.1&uuid=&theme_id=44566068&store=https://wvpnpr-t7.myshopify.com&xyz=infoportions34gizmotrims.com&zzz="
+      }
+    ]
+  },
+  {
+    "kind": "perf-throttled",
+    "name": "collection @m-412-android",
+    "status": "PASS",
+    "navMs": 19367,
+    "metrics": {
+      "ttfb": 234,
+      "domContentLoaded": 4049,
+      "loadEvent": 4630,
+      "paints": [
+        {
+          "name": "first-paint",
+          "ms": 603
+        },
+        {
+          "name": "first-contentful-paint",
+          "ms": 603
+        }
+      ],
+      "cls": 0,
+      "resourceCount": 248,
+      "totalKB": 1674,
+      "slow": [
+        {
+          "url": "https://otlp-http-production.shopifysvc.com/v1/metrics",
+          "ms": 2427,
+          "size": 0
+        }
+      ]
+    },
+    "brokenImages": [],
+    "overflowPx": 37,
+    "consoleErrors": 2,
+    "pageErrors": 0,
+    "failedRequests": 1,
+    "errorSamples": [
+      {
+        "text": "Access to XMLHttpRequest at 'https://big-skins.com/sales/?version=7.0.1&uuid=&theme_id=44566068&store=https://wvpnpr-t7.myshopify.com&xyz=infoportions34gizmotrims.com&zzz=' from origin 'https://wvpnpr-t7.myshopify.com' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+        "location": "https://wvpnpr-t7.myshopify.com/collections/wheels"
+      },
+      {
+        "text": "Failed to load resource: net::ERR_FAILED",
+        "location": "https://big-skins.com/sales/?version=7.0.1&uuid=&theme_id=44566068&store=https://wvpnpr-t7.myshopify.com&xyz=infoportions34gizmotrims.com&zzz="
+      }
+    ]
+  }
+]

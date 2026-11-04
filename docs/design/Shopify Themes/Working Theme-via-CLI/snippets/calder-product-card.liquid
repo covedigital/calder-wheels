@@ -78,40 +78,136 @@
 
   if calder_premium
     assign display_title = short_title | default: product.metafields.custom.design_code.value | default: product.title
-    assign construction_value = product.metafields.custom.construction.value
-    if construction_value == blank
-      assign type_lower = product.type | downcase
-      if type_lower contains 'forged'
-        assign construction_value = 'Forged'
-      elsif type_lower contains 'cast monoblock'
-        assign construction_value = 'Cast Monoblock'
-      endif
-    endif
-    assign construction_lower = construction_value | downcase
-    if construction_lower contains 'forged'
-      assign construction_label = '2-Piece Spun Forged'
-    elsif construction_value == 'Cast Monoblock'
-      assign construction_label = 'Cast Monoblock'
-    else
-      assign construction_label = construction_value
-    endif
-    assign center_finish_index = -1
-    for option in product.options
+    assign construction_label = '2-Piece Spun Forged'
+
+    comment
+      Shown Configuration sources (2026-11-02 D) — resolved per variant from
+      the product's own data, options identified by NAME:
+        diameter  native Diameter option value
+        center    native Center Finish option value
+        barrel    native Barrel & Lip option value (combined "Barrel & Lip -
+                  Hardware" values contribute the "... Lip" fragment only)
+        bolts     "… Bolts" fragment of the combined option value, else the
+                  documented part-number SKU bolt digit (registry sku_scheme:
+                  last digit 1=Chrome 2=Black — the live-store verified mapping
+                  also used by calder-design-url.liquid), else the handle
+                  chrome-bolts/black-bolts tokens
+      When a value cannot be resolved for a variant the field is omitted —
+      nothing is invented (spec D data rules).
+    endcomment
+    assign cc_diameter_index = -1
+    assign cc_center_index = -1
+    assign cc_barrel_index = -1
+    assign cc_combined_hw = false
+    for option in product.options_with_values
       assign option_name_lower = option.name | downcase
-      if option_name_lower contains 'center finish'
-        assign center_finish_index = forloop.index0
-        break
+      if option_name_lower contains 'diameter'
+        assign cc_diameter_index = forloop.index0
+      elsif option_name_lower contains 'center finish'
+        assign cc_center_index = forloop.index0
+      elsif option_name_lower contains 'barrel'
+        assign cc_barrel_index = forloop.index0
+        if option_name_lower contains 'hardware'
+          assign cc_combined_hw = true
+        endif
       endif
     endfor
-    if center_finish_index >= 0
-      assign selected_finish = current_variant.options[center_finish_index] | default: ''
+    if cc_center_index >= 0
+      assign selected_finish = current_variant.options[cc_center_index] | default: ''
     else
       assign selected_finish = ''
     endif
+
+    comment
+      Diameter values for the Available Sizes line: unique option values,
+      separated by " · " (spec D). No reliable diameter option -> section
+      omitted.
+    endcomment
+    assign cc_sizes_line = ''
+    if cc_diameter_index >= 0
+      for option in product.options_with_values
+        assign option_name_lower = option.name | downcase
+        if option_name_lower contains 'diameter'
+          for value in option.values
+            assign cc_sizes_line = cc_sizes_line | append: value
+            unless forloop.last
+              assign cc_sizes_line = cc_sizes_line | append: ' · '
+            endunless
+          endfor
+          break
+        endif
+      endfor
+    endif
+
+    comment
+      Per-variant configuration map for the card-sync script: variant id ->
+      {d, c, b, h}. Emitted once per card instance.
+    endcomment
   endif
 -%}
-
 <calder-product-card class="prd prd--hover-off lazyload{{ card_modifier }}" data-section-render data-available="{% if product.available %}true{% else %}false{% endif %}">
+{%- if calder_premium -%}
+<script type="application/json" data-calder-card-variants>
+  [
+  {%- liquid
+    assign cc_first_variant = true
+    for cc_v in product.variants
+      unless cc_first_variant
+        echo ','
+      endunless
+      assign cc_first_variant = false
+      assign cc_d = ''
+      assign cc_c = ''
+      assign cc_b = ''
+      assign cc_h = ''
+      if cc_diameter_index >= 0
+        assign cc_d = cc_v.options[cc_diameter_index]
+      endif
+      if cc_center_index >= 0
+        assign cc_c = cc_v.options[cc_center_index]
+      endif
+      if cc_barrel_index >= 0
+        assign cc_b_raw = cc_v.options[cc_barrel_index]
+        if cc_combined_hw and cc_b_raw contains ' Bolts'
+          assign cc_b = cc_b_raw | split: ' Lip' | first | append: ' Lip'
+          assign cc_h = cc_b_raw | split: '- ' | last
+        else
+          assign cc_b = cc_b_raw
+          assign cc_h = ''
+        endif
+        if cc_h == blank
+          assign cc_bolt_digit = cc_v.sku | slice: -1
+          if cc_bolt_digit == '1'
+            assign cc_h = 'Chrome'
+          elsif cc_bolt_digit == '2'
+            assign cc_h = 'Black'
+          else
+            assign cc_handle_l = product.handle | downcase
+            if cc_handle_l contains 'chrome-bolts'
+              assign cc_h = 'Chrome'
+            elsif cc_handle_l contains 'black-bolts'
+              assign cc_h = 'Black'
+            endif
+          endif
+        endif
+      endif
+      assign cc_b = cc_b | remove: ' Lip' | remove: ' lip'
+      assign cc_h = cc_h | remove: ' Bolts' | remove: ' bolts'
+      echo '{"id":' | append: cc_v.id | append: ',"d":'
+      echo cc_d | json
+      echo ',"c":'
+      echo cc_c | json
+      echo ',"b":'
+      echo cc_b | json
+      echo ',"h":'
+      echo cc_h | json
+      echo '}'
+    endfor
+  -%}
+  ]
+</script>
+{%- endif -%}
+
   <div class="calder-card">
     <div class="calder-card__media">
       {% render 'product-card-badges', render: true, section: section, product: product, product_form_id: product_form_id %}
@@ -155,13 +251,17 @@
         {% render 'calder-card-badges', product: product %}
       {% endunless %}
       {% if calder_premium %}
-        {% for option in product.options_with_values %}
-          {% assign option_name = option.name | downcase %}
-          {% if option_name contains 'diameter' or option_name contains 'size' %}
-            <div class="calder-card__diameters">{{ option.values | join: ' · ' | escape }}</div>
-            {% break %}
-          {% endif %}
-        {% endfor %}
+        {%- comment -%}
+          Section 1 — Available Sizes (2026-11-02 D): informational list of
+          the product's actual Diameter option values; not a picker. Omitted
+          when no reliable diameter data exists.
+        {%- endcomment -%}
+        {% if cc_sizes_line != blank %}
+          <div class="calder-card__sizes">
+            <div class="calder-card__section-label">Available Sizes</div>
+            <div class="calder-card__sizes-values">{{ cc_sizes_line | escape }}</div>
+          </div>
+        {% endif %}
       {% endif %}
 
       {% if settings.product_card_rating and calder_premium == false %}
@@ -179,30 +279,138 @@
       {% endcapture %}
       {% unless calder_premium %}{{ card_price_markup }}{% endunless %}
 
-      {% if settings.product_card_show_variants %}
-        <div class="calder-card__swatches">
-          {% render 'variant_picker',
-            product: product,
-            picker_type: picker_type,
-            section: section,
-            section_id: section_id,
-            layout: 'product-card',
-            product_form_id: product_form_id,
-            use_pics: use_pics,
-            use_variants_media: use_variants_media,
-            color_options_name: settings.product_card_color_options_name,
-            swatches_width: swatches_width,
-            show_colors_only: true,
-            product_form_suffix: product_form_suffix,
-            quick_options: true
-          %}
-        </div>
-      {% endif %}
+      {%- comment -%}Legacy (non-premium) layouts keep their original quick
+        swatch block untouched (2026-11-02 D: premium-only scope).{%- endcomment -%}
+      {% unless calder_premium %}
+        {% if settings.product_card_show_variants %}
+          <div class="calder-card__swatches">
+            {% render 'variant_picker',
+              product: product,
+              picker_type: picker_type,
+              section: section,
+              section_id: section_id,
+              layout: 'product-card',
+              product_form_id: product_form_id,
+              use_pics: use_pics,
+              use_variants_media: use_variants_media,
+              color_options_name: settings.product_card_color_options_name,
+              swatches_width: swatches_width,
+              show_colors_only: true,
+              product_form_suffix: product_form_suffix,
+              quick_options: true
+            %}
+          </div>
+        {% endif %}
+      {% endunless %}
 
-      {% if calder_premium and settings.product_card_show_variants and selected_finish != blank %}
-        <div class="calder-card__selected-finish" aria-live="polite">{{ selected_finish | escape }}</div>
-        {{ card_price_markup }}
-      {% elsif calder_premium %}
+      {% if calder_premium %}
+        {%- comment -%}
+          Preserve the existing picker inputs for the native form and card
+          synchronization, without displaying an Available Finishes section.
+        {%- endcomment -%}
+        <div class="calder-card__finishes" hidden>
+          {% if settings.product_card_show_variants %}
+            <div class="calder-card__swatches">
+              {% render 'variant_picker',
+                product: product,
+                picker_type: picker_type,
+                section: section,
+                section_id: section_id,
+                layout: 'product-card',
+                product_form_id: product_form_id,
+                use_pics: use_pics,
+                use_variants_media: use_variants_media,
+                color_options_name: settings.product_card_color_options_name,
+                swatches_width: swatches_width,
+                card_option_filter: 'Center Finish',
+                product_form_suffix: product_form_suffix
+              %}
+            </div>
+          {% endif %}
+        </div>
+
+        {%- comment -%}
+          Section 3 — Shown Configuration (2026-11-02 D): compact two-column
+          panel reflecting the configuration actually selected on THIS card.
+          Server-rendered initial values mirror the resolved card selection;
+          calder-product-card.js re-syncs per card on every existing variant
+          change (input[name="id"] change events). Unresolvable fields are
+          omitted; the whole panel is omitted when nothing resolves.
+        {%- endcomment -%}
+        {%- liquid
+          assign cc_shown_d = ''
+          assign cc_shown_c = ''
+          assign cc_shown_b = ''
+          assign cc_shown_h = ''
+          if cc_diameter_index >= 0
+            assign cc_shown_d = current_variant.options[cc_diameter_index]
+          endif
+          if cc_center_index >= 0
+            assign cc_shown_c = current_variant.options[cc_center_index]
+          endif
+          if cc_barrel_index >= 0
+            assign cc_b_raw = current_variant.options[cc_barrel_index]
+            if cc_combined_hw and cc_b_raw contains ' Bolts'
+              assign cc_shown_b = cc_b_raw | split: ' Lip' | first | append: ' Lip'
+              assign cc_shown_h = cc_b_raw | split: '- ' | last
+            else
+              assign cc_shown_b = cc_b_raw
+            endif
+            if cc_shown_h == blank
+              assign cc_bolt_digit = current_variant.sku | slice: -1
+              if cc_bolt_digit == '1'
+                assign cc_shown_h = 'Chrome'
+              elsif cc_bolt_digit == '2'
+                assign cc_shown_h = 'Black'
+              else
+                assign cc_handle_l = product.handle | downcase
+                if cc_handle_l contains 'chrome-bolts'
+                  assign cc_shown_h = 'Chrome'
+                elsif cc_handle_l contains 'black-bolts'
+                  assign cc_shown_h = 'Black'
+                endif
+              endif
+            endif
+          endif
+          assign cc_shown_b = cc_shown_b | remove: ' Lip' | remove: ' lip'
+          assign cc_shown_h = cc_shown_h | remove: ' Bolts' | remove: ' bolts'
+          assign cc_has_config = false
+          if cc_shown_d != blank or cc_shown_c != blank or cc_shown_b != blank or cc_shown_h != blank
+            assign cc_has_config = true
+          endif
+        -%}
+        {% if cc_has_config %}
+          <div class="calder-card__config" aria-live="polite">
+            <div class="calder-card__config-heading">Shown Configuration</div>
+            <div class="calder-card__config-grid">
+              {% if cc_shown_d != blank %}
+                <div class="calder-card__config-cell" data-calder-config-cell="d">
+                  <span class="calder-card__config-label">Diameter</span>
+                  <span class="calder-card__config-value" data-calder-config="d">{{ cc_shown_d | escape }}</span>
+                </div>
+              {% endif %}
+              {% if cc_shown_c != blank %}
+                <div class="calder-card__config-cell" data-calder-config-cell="c">
+                  <span class="calder-card__config-label">Center Finish</span>
+                  <span class="calder-card__config-value" data-calder-config="c">{{ cc_shown_c | escape }}</span>
+                </div>
+              {% endif %}
+              {% if cc_shown_h != blank %}
+                <div class="calder-card__config-cell" data-calder-config-cell="h">
+                  <span class="calder-card__config-label">Bolts</span>
+                  <span class="calder-card__config-value" data-calder-config="h">{{ cc_shown_h | escape }}</span>
+                </div>
+              {% endif %}
+              {% if cc_shown_b != blank %}
+                <div class="calder-card__config-cell" data-calder-config-cell="b">
+                  <span class="calder-card__config-label">Barrel</span>
+                  <span class="calder-card__config-value" data-calder-config="b">{{ cc_shown_b | escape }}</span>
+                </div>
+              {% endif %}
+            </div>
+          </div>
+        {% endif %}
+
         {{ card_price_markup }}
       {% endif %}
 

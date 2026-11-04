@@ -266,7 +266,29 @@
       if (!snap.complete) { return null; }
       var vehicle = readVehicle();
       var exact = vehicle ? resolver.groupFromVehicle(vehicle, snap.tokens.diameter) : null;
-      return exact || defaultGroupId();
+      if (exact) { return exact; }
+      /* pcd carry (2026-11-02 C): a bolt pattern transferred from style-mode
+         listings (design deep links append ?pcd=…) scopes the purchase
+         lookup when no vehicle is selected. Validated against the design's
+         fitment groups; unknown/unsupported patterns are ignored safely and
+         never override a deliberate vehicle selection. */
+      if (!vehicle) {
+        var group = groupFromPcdParam();
+        if (group) { return group; }
+      }
+      return defaultGroupId();
+    }
+    function groupFromPcdParam() {
+      var pcd = null;
+      try { pcd = new URLSearchParams(window.location.search).get('pcd'); } catch (e) { return null; }
+      if (!pcd) { return null; }
+      var v = String(pcd).trim().toLowerCase().replace(/\s+/g, '').replace(/\.\d+$/, '');
+      if (!v) { return null; }
+      var groups = resolver.design.fitmentGroups || [];
+      for (var i = 0; i < groups.length; i++) {
+        if (String(groups[i].id).indexOf(v + '-') === 0) { return groups[i].id; }
+      }
+      return null;
     }
 
     function designPatterns() {

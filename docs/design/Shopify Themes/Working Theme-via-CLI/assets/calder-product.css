@@ -550,7 +550,7 @@
   letter-spacing: -0.055em;
   text-transform: uppercase;
 
-  display: none;
+  //display: none;
 }
 
 
@@ -582,6 +582,17 @@
 
 .calder-pdp__design-code + .calder-pdp__title {
   font-size: clamp(22px, 1.7vw, 30px);
+  font-size: clamp(54px, 17vw, 72px);
+}
+
+
+/*
+  The design code now renders INSIDE the product title (see
+  calder-product.liquid). Keep the same title-text sizing the sibling
+  selector used to provide when both the code and the title text show.
+*/
+
+.calder-pdp__title:has(> .calder-pdp__design-code) {
   font-size: clamp(54px, 17vw, 72px);
 }
 
@@ -2504,7 +2515,7 @@
   .calder-pdp__design-code {
     font-size: clamp(54px, 17vw, 72px);
     line-height: 0.84;
-    display: none;
+    //display: none;
   }
 
   .calder-pdp__title {
@@ -6743,50 +6754,15 @@ position: static;
   gap: 20px;
 }
 
-.calder-recommendations calder-product-card {
-  background: var(--calder-white);
-  border: 1px solid var(--calder-border-light);
-  box-shadow: 0 1px 6px rgba(0,0,0,0.04);
-}
-
-.calder-recommendations calder-product-card:hover {
-  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-}
-
-.calder-recommendations .calder-card__title,
-.calder-recommendations .calder-card__title a {
-  color: var(--calder-navy);
-}
-
-.calder-recommendations .calder-card__type,
-.calder-recommendations .calder-card__type a {
-  color: var(--calder-champagne);
-}
-
-.calder-recommendations .calder-card__price .prd-price-regular {
-  color: var(--calder-navy);
-}
-
-.calder-recommendations .calder-card__action .btn {
-  background: var(--calder-champagne);
-  color: var(--calder-white);
-}
-
-.calder-recommendations .calder-card__action .btn:hover {
-  background: #b89575;
-}
-
-.calder-recommendations .calder-card__details a {
-  color: var(--calder-muted);
-}
-
-.calder-recommendations .calder-card__features {
-  border-top-color: var(--calder-border-light);
-}
-
-.calder-recommendations .calder-card__feature {
-  border-right-color: var(--calder-border-light);
-}
+/*
+ * 2026-11-03: the legacy .calder-recommendations card-appearance overrides
+ * (element background/border/shadow, title/type/price colors, action buttons,
+ * details link, features borders) were removed. Recommendations cards now use
+ * the same premium product-card system as every other card on the site:
+ * calder-recommendations.liquid loads calder-product-card.css, and the
+ * calder-card--light/dark tokens own the card appearance. Only the section
+ * wrapper, heading and grid layout are styled here.
+ */
 
 /* ============================================================
    CALDER SPECIALIST CTA
@@ -7361,7 +7337,9 @@ position: static;
   }
 
   .calder-recommendations__grid {
-    grid-template-columns: repeat(2, 1fr);
+    /* 2026-11-03: minmax(0,1fr) clamps the auto minimum so wide card
+       content (qty/CTA rows) can never blow the track past the viewport. */
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 16px;
   }
 
@@ -7435,7 +7413,7 @@ position: static;
   }
 
   .calder-recommendations__grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: minmax(0, 1fr);
     gap: 12px;
   }
 
@@ -7464,6 +7442,23 @@ position: static;
 
   .calder-pdp__trust {
     gap: 16px;
+  }
+}
+
+/* ============================================================
+   2026-11-03 mobile fix — PDP recommendations cards.
+   On phones the 2-col grid overflowed offscreen (1fr tracks grow
+   to card min-content). Phones now get 1 card per row, stacked,
+   with clamped tracks so card content can never push past the
+   viewport. Tablet 2-col (768-991px) and desktop 4-col unchanged.
+   ============================================================ */
+@media (max-width: 767px) {
+  .calder-recommendations__grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+  }
+  .calder-recommendations__grid > * {
+    min-width: 0;
   }
 }
 

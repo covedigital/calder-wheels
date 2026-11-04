@@ -1,0 +1,66 @@
+{%- comment -%}
+  Calder gallery → PDP deep-link query builder (Gallery audit 2026-11-01, Phase F / doc 07 G-1).
+
+  Maps gallery_build metaobject finish labels to the canonical registry option
+  tokens consumed by calder-pdp-state.js on the universal PDP:
+    diameter: 22 | 24 | 26
+    center:   gloss-black | black-titanium | titanium-tint
+    barrel:   gloss-black | polished
+    hardware: chrome | black
+
+  Emits `?diameter=..&center=..&barrel=..&hardware=..` including ONLY the tokens
+  that map. Unmapped labels degrade gracefully: the caller still links to the
+  design PDP and the PDP applies its registry default_configuration. Never
+  emits an invalid token (resolver must not see INVALID garbage from gallery).
+  Accepts: design_code, diameter, center_finish, lip_finish, hardware_finish.
+  Renders '' when nothing maps.
+{%- endcomment -%}
+{%- liquid
+  assign qs_parts = ''
+  assign ft_center_raw = center_finish | default: '' | strip | downcase | replace: ' ', '-'
+  assign ft_barrel_raw = lip_finish | default: '' | strip | downcase | replace: ' ', '-'
+  assign ft_hw_raw = hardware_finish | default: '' | strip | downcase | replace: ' ', '-'
+  assign ft_diam_raw = diameter | default: '' | strip | replace: '"', ''
+  assign ft_center = ''
+  assign ft_barrel = ''
+  assign ft_hw = ''
+  assign ft_diam = ''
+  if ft_center_raw == 'gloss-black' or ft_center_raw == 'black-titanium' or ft_center_raw == 'titanium-tint'
+    assign ft_center = ft_center_raw
+  elsif ft_center_raw == 'black-tint'
+    assign ft_center = 'black-titanium'
+  endif
+  if ft_barrel_raw == 'gloss-black' or ft_barrel_raw == 'polished'
+    assign ft_barrel = ft_barrel_raw
+  endif
+  if ft_hw_raw == 'chrome' or ft_hw_raw == 'black'
+    assign ft_hw = ft_hw_raw
+  endif
+  if ft_diam_raw == '22' or ft_diam_raw == '24' or ft_diam_raw == '26'
+    assign ft_diam = ft_diam_raw
+  endif
+  if ft_diam != blank or ft_center != blank or ft_barrel != blank or ft_hw != blank
+    echo '?'
+    if ft_diam != blank
+      echo 'diameter=' | append: ft_diam
+    endif
+    if ft_center != blank
+      if ft_diam != blank
+        echo '&'
+      endif
+      echo 'center=' | append: ft_center
+    endif
+    if ft_barrel != blank
+      if ft_diam != blank or ft_center != blank
+        echo '&'
+      endif
+      echo 'barrel=' | append: ft_barrel
+    endif
+    if ft_hw != blank
+      if ft_diam != blank or ft_center != blank or ft_barrel != blank
+        echo '&'
+      endif
+      echo 'hardware=' | append: ft_hw
+    endif
+  endif
+-%}

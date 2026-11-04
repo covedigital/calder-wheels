@@ -1,4 +1,5 @@
 {% comment %}theme-check-disable NestedSnippet{% endcomment %}
+<script src="{{ 'calder-product-card.js' | asset_url }}" defer></script>
 {%- paginate collection.products by settings.collection_products_per_page -%}
   <div class="prd-grid">
     {%- for product in collection.products limit: settings.collection_products_per_page -%}

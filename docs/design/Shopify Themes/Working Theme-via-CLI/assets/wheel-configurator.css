@@ -118,7 +118,7 @@
   border-radius: 6px;
   background: var(--body-bg, #111);
   font-family: inherit;
-  font-size: 14px;
+  font-size: 16px; /* iOS tap-zoom floor (mobile audit item 1) */
   font-weight: 600;
   color: var(--heading-color, #fff);
   cursor: pointer;

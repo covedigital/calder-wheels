@@ -1,0 +1,502 @@
+/*!
+ * Calder mobile sticky configurator styles — feature/calder-mobile-sticky-configurator.
+ * Scoped to the .calder-mobile-uc namespace. Mobile only (<=749px); the root
+ * is display:none everywhere else. Uses existing Calder tokens:
+ *   --calder-navy / --calder-deep-navy / --calder-champagne / --calder-gold
+ * No existing theme selectors, globals, or overrides are touched.
+ */
+
+.calder-mobile-uc {
+  display: none;
+}
+
+/* ── Mobile only ───────────────────────────────────────────────────── */
+@media (max-width: 749px) {
+
+  .calder-mobile-uc {
+    --calder-muc-nav-offset: 0px; /* set by JS to the live nav height */
+    --calder-muc-safe-bottom: env(safe-area-inset-bottom, 0px);
+    --calder-muc-navy: var(--calder-navy, #0E2A3E);
+    --calder-muc-gold: var(--calder-champagne, #E9B054);
+    --calder-muc-radius: 0;
+    display: block;
+    position: fixed;
+    left: 0;
+    right: 0;
+    /* Nav visible: bottom edge sits EXACTLY on the nav's top edge (no gap,
+       no safe-area padding — the nav's own 62px already spans it). */
+    bottom: var(--calder-muc-nav-offset);
+    z-index: 1008; /* below .hdr-mobile-bottom (1009) — never covers the nav */
+    transition: bottom 0.35s ease;
+    will-change: bottom;
+    pointer-events: none; /* children re-enable; keeps the fixed box transparent to taps */
+  }
+
+  /* Nav hidden on downward scroll (or nav disabled): drop to the
+     home-indicator safe area instead of touching the screen edge. */
+  .calder-mobile-uc[data-calder-muc-nav-hidden='true'] {
+    bottom: var(--calder-muc-safe-bottom);
+  }
+
+  .calder-mobile-uc[hidden] {
+    display: none;
+  }
+
+  /* ── Collapsed bar ─────────────────────────────────────────────────── */
+  .calder-mobile-uc__bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    min-height: 75px;
+    padding: 10px 15px;
+    margin: 0;
+    border: 0;
+    border-radius: var(--calder-muc-radius);
+    background: var(--calder-muc-navy);
+    color: #ffffff;
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+    box-shadow: 0 -2px 14px rgba(0, 0, 0, 0.22);
+    pointer-events: auto;
+    -webkit-appearance: none;
+    appearance: none;
+    transition: box-shadow 0.2s ease;
+  }
+
+  .calder-mobile-uc__bar:focus-visible {
+    outline: 2px solid var(--calder-muc-gold);
+    outline-offset: 2px;
+  }
+
+  .calder-mobile-uc__bar-thumb,
+  .calder-mobile-uc__summary-thumb {
+    position: relative;
+    display: block;
+    flex: 0 0 auto;
+    width: 40px;
+    height: 40px;
+    overflow: hidden;
+    border-radius: 6px;
+    background: #fff;
+  }
+
+  .calder-mobile-uc__summary-thumb {
+    width: 34px;
+    height: 34px;
+    background: #eef1f3;
+  }
+
+  .calder-mobile-uc__thumb-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+  }
+
+  .calder-mobile-uc__thumb-layer:not([src]) {
+    visibility: hidden;
+  }
+
+  .calder-mobile-uc__bar-text {
+    display: flex;
+    flex-direction: column;
+    min-width: 0; /* lets the summary ellipsis-truncate instead of overflowing */
+    flex: 1 1 auto;
+    gap: 2px;
+  }
+
+  .calder-mobile-uc__bar-label {
+    font-size: 14px;
+    font-weight: 600;
+    //letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #ffffff;
+    white-space: nowrap;
+    line-height: 1.2;
+  }
+
+  .calder-mobile-uc__bar-summary {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.35;
+    color: rgba(255, 255, 255, 0.80);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .calder-mobile-uc__bar-chevron {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    color: rgba(255, 255, 255, 0.75);
+    transition: transform 0.25s ease;
+  }
+
+  .calder-mobile-uc.is-open .calder-mobile-uc__bar-chevron {
+    transform: rotate(180deg);
+  }
+
+  /* ── Expanded sheet ───────────────────────────────────────────────── */
+  .calder-mobile-uc__sheet {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    /* Content-sized sheet: grows to fit the active category so nothing needs
+       internal scrolling in normal cases. svh (small viewport) keeps the cap
+       STABLE on mobile Safari — unlike dvh, it does not shrink/grow when the
+       browser toolbars collapse during scrolling. */
+    max-height: calc(100vh - 84px);
+    max-height: calc(100svh - 84px);
+    padding: 0.5rem 1.2rem calc(12px + var(--calder-muc-safe-bottom));
+    box-sizing: border-box;
+    border: 1px solid #dfe4e8;
+    border-bottom: 0;
+    border-radius: 16px 16px 0 0;
+    background: #ffffff;
+    color: var(--calder-muc-navy);
+    box-shadow: 0 -8px 28px rgba(0, 0, 0, 0.18);
+    pointer-events: auto;
+    transform: translateY(100%);
+    opacity: 0;
+    transition: transform 0.3s ease, opacity 0.2s ease;
+  }
+
+  .calder-mobile-uc.is-open .calder-mobile-uc__sheet {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  .calder-mobile-uc__sheet[hidden] {
+    display: none;
+  }
+
+  .calder-mobile-uc__grab {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 22px;
+    flex: 0 0 auto;
+    cursor: pointer;
+    border: 0;
+    background: transparent;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    font: inherit;
+    touch-action: none; /* JS owns the gesture on the handle */
+  }
+
+  .calder-mobile-uc__grab:focus-visible {
+    outline: 2px solid var(--calder-muc-gold);
+    outline-offset: 4px;
+    border-radius: 4px;
+  }
+
+  .calder-mobile-uc__grab-handle {
+    display: block;
+    width: 36px;
+    height: 4px;
+    border-radius: 2px;
+    background: #c3ccd2;
+  }
+
+  .calder-mobile-uc__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 2px 0 8px;
+    flex: 0 0 auto;
+  }
+
+  .calder-mobile-uc__title {
+    font-size: 14px;
+    font-weight: 600;
+    //letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--calder-muc-navy);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .calder-mobile-uc__head-right {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex: 0 0 auto;
+  }
+
+  .calder-mobile-uc__code {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: var(--calder-muc-navy);
+    opacity: 0.7;
+    white-space: nowrap;
+  }
+
+  /* Explicit minimize affordance (client update 2026-11-03): the collapsed
+     bar sits BEHIND the open sheet, so its rotated chevron is not visible
+     while expanded. 44px hit area via negative margins — no row inflation. */
+  .calder-mobile-uc__minimize {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 44px;
+    min-height: 44px;
+    margin: -8px -10px -8px -4px;
+    padding: 0;
+    border: 0;
+    border-radius: 8px;
+    background: transparent;
+    color: var(--calder-muc-navy);
+    opacity: 0.75;
+    cursor: pointer;
+    -webkit-appearance: none;
+    appearance: none;
+    font: inherit;
+  }
+
+  .calder-mobile-uc__minimize:focus-visible {
+    outline: 2px solid var(--calder-muc-gold);
+    outline-offset: 2px;
+    opacity: 1;
+  }
+
+  /* ── Tabs ───────────────────────────────────────────────────────────── */
+  .calder-mobile-uc__tabs {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 6px;
+    flex: 0 0 auto;
+    padding-bottom: 10px;
+  }
+
+  .calder-mobile-uc__tab {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    min-height: 44px;
+    padding: 0.4rem 1rem;
+    border: 1px solid #d9dfe4;
+    border-radius: 4px;
+    background: #ffffff;
+    color: var(--calder-muc-navy);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 1.2;
+    cursor: pointer;
+    font-family: inherit;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  .calder-mobile-uc__tab svg {
+    width: 16px;
+    height: 16px;
+    flex: 0 0 auto;
+  }
+
+  .calder-mobile-uc__tab[aria-selected="true"] {
+    border-color: var(--calder-muc-gold);
+    background: rgba(233, 176, 84, 0.10);
+  }
+
+  .calder-mobile-uc__tab:focus-visible {
+    outline: 2px solid var(--calder-muc-gold);
+    outline-offset: 1px;
+  }
+
+  /* ── Options panel ─────────────────────────────────────────────────── */
+  .calder-mobile-uc__body {
+    flex: 1 1 auto;
+    min-height: 0; /* flex child scroll container */
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* hard containment — options can never paint over the summary */
+  }
+
+  .calder-mobile-uc__category {
+    margin: 0 0 8px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #5b6770;
+    flex: 0 0 auto;
+  }
+
+  .calder-mobile-uc__options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    /* Client fix 2026-11-03: min-height:0 lets the options box SHRINK inside
+       the body instead of overflowing it (the summary-overlap bug). With the
+       content-sized sheet it auto-fits; it only scrolls if the svh cap is hit. */
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto;
+    overscroll-behavior: contain; /* never hijack the page scroll */
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 4px;
+  }
+
+  .calder-mobile-uc__option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    min-height: 44px;
+    min-width: 74px;
+    padding: 8px 10px;
+    border: 1px solid #d9dfe4;
+    border-radius: 4px;
+    background: #ffffff;
+    color: var(--calder-muc-navy);
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.25;
+    text-align: center;
+    cursor: pointer;
+    font-family: inherit;
+    -webkit-appearance: none;
+    appearance: none;
+    flex: 1 1 30%;
+  }
+
+  .calder-mobile-uc__option--dia {
+    flex: 1 1 0;
+    font-size: 13px;
+    font-weight: 500;
+    //letter-spacing: 0.04em;
+  }
+
+  .calder-mobile-uc__option[aria-checked="true"],
+  .calder-mobile-uc__option--dia[aria-checked="true"] {
+    background: var(--calder-muc-navy);
+    border-color: var(--calder-muc-navy);
+    color: #ffffff;
+  }
+
+  .calder-mobile-uc__option--swatch[aria-checked="true"] {
+    background: var(--calder-muc-navy);
+    border-color: var(--calder-muc-navy);
+    color: #fff;
+  }
+
+  .calder-mobile-uc__option:focus-visible {
+    outline: 2px solid var(--calder-muc-gold);
+    outline-offset: 1px;
+  }
+
+  .calder-mobile-uc__option-swatch {
+    width: 44px;
+    height: 44px;
+    border-radius: 6px;
+    object-fit: contain;
+    background: #f4f6f7;
+    pointer-events: none;
+    display: none;
+  }
+
+  .calder-mobile-uc__option-name {
+    pointer-events: none;
+  }
+
+  /* ── Current configuration summary ─────────────────────────────────── */
+  .calder-mobile-uc__summary {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+    padding: 9px 10px;
+    border: 1px solid #dfe4e8;
+    border-radius: var(--calder-muc-radius);
+    background: #ffffff;
+    flex: 0 0 auto;
+    position: relative;
+    z-index: 1; /* always clears the body — never overlapped by options */
+  }
+
+  .calder-mobile-uc__summary-text {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    flex: 1 1 auto;
+    gap: 1px;
+  }
+
+  .calder-mobile-uc__summary-eyebrow {
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #85919a;
+  }
+
+  .calder-mobile-uc__summary-value {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--calder-muc-navy);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .calder-mobile-uc__status {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    flex: 0 0 auto;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #85919a;
+  }
+
+  .calder-mobile-uc__status-dot {
+    display: block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    border: 1.5px solid #b6bfc6;
+    background: transparent;
+    box-sizing: border-box;
+  }
+
+  .calder-mobile-uc.is-complete .calder-mobile-uc__status-dot {
+    background: var(--calder-muc-gold);
+    border-color: var(--calder-muc-gold);
+  }
+
+  .calder-mobile-uc.is-complete .calder-mobile-uc__status {
+    color: var(--calder-muc-navy);
+  }
+}
+
+/* ── Reduced motion ─────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .calder-mobile-uc,
+  .calder-mobile-uc__sheet,
+  .calder-mobile-uc__bar-chevron {
+    transition: none !important;
+  }
+}

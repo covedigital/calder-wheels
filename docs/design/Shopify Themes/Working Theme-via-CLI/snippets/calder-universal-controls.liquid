@@ -1,11 +1,56 @@
 {%- comment -%}
   Calder universal PDP controls — INITIAL design (.calder-uc__* system).
   Behavior lives in assets/calder-universal-pdp.js (resolver + state manager).
+  Swatches use the product's own design render set (2026-11-02):
+  {design_number}-disk-{gb|bt|ti}.png, {design_number}-barrel-{gb|gbl}.png,
+  {design_number}-{24|30}pcs-{bk|ch}.png (203 & 205 are 30-bolt). Designs
+  without a render set fall back to the generic component renders, and the
+  controller re-syncs the gallery layers from the resolver on boot.
 {%- endcomment -%}
 {%- liquid
   assign uc_design_code = product.metafields.custom.design_code.value | default: product.metafields.custom.design_code | strip | upcase
   assign uc_design_key = uc_design_code | remove: '-'
   assign uc_registry_file = 'calder-design-registry-' | append: uc_design_key | downcase | append: '.js'
+
+  assign uc_design_number = ''
+  assign uc_pcs = ''
+  if uc_design_key == 'CLM01'
+    assign uc_design_number = '201'
+    assign uc_pcs = '24pcs'
+  elsif uc_design_key == 'CLM02'
+    assign uc_design_number = '202'
+    assign uc_pcs = '24pcs'
+  elsif uc_design_key == 'CLM03'
+    assign uc_design_number = '203'
+    assign uc_pcs = '30pcs'
+  elsif uc_design_key == 'CLM05'
+    assign uc_design_number = '205'
+    assign uc_pcs = '30pcs'
+  elsif uc_design_key == 'CLB06' or uc_design_key == 'CLM06'
+    assign uc_design_number = '206'
+    assign uc_pcs = '24pcs'
+  elsif uc_design_key == 'CLB07' or uc_design_key == 'CLM07'
+    assign uc_design_number = '207'
+    assign uc_pcs = '24pcs'
+  endif
+
+  if uc_design_number != blank
+    assign uc_center_gb_img = uc_design_number | append: '-disk-gb.png'
+    assign uc_center_bt_img = uc_design_number | append: '-disk-bt.png'
+    assign uc_center_ti_img = uc_design_number | append: '-disk-ti.png'
+    assign uc_barrel_gb_img = uc_design_number | append: '-barrel-gb.png'
+    assign uc_barrel_pol_img = uc_design_number | append: '-barrel-gbl.png'
+    assign uc_hw_ch_img = uc_design_number | append: '-' | append: uc_pcs | append: '-ch.png'
+    assign uc_hw_bk_img = uc_design_number | append: '-' | append: uc_pcs | append: '-bk.png'
+  else
+    assign uc_center_gb_img = 'wheel-component-center-spun-gloss-black.png'
+    assign uc_center_bt_img = 'wheel-component-center-spun-black-tint.png'
+    assign uc_center_ti_img = 'wheel-component-center-spun-titanium-tint.png'
+    assign uc_barrel_gb_img = 'wheel-component-barrel-spun-gloss-black.png'
+    assign uc_barrel_pol_img = 'wheel-component-barrel-spun-polished.png'
+    assign uc_hw_ch_img = 'wheel-component-hardware-chrome-bolts.png'
+    assign uc_hw_bk_img = 'wheel-component-hardware-black-bolts.png'
+  endif
 -%}
 <link rel="stylesheet" href="{{ 'calder-universal-controls.css' | asset_url }}" media="all">
 <script src="{{ uc_registry_file | asset_url }}" defer></script>
@@ -42,27 +87,27 @@
   <div class="calder-uc__group" role="radiogroup" aria-label="Center Finish" data-calder-uc-group="center">
     <div class="calder-uc__heading"><span class="calder-uc__eyebrow">Center Finish</span><span class="calder-uc__label" data-calder-uc-selected="center">Gloss Black</span></div>
     <div class="calder-uc__values">
-      <button type="button" class="calder-uc__option is-selected" role="radio" aria-checked="true" data-calder-uc-option data-dim="center" data-token="gloss-black" aria-label="Gloss Black"><span class="calder-uc__swatch"><img src="{{ 'wheel-component-center-spun-gloss-black.png' | asset_url }}" alt="" width="44" height="44" loading="lazy" decoding="async"></span><span class="calder-uc__option-name">Gloss Black</span></button>
-      <button type="button" class="calder-uc__option" role="radio" aria-checked="false" data-calder-uc-option data-dim="center" data-token="black-titanium" aria-label="Black Titanium"><span class="calder-uc__swatch"><img src="{{ 'wheel-component-center-spun-black-tint.png' | asset_url }}" alt="" width="44" height="44" loading="lazy" decoding="async"></span><span class="calder-uc__option-name">Black Titanium</span></button>
-      <button type="button" class="calder-uc__option" role="radio" aria-checked="false" data-calder-uc-option data-dim="center" data-token="titanium-tint" aria-label="Titanium Tint"><span class="calder-uc__swatch"><img src="{{ 'wheel-component-center-spun-titanium-tint.png' | asset_url }}" alt="" width="44" height="44" loading="lazy" decoding="async"></span><span class="calder-uc__option-name">Titanium Tint</span></button>
+      <button type="button" class="calder-uc__option is-selected" role="radio" aria-checked="true" data-calder-uc-option data-dim="center" data-token="gloss-black" aria-label="Gloss Black"><span class="calder-uc__swatch"><img src="{{ uc_center_gb_img | asset_url }}" alt="" width="44" height="44" loading="lazy" decoding="async"></span><span class="calder-uc__option-name">Gloss Black</span></button>
+      <button type="button" class="calder-uc__option" role="radio" aria-checked="false" data-calder-uc-option data-dim="center" data-token="black-titanium" aria-label="Black Titanium"><span class="calder-uc__swatch"><img src="{{ uc_center_bt_img | asset_url }}" alt="" width="44" height="44" loading="lazy" decoding="async"></span><span class="calder-uc__option-name">Black Titanium</span></button>
+      <button type="button" class="calder-uc__option" role="radio" aria-checked="false" data-calder-uc-option data-dim="center" data-token="titanium-tint" aria-label="Titanium Tint"><span class="calder-uc__swatch"><img src="{{ uc_center_ti_img | asset_url }}" alt="" width="44" height="44" loading="lazy" decoding="async"></span><span class="calder-uc__option-name">Titanium Tint</span></button>
     </div>
   </div>
 
-  {%- comment -%}Barrel &amp; Lip Finish{%- endcomment -%}
+  {%- comment -%}Barrel & Lip Finish{%- endcomment -%}
   <div class="calder-uc__group" role="radiogroup" aria-label="Barrel and Lip Finish" data-calder-uc-group="barrel">
     <div class="calder-uc__heading"><span class="calder-uc__eyebrow">Barrel &amp; Lip Finish</span><span class="calder-uc__label" data-calder-uc-selected="barrel">Gloss Black Lip</span></div>
     <div class="calder-uc__values">
-      <button type="button" class="calder-uc__option is-selected" role="radio" aria-checked="true" data-calder-uc-option data-dim="barrel" data-token="gloss-black" aria-label="Gloss Black Lip"><span class="calder-uc__swatch"><img src="{{ 'wheel-component-barrel-spun-gloss-black.png' | asset_url }}" alt="" width="44" height="44" loading="lazy" decoding="async"></span><span class="calder-uc__option-name">Gloss Black Lip</span></button>
-      <button type="button" class="calder-uc__option" role="radio" aria-checked="false" data-calder-uc-option data-dim="barrel" data-token="polished" aria-label="Polished Lip"><span class="calder-uc__swatch"><img src="{{ 'wheel-component-barrel-spun-polished.png' | asset_url }}" alt="" width="44" height="44" loading="lazy" decoding="async"></span><span class="calder-uc__option-name">Polished Lip</span></button>
+      <button type="button" class="calder-uc__option is-selected" role="radio" aria-checked="true" data-calder-uc-option data-dim="barrel" data-token="gloss-black" aria-label="Gloss Black Lip"><span class="calder-uc__swatch"><img src="{{ uc_barrel_gb_img | asset_url }}" alt="" width="44" height="44" loading="lazy" decoding="async"></span><span class="calder-uc__option-name">Gloss Black Lip</span></button>
+      <button type="button" class="calder-uc__option" role="radio" aria-checked="false" data-calder-uc-option data-dim="barrel" data-token="polished" aria-label="Polished Lip"><span class="calder-uc__swatch"><img src="{{ uc_barrel_pol_img | asset_url }}" alt="" width="44" height="44" loading="lazy" decoding="async"></span><span class="calder-uc__option-name">Polished Lip</span></button>
     </div>
   </div>
 
-  {%- comment -%}Hardware &amp; Rivet Finish{%- endcomment -%}
+  {%- comment -%}Hardware & Rivet Finish{%- endcomment -%}
   <div class="calder-uc__group" role="radiogroup" aria-label="Hardware and Rivet Finish" data-calder-uc-group="hardware">
     <div class="calder-uc__heading"><span class="calder-uc__eyebrow">Hardware &amp; Rivet Finish</span><span class="calder-uc__label" data-calder-uc-selected="hardware">Chrome Bolts</span></div>
     <div class="calder-uc__values">
-      <button type="button" class="calder-uc__option is-selected" role="radio" aria-checked="true" data-calder-uc-option data-dim="hardware" data-token="chrome" aria-label="Chrome Bolts"><span class="calder-uc__swatch"><img src="{{ 'wheel-component-hardware-chrome-bolts.png' | asset_url }}" alt="" width="44" height="44" loading="lazy" decoding="async"></span><span class="calder-uc__option-name">Chrome Bolts</span></button>
-      <button type="button" class="calder-uc__option" role="radio" aria-checked="false" data-calder-uc-option data-dim="hardware" data-token="black" aria-label="Black Bolts"><span class="calder-uc__swatch"><img src="{{ 'wheel-component-hardware-black-bolts.png' | asset_url }}" alt="" width="44" height="44" loading="lazy" decoding="async"></span><span class="calder-uc__option-name">Black Bolts</span></button>
+      <button type="button" class="calder-uc__option is-selected" role="radio" aria-checked="true" data-calder-uc-option data-dim="hardware" data-token="chrome" aria-label="Chrome Bolts"><span class="calder-uc__swatch"><img src="{{ uc_hw_ch_img | asset_url }}" alt="" width="44" height="44" loading="lazy" decoding="async"></span><span class="calder-uc__option-name">Chrome Bolts</span></button>
+      <button type="button" class="calder-uc__option" role="radio" aria-checked="false" data-calder-uc-option data-dim="hardware" data-token="black" aria-label="Black Bolts"><span class="calder-uc__swatch"><img src="{{ uc_hw_bk_img | asset_url }}" alt="" width="44" height="44" loading="lazy" decoding="async"></span><span class="calder-uc__option-name">Black Bolts</span></button>
     </div>
   </div>
 

@@ -1,0 +1,215 @@
+{
+  "t-1180-tablet-landscape:cart": {
+    "viewport": {
+      "width": 1180,
+      "height": 820
+    },
+    "docWidth": 1180,
+    "overflowingElements": [],
+    "brokenImages": [],
+    "aspectIssues": [
+      {
+        "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwMHB4IiBoZWlnaHQ9IjEwMDBweCIgdmlld0JveD0iMCAwIDEwMDAgMTAwMCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3",
+        "natural": 1,
+        "rendered": 1.457,
+        "cls": ""
+      }
+    ],
+    "tinyTouchTargets": [
+      {
+        "tag": "a",
+        "cls": "skip-to-content-link btn visually-hidden",
+        "text": "Skip to content",
+        "w": 1,
+        "h": 1
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "Home",
+        "w": 75,
+        "h": 20
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "Wheels",
+        "w": 93,
+        "h": 20
+      },
+      {
+        "tag": "a",
+        "cls": "dropdn-link",
+        "text": "",
+        "w": 32,
+        "h": 18
+      },
+      {
+        "tag": "a",
+        "cls": "dropdn-link",
+        "text": "USER ACCOUNT",
+        "w": 32,
+        "h": 18
+      },
+      {
+        "tag": "a",
+        "cls": "dropdn-link",
+        "text": "Wishlist",
+        "w": 40,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "dropdn-link minicart-link js-minicart-link ",
+        "text": "Shipping\n    Shopping Cart",
+        "w": 40,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "All Wheels",
+        "w": 75,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "By Vehicle",
+        "w": 74,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "By Style",
+        "w": 58,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "Accessories",
+        "w": 87,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "Our Story",
+        "w": 68,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "Engineering",
+        "w": 85,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "Gallery",
+        "w": 50,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "Find a Dealer",
+        "w": 94,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "Fitment Tool",
+        "w": 87,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "Build Your Wheel",
+        "w": 121,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "Vehicle Gallery",
+        "w": 106,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "Wheel Gallery",
+        "w": 99,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "Contact",
+        "w": 56,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "FAQs",
+        "w": 37,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "Shipping",
+        "w": 62,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "   top-level-link\n          ",
+        "text": "Returns",
+        "w": 55,
+        "h": 19
+      },
+      {
+        "tag": "a",
+        "cls": "",
+        "text": "Calder Wheels",
+        "w": 91,
+        "h": 16
+      }
+    ],
+    "stickyElements": [
+      {
+        "tag": "div",
+        "cls": "hdr-content hdr-content-sticky hide-mobile compensate-for-sc",
+        "id": "Sticky-header",
+        "pos": "fixed",
+        "rect": {
+          "top": -64,
+          "left": 0,
+          "w": 1180,
+          "h": 64
+        }
+      },
+      {
+        "tag": "a",
+        "cls": "back-to-top js-back-to-top compensate-for-scrollbar",
+        "id": "",
+        "pos": "fixed",
+        "rect": {
+          "top": 870,
+          "left": 1080,
+          "w": 50,
+          "h": 50
+        }
+      }
+    ]
+  }
+}

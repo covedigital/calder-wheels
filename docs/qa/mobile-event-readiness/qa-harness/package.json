@@ -1,0 +1,22 @@
+{
+  "name": "calder-mobile-event-qa",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "test": "playwright test",
+    "test:smoke": "playwright test 01-smoke",
+    "test:visual": "playwright test 02-visual 03-visual",
+    "test:functional": "playwright test 04-functional",
+    "test:perf": "playwright test 05-performance",
+    "report": "playwright show-report"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "lighthouse": "^12.8.2",
+    "playwright": "^1.48.2"
+  },
+  "private": true,
+  "type": "module"
+}

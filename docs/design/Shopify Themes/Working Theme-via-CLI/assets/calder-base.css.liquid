@@ -506,7 +506,7 @@ button:hover .calder-icon--forward {
   padding: 0 44px 0 18px;
   font-family: var(--calder-ui-font);
   font-weight: 400;
-  font-size: 13px;
+  font-size: 16px; /* iOS tap-zoom floor (mobile audit item 1) */
   color: var(--calder-white);
   background: var(--calder-control-bg);
   border: 1px solid var(--calder-control-border);
@@ -542,7 +542,7 @@ button:hover .calder-icon--forward {
   padding: 10px 14px;
   font-family: var(--calder-ui-font);
   font-weight: 400;
-  font-size: 14px;
+  font-size: 16px; /* iOS tap-zoom floor (mobile audit item 1) */
   color: var(--calder-ink);
   background: rgba(255, 255, 255, 0.96);
   border: 1px solid rgba(255, 255, 255, 0.22);
@@ -1225,6 +1225,16 @@ button:hover .calder-icon--forward {
     --calder-h2-size: 28px;
     --calder-h3-size: 20px;
     --calder-control-height: 52px;
+  }
+
+  /* iOS tap-zoom floor (mobile audit item 1, 2026-11-02): iOS Safari zooms
+     the page when a focused form control renders below 16px. Every select,
+     input and textarea inside .calder-site gets a 16px floor on phones —
+     even controls defined elsewhere with smaller font sizes. */
+  .calder-site select,
+  .calder-site input,
+  .calder-site textarea {
+    font-size: 16px;
   }
 }
 
