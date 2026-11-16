@@ -30,11 +30,12 @@
 .sidebar-block {
   position: relative
 }
-.sidebar-block .sidebar-block_title {
+.sidebar-block div.sidebar-block_title {
   position: relative;
   z-index: 1;
-  padding: 14px 45px 14px 0;
-  border-bottom: 1px solid var(--sidebar-block-border-color)
+  padding: 0;
+  //border-bottom: 1px solid var(--sidebar-block-border-color);
+  border-bottom: 0;
 }
 @media (max-width:1024px) {
   .sidebar-block .sidebar-block_title {
@@ -114,7 +115,7 @@
   }
 }
 .sidebar-block .sidebar-block_content {
-  margin-top: 20px;
+  margin-top: 10px;
   transition: opacity .5s ease
 }
 .sidebar-block .toggle-arrow {
@@ -991,7 +992,7 @@ body:not(.has-sticky) .filter-col--sticky .filter-col-content {
   color: var(--text-color-secondary)
 }
 .category-page-block .prd-grid-wrap:not(:first-child) {
-  margin-top: 15px
+  margin-top: 0
 }
 @media (min-width:1025px) {
   .category-page-block .filter-col {

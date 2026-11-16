@@ -1,0 +1,88 @@
+## Calder Updates
+
+Make sure there is a theme backup locally and on the github repo before all of these changes
+
+Update the OpenCode implementation prompt to include phases of quality check for different components of these changes so that not all changes are done all at once. Once changes have been applied to a component/section, OpenCode should prompt the user to perform a quality check before moving on to the next implementation. The quality check prompt should give the user pointers on what to test in order to ensure that section of updates is satisfactory
+
+
+# Home
+- Update hero
+- Fix 2-Piece Spun image
+- Fix 24hr image
+- Fix engineering image
+- Fix bottom dissect image
+
+
+# Collection
+- Fitment guide By Vehicle: Apply display none to the filter-row-selected whenever there are selections+results from the vehicle tab
+- Fitment guide By Vehicle: Add the a "clear filters" feature to the .category-page-title, underneath the div.ProductCountDesktop + the "clear filters" feature should function the same way as the .cw-fitment-guide__reset in the fitment guide, completely clearing all filter options and vehicle selection
+- the .cw-fitment-guide__image should accurate change the src image based on the type of vehicle selected + Currently any vehicle selected shows the image of vehicle_type-suv.png, when the image should reflect the appropriate type of car (i.e. vehicle_type-custom.png, vehicle_type-full_size_truck.png, vehicle_type-off_road.png, vehicle_type-sport.png, vehicle_type-suv.png)
+- the "Barrel & Lip - Hardware" (Bolts) filter should also show on the collection page filter options. Its created in the admin section of the site but doesnt appear on the front-end
+- Theme Calder Product Card: why does the .calder-card__config show the same configuration for all of the listed products? Every .calder-card__config shows the same options (Diameter: 22", Center Finish: Black Tint, Bolts: Chrome, Barrel: Chrome). The shown configuration should reflect the correct configuration for the respective product + the shown configurations are not all accurate
+
+
+# Product
+- the .calder-uc, for the "Hardware and Rivet Finish" option, "Black Bolts" should be first and the "Chrome Bolts" second
+- regarding the .calder-pdp__fitment, whenever a vehicle is selected, the only options that should be available/visible in the .calder-design-nav are the wheel designs that are compatible with the selected vehicle's bolt pattern, the other non-compatible .calder-design-nav design options should not be visible for that vehicle + Also, if the .calder-pdp__fitment-reset is reset then all of the .calder-design-nav design options should be available/visible again
+- whenever the .calder-pdp__fitment is .calder-pdp__fitment--verify, the .calder-pdp__fitment--verify .calder-pdp__fitment-icon should match the circle svg inside of it + the circle svg should match .calder-pdp__fitment-icon color for the "verify" status
+- for the .calder-specs__table, the Width, Bolt Pattern, and Offset specs should not be ranges as they are by default for the selected wheel. Those specific specs should be the actual value assign to that spec for that wheel design
+- A shopper should not be able to add a wheel to the cart if a vehicle is not selected + The should a conditional message within the .calder-upc__message that notifies the shopper that a selected vehicle is required to add a wheel to the cart. In that case the add to cart button should be disabled
+- the "Diameter" .calder-uc__group should be hidden/display:none if no vehicle is selected (or when a vehicle selection is reset), as the Diameter is only relevant for vehicles, not if someone is just playing with the configurator to see the design options with no intent to buy
+
+
+
+# Cart
+- each cart item should have all of the selected calder-uc options from the product PDP (Example - Diameter: 22", Center Finish: Black Tint, Bolts: Chrome, Barrel: Chrome) + Each selected spec should have a checkbox confirmation for the selected before the shopper is allowed to "Proceed to Checkout" + Similar to the prd-block-agreement which prevents the shopper from proceeding to check unless they agree to their selection(s)
+- keep the design/layout of the .card-total bg-alt.calder-cart-summary the same, only update the cart item specs and spec confirmations
+
+
+# Gallery (Vehicle / Wheel)
+- the gallery entry item goes to a designated product page instead of the intended entry details page. Check the theme to see if a gallery entry details page was created (or similar) and wire the click of the gallery entry item to go to its respective details page
+
+
+
+=========
+
+
+C1 - APPROVED
+
+C2 - APPROVED
+
+C3 - APPROVED (Already removed)
+
+C4 - APPROVED
+
+C5 - APPROVED
+
+C6 - APPROVED
+
+C7 - (b) registry default_configs-matching variant (design showcase) ----- Need Shopify product export (option names/values, variant order, SKUs) to verify the parse & choose source: /Users/admin/Projects/Autonomous Agent/1 - Projects/Calder Wheels/docs/design/site-updates_11-15-2026/products_export_1.csv
+
+P1 - APPROVED -- nav can read per-design PCDs server-side (design-product metafields)
+
+P2 - APPROVED
+
+P3 - APPROVED
+
+P4 - APPROVED
+
+P5 - APPROVED
+
+P6 - APPROVED
+
+P7 - APPROVED - Supporting Files: /Users/admin/Projects/Autonomous Agent/1 - Projects/Calder Wheels/docs/architecture/SUV Data Sheet revised 10-21-26.xlsx + /Users/admin/Projects/Autonomous Agent/1 - Projects/Calder Wheels/docs/architecture/SUV Fitment Guide.xlsx
+
+P8 - KEEP THEM (RX/TX) data supports keeping them); suspension portion supporting data - Supporting Files: /Users/admin/Projects/Autonomous Agent/1 - Projects/Calder Wheels/docs/architecture/SUV Data Sheet revised 10-21-26.xlsx + /Users/admin/Projects/Autonomous Agent/1 - Projects/Calder Wheels/docs/architecture/SUV Fitment Guide.xlsx
+
+K1 cart line shows its own config ----- manual ----- Universal CTA sends no line properties at all (calder-universal-cta.js:448-449: {id, quantity} only). Cart templates already render all non-underscore props + Vehicle prop drives the (currently dead) FITMENT CONFIRMED badge (main-cart-items.liquid:129-130). Precedent: configurator app already sends props + _-internals (configurator-app.js:1167-1180) ----- Missing (clear) ----- assets/calder-universal-cta.js, cart templates (render loop exists) ----- Add properties at add time from the PDP state snapshot: Diameter, Center Finish, Barrel/Lip, Bolts, Design, Vehicle Y/M/M(+trim if available), _-prefixed internals; identical-SKU-different-config stays native separate lines ----- Depends on P5 (vehicle required) so every line carries vehicle data — order 5→7 already correct
+
+K2 per-line confirmation checkboxes gate checkout ----- manual ----- None exist. Reference mechanism verified: prd-block-agreement + AgreementCheckbox (app.js:4011-4075) class-toggles .shopify-payment-agree (CSS gate style.css:16828) across cart page, drawer, and express buttons. Cart AJAX re-render replaces line markup → natural confirmation invalidation ----- Missing ----- sections/main-cart-items.liquid, snippets/header-cart-line-item.liquid, small JS module ----- Per-line checkboxes for calder lines (from K1 props); all-confirmed AND existing agreement → enable checkout; reuse class-gate mechanism; re-render resets state on any change (invalidate by design) ----- See K3 honesty
+
+K3 checkout bypass audit ----- prompt ----- Class-based gating is bypassable (direct /checkout, other entry points). True enforcement requires Checkout UI Extensions / app — cannot be delivered theme-side; will not claim otherwise ----- Assessment ----- — ----- Report bypasses; request approval for a supported validation/app strategy before marking enforced ----- Payment/checkout internals untouched without approval
+K4 summary layout untouched ----- manual ----- .card-total.bg-alt.calder-cart-summary fully mapped (main-cart-items.liquid:199-291) ----- Constraint noted ----- none ----- Line specs + confirmations only; zero summary CSS/markup edits ----- —
+
+G1 gallery entries → own details page ----- manual ----- Details pages exist (/pages/gallery-build?build=HANDLE → page.gallery-build.json → calder-gallery-detail + native metaobject route templates/metaobject.gallery_build.liquid). Found your bug: live store has zero gallery_build metaobjects (Phase A admin blocker since 11-01), so all visible cards are static section blocks — and page.wheel-gallery.json carries a legacy block with "detail_url": "shopify://products/calder-clm-01-wheel", gallery_handle: "" → that entry lands on the PDP. Wheel-gallery metaobject cards also deep-link to PDPs (Nov-2 Phase F — superseded by this newest instruction; the details page keeps its own product CTA) ----- Partially blocked ----- templates/page.wheel-gallery.json (legacy block), sections/calder-wheel-gallery.liquid:24-30 ----- Wire every entry (both galleries, metaobject + block paths) to its own details page; preserve detail page's product CTA ----- Meaningful destinations require admin to create gallery_build entries (procedure already written: docs/gallery-audit/vehicle-content/06-import-procedure.md). Wire now → empty detail pages until entries exist. Your sequencing call
+
+I1/I2 inventory/SKU assessment ----- prompt ----- Sources found in-repo: SKU master xlsx (4 sheets × ~228 SKUs, CLB-legacy part numbers e.g. CLB0622106397825GB11 — CLM aliases already handled code-side), calder-demo-inventory.js (demo BOM), registry fitment groups, Matrixify image batches. No Shopify product/inventory export, QuickBooks item list, or BOM component master in repo ----- Assessment ready; I2 blocked pending exports + separate approval ----- none (read-only) ----- I1 report at Batch 9; no hardcoded low-stock thresholds anywhere; no imports drafted ----- Request exports only if you want I2 reference patches
+
+§5 preserve items: homepage media = manual-only report (no asset/CSS edits from me); desktop PDP whitespace = separate audit + own gate; wholesale = audit-only; future items = document-only;
