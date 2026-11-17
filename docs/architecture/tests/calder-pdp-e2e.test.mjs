@@ -186,21 +186,23 @@ test('E2E: vehicle select -> fitment text hidden -> CTA available -> SKU cell li
   assert.ok(updp, 'PDP booted');
   await new Promise(r => setTimeout(r, 10));
 
-  // 1) initial load: Add to Cart enabled (default group), NO loading text
-  assert.equal(purchaseRoot.attrs['data-calder-uc-state'], 'AVAILABLE', 'initial state AVAILABLE');
-  assert.ok(!ctaBtn.disabled, 'enabled on load');
+  // 1) initial load without a vehicle: P5 (2026-11-15) — Add to Cart disabled
+  //    with the vehicle-required message; SKU cell still live; no loading text.
+  assert.equal(purchaseRoot.attrs['data-calder-uc-state'], 'VEHICLE_REQUIRED', 'initial state VEHICLE_REQUIRED (P5)');
+  assert.equal(ctaBtn.attrs.disabled, 'disabled', 'disabled on load without a vehicle');
   assert.equal(ctaLabel.attrs.textContent || ctaLabel.textContent, 'Add to Cart');
+  assert.equal(String(message.textContent), 'Select your vehicle to confirm fitment, check availability, and add this wheel to your cart.', 'exact P5 message');
   assert.ok(!String(message.textContent).includes('Checking availability'), 'no loading flash');
 
   // 2) SKU cell is live with part_number even on initial load
-  assert.ok(skuCell.textContent.includes('Universal Part#'), 'SKU cell has Universal Part# on load: ' + skuCell.textContent);
-  assert.ok(/Part#: [A-Z]/.test(skuCell.textContent), 'part number is a real code: ' + skuCell.textContent);
-  // approved two-line spec-cell format: SKU: CFG-... <br /> Universal Part#: ...
-  assert.ok(skuCell.innerHTML.includes('<br />Universal Part#:'), 'spec cell uses the two-line <br /> format: ' + skuCell.innerHTML);
+  assert.ok(skuCell.textContent.includes('Part Number'), 'SKU cell has Part Number on load: ' + skuCell.textContent);
+  assert.ok(/Part Number: [A-Z]/.test(skuCell.textContent), 'part number is a real code: ' + skuCell.textContent);
+  // approved two-line spec-cell format: SKU: CFG-... <br /> Part Number: ...
+  assert.ok(skuCell.innerHTML.includes('<br />Part Number:'), 'spec cell uses the two-line <br /> format: ' + skuCell.innerHTML);
   assert.ok(/^SKU: CFG-CLB06-22-/.test(skuCell.innerHTML), 'spec cell leads with the CFG SKU: ' + skuCell.innerHTML);
   // .calder-pdp__sku block: <span class="sku">…</span><br /><span class="universal-part">…</span>
   assert.ok(pdpSkuBlock.innerHTML.includes('<span class="sku"><span>SKU:</span> CFG-CLB06-22-'), 'pdp sku block has the CFG SKU span: ' + pdpSkuBlock.innerHTML);
-  assert.ok(pdpSkuBlock.innerHTML.includes('<br /><span class="universal-part"><span>Universal Part#:</span> CLB'), 'pdp sku block has the universal part span: ' + pdpSkuBlock.innerHTML);
+  assert.ok(pdpSkuBlock.innerHTML.includes('<br /><span class="universal-part"><span>Part Number:</span> CLB'), 'pdp sku block has the universal part span: ' + pdpSkuBlock.innerHTML);
 
   // 3) change a .calder-uc selection -> SKU + part number update (cell AND pdp block)
   const clickOpt = optionButtons[1]; clickOpt.closest = () => clickOpt;
@@ -228,14 +230,14 @@ test('E2E: vehicle select -> fitment text hidden -> CTA available -> SKU cell li
   await new Promise(r => setTimeout(r, 10));
   assert.equal(purchaseRoot.attrs['data-calder-uc-state'], 'VEHICLE_INCOMPATIBLE', 'non-matching pattern -> disabled');
   assert.equal(ctaBtn.attrs.disabled, 'disabled');
-  assert.ok(skuCell.textContent.includes('Universal Part#'), 'part number STILL live on incompatible: ' + skuCell.textContent);
+  assert.ok(skuCell.textContent.includes('Part Number'), 'part number STILL live on incompatible: ' + skuCell.textContent);
 
-  // 7) vehicle cleared (Reset) -> back to enabled default state
+  // 7) vehicle cleared (Reset) -> P5: back to the vehicle-required disabled state
   delete store['calder_selected_vehicle'];
   document.dispatchEventCustom('calder:vehicle-cleared', null);
   await new Promise(r => setTimeout(r, 10));
-  assert.equal(purchaseRoot.attrs['data-calder-ct-state'] || purchaseRoot.attrs['data-calder-uc-state'], 'AVAILABLE', 'reset -> AVAILABLE');
-  assert.ok(!ctaBtn.disabled, 'reset -> enabled');
+  assert.equal(purchaseRoot.attrs['data-calder-ct-state'] || purchaseRoot.attrs['data-calder-uc-state'], 'VEHICLE_REQUIRED', 'reset -> VEHICLE_REQUIRED (P5)');
+  assert.equal(ctaBtn.attrs.disabled, 'disabled', 'reset -> disabled until a vehicle is selected again');
 
   // 8) resolved part number dispatched for spec table (diameter row)
   assert.ok(events.includes('calder:universal-resolved'), 'resolver broadcast fired');

@@ -3,12 +3,19 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
-  margin: 1rem 0 0;
+  margin: 1rem 0 2rem;
 }
 .calder-uc__group {
   display: flex;
   flex-direction: column;
   gap: 10px;
+}
+/* P4 (2026-11-15 CHANGES): the Diameter group is hidden until a vehicle is
+   selected (calder-universal-pdp.js toggles the hidden attribute). The
+   explicit display rule above would defeat the UA [hidden] default, so the
+   guard must be explicit — same pattern as the gallery [hidden] fix. */
+.calder-uc__group[hidden] {
+  display: none !important;
 }
 .calder-uc__heading {
   display: initial;
@@ -123,6 +130,22 @@
   line-height: 1.45;
   color: var(--calder-color-muted, #6b7280);
   min-height: 1.2em;
+}
+/* 2026-11-16 client update: the vehicle-required message stands out in red. */
+[data-calder-uc-state="VEHICLE_REQUIRED"] .calder-upc__message {
+  color: var(--calder-error, #d63638);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+/* 2026-11-16 client update: the design nav is hidden on the standard PDP
+   (shoppers shouldn't be distracted before adding the desired product;
+   the Universal Wheel Builder page shows it prominently instead). */
+.calder-pdp__config .calder-design-nav {
+  display: none;
+}
+.calder-pdp__config[data-show-design-nav="true"] .calder-design-nav {
+  display: block;
 }
 .calder-upc__support-link {
   font-family: var(--calder-ui-font, sans-serif);
@@ -672,4 +695,122 @@
   .calder-design-nav__number {
     display: none;
   }
+}
+/* P1 (2026-11-15): shown by calder-universal-pdp.js when the selected
+   vehicle's bolt pattern matches none of the other designs. */
+.calder-design-nav__empty {
+  grid-column: 1 / -1;
+  padding: 10px 8px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  font-family: var(--calder-ui-font, sans-serif);
+  font-size: 13px;
+  color: var(--calder-color-muted, #6b7280);
+}
+.calder-design-nav__empty[hidden] {
+  display: none;
+}
+
+/* P4 (2026-11-15): diameters the selected vehicle's fitment data does not
+   offer render disabled — visual affordance for the aria-disabled buttons. */
+.calder-uc__option:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* ── Universal Wheel Builder (2026-11-16) ── */
+.calder-builder {
+  max-width: 1178px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+.calder-builder__header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+.calder-builder__title {
+  font-family: var(--calder-ui-font, sans-serif);
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--calder-navy, #102C40);
+  margin: 0 0 0.5rem;
+}
+.calder-builder__intro {
+  font-family: var(--calder-ui-font, sans-serif);
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--calder-color-muted, #6b7280);
+  max-width: 600px;
+  margin: 0 auto;
+}
+.calder-builder__designs {
+  margin: 2rem 0;
+  padding: 1.5rem;
+  background: var(--calder-color-surface-alt, #f5f7fa);
+  border-radius: 8px;
+  border: 1px solid var(--calder-color-border, #e1e5eb);
+}
+/* Override the PDP's design-nav hiding for the builder page */
+.calder-builder .calder-design-nav { display: block !important; }
+.calder-builder .calder-design-nav__heading {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--calder-navy, #102C40);
+  margin-bottom: 14px;
+}
+.calder-builder .calder-design-nav__link {
+  border: 2px solid var(--calder-color-border, #e1e5eb);
+  border-radius: 8px;
+  padding: 12px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.calder-builder .calder-design-nav__link:hover {
+  border-color: var(--calder-gold, #C2A48A);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+.calder-builder .calder-design-nav__thumb { width: 66px; height: 44px; }
+.calder-builder .calder-design-nav__name { font-size: 15px; }
+.calder-builder__body {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.calder-builder__cta-zone {
+  text-align: center;
+  margin: 2rem 0;
+}
+.calder-builder__cta {
+  font-family: var(--calder-ui-font, sans-serif);
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 16px 48px;
+  background: var(--calder-navy, #102C40);
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+.calder-builder__cta:hover { background: var(--calder-gold, #C2A48A); }
+.calder-builder__cta-note {
+  font-family: var(--calder-ui-font, sans-serif);
+  font-size: 12px;
+  color: var(--calder-color-muted, #6b7280);
+  margin: 8px 0 0;
+}
+.calder-builder-placeholder {
+  text-align: center;
+  padding: 3rem;
+  font-family: var(--calder-ui-font, sans-serif);
+  color: var(--calder-color-muted, #6b7280);
+}
+@media (min-width: 750px) {
+  .calder-builder__body { flex-direction: row; }
+  .calder-builder__preview { flex: 1 1 55%; }
+  .calder-builder__controls { flex: 1 1 45%; }
 }

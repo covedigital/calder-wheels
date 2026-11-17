@@ -139,7 +139,9 @@
           root.setAttribute('data-calder-uc-state', 'VEHICLE_REQUIRED');
           cta.disabled = true;
           ctaLabel.textContent = 'Add to Cart';
-          setMessage('Select your vehicle to confirm fitment and availability for the exact wheel.');
+          /* P5 (2026-11-15): exact client-requested wording — the vehicle
+             picker action lives in the fitment panel above the CTA. */
+          setMessage('Select your vehicle to confirm fitment, check availability, and add this wheel to your cart.');
           break;
         case 'INVALID':
           root.setAttribute('data-calder-uc-state', 'INVALID');
@@ -311,6 +313,23 @@
       var vehicle = readVehicle();
       var qty = readQuantity();
       var qb = qbAvailability(snap.tokens, qty);
+
+      /* P5 (2026-11-15): a valid vehicle is required before purchasing —
+         without one the CTA is disabled and the message points at the
+         fitment picker. This supersedes the earlier no-vehicle default-
+         group path (and the pcd-param purchase scoping, 2026-11-02 C):
+         the pcd URL param still validates for navigation, but it can no
+         longer enable purchase on its own. The SKU cell stays live via
+         the peek below. */
+      if (!vehicle) {
+        var requiredOut = { state: 'VEHICLE_REQUIRED', qb: qb, requestedQuantity: qty };
+        var requiredPeek = resolver.peek(snap.tokens, currentGroup());
+        if (requiredPeek && requiredPeek.cell && requiredPeek.cell.part_number) {
+          requiredOut.partNumber = requiredPeek.cell.part_number;
+        }
+        applyOutcome(requiredOut, snap.seq);
+        return;
+      }
       var buildOutcome = function (resolved) {
         var out = resolved || { state: 'AVAILABLE' };
         out.qb = qb;
@@ -331,8 +350,8 @@
         }
         applyOutcome(out, snap.seq);
       };
-      /* CTA status changes ONLY on vehicle selection + bolt-pattern match.
-         No vehicle -> default group, enabled immediately (no loading flash). */
+      /* CTA status changes only on a vehicle selection + bolt-pattern match
+         (P5: a vehicle is always present past this point). */
       if (!vehicleMatchesDesign(vehicle)) {
         var incompatOut = {
           state: 'VEHICLE_INCOMPATIBLE',
@@ -348,6 +367,33 @@
         applyOutcome(incompatOut, snap.seq);
         return;
       }
+
+      /* P4 (2026-11-15): prevent unsupported size combinations — when the
+         vehicle's own fitment records (cf) are loaded, a diameter they do
+         not offer can never resolve to the vehicle's fitment group; the old
+         default-group fallback would have silently priced it against a
+         different pattern. Fail closed with a truthful message instead.
+         Vehicles saved without cf data skip this backstop (pattern match
+         still enforced above; the disabled UI control is the first line
+         of defense). */
+      if (vehicle.cf && vehicle.cf.length &&
+          !resolver.groupFromVehicle(vehicle, snap.tokens.diameter)) {
+        var sizeOut = {
+          state: 'INVALID',
+          message: 'The selected size isn\u2019t offered for your vehicle \u2014 choose an available size.',
+          qb: qb,
+          requestedQuantity: qty,
+          vehiclePatterns: vehiclePatterns(vehicle),
+          designPatterns: designPatterns()
+        };
+        var sizePeek = resolver.peek(snap.tokens, currentGroup());
+        if (sizePeek && sizePeek.cell && sizePeek.cell.part_number) {
+          sizeOut.partNumber = sizePeek.cell.part_number;
+        }
+        applyOutcome(sizeOut, snap.seq);
+        return;
+      }
+
       buildOutcome(null);
       var group = currentGroup();
       if (!group) { return; }
@@ -430,6 +476,58 @@
       cta.disabled = true;
       ctaLabel.textContent = 'Adding…';
       var qty = readQuantity();
+
+      /* ── Line-item properties (K1, 2026-11-15) ──
+         The cart line must carry its OWN complete configuration — snapshot
+         at add time from this CTA's state, resolved record and vehicle
+         (never a global last-selected value). Customer-facing keys render
+         in the cart page + drawer (both templates loop all non-underscore
+         properties); underscore-prefixed internals stay hidden and feed
+         the per-line confirmations + integrations. Width / Bolt Pattern
+         resolve from the same fitment records the spec table uses; a
+         blank value is omitted rather than invented. Duplicate designs
+         with different configurations stay distinct lines because
+         Shopify keys cart lines by variant id + properties. */
+      var addVehicle = readVehicle();
+      var addLabels = resolver.labels || {};
+      var addGroup = null;
+      try { addGroup = resolver.groupFromVehicle(addVehicle, snap.tokens.diameter); } catch (e) { addGroup = null; }
+      var addCfg = null;
+      if (addVehicle && addVehicle.cf) {
+        addVehicle.cf.forEach(function (c) {
+          var m = /^(\d{2})\s*[x×]/i.exec(String((c && c.z) || ''));
+          if (m && m[1] === snap.tokens.diameter) { addCfg = c; }
+        });
+      }
+      function addWidth() {
+        var w = /^\d{2}\s*[x×]\s*([\d.]+)/i.exec(String((addCfg && (addCfg.z || addCfg.fz)) || ''));
+        var r = /^\d{2}\s*[x×]\s*([\d.]+)/i.exec(String((addCfg && addCfg.rz) || (addCfg && addCfg.z) || ''));
+        if (!w) { return ''; }
+        if (addCfg && addCfg.rz && r && w[1] !== r[1]) { return 'Front ' + w[1] + '" / Rear ' + r[1] + '"'; }
+        return w[1] + '"';
+      }
+      var addProperties = {
+        'Wheel Design': (resolver.design && resolver.design.designCode) || '',
+        'Diameter': snap.tokens.diameter ? snap.tokens.diameter + '"' : '',
+        'Width': addWidth(),
+        'Center Finish': (addLabels.center && addLabels.center[snap.tokens.center]) || snap.tokens.center || '',
+        'Barrel & Lip Finish': (addLabels.barrel && addLabels.barrel[snap.tokens.barrel]) || snap.tokens.barrel || '',
+        'Hardware & Rivet Finish': (addLabels.hardware && addLabels.hardware[snap.tokens.hardware]) || snap.tokens.hardware || '',
+        'Vehicle': (addVehicle && (addVehicle.display_name ||
+          [addVehicle.year || addVehicle.y, addVehicle.make || addVehicle.m, addVehicle.model || addVehicle.M].filter(Boolean).join(' '))) || '',
+        'Bolt Pattern': addGroup ? String(addGroup).split('-')[0] : ''
+      };
+      Object.keys(addProperties).forEach(function (key) {
+        if (addProperties[key] === '' || addProperties[key] == null) { delete addProperties[key]; }
+      });
+      addProperties['_configurator'] = 'true';
+      addProperties['_source'] = 'universal-cta';
+      addProperties['_design_code'] = (resolver.design && resolver.design.designCode) || '';
+      addProperties['_fitment_group'] = addGroup || '';
+      addProperties['_config_tokens'] = JSON.stringify(snap.tokens);
+      addProperties['_variant_id'] = String(legacy.variantId);
+      addProperties['_product_handle'] = legacy.handle;
+
       var sections = CART_SECTIONS.slice();
       var cartItems = document.querySelector('cart-items');
       if (cartItems && typeof cartItems.getSectionsToRender === 'function') {
@@ -446,7 +544,7 @@
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         body: JSON.stringify({
-          items: [{ id: legacy.variantId, quantity: qty }],
+          items: [{ id: legacy.variantId, quantity: qty, properties: addProperties }],
           sections: sections,
           sections_url: window.location.pathname || '/'
         })

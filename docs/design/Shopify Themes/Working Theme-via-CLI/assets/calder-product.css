@@ -8121,3 +8121,22 @@ position: static;
   overflow-wrap: anywhere;
 }
 
+
+/* ── P7 (2026-11-15): general-spec tag in .calder-specs__table ──
+   Width / Bolt Pattern / Offset server-render the GENERAL specification on
+   universal design PDPs; calder-universal-pdp.js swaps in the EXACT assigned
+   values once a vehicle + configuration are selected (the tag disappears with
+   them) and restores these pristine general cells on reset. */
+.calder-specs__table .calder-specs__general-tag {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 1px 6px;
+  border: 1px solid var(--calder-color-border, #d1d5db);
+  border-radius: 3px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--calder-color-muted, #6b7280);
+  vertical-align: middle;
+}

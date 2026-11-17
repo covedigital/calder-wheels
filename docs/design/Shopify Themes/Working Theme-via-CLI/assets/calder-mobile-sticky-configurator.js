@@ -78,9 +78,59 @@
       if (pollTries++ < 80) { setTimeout(pollController, 100); }
     }
 
+    /* ── Vehicle-aware Diameter (P4, 2026-11-15) ──
+       Mirrors the desktop .calder-uc behavior: the Diameter tab is hidden
+       until a vehicle is selected (and returns on Reset); with a vehicle,
+       option labels show the combined Size ("22 × 10") from the vehicle's
+       own fitment records — display labels only, tokens/identifiers
+       unchanged; diameters the vehicle does not offer render disabled.
+       The tab NAME stays "Diameter" (protected mobile tab naming). */
+    var diaVehicle = null;
+    var diaSupported = null;
+    var diaLabels = null;
+    function diaWidthFrom(size) {
+      var m = /^\d{2}\s*[x×]\s*([\d.]+)/i.exec(String(size || ''));
+      return m ? m[1] : '';
+    }
+    function diaApplyVehicle(vehicle) {
+      diaVehicle = null; diaSupported = null; diaLabels = null;
+      if (vehicle && (vehicle.b || vehicle.bolt_pattern)) { diaVehicle = vehicle; }
+      if (diaVehicle) {
+        diaSupported = {}; diaLabels = {};
+        (diaVehicle.cf || []).forEach(function (cfg) {
+          var m = /^(\d{2})\s*[x×]/i.exec(String((cfg && cfg.z) || ''));
+          if (!m) { return; }
+          diaSupported[m[1]] = true;
+          var front = diaWidthFrom(cfg.z || cfg.fz);
+          var rear = diaWidthFrom(cfg.rz || cfg.z);
+          if (front && front === rear) { diaLabels[m[1]] = m[1] + ' × ' + front; }
+        });
+      }
+      var diaTab = tabsEl.querySelector('[data-dim="diameter"]');
+      if (diaTab) { diaTab.hidden = !diaVehicle; }
+      if (!diaVehicle && activeDim === 'diameter') { setActiveTab('center'); }
+      var UC = window.CALDER_UNIVERSAL_PDP;
+      if (UC && UC.state) {
+        buildOptions(UC.resolver, UC.state.getState().tokens);
+        renderActivePanel();
+      }
+    }
+    document.addEventListener('calder:vehicle-selected', function (evt) {
+      try { diaApplyVehicle((evt && evt.detail) || JSON.parse(localStorage.getItem('calder_selected_vehicle'))); } catch (e) { diaApplyVehicle(null); }
+    });
+    document.addEventListener('calder:vehicle-cleared', function () { diaApplyVehicle(null); });
+    window.addEventListener('storage', function (evt) {
+      if (evt.key === 'calder_selected_vehicle') {
+        try { diaApplyVehicle(evt.newValue ? JSON.parse(evt.newValue) : null); } catch (e) { diaApplyVehicle(null); }
+      }
+    });
+
     function labelFor(resolver, dim, token) {
       if (!token) { return null; }
-      if (dim === 'diameter') { return token + '"'; }
+      if (dim === 'diameter') {
+        if (diaLabels && diaLabels[token]) { return diaLabels[token]; }
+        return token + '"';
+      }
       return (resolver.labels[dim] && resolver.labels[dim][token]) || token;
     }
 
@@ -156,6 +206,12 @@
           var btn = document.createElement('button');
           btn.type = 'button';
           var isDia = dim === 'diameter';
+          /* P4 (2026-11-15): diameters the selected vehicle's fitment data
+             does not offer render disabled (mirrors the desktop control). */
+          if (isDia && diaVehicle && diaSupported && !diaSupported[token]) {
+            btn.disabled = true;
+            btn.setAttribute('aria-disabled', 'true');
+          }
           btn.className = 'calder-mobile-uc__option' + (isDia ? ' calder-mobile-uc__option--dia' : '');
           if (!isDia) {
             var origImg = document.querySelector(
@@ -415,6 +471,9 @@
       buildTabs(resolver);
       buildOptions(resolver, state.getState().tokens);
       setActiveTab('diameter'); /* default tab on first opening */
+      /* P4 (2026-11-15): apply the saved-vehicle state to the Diameter tab
+         (hidden without a vehicle) and the Size labels before first open. */
+      try { diaApplyVehicle(JSON.parse(localStorage.getItem('calder_selected_vehicle'))); } catch (e) { diaApplyVehicle(null); }
       onState(state.getState());
       unsubscribe = state.subscribe(onState);
 

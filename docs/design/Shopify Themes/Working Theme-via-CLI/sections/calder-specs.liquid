@@ -119,20 +119,30 @@
               {% endif %}
               {%- endif -%}
 
+              {%- comment -%}
+                P7 (2026-11-15): Width / Bolt Pattern / Center Bore / Offset are
+                the vehicle-resolvable specs. Server-side values are the GENERAL
+                specification (settings / metafield ranges) and are labeled as
+                such on universal design PDPs; calder-universal-pdp.js replaces
+                them with the EXACT assigned values from the selected vehicle's
+                fitment records + the resolved registry fitment group once a
+                vehicle and configuration are selected (never derived from
+                ranges). Unresolvable -> the truthful general values stay.
+              {%- endcomment -%}
               <tr>
                 <td>Width</td>
-                <td>{{ section.settings.spec_width | default: '8.5" — 11"' }}</td>
+                <td data-calder-spec="width">{{ section.settings.spec_width | default: '8.5" — 11"' }}{%- if is_universal_design -%} <span class="calder-specs__general-tag">general</span>{%- endif -%}</td>
               </tr>
 
               {% if bolt_pattern != blank %}
               <tr>
                 <td>Bolt Pattern</td>
-                <td>{{ bolt_pattern }}</td>
+                <td data-calder-spec="bolt">{{ bolt_pattern }}{%- if is_universal_design -%} <span class="calder-specs__general-tag">general</span>{%- endif -%}</td>
               </tr>
               {% else %}
               <tr>
                 <td>Bolt Pattern</td>
-                <td>{{ section.settings.spec_bolt | default: '5x112' }}</td>
+                <td data-calder-spec="bolt">{{ section.settings.spec_bolt | default: '5x112' }}{%- if is_universal_design -%} <span class="calder-specs__general-tag">general</span>{%- endif -%}</td>
               </tr>
               {% endif %}
 
@@ -141,11 +151,20 @@
                 <td>Center Bore</td>
                 <td>{{ center_bore }}mm</td>
               </tr>
+              {%- elsif is_universal_design -%}
+              {%- comment -%}Universal design products carry no single center_bore
+                metafield (multi-bore catalog rows); the exact wheel bore for
+                the resolved fitment group fills this cell at runtime. The
+                truthful pre-selection state is "—", not an invented value.{%- endcomment -%}
+              <tr>
+                <td>Center Bore</td>
+                <td data-calder-spec="bore">—</td>
+              </tr>
               {% endif %}
 
               <tr>
                 <td>Offset</td>
-                <td>{{ section.settings.spec_offset | default: '+22 to +45' }}</td>
+                <td data-calder-spec="offset">{{ section.settings.spec_offset | default: '+22 to +45' }}{%- if is_universal_design -%} <span class="calder-specs__general-tag">general</span>{%- endif -%}</td>
               </tr>
 
               {% if construction != blank %}

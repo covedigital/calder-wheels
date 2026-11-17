@@ -214,9 +214,14 @@ test('CTA state matrix: each resolution state drives the correct CTA mode', asyn
 
   env = buildSandbox({});
   await tick();
-  assert.equal(env.purchase.root.getAttribute('data-calder-uc-state'), 'AVAILABLE', 'no vehicle -> default group + component stock -> purchasable');
-  assert.equal(env.purchase.ctaBtn.disabled, false, 'enabled on load, no Checking-Availability flash');
+  /* P5 (2026-11-15): a valid vehicle is required before purchasing — the
+     no-vehicle default-group "purchasable" path is superseded. The CTA is
+     disabled with the client-requested message; the SKU cell stays live. */
+  assert.equal(env.purchase.root.getAttribute('data-calder-uc-state'), 'VEHICLE_REQUIRED', 'no vehicle -> VEHICLE_REQUIRED (P5)');
+  assert.equal(env.purchase.ctaBtn.disabled, true, 'disabled on load without a vehicle');
   assert.equal(env.purchase.ctaLabel.textContent, 'Add to Cart');
+  assert.equal(env.purchase.message.textContent,
+    'Select your vehicle to confirm fitment, check availability, and add this wheel to your cart.', 'exact P5 message');
   assert.ok(!env.purchase.message.textContent.includes('Checking availability'), 'no loading message');
 
   // vehicle with a NON-matching bolt pattern -> disabled, Reset guidance
@@ -264,12 +269,14 @@ test('no cart submission without a vehicle; submission posts the resolved legacy
     }
   });
   await tick();
-  assert.equal(env.purchase.root.getAttribute('data-calder-uc-state'), 'AVAILABLE', 'CTA no longer gated on vehicle');
+  /* P5 (2026-11-15): without a vehicle the CTA is disabled (VEHICLE_REQUIRED)
+     and a click submits NOTHING — restoring this test's original intent. */
+  assert.equal(env.purchase.root.getAttribute('data-calder-uc-state'), 'VEHICLE_REQUIRED');
+  assert.equal(env.purchase.ctaBtn.disabled, true);
   env.purchase.ctaBtn.click();
   await tick();
-  assert.equal(env.posted.filter((p2) => p2.url.includes('cart/add.js')).length, 1, 'component-stock config submits the DEFAULT-group variant without a vehicle');
+  assert.equal(env.posted.filter((p2) => p2.url.includes('cart/add.js')).length, 0, 'no submission without a vehicle');
 
-  const baseline = env.posted.filter((p) => p.url.includes('cart/add.js')).length;
   env.store['calder_selected_vehicle'] = JSON.stringify(GM_VEHICLE);
   env.api.state.setOption('diameter', '22'); // state poke triggers recheck
   await tick();
@@ -278,7 +285,7 @@ test('no cart submission without a vehicle; submission posts the resolved legacy
   env.purchase.ctaBtn.click();
   await tick();
   const adds = env.posted.filter((p) => p.url.includes('cart/add.js'));
-  assert.equal(adds.length, baseline + 1, 'duplicate clicks produce exactly one submission');
+  assert.equal(adds.length, 1, 'exactly one submission (duplicate clicks produce one)');
   assert.equal(adds[0].body.items[0].id, 987654, 'resolved legacy variant id submitted');
   assert.equal(adds[0].body.items[0].quantity, 2, 'quantity read from qty input');
   assert.ok(!String(adds[0].body.items[0].id).startsWith('CFG'), 'never submits a universal config-anchor variant');
@@ -320,6 +327,8 @@ test('successful add applies returned section HTML and restores Add to Cart', as
 });
 
 test('successful add delegates rendering to the theme cart-items renderer (no raw section dumping)', async () => {
+  /* P5 (2026-11-15): vehicle required for purchase — non-vehicle-behavior
+     tests (rendering/stock/inventory) run with a selected vehicle. */
   const renderContentsCalls = [];
   let toggleEmptyClassCalls = 0;
   const impl = {
@@ -336,6 +345,7 @@ test('successful add delegates rendering to the theme cart-items renderer (no ra
   let postedBody = null;
   const env = buildSandbox({
     cartItemsImpl: impl,
+    vehicle: GM_VEHICLE,
     sectionsDom: { 'header-cart': headerCart },
     fetchImpl: async (url, init) => {
       postedBody = JSON.parse(init.body);
@@ -357,6 +367,7 @@ test('fallback section rendering swaps the #shopify-section wrapper content with
   const wrapper = fakeElement({});
   const env = buildSandbox({
     withoutCartItems: true,
+    vehicle: GM_VEHICLE,
     sectionsDom: { 'shopify-section-header-cart': wrapper },
     fetchImpl: async () => ({
       ok: true,
@@ -371,7 +382,7 @@ test('fallback section rendering swaps the #shopify-section wrapper content with
 
 test('low-availability warning uses the minimum component quantity threshold (no exact counts)', async () => {
   // CLB-06 22" default group: buildable = min(10 blanks, 11 centers, 26 barrels, 400/20 hw) = 10
-  const env = buildSandbox({ minQty: 12 });
+  const env = buildSandbox({ minQty: 12, vehicle: GM_VEHICLE });
   await tick();
   assert.equal(env.purchase.root.getAttribute('data-calder-uc-state'), 'AVAILABLE');
   assert.equal(env.purchase.ctaBtn.disabled, false, 'still purchasable at low stock');
@@ -380,7 +391,7 @@ test('low-availability warning uses the minimum component quantity threshold (no
 });
 
 test('component stock-out disables Add to Cart with the support-rep message (no exact counts, no placeholder phone)', async () => {
-  const env = buildSandbox({ qty: '11', qbParts: { 'CAL-206-D-22': { description: 'Barrel Blank 22 (206)', on_hand: 10 } } });
+  const env = buildSandbox({ qty: '11', vehicle: GM_VEHICLE, qbParts: { 'CAL-206-D-22': { description: 'Barrel Blank 22 (206)', on_hand: 10 } } });
   await tick();
   assert.equal(env.purchase.root.getAttribute('data-calder-uc-state'), 'NO_STOCK');
   assert.equal(env.purchase.ctaBtn.disabled, true);
@@ -412,7 +423,7 @@ test('developer output panel: template-option gated, populated by CTA, partNumbe
   assert.ok(ctaSrc.includes('renderDevPanel'), 'CTA populates dev panel');
   assert.ok(ctaSrc.includes('peekedPartNumber'), 'partNumber falls back to registry peek');
   const skuHandler = readFileSync(path.join(ASSETS, 'calder-universal-pdp.js'), 'utf8');
-  assert.ok(skuHandler.includes('Universal Part#'), 'SKU cell shows CFG + Universal Part#');
+  assert.ok(skuHandler.includes('<br />Part Number: '), 'SKU cell shows CFG + Part Number');
   assert.ok(prodSection.includes('ckIcon.hidden = false'), 'clearVehicle resets icon to default');
 });
 
@@ -427,7 +438,7 @@ test('inventory source = native skips the QuickBooks component gate entirely', a
   // No CALDER_QUICKBOOKS_INVENTORY payload in the sandbox at all:
   // source=native must stay AVAILABLE (Shopify availability decides) instead of
   // degrading to the "could not be verified" ERROR that demo/quickbooks modes show.
-  const env = buildSandbox({ inventorySource: 'native', noQb: true });
+  const env = buildSandbox({ inventorySource: 'native', noQb: true, vehicle: GM_VEHICLE });
   await tick();
   assert.equal(env.purchase.root.getAttribute('data-calder-uc-state'), 'AVAILABLE', 'native mode stays AVAILABLE without any component payload');
   assert.ok(!/could not be verified/i.test(env.purchase.message.textContent), 'native mode never errors on missing component data');

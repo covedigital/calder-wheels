@@ -25,6 +25,16 @@
   options (calder-pdp-state.js) and resets gracefully on mismatch, so no
   incompatible options or bolts are ever transferred (spec A state rules).
 
+  2026-11-15 P1: each link also carries its design's bolt_pattern metafield
+  as data-pcds (collected from the same catalog lookup). While a vehicle is
+  selected, calder-universal-pdp.js shows only the designs whose patterns
+  include the vehicle's; calder:vehicle-cleared (the fitment panel Reset)
+  restores every design. Bolt pattern is the only cross-design constraint
+  the catalog exposes — the destination PDP still fail-closes the purchase
+  through the full resolver checks, so a pattern match alone never
+  guarantees fitment. Links without data-pcds stay visible (missing data
+  must not drop possibly-compatible designs).
+
   Fallback (catalog lookup unavailable): registry canonical handles
   (calder-clm-0X-wheel for the never-renamed designs; calder-clb-06/07-wheel
   for the renamed pair — redirect-covered when the rename was done in admin).
@@ -49,6 +59,7 @@
 
   assign cdn_urls = ''
   assign cdn_titles = ''
+  assign cdn_pcds = ''
 -%}
 {%- if collections.all != blank -%}
   {%- paginate collections.all.products by 250 -%}
@@ -74,6 +85,19 @@
           if cdn_p_key != blank
             assign cdn_urls = cdn_urls | append: cdn_p_key | append: '|' | append: cdn_p.url | append: ','
             assign cdn_titles = cdn_titles | append: cdn_p_key | append: '|' | append: cdn_p.title | append: ','
+            comment
+              P1 (2026-11-15): the design's bolt_pattern metafield (list or
+              string — the catalog lookup verified both render as "6x135,
+              6x139" style output). ';' separates key|value pairs because
+              the values themselves contain commas.
+            endcomment
+            capture cdn_bp
+              echo cdn_p.metafields.custom.bolt_pattern.value | default: cdn_p.metafields.custom.bolt_pattern
+            endcapture
+            assign cdn_bp = cdn_bp | strip
+            if cdn_bp != blank
+              assign cdn_pcds = cdn_pcds | append: cdn_p_key | append: '|' | append: cdn_bp | append: ';'
+            endif
           endif
         -%}
       {%- endif -%}
@@ -91,11 +115,20 @@
           assign cdn_number = cdn_numbers[cdn_i]
           assign cdn_url = ''
           assign cdn_title = ''
+          assign cdn_pcd = ''
           assign cdn_pairs = cdn_urls | split: ','
           for cdn_pair in cdn_pairs
             assign cdn_pk = cdn_pair | split: '|' | first
             if cdn_pk == cdn_key
               assign cdn_url = cdn_pair | split: '|' | last
+              break
+            endif
+          endfor
+          assign cdn_pcd_pairs = cdn_pcds | split: ';'
+          for cdn_pair in cdn_pcd_pairs
+            assign cdn_pk = cdn_pair | split: '|' | first
+            if cdn_pk == cdn_key
+              assign cdn_pcd = cdn_pair | split: '|' | last
               break
             endif
           endfor
@@ -120,7 +153,7 @@
           endif
         -%}
         <li class="calder-design-nav__item">
-          <a class="calder-design-nav__link" href="{{ cdn_url }}" data-calder-design-nav-link>
+          <a class="calder-design-nav__link" href="{{ cdn_url }}" data-calder-design-nav-link{% if cdn_pcd != blank %} data-pcds="{{ cdn_pcd | escape }}"{% endif %}>
             <span class="calder-design-nav__thumb" aria-hidden="true">
               <img src="{{ cdn_number | append: '-disk-gb.png' | asset_url }}" alt="" width="88" height="56" loading="lazy" decoding="async">
             </span>
@@ -133,6 +166,11 @@
         </li>
       {%- endif -%}
     {%- endfor -%}
+    {%- comment -%}P1 (2026-11-15): shown by calder-universal-pdp.js when a
+      selected vehicle's bolt pattern matches none of the other designs.{%- endcomment -%}
+    <li class="calder-design-nav__empty" data-design-nav-empty hidden>
+      No other Calder designs match your vehicle&rsquo;s bolt pattern.
+    </li>
   </ul>
 </nav>
 {%- endif -%}

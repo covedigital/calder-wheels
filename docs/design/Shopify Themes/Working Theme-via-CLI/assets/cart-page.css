@@ -547,16 +547,16 @@
 
 @media (max-width:1465px) {
   .cart-table-prd-price, .cart-table-prd-price-total {
-    -ms-flex: 0 0 80px;
-    flex: 0 0 80px;
+    -ms-flex: 0 0 30px;
+    flex: 0 0 30px;
     max-width: 80px;
   }
 }
 
 @media (max-width:1199px) {
   .cart-table-prd-price, .cart-table-prd-price-total {
-    -ms-flex: 0 0 80px;
-    flex: 0 0 80px;
+    -ms-flex: 0 0 30px;
+    flex: 0 0 30px;
     max-width: 80px;
   }
 }
@@ -1327,70 +1327,99 @@
     padding:25px 20px;
   }
 }
-/* Calder final integration: preserve Lumia quantity-input DOM and event handlers */
+/* Calder final integration: preserve Lumia quantity-input DOM and event handlers.
+   2026-11-17 refinement: SINGLE geometry authority for the cart-page quantity
+   selector (the later __actions-scoped duplicate rules were removed).
+   Flex design: [input | − | +] — nav is a static stretched flex item (row-reverse:
+   DOM-first + renders on the RIGHT edge), input absorbs the slack, dividers ride
+   the button borders. Scoped to .calder-cart-item .cart-table-prd-qty so the
+   geometry survives moveQtyNode() relocating the node at small widths. */
 
 .calder-site.template-cart .calder-cart-item .cart-table-prd-qty quantity-input {
-  display:block;
-  width:112px;
+  display: block;
+  width: 140px;
 }
 
-.calder-site.template-cart .calder-cart-item .cart-table-prd-qty quantity-input>.prd-quantity {
-  position:relative;
-  display:flex;
-  align-items:center;
-  min-height:40px;
-  width:112px;
-  padding-right:54px;
+.calder-site.template-cart .calder-cart-item .cart-table-prd-qty quantity-input > .prd-quantity {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  height: 44px;
+  width: 140px;
+  padding: 0;
+  border: 1px solid var(--cwci-qty-border);
+  border-radius: 12px;
+  background: var(--cwci-card-bg);
+  color: var(--cwci-navy);
+  overflow: hidden;
 }
 
 .calder-site.template-cart .calder-cart-item .cart-table-prd-qty .prd-quantity input {
-  width:100%;
-  min-width:0;
-  height:38px;
-  padding:0 5px;
-  text-align:center;
-  appearance:textfield;
-  -moz-appearance:textfield;
+  flex: 1 1 auto;
+  width: auto;
+  min-width: 0;
+  height: auto;
+  padding: 0 6px;
+  text-align: center;
+  appearance: textfield;
+  -moz-appearance: textfield;
+  border: 0;
+  background: transparent;
+  font: 600 15px/1 var(--calder-ui-font);
+  color: var(--cwci-navy);
 }
 
-.calder-site.template-cart .calder-cart-item .cart-table-prd-qty .prd-quantity input::-webkit-inner-spin-button,.calder-site.template-cart .calder-cart-item .cart-table-prd-qty .prd-quantity input::-webkit-outer-spin-button {
-  -webkit-appearance:none;
-  margin:0;
+.calder-site.template-cart .calder-cart-item .cart-table-prd-qty .prd-quantity input::-webkit-inner-spin-button,
+.calder-site.template-cart .calder-cart-item .cart-table-prd-qty .prd-quantity input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 .calder-site.template-cart .calder-cart-item .cart-table-prd-qty .prd-quantity-nav {
-  position:absolute;
-  right:0;
-  top:0;
-  bottom:0;
-  display:flex;
-  flex-direction:row-reverse;
-  width:54px;
+  position: static;
+  top: auto;
+  right: auto;
+  bottom: auto;
+  display: flex;
+  flex-direction: row-reverse;
+  width: auto;
+  flex: 0 0 auto;
+  align-self: stretch;
 }
 
 .calder-site.template-cart .calder-cart-item .cart-table-prd-qty .prd-quantity-btn {
-  display:grid;
-  place-items:center;
-  width:27px;
-  height:100%;
-  padding:0;
-  border:0;
-  border-left:1px solid var(--calder-navy-border);
-  background:transparent;
-  cursor:pointer;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  flex: 0 0 36px;
+  height: auto;
+  padding: 0;
+  border: 0;
+  border-left: 1px solid var(--cwci-qty-border);
+  border-radius: 0;
+  background: transparent;
+  color: var(--cwci-navy);
+  cursor: pointer;
+}
+
+/* row-reverse nav: DOM-first (+) renders on the RIGHT edge — the only
+   button needing the container radius; the minus sits interior. */
+.calder-site.template-cart .calder-cart-item .cart-table-prd-qty .prd-quantity-btn:first-child {
+  border-radius: 0 11px 11px 0;
 }
 
 .calder-site.template-cart .calder-cart-item .cart-table-prd-qty .prd-quantity-btn svg {
-  width:12px;
-  height:12px;
+  display: block;
+  width: 13px;
+  height: 13px;
 }
 
 .calder-site.template-cart .calder-cart-item .cart-table-prd-qty .prd-quantity-btn svg path {
-  fill:currentColor;
+  fill: currentColor;
 }
 
 .calder-site.template-cart .calder-cart-item .cart-table-prd-qty .quantity-status {
-  display:none;
+  display: none;
 }
 
 .calder-site.template-cart .calder-cart-item.is-updating {
@@ -1421,8 +1450,20 @@
 }
 
 @media(max-width:575px) {
+  /* 2026-11-17 refinement Phase 5 — THE MOBILE QTY FIX: moveQtyNode()
+     (cart-page.js) relocates the quantity DOM from [data-node-desktop]
+     into this block's [data-node-mobile] at ≤575px. The old
+     display:none!important here made the MOVED qty invisible. The block
+     now renders; only its duplicate price/total clones stay hidden. */
   .calder-site.template-cart .cart-table-mobile {
-    display:none!important;
+    display:block!important;
+  }
+  .calder-site.template-cart .cart-table-mobile .cart-table-prd-price,
+  .calder-site.template-cart .cart-table-mobile .cart-table-prd-price-total {
+    display:none;
+  }
+  .calder-site.template-cart .cart-table-mobile .cart-table-prd-qty {
+    margin:12px 0 0;
   }
   .calder-site.template-cart .calder-cart-item .cart-table-prd-qty {
     display:block!important;
@@ -2037,4 +2078,621 @@
   background: var(--calder-navy, #0e2a3e);
   color: #fff;
   text-decoration: none;
+}
+
+/* ============================================================
+   CALDER CART ITEM — APPROVED CARD REDESIGN (2026-11-17, Phase 2)
+   White rounded card: main grid (image | details), product header
+   (title + unit price + PER WHEEL), actions-row skeleton.
+   ------------------------------------------------------------
+   Scope: cart page line items only (.calder-site.template-cart).
+   The page shell (heading/progress), ORDER SUMMARY sidebar, empty
+   state and the header drawer are NOT touched by this layer.
+   Legacy cart layers above stay in the file; only the properties
+   they contest are overridden (equal specificity, later source
+   order wins). !important is used ONLY where the 11-15/11-16
+   layers used it first on the same element (padding on the line).
+   ============================================================ */
+
+.calder-site.template-cart {
+  --cwci-navy: #0E2A3E;
+  --cwci-heading: #081B32;
+  --cwci-secondary: #687384;
+  --cwci-card-bg: #FFFFFF;
+  --cwci-image-bg: #F3F6F9;
+  --cwci-divider: #E1E5EB;
+  --cwci-checkbox: #0869DF;
+  --cwci-fitment: #15803D;
+  --cwci-fitment-bg: #EDF9EE;
+  --cwci-qty-border: #D6DCE4;
+}
+
+/* Lines container: a plain stack of cards (was one bordered table) */
+.calder-site.template-cart .cart-table {
+  display: block;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  padding: 0;
+}
+
+/* The card (2026-11-17 refinement: 36px/40px per approved spec;
+   !important retained — contests the 11-15/16 layers' own !important
+   line paddings) */
+.calder-site.template-cart .calder-cart-item {
+  display: block;
+  background: var(--cwci-card-bg);
+  border: 0;
+  border-radius: 24px;
+  //box-shadow: 0 8px 28px rgba(14, 42, 62, 0.08);
+  padding: 0 2rem 1rem 0 !important;
+  margin: 0 0 20px;
+}
+
+.calder-site.template-cart .calder-cart-item:last-child {
+  margin-bottom: 0;
+}
+
+.calder-site.template-cart .calder-cart-item > * {
+  margin: 0;
+}
+
+/* Main content grid: image (~1/3) | details */
+.calder-site.template-cart .calder-cart-item__main {
+  display: grid;
+  grid-template-columns: minmax(280px, 34%) minmax(0, 1fr);
+  column-gap: 32px;
+  align-items: start;
+}
+
+/* Square, light-gray image tile; wheel rendered with object-fit: contain */
+.calder-site.template-cart .calder-cart-item__image {
+  align-self: start;
+}
+
+.calder-site.template-cart .calder-cart-item__image > a {
+  position: relative;
+  display: block;
+  aspect-ratio: 1 / 1;
+  border-radius: 18px;
+  background: var(--cwci-image-bg);
+  overflow: hidden;
+}
+
+.calder-site.template-cart .calder-cart-item__image .image-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding-bottom: 0;
+  background: var(--cwci-image-bg);
+  border-radius: 18px;
+}
+
+.calder-site.template-cart .calder-cart-item__image .image-container > img,
+.calder-site.template-cart .calder-cart-item__image .ic--cover img {
+  object-fit: contain;
+}
+
+/* Details column */
+.calder-site.template-cart .calder-cart-item__details {
+  min-width: 0;
+}
+
+/* Header: title left, unit price + PER WHEEL right */
+.calder-site.template-cart .calder-cart-item__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+.calder-site.template-cart .calder-cart-item__header-title {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.calder-site.template-cart .calder-cart-item__title {
+  margin: 0;
+  font: 700 clamp(22px, 1vw, 28px)/1.1 var(--calder-heading-font);
+  letter-spacing: -0.02em;
+  text-transform: none;
+  color: var(--cwci-navy);
+}
+
+.calder-site.template-cart .calder-cart-item__title a {
+  display: block;
+  color: inherit;
+}
+
+.calder-site.template-cart .calder-cart-item__unit-price {
+  flex: 0 0 auto;
+  text-align: right;
+}
+
+.calder-site.template-cart .calder-cart-item__unit-price .prd-price-regular {
+  font-size: clamp(19px, 1.5vw, 23px);
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--cwci-navy);
+}
+
+.calder-site.template-cart .calder-cart-item__per-wheel {
+  display: block;
+  margin-top: 4px;
+  font: 600 11px/1.3 var(--calder-ui-font);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--cwci-secondary);
+}
+
+/* Spec area (options + confirmations + fitment note) — Phase 3 target */
+.calder-site.template-cart .calder-cart-item__specs {
+  min-width: 0;
+}
+
+/* Bottom action row — final design lands in Phase 5; this is the skeleton */
+.calder-site.template-cart .calder-cart-item__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px 24px;
+  border-top: 1px solid var(--cwci-divider);
+  margin-top: 28px;
+  padding-top: 20px;
+}
+
+.calder-site.template-cart .calder-cart-item__actions-left {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  min-width: 0;
+}
+
+.calder-site.template-cart .calder-cart-item__actions-right {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px 20px;
+  min-width: 0;
+  flex: 0 1 auto;
+}
+
+.calder-site.template-cart .calder-cart-item__actions .cart-table-prd-qty {
+  flex: 0 0 auto;
+}
+
+.calder-site.template-cart .calder-cart-item__actions .cart-table-prd-price-total {
+  text-align: right;
+}
+
+.calder-site.template-cart .calder-cart-item__actions .cart-table-prd-discount {
+  flex: 0 0 100%;
+  min-width: 0;
+}
+
+.calder-site.template-cart .calder-cart-item__actions .cart-table-prd-discount:not(:has(li)) {
+  display: none;
+}
+
+/* Error region: normal flow at the card bottom (Lumia base pins it
+   absolutely below the row — invalid once the line is a card) */
+.calder-site.template-cart .calder-cart-item .cart-item__error {
+  position: static;
+  min-width: 0;
+  margin: 12px 0 0;
+}
+
+/* ============================================================
+   CALDER CART ITEM — Phase 3: SPECIFICATION CHECKLIST (2026-11-17)
+   CONFIRM WHEEL SPECS heading + two-column grid of the eight K1
+   fields, one real checkbox per cell (label-wrapped: clicking the
+   text toggles the box). Checkbox is the ONLY icon-like element.
+   Scoped to the cart page; the drawer keeps its compact inline style.
+   ============================================================ */
+
+.calder-site.template-cart .calder-cart-item__specs .calder-line-confirm__heading {
+  font-family: var(--calder-ui-font);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
+  color: #5c626c;
+  margin: 0;
+}
+
+.calder-site.template-cart .calder-cart-item__spec-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+/* Row dividers + the subtle vertical divider between columns.
+   Modifier classes (not nth-child): full-width rows break positional pairing. */
+.calder-site.template-cart .calder-cart-item__spec {
+  min-width: 0;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--cwci-divider);
+}
+
+.calder-site.template-cart .calder-cart-item__spec:last-child {
+  border-bottom: 0;
+}
+
+.calder-site.template-cart .calder-cart-item__spec--lead {
+  border-right: 1px solid var(--cwci-divider);
+  padding-right: 28px;
+}
+
+.calder-site.template-cart .calder-cart-item__spec--trail {
+  padding-left: 15px;
+}
+
+/* Vehicle (and Bolt Pattern after it) take a full-width row — vehicle
+   names vary in length and would distort a shared column. */
+.calder-site.template-cart .calder-cart-item__spec--wide {
+  grid-column: 1 / -1;
+}
+
+.calder-site.template-cart .calder-cart-item__spec-cell {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  cursor: pointer;
+  min-width: 0;
+}
+
+/* Real checkbox, custom-rendered: 36px, 7px radius, spec blue #0869DF,
+   white checkmark. Input remains a genuine accessible control. */
+.calder-site.template-cart .calder-cart-item__spec-cell input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  flex: 0 0 auto;
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  border: 1px solid var(--cwci-qty-border);
+  border-radius: 4px;
+  background: var(--cwci-card-bg);
+  cursor: pointer;
+  position: relative;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.calder-site.template-cart .calder-cart-item__spec-cell input[type="checkbox"]:hover {
+  border-color: var(--cwci-checkbox);
+}
+
+.calder-site.template-cart .calder-cart-item__spec-cell input[type="checkbox"]:checked {
+  background: var(--cwci-checkbox);
+  border-color: var(--cwci-checkbox);
+}
+
+.calder-site.template-cart .calder-cart-item__spec-cell input[type="checkbox"]:checked::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4.5 12.5l5 5 10-11'/%3E%3C/svg%3E") center / 15px 15px no-repeat;
+}
+
+.calder-site.template-cart .calder-cart-item__spec-cell input[type="checkbox"]:focus-visible {
+  outline: 2px solid var(--cwci-checkbox);
+  outline-offset: 2px;
+}
+
+.calder-site.template-cart .calder-cart-item__spec-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.calder-site.template-cart .calder-cart-item__spec-label {
+  font: 600 11px/1.3 var(--calder-ui-font);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--cwci-secondary);
+}
+
+.calder-site.template-cart .calder-cart-item__spec-value {
+  font: 600 13px/1.35 var(--calder-ui-font);
+  color: var(--calder-ink, #231F20);
+  overflow-wrap: anywhere;
+}
+
+/* ============================================================
+   CALDER CART ITEM — Phase 4: FITMENT CONFIRMATION BANNER (2026-11-17)
+   The [data-calder-line-complete] badge (revealed by
+   calder-cart-confirm.js when ALL of the line's spec checkboxes are
+   checked) is the SINGLE fitment surface — the separate unconditional
+   vehicle badge was removed from the markup. Spec targets: green
+   #15803D on #EDF9EE, 14px radius, green 48px circular check icon,
+   uppercase heading + vehicle detail text. Scoped to the cart page;
+   the drawer keeps its compact badge styling.
+   ============================================================ */
+
+.calder-site.template-cart .calder-cart-item .calder-cart-fitment {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 10px 0 0;
+  padding: 0.5rem 1rem;
+  border: 0;
+  border-radius: 5px;
+  background: var(--cwci-fitment-bg);
+  color: var(--cwci-fitment);
+  font-family: var(--calder-ui-font);
+}
+
+.calder-site.template-cart .calder-cart-item .calder-cart-fitment[hidden] {
+  display: none;
+}
+
+/* Green circular check icon */
+.calder-site.template-cart .calder-cart-item .calder-cart-fitment .calder-cart-fitment__icon {
+  flex: 0 0 auto;
+  width: 20px;
+  height: 20px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--cwci-fitment);
+  color: #FFFFFF;
+  font-size: 16px;
+  line-height: 1;
+}
+
+/* Heading + vehicle detail */
+.calder-site.template-cart .calder-cart-item .calder-cart-fitment .calder-cart-item__fitment-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  min-width: 0;
+}
+
+.calder-site.template-cart .calder-cart-item .calder-cart-fitment .calder-cart-item__fitment-text strong {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--cwci-fitment);
+}
+
+.calder-site.template-cart .calder-cart-item .calder-cart-fitment .calder-cart-item__fitment-text small {
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--calder-ink, #231F20);
+  overflow-wrap: anywhere;
+  display: none;
+}
+
+/* ============================================================
+   CALDER CART ITEM — Phase 5: BOTTOM ACTION ROW (2026-11-17)
+   Edit Specs (deep-link to the product page with the line's own
+   config as calder-pdp-state URL params) + Remove on the left;
+   reskinned quantity selector + Item Total on the right.
+   ============================================================ */
+
+/* Edit Specs — configurator lines only */
+.calder-site.template-cart .calder-cart-item__edit-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  font: 600 13px/1.2 var(--calder-ui-font);
+  color: var(--cwci-navy);
+  text-decoration: none;
+}
+
+.calder-site.template-cart .calder-cart-item__edit-link svg {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 auto;
+}
+
+.calder-site.template-cart .calder-cart-item__edit-link:hover,
+.calder-site.template-cart .calder-cart-item__edit-link:focus-visible {
+  text-decoration: underline;
+}
+
+/* Remove — icon + text label (was icon-only circle) */
+.calder-site.template-cart .calder-cart-item__actions .cart-table-prd-action {
+  width: auto;
+}
+
+.calder-site.template-cart .calder-cart-item__actions .cart-table-prd-remove {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  width: auto;
+  height: auto;
+  min-height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: 12px;
+  background: transparent;
+  font: 500 13px/1.2 var(--calder-ui-font);
+  color: var(--cwci-secondary);
+}
+
+.calder-site.template-cart .calder-cart-item__actions .cart-table-prd-remove:hover,
+.calder-site.template-cart .calder-cart-item__actions .cart-table-prd-remove:focus-visible {
+  color: var(--cwci-navy);
+  text-decoration: underline;
+}
+
+.calder-site.template-cart .calder-cart-item__actions .cart-table-prd-remove svg {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 auto;
+}
+
+/* Quantity selector geometry: lives ONCE in the 'final integration'
+   block above (scoped .calder-cart-item .cart-table-prd-qty — survives
+   moveQtyNode DOM relocation). The actions-flex placement is the Phase 2
+   skeleton rule (.calder-cart-item__actions .cart-table-prd-qty { flex: 0 0 auto }).
+   The former __actions-scoped duplicate geometry rules were removed
+   (2026-11-17): equal-specificity source-order contests are gone. */
+
+/* Item Total — label + amount, right-aligned */
+.calder-site.template-cart .calder-cart-item__total {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  text-align: right;
+  flex: 0 0 auto;
+  margin-left: 1.5rem;
+}
+
+.calder-site.template-cart .calder-cart-item__total-label {
+  font: 600 11px/1.3 var(--calder-ui-font);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--cwci-secondary);
+}
+
+/* (0,6,0): must beat the fidelity layer's (0,5,0) price rules */
+.calder-site.template-cart .calder-cart-item__total .cart-table-prd-price-total .prd-price .prd-price-regular {
+  font: 700 clamp(18px, 1.4vw, 22px)/1.15 var(--calder-heading-font);
+  color: var(--cwci-navy);
+  white-space: nowrap;
+}
+
+.calder-site.template-cart .calder-cart-item__total .cart-table-prd-price-total .prd-price .prd-price-old {
+  font: 600 12px/1.3 var(--calder-ui-font);
+  color: var(--cwci-secondary);
+}
+
+.calder-site.template-cart .calder-cart-item__header .calder-cart-item__unit-price .cart-table-prd-price .prd-price .prd-price-regular {
+  font-size: clamp(19px, 1.5vw, 23px);
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--cwci-navy);
+}
+
+.calder-site.template-cart .calder-cart-item__header .calder-cart-item__unit-price .cart-table-prd-price .prd-price .prd-price-old {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--cwci-secondary);
+}
+
+/* ============================================================
+   CALDER CART ITEM — REFINEMENT Phase 2 (2026-11-17): CONTAINER,
+   CARD + MAIN COLUMNS
+   Developer decisions (locked): cart-section width stays 1178px
+   (cart.json untouched); the 1.6fr/1fr summary split stays as-is.
+   All reclaimed width comes from WITHIN the items column:
+   the fidelity .cart-table side padding (20px, a border-box
+   remnant of the retired table look) is absorbed into the card,
+   and the image/details proportion is rebalanced so the details
+   column gets the larger share the spec grid needs.
+   ============================================================ */
+
+/* The card is the only spacing authority inside the items column.
+   Card padding lives in the Phase 2 layer rule above (edited in place
+   to 36px/40px — its !important contests the 11-15 layers). */
+.calder-site.template-cart .calder-cart-layout .cart-table {
+  padding: 0;
+  margin-top: 1rem;
+}
+
+/* Image column — developer Phase 3 update (2026-11-17): 250px min /
+   12% ceiling (developer's own edit, preserved). The cart image now
+   requests a 500px+ file (sizes 250px, width_times 2) so the 250×250
+   tile renders sharp on 2× displays (was sizes 100px → ~300px file). */
+.calder-site.template-cart .calder-cart-item__main {
+  grid-template-columns: minmax(250px, 12%) minmax(0, 1fr);
+  column-gap: 36px;
+}
+
+/* Header breathing room per spec (3.5) */
+.calder-site.template-cart .calder-cart-item__header {
+  margin-bottom: 0;
+}
+
+/* ============================================================
+   CALDER CART ITEM — REFINEMENT Phase 5 (2026-11-17): RESPONSIVE TIERS
+   Breakpoint alignment: 1199 = Lumia's own aside--content switch
+   (style.css), 767 = the theme's mobile boundary (summary stacks,
+   fidelity layer), 575 = moveQtyNode threshold (qty fix above).
+   ============================================================ */
+
+/* Standard desktop — 1024–1439 */
+@media (max-width: 1439px) {
+  .calder-site.template-cart .calder-cart-item {
+    padding: 32px 36px !important;
+  }
+  .calder-site.template-cart .calder-cart-item__main {
+    column-gap: 32px;
+  }
+}
+
+/* Narrow desktop / tablet-wide — at the locked 1178px section width the
+   items column drops to ~600px below 1200: a 250px image beside the
+   details would starve the spec grid. Stack image above details. */
+@media (max-width: 1199px) {
+  .calder-site.template-cart .calder-cart-item__main {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 24px;
+  }
+  .calder-site.template-cart .calder-cart-item__image {
+    max-width: 320px;
+  }
+}
+
+/* Tablet — 768–1023 */
+@media (max-width: 1023px) {
+  .calder-site.template-cart .calder-cart-item {
+    padding: 28px 32px !important;
+  }
+}
+
+/* Mobile — below 768: single column everywhere */
+@media (max-width: 767px) {
+  .calder-site.template-cart .calder-cart-item {
+    padding: 20px !important;
+  }
+  .calder-site.template-cart .calder-cart-item__image {
+    max-width: 260px;
+  }
+  .calder-site.template-cart .calder-cart-item__header {
+    margin-bottom: 20px;
+    gap: 16px;
+  }
+  .calder-site.template-cart .calder-cart-item__specs .calder-line-confirm__heading {
+    margin: 16px 0 8px;
+  }
+  .calder-site.template-cart .calder-cart-item__spec {
+    padding: 14px 0;
+  }
+  .calder-site.template-cart .calder-cart-item__spec-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  /* no vertical divider in a single column */
+  .calder-site.template-cart .calder-cart-item__spec--lead {
+    border-right: 0;
+    padding-right: 0;
+  }
+  .calder-site.template-cart .calder-cart-item__spec--trail {
+    padding-left: 0;
+  }
+  .calder-site.template-cart .calder-cart-item__actions {
+    margin-top: 20px;
+    padding-top: 16px;
+    gap: 12px 16px;
+  }
+  .calder-site.template-cart .calder-cart-item__actions-right {
+    gap: 10px 16px;
+  }
+  .calder-site.template-cart .calder-cart-item .calder-cart-fitment {
+    padding: 12px 14px;
+  }
 }

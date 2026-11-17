@@ -53,6 +53,10 @@
                     {{ 'theme.general.from_vendor' | t }}
                 {%- endif -%}
                 </div>
+                {%- if calder_clear_filters -%}
+                    {%- comment -%} Calder: complete reset (all filters + vehicle) — handler in calder-fitment-finder-guide.js (C2 2026-11-15; label 2026-11-16).{%- endcomment -%}
+                    <button type="button" class="calder-clear-filters" data-calder-clear-filters>Clear Vehicle</button>
+                {%- endif -%}
             </div>
 
             <div class="mt-2"></div>

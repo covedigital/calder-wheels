@@ -1,0 +1,15 @@
+{
+  "sections": {
+    "universal-builder": {
+      "type": "calder-universal-builder",
+      "settings": {
+        "heading": "Universal Wheel Builder",
+        "intro_text": "Explore every Calder design and finish combination freely. When you find the perfect build, choose your design and configure it for your vehicle on the product page.",
+        "design_product": "calder-clm-01-wheel"
+      }
+    }
+  },
+  "order": [
+    "universal-builder"
+  ]
+}

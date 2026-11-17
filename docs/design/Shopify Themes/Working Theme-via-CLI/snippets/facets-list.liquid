@@ -16,6 +16,34 @@
 
     assign value_label = value.label | escape
 
+    comment
+      2026-11-16 client updates — three filter-specific presentation rules:
+      (1) SIZE — the Diameter filter's values render as combined size labels
+          (diameter × width, e.g. "22x10"). Width 10 is catalog-wide per the
+          SUV Data Sheet master.
+      (2) BOLT PATTERN — combined multi-pattern values (containing a comma)
+          are hidden; only single patterns are offered.
+      (3) BOLTS — the combined "Barrel & Lip - Hardware" option filter's
+          values render as the bolt fragment only, via the bolt_label_override
+          param (the dedup happens in facets.liquid's forloop scope).
+    endcomment
+
+    if is_bolt_pattern_filter
+        assign bp_check = value.label | escape
+        if bp_check contains ','
+            assign show = false
+        endif
+    endif
+
+    if is_size_filter
+        assign raw_dia = value.label | remove: '"' | strip
+        assign value_label = raw_dia | append: 'x10'
+    endif
+
+    if bolt_label_override != blank
+        assign value_label = bolt_label_override | escape
+    endif
+
     assign tooltip = false
 
     if colorpics

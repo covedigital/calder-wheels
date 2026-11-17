@@ -162,6 +162,13 @@
       if (allLayersOk) { previewFallback.setAttribute('hidden', 'hidden'); }
     }
 
+    /* Width fragment of a fitment size string ("22x10" -> "10"). Shared by the
+       P4 Size labels and the P7 spec cells below. */
+    function diaWidthFrom(size) {
+      var m = /^\d{2}\s*[x×]\s*([\d.]+)/i.exec(String(size || ''));
+      return m ? m[1] : '';
+    }
+
     function updateSpecCells(tokens) {
       var specDims = { diameter: 'diameter', center: 'center', barrel: 'barrel', hardware: 'hardware' };
       Object.keys(specDims).forEach(function (dim) {
@@ -174,24 +181,131 @@
       Array.prototype.forEach.call(diaCells, function (cell) {
         if (tokens.diameter) { cell.textContent = tokens.diameter + '"'; }
       });
+      applyVehicleSpecs(tokens);
     }
+
+    /* ── Exact vehicle specs (P7, 2026-11-15) ──
+       Width / Bolt Pattern / Center Bore / Offset in .calder-specs__table are
+       the GENERAL specification until a vehicle + configuration are selected.
+       With both, the EXACT assigned values come from the vehicle's own fitment
+       records (cf.z width, cf.o offset) and the resolved registry fitment
+       group id (bolt pattern + wheel center bore) — never derived from the
+       ranges. Staggered fitments show the true front/rear width pair. When
+       anything is unresolvable (no vehicle, no cf match, no group), the
+       server-rendered general values + their "general" tags are restored
+       untouched; the Batch 5 purchase gates already block any unresolved
+       configuration, so no unsafe exact value is ever shown next to a
+       purchasable state. */
+    var SPEC_DIMS = ['width', 'bolt', 'offset', 'bore'];
+    var SPEC_PRISTINE = {};
+    SPEC_DIMS.forEach(function (dim) {
+      var cell = document.querySelector('[data-calder-spec="' + dim + '"]');
+      if (cell) { SPEC_PRISTINE[dim] = cell.innerHTML; }
+    });
+    function specVehicleData(tokens) {
+      var vehicle = readSavedVehicle();
+      if (!vehicle || !tokens || !tokens.diameter) { return null; }
+      var group = null;
+      try { group = resolver.groupFromVehicle(vehicle, tokens.diameter); } catch (e) { group = null; }
+      var cfg = null;
+      (vehicle.cf || []).forEach(function (c) {
+        var m = /^(\d{2})\s*[x×]/i.exec(String((c && c.z) || ''));
+        if (m && m[1] === tokens.diameter) { cfg = c; }
+      });
+      return (group && cfg) ? { group: group, cfg: cfg } : null;
+    }
+    function specWidthFromCfg(cfg) {
+      var front = diaWidthFrom(cfg.z || cfg.fz);
+      var rear = diaWidthFrom(cfg.rz || cfg.z);
+      if (!front) { return ''; }
+      if (cfg.rz && rear && front !== rear) { return 'Front ' + front + '" / Rear ' + rear + '"'; }
+      return front + '"';
+    }
+    function specOffsetFromCfg(cfg) {
+      var m = /^\+?0*(\d+(?:\.\d+)?)\s*mm$/i.exec(String(cfg.o || ''));
+      return m ? '+' + m[1] + 'mm' : '';
+    }
+    function setSpecCell(dim, value) {
+      var cell = document.querySelector('[data-calder-spec="' + dim + '"]');
+      if (!cell) { return; }
+      var pristine = SPEC_PRISTINE[dim];
+      if (value) {
+        cell.textContent = value;
+        cell.setAttribute('data-calder-spec-exact', '1');
+      } else if (pristine !== undefined && cell.getAttribute('data-calder-spec-exact') === '1') {
+        cell.innerHTML = pristine;
+        cell.removeAttribute('data-calder-spec-exact');
+      }
+    }
+    function applyVehicleSpecs(tokens) {
+      var data = specVehicleData(tokens);
+      if (!data) {
+        SPEC_DIMS.forEach(function (dim) { setSpecCell(dim, ''); });
+        return;
+      }
+      var parts = String(data.group).split('-');
+      setSpecCell('width', specWidthFromCfg(data.cfg));
+      setSpecCell('bolt', parts[0] || '');
+      setSpecCell('offset', specOffsetFromCfg(data.cfg));
+      setSpecCell('bore', parts[2] ? parts[2] + 'mm' : '');
+    }
+    document.addEventListener('calder:vehicle-selected', function () { applyVehicleSpecs(state.getState().tokens); });
+    document.addEventListener('calder:vehicle-cleared', function () { applyVehicleSpecs(state.getState().tokens); });
+    window.addEventListener('storage', function (evt) {
+      if (evt.key === 'calder_selected_vehicle') { applyVehicleSpecs(state.getState().tokens); }
+    });
 
     var UC_CENTER_CODE = { 'gloss-black': 'GB', 'black-titanium': 'BT', 'titanium-tint': 'TT' };
     var UC_LIP_CODE = { 'gloss-black': 'GBL', 'polished': 'POL' };
     var UC_BOLT_CODE = { 'chrome': 'CH', 'black': 'BK' };
-    /* SKU + Universal Part# presentation (client-approved format 2026-10-29):
-       spec table cell:   SKU: CFG-... <br /> Universal Part#: CLB...
+    /* SKU + Part Number presentation (client-approved format 2026-10-29;
+       label renamed "Universal Part#" -> "Part Number" 2026-11-17):
+       spec table cell:   SKU: CFG-... <br /> Part Number: CLB...
        PDP .calder-pdp__sku block:
          <span class="sku"><span>SKU:</span> CFG-...</span><br />
-         <span class="universal-part"><span>Universal Part#:</span> CLB...</span>
+         <span class="universal-part"><span>Part Number:</span> CLB...</span>
        Values are registry tokens (alnum/dash); sanitizeSpecValue keeps the
        innerHTML write safe. Both targets update on EVERY calder-uc selection
        (the CTA broadcasts calder:universal-resolved with the resolved record). */
     function sanitizeSpecValue(value) {
       return String(value == null ? '' : value).replace(/[^A-Za-z0-9#-]/g, '');
     }
+
+    /* ── Size-dependent price (P6, 2026-11-15) ──
+       The resolver returns Shopify's authoritative price for the resolved
+       SKU (Storefront API priceCents; registry msrp fallback) on every
+       resolve()-backed outcome. The PDP price display updates to it on
+       calder:universal-resolved. Formatting mirrors the original Liquid
+       rendering captured at init (currency prefix + separator style) so
+       "$1,000" becomes "$1,200" — never a differently formatted string.
+       Outcomes without a price (vehicle-required, invalid) leave the
+       last known price untouched. Cart lines already price by the
+       resolved variantId — the checkout price is the variant's own
+       Shopify price; no parallel pricing system exists. */
+    var priceTextNode = (function () {
+      var box = document.querySelector('.calder-pdp__price .prd-price-regular');
+      if (box && box.firstChild && box.firstChild.nodeType === 3) { return box.firstChild; }
+      return null;
+    })();
+    var pricePattern = null;
+    if (priceTextNode) {
+      var pm = /^\s*([^\d]*)(\d[\d.,]*)([\s\S]*)$/.exec(priceTextNode.data);
+      if (pm && /^\d[\d.,]*$/.test(pm[2])) {
+        pricePattern = { prefix: pm[1], thousands: pm[2].indexOf(',') !== -1, suffix: pm[3] };
+      }
+    }
+    function updatePriceDisplay(out) {
+      if (!pricePattern || !priceTextNode || !out || typeof out.price !== 'number') { return; }
+      var amount = Number(out.price);
+      var text = pricePattern.thousands
+        ? amount.toLocaleString('en-US', { maximumFractionDigits: 2 })
+        : String(amount);
+      priceTextNode.data = pricePattern.prefix + text + pricePattern.suffix;
+    }
+
     document.addEventListener('calder:universal-resolved', function (e) {
       var out = e && e.detail;
+      updatePriceDisplay(out);
       var t = state.getState().tokens;
       var cfgSku = resolver && resolver.design && resolver.design.designCode && t.diameter
         ? 'CFG-' + resolver.design.designCode + '-' + t.diameter + '-' + (UC_CENTER_CODE[t.center] || '') + '-' + (UC_LIP_CODE[t.barrel] || '') + '-' + (UC_BOLT_CODE[t.hardware] || '')
@@ -200,9 +314,9 @@
       var cell = document.querySelector('[data-calder-spec="sku"]');
       if (cell) {
         if (cfgSku && pn) {
-          cell.innerHTML = 'SKU: ' + sanitizeSpecValue(cfgSku) + '<br />Universal Part#: ' + sanitizeSpecValue(pn);
+          cell.innerHTML = 'SKU: ' + sanitizeSpecValue(cfgSku) + '<br />Part Number: ' + sanitizeSpecValue(pn);
         } else if (pn) {
-          cell.innerHTML = 'Universal Part#: ' + sanitizeSpecValue(pn);
+          cell.innerHTML = 'Part Number: ' + sanitizeSpecValue(pn);
         } else {
           cell.innerHTML = cfgSku ? 'SKU: ' + sanitizeSpecValue(cfgSku) : '—';
         }
@@ -212,7 +326,7 @@
         block.innerHTML =
           '<span class="sku"><span>SKU:</span> ' + (cfgSku ? sanitizeSpecValue(cfgSku) : '—') + '</span>' +
           '<br />' +
-          '<span class="universal-part"><span>Universal Part#:</span> ' + (pn ? sanitizeSpecValue(pn) : '—') + '</span>';
+          '<span class="universal-part"><span>Part Number:</span> ' + (pn ? sanitizeSpecValue(pn) : '—') + '</span>';
       }
     });
 
@@ -273,6 +387,13 @@
        (bolt pattern carried from listings) passes through unchanged when
        present; calder-universal-cta.js validates it on the destination. */
     var designNav = document.querySelector('[data-calder-design-nav]');
+    /* Shared saved-vehicle reader (P1 + P4 CHANGES 2026-11-15). */
+    function readSavedVehicle() {
+      try {
+        var raw = localStorage.getItem('calder_selected_vehicle');
+        return raw ? JSON.parse(raw) : null;
+      } catch (e) { return null; }
+    }
     if (designNav) {
       designNav.addEventListener('click', function (evt) {
         var link = evt.target.closest ? evt.target.closest('[data-calder-design-nav-link]') : null;
@@ -287,6 +408,148 @@
         var qs = parts.join('&');
         if (qs) { link.setAttribute('href', (link.getAttribute('href') || '').split('?')[0] + '?' + qs); }
       });
+
+      /* ── Design-nav vehicle filtering (P1, 2026-11-15) ──
+         While a vehicle is selected, only the designs whose bolt_pattern
+         metafield (stamped server-side as data-pcds by
+         snippets/calder-design-nav.liquid) includes the vehicle's pattern
+         stay visible; every design returns on calder:vehicle-cleared (the
+         fitment panel Reset). The current design is excluded from the nav
+         and its own compatibility is enforced separately by the CTA
+         (VEHICLE_INCOMPATIBLE fail-closes the purchase) — a nav pattern
+         match alone never guarantees fitment. Pattern normalization mirrors
+         calder-universal-cta.js vehiclePatterns (lowercase, whitespace
+         stripped, trailing decimals removed — "6X139.7" == "6x139"), and
+         supports both saved-vehicle shapes (compact b / finder
+         bolt_pattern). Links without data-pcds stay visible: missing data
+         must not drop possibly-compatible designs. */
+      var dnLinks = Array.prototype.slice.call(designNav.querySelectorAll('[data-calder-design-nav-link]'));
+      var dnEmpty = designNav.querySelector('[data-design-nav-empty]');
+
+      function dnNormalizePattern(raw) {
+        return String(raw || '').trim().toLowerCase().replace(/\s+/g, '').replace(/\.\d+$/, '');
+      }
+      function dnNormalizeList(raw) {
+        var out = [];
+        String(raw || '').split(',').forEach(function (item) {
+          var v = dnNormalizePattern(item);
+          if (v && out.indexOf(v) === -1) { out.push(v); }
+        });
+        return out;
+      }
+      function dnVehiclePatterns(vehicle) {
+        var out = [];
+        if (!vehicle) { return out; }
+        [vehicle.b, vehicle.bolt_pattern].forEach(function (raw) {
+          var v = dnNormalizePattern(raw);
+          if (v && out.indexOf(v) === -1) { out.push(v); }
+        });
+        return out;
+      }
+      function dnReadVehicle() {
+        return readSavedVehicle();
+      }
+      function dnApplyFilter(vehicle) {
+        var patterns = dnVehiclePatterns(vehicle);
+        var visible = 0;
+        dnLinks.forEach(function (link) {
+          var li = link.closest('.calder-design-nav__item') || link;
+          var show = true;
+          if (patterns.length) {
+            var pcds = link.getAttribute('data-pcds');
+            if (pcds) {
+              var list = dnNormalizeList(pcds);
+              show = list.some(function (p) { return patterns.indexOf(p) !== -1; });
+            }
+          }
+          li.hidden = !show;
+          if (show) { visible++; }
+        });
+        if (dnEmpty) { dnEmpty.hidden = visible !== 0; }
+      }
+
+      document.addEventListener('calder:vehicle-selected', function (evt) {
+        dnApplyFilter((evt && evt.detail) || dnReadVehicle());
+      });
+      document.addEventListener('calder:vehicle-cleared', function () { dnApplyFilter(null); });
+      window.addEventListener('storage', function (evt) {
+        if (evt.key === 'calder_selected_vehicle') { dnApplyFilter(dnReadVehicle()); }
+      });
+      dnApplyFilter(dnReadVehicle());
+    }
+
+    /* ── Vehicle-gated Diameter group (P4, 2026-11-15) ──
+       The Diameter control only matters once a vehicle is selected — a
+       shopper exploring finishes without buying intent never needs it.
+       Hidden on initial load when no vehicle is saved; revealed on
+       calder:vehicle-selected; hidden again on reset
+       (calder:vehicle-cleared, e.g. .calder-pdp__fitment-reset). The
+       diameter selection state itself is untouched (URL params, history
+       and the resolver default keep working); only the control's
+       visibility is gated. Accessible hiding: the hidden attribute +
+       the explicit .calder-uc__group[hidden] CSS guard.
+
+       With a vehicle selected (P4): option buttons present the combined
+       Size label ("22 × 10") from the vehicle's own fitment records
+       (cf.z / fz / rz widths) — display labels ONLY; data-token and the
+       underlying diameter/width identifiers never change. A diameter
+       whose cf entry carries differing front/rear widths (staggered
+       fitment) keeps its plain label rather than showing one half of
+       the pair. Diameters the vehicle's fitment data does not offer are
+       disabled (unsupported size combinations are prevented at the
+       control level; calder-universal-cta.js fail-closes the purchase
+       as a backstop). No vehicle -> plain labels, everything enabled. */
+    var diaGroup = root.querySelector('[data-calder-uc-group="diameter"]');
+    if (diaGroup) {
+      var diaButtons = Array.prototype.slice.call(
+        diaGroup.querySelectorAll('[data-calder-uc-option][data-dim="diameter"]')
+      );
+      diaButtons.forEach(function (btn) {
+        var nameEl = btn.querySelector('.calder-uc__option-name');
+        if (nameEl && !btn.getAttribute('data-calder-dia-plain')) {
+          btn.setAttribute('data-calder-dia-plain', nameEl.textContent);
+        }
+      });
+      function diaVehicleInfo(vehicle) {
+        var out = { valid: false, supported: {}, labels: {} };
+        if (!vehicle || !(vehicle.b || vehicle.bolt_pattern)) { return out; }
+        out.valid = true;
+        (vehicle.cf || []).forEach(function (cfg) {
+          var m = /^(\d{2})\s*[x×]/i.exec(String((cfg && cfg.z) || ''));
+          if (!m) { return; }
+          var dia = m[1];
+          out.supported[dia] = true;
+          var front = diaWidthFrom(cfg.z || cfg.fz);
+          var rear = diaWidthFrom(cfg.rz || cfg.z);
+          if (front && front === rear) {
+            out.labels[dia] = dia + ' × ' + front;
+          }
+        });
+        return out;
+      }
+      var diaApply = function (vehicle) {
+        var info = diaVehicleInfo(vehicle);
+        diaGroup.hidden = !info.valid;
+        diaButtons.forEach(function (btn) {
+          var nameEl = btn.querySelector('.calder-uc__option-name');
+          var token = btn.getAttribute('data-token');
+          var plain = btn.getAttribute('data-calder-dia-plain') || (nameEl ? nameEl.textContent : token + '"');
+          var unsupported = info.valid && vehicle && vehicle.cf && vehicle.cf.length && !info.supported[token];
+          btn.disabled = !!unsupported;
+          btn.setAttribute('aria-disabled', unsupported ? 'true' : 'false');
+          if (nameEl) {
+            nameEl.textContent = (info.valid && info.labels[token]) ? info.labels[token] : plain;
+          }
+        });
+      };
+      document.addEventListener('calder:vehicle-selected', function (evt) {
+        diaApply((evt && evt.detail) || readSavedVehicle());
+      });
+      document.addEventListener('calder:vehicle-cleared', function () { diaApply(null); });
+      window.addEventListener('storage', function (evt) {
+        if (evt.key === 'calder_selected_vehicle') { diaApply(readSavedVehicle()); }
+      });
+      diaApply(readSavedVehicle());
     }
 
     /* ── Self-contained gallery slider ──

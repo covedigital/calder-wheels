@@ -70,11 +70,20 @@
         (fitment-finder.js) and hides the status panel; on collection
         pages the vehicle-driven URL filter params are then stripped
         so style browsing never inherits the vehicle's constraints.
-    10. Vehicle-mode finish filters (2026-11-02 B): barrel/lip and
-        bolt/hardware finish selects (real option data from
-        fitment-catalog) narrow the guide's already vehicle-matched
-        wheels grid client-side; the visible count updates with them.
-   ============================================================ */
+     10. Vehicle-mode finish filters (2026-11-02 B): barrel/lip and
+         bolt/hardware finish selects (real option data from
+         fitment-catalog) narrow the guide's already vehicle-matched
+         wheels grid client-side; the visible count updates with them.
+     11. Vehicle-lock correction (C1, 2026-11-15): the applied-filter
+         chips (.filter-row-selected, rendered inside #product-grid)
+         are hidden only while a vehicle is selected AND the filtered
+         listing has results; zero matches keep the chips visible.
+         Re-applied after every facet/grid re-render.
+     12. Clear Filters (C2, 2026-11-15): the button under
+         ProductCountDesktop (desktop sidebar + mobile popup) runs the
+         same complete reset as the guide's RESET action — facets,
+         vehicle, chips, URL params, results.
+    ============================================================ */
 (function () {
   'use strict';
 
@@ -248,14 +257,27 @@
     });
   }
 
-  /* ── Vehicle lock: applied-filter chips (2026-11-02 B) ──
+  /* ── Vehicle lock: applied-filter chips (2026-11-02 B; C1 2026-11-15) ──
      The vehicle's bolt-pattern/diameter constraints are URL facet params,
-     which the sidebar renders as individually dismissible chips
-     (.filter-row-selected). While a vehicle is selected those chips are
-     hidden so the fitment can only be removed through the dedicated Reset
-     action; restored when the vehicle clears. */
+     rendered as individually dismissible chips (.filter-row-selected) by
+     facets-active INSIDE #product-grid — not inside the filter form. While
+     a vehicle is selected those chips are hidden so the fitment can only
+     be removed through the dedicated Reset action; restored when the
+     vehicle clears. C1 corrections: (1) the original sidebar-scoped
+     selector matched nothing, so the lock never engaged — the chips row
+     now targets its real render location; (2) the lock only applies while
+     the vehicle-filtered listing actually has results — with zero matches
+     the chips stay visible so the shopper can lift the constraint. */
+  function collectionGridHasResults() {
+    var grid = document.getElementById('product-grid');
+    if (!grid) return false; // no listing surface (guide page) — nothing to gate
+    return !!grid.querySelector('.prd'); // legacy + calder card item class
+  }
+
   function setAppliedFilterChipsVisibility(hidden) {
+    if (hidden && !collectionGridHasResults()) hidden = false;
     var chips = document.querySelectorAll(
+      '#product-grid .filter-row-selected, ' +
       'facet-filters-form .filter-row-selected, filter-popup .filter-row-selected'
     );
     Array.prototype.forEach.call(chips, function (row) {
@@ -341,10 +363,12 @@
   }
 
   /* The sidebar can be rebuilt outside the guide's render cycle
-     (FacetFiltersForm.asyncLoadSidebar, filter-popup.render()) —
-     re-apply the vehicle-selected presentation state (hidden Bolt
-     Pattern block + vehicle-titled page heading) whenever facet
-     content changes. */
+     (FacetFiltersForm.asyncLoadSidebar, filter-popup.render()), and each
+     facet render replaces #ProductGridContainer wholesale (facets.js
+     renderProductGridContainer) — which recreates the chips row inside
+     it. Re-apply the vehicle-selected presentation state (hidden Bolt
+     Pattern block + hidden chips + vehicle-titled page heading)
+     whenever facet or grid content changes. */
   function watchFacetRerenders() {
     if (facetWatchAttached) return;
     facetWatchAttached = true;
@@ -354,6 +378,8 @@
     if (column) targets.push(column);
     var popup = document.querySelector('filter-popup');
     if (popup) targets.push(popup);
+    var gridContainer = document.getElementById('ProductGridContainer');
+    if (gridContainer) targets.push(gridContainer);
     if (!targets.length) return;
 
     var pending = null;
@@ -377,9 +403,18 @@
 
   var suppressParamStrip = false;
 
-  function resetFitment(section) {
-    // The Reset action owns the full navigation to the bare collection URL
-    // (step 5 below); the cleared-observer's param strip must not race it.
+  /* Complete reset shared by the guide card's RESET action and the
+     sidebar's Clear Filters button (C2, 2026-11-15): clears the
+     persistent vehicle, resets the card through the guide's own
+     change cascade, turns the vehicle presentation state off, hides
+     the finder status panel, and — when any URL query exists —
+     navigates to the bare collection path so the facet sidebar's
+     checkbox states rebuild fully unfiltered (a full reload is the
+     only way to reset them cleanly; the theme's renderFilters does
+     not re-render them). */
+  function performCollectionReset(section) {
+    // The Reset action owns the full navigation to the bare collection URL;
+    // the cleared-observer's param strip must not race it.
     suppressParamStrip = true;
     setTimeout(function () { suppressParamStrip = false; }, 0);
     // 1. Persistent vehicle cleared first — a reload must not restore it.
@@ -387,7 +422,7 @@
 
     // 2. Card back to pristine through the guide's own change cascade
     //    (make/model reset, submit disabled, results hidden).
-    resetCard(section);
+    if (section) { resetCard(section); }
 
     // 3. Vehicle presentation state off.
     vehicleActive = false;
@@ -399,10 +434,14 @@
     // 4. Finder status panel -> hidden (the empty state syncs through
     //    the section's own MutationObserver, and the vehicle-cleared
     //    event dispatches through the panel observer).
-    var panel = section.querySelector('[data-fitment-status]');
+    var panel = section
+      ? section.querySelector('[data-fitment-status]')
+      : document.querySelector('[data-fitment-status]');
     if (panel) {
       panel.setAttribute('hidden', '');
       panel.style.display = 'none';
+    } else {
+      document.dispatchEvent(new CustomEvent('calder:vehicle-cleared'));
     }
 
     // 5. Persistent URL filter params -> clean listing. Full reload so
@@ -410,6 +449,18 @@
     if (window.location.search) {
       window.location.href = window.location.pathname;
     }
+  }
+
+  function resetFitment(section) {
+    performCollectionReset(section);
+  }
+
+  function guideSection() {
+    var sections = document.querySelectorAll(FINDER_SELECTOR);
+    for (var i = 0; i < sections.length; i++) {
+      if (sections[i].querySelector(CARD_SELECTOR)) return sections[i];
+    }
+    return null;
   }
 
   /* ── Init ── */
@@ -592,5 +643,17 @@
     setBoltPatternFilterVisibility(false);
     setAppliedFilterChipsVisibility(false);
     restoreCollectionTitle();
+  });
+
+  /* C2 (2026-11-15): Clear Filters in the facets title (under
+     ProductCountDesktop, desktop sidebar + mobile popup) runs the same
+     complete reset as the guide card's RESET action — every facet
+     filter, the vehicle selection, chips, URL params and results.
+     Delegated at document level so the button keeps working after
+     every sidebar / popup / grid AJAX re-render. */
+  document.addEventListener('click', function (evt) {
+    if (!evt.target || !evt.target.closest) return;
+    if (!evt.target.closest('[data-calder-clear-filters]')) return;
+    performCollectionReset(guideSection());
   });
 })();

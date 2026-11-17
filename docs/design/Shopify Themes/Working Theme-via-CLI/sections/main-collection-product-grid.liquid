@@ -179,7 +179,8 @@
               id: 'FacetFiltersForm',
               show_sizes: settings.show_sizes,
               size_options_name: settings.size_options_name,
-              show_colorpics: settings.show_colorpics
+              show_colorpics: settings.show_colorpics,
+              calder_clear_filters: true
             %}
           {%- endif -%}
         </div>
@@ -349,7 +350,7 @@
     </div>
     <!-- /Two columns -->
 
-    {% render 'facets-mobile-popup-container' results: collection, sort_by: sort_by %}
+    {% render 'facets-mobile-popup-container' results: collection, sort_by: sort_by, calder_clear_filters: true %}
 
     </div>
   </div>

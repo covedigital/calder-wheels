@@ -102,20 +102,30 @@
             item: item
           %}
           <div class="header-cart-line-item-body">
+            {%- assign is_calder_line = false -%}
+            {%- if item.properties['_configurator'] != blank -%}
+              {%- assign is_calder_line = true -%}
+            {%- endif -%}
             {%- if item.product.has_only_default_variant == false or item.properties.size != 0 -%}
+              {%- if is_calder_line -%}
+                <div class="calder-line-confirm__heading">Confirm Wheel Specs</div>
+              {%- endif -%}
               <dl>
                 {%- if item.product.has_only_default_variant == false -%}
                   {%- for option in item.options_with_values -%}
-                    <div class="cart-table-product-option">
+                    <div class="cart-table-product-option{% if is_calder_line %} calder-option-confirm{% endif %}">
                       <dt>{{ option.name }}:</dt>
                       <dd>{{ option.value }}</dd>
+                      {%- if is_calder_line -%}
+                        <input type="checkbox" class="calder-spec-confirm" data-calder-line-confirm data-line="{{ item.key | escape }}" aria-label="Confirm {{ option.name | escape }}: {{ option.value | escape }}">
+                      {%- endif -%}
                     </div>
                   {%- endfor -%}
                 {%- endif -%}
                 {%- for property in item.properties -%}
                   {%- assign property_first_char = property.first | slice: 0 -%}
                   {%- if property.last != blank and property_first_char != '_' -%}
-                    <div class="cart-table-product-option">
+                    <div class="cart-table-product-option{% if is_calder_line %} calder-option-confirm{% endif %}">
                       <dt>{{ property.first }}:</dt>
                       <dd>
                         {%- if property.last contains '/uploads/' -%}
@@ -126,13 +136,28 @@
                           {{ property.last }}
                         {%- endif -%}
                       </dd>
+                      {%- if is_calder_line -%}
+                        <input type="checkbox" class="calder-spec-confirm" data-calder-line-confirm data-line="{{ item.key | escape }}" aria-label="Confirm {{ property.first | escape }}: {{ property.last | escape }}">
+                      {%- endif -%}
                     </div>
                   {%- endif -%}
                 {%- endfor -%}
               </dl>
+              {%- if is_calder_line -%}
+                <p class="calder-cart-fitment calder-all-confirmed" data-calder-line-complete hidden>
+                  <span aria-hidden="true">✓</span> <span><strong>FITMENT CONFIRMED</strong></span>
+                </p>
+              {%- endif -%}
             {%- endif -%}
+            {%- comment -%}
+              Phase 3 (2026-11-17): the separate K2 confirmation block that used
+              to live here was REMOVED — the inline checkboxes above (one per
+              displayed option/property row) are the drawer's confirmation
+              surface. The drawer stays compact (no cart-page card design
+              here); the per-line completion badge below is shared logic.
+            {%- endcomment -%}
             {%- if item.selling_plan_allocation.selling_plan.name != blank -%}
-              <p class="prd-prepay-text" data-tippy-placement="left" data-tippy-content="{{ item.selling_plan_allocation.selling_plan.description | escape }}">{{ item.selling_plan_allocation.selling_plan.name }}</p>
+              <p class="prd-prepay-text"  data-tippy-placement="left" data-tippy-content="{{ item.selling_plan_allocation.selling_plan.description | escape }}">{{ item.selling_plan_allocation.selling_plan.name }}</p>
             {%- endif -%}
             <div class="minicart-prd-info-bottom row" data-node-desktop>
               <div class="col-auto minicart-prd-qty">

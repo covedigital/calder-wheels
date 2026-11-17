@@ -492,7 +492,7 @@
             <span class="sku"><span>SKU:</span> {{ current_variant.sku }}</span>
             {%- if is_universal_design -%}
               <br />
-              <span class="universal-part"><span>Universal Part#:</span> —</span>
+              <span class="universal-part"><span>Part Number:</span> —</span>
             {%- endif -%}
           </div>
         {%- endif -%}
@@ -631,7 +631,13 @@
         ==========================================================
       {% endcomment %}
 
-      <div class="calder-pdp__config-stack calder-pdp__config">
+      {%- comment -%}
+        2026-11-16 client update: the design nav is hidden on the standard PDP
+        (shoppers shouldn't be distracted before adding to cart). The Universal
+        Wheel Builder page sets data-show-design-nav="true" to show it prominently.
+        The snippet is never deleted — just display:none in CSS.
+      {%- endcomment -%}
+      <div class="calder-pdp__config-stack calder-pdp__config" data-show-design-nav="false">
 
         {% comment %}
           Native Shopify/Lumia variants are the authoritative
@@ -1330,6 +1336,9 @@
         );
         fitmentPanel.classList.remove(
           'calder-pdp__fitment--confirmed'
+        );
+        fitmentPanel.classList.remove(
+          'calder-pdp__fitment--verify'
         );
         if (fitmentLabel) {
           fitmentLabel.textContent =

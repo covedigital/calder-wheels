@@ -819,11 +819,12 @@ calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__sec
   color: var(--calder-card-secondary, #667085);
   margin: 0 0 0;
 }
-calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__sizes-values {
+calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__part_no-value {
   font-size: 14px;
   font-weight: 600;
   color: var(--calder-card-text, #0e2a3e);
   line-height: 1.3;
+  letter-spacing: 0.02em;
 }
 calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__finishes-list {
   font-size: 13px;
@@ -921,24 +922,38 @@ calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__con
   padding: 0 10px 10px 0;
   box-sizing: border-box;
 }
+/* ── Column 1: Size, Bolts, Offset ── */
 calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__config-cell[data-calder-config-cell="d"],
-calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__config-cell[data-calder-config-cell="h"] {
+calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__config-cell[data-calder-config-cell="h"],
+calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__config-cell[data-calder-config-cell="o"] {
   grid-column: 1;
 }
+/* ── Column 2: Center Finish, Barrel, Center Bore ── */
 calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__config-cell[data-calder-config-cell="c"],
-calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__config-cell[data-calder-config-cell="b"] {
+calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__config-cell[data-calder-config-cell="b"],
+calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__config-cell[data-calder-config-cell="cb"] {
   grid-column: 2;
   padding-right: 0;
   padding-left: 10px;
   border-left: 1px solid var(--calder-card-border, rgba(14, 42, 62, 0.18));
 }
+/* ── Row 1: Size + Center Finish ── */
 calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__config-cell[data-calder-config-cell="d"],
 calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__config-cell[data-calder-config-cell="c"] {
   grid-row: 1;
 }
+/* ── Row 2: Bolts + Barrel ── */
 calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__config-cell[data-calder-config-cell="h"],
 calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__config-cell[data-calder-config-cell="b"] {
   grid-row: 2;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-top: 1px solid var(--calder-card-border, rgba(14, 42, 62, 0.18));
+}
+/* ── Row 3: Offset + Center Bore (2026-11-16) ── */
+calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__config-cell[data-calder-config-cell="o"],
+calder-product-card:is(.calder-card--light,.calder-card--dark) .calder-card__config-cell[data-calder-config-cell="cb"] {
+  grid-row: 3;
   padding-top: 10px;
   padding-bottom: 0;
   border-top: 1px solid var(--calder-card-border, rgba(14, 42, 62, 0.18));

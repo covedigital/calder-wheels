@@ -106,8 +106,12 @@
   <div class="calder-uc__group" role="radiogroup" aria-label="Hardware and Rivet Finish" data-calder-uc-group="hardware">
     <div class="calder-uc__heading"><span class="calder-uc__eyebrow">Hardware &amp; Rivet Finish</span><span class="calder-uc__label" data-calder-uc-selected="hardware">Chrome Bolts</span></div>
     <div class="calder-uc__values">
-      <button type="button" class="calder-uc__option is-selected" role="radio" aria-checked="true" data-calder-uc-option data-dim="hardware" data-token="chrome" aria-label="Chrome Bolts"><span class="calder-uc__swatch"><img src="{{ uc_hw_ch_img | asset_url }}" alt="" width="44" height="44" loading="lazy" decoding="async"></span><span class="calder-uc__option-name">Chrome Bolts</span></button>
+      {%- comment -%}P3 (2026-11-15): Black Bolts renders first, Chrome Bolts
+        second (client request). The default SELECTION stays the registry
+        default_configuration (chrome) — only the display order
+        changes; tokens, SKU mappings and availability are untouched.{%- endcomment -%}
       <button type="button" class="calder-uc__option" role="radio" aria-checked="false" data-calder-uc-option data-dim="hardware" data-token="black" aria-label="Black Bolts"><span class="calder-uc__swatch"><img src="{{ uc_hw_bk_img | asset_url }}" alt="" width="44" height="44" loading="lazy" decoding="async"></span><span class="calder-uc__option-name">Black Bolts</span></button>
+      <button type="button" class="calder-uc__option is-selected" role="radio" aria-checked="true" data-calder-uc-option data-dim="hardware" data-token="chrome" aria-label="Chrome Bolts"><span class="calder-uc__swatch"><img src="{{ uc_hw_ch_img | asset_url }}" alt="" width="44" height="44" loading="lazy" decoding="async"></span><span class="calder-uc__option-name">Chrome Bolts</span></button>
     </div>
   </div>
 

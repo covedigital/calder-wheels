@@ -11,27 +11,6 @@
   "sections": {
     "wheel-gallery": {
       "type": "calder-wheel-gallery",
-      "blocks": {
-        "wheel_build_DL76hM": {
-          "type": "wheel_build",
-          "settings": {
-            "image": "shopify://shop_images/Calder-Wheels-Close-up_2.png",
-            "wheel_model": "CLM-01",
-            "wheel_series": "Forged Monoblock",
-            "finish": "Gloss Black",
-            "detail_url": "shopify://products/calder-clm-01-wheel",
-            "gallery_handle": "",
-            "wheel_style": "",
-            "construction": "",
-            "bolt_pattern": "",
-            "wheel_diameter": "",
-            "description": ""
-          }
-        }
-      },
-      "block_order": [
-        "wheel_build_DL76hM"
-      ],
       "settings": {
         "hero_title": "Wheel Gallery",
         "hero_subtitle": "Explore Calder wheel designs, finishes, and configurations. Browse by design — discover every finish combination.",

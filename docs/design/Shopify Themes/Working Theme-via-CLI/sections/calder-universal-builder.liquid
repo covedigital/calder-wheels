@@ -1,0 +1,141 @@
+{% comment %}
+  Calder Universal Wheel Builder (2026-11-16 client meeting)
+  ------------------------------------------------------------
+  An exploration-focused configurator page where shoppers freely browse
+  designs and finishes WITHOUT the standard PDP's purchase restrictions
+  (no vehicle requirement, no Diameter gating). The design nav is PROMINENT
+  (the primary exploration tool), and the follow-up CTA takes the shopper
+  to the selected design's product page to purchase, or "Request this Wheel"
+  if the design has no product.
+
+  This section does NOT replace the standard PDP configurator — it's a
+  separate page template (page.universal-builder.json) for design
+  exploration before the shopper is ready to apply a design to a vehicle.
+
+  Reuses the existing universal PDP infrastructure: calder-config-resolver.js,
+  calder-pdp-state.js, calder-universal-pdp.js, calder-universal-controls
+  snippet, calder-universal-gallery-slide snippet, calder-design-nav snippet.
+  The purchase block (calder-universal-purchase) is NOT rendered here — the
+  CTA links to the product page instead.
+{% endcomment %}
+
+{{ 'calder-universal-controls.css' | asset_url | stylesheet_tag }}
+{{ 'calder-product.css' | asset_url | stylesheet_tag }}
+
+{% liquid
+  assign builder_product = all_products[section.settings.design_product]
+  assign builder_design_code = builder_product.metafields.custom.design_code.value | default: builder_product.metafields.custom.design_code | default: '' | strip | upcase
+  assign builder_design_key = builder_design_code | remove: '-'
+  assign builder_is_universal = false
+  if builder_design_key == 'CLM01' or builder_design_key == 'CLM02' or builder_design_key == 'CLM03' or builder_design_key == 'CLM05' or builder_design_key == 'CLB06' or builder_design_key == 'CLB07' or builder_design_key == 'CLM06' or builder_design_key == 'CLM07'
+    assign builder_is_universal = true
+  endif
+%}
+
+{% if builder_is_universal == false %}
+  <div class="calder-builder-placeholder">
+    <p>Select a universal design product in the section settings to enable the Universal Wheel Builder.</p>
+  </div>
+{% else %}
+
+{% render 'calder-configuration-catalog', wheel_collection: collections['all-calder-wheels'] %}
+{% render 'configurator-product-data', product: builder_product %}
+
+<div class="calder-builder" data-calder-universal data-calder-builder-root
+     data-design-code="{{ builder_design_code }}"
+     data-storefront-token="{{ settings.calder_storefront_access_token | default: '' }}"
+     data-calder-uc-explore="true">
+
+  <div class="calder-builder__header">
+    <h1 class="calder-builder__title">{{ section.settings.heading | default: 'Universal Wheel Builder' }}</h1>
+    <p class="calder-builder__intro">{{ section.settings.intro_text | default: 'Explore every Calder design and finish combination freely. When you find the perfect build, choose your design and configure it for your vehicle on the product page.' }}</p>
+  </div>
+
+  {% comment %} Prominent design nav — the primary exploration tool {% endcomment %}
+  <div class="calder-builder__designs">
+    {% render 'calder-design-nav', product: builder_product %}
+  </div>
+
+  <div class="calder-builder__body">
+    <div class="calder-builder__preview">
+      {% render 'calder-universal-gallery-slide', product: builder_product, design_code: builder_design_code %}
+    </div>
+
+    <div class="calder-builder__controls">
+      {% render 'calder-universal-controls', product: builder_product, product_form_id: 'calder-builder-form' %}
+    </div>
+  </div>
+
+  {% comment %} Follow-up CTA — takes the shopper to the design's product page {% endcomment %}
+  <div class="calder-builder__cta-zone">
+    <button type="button" class="calder-builder__cta btn btn--primary"
+            data-calder-builder-cta
+            data-design-handle="{{ builder_product.handle }}">
+      <span data-calder-builder-cta-label>Choose This Design</span>
+    </button>
+    <p class="calder-builder__cta-note">You'll be taken to the product page to select your vehicle and confirm fitment.</p>
+  </div>
+</div>
+
+<script src="{{ 'calder-config-resolver.js' | asset_url }}" defer></script>
+<script src="{{ 'calder-pdp-state.js' | asset_url }}" defer></script>
+<script src="{{ 'calder-universal-pdp.js' | asset_url }}" defer></script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var cta = document.querySelector('[data-calder-builder-cta]');
+    if (!cta) return;
+    cta.addEventListener('click', function () {
+      var state = window.CALDER_UNIVERSAL_PDP && window.CALDER_UNIVERSAL_PDP.state;
+      if (!state) return;
+      var snap = state.getState();
+      var handle = cta.getAttribute('data-design-handle');
+      var params = [];
+      ['diameter', 'center', 'barrel', 'hardware'].forEach(function (dim) {
+        if (snap.tokens[dim]) params.push(dim + '=' + encodeURIComponent(snap.tokens[dim]));
+      });
+      var qs = params.length ? '?' + params.join('&') : '';
+      var url = '/products/' + handle + qs;
+      window.location.href = url;
+    });
+  });
+</script>
+
+{% endif %}
+
+{% schema %}
+{
+  "name": "Universal Builder",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Builder"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Universal Wheel Builder"
+    },
+    {
+      "type": "textarea",
+      "id": "intro_text",
+      "label": "Intro text",
+      "default": "Explore every Calder design and finish combination freely. When you find the perfect build, choose your design and configure it for your vehicle on the product page."
+    },
+    {
+      "type": "product",
+      "id": "design_product",
+      "label": "Design product (any universal design product)",
+      "info": "Select one of the calder-*-wheel universal design products. The builder uses its design registry for the configurator and the design nav."
+    }
+  ],
+  "presets": [
+    {
+  "name": "Universal Builder",
+      "category": "Calder Wheels"
+    }
+  ]
+}
+{% endschema %}

@@ -208,4 +208,8 @@
         });
       </script>
     {%- endif -%}
+    {%- comment -%}K2 (2026-11-15): per-line specification confirmation gate —
+      drawer surface (loads on every page that renders the cart drawer;
+      booted guard makes the double include with the cart page harmless).{%- endcomment -%}
+    <script src="{{ 'calder-cart-confirm.js' | asset_url }}" defer></script>
 {%- endunless -%}

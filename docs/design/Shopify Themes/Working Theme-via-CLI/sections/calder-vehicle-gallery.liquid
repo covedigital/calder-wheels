@@ -13,7 +13,7 @@
   {% if section.settings.show_sort %}<label class="cg-sort">SORT BY <select data-gallery-sort><option value="default">Featured</option><option value="az">Name A–Z</option><option value="za">Name Z–A</option></select></label>{% endif %}
   <p class="cg-count" data-gallery-count aria-live="polite"></p>
  <div class="calder-gallery-grid" data-gallery-grid data-items-per-page="{{ section.settings.per_page }}">
-  {% assign all_builds = shop.metaobjects.gallery_build.values %}
+  {% assign all_builds = metaobjects.gallery_build.values %}
   {% assign gallery_card_count = 0 %}
   {% for build in all_builds %}
   {% assign gtype = build.gallery_type.value | default: build.gallery_type | default: 'vehicle' %}
@@ -21,14 +21,19 @@
   {% assign featured = build.featured_image.value | default: build.featured_image | default: build.gallery_images.value.first %}
   {% assign title = build.wheel_model.value | default: build.wheel_model %}
   {% if gallery_type == 'vehicle' %}{% capture title %}{{ build.vehicle_year.value }} {{ build.vehicle_make.value }} {{ build.vehicle_model.value }}{% endcapture %}{% endif %}
-  {% assign detail_link = build.system.url | default: '' %}{% if detail_link == blank %}{% assign detail_link = '/pages/gallery-build?build=' | append: build.system.handle %}{% endif %}
+  {% comment %}G1 404 guard (2026-11-15 QA): the query-param detail fallback only
+    emits when the gallery-build PAGE exists in the store (admin-created,
+    published, handle 'gallery-build'). Without it, entries with no
+    metaobject web route render as non-navigating cards — never a 404,
+    never a redirect to a designated product PDP.{% endcomment %}
+  {% assign detail_link = build.system.url | default: '' %}{% if detail_link == blank and pages['gallery-build'] != blank %}{% assign detail_link = '/pages/gallery-build?build=' | append: build.system.handle %}{% endif %}
   {% render 'calder-gallery-card', image: featured, heading: title, url: detail_link, make: build.vehicle_make.value, model: build.vehicle_model.value, wheel: build.wheel_model.value, series: build.wheel_series.value, finish: build.overall_finish.value, construction: build.construction.value, size: build.front_wheel_size.value, bolt: build.bolt_pattern.value, style: build.wheel_style.value %}
   {% assign gallery_card_count = gallery_card_count | plus: 1 %}
   {% endif %}{% endfor %}
   {% for block in section.blocks %}
   {% assign item = block.settings %}
   {% capture item_title %}{% if gallery_type == 'vehicle' %}{{ item.vehicle_year }} {{ item.vehicle_make }} {{ item.vehicle_model }}{% else %}{{ item.wheel_model }}{% endif %}{% endcapture %}
-  {% assign detail_link = item.detail_url %}{% if item.gallery_handle != blank %}{% assign detail_link = '/pages/gallery-build?build=' | append: item.gallery_handle %}{% endif %}
+  {% assign detail_link = item.detail_url %}{% if item.gallery_handle != blank and pages['gallery-build'] != blank %}{% assign detail_link = '/pages/gallery-build?build=' | append: item.gallery_handle %}{% endif %}
   {% assign card_finish = item.overall_finish | default: item.finish %}
   {% assign card_size = item.wheel_diameter | default: item.wheel_size %}
   {% render 'calder-gallery-card', image: item.image, heading: item_title, url: detail_link, make: item.vehicle_make, model: item.vehicle_model, wheel: item.wheel_model, series: item.wheel_series, finish: card_finish, construction: item.construction, size: card_size, bolt: item.bolt_pattern, style: item.wheel_style %}

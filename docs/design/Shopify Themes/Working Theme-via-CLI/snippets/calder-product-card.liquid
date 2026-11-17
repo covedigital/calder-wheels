@@ -112,6 +112,58 @@
         endif
       endif
     endfor
+
+    comment
+      C7 (2026-11-15): showcase variant — registry design default configuration
+      matched to this product's own variants (developer-approved source (b)).
+      docs/architecture/calder_design_registry.json default_configuration is
+      identical for all six designs: 22" / gloss-black center / gloss-black
+      lip / chrome bolts. The variant products (fixed lip/bolt combo per
+      product, 9 variants = 3 diameters x 3 centers) resolve to their own
+      22" + Gloss Black variant; the design products already list the exact
+      default configuration as their first variant (verified against the
+      live export) and resolve to it here unchanged. The showcased
+      center's own alt-coded render ("... - Gloss Black center, ...",
+      Matrixify position 2) replaces the featured media so the image and
+      the Shown Configuration panel describe ONE configuration — the
+      showcase only engages when that image exists, never a mismatched
+      pair. Price stays on the same 22" tier as the previous first
+      variant. Falls back to selected_or_first_available otherwise.
+    endcomment
+    if cc_center_index >= 0
+      for cc_v in product.variants
+        if cc_v.available and cc_v.options[cc_center_index] == 'Gloss Black'
+          if cc_diameter_index < 0 or cc_v.options[cc_diameter_index] == '22"'
+            assign cc_showcase_variant = cc_v
+            break
+          endif
+        endif
+      endfor
+      if cc_showcase_variant
+        for cc_media in product.media
+          if cc_media.media_type == 'image' and cc_media.alt contains 'Gloss Black center'
+            assign cc_showcase_media = cc_media
+            break
+          endif
+        endfor
+        if cc_showcase_media
+          assign current_variant = cc_showcase_variant
+          assign image = cc_showcase_media
+          assign product_url_collection = product.url
+          if settings.product_card_url_within_collection
+            assign product_url_collection = product.url | within: collection
+          endif
+          capture calder_design_pdp_url
+            render 'calder-design-url', product: product, current_variant: current_variant
+          endcapture
+          assign calder_design_pdp_url = calder_design_pdp_url | strip
+          if calder_design_pdp_url != blank
+            assign product_url_collection = calder_design_pdp_url
+          endif
+        endif
+      endif
+    endif
+
     if cc_center_index >= 0
       assign selected_finish = current_variant.options[cc_center_index] | default: ''
     else
@@ -171,6 +223,22 @@
         if cc_combined_hw and cc_b_raw contains ' Bolts'
           assign cc_b = cc_b_raw | split: ' Lip' | first | append: ' Lip'
           assign cc_h = cc_b_raw | split: '- ' | last
+        elsif cc_b_raw == 'Chrome' or cc_b_raw == 'Black'
+          comment
+            C7 (2026-11-15): same routing as the server-rendered panel above —
+            "Barrel & Lip Finish" values of Chrome/Black are the product's
+            fixed hardware finish; the lip finish comes from the documented
+            SKU tail digit. Keeps the JS card sync truthful for any variant
+            the shopper selects.
+          endcomment
+          assign cc_h = cc_b_raw
+          assign cc_b = ''
+          assign cc_lip_digit = cc_v.sku | slice: -2 | slice: 0
+          if cc_lip_digit == '1'
+            assign cc_b = 'Polished'
+          elsif cc_lip_digit == '2'
+            assign cc_b = 'Gloss Black'
+          endif
         else
           assign cc_b = cc_b_raw
           assign cc_h = ''
@@ -252,14 +320,20 @@
       {% endunless %}
       {% if calder_premium %}
         {%- comment -%}
-          Section 1 — Available Sizes (2026-11-02 D): informational list of
-          the product's actual Diameter option values; not a picker. Omitted
-          when no reliable diameter data exists.
+          Section 1 — Part# (2026-11-16 client update): the product's universal
+          part number (the variant SKU from the SKU master, e.g. CLM0522106390630BT11).
+          Replaces the former "Available Sizes" informational list.
         {%- endcomment -%}
-        {% if cc_sizes_line != blank %}
-          <div class="calder-card__sizes">
-            <div class="calder-card__section-label">Available Sizes</div>
-            <div class="calder-card__sizes-values">{{ cc_sizes_line | escape }}</div>
+        {%- liquid
+          assign cc_part_no = current_variant.sku
+          if cc_part_no == blank
+            assign cc_part_no = product.selected_or_first_available_variant.sku
+          endif
+        -%}
+        {% if cc_part_no != blank %}
+          <div class="calder-card__part_no">
+            <div class="calder-card__section-label">Part#</div>
+            <div class="calder-card__part_no-value">{{ cc_part_no | escape }}</div>
           </div>
         {% endif %}
       {% endif %}
@@ -342,17 +416,76 @@
           assign cc_shown_c = ''
           assign cc_shown_b = ''
           assign cc_shown_h = ''
+          assign cc_shown_size = ''
+          assign cc_shown_offset = ''
+          assign cc_shown_bore = ''
           if cc_diameter_index >= 0
             assign cc_shown_d = current_variant.options[cc_diameter_index]
           endif
           if cc_center_index >= 0
             assign cc_shown_c = current_variant.options[cc_center_index]
           endif
+          comment
+            2026-11-16 client update — Size = combined diameter × width (e.g. 22x10).
+            Width parses from the variant SKU position 7-8 (documented master scheme:
+            CLM05-22-10-639-... design|dia|width|bolt). Fallback: the catalog-wide
+            x10 width per the SUV Data Sheet master.
+          endcomment
+          if cc_shown_d != blank
+            assign cc_dia_raw = cc_shown_d | remove: '"' | strip
+            assign cc_width_raw = current_variant.sku | slice: 7, 2
+            if cc_width_raw == blank or cc_width_raw == ''
+              assign cc_width_raw = '10'
+            endif
+            assign cc_shown_size = cc_dia_raw | append: 'x' | append: cc_width_raw
+          endif
+          comment
+            2026-11-16 client update — Offset and Center Bore from product data.
+            Offset parses from the handle (-p<NN>- pattern, verified across all 96
+            variant product handles in the live export). Center Bore reads the
+            center_bore metafield (cleans the import apostrophe) with a handle
+            fallback. Both values correspond to the product's fixed bolt pattern
+            (each variant product is one bolt-pattern family).
+          endcomment
+          assign cc_handle_parts = product.handle | split: '-p'
+          if cc_handle_parts.size > 1
+            assign cc_offset_raw = cc_handle_parts[1] | split: '-' | first
+            if cc_offset_raw != blank
+              assign cc_shown_offset = '+' | append: cc_offset_raw | append: 'mm'
+            endif
+          endif
+          assign cc_bore_raw = product.metafields.custom.center_bore.value | default: product.metafields.custom.center_bore | default: ''
+          assign cc_bore_raw = cc_bore_raw | remove: "'" | strip
+          if cc_bore_raw != blank
+            assign cc_shown_bore = cc_bore_raw
+          elsif cc_handle_parts.size > 1
+            assign cc_handle_tail = cc_handle_parts[1] | split: 'mm' | first
+            if cc_handle_tail != blank
+              assign cc_shown_bore = cc_handle_tail | replace: '-', '.' | strip
+            endif
+          endif
           if cc_barrel_index >= 0
             assign cc_b_raw = current_variant.options[cc_barrel_index]
             if cc_combined_hw and cc_b_raw contains ' Bolts'
               assign cc_shown_b = cc_b_raw | split: ' Lip' | first | append: ' Lip'
               assign cc_shown_h = cc_b_raw | split: '- ' | last
+            elsif cc_b_raw == 'Chrome' or cc_b_raw == 'Black'
+              comment
+                C7 (2026-11-15): live catalog shape — the "Barrel & Lip Finish"
+                option carries the product's fixed HARDWARE value (Chrome /
+                Black). Display it under Bolts and take the true lip finish
+                from the documented SKU tail digit (verified 864/864 against
+                the handles in the live export: ...BT11 = center, 1=Polished
+                lip, 1=Chrome bolts). Unparseable SKU -> barrel omitted
+                (truthful), never invented.
+              endcomment
+              assign cc_shown_h = cc_b_raw
+              assign cc_lip_digit = current_variant.sku | slice: -2 | slice: 0
+              if cc_lip_digit == '1'
+                assign cc_shown_b = 'Polished'
+              elsif cc_lip_digit == '2'
+                assign cc_shown_b = 'Gloss Black'
+              endif
             else
               assign cc_shown_b = cc_b_raw
             endif
@@ -381,12 +514,12 @@
         -%}
         {% if cc_has_config %}
           <div class="calder-card__config" aria-live="polite">
-            <div class="calder-card__config-heading">Shown Configuration</div>
+            <div class="calder-card__config-heading">Wheel Description</div>
             <div class="calder-card__config-grid">
-              {% if cc_shown_d != blank %}
+              {% if cc_shown_size != blank %}
                 <div class="calder-card__config-cell" data-calder-config-cell="d">
-                  <span class="calder-card__config-label">Diameter</span>
-                  <span class="calder-card__config-value" data-calder-config="d">{{ cc_shown_d | escape }}</span>
+                  <span class="calder-card__config-label">Size</span>
+                  <span class="calder-card__config-value" data-calder-config="d">{{ cc_shown_size | escape }}</span>
                 </div>
               {% endif %}
               {% if cc_shown_c != blank %}
@@ -405,6 +538,18 @@
                 <div class="calder-card__config-cell" data-calder-config-cell="b">
                   <span class="calder-card__config-label">Barrel</span>
                   <span class="calder-card__config-value" data-calder-config="b">{{ cc_shown_b | escape }}</span>
+                </div>
+              {% endif %}
+              {% if cc_shown_offset != blank %}
+                <div class="calder-card__config-cell" data-calder-config-cell="o">
+                  <span class="calder-card__config-label">Offset</span>
+                  <span class="calder-card__config-value" data-calder-config="o">{{ cc_shown_offset | escape }}</span>
+                </div>
+              {% endif %}
+              {% if cc_shown_bore != blank %}
+                <div class="calder-card__config-cell" data-calder-config-cell="cb">
+                  <span class="calder-card__config-label">Center Bore</span>
+                  <span class="calder-card__config-value" data-calder-config="cb">{{ cc_shown_bore | escape }}</span>
                 </div>
               {% endif %}
             </div>

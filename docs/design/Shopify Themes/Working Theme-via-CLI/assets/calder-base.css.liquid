@@ -1257,3 +1257,76 @@ button:hover .calder-icon--forward {
     animation-iteration-count: 1 !important;
   }
 }
+/* ── K2 (2026-11-15): per-line specification confirmations ──
+   Rendered per Calder cart line (cart page + drawer) by
+   main-cart-items.liquid / header-cart-line-item.liquid; gated by
+   calder-cart-confirm.js. Global file so the drawer (all pages) gets
+   the styles. The cart summary block (.card-total.bg-alt.calder-cart-summary)
+   is deliberately untouched (K4).
+   2026-11-17 Phase 3: the drawer's separate K2 block markup
+   (.calder-line-confirm container + .calder-line-confirm__item rows)
+   was REMOVED — its container/item styles below are deleted with it;
+   the __heading (drawer + cart page), inline option + gate classes
+   remain in use. */
+.calder-line-confirm__heading {
+  font-family: var(--calder-ui-font, sans-serif);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--calder-color-muted, #6b7280);
+  margin-bottom: 6px;
+}
+/* (2026-11-17 Phase 3) .calder-line-confirm__item rules removed — the
+   drawer's legacy block markup was deleted; inline .calder-option-confirm
+   rows are the drawer's confirmation surface. */
+/* Checkout gate — same technique as the theme's .shopify-payment-agree.disabled
+   (style.css): pointer-events + opacity on buttons AND express wrappers. */
+.calder-line-confirm-gate {
+  pointer-events: none !important;
+  opacity: 0.5 !important;
+  cursor: not-allowed !important;
+}
+
+/* ── 2026-11-16: inline spec confirmation (replaces .calder-line-confirm block) ──
+   Checkboxes render directly inside .cart-table-product-option rows on the
+   cart page + drawer. When all of a line's boxes are checked, the green
+   FITMENT CONFIRMED badge appears. */
+.calder-line-confirm__heading {
+  display: block;
+  font-family: var(--calder-ui-font, sans-serif);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--calder-color-muted, #6b7280);
+  margin: 8px 0 4px;
+}
+.cart-table-product-option.calder-option-confirm {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+}
+.cart-table-product-option.calder-option-confirm dt {
+  flex: 0 0 auto;
+}
+.cart-table-product-option.calder-option-confirm dd {
+  flex: 1 1 auto;
+}
+.cart-table-product-option .calder-spec-confirm {
+  flex: 0 0 auto;
+  width: 16px;
+  height: 16px;
+  margin: 2px 0;
+  accent-color: var(--calder-navy, #102C40);
+  cursor: pointer;
+}
+.calder-all-confirmed {
+  margin: 8px 0 4px;
+}
+/* Gate class (checkout buttons) — same as before */
+.calder-line-confirm-gate {
+  pointer-events: none !important;
+  opacity: 0.5 !important;
+  cursor: not-allowed !important;
+}

@@ -69,15 +69,23 @@
                         endif
                       -%}
                       <div class="cart-table-prd calder-cart-item" id="CartItem-{{ item.index | plus: 1 }}">
-                        <div class="cart-table-prd-image {% unless item.image %}d-none{% endunless %}">
+                        {%- comment -%}
+                          2026-11-17 Phase 2 (approved cart item card): card skeleton —
+                          MAIN (image | details(header + specs)) + ACTIONS row. All functional
+                          hooks preserved verbatim: #CartItem-N id, [data-node-desktop/mobile],
+                          input[name=updates[]] + data-index, cart-remove-button, error region,
+                          price/quantity snippet renders, confirm checkboxes ([data-calder-line-confirm]).
+                        {%- endcomment -%}
+                        <div class="calder-cart-item__main">
+                        <div class="cart-table-prd-image calder-cart-item__image {% unless item.image %}d-none{% endunless %}">
                           {% if item.image %}
                             <a href="{{ product_url_collection }}">
                               {% render 'image-container',
                                 image: item.image,
                                 product_aspect_ratio: true,
                                 padding_no_bg: 120,
-                                sizes: '100px',
-                                width_times: 3,
+                                sizes: '250px',
+                                width_times: 2,
                                 cover: settings.product_card_cover
                               %}
                             </a>
@@ -86,87 +94,406 @@
                             {%- endif -%}
                           {% endif %}
                         </div>
-                        <div class="cart-table-prd-content-wrap">
-                          <div class="cart-table-prd-info">
-                            {%- if section.settings.show_vendor -%}
-                              <p class="cart-table-vendor">{{ item.product.vendor }}</p>
-                            {%- endif -%}
-                            <h2 class="cart-table-prd-name">
-                              <a href="{{ product_url_collection }}">{{ item.product.title | escape }}</a>
-                            </h2>
+                        <div class="calder-cart-item__details">
+                          <div class="calder-cart-item__header">
+                            <div class="calder-cart-item__header-title">
+                              {%- if section.settings.show_vendor -%}
+                                <p class="cart-table-vendor">{{ item.product.vendor }}</p>
+                              {%- endif -%}
+                              <h2 class="cart-table-prd-name calder-cart-item__title">
+                                <a href="{{ product_url_collection }}">{{ item.product.title | escape }}</a>
+                              </h2>
+                            </div>
+                            <div class="calder-cart-item__unit-price">
+                              <div class="cart-table-prd-price">
+                                {% render 'main-cart-item-component-price', item: item %}
+                              </div>
+                              <span class="calder-cart-item__per-wheel">Per Wheel</span>
+                            </div>
+                          </div>
+                          <div class="cart-table-prd-info calder-cart-item__specs">
                             {%- if item.product.has_only_default_variant == false or item.properties.size != 0 -%}
-                              <dl>
-                                {%- if item.product.has_only_default_variant == false -%}
-                                  {%- for option in item.options_with_values -%}
-                                    <div class="cart-table-product-option">
-                                      <dt>{{ option.name }}:</dt>
-                                      <dd>{{ option.value }}</dd>
-                                    </div>
-                                  {%- endfor -%}
-                                {%- endif -%}
-                                {%- for property in item.properties -%}
-                                  {%- assign property_first_char = property.first | slice: 0 -%}
-                                  {%- if property.last != blank and property_first_char != '_' -%}
-                                    <div class="cart-table-product-option">
-                                      <dt>{{ property.first }}:</dt>
-                                      <dd>
-                                        {%- if property.last contains '/uploads/' -%}
-                                          <a href="{{ property.last }}" class="link" target="_blank">
-                                            {{ property.last | split: '/' | last }}
-                                          </a>
-                                        {%- else -%}
-                                          {{ property.last }}
-                                        {%- endif -%}
-                                      </dd>
-                                    </div>
+                              {%- assign is_calder_line = false -%}
+                              {%- if item.properties['_configurator'] != blank -%}
+                                {%- assign is_calder_line = true -%}
+                              {%- endif -%}
+                              {%- if is_calder_line -%}
+                                {%- comment -%}
+                                  Phase 3 (2026-11-17): approved specification checklist.
+                                  Six display cells in fixed order — Size (Diameter × Width
+                                  combined), Center Finish, Lip Finish, Bolts, Vehicle,
+                                  Bolt Pattern — sourced from the K1 line properties;
+                                  Wheel Design is excluded (not a required spec). Blank
+                                  values omit the cell (never invented); variant options
+                                  are NOT repeated here (they duplicated these fields).
+                                  One real checkbox per cell — [data-calder-line-confirm],
+                                  keyed data-line — calder-cart-confirm.js gates checkout
+                                  until every checkbox on every Calder line is checked;
+                                  AJAX re-renders reset them (by design). The checkbox is
+                                  the only icon-like element.
+                                {%- endcomment -%}
+                                <div class="calder-line-confirm__heading">Confirm Wheel Specs</div>
+                                <ul class="calder-cart-item__spec-grid" role="list">
+                                  {%- comment -%}
+                                    Phase 3 round 3 (developer, 2026-11-17): Lip Finish and
+                                    Bolts derive from a source cascade so every line era
+                                    displays them: (1) K1 visible property, (2) BYW underscore
+                                    internal, (3) the _config_tokens JSON snapshot written by
+                                    every universal add (token → registry label), (4) a
+                                    key-scan of the line's properties (catches key drift),
+                                    (5) Bolts only: the variant's own hardware option value.
+                                    Vehicle gets a full-width row (names vary in length);
+                                    Bolt Pattern follows full-width to keep row dividers
+                                    clean. Blank after the whole cascade → cell omits
+                                    truthfully. Stored values are never modified.
+                                  {%- endcomment -%}
+                                  {%- assign size_d = item.properties['Diameter'] | default: item.properties['_diameter'] | remove: '"' | strip -%}
+                                  {%- assign size_w = item.properties['Width'] | remove: '"' | strip -%}
+                                  {%- assign size_value = '' -%}
+                                  {%- if size_d != blank and size_w != blank -%}
+                                    {%- assign size_value = size_d | append: 'x' | append: size_w -%}
+                                  {%- elsif size_d != blank -%}
+                                    {%- assign size_value = size_d -%}
+                                  {%- elsif size_w != blank -%}
+                                    {%- assign size_value = size_w -%}
                                   {%- endif -%}
-                                {%- endfor -%}
-                              </dl>
+                                  {%- if size_value != blank -%}
+                                    <li class="calder-cart-item__spec calder-cart-item__spec--lead">
+                                      <label class="calder-cart-item__spec-cell">
+                                        <input type="checkbox" class="calder-spec-confirm" data-calder-line-confirm data-line="{{ item.key | escape }}">
+                                        <span class="calder-cart-item__spec-text">
+                                          <span class="calder-cart-item__spec-label">Size</span>
+                                          <span class="calder-cart-item__spec-value">{{ size_value }}</span>
+                                        </span>
+                                      </label>
+                                    </li>
+                                  {%- endif -%}
+                                  {%- assign center_value = item.properties['Center Finish'] | default: item.properties['_center_finish'] | strip -%}
+                                  {%- if center_value != blank -%}
+                                    <li class="calder-cart-item__spec calder-cart-item__spec--trail">
+                                      <label class="calder-cart-item__spec-cell">
+                                        <input type="checkbox" class="calder-spec-confirm" data-calder-line-confirm data-line="{{ item.key | escape }}">
+                                        <span class="calder-cart-item__spec-text">
+                                          <span class="calder-cart-item__spec-label">Center Finish</span>
+                                          <span class="calder-cart-item__spec-value">{{ center_value }}</span>
+                                        </span>
+                                      </label>
+                                    </li>
+                                  {%- endif -%}
+                                  {%- assign lip_value = item.properties['Barrel & Lip Finish'] | default: item.properties['_barrel_finish'] | strip -%}
+                                  {%- if lip_value == blank -%}
+                                    {%- assign ct_barrel = item.properties['_config_tokens'] | split: '"barrel":"' | last | split: '"' | first -%}
+                                    {%- if ct_barrel == 'gloss-black' -%}
+                                      {%- assign lip_value = 'Gloss Black Lip' -%}
+                                    {%- elsif ct_barrel == 'polished' -%}
+                                      {%- assign lip_value = 'Polished Lip' -%}
+                                    {%- endif -%}
+                                  {%- endif -%}
+                                  {%- assign bolts_value = item.properties['Hardware & Rivet Finish'] | default: item.properties['_hardware_finish'] | strip -%}
+                                  {%- if bolts_value == blank -%}
+                                    {%- assign ct_hardware = item.properties['_config_tokens'] | split: '"hardware":"' | last | split: '"' | first -%}
+                                    {%- if ct_hardware == 'chrome' -%}
+                                      {%- assign bolts_value = 'Chrome Bolts' -%}
+                                    {%- elsif ct_hardware == 'black' -%}
+                                      {%- assign bolts_value = 'Black Bolts' -%}
+                                    {%- endif -%}
+                                  {%- endif -%}
+                                  {%- if lip_value == blank or bolts_value == blank -%}
+                                    {%- for property in item.properties -%}
+                                      {%- assign prop_key = property.first -%}
+                                      {%- assign prop_key_first = prop_key | slice: 0 -%}
+                                      {%- if property.last != blank and prop_key_first != '_' -%}
+                                        {%- if lip_value == blank and prop_key contains 'Lip' -%}
+                                          {%- assign lip_value = property.last -%}
+                                        {%- endif -%}
+                                        {%- if bolts_value == blank -%}
+                                          {%- if prop_key contains 'Rivet' or prop_key == 'Bolts' or prop_key == 'Bolt Finish' -%}
+                                            {%- assign bolts_value = property.last -%}
+                                          {%- endif -%}
+                                        {%- endif -%}
+                                      {%- endif -%}
+                                    {%- endfor -%}
+                                  {%- endif -%}
+                                  {%- if bolts_value == blank -%}
+                                    {%- for option in item.options_with_values -%}
+                                      {%- if option.name == 'Barrel & Lip Finish' or option.name == 'Barrel & Lip - Hardware' -%}
+                                        {%- assign bolts_value = option.value -%}
+                                      {%- endif -%}
+                                    {%- endfor -%}
+                                  {%- endif -%}
+                                  {%- if lip_value != blank -%}
+                                    <li class="calder-cart-item__spec calder-cart-item__spec--lead">
+                                      <label class="calder-cart-item__spec-cell">
+                                        <input type="checkbox" class="calder-spec-confirm" data-calder-line-confirm data-line="{{ item.key | escape }}">
+                                        <span class="calder-cart-item__spec-text">
+                                          <span class="calder-cart-item__spec-label">Lip Finish</span>
+                                          <span class="calder-cart-item__spec-value">{{ lip_value }}</span>
+                                        </span>
+                                      </label>
+                                    </li>
+                                  {%- endif -%}
+                                  {%- if bolts_value != blank -%}
+                                    <li class="calder-cart-item__spec calder-cart-item__spec--trail">
+                                      <label class="calder-cart-item__spec-cell">
+                                        <input type="checkbox" class="calder-spec-confirm" data-calder-line-confirm data-line="{{ item.key | escape }}">
+                                        <span class="calder-cart-item__spec-text">
+                                          <span class="calder-cart-item__spec-label">Bolts</span>
+                                          <span class="calder-cart-item__spec-value">{{ bolts_value }}</span>
+                                        </span>
+                                      </label>
+                                    </li>
+                                  {%- endif -%}
+                                  {%- assign vehicle_value = item.properties['Vehicle'] | default: item.properties['Fitment Vehicle'] -%}
+                                  {%- if vehicle_value != blank -%}
+                                    <li class="calder-cart-item__spec calder-cart-item__spec--wide">
+                                      <label class="calder-cart-item__spec-cell">
+                                        <input type="checkbox" class="calder-spec-confirm" data-calder-line-confirm data-line="{{ item.key | escape }}">
+                                        <span class="calder-cart-item__spec-text">
+                                          <span class="calder-cart-item__spec-label">Vehicle</span>
+                                          <span class="calder-cart-item__spec-value">{{ vehicle_value }}</span>
+                                        </span>
+                                      </label>
+                                    </li>
+                                  {%- endif -%}
+                                  {%- assign pattern_value = item.properties['Bolt Pattern'] -%}
+                                  {%- if pattern_value == blank -%}
+                                    {%- assign pattern_group = item.properties['_fitment_group'] -%}
+                                    {%- if pattern_group != blank -%}
+                                      {%- assign pattern_value = pattern_group | split: '-' | first -%}
+                                    {%- endif -%}
+                                  {%- endif -%}
+                                  {%- if pattern_value != blank -%}
+                                    <li class="calder-cart-item__spec calder-cart-item__spec--wide">
+                                      <label class="calder-cart-item__spec-cell">
+                                        <input type="checkbox" class="calder-spec-confirm" data-calder-line-confirm data-line="{{ item.key | escape }}">
+                                        <span class="calder-cart-item__spec-text">
+                                          <span class="calder-cart-item__spec-label">Bolt Pattern</span>
+                                          <span class="calder-cart-item__spec-value">{{ pattern_value }}</span>
+                                        </span>
+                                      </label>
+                                    </li>
+                                  {%- endif -%}
+                                </ul>
+                              {%- else -%}
+                                <dl>
+                                  {%- if item.product.has_only_default_variant == false -%}
+                                    {%- for option in item.options_with_values -%}
+                                      <div class="cart-table-product-option{% if is_calder_line %} calder-option-confirm{% endif %}">
+                                        <dt>{{ option.name }}:</dt>
+                                        <dd>{{ option.value }}</dd>
+                                        {%- if is_calder_line -%}
+                                          <input type="checkbox" class="calder-spec-confirm" data-calder-line-confirm data-line="{{ item.key | escape }}" aria-label="Confirm {{ option.name | escape }}: {{ option.value | escape }}">
+                                        {%- endif -%}
+                                      </div>
+                                    {%- endfor -%}
+                                  {%- endif -%}
+                                  {%- for property in item.properties -%}
+                                    {%- assign property_first_char = property.first | slice: 0 -%}
+                                    {%- if property.last != blank and property_first_char != '_' -%}
+                                      <div class="cart-table-product-option{% if is_calder_line %} calder-option-confirm{% endif %}">
+                                        <dt>{{ property.first }}:</dt>
+                                        <dd>
+                                          {%- if property.last contains '/uploads/' -%}
+                                            <a href="{{ property.last }}" class="link" target="_blank">
+                                              {{ property.last | split: '/' | last }}
+                                            </a>
+                                          {%- else -%}
+                                            {{ property.last }}
+                                          {%- endif -%}
+                                        </dd>
+                                        {%- if is_calder_line -%}
+                                          <input type="checkbox" class="calder-spec-confirm" data-calder-line-confirm data-line="{{ item.key | escape }}" aria-label="Confirm {{ property.first | escape }}: {{ property.last | escape }}">
+                                        {%- endif -%}
+                                      </div>
+                                    {%- endif -%}
+                                  {%- endfor -%}
+                                </dl>
+                              {%- endif -%}
+                              {%- if is_calder_line -%}
+                                {%- comment -%}
+                                  2026-11-16: the green FITMENT CONFIRMED label appears
+                                  when ALL of this line's specification checkboxes are
+                                  checked (calder-cart-confirm.js toggles [hidden]).
+                                  Positioned at the end of the option rows.
+                                {%- endcomment -%}
+                                <p class="calder-cart-fitment calder-all-confirmed" data-calder-line-complete hidden>
+                                  <span class="calder-cart-fitment__icon" aria-hidden="true">✓</span>
+                                  <span class="calder-cart-item__fitment-text">
+                                    <strong>Fitment Confirmed</strong>
+                                    {%- assign fitment_vehicle = item.properties['Vehicle'] | default: item.properties['Fitment Vehicle'] -%}
+                                    {%- if fitment_vehicle != blank -%}<small>{{ fitment_vehicle | escape }}</small>{%- endif -%}
+                                  </span>
+                                </p>
+                              {%- endif -%}
                             {%- endif -%}
                             {%- if item.selling_plan_allocation.selling_plan.name != blank -%}
                               <p class="prd-prepay-text"  data-tippy-placement="bottom" data-tippy-content="{{ item.selling_plan_allocation.selling_plan.description | escape }}">{{ item.selling_plan_allocation.selling_plan.name }}</p>
                             {%- endif -%}
-                            {%- assign fitment_vehicle = item.properties['Vehicle'] | default: item.properties['Fitment Vehicle'] -%}
-                            {%- if fitment_vehicle != blank -%}<p class="calder-cart-fitment"><span aria-hidden="true">✓</span> <span><strong>FITMENT CONFIRMED</strong><small>{{ fitment_vehicle | escape }}</small></span></p>{%- endif -%}
+                            {%- comment -%}
+                              Phase 4 (2026-11-17): the separate unconditional vehicle
+                              badge that used to render here was REMOVED — the
+                              [data-calder-line-complete] badge above (revealed by
+                              calder-cart-confirm.js when all of this line's checkboxes
+                              are checked) is the single fitment confirmation surface,
+                              with the vehicle as its detail text.
+                            {%- endcomment -%}
                           </div>
-                          <div class="cart-table-prd-price">
-                            {% render 'main-cart-item-component-price', item: item %}
-                          </div>
-                          <div class="cart-table-prd-qty" data-node-desktop>
-                            {% render 'quantity',
-                              item: item,
-                              name: 'updates[]',
-                              value: item.quantity,
-                              min: 0,
-                              in_cart: true,
-                              product_title: item.product.title,
-                              current_variant: item.variant,
-                              layout: layout,
-                              hide_quantity: hide_quantity
-                            %}
-                          </div>
-                          <div class="cart-table-prd-price-total position-relative">
-                            {% render 'main-cart-item-component-final-price', item: item %}
                           </div>
                         </div>
-                        <div class="cart-table-prd-action">
-                          <cart-remove-button data-index="{{ item.index | plus: 1 }}">
-                            <a href="{{ item.url_to_remove }}" class="cart-table-prd-remove position-relative" aria-label="{{ 'theme-sections.sections.cart.remove_title' | t: title: item.title }}" title="{{ 'theme-sections.sections.cart.remove_title' | t: title: item.title }}">{% render 'icon-remove2' %}
-                              <div class="loading-overlay__spinner hidden">
-                                <div data-load="loading"></div>
+                        <div class="calder-cart-item__actions">
+                          {%- comment -%}
+                            Phase 5 (2026-11-17): Edit Specs (configurator lines only) deep-links
+                            to the product page with the line's own configuration as URL params —
+                            the calder-pdp-state contract (?diameter=&center=&barrel=&hardware=
+                            + &pcd=). Tokens come from the K1 _config_tokens snapshot; BYW-era
+                            lines fall back to the underscore internals with label→token mapping
+                            (the same vocabulary as calder-finish-tokens.liquid). Blank → param
+                            omitted, never invented; everything blank → plain product URL.
+                          {%- endcomment -%}
+                          {%- comment -%}
+                            Phase 3 update (2026-11-17): every emitted token is VALIDATED
+                            against the canonical registry vocabulary BEFORE it reaches the
+                            URL. calder-pdp-state.parseUrl drops tokens missing from the
+                            target design's resolver options, and the PDP then renders the
+                            raw requested value in the selection labels + hides the
+                            preview layers ("Preview unavailable..."). A validated token
+                            is either applied cleanly by the PDP or omitted here — raw
+                            code / broken previews are never reachable from this link.
+                            Sources: _config_tokens (K1 snapshot) first, then the BYW
+                            underscore internals with label→token mapping.
+                          {%- endcomment -%}
+                          {%- assign ct_raw = item.properties['_config_tokens'] -%}
+                          {%- assign ct_diam = ct_raw | split: '"diameter":"' | last | split: '"' | first | strip -%}
+                          {%- assign ct_center = ct_raw | split: '"center":"' | last | split: '"' | first -%}
+                          {%- assign ct_barrel = ct_raw | split: '"barrel":"' | last | split: '"' | first -%}
+                          {%- assign ct_hw = ct_raw | split: '"hardware":"' | last | split: '"' | first -%}
+                          {%- if ct_center == blank -%}
+                            {%- assign cfb = item.properties['_center_finish'] | downcase | replace: ' ', '-' -%}
+                            {%- if cfb == 'black-tint' -%}
+                              {%- assign ct_center = 'black-titanium' -%}
+                            {%- elsif cfb != blank -%}
+                              {%- assign ct_center = cfb -%}
+                            {%- endif -%}
+                          {%- endif -%}
+                          {%- if ct_barrel == blank -%}
+                            {%- assign bfb = item.properties['_barrel_finish'] -%}
+                            {%- if bfb contains 'Polished' -%}
+                              {%- assign ct_barrel = 'polished' -%}
+                            {%- elsif bfb != blank -%}
+                              {%- assign ct_barrel = 'gloss-black' -%}
+                            {%- endif -%}
+                          {%- endif -%}
+                          {%- if ct_hw == blank -%}
+                            {%- assign hfb = item.properties['_hardware_finish'] -%}
+                            {%- if hfb contains 'Chrome' -%}
+                              {%- assign ct_hw = 'chrome' -%}
+                            {%- elsif hfb != blank -%}
+                              {%- assign ct_hw = 'black' -%}
+                            {%- endif -%}
+                          {%- endif -%}
+                          {%- if ct_diam == blank -%}
+                            {%- assign ct_diam = item.properties['_diameter'] | remove: '"' | strip -%}
+                          {%- endif -%}
+                          {%- comment -%} Canonical vocabulary gate (per registry option_tokens) {%- endcomment -%}
+                          {%- unless ct_diam == '22' or ct_diam == '24' or ct_diam == '26' -%}
+                            {%- assign ct_diam = '' -%}
+                          {%- endunless -%}
+                          {%- unless ct_center == 'gloss-black' or ct_center == 'black-titanium' or ct_center == 'titanium-tint' -%}
+                            {%- assign ct_center = '' -%}
+                          {%- endunless -%}
+                          {%- unless ct_barrel == 'gloss-black' or ct_barrel == 'polished' -%}
+                            {%- assign ct_barrel = '' -%}
+                          {%- endunless -%}
+                          {%- unless ct_hw == 'black' or ct_hw == 'chrome' -%}
+                            {%- assign ct_hw = '' -%}
+                          {%- endunless -%}
+                          {%- assign pcd_val = item.properties['_fitment_group'] | split: '-' | first | downcase -%}
+                          {%- if pcd_val == blank -%}
+                            {%- assign pcd_val = item.properties['Bolt Pattern'] | downcase -%}
+                          {%- endif -%}
+                          {%- unless pcd_val contains 'x' -%}
+                            {%- assign pcd_val = '' -%}
+                          {%- endunless -%}
+                          {%- assign edit_qs = '' -%}
+                          {%- if ct_diam != blank -%}
+                            {%- assign edit_qs = 'diameter=' | append: ct_diam -%}
+                          {%- endif -%}
+                          {%- if ct_center != blank -%}
+                            {%- if edit_qs == blank -%}
+                              {%- assign edit_qs = 'center=' | append: ct_center -%}
+                            {%- else -%}
+                              {%- assign edit_qs = edit_qs | append: '&center=' | append: ct_center -%}
+                            {%- endif -%}
+                          {%- endif -%}
+                          {%- if ct_barrel != blank -%}
+                            {%- if edit_qs == blank -%}
+                              {%- assign edit_qs = 'barrel=' | append: ct_barrel -%}
+                            {%- else -%}
+                              {%- assign edit_qs = edit_qs | append: '&barrel=' | append: ct_barrel -%}
+                            {%- endif -%}
+                          {%- endif -%}
+                          {%- if ct_hw != blank -%}
+                            {%- if edit_qs == blank -%}
+                              {%- assign edit_qs = 'hardware=' | append: ct_hw -%}
+                            {%- else -%}
+                              {%- assign edit_qs = edit_qs | append: '&hardware=' | append: ct_hw -%}
+                            {%- endif -%}
+                          {%- endif -%}
+                          {%- if pcd_val != blank -%}
+                            {%- if edit_qs == blank -%}
+                              {%- assign edit_qs = 'pcd=' | append: pcd_val -%}
+                            {%- else -%}
+                              {%- assign edit_qs = edit_qs | append: '&pcd=' | append: pcd_val -%}
+                            {%- endif -%}
+                          {%- endif -%}
+                          <div class="calder-cart-item__actions-left">
+                            {%- if is_calder_line -%}
+                              <a class="calder-cart-item__edit-link" href="{{ item.url }}{% if edit_qs != blank %}{% if item.url contains '?' %}&{% else %}?{% endif %}{{ edit_qs }}{% endif %}">
+                                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M4 20h4L20.5 7.5a2.1 2.1 0 0 0 0-3L19 3a2.1 2.1 0 0 0-3 0L3.5 15.5V20H4Z" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M13.5 6.5l4 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+                                <span>Edit Specs</span>
+                              </a>
+                            {%- endif -%}
+                            <div class="cart-table-prd-action">
+                              <cart-remove-button data-index="{{ item.index | plus: 1 }}">
+                                <a href="{{ item.url_to_remove }}" class="cart-table-prd-remove position-relative" aria-label="{{ 'theme-sections.sections.cart.remove_title' | t: title: item.title }}" title="{{ 'theme-sections.sections.cart.remove_title' | t: title: item.title }}">{% render 'icon-remove2' %}<span class="calder-cart-item__action-label">Remove</span>
+                                  <div class="loading-overlay__spinner hidden">
+                                    <div data-load="loading"></div>
+                                  </div>
+                                </a>
+                              </cart-remove-button>
+                            </div>
+                          </div>
+                          <div class="calder-cart-item__actions-right">
+                            <div class="cart-table-prd-qty" data-node-desktop>
+                              {% render 'quantity',
+                                item: item,
+                                name: 'updates[]',
+                                value: item.quantity,
+                                min: 0,
+                                in_cart: true,
+                                product_title: item.product.title,
+                                current_variant: item.variant,
+                                layout: layout,
+                                hide_quantity: hide_quantity
+                              %}
+                            </div>
+                            <div class="calder-cart-item__total">
+                              <span class="calder-cart-item__total-label">Item Total</span>
+                              <div class="cart-table-prd-price-total position-relative">
+                                {% render 'main-cart-item-component-final-price', item: item %}
                               </div>
-                            </a>
-                          </cart-remove-button>
-                        </div>
-                        <div class="cart-table-prd-discount">
-                          <ul class="discounts list-unstyled" role="list" aria-label="{{ 'customer.order.discount' | t }}">
-                            {%- for discount in item.discounts -%}
-                              <li class="discounts__discount">
-                                {%- render 'icon-discount' -%}
-                                {{ discount.title }}
-                              </li>
-                            {%- endfor -%}
-                          </ul>
+                            </div>
+                          </div>
+                          <div class="cart-table-prd-discount">
+                            <ul class="discounts list-unstyled" role="list" aria-label="{{ 'customer.order.discount' | t }}">
+                              {%- for discount in item.discounts -%}
+                                <li class="discounts__discount">
+                                  {%- render 'icon-discount' -%}
+                                  {{ discount.title }}
+                                </li>
+                              {%- endfor -%}
+                            </ul>
+                          </div>
                         </div>
                         <div class="cart-table-mobile">
                           <div class="cart-table-prd-price">
@@ -331,6 +658,9 @@
   </div>
 </cart-items>
 <script src="{{ 'cart-page.js' | asset_url }}" defer></script>
+{%- comment -%}K2 (2026-11-15): per-line specification confirmation gate —
+  cart page surface (the drawer include lives in header-cart.liquid).{%- endcomment -%}
+<script src="{{ 'calder-cart-confirm.js' | asset_url }}" defer></script>
 {%- endunless -%}
 
 {% schema %}

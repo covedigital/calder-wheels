@@ -500,3 +500,12 @@
     transition: none !important;
   }
 }
+
+/* ── P4 (2026-11-15): vehicle-gated Diameter tab + unsupported sizes ── */
+.calder-mobile-uc__tab[hidden] {
+  display: none !important;
+}
+.calder-mobile-uc__option:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}

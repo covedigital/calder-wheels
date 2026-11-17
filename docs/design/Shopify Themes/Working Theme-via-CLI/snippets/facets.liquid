@@ -63,6 +63,10 @@
           {{ 'theme.general.from_vendor' | t }}
         {%- endif -%}
       </div>
+      {%- if calder_clear_filters -%}
+        {%- comment -%} Calder: complete reset (all filters + vehicle) — handler in calder-fitment-finder-guide.js (C2 2026-11-15; label update 2026-11-16 client meeting: the action reads as clearing the vehicle + its derived constraints).{%- endcomment -%}
+        <button type="button" class="calder-clear-filters" data-calder-clear-filters>Clear Vehicle</button>
+      {%- endif -%}
       {% render 'collection-subtitle' %}
     </div>
   {%- endif -%}
@@ -195,6 +199,44 @@
                   {%- for filter in results.filters -%}
                     {%- liquid
                       assign total_active_values = total_active_values | plus: filter.active_values.size
+
+                      comment
+                        Calder client updates 2026-11-16:
+                        (1) SIZE filter — the Diameter variant-option filter is presented
+                            as "SIZE" with combined size values (diameter × width, e.g.
+                            22x10). Width 10 is the catalog-wide wheel width per the SUV
+                            Data Sheet master (912/912 SKUs = x10); revisit if wider
+                            wheels launch. The filter renders with the SAME checkbox
+                            design as the other option filters (category-list), not the
+                            tag/pill list style.
+                        (2) BOLT PATTERN — combined multi-pattern values (e.g.
+                            "6x135, 6x139" from the design products' list metafield)
+                            are hidden; only single patterns are offered.
+                        (3) BOLTS — the combined "Barrel & Lip - Hardware" option
+                            filter displays the bolt fragment only ("Black Bolts" /
+                            "Chrome Bolts"), deduped to exactly two options regardless
+                            of the lip variant they came from.
+                      endcomment
+                      assign is_size_filter = false
+                      if filter.param_name == 'filter.v.option.diameter' or filter.label == 'Diameter' or filter.label == 'Size'
+                        assign is_size_filter = true
+                      endif
+
+                      assign is_bolt_pattern_filter = false
+                      assign fpl = filter.label | downcase
+                      if filter.param_name contains 'bolt_pattern' or fpl contains 'bolt pattern' or fpl == 'bolts'
+                        unless is_size_filter
+                          assign is_bolt_pattern_filter = true
+                        endunless
+                      endif
+
+                      assign is_bolts_filter = false
+                      assign fpn = filter.param_name | downcase
+                      if fpn contains 'barrel-lip-hardware' or fpn contains 'hardware_rivet_finish_options' or fpl contains 'bolt' and fpl contains 'lip'
+                        unless is_size_filter
+                          assign is_bolts_filter = true
+                        endunless
+                      endif
                     -%}
 
                     {%- case filter.type -%}
@@ -234,6 +276,16 @@
                             endif
                           endif
 
+                          comment
+                            2026-11-16: the Diameter filter presents as "SIZE" with the
+                            same checkbox design as every other option filter (never
+                            the tag/pill list), regardless of the sizes setting.
+                          endcomment
+                          if is_size_filter
+                            assign sizes = false
+                            assign has_scroll_and_search = false
+                          endif
+
                           assign filter_label = 'filter-group-' | append: filter.label | handle
                           assign filter_tab_status = cart.attributes[filter_label]
 
@@ -249,7 +301,7 @@
                         -%}
                         <filter-block class="sidebar-block filter-group-block {{ filter_tab_status }} js-filter" id="Details-{{ forloop.index }}-{{ section.id }}" data-index="{{ forloop.index }}">
                           <div class="sidebar-block_title" data-save-attr='{ "filter-group-{{ filter.label | handle }}": {% if filter_tab_status == 'open' %}"close"{% else %}"open"{% endif %} }'>
-                            <span class="sidebar-block_title_text heading-font">{{ filter.label | escape | upcase }}</span>
+                            <span class="sidebar-block_title_text heading-font">{% if is_size_filter %}SIZE{% else %}{{ filter.label | escape | upcase }}{% endif %}</span>
                             <span class="sidebar-block_selected facets__selected {% unless filter.active_values.size > 0 %} hidden{% endunless %}">
                               <facet-remove><a href="{{ filter.url_to_remove }}" title="{{ 'products.facets.reset' | t }}"><i class="filter-item">{{ 'products.facets.reset' | t }}</i></a></facet-remove>
                             </span>
@@ -282,16 +334,58 @@
                                         assign filter_values_limit = 16
                                       endif
 
+                                      comment
+                                        2026-11-16 client updates:
+                                        (1) BOLTS dedup — the combined "Barrel & Lip -
+                                            Hardware" option filter carries 4 values (2
+                                            lip variants × 2 bolt finishes); the storefront
+                                            presents the bolt fragment only, deduped to
+                                            exactly two options (Black Bolts / Chrome
+                                            Bolts). The dedup tracking (bolts_seen) is
+                                            built inside this liquid block — assign
+                                            persists across forloop iterations here.
+                                        (2) SIZE — the Diameter filter renders with
+                                            combined size values (22x10) in the standard
+                                            checkbox design.
+                                        (3) BOLT PATTERN — combined multi-pattern
+                                            values (containing a comma) are hidden.
+                                      endcomment
+                                      assign bolts_seen = ''
+
                                       if filter.values.size <= filter_values_limit
                                         for value in filter.values
-                                          render 'facets-list', colorpics: colorpics, filter: filter, value: value, forloop: forloop, sizes: sizes, show: 'all'
+                                          if is_bolts_filter
+                                            assign calder_bolt_label = value.label | split: '- ' | last | strip
+                                            unless bolts_seen contains calder_bolt_label
+                                              assign bolts_seen = bolts_seen | append: calder_bolt_label | append: '||'
+                                              render 'facets-list', colorpics: colorpics, filter: filter, value: value, forloop: forloop, sizes: sizes, show: 'all', is_size_filter: is_size_filter, is_bolt_pattern_filter: is_bolt_pattern_filter, bolt_label_override: calder_bolt_label
+                                            endunless
+                                          else
+                                            render 'facets-list', colorpics: colorpics, filter: filter, value: value, forloop: forloop, sizes: sizes, show: 'all', is_size_filter: is_size_filter, is_bolt_pattern_filter: is_bolt_pattern_filter
+                                          endif
                                         endfor
                                       else
                                         for value in filter.values
-                                          render 'facets-list', colorpics: colorpics, filter: filter, value: value, forloop: forloop, sizes: sizes, show: 'enabled'
+                                          if is_bolts_filter
+                                            assign calder_bolt_label = value.label | split: '- ' | last | strip
+                                            unless bolts_seen contains calder_bolt_label
+                                              assign bolts_seen = bolts_seen | append: calder_bolt_label | append: '||'
+                                              render 'facets-list', colorpics: colorpics, filter: filter, value: value, forloop: forloop, sizes: sizes, show: 'enabled', is_size_filter: is_size_filter, is_bolt_pattern_filter: is_bolt_pattern_filter, bolt_label_override: calder_bolt_label
+                                            endunless
+                                          else
+                                            render 'facets-list', colorpics: colorpics, filter: filter, value: value, forloop: forloop, sizes: sizes, show: 'enabled', is_size_filter: is_size_filter, is_bolt_pattern_filter: is_bolt_pattern_filter
+                                          endif
                                         endfor
                                         for value in filter.values
-                                          render 'facets-list', colorpics: colorpics, filter: filter, value: value, forloop: forloop, sizes: sizes, show: 'disabled'
+                                          if is_bolts_filter
+                                            assign calder_bolt_label = value.label | split: '- ' | last | strip
+                                            unless bolts_seen contains calder_bolt_label
+                                              assign bolts_seen = bolts_seen | append: calder_bolt_label | append: '||'
+                                              render 'facets-list', colorpics: colorpics, filter: filter, value: value, forloop: forloop, sizes: sizes, show: 'disabled', is_size_filter: is_size_filter, is_bolt_pattern_filter: is_bolt_pattern_filter, bolt_label_override: calder_bolt_label
+                                            endunless
+                                          else
+                                            render 'facets-list', colorpics: colorpics, filter: filter, value: value, forloop: forloop, sizes: sizes, show: 'disabled', is_size_filter: is_size_filter, is_bolt_pattern_filter: is_bolt_pattern_filter
+                                          endif
                                         endfor
                                       endif
                                     -%}

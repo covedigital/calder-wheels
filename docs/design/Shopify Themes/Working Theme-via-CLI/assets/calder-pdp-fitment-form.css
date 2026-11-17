@@ -62,8 +62,17 @@
   opacity: 0.45;
   cursor: not-allowed;
 }
+/* P2 (2026-11-15): verify status — the icon container and the circle svg
+   inside it must match in color and geometry. The gold background now
+   renders as a circle (border-radius matches the svg's inscribed circle)
+   and the svg's currentColor equals the container color, so the warn/check
+   glyph fill matches its background; the white mark strokes stay legible
+   on the gold badge. Scoped to the verify state only — success/unset
+   icon colors are untouched. */
 .calder-pdp__fitment--verify .calder-pdp__fitment-icon {
   background: var(--calder-gold, #C2A48A);
+  border-radius: 50%;
+  color: var(--calder-gold, #C2A48A);
 }
 .calder-pdp__fitment--verify .calder-pdp__fitment-label {
   color: var(--calder-gold, #C2A48A);

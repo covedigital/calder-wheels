@@ -42,3 +42,19 @@ Per entry: handle · title · cover file · gallery file count/order · design I
 
 ## 6. Publication gate (applies to both paths)
 Publish = set Active, executed **only** after: QA pass (doc 07) + client cover confirmations + F-150 decision + the mandatory client confirmation in doc 08 §1. Draft entries are invisible to the storefront (`shop.metaobjects` exposes only Active entries) — drafts are safe to leave in place indefinitely.
+---
+
+## 2026-11-15 addendum — wheel-type entries + the pairing rule
+
+1. **Pairing rule (theme-enforced):** a wheel gallery entry correlates to vehicle entries with the SAME
+   design (`wheel_model`) AND a bolt pattern contained in the wheel entry's `bolt_pattern` list (and vice
+   versa). When creating either side, confirm the counterpart exists; if not, create it FIRST. The Theme
+   Editor details-page preview surfaces a dashed hint naming the missing counterpart.
+2. **Backfill step:** the original 12 vehicle entries were authored without `bolt_pattern`. Backfill it
+   before/with the first wheel entry (values table: `../wheel-content/README-wheel-entries.md` §2) —
+   otherwise the VEHICLES WITH THIS WHEEL match degrades to design-only for every entry.
+3. **Wheel entry data sheet:** `../wheel-content/wheel-entry-data-sheet.json` (six drafts, one per design,
+   registry-sourced defaults + `REVIEW`/`SUPPLY` fields for the client). Definition additions required
+   first: `wheel_offset`, `center_bore` (single-line text).
+4. **Static block activation:** after the first wheel entry exists + is published, set the Wheel Gallery
+   CLM-01 block's `gallery_handle` to the reviewed entry handle (currently intentionally inert).
